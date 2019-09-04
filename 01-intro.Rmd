@@ -1,0 +1,1254 @@
+# Motivación del principio Bootstrap  {#cap1}
+
+
+```{r , child = '_global_options.Rmd'}
+```
+
+Etimología: bootstrap = cinta de la bota (oreja lateral para calzarse
+las botas). Modismo anglosajón: to pull oneself up by one’s bootstraps.
+
+
+## Introducción
+
+El bootstrap es un procedimiento estadístico que sirve para aproximar la
+distribución en el muestreo (normalmente) de un estadístico. Para ello
+procede mediante remuestreo, es decir, obteniendo muestras mediante
+algún procedimiento aleatorio que utilice la muestra original.
+
+Su ventaja principal es que no requiere hipótesis sobre el mecanismo
+generador de los datos. Sí las requiere, aunque suelen ser más
+relajadas, para obtener propiedades asintóticas del mismo. Por otra
+parte, su implementación en ordenador suele ser sencilla, en comparación
+con otros métodos. Su principal inconveniente es la necesidad de
+computación intensiva, debido a la fuerza bruta del método de Monte
+Carlo. Con la capacidad computacional actual, esta mayor carga
+computacional del bootstrap no suele ser un problema hoy en día. En
+raras ocasiones el bootstrap no necesita del uso de técnicas de Monte
+Carlo.
+
+### Breve nota histórica
+
+Precursores teóricos remotos:
+
+-   Laplace (1810). Teoría límite de primer orden.
+
+-   Chebychev (final siglo XIX). Teoría límite de segundo orden.
+
+Primeras contribuciones:
+
+-   Hubback (1878-1968). Esquemas de muestreo espacial para ensayos
+    agrícolas.
+
+-   Mahalanobis (años 1930 y segunda guerra mundial). Precursor del
+    bootstrap por bloques.
+
+Otras contribuciones:
+
+-   Gurney, McCarthy, Hartigan (años 1960, 1970). Métodos de
+    half-sampling para estimación de varianzas (U.S. Bureau of the
+    Census).
+
+-   Maritz, Jarret, Simon (años 1970, 1980). Métodos de permutaciones
+    relacionados con el bootstrap.
+
+En la actualidad:
+
+-   Bradley Efron (Stanford University, 1979). Creador oficial del
+    método. Acuñó su nombre. Fusionó la potencia de Monte Carlo con la
+    resolución de problemas planteados de forma muy general.
+
+-   Peter Hall (1951-2016). Fue uno de los estadísticos contemporáneos
+    más prolíficos. Dedicó al bootstrap gran parte de su producción a
+    partir de los años 1980.
+
+### Paradigma inferencial y análogo bootstrap
+
+***Paradigma inferencial***
+
+Suponemos que $\mathbf{X}=\left( X_1,\ldots ,X_n \right)$ es una m.a.s. 
+de una población con distribución $F$ y que 
+estamos interesados en hacer inferencia sobre $\theta =\theta \left(F \right)$.
+Para ello nos gustaría conocer la distribución en el muestreo de
+$R\left( \mathbf{X},F \right)$, cierto estadístico función
+de la muestra y de la distribución poblacional.
+Por ejemplo: 
+$$R=R\left( \mathbf{X},F \right) =\theta \left( F_n \right) 
+-\theta \left( F \right) = \hat \theta - \theta,$$
+siendo $F_n$ la función de distribución empírica.
+
+A veces podemos calcular directamente la distribución de $R\left( \mathbf{X},F \right)$, 
+aunque suele depender de cantidades poblacionales, 
+no conocidas en la práctica.
+Por ejemplo, bajo normalidad $X_i \overset{i.i.d.}{\sim} 
+\mathcal{N}\left( \mu ,\sigma^2 \right)$, si estamos interesados en 
+$$\theta \left( F \right) =\mu =\int x~dF\left( x \right) =\int xf\left( x \right) ~dx$$
+como $\theta \left( F_n \right) = \int x~dF_n\left( x \right) = 
+\sum \frac{1}{n}X_i = \bar{X}$, podríamos considerar el estadístico:
+$$R=R\left( \mathbf{X},F \right) = \bar{X} - \mu \sim \mathcal{N}\left( 0 ,\frac{\sigma^2}{n} \right).$$
+Aunque en la práctica la varianza no es normalmente conocida y habría que aproximarla
+(sería preferible considerar como estadístico la media estudentizada).
+
+
+Otras veces sólo podemos llegar a aproximar la distribución de 
+$R\left( \mathbf{X},F \right)$ cuando $n \rightarrow \infty$.
+Por ejemplo, cuando estamos interesados en la media pero desconocemos la 
+distribución de los datos.
+
+***Análogo bootstrap***
+
+El primer paso es reemplazar la distribución poblacional (desconocida) $F$ por una
+estimación, $\hat{F}$, de la misma. Por ejemplo, podríamos considerar la
+distribución empírica $\hat{F}=F_n$ (bootstrap uniforme; Sección \@ref(cap1-unif)), 
+o una aproximación paramétrica $\hat{F}=F_{\hat \theta}$ (bootstrap paramétrico; Sección \@ref(cap4-boot-par)).
+
+Como ejemplo ilustrativo consideramos los datos simulados `r latexfig("muestra-sim")`:
+```{r muestra-sim, fig.cap="Distribución de la muestra simulada."}
+set.seed(1)
+muestra <- rnorm(100)
+hist(muestra, freq = FALSE, xlim = c(-3, 3),
+     main = '', xlab = 'x', ylab = 'densidad')
+curve(dnorm, lty = 2, add = TRUE)
+```
+Como aproximación de la distribución poblacional, desconocida en la práctica,
+siempre podemos considerar la distribución empírica 
+(o una versión suavizada: bootstrap suavizado; Sección \@ref(cap4-boot-suav)). 
+Alternativamente podríamos asumir un modelo paramétrico y estimar los parámetros a partir de la muestra `r latexfig("muestra-sim-aprox")`.
+```{r muestra-sim-aprox, fig.cap="Distribución teórica de la muestra simulada y distintas aproximaciones."}
+# Distribución bootstrap uniforme
+curve(ecdf(muestra)(x), xlim = c(-3, 3), ylab = "F(x)", type = "s")
+# Distribución bootstrap paramétrico (asumiendo normalidad)
+curve(pnorm(x, mean(muestra), sd(muestra)), lty = 2, add = TRUE)
+# Distribución teórica
+curve(pnorm, lty = 3, add = TRUE)
+legend("bottomright", legend = c("Empírica", "Aprox. paramétrica", "Teórica"), lty = 1:3)
+```
+
+
+A partir de la aproximación $\hat{F}$ podríamos generar, condicionalmente a la muestra observada, 
+remuestras 
+$$\mathbf{X}^{\ast}=\left( X_1^{\ast},\ldots ,X_n^{\ast} \right)$$ 
+con distribución $X_i^{\ast} \sim \hat{F}$, que demoninaremos remuestras bootstrap.
+Por lo que podemos hablar de la distribución en el remuestreo de 
+$$R^{\ast}=R\left( \mathbf{X}^{\ast},\hat{F} \right),$$ 
+llamada distribución bootstrap.
+
+La idea original (Efron, 1979) es que la distribución
+de $\hat{\theta}_{b}^{\ast }$ en torno a $\hat{\theta}$ aproxima la
+distribución de $\hat{\theta}$ en torno a $\theta$. 
+Por tanto se pretende aproximar la distribución en el muestreo de $R$ por la
+distribución bootstrap de $R^{\ast}$. 
+
+En raras ocasiones la distribución bootstrap de $R^{\ast}$ es
+calculable directamente, pero siempre suele poder aproximarse por
+Monte Carlo.
+
+<!-- 
+Selección del estadístico
+Interesaría un estadístico pivotal
+Bootstrap percentil
+Bootstrap básico o natural
+Boostrap estudentizado
+-->
+
+### Implementación en la práctica {#cap1-implementacion}
+
+En el caso i.i.d., si empleamos como aproximación la distribución empírica $\hat{F}=F_n$,
+la generación de las muestras bootstrap puede hacerse mediante remuestreo 
+(manteniendo el tamaño muestral). Habría que simular una muestra de tamaño $n$ 
+de una variable aleatoria discreta que toma los valores
+$X_1,\ldots ,X_n$ todos ellos con probabilidad $\frac{1}{n}$:
+
+* Para cada $i=1,\ldots, n$,
+  $P^{\ast}\left( X_i^{\ast}=X_j \right) =
+  \frac{1}{n}$, $j=1,\ldots ,n$.
+
+Existen multitud de algoritmos para simular variables discretas, pero en
+este caso de equiprobabilidad hay un procedimiento muy eficiente (método
+de la transformación cuantil con búsqueda directa) que se reduce a
+simular un número aleatorio $U$, con distribución $\mathcal{U}\left( 0,1 \right)$,
+y hacer $X^{\ast}=X_{\left\lfloor nU\right\rfloor +1}$, donde $\left\lfloor x\right\rfloor$
+representa la parte entera de $x$, es decir, el mayor número entero que
+sea menor o igual que $x$. 
+Empleando ese método, el procedimiento para generar la muestra bootstrap sería:
+
+* Para cada $i=1,\ldots ,n$ 
+  generar $U_i\sim \mathcal{U}\left( 0,1 \right)$ y
+  hacer $X_i^{\ast}=X_{\left\lfloor nU_i\right\rfloor +1}$.
+  
+```{r}
+set.seed(1)
+n <- length(muestra)
+u <- runif(n)
+muestra_boot <- muestra[floor(n*u) + 1]
+head(muestra_boot)
+```
+
+
+En `R` es recomendable^[De esta forma se evitan posibles problemas numéricos 
+al emplear el método de la transformación cuantil cuando $n$ es extremadamente grande
+(e.g. <https://stat.ethz.ch/pipermail/r-devel/2018-September/076817.html>).] 
+emplear la función `sample` para generar muestras aleatorias con reemplazamiento 
+del conjunto de datos original:
+```{r }
+muestra_boot <- sample(muestra, replace = TRUE)
+head(muestra_boot)
+```
+
+En el caso multidimensional, cuando trabajamos con un conjunto de datos
+con múltiples variables, 
+podríamos emplear un procedimiento análogo, a partir de remuestras del
+vector de índices. Por ejemplo:
+```{r}
+data(iris)
+str(iris)
+n <- nrow(iris)
+# i_boot <- floor(n*runif(n)) + 1
+# i_boot <- sample.int(n, replace = TRUE)
+i_boot <- sample(n, replace = TRUE)
+data_boot <- iris[i_boot, ]
+str(data_boot)
+```
+
+Esta forma de proceder es la que emplea por defecto el paquete `boot` que 
+describiremos más adelante (Sección \@ref(cap1-pkgboot)).
+
+```{example, label="media-dt-conocida", name="Inferencia sobre la media con varianza conocida"}
+
+<br> \vspace{0.5cm}
+
+Hemos observado 15 tiempos de vida de microorganismos: 
+0.143, 0.182, 0.256, 0.260, 0.270, 0.437, 0.509, 
+0.611, 0.712, 1.04, 1.09, 1.15, 1.46, 1.88, 2.08.
+A partir de los cuales queremos 
+obtener una estimación por intervalo de confianza de su vida media,
+suponiendo que la desviación típica es conocida e igual a 0.6
+(en el Capítulo \@ref(cap5) se tratará con más detalle la construcción de intervalos de confianza).
+```
+`r latexfig("microorganismos", output = is_latex())`
+```{r microorganismos, fig.cap="Distribución del tiempo de vida de microorganismos."}
+muestra <- c(0.143, 0.182, 0.256, 0.26, 0.27, 0.437, 0.509, 
+    0.611, 0.712, 1.04, 1.09, 1.15, 1.46, 1.88, 2.08)
+sigma <- 0.6
+summary(muestra)
+sd(muestra)
+hist(muestra)
+rug(muestra)
+
+```
+
+***Contexto clásico***
+
+Suponemos que los datos $\mathbf{X}=\left( X_1,\ldots ,X_n \right)$ son una m.a.s. 
+de una población con distribución $F$, con $\mu$ desconocida y $\sigma$ conocida,
+y que estamos interesados en hacer inferencia sobre:
+$$\theta \left( F \right) =\mu =\int x~dF\left( x \right)$$
+Para ello, un estadístico adecuado para este caso es:
+$$R=R\left( \mathbf{X},F \right) =\sqrt{n}\frac{\bar{X}-\mu }{\sigma},$$
+con $\theta \left( F_n \right) =\int x~dF_n\left( x \right) = \bar{X}$.
+
+Bajo normalidad $\left( X\sim \mathcal{N}\left( \mu ,\sigma^2 \right) \right)$,
+$R\sim N\left( 0,1 \right)$. Si $F$ no es normal, tan sólo sabemos que,
+bajo ciertas condiciones,
+$R\overset{d}{\rightarrow }\mathcal{N}\left( 0, 1 \right)$.
+
+A partir de esta última aproximación, se obtiene el intervalo de
+confianza asintótico (de nivel $1-\alpha$) para la media $\mu$:
+$$\hat{IC}_{1-\alpha}\left(  \mu\right)  = 
+\left(  \overline{X}-z_{1-\alpha/2}\dfrac{\sigma}{\sqrt{n}},\ \overline{X} 
++ z_{1-\alpha/2}\dfrac{\sigma}{\sqrt{n}} \right).$$
+
+```{r intervalo-norm}
+alfa <- 0.05
+x_barra <- mean(muestra)
+z <- qnorm(1 - alfa/2)
+ic_inf <- x_barra - z*sigma/sqrt(n)
+ic_sup <- x_barra + z*sigma/sqrt(n)
+IC <- c(ic_inf, ic_sup)
+IC
+```
+
+***Contexto bootstrap*** 
+
+Consideramos la función de distribución empírica $\hat{F}=F_n$
+como aproximación de la distribución poblacional (bootstrap uniforme).
+Para aproximar la distribución bootstrap del estadístico por Monte Carlo,
+se generan $B=1000$ muestras bootstrap 
+$\mathbf{X}^{\ast (b)}=\left( X_1^{\ast (b)},\ldots ,X_n^{\ast (b)} \right)$
+de forma que 
+$P^{\ast (b)}\left( X_i^{\ast}=X_j \right) =
+\frac{1}{n}$, $j=1,\ldots ,n$, para $i=1,\ldots, n$ y $b=1,\ldots, B$.
+A partir de las cuales se obtienen las $B$ réplicas bootstrap del estadístico:
+$$R^{\ast (b)}=R\left( \mathbf{X}^{\ast (b)},\hat{F} \right) =\sqrt{n}\frac{
+\bar{X}^{\ast  (b)}-\bar{X}}{\sigma }, \ b=1,\ldots, B, $$
+con $\bar{X}^{\ast (b)} = \frac{1}{n}\sum X_i^{\ast (b)}$.
+
+```{r}
+set.seed(1)
+B <- 1000
+estadistico_boot <- numeric(B)
+for (k in 1:B) {
+    remuestra <- sample(muestra, n, replace = TRUE)
+    x_barra_boot <- mean(remuestra)
+    estadistico_boot[k] <- sqrt(n) * (x_barra_boot - x_barra)/sigma
+}
+```
+
+Las características de interés de la distribución en el muestreo de $R$ 
+se aproximan por las correspondientes de la distribución bootstrap de $R^{\ast}$.
+En este caso nos interesa aproximar los puntos críticos $x_{\alpha /2}$ y
+$x_{1-\alpha /2}$, tales que:
+$$P\left( x_{\alpha /2} < R < x_{1-\alpha /2} \right) = 1-\alpha.$$
+Para lo que podemos emplear los cuantiles muestrales^[
+Se podrían considerar distintos estimadores del cuantil $x_{\alpha}$ 
+(ver p.e. la ayuda de la función `quantile`).
+Si empleamos directamente la distribución empírica, el cuantil se 
+correspondería con la observación ordenada en la posición $B \alpha$ 
+(se suele hacer una interpolación lineal si este valor no es entero), 
+lo que equivale a emplear la función `quantile()` de `R` con el parámetro 
+`type = 1`. Esta función considera por defecto la posición 
+$1 + (B - 1) \alpha$ (`type = 7`).
+En el libro de Davison y Hinkley (1997), y en el paquete `boot`, se emplea $(B + 1) \alpha$ (equivalente a `type = 6`; lo que justifica que
+consideren habitualmente 999 réplicas bootstrap).]:
+
+<!-- probar type = 1 en quantile -->
+
+```{r}
+# Empleando la distribución empírica del estadístico bootstrap: 
+estadistico_boot_ordenado <- sort(estadistico_boot)
+indice_inf <- floor(B * alfa/2)
+indice_sup <- floor(B * (1 - alfa/2))
+pto_crit <- estadistico_boot_ordenado[c(indice_inf, indice_sup)]
+# Empleando la función `quantile`:
+# pto_crit <- quantile(estadistico_boot, c(alfa/2, 1 - alfa/2), type = 1)
+pto_crit <- quantile(estadistico_boot, c(alfa/2, 1 - alfa/2))
+pto_crit
+```
+A partir de los cuales obtenemos la correspondiente estimación por IC
+boostrap:
+$$\hat{IC}^{boot}_{1-\alpha}\left(  \mu\right)  = 
+\left(  \overline{X}-x_{1-\alpha/2}\dfrac{\sigma}{\sqrt{n}},\ \overline{X} 
+- x_{\alpha/2}\dfrac{\sigma}{\sqrt{n}} \right).$$
+
+```{r}
+# Construcción del IC
+ic_inf_boot <- x_barra - pto_crit[2] * sigma/sqrt(n)
+ic_sup_boot <- x_barra - pto_crit[1] * sigma/sqrt(n)
+IC_boot <- c(ic_inf_boot, ic_sup_boot)
+names(IC_boot) <- paste0(100*c(alfa, 1-alfa), "%") # rev(names(IC_boot))
+IC_boot
+```
+Nótese que este intervalo de confianza no está centrado en la media,
+al contrario que el obtenido con la aproximación tradicional.
+Aunque en este caso no se observan grandes diferencias ya que 
+la distribución bootstrap obtenida es muy similar a la aproximación normal
+`r citefig("estad-boot")`.
+
+```{r estad-boot, fig.cap='Distribución del estadístico boostrap y aproximaciones de los cuantiles. Con línea discontinua se muestra la distribución normal asintótica.'}
+hist(estadistico_boot, freq = FALSE)
+lines(density(estadistico_boot))
+abline(v = pto_crit)
+curve(dnorm, lty = 2, add = TRUE)
+abline(v = c(-z, z), lty = 2)
+```
+
+
+## El Bootstrap uniforme {#cap1-unif}
+
+Como ya se comentó anteriormente el bootstrap uniforme es aquel en el que
+se reemplaza la distribución poblacional (desconocida) por la distribución
+empírica:
+$$F_n\left( x \right) =\frac{1}{n}\sum_{i=1}^{n}\mathbf{1}\left\{ X_i\leq x\right\}.$$
+
+Es decir $\hat{F}=F_n$ y, por lo tanto,
+$R^{\ast}=R\left( \mathbf{X}^{\ast},F_n \right)$. 
+
+Conviene recordar algunas propiedades de la distribución empírica:
+$$\begin{aligned}
+nF_n\left( x \right) &= \sum_{i=1}^{n}\mathbf{1}\left\{ X_i\leq x\right\}
+\sim \mathcal{B}\left( n,F\left( x \right) \right), \\
+E\left( nF_n\left( x \right) \right) &= nF\left( x \right) \implies E\left(
+F_n\left( x \right) \right) =F\left( x \right), \\
+Var\left( nF_n\left( x \right) \right) &=  nF\left( x \right) \left(
+1-F\left( x \right) \right) \\
+&\implies  Var\left( F_n\left( x \right) \right) =\frac{F\left( x \right) \left( 1-F\left( x \right) \right)}{n}
+\end{aligned}$$
+
+Así pues, en este caso el algoritmo bootstrap uniforme (también llamado
+bootstrap naïve) es el siguiente:
+
+1. Para cada $i=1,\ldots ,n$ arrojar $X_i^{\ast}$ a partir de
+$F_n$, es decir
+$P^{\ast}\left( X_i^{\ast}=X_j \right) =\frac{1}{n}$, $j=1,\ldots
+,n$
+
+2. Obtener $\mathbf{X}^{\ast}=\left( X_1^{\ast},\ldots
+,X_n^{\ast} \right)$
+
+3. Calcular $R^{\ast}=R\left( \mathbf{X}^{\ast},F_n \right)$
+
+Como veremos más adelante, a veces (muy poco frecuentemente) es posible
+calcular exactamente la distribución bootstrap de $R^{\ast}$. Cuando
+eso no es posible, esa distribución es fácilmente aproximable por Monte
+Carlo, arrojando una gran cantidad, $B$, de réplicas de $R^{\ast}$. En
+ese caso, el algoritmo se convierte en:
+
+1. Para cada $i=1,\ldots ,n$ arrojar $X_i^{\ast}$ a partir de $F_n$
+
+2. Obtener $\mathbf{X}^{\ast}=\left( X_1^{\ast},\ldots
+,X_n^{\ast} \right)$
+
+3. Calcular $R^{\ast}=R\left( \mathbf{X}^{\ast},F_n \right)$
+
+4. Repetir $B$ veces los pasos 1-3 para obtener las réplicas bootstrap
+$R^{\ast (1)}, \ldots, R^{\ast (B)}$
+
+5. Utilizar esas réplicas bootstrap para aproximar la distribución en el
+muestreo de $R$
+
+
+### Ejemplos
+
+```{example, label="media-dt-conocida-perturbando", name="Inferencia sobre la media con varianza conocida, continuación"}
+```
+
+En el Ejemplo \@ref(exm:media-dt-conocida) anteriormente visto de inferencia para la media con
+varianza conocida, el algoritmo bootstrap (basado en Monte Carlo) para
+aproximar la distribución en el muestreo de $R$ empleado fue:
+
+1. Para cada $i=1,\ldots ,n$ arrojar $U_i\sim \mathcal{U}\left( 0,1 \right)$ y
+hacer $X_i^{\ast}=X_{\left\lfloor nU_i\right\rfloor +1}$
+
+2. Obtener $\bar{X}^{\ast}=\frac{1}{n}\sum X_i^{\ast}$
+
+3. Calcular
+$R^{\ast}=\sqrt{n}\frac{\bar{X}^{\ast}-\bar{X}}{
+\sigma }$
+
+4. Repetir $B$ veces los pasos 1-3 para obtener las réplicas bootstrap
+$R^{\ast (1)}, \ldots, R^{\ast (B)}$
+
+5. Aproximar la distribución en el muestreo de $R$ mediante la empírica
+de $R^{\ast (1)}, \ldots, R^{\ast (B)}$
+
+Como curiosidad podemos calcular la esperanza y la varianza de $R$ y la
+esperanza y varianza bootstrap de $R^{\ast}$. Para $R$ tenemos:
+$$\begin{aligned}
+E\left( R \right) &=\sqrt{n}\frac{E\left( \bar{X} \right) -\mu }{\sigma }
+=0, \\
+Var\left( R \right) &=n\frac{Var\left( \bar{X} \right)}{\sigma^2}=n
+\frac{\frac{1}{n}\sigma^2}{\sigma^2}=1.
+\end{aligned}$$
+
+Para calcular esos mismos momentos de $R^{\ast}$, resultará útil
+obtener previamente la esperanza y varianza bootstrap de
+$\bar{X}^{\ast}$:
+$$\begin{aligned}
+E^{\ast}\left( \bar{X}^{\ast} \right) &= \frac{1}{n}
+\sum_{i=1}^{n}E^{\ast}\left( X_i^{\ast} \right) =\frac{1}{n}
+\sum_{i=1}^{n}E^{\ast}\left( X_1^{\ast} \right) =E^{\ast}\left(
+X_1^{\ast} \right) =\bar{X}, \\
+Var^{\ast}\left( \bar{X}^{\ast} \right) &= \frac{1}{n^2}
+\sum_{i=1}^{n}Var^{\ast}\left( X_i^{\ast} \right) =\frac{1}{n^2}
+\sum_{i=1}^{n}Var^{\ast}\left( X_1^{\ast} \right) =\frac{1}{n}Var^{\ast
+}\left( X_1^{\ast} \right) =\frac{S_n^2}{n},
+\end{aligned}$$
+ya que
+$$\begin{aligned}
+E^{\ast}\left( X_1^{\ast} \right) &= \sum_{j=1}^{n}X_jP^{\ast}\left(
+X_1^{\ast}=X_j \right) =\sum_{j=1}^{n}\frac{1}{n}X_j=\bar{X}, \\
+Var^{\ast}\left( X_1^{\ast} \right) &= E^{\ast}\left( X_1^{\ast
+2} \right) -\left[ E^{\ast}\left( X_1^{\ast} \right) \right]
+^2=\sum_{j=1}^{n}X_j^2P^{\ast}\left( X_1^{\ast}=X_j \right) -\bar{X}
+^2 \\
+&= \frac{1}{n}\sum_{j=1}^{n}X_j^2-\bar{X}^2=\frac{1}{n}
+\sum_{j=1}^{n}\left( X_j-\bar{X} \right)^2=S_n^2
+\end{aligned}$$
+
+Así pues, la esperanza y la varianza bootstrap de $R^{\ast}$
+resultan:
+$$\begin{aligned}
+E^{\ast}\left( R^{\ast} \right) &= \sqrt{n}\frac{E^{\ast}\left( \bar{X}^{\ast} \right) -\bar{X}}{\sigma }=0, \\
+Var^{\ast}\left( R^{\ast} \right) &= n\frac{Var^{\ast}\left( \bar{X}^{\ast} \right)}{\sigma^2}=n\frac{\frac{1}{n}S_n^2}{\sigma^2}=
+\frac{S_n^2}{\sigma^2}.
+\end{aligned}$$
+
+Es curioso observar que la esperanza de $R$ y la esperanza bootstrap de
+$R^{\ast}$ coinciden (son ambas cero), pero no ocurre lo mismo con sus
+varianzas: la de $R$ es $1$ y la varianza bootstrap de $R^{\ast}$ es
+$\frac{S_n^2}{\sigma^2}$, que, aunque tiende a $1$ (en probabilidad o de
+forma casi segura, bajo las condiciones adecuadas) cuando $n\rightarrow
+\infty$, no es igual a $1$. Eso nos lleva a intuir que el método de
+remuestreo bootstrap propuesto quizá podría modificarse ligeramente para
+que imitase exactamente al caso no bootstrap también en la varianza.
+Puede comprobarse que eso se consigue remuestreando $X^{\ast}$ de la
+distribución empírica de la muestra modificada: 
+$\left( \tilde{X}_1,\ldots ,\tilde{X}_n \right)$, siendo
+$$\tilde{X}_i=\bar{X}+\frac{\sigma }{S_n}\left( X_i-\bar{X}
+ \right) \text{, }i=1,\ldots ,n.$$
+
+Efectivamente, bajo ese nuevo remuestreo, se tiene 
+$$\begin{aligned}
+E^{\ast}\left( \bar{X}^{\ast} \right) &= E^{\ast}\left( X_1^{\ast
+} \right) =\overline{\tilde{X}}=\frac{1}{n}\sum_{i=1}^{n}\left[ \bar{X}+
+\frac{\sigma }{S_n}\left( X_i-\bar{X} \right) \right] \\
+&= \bar{X}+\frac{1}{n}\frac{\sigma }{S_n}\sum_{i=1}^{n}\left( X_i-
+\bar{X} \right) =\bar{X}, \\
+Var^{\ast}\left( \bar{X}^{\ast} \right) &= \frac{1}{n}Var^{\ast
+}\left( X_1^{\ast} \right) =\frac{\sigma^2}{n},
+\end{aligned}$$
+ya que
+$$\begin{aligned}
+Var^{\ast}\left( X_1^{\ast} \right) &= E^{\ast}\left( X_1^{\ast
+2} \right) -\left[ E^{\ast}\left( X_1^{\ast} \right) \right]
+^2=\sum_{j=1}^{n}\tilde{X}_j^2P^{\ast}\left( X_1^{\ast}=\tilde{X}
+_j \right) -\overline{\tilde{X}}^2 \\
+&= \frac{1}{n}\sum_{j=1}^{n}\tilde{X}_j^2-\overline{\tilde{X}}^2=\frac{
+1}{n}\sum_{j=1}^{n}\left( \tilde{X}_j-\overline{\tilde{X}} \right)^2=
+\frac{1}{n}\sum_{j=1}^{n}\left[ \frac{\sigma }{S_n}\left( X_j-\bar{X} \right) \right]^2 \\
+&= \frac{\sigma^2}{S_n^2}\frac{1}{n}\sum_{j=1}^{n}\left( X_i-
+\bar{X} \right)^2=\frac{\sigma^2}{S_n^2}S_n^2=\sigma^2.
+\end{aligned}$$
+Como consecuencia 
+$$\begin{aligned}
+E^{\ast}\left( R^{\ast} \right) &= \sqrt{n}\frac{E^{\ast}\left( 
+\bar{X}^{\ast} \right) -\bar{X}}{\sigma }=0, \\
+Var^{\ast}\left( R^{\ast} \right) &= n\frac{Var^{\ast}\left( 
+\bar{X}^{\ast} \right)}{\sigma^2}=n\frac{\frac{\sigma^2}{n}}{\sigma^2}
+=1.
+\end{aligned}$$
+
+Esto es muy coherente con lo que nos diría la intuición pues, si la
+varianza poblacional, $\sigma^2$, es conocida (ese es el motivo de
+que podamos usarla directamente en la definición del estadístico $R$),
+el plan de remuestreo bootstrap también ha de conocer $\sigma^2$, es
+decir ha de diseñarse de modo que la distribución bootstrap de
+$X^{\ast}$ tenga también varianza bootstrap $\sigma^2$. Eso ocurre
+con el remuestreo uniforme de la muestra transformada
+$\left( \tilde{X}_1,\ldots ,\tilde{X}_n \right)$, pero no ocurre con
+el remuestreo naïve (a partir de la distribución empírica de la muestra
+original). Esto da pie a una de las consideraciones más importantes a la
+hora de diseñar un buen método de remuestreo bootstrap: ha de procurarse
+que **el bootstrap imite todas las condiciones que cumple la población
+original**.
+
+El código para realizar remuestreo bootstrap uniforme sobre la empírica de la
+muestra perturbando es análogo:
+```{r}
+# Remuestreo
+B <- 1000
+estadistico_boot <- numeric(B)
+coeficiente <- sigma/sd(muestra)
+muestra_perturbada <- x_barra + coeficiente * (muestra - x_barra)
+for (k in 1:B) {
+  remuestra <- sample(muestra_perturbada, n, replace = TRUE)
+  x_barra_boot <- mean(remuestra)
+  estadistico_boot[k] <- sqrt(n) * (x_barra_boot - x_barra)/sigma
+}
+
+# Aproximación bootstrap de los ptos críticos
+pto_crit <- quantile(estadistico_boot, c(alfa/2, 1 - alfa/2))
+# Construcción del IC
+ic_inf_boot <- x_barra - pto_crit[2] * sigma/sqrt(n)
+ic_sup_boot <- x_barra - pto_crit[1] * sigma/sqrt(n)
+IC_boot <- c(ic_inf_boot, ic_sup_boot)
+names(IC_boot) <- paste0(100*c(alfa, 1-alfa), "%")
+IC_boot
+```
+
+
+
+```{example, label="mediana", name="Inferencia sobre la mediana"}
+<br> \vspace{0.5cm}
+
+Continuando con el ejemplo de los tiempos de vida de microorganismos,
+supongamos que queremos obtener una estimación por intervalo de confianza 
+de su vida mediana a partir de los 15 valores observados.
+```
+
+Consideramos la mediana poblacional como parámetro de interés:
+$$\theta = \theta \left( F \right) = F^{-1}\left( \frac{1}{2} \right) 
+= \inf \left\{ x\in \mathbb{R} : F\left( x \right) \geq \frac{1}{2}\right\}.$$
+Dada una muestra $\mathbf{X}=\left( X_1,\ldots ,X_n \right) \sim
+F$, $\theta$ puede estimarse mediante la mediana muestral
+$$\begin{aligned}
+\hat{\theta} &= \theta \left( F_n \right) =F_n^{-1}\left( \frac{1}{2} \right) 
+=\inf \left\{ x\in \mathbb{R} : F_n\left( x \right) \geq \frac{1}{2}
+\right\} \\
+&= \left\{ 
+\begin{array}{ll}
+X_{(m)} & \text{si } n=2m-1 \text{ es impar} \\ 
+\frac{X_{(m)}+X_{\left( m+1 \right)}}{2} & \text{si } n=2m \text{ es par}
+\end{array}
+\right.
+\end{aligned}$$
+siendo $X_{(1)},\ldots ,X_{(n)}$ los estadísticos ordenados.
+
+El estadístico interesante para realizar inferencia en este contexto es
+$R=\sqrt{n}\left( \hat{\theta}-\theta \right)$. Si la población de
+partida es continua, puede demostrarse que su distribución asintótica
+(i.e., cuando $n \rightarrow \infty$) viene dada por
+$$R=\sqrt{n}\left( \hat{\theta}-\theta \right) \overset{d}{\rightarrow }
+\mathcal{N}\left( 0,\frac{1}{f\left( \theta \right)^2} \right),$$donde $f$ es
+la función de densidad de la población. Como consecuencia, la
+utilización de esta distribución límite, 
+$\mathcal{N}\left( 0, 1/f\left( \theta \right)^2 \right)$, para realizar
+inferencia sobre la mediana, además de comportar una aproximación de la
+distribución en el muestreo real, no puede utilizarse directamente
+porque la densidad (desconocida) aparece en la expresión de la varianza
+asintótica. Para ser utilizable en la práctica deberíamos estimar $f$,
+lo cual es un problema añadido.
+
+Esta es pues una situación muy natural en la que usar un método
+bootstrap para aproximar la distribución de $R$. Consideremos como
+estimador de $F$ la distribución empírica, $F_n$, y procedamos según
+un bootstrap uniforme (supongamos $n=2m-1$, impar, por simplicidad):
+
+1. Para cada $i=1,\ldots ,n$ arrojar $U_i\sim \mathcal{U}\left( 0,1 \right)$ y
+hacer $X_i^{\ast}=X_{\left\lfloor nU_i\right\rfloor +1}$
+
+2. Obtener $X_{(1)}^{\ast},\ldots ,X_{(n)}^{\ast}$ 
+los estadísticos ordenados de la remuestra bootstrap y quedarse con
+el que ocupa lugar central:
+$\hat{\theta}^{\ast}=\theta \left( F_n^{\ast} \right) =X_{(m)}^{\ast}$
+
+3. Calcular
+$R^{\ast}=\sqrt{n}\left( X_{(m)}^{\ast}-X_{\left(m \right)} \right)$
+
+4. Repetir $B$ veces los pasos 1-3 para obtener las réplicas bootstrap
+$R^{\ast (1)}, \ldots, R^{\ast (B)}$
+
+5. Aproximar la distribución en el muestreo de $R$ mediante la empírica
+de $R^{\ast (1)}, \ldots, R^{\ast (B)}$
+
+El código implementando este algoritmo sería muy similar al de los casos anteriores:
+```{r}
+x_mediana<- median(muestra)
+
+# Remuestreo
+B <- 1000
+estadistico_boot <- numeric(B)
+coeficiente <- sigma/sd(muestra)
+for (k in 1:B) {
+  remuestra <- sample(muestra, n, replace = TRUE)
+  x_mediana_boot <- median(remuestra)
+  estadistico_boot[k] <- sqrt(n) * (x_mediana_boot - x_mediana)
+}
+
+# Aproximación bootstrap de los ptos críticos
+pto_crit <- quantile(estadistico_boot, c(alfa/2, 1 - alfa/2))
+# Construcción del IC
+ic_inf_boot <- x_mediana - pto_crit[2]/sqrt(n)
+ic_sup_boot <- x_mediana - pto_crit[1]/sqrt(n)
+IC_boot <- c(ic_inf_boot, ic_sup_boot)
+names(IC_boot) <- paste0(100*c(alfa, 1-alfa), "%")
+IC_boot
+```
+
+Sin embargo, como veremos más adelante, este caso de inferencia de la
+mediana es uno de los pocos casos en los que la distribución bootstrap
+se puede calcular de forma exacta, siendo dicha expresión utilizable en
+la práctica.
+
+## Cálculo de la distribución Bootstrap: exacta y aproximada 
+
+### Distribución bootstrap exacta
+
+En principio siempre es posible calcular la distribución en el
+remuestreo del estadístico bootstrap de forma exacta. Al menos para el
+bootstrap uniforme, que es el más habitual. El motivo es que la
+distribución de probabilidad de la que se remuestrea en el universo
+bootstrap es discreta y con un número finito de valores: $X_1,\ldots
+,X_n$. Así pues, cada observación bootstrap, $X_i^{\ast}$, ha de
+tomar necesariamente alguno de esos $n$ valores y, por tanto, el número
+de posibles remuestras, $\mathbf{X}^{\ast}=\left( X_1^{\ast
+},\ldots ,X_n^{\ast} \right)$, obtenibles mediante el bootstrap
+uniforme es finito, concretamente $n^{n}$. Aún siendo finito, este
+número es gigantescamente grande incluso para tamaños muestrales
+pequeños (salvo casos extremos del tipo $n=2,\ldots ,9$). Por ejemplo,
+para $n=10$, tenemos $10^{10}$ (diez mil millones de) posibles
+remuestras bootstrap y para $n=20$, tendríamos
+$20^{20}\simeq 10.4857\cdot 10^{25}$ (algo más de cien
+cuatrillones). Incluso para estos tamaños muestrales el problema de
+cálculo de la distribución bootstrap exacta de
+$\mathbf{X}^{\ast}$ es inabordable.
+
+### Vectores de remuestreo
+
+Una forma alternativa de representar las posibles remuestras bootstrap
+es mediante los llamados vectores de remuestreo. Son utilizables en el
+caso de que el estadístico de interés sea funcional, es decir, cuando
+$R$ depende de la muestra sólo a través de la distribución empírica o,
+lo que es lo mismo, el valor de $R$ no cambia cuando realizamos una
+permutación arbitraria sobre los elementos de la muestra (los cambiamos
+de orden). Consideremos la remuestra bootstrap
+$\mathbf{X}^{\ast}
+=\left( X_1^{\ast},\ldots ,X_n^{\ast} \right)$ y denotemos por
+$$N_j=\#\left\{ i\in \left\{ 1,\ldots ,n\right\} : 
+X_i^{\ast}=X_j\right\}.$$
+Obviamente, si el orden en el que se han obtenido los
+elementos de la muestra no es importante, entonces el vector 
+$\mathbf{N}=\left( N_1,\ldots ,N_n \right)$ contiene la misma
+información que la remuestra bootstrap $\mathbf{X}^{\ast}$.
+Esencialmente lo que hace el vector $\mathbf{N}$ es contabilizar
+cuantas veces se repite cada elemento de la muestra original en la
+remuestra bootstrap. Con esta notación, el vector de remuestreo
+bootstrap, 
+$\mathbf{P}^{\ast}=\left( P_1^{\ast},\ldots ,P_n^{\ast} \right)$, 
+se define como $P_i^{\ast}=\frac{N_i}{n}$, $i=1,\ldots ,n$.
+
+La distribución en el remuestreo de $\mathbf{N}$, bajo el
+bootstrap uniforme, es multinomial: $\mathbf{N}\sim \mathcal{M}_n\left(
+n,\left( \frac{1}{n},\ldots ,\frac{1}{n} \right) \right)$. Así que su
+masa de probabilidad, y por tanto la de $\mathbf{P}^{\ast}$, es
+fácilmente calculable:
+$$\begin{aligned}
+P\left( N_1=m_1,\ldots ,N_n=m_n \right) &= \frac{n!}{m_1!\cdots
+m_n!}\left( \frac{1}{n} \right)^{m_1}\cdots \left( \frac{1}{n} \right)
+^{m_n} \\
+&= \frac{n!}{m_1!\cdots m_n!n^{n}}\text{, } \\
+\end{aligned}$$
+para $m_1,\ldots ,m_n$ enteros con $\sum_{i=1}^{n}m_i = n$,
+donde el número de átomos de probabilidad de $\mathbf{N}$ es ahora
+$\binom{n+n-1}{n}=\binom{2n-1}{n}$. 
+
+En general $\binom{2n-1}{n}<n^{n}$,
+pues el hecho de que no importe el orden de las componentes de las
+remuestras bootstrap provoca un menor número de átomos de probabilidad.
+Aún así dicho cardinal es prohibitivamente grande incluso para tamaños
+muestrales pequeños: para $n=10$, resultaría abordable pues
+$\binom{19}{10}= 92\,378$, pero para $n=20$ tendríamos
+$\binom{39}{20}= 68\, 923\,264\,410$. De toda esa
+enorme cantidad de átomos, el de más grande probabilidad resulta tener
+una probabilidad de $\frac{n!}{n^{n}}$, que es insignificantemente
+pequeña para tamaños pequeños como $n=20$, con
+$\frac{20!}{20^{20}}\sim 2.\, 320\,2\times 10^{-8}$. De todas
+formas, existen raras ocasiones en las que el número de átomos de
+probabilidad de $R^{\ast}$ resulta ser mucho menor que el de
+$\mathbf{P}^{\ast}$.
+
+Para tamaños muestrales realmente pequeños es posible encontrar todos
+los átomos de probabilidad de la distribución bootstrap. Un ejemplo es
+la media muestral con, por ejemplo, $n=3$.
+
+
+```{example, label="media3", name="Media muestral para una muestra de tamaño 3"}
+<br> \vspace{0.5cm}
+
+Consideremos una muestra aleatoria simple de tamaño $n=3$ de una
+población con distribución $F$ y tomemos como parámetro de interés la
+media poblacional
+$\theta \left( F \right) =\mu =\int xdF\left( x \right)$. 
+Tomemos como estadístico de interés 
+$R=R\left( \mathbf{X},F \right) =\bar{X}$. 
+El análogo bootstrap de esta estadístico es
+$R^{\ast}=R\left( \mathbf{X}^{\ast},F_n \right) =\bar{X}^{\ast}$, 
+cuya distribución en el remuestreo se puede calcular de forma exacta 
+debido al reducido número de átomos de probabilidad que tiene. 
+Esta es una distribución discreta con 10 posibles valores, cuyo
+valor más probable es precisamente $\bar{X}$ que tiene una
+probabilidad bootstrap de $\frac{2}{9}$, como puede verse en la
+siguiente tabla.
+
+| $\mathbf{X}^{\ast}$ (salvo permutaciones)  |    $\mathbf{N}$ = $\left( m_1,m_2,m_3 \right)$  |    $\mathbf{P}^{\ast}$ = $\left(p_1,p_2,p_3 \right)$   |    $\frac{3!}{m_1!m_2!m_3!3^{3}}$   |   $\bar{X}^{\ast}$ | 
+| -----------------------------  | -------------------------- | -------------------------- | --------------------------- | ----------------------------- |
+| $\left( X_1,X_1,X_1 \right)$   |    $\left( 3,0,0 \right)$   |    $\left(1,0,0 \right)$   |    $\frac{1}{27}$   |    $X_1$    | 
+| $\left( X_2,X_2,X_2 \right)$   |    $\left( 0,3,0 \right)$   |    $\left(0,1,0 \right)$   |    $\frac{1}{27}$   |    $X_2$    | 
+| $\left( X_3,X_3,X_3 \right)$   |    $\left( 0,0,3 \right)$   |    $\left(0,0,1 \right)$   |    $\frac{1}{27}$   |    $X_3$    | 
+| $\left( X_1,X_1,X_2 \right)$   |    $\left( 2,1,0 \right)$   |    $\left( \frac{2}{3},\frac{1}{3},0 \right)$   |    $\frac{1}{9}$   |    $\frac{2X_1+X_2}{3}$    | 
+| $\left( X_1,X_1,X_3 \right)$   |    $\left( 2,0,1 \right)$   |    $\left( \frac{2}{3},0,\frac{1}{3} \right)$   |    $\frac{1}{9}$   |    $\frac{2X_1+X_3}{3}$    | 
+| $\left( X_1,X_2,X_2 \right)$   |    $\left( 1,2,0 \right)$   |    $\left( \frac{1}{3},\frac{2}{3},0 \right)$   |    $\frac{1}{9}$   |    $\frac{X_1+2X_2}{3}$    | 
+| $\left( X_2,X_2,X_3 \right)$   |    $\left( 0,2,1 \right)$   |    $\left( 0,\frac{2}{3},\frac{1}{3} \right)$   |    $\frac{1}{9}$   |    $\frac{2X_2+X_3}{3}$    | 
+| $\left( X_1,X_3,X_3 \right)$   |    $\left( 1,0,2 \right)$   |    $\left( \frac{1}{3},0,\frac{2}{3} \right)$   |    $\frac{1}{9}$   |    $\frac{X_1+2X_3}{3}$    | 
+| $\left( X_2,X_3,X_3 \right)$   |    $\left( 0,1,2 \right)$   |    $\left( 0,\frac{1}{3},\frac{2}{3} \right)$   |    $\frac{1}{9}$   |    $\frac{X_2+2X_3}{3}$    | 
+| $\left( X_1,X_2,X_3 \right)$   |    $\left( 1,1,1 \right)$   |    $\left( \frac{1}{3},\frac{1}{3},\frac{1}{3} \right)$   |    $\frac{2}{9}$   |    $\frac{X_1+X_2+X_3}{3}$    | 
+
+```
+
+En algunas ocasiones es factible encontrar expresiones cerradas
+para la distribución de $R^{\ast}$, más allá de las obvias que
+consisten en enumerar el ingente número de átomos de probabilidad de
+$\mathbf{P}^{\ast}$:
+$$P^{\ast}\left( R^{\ast}=R\left( \left( m_1,\ldots ,m_n \right)
+,F_n \right) \right)$$ 
+Veamos un ejemplo.
+
+### Inferencia sobre la mediana
+
+En el caso de la mediana, consideremos, por simplicidad el caso de
+tamaño muestral impar, $n=2m-1$. Supongamos también que no hay empates
+en los valores de la muestra (si los hubiese las expresiones serían más
+farragosas pero también calculables). La versión bootstrap del
+estadístico sobre el cual pivota la inferencia es $R^{\ast}=X_{\left(
+m \right)}^{\ast}-X_{(m)}$. Su distribución bootstrap
+podría calcularse si se obtuviese la de $X_{(m)}^{\ast}$.
+Pero ésta es factible de calcular por los pocos posibles valores que
+puede tomar el estadístico $X_{(m)}^{\ast}$ (tan sólo los
+valores de la muestra original) y por la sencillez del bootstrap
+uniforme.
+Veámoslo:
+$$P^{\ast}\left( X_{(m)}^{\ast}>X_{(j)} \right)
+=P^{\ast}\left( \#\left\{ X_i^{\ast}\leq X_{(j)}\right\}
+\leq m-1 \right),$$
+pero $\#\left\{ X_i^{\ast}\leq X_{(j)}\right\} \sim \mathcal{B}\left(
+n,\frac{j}{n} \right)$, con lo cual
+
+$$P^{\ast}\left( X_{(m)}^{\ast}>X_{(j)} \right)
+=\sum_{k=0}^{m-1}\binom{n}{k}\left( \frac{j}{n} \right)^{k}
+\left( \frac{n-j}{n} \right)^{n-k}$$
+
+y, por lo tanto, si $j\geq 2$, 
+$$\begin{aligned}
+P^{\ast}\left( X_{(m)}^{\ast}=X_{(j)} \right)
+=&\ P^{\ast}\left( X_{(m)}^{\ast}>X_{\left( j-1 \right)} \right)
+-P^{\ast}\left( X_{(m)}^{\ast}>X_{(j)} \right) \\
+=&\ \sum_{k=0}^{m-1}\binom{n}{k}\left( \frac{j-1}{n} \right)^{k}\left( \frac{
+n-j+1}{n} \right)^{n-k} \\
+&-\sum_{k=0}^{m-1}\binom{n}{k}\left( \frac{j}{n} \right)^{k}\left( \frac{n-j}{
+n} \right)^{n-k} \\
+=&\ \sum_{k=0}^{m-1}\binom{n}{k}\left[ \left( \frac{j-1}{n} \right)^{k}\left( 
+\frac{n-j+1}{n} \right)^{n-k}-\left( \frac{j}{n} \right)^{k}\left( \frac{n-j
+}{n} \right)^{n-k}\right] .
+\end{aligned}$$
+
+Cuando $j=1$, entonces 
+$$\begin{aligned}
+P^{\ast}\left( X_{(m)}^{\ast} = X_{(1)} \right)
+&= 1-P^{\ast}\left( X_{(m)}^{\ast}>X_{(1)} \right) \\
+&=  1-\sum_{k=0}^{m-1}\binom{n}{k}\left( \frac{1}{n} \right)^{k}
+\left( \frac{n-1}{n} \right)^{n-k}.
+\end{aligned}$$
+
+<!-- 
+Se podría comparar la distribución exacta 
+con la aproximación por Monte carlo 
+-->
+
+### Distribución Bootstrap aproximada por Monte Carlo
+
+Como ya se comentó anteriormente, 
+al conocer el mecanismo que genera los datos en el bootstrap,
+siempre se podrá simular dicho mecanismo mediante el método de Monte
+Carlo. Por lo que el algoritmo general para la aproximación de Monte Carlo del
+bootstrap uniforme es:
+
+1. Para cada $i=1,\ldots ,n$ arrojar $X_i^{\ast}$ a partir de $F_n$
+
+2. Obtener $\mathbf{X}^{\ast}=\left( X_1^{\ast},\ldots
+,X_n^{\ast} \right)$
+
+3. Calcular $R^{\ast}=R\left( \mathbf{X}^{\ast},F_n \right)$
+
+4. Repetir $B$ veces los pasos 1-3 para obtener las réplicas bootstrap
+$R^{\ast (1)}$, $\ldots$, $R^{\ast (B)}$
+
+5. Utilizar esas réplicas bootstrap para aproximar la distribución en el
+muestreo de $R$
+
+Como se mostró en la Sección \@ref(cap1-implementacion), el paso 1 se puede llevar a cabo simulando una distribución uniforme discreta
+mediante el método de la transformación cuantil:
+
+1. Para cada $i=1,\ldots ,n$ arrojar $U_i\sim \mathcal{U}\left( 0,1 \right)$ y
+hacer $X_i^{\ast}=X_{\left\lfloor nU_i\right\rfloor +1}$
+
+Aunque en `R` se recomienda emplear la función `sample`.
+
+```{example, label="media-dt-desconocida", name="Inferencia sobre la media con varianza desconocida"}
+<br> \vspace{0.5cm}
+
+Continuando con el ejemplo de los tiempos de vida de microorganismos,
+supongamos que queremos obtener una estimación por intervalo de confianza 
+de su vida media a partir de los 15 valores observados pero en la
+situación mucho más realista de que la varianza sea desconocida.
+```
+
+Tenemos pues
+$\mathbf{X}=\left( X_1,\ldots ,X_n \right) \sim F\,$, con
+$\mu$ y $\sigma$ desconocidas
+
+El parámetro de interés es
+$$\theta \left( F \right) =\mu =\int x~dF\left( x \right)$$
+que se estima mediante
+$$\theta \left( F_n \right) =\int x~dF_n\left( x \right) =\bar{X}.$$
+Así pues, el estadístico en el que basar la inferencia es
+$$R=R\left( \mathbf{X},F \right) =\sqrt{n}\frac{\bar{X}-\mu }{S_{n-1}},$$
+donde $S_{n-1}^2$ es la cuasivarianza muestral:
+$$S_{n-1}^2=\frac{1}{n-1}\sum_{j=1}^{n}\left( X_j-\bar{X} \right)^2.$$
+
+Bajo normalidad $\left( X\sim \mathcal{N}\left( \mu ,\sigma^2 \right) \right)$,
+se sabe que $R\sim t_{n-1}$ y, en particular,
+$R\overset{d}{\rightarrow } \mathcal{N}\left( 0,1 \right)$ cuando $n\rightarrow \infty$. 
+Si $F$ no es normal entonces la distribución de $R$ ya no es una $t_{n-1}$, 
+pero también es cierto que, bajo ciertas condiciones,
+$R\overset{d}{\rightarrow}\mathcal{N}\left(0,1 \right)$.
+
+En el contexto bootstrap elegimos $\hat{F}=F_n\,$, con lo cual se
+trata de un bootstrap naïve o uniforme. El análogo bootstrap del
+estadístico $R$ será
+$$R^{\ast}=R\left( \mathbf{X}^{\ast},F_n \right) =\sqrt{n}\frac{
+\bar{X}^{\ast}-\bar{X}}{S_{n-1}^{\ast}},$$
+siendo
+$$\begin{aligned}
+\bar{X}^{\ast} &= \frac{1}{n}\sum_{i=1}^{n}X_i^{\ast}, \\
+S_{n-1}^{\ast 2} &= \frac{1}{n-1}\sum_{i=1}^{n}\left( X_i^{\ast}-
+\bar{X}^{\ast} \right)^2.
+\end{aligned}$$
+
+El algoritmo bootstrap (aproximado por Monte Carlo) procedería así:
+
+1. Para cada $i=1,\ldots ,n$ arrojar $U_i\sim \mathcal{U}\left( 0,1 \right)$ y
+hacer $X_i^{\ast}=X_{\left\lfloor nU_i\right\rfloor +1}$
+
+2. Obtener $\bar{X}^{\ast}$ y $S_{n-1}^{\ast 2}$
+
+3. Calcular
+$R^{\ast}=\sqrt{n}\frac{\bar{X}^{\ast}-\bar{X}}{
+S_{n-1}^{\ast}}$
+
+4. Repetir $B$ veces los pasos 1-3 para obtener las réplicas bootstrap
+$R^{\ast (1)}, \ldots, R^{\ast (B)}$
+
+5. Aproximar la distribución en el muestreo de $R$ mediante la
+distribución empírica de $R^{\ast (1)}, \ldots, R^{\ast (B)}$
+
+El código para implementar este método es similar al del caso de varianza conocida
+del Ejemplo \@ref(exm:media-dt-conocida):
+```{r}
+muestra <- c(0.143, 0.182, 0.256, 0.26, 0.27, 0.437, 0.509, 
+             0.611, 0.712, 1.04, 1.09, 1.15, 1.46, 1.88, 2.08)
+n <- length(muestra)
+alfa <- 0.05
+x_barra <- mean(muestra)
+cuasi_dt <- sd(muestra)
+
+# Remuestreo
+set.seed(1)
+B <- 1000
+remuestra <- numeric(n)
+estadistico_boot <- numeric(B)
+for (k in 1:B) {
+  remuestra <- sample(muestra, n, replace = TRUE)
+  x_barra_boot <- mean(remuestra)
+  cuasi_dt_boot <- sd(remuestra)
+  estadistico_boot[k] <- sqrt(n) * (x_barra_boot - x_barra)/cuasi_dt_boot
+}
+
+# Aproximación bootstrap de los ptos críticos
+pto_crit <- quantile(estadistico_boot, c(alfa/2, 1 - alfa/2))
+
+# Construcción del IC
+ic_inf_boot <- x_barra - pto_crit[2] * cuasi_dt/sqrt(n)
+ic_sup_boot <- x_barra - pto_crit[1] * cuasi_dt/sqrt(n)
+IC_boot <- c(ic_inf_boot, ic_sup_boot)
+names(IC_boot) <- paste0(100*c(alfa, 1-alfa), "%")
+IC_boot
+```
+
+Este procedimiento para la construcción de intervalos de confianza
+se denomina *método percentil-t* y se tratará en la Sección \@ref(cap5-perc-t).
+
+### Elección del número de réplicas Monte Carlo
+
+Normalmente el valor de $B$ se toma del orden de varias centenas o
+incluso millares. En los casos en los que el bootstrap se utiliza para
+estimar el sesgo o la varianza de un estimador, bastará tomar un número,
+$B$, de réplicas bootstrap del orden de $B = 100, 200, 500$. Sin embargo,
+cuando se trata de utilizar el bootstrap para realizar contrastes de
+hipótesis o construir intervalos de confianza son necesarios valores
+mayores, del tipo $B = 500, 1000, 2000, 5000$.
+
+<!-- 
+considerar distintos estadísticos: 
+media, error estándar y cuantiles
+-->
+
+Evidentemente, la función de distribución del estadístico de interés,
+$\psi \left( u \right) =P\left( R\leq u \right)$, se estimaría mediante
+la distribución empírica de las $B$ realizaciones de la aproximación de
+Monte Carlo, $\hat{\psi}_{B}\left( u \right) =
+\frac{1}{B}\sum_{i=1}^{B}\mathbf{1}\left\{ R^{\ast (i)}\leq u\right\}$, 
+de la verdadera distribución bootstrap exacta: $\hat{\psi}\left(
+u \right) =P^{\ast}\left( R^{\ast}\leq u \right)$. El error de Monte
+Carlo de $\hat{\psi}_{B}\left( u \right)$ con respecto a
+$\hat{\psi}\left(
+u \right)$ viene dado por su varianza Monte Carlo, pues su sesgo Monte
+Carlo es cero:
+
+$$\begin{aligned}
+E^{MC}\left( \hat{\psi}_{B}\left( u \right) \right) &= \frac{1}{B}
+\sum_{i=1}^{B}E^{MC}\left( \mathbf{1}\left\{ R^{\ast (i)}\leq
+u\right\} \right) =\frac{1}{B}\sum_{i=1}^{B}P^{\ast}\left( R^{\ast \left(
+i \right)}\leq u \right) \\
+&= \frac{1}{B}\sum_{i=1}^{B}\hat{\psi}\left( u \right) =\hat{\psi}\left(
+u \right), \\
+Var^{MC}\left( \hat{\psi}_{B}\left( u \right) \right) &= \frac{1}{B^2}
+\sum_{i=1}^{B}Var^{MC}\left( \mathbf{1}\left\{ R^{\ast (i)}\leq
+u\right\} \right) \\
+&= \frac{1}{B^2}\sum_{i=1}^{B}P^{\ast}\left( R^{\ast (i)
+}\leq u \right) \left[ 1-P^{\ast}\left( R^{\ast (i)}\leq
+u \right) \right] = \\
+&= \frac{1}{B^2}\sum_{i=1}^{B}\hat{\psi}\left( u \right) \left( 1-\hat{\psi}
+\left( u \right) \right) =\frac{1}{B}\hat{\psi}\left( u \right) \left( 1-\hat{
+\psi}\left( u \right) \right) \leq \frac{1}{4B}
+\end{aligned}$$
+
+Así, el error de la aproximación de Monte Carlo al bootstrap exacto
+(raíz cuadrada de la varianza del Monte Carlo), puede acotarse por
+$\frac{1}{2\sqrt{B}}$.
+
+## Herramientas disponibles en R sobre bootstrap  {#cap1-paquetes}
+
+En `R` hay una gran cantidad de paquetes que implementan métodos bootstrap.
+Por ejemplo, al ejecutar el comando `??bootstrap` (o `help.search('bootstrap')`)
+se mostrarán las funciones de los paquetes instalados que incluyen este término
+en su documentación (se puede realizar la búsqueda en todos los paquetes disponibles
+de `R` a través de <https://www.rdocumentation.org>).
+
+De entre todos estas herramientas destacan dos librerías 
+como las más empleadas:
+
+* `bootstrap`: contiene las rutinas (bootstrap, cross-validation,
+  jackknife) y los datos del libro "An Introduction to the Bootstrap" de B.
+  Efron y R. Tibshirani, 1993, Chapman and Hall. La librería fue
+  desarrollada originalmente en `S` por Rob Tibshirani y exportada a `R` por
+  Friedrich Leisch. Es útil para desarrollar los ejemplos que se citan en
+  ese libro.
+
+* `boot`: incluye las funciones y conjuntos de datos utilizados en el libro 
+  "Bootstrap Methods and Their Applications" de A. C. Davison y D. V. Hinkley, 1997,
+  Cambridge University Press. Esta librería fue desarrollada originalmente 
+  en `S` por Angelo J. Canty y posteriormente exportada a `R` (ver Canty, 2002).
+  Este paquete es mucho más completo que el paquete `bootstrap` 
+  y es el que emplearemos como referencia en este libro 
+  (ver Sección \@ref(cap1-pkgboot)).
+
+Por otra parte existen numerosas rutinas (scripts) realizadas en `R` por
+diversos autores, que están disponibles en Internet 
+(por ejemplo, puede ser interesante realizar una búsqueda en 
+<https://rseek.org>). 
+
+El bootstrap uniforme se puede implementar fácilmente. Por ejemplo,
+una rutina general para el caso univariante sería la siguiente:
+
+```{r}
+#' @param x vector que contiene la muestra.
+#' @param B número de réplicas bootstrap.
+#' @param statistic función que calcula el estadístico.
+boot.strap0 <- function(x, B=1000, statistic=mean){
+  ndat <- length(x)
+  x.boot <- sample(x, ndat*B, replace=TRUE)
+  x.boot <- matrix(x.boot, ncol=B, nrow=ndat)
+  stat.boot <- apply(x.boot, 2, statistic)
+}
+```
+
+Podríamos aplicar esta función a la muestra de tiempos de vida de
+microorganismos con el siguiente código:
+```{r}
+fstatistic <- function(x){
+  #  mean(x)
+  #  mean(x, trim=0.2)
+  median(x)
+  #  max(x)
+}
+
+B <- 1000
+set.seed(1)
+stat.dat <- fstatistic(muestra)
+stat.boot <- boot.strap0(muestra, B, fstatistic)
+
+res.boot <- c(stat.dat, mean(stat.boot)-stat.dat, sd(stat.boot))
+names(res.boot) <- c("Estadístico", "Sesgo", "Error Std.")
+res.boot
+```
+
+La función `boot.strap0()` anterior no es adecuada para el caso multivariante
+(por ejemplo cuando estamos interesados en regresión).
+Como se mostró en la Sección \@ref(cap1-implementacion)
+sería preferible emplear remuestras del vector de índices. Por ejemplo:
+
+```{r}
+#' @param datos vector, matriz o data.frame que contiene los datos.
+#' @param B número de réplicas bootstrap.
+#' @param statistic función con al menos dos parámetros, 
+#' los datos y el vector de índices de remuestreo, 
+#' y que devuelve el vector de estadísticos.
+#' @param ... parámetros adicionales de la función statistic.
+boot.strap <- function(datos, B=1000, statistic, ...) {
+  ndat <- NROW(datos)
+  i.boot <- sample(ndat, ndat*B, replace=TRUE)
+  i.boot <- matrix(i.boot, ncol=B, nrow=ndat)
+  stat.boot <- drop(apply(i.boot, 2, function(i) statistic(datos, i, ...)))
+}
+```
+
+El paquete `boot`, descrito a continuación, emplea una implementación similar.
+
+### El paquete `boot` {#cap1-pkgboot}
+
+La función principal de este paquete es la función `boot()` que implementa 
+distintos métodos de remuestreo para datos i.i.d..
+En su forma más simple permite realizar bootstrap uniforme
+(denominado *bootstrap noparamétrico básico* en este paquete):
+```{r eval=FALSE}
+boot(data, statistic, R)
+```
+donde `data` es un vector, matriz o `data.frame` que contiene los datos, 
+`R` es el número de réplicas bootstrap, y `statistic` es una función 
+con al menos dos parámetros (con las opciones por defecto), 
+los datos y el vector de índices de remuestreo, 
+y que devuelve el vector de estadísticos.
+
+Por ejemplo, para hacer inferencia sobre la mediana del tiempo de microorganismos,
+podríamos emplear el siguiente código:
+```{r}
+library(boot)
+muestra <- c(0.143, 0.182, 0.256, 0.26, 0.27, 0.437, 0.509, 
+             0.611, 0.712, 1.04, 1.09, 1.15, 1.46, 1.88, 2.08)
+
+statistic <- function(data, i){
+  # remuestra <- data[i]; median(remuestra)
+  median(data[i])
+}
+
+set.seed(1)
+res.boot <- boot(muestra, statistic, R = 1000)
+```
+
+El resultado que devuelve esta función es un objeto de clase `boot`, una lista con los siguientes componentes:
+```{r}
+names(res.boot)
+```
+Además de los parámetros de entrada (incluyendo los valores por defecto), contiene tres componentes adicionales:
+
+* `tO`: el valor observado del estadístico 
+  (su evaluación en los datos originales).
+  
+* `t`: la matriz de réplicas bootstrap del estadístico
+  (cada fila se corresponde con una remuestra).
+  
+* `seed`: el valor inicial de la semilla (`.Random.seed`)
+  empleada para la generación de las réplicas.
+
+Este tipo de objetos dispone de dos métodos principales:
+el método `print()` que muestra un resumen de los resultados
+(incluyendo  aproximaciones bootstrap del sesgo y del error
+estándar de los estadísticos; ver Capítulo \@ref(cap2)):
+```{r}
+res.boot
+```
+y el método `plot()` que genera gráficas básicas de diagnosis
+de los resultados (correspondientes al estadístico determinado por el parámetro `index`, por defecto `= 1`): `r latexfig("plot-res-boot", output = is_latex())`
+
+```{r plot-res-boot, fig.width=12, fig.cap='Gráficos de diagnóstico de los resultados bootstrap de la mediana de los tiempos de vida de microorganismos.'}
+plot(res.boot)
+```
+
+
+Además de estos métodos, las principales funciones de interés serían:
+
+* `jack.after.boot()`: genera un gráfico para diagnósticar la inluencia 
+  de las observaciones individuales en los resultados bootstrap 
+  (se representan los cuantiles frente a las diferencias en el estadístico 
+  al eliminar una observación; este gráfico también se puede obtener estableciendo
+  `jack = TRUE` en `plot.boot()`).
+  
+* `boot.array()`: genera la matriz de índices a partir de la que se obtuvieron las
+  remuestras (permite reconstruir las remuestras bootstrap).
+  
+* `boot.ci()`: construye distintos tipos de intervalos de confianza 
+  (se tratarán en el Capítulo \@ref(cap5)) dependiendo del parámetro `type`:
+  
+    - `"norm"`: utiliza la distribución asintótica normal considerando las
+        aproximaciones bootstrap del sesgo y de la varianza.
+        
+    - `"basic"`: emplea el estadístico $R = \hat \theta - \theta$ para la
+      construcción del intervalo de confianza.
+      
+    - `"stud"`: calcula el intervalo a partir del estadístico estudentizado 
+        $R = \left( \hat \theta - \theta \right) / \sqrt{Var(\hat \theta)}$.
+    
+    - `"perc"`: utiliza directamente la distribución bootstrap del estadístico
+      ($R = \hat \theta$).
+    
+    - `"bca"`: emplea el método $BCa$ ("bias-corrected and accelerated") 
+        propuesto por Efron (1987) (ver Sección 5.3.2 de Davison y Hinkley, 1997).
+    
+    - `"all"`: calcula los cinco tipos de intervalos anteriores.
+
+
+Como ya se comentó, la función `boot()` admite estadísticos multivariantes 
+(haciendo que la función `statistic` devuelva un vector en lugar de un escalar),
+pero por defecto las funciones anteriores consideran el primer componente
+como el estadístico principal. 
+Para obtener resultados de otros componentes del vector de estadísticos
+habrá que establecer el parámetro `index` igual al índice deseado.
+Además, en algunos casos (por ejemplo para la obtención de intevalos de confianza
+estudentizados con la función `boot.ci()`) se supone, por defecto, que el segundo
+componente del vector de estadísticos contiene estimaciones de la varianza del
+estadístico para cada réplica boostrap.
+
+```{example, label="media-dt-desconocida-boot", name="Inferencia sobre la media con varianza desconocida, continuación"}
+<br> \vspace{0.5cm}
+
+Continuando con el Ejemplo \@ref(exm:media-dt-desconocida) de
+inferencia sobre la media con varianza desconocida. 
+Para obtener la estimación por intervalo de confianza del tiempo de vida medio 
+de los microorganismos con el paquete `boot`, podríamos emplear
+el siguiente código:
+```
+```{r}
+library(boot)
+muestra <- c(0.143, 0.182, 0.256, 0.26, 0.27, 0.437, 0.509, 
+             0.611, 0.712, 1.04, 1.09, 1.15, 1.46, 1.88, 2.08)
+
+statistic <- function(data, i){
+  remuestra <- data[i]
+  c(mean(remuestra), var(remuestra)/length(remuestra))
+}
+
+set.seed(1)
+res.boot <- boot(muestra, statistic, R = 1000)
+res.boot
+boot.ci(res.boot)
+```
+
+El intervalo marcado como `Studentized` se obtuvo empleando el mismo estadístico
+del Ejemplo \@ref(exm:media-dt-desconocida).
+
+
+***Modificaciones del bootstrap uniforme*** 
+
+Establecenciendo parámetros adicionales de la función `boot` se pueden llevar 
+a cabo modificaciones del bootstrap uniforme. 
+Algunos de estos parámetros son los siguientes:
+
+* `strata`: permite realizar remuestreo estratificado estableciendo este parámetro
+  como un vector numérico o factor que defina los grupos.
+
+* `sim = c("ordinary" , "parametric", "balanced", "permutation", "antithetic")`:
+  permite establecer distintos tipos de remuestreo. 
+  Por defecto es igual a `"ordinary"` que se corresponde con el bootstrap uniforme,
+  descrito anteriormente. Entre el resto de opciones destacaríamos 
+  `sim = "permutation"`, que permite realizar contrastes de
+  permutaciones (remuestreo sin reemplazamiento), y `sim = "parametric"`,
+  que permite realizar bootstrap paramétrico (Sección \@ref(cap4-boot-par)). 
+  En este último caso también habrá que establecer los parámetros `ran.gen` y
+  `mle`, y la función `statistics` no empleará el segundo parámetro de índices.
+
+* `ran.gen`: función que genera los datos. El primer argumento será el conjunto de datos
+  original y el segundo un vector de parámetros adicionales 
+  (normalmente los valores de los parámetros de la distribución).
+
+* `mle`: parámetros de la distribución (típicamente estimados por máxima verosimilitud)
+  o parámetros adicionales para `ran.gen` ó `statistics`.
+
+Además hay otros parámetros para el procesamiento en paralelo: `parallel = c("no", "multicore", "snow")`, `ncpus`, `cl`. Para más detalles sobre los parámetros
+consultar la ayuda de la función `boot()` (`?boot`).
+
+El paquete `boot` también incluye otras funciones que implementan métodos
+boostrap para otros tipos de datos, como la función `censboot()` para datos 
+censurados (Capítulo \@ref(cap8)) o la función `tsboot()` para series de tiempo (Capítulo \@ref(cap9)).
+
+
+
+
