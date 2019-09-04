@@ -2,6 +2,9 @@
 
 ## Cao, R. (rcao@udc.es) y Fernández-Casal, R. (rfcasal@udc.es)
 
+
+Este libro contiene los apuntes de la asignatura de [Técnicas de Remuestreo](http://eamo.usc.es/pub/mte/index.php/es/?option=com_content&view=article&id=2202&idm=22&a%C3%B1o=2019) del [Máster en Técnicas Estadísticas](http://eio.usc.es/pub/mte). 
+
 Este libro ha sido escrito en [R-Markdown](http://rmarkdown.rstudio.com) empleando el paquete [`bookdown`](https://bookdown.org/yihui/bookdown/)  y está disponible en el repositorio Github: [rubenfcasal/book_remuestreo](https://github.com/rubenfcasal/book_remuestreo). 
 Se puede acceder a la versión en línea a través del siguiente enlace:
 
