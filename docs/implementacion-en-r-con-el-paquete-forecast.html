@@ -278,10 +278,20 @@ fit &lt;-<span class="st"> </span><span class="kw">ets</span>(data2)
 <span class="kw">set.seed</span>(<span class="dv">1</span>)
 ry &lt;-<span class="st"> </span><span class="kw">simulate</span>(fit, <span class="dv">12</span><span class="op">*</span><span class="dv">4</span>)
 <span class="kw">lines</span>(ry, <span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</code></pre></div>
-<p><img src="09-depen_files/figure-html/unnamed-chunk-12-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<div class="figure" style="text-align: center"><span id="fig:co2"></span>
+<img src="09-depen_files/figure-html/co2-1.png" alt="Datos de co2 (1990-1997) y simulación condicional (a partir de las observaciones desde 1990 hasta 1996)." width="70%" />
+<p class="caption">
+Figura 9.4: Datos de co2 (1990-1997) y simulación condicional (a partir de las observaciones desde 1990 hasta 1996).
+</p>
+</div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(<span class="kw">forecast</span>(fit, <span class="dt">h=</span><span class="dv">12</span><span class="op">*</span><span class="dv">4</span>), <span class="dt">col=</span><span class="st">&quot;blue&quot;</span>)
 <span class="kw">lines</span>(ry, <span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</code></pre></div>
-<p><img src="09-depen_files/figure-html/unnamed-chunk-12-2.png" width="70%" style="display: block; margin: auto;" /></p>
+<div class="figure" style="text-align: center"><span id="fig:co22"></span>
+<img src="09-depen_files/figure-html/co22-1.png" alt="Predicción de los valores de co2 y simulación condicional (ambas a partir de las observaciones entre 1990 y 1996)." width="70%" />
+<p class="caption">
+Figura 9.5: Predicción de los valores de co2 y simulación condicional (ambas a partir de las observaciones entre 1990 y 1996).
+</p>
+</div>
 <p>Ver enlaces en referencias <a href="enlaces.html#forecast-links">9.9.1</a>.</p>
 </div>
 </div>

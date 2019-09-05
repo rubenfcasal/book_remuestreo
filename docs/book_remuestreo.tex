@@ -185,8 +185,9 @@ Este libro ha sido escrito en
 \href{https://bookdown.org/yihui/bookdown/}{\texttt{bookdown}} y está
 disponible en el repositorio Github:
 \href{https://github.com/rubenfcasal/book_remuestreo}{rubenfcasal/book\_remuestreo}.
-Se puede acceder a la versión en línea a través del siguiente
-enlace:\url{https://rubenfcasal.github.io/book_remuestreo}.
+Se puede acceder a la versión en línea a través del siguiente enlace:
+
+\url{https://rubenfcasal.github.io/book_remuestreo}.
 
 Para ejecutar los ejemplos mostrados en el libro será necesario tener
 instalados los siguientes paquetes:
@@ -194,7 +195,7 @@ instalados los siguientes paquetes:
 \href{https://cran.r-project.org/web/packages/bootstrap/index.html}{\texttt{bootstrap}},
 \href{https://cran.r-project.org/web/packages/survival/index.html}{\texttt{survival}},
 \href{https://cran.r-project.org/web/packages/forecast/index.html}{\texttt{forecast}},
-\href{https://cran.r-project.org/web/packages/MASS/index.html}{\texttt{MASS}}
+\href{https://cran.r-project.org/web/packages/MASS/index.html}{\texttt{MASS}}.
 Por ejemplo mediante el comando:
 
 \begin{Shaded}
@@ -2186,7 +2187,7 @@ llevar a cabo mediante el siguiente código:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.1570513
+## [1] 0.1559049
 \end{verbatim}
 
 \begin{Shaded}
@@ -2196,7 +2197,7 @@ llevar a cabo mediante el siguiente código:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.2517709
+## [1] 0.2512371
 \end{verbatim}
 
 \begin{Shaded}
@@ -2209,7 +2210,7 @@ llevar a cabo mediante el siguiente código:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.0004837933
+## [1] 0.00145046
 \end{verbatim}
 
 \begin{Shaded}
@@ -2219,7 +2220,7 @@ llevar a cabo mediante el siguiente código:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.0482999
+## [1] 0.0493702
 \end{verbatim}
 
 Empleando el paquete \texttt{boot} el código sería más simple:
@@ -4280,7 +4281,7 @@ mismo, \(O\left( n^{-1} \right)\) en ambos casos.
 En el Ejemplo \ref{exm:media-dt-desconocida}, se implementó este método
 para obtener una estimación por intervalo de confianza del tiempo de
 vida medio de microorganismos. En el Ejemplo
-\ref{exm:media-dt-desconocida-boot} se mmostró como calcular este
+\ref{exm:media-dt-desconocida-boot} se mostró como calcular este
 intervalo empleando el paquete \texttt{boot} (haciendo que la función
 \texttt{statistic} devuelva también la varianza del estadístico y
 estableciendo \texttt{type="stud"} en la llamada a la función
@@ -4546,7 +4547,7 @@ bootstrap para un nivel de confianza nominal del 90\%
 
 \begin{verbatim}
 ##    user  system elapsed 
-##   27.08    0.03   27.22
+##   26.97    0.02   26.98
 \end{verbatim}
 
 \begin{Shaded}
@@ -5118,9 +5119,10 @@ por Härdle y Marron (1991), procede del siguiente modo:
 \item
   Para cada índice \(i=1,2,\ldots ,n\), se arroja, condicionalmente a la
   muestra observada,
-  \(\left\{ \left( X_1,Y_1 \right),\left( X_2,Y_2 \right),\ldots ,\left( X_n,Y_n \right) \right\}\),
-  un residuo bootstrap \(\hat{\varepsilon}_i^{\ast}\) de una
-  distribución de probabilidad que cumpla,
+  \(\left\{ \left( X_1,Y_1 \right), \ \left( X_2,Y_2 \right),\right.\)
+  \(\left.\ldots ,\ \left( X_n,Y_n \right) \right\}\), un residuo
+  bootstrap \(\hat{\varepsilon}_i^{\ast}\) de una distribución de
+  probabilidad que cumpla,
   \(E^{\ast}\left( \hat{\varepsilon}_i^{\ast} \right) =0\),
   \(E^{\ast}\left( \hat{\varepsilon}_i^{\ast 2} \right) =\hat{ \varepsilon}_i^2\)
   y
@@ -6744,7 +6746,8 @@ puede extenderse fácilmente para procesos de Markov de orden \(p>1\).
 
 Para simular una serie de tiempo en \texttt{R} se puede emplear la
 función \texttt{arima.sim} del paquete base \texttt{stats}. Por ejemplo,
-podemos generar una serie autoregressiva con:
+podemos generar una serie autoregressiva con: {[}Figura
+@ref(fig:arima.sim){]}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -6763,14 +6766,19 @@ podemos generar una serie autoregressiva con:
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.7\linewidth]{09-depen_files/figure-latex/unnamed-chunk-2-1} \end{center}
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{09-depen_files/figure-latex/arima.sim-1} 
+
+}
+
+\caption{Simulación de un modelo autoregresivo.}(\#fig:arima.sim)
+\end{figure}
 
 En este caso el periodo de calentamiento se establece mediante el
 parámetro \texttt{n.start} (que se fija automáticamente a un valor
-adecuado).
-
-La recomendación es fijar la varianza de las series simuladas si se
-quieren comparar resultados considerando distintos parámetros de
+adecuado). La recomendación es fijar la varianza de las series simuladas
+si se quieren comparar resultados considerando distintos parámetros de
 dependencia.
 
 Otras opciones:
@@ -6786,7 +6794,7 @@ Otras opciones:
   \texttt{start.innov\ =\ rand.gen(n.start,\ ...)}
 \end{itemize}
 
-Ejemplo (\texttt{?arima.sim}):
+Ejemplo (\texttt{?arima.sim}): {[}Figura @ref(fig:arima.sim2){]}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -6798,7 +6806,14 @@ Ejemplo (\texttt{?arima.sim}):
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.7\linewidth]{09-depen_files/figure-latex/unnamed-chunk-3-1} \end{center}
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{09-depen_files/figure-latex/arima.sim2-1} 
+
+}
+
+\caption{Simulación de un modelo autoregresivo con errores con distribución *t* de Student.}(\#fig:arima.sim2)
+\end{figure}
 
 \section{\texorpdfstring{Implementación en \texttt{R} con el paquete
 \texttt{boot}}{Implementación en R con el paquete boot}}\label{implementacion-en-r-con-el-paquete-boot}
@@ -6873,16 +6888,16 @@ i.i.d. The observed residuals are sampled as an i.i.d. series and then a
 bootstrap time series is reconstructed. In constructing the bootstrap
 time series from the residuals, it is recommended to generate a long
 time series and then discard the initial burn-in stage. Since the length
-of burn-in required is problem specific, tsboot does not actually do the
-resampling. Instead the user should give a function which will return
-the bootstrap time series. This function should take three arguments,
-the time series as supplied to \texttt{tsboot}, a value \texttt{n.sim}
-which is the length of the time series required and the third argument
-containing any other information needed by the random generation
-function such as coefficient estimates. When the random generation
-function is called it will be passed the arguments \texttt{data},
-\texttt{n.sim} and \texttt{ran.args} passed to \texttt{tsboot} or their
-defaults.
+of burn-in required is problem specific, \texttt{tsboot} does not
+actually do the resampling. Instead the user should give a function
+which will return the bootstrap time series. This function should take
+three arguments, the time series as supplied to \texttt{tsboot}, a value
+\texttt{n.sim} which is the length of the time series required and the
+third argument containing any other information needed by the random
+generation function such as coefficient estimates. When the random
+generation function is called it will be passed the arguments
+\texttt{data}, \texttt{n.sim} and \texttt{ran.args} passed to
+\texttt{tsboot} or their defaults.
 
 One problem with the model-based bootstrap is that it is critically
 dependent on the correct model being fitted to the data. Davison and
@@ -6955,13 +6970,22 @@ Dataframe lynx contains the Canadian lynx data, to the logarithm of
 which we fit the autoregressive model that minimizes AIC:
 \end{quote}
 
+{[}Figura \ref{fig:lynx-data}{]}
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{ts.plot}\NormalTok{(}\KeywordTok{log}\NormalTok{(lynx))}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.7\linewidth]{09-depen_files/figure-latex/unnamed-chunk-7-1} \end{center}
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{09-depen_files/figure-latex/lynx-data-1} 
+
+}
+
+\caption{Lynx data (logarithmic scale).}\label{fig:lynx-data}
+\end{figure}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -6983,7 +7007,8 @@ itself.
 \end{quote}
 
 \begin{quote}
-Here are results for fixed-block bootstraps with block length l = 20:
+Here are results for fixed-block bootstraps with block length
+\(l = 20\):
 \end{quote}
 
 \begin{Shaded}
@@ -7058,6 +7083,8 @@ on the body temperature \(y_1, \ldots, y_n\) and an indicator
 \(x_1, \ldots, x_n\) of activity of a female beaver, Castor canadensis.
 \end{quote}
 
+{[}Figura \ref{fig:beaver-data}{]}
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{# ?beaver}
@@ -7065,7 +7092,14 @@ on the body temperature \(y_1, \ldots, y_n\) and an indicator
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.7\linewidth]{09-depen_files/figure-latex/beaver-data-1} \end{center}
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{09-depen_files/figure-latex/beaver-data-1} 
+
+}
+
+\caption{Beaver data}\label{fig:beaver-data}
+\end{figure}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -7134,8 +7168,16 @@ To fit the original model and to generate a new series:
 \CommentTok{#     ts}
 \CommentTok{# \}}
 \CommentTok{# new.beaver <- beaver.gen( beaver, 100, beaver.args )}
-\CommentTok{# }
-\CommentTok{# # Now we are able to generate data, we can bootstrap and see the results of beaver.boot as follows:}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{quote}
+Now we are able to generate data, we can bootstrap and see the results
+of \texttt{beaver.boot} as follows:
+\end{quote}
+
+\begin{Shaded}
+\begin{Highlighting}[]
 \CommentTok{# beaver.fun <- function(ts) fit(ts)$paras}
 \CommentTok{# beaver.boot <- tsboot( beaver, beaver.fun, R=99,sim="model", }
 \CommentTok{#         n.sim=100,ran.gen=beaver.gen,ran.args=beaver.args) }
@@ -7169,6 +7211,8 @@ Consider scrambling the phases of the sunspot data. To see the original
 data,
 \end{quote}
 
+{[}Figura \ref{fig:sunspot}{]}
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{data}\NormalTok{(sunspot.year)  }\CommentTok{# WarningR: data set 'sunspot' not found}
@@ -7179,7 +7223,14 @@ data,
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.7\linewidth]{09-depen_files/figure-latex/sunspot-1} \end{center}
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{09-depen_files/figure-latex/sunspot-1} 
+
+}
+
+\caption{Sunspot data (yearly numbers).}\label{fig:sunspot}
+\end{figure}
 
 \begin{quote}
 two replicates generated using ordinary phase scrambling, and two phase
@@ -7191,7 +7242,7 @@ original data:
 \begin{Highlighting}[]
 \KeywordTok{set.seed}\NormalTok{(DNI)}
 \NormalTok{sunspot.}\DecValTok{1}\NormalTok{ <-}\StringTok{ }\KeywordTok{tsboot}\NormalTok{(sunspot.year, ...}
-\NormalTok{.Random.seed <-}\StringTok{ }\NormalTok{sunspot.}\DecValTok{1}\OperatorTok{$}\NormalTok{seed }\CommentTok{# set.seed(1)}
+\NormalTok{.Random.seed <-}\StringTok{ }\NormalTok{sunspot.}\DecValTok{1}\OperatorTok{$}\NormalTok{seed }\CommentTok{# set.seed(DNI)}
 \NormalTok{sunspot.}\DecValTok{2}\NormalTok{ <-}\StringTok{ }\KeywordTok{tsboot}\NormalTok{(sunspot.year, ...}
 \end{Highlighting}
 \end{Shaded}
@@ -7231,7 +7282,16 @@ Por ejemplo, en el caso de series de tiempo, se puede emplear la función
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.7\linewidth]{09-depen_files/figure-latex/unnamed-chunk-12-1} \end{center}
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{09-depen_files/figure-latex/co2-1} 
+
+}
+
+\caption{Datos de co2 (1990-1997) y simulación condicional (a partir de las observaciones desde 1990 hasta 1996).}\label{fig:co2}
+\end{figure}
+
+{[}Figura \ref{fig:co2}{]}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -7240,7 +7300,16 @@ Por ejemplo, en el caso de series de tiempo, se puede emplear la función
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.7\linewidth]{09-depen_files/figure-latex/unnamed-chunk-12-2} \end{center}
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{09-depen_files/figure-latex/co22-1} 
+
+}
+
+\caption{Predicción de los valores de co2 y simulación condicional (ambas a partir de las observaciones entre 1990 y 1996).}\label{fig:co22}
+\end{figure}
+
+{[}Figura \ref{fig:co22}{]}
 
 Ver enlaces en referencias \ref{forecast-links}.
 

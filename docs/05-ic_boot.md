@@ -407,7 +407,7 @@ percentil-$t$ es el mismo, $O\left( n^{-1} \right)$ en ambos casos.
 En el Ejemplo \@ref(exm:media-dt-desconocida), se implementó
 este método para obtener una estimación por intervalo de confianza
 del tiempo de vida medio de microorganismos.
-En el Ejemplo \@ref(exm:media-dt-desconocida-boot) se mmostró como
+En el Ejemplo \@ref(exm:media-dt-desconocida-boot) se mostró como
 calcular este intervalo empleando el paquete `boot` (haciendo que 
 la función `statistic` devuelva también la varianza del estadístico 
 y estableciendo `type="stud"` en la llamada a la función `boot.ci()`).
@@ -666,7 +666,7 @@ t.fin
 
 ```
 ##    user  system elapsed 
-##   27.08    0.03   27.22
+##   26.97    0.02   26.98
 ```
 
 ```r

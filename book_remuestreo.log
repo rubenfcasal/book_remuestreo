@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99999 (MiKTeX 2.9.6630 64-bit) (preloaded format=xelatex 2018.10.5)  5 SEP 2019 01:18
+This is XeTeX, Version 3.14159265-2.6-0.99999 (MiKTeX 2.9.6630 64-bit) (preloaded format=xelatex 2018.10.5)  5 SEP 2019 19:27
 entering extended mode
 **./book_remuestreo.tex
 (book_remuestreo.tex
@@ -1052,7 +1052,7 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 
 [4]
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <10> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 202.
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 203.
 File: images/by-nc-nd-88x31.png Graphic file (type bmp)
 <images/by-nc-nd-88x31.png>
 [5
@@ -1085,19 +1085,19 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 Underfull \vbox (badness 6510) has occurred while \output is active []
 
 [20] [21] [22]
-Underfull \hbox (badness 1067) in paragraph at lines 1469--1479
+Underfull \hbox (badness 1067) in paragraph at lines 1470--1480
 \TU/lmr/m/n/10 ría mediante la distribución empírica de las $\OML/lmm/m/it/10 B
 $ \TU/lmr/m/n/10 realizaciones de la aproximación de Monte Carlo,
  []
 
 [23] [24]
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <12> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 1611.
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 1612.
 [25]
 File: 01-intro_files/figure-latex/plot-res-boot-1.pdf Graphic file (type pdf)
 <use 01-intro_files/figure-latex/plot-res-boot-1.pdf>
 [26] [27]
-Underfull \hbox (badness 10000) in paragraph at lines 1858--1870
+Underfull \hbox (badness 10000) in paragraph at lines 1859--1871
 []\TU/lmtt/m/n/10 sim = c("ordinary" , "parametric", "balanced", "permutation",
  "antithetic")\TU/lmr/m/n/10 : permite
  []
@@ -1128,7 +1128,7 @@ File: 04-mod_boot_unif_files/figure-latex/boot-par-aprox-1.pdf Graphic file (ty
 pe pdf)
 <use 04-mod_boot_unif_files/figure-latex/boot-par-aprox-1.pdf>
 [45]
-Overfull \hbox (42.57864pt too wide) in paragraph at lines 3025--3029
+Overfull \hbox (42.57864pt too wide) in paragraph at lines 3026--3030
 []\TU/lmr/m/n/10 con lo cual $\OML/lmm/m/it/10 F[] [] \OT1/lmr/m/n/10 = [] [][]
  \OT1/lmr/bx/n/10 1 []$\TU/lmr/m/n/10 . Puede demostrarse fácilmente que $\OML/
 lmm/m/it/10 F[] [] \OT1/lmr/m/n/10 = [] []$\TU/lmr/m/n/10 . 
@@ -1149,11 +1149,11 @@ File: 04-mod_boot_unif_files/figure-latex/density-sim-1.pdf Graphic file (type
 pdf)
 <use 04-mod_boot_unif_files/figure-latex/density-sim-1.pdf>
 [51]
-Underfull \vbox (badness 10000) detected at line 3437
+Underfull \vbox (badness 10000) detected at line 3438
  []
 
 
-Underfull \vbox (badness 10000) detected at line 3437
+Underfull \vbox (badness 10000) detected at line 3438
  []
 
 [52] [53]
@@ -1187,10 +1187,10 @@ E PARZEN-ROSENBLATT \TU/lmr/m/n/10 75
 ]
 Capítulo 7.
 [81] [82]
-Overfull \hbox (63.18422pt too wide) in paragraph at lines 5119--5131
+Overfull \hbox (6.34718pt too wide) in paragraph at lines 5120--5133
 []\TU/lmr/m/n/10 Para cada índice $\OML/lmm/m/it/10 i \OT1/lmr/m/n/10 = 1\OML/l
 mm/m/it/10 ; \OT1/lmr/m/n/10 2\OML/lmm/m/it/10 ; [] ; n$\TU/lmr/m/n/10 , se arr
-oja, condicionalmente a la muestra observada, $[]$,
+oja, condicionalmente a la muestra observada, $[]$
  []
 
 [83] [84] [85] [86
@@ -1198,7 +1198,7 @@ oja, condicionalmente a la muestra observada, $[]$,
 ]
 Capítulo 8.
 
-Overfull \hbox (33.20143pt too wide) in paragraph at lines 5381--5392
+Overfull \hbox (33.20143pt too wide) in paragraph at lines 5383--5394
 []\TU/lmr/m/n/10 En resumen, en lugar de observar la muestra $[]$, sólo podemos
  observar $[]$,
  []
@@ -1211,7 +1211,7 @@ Underfull \vbox (badness 3907) has occurred while \output is active []
 
 [90]
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <14.4> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 5707.
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 5709.
 [91] [92]
 File: 08-dat_cen_files/figure-latex/survfit-f-g-1.pdf Graphic file (type pdf)
 <use 08-dat_cen_files/figure-latex/survfit-f-g-1.pdf>
@@ -1226,52 +1226,44 @@ File: 08-dat_cen_files/figure-latex/surv-strata-1.pdf Graphic file (type pdf)
 ]
 Capítulo 9.
 [99] [100] [101] [102] [103] [104] [105] [106] [107]
-File: 09-depen_files/figure-latex/unnamed-chunk-2-1.pdf Graphic file (type pdf)
-
-<use 09-depen_files/figure-latex/unnamed-chunk-2-1.pdf>
+File: 09-depen_files/figure-latex/arima.sim-1.pdf Graphic file (type pdf)
+<use 09-depen_files/figure-latex/arima.sim-1.pdf>
 [108]
-File: 09-depen_files/figure-latex/unnamed-chunk-3-1.pdf Graphic file (type pdf)
-
-<use 09-depen_files/figure-latex/unnamed-chunk-3-1.pdf>
+File: 09-depen_files/figure-latex/arima.sim2-1.pdf Graphic file (type pdf)
+<use 09-depen_files/figure-latex/arima.sim2-1.pdf>
 [109] [110]
-File: 09-depen_files/figure-latex/unnamed-chunk-7-1.pdf Graphic file (type pdf)
-
-<use 09-depen_files/figure-latex/unnamed-chunk-7-1.pdf>
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
+File: 09-depen_files/figure-latex/lynx-data-1.pdf Graphic file (type pdf)
+<use 09-depen_files/figure-latex/lynx-data-1.pdf>
 [111] [112]
 File: 09-depen_files/figure-latex/beaver-data-1.pdf Graphic file (type pdf)
 <use 09-depen_files/figure-latex/beaver-data-1.pdf>
 [113] [114]
 File: 09-depen_files/figure-latex/sunspot-1.pdf Graphic file (type pdf)
 <use 09-depen_files/figure-latex/sunspot-1.pdf>
-[115]
-File: 09-depen_files/figure-latex/unnamed-chunk-12-1.pdf Graphic file (type pdf
-)
-<use 09-depen_files/figure-latex/unnamed-chunk-12-1.pdf>
-File: 09-depen_files/figure-latex/unnamed-chunk-12-2.pdf Graphic file (type pdf
-)
-<use 09-depen_files/figure-latex/unnamed-chunk-12-2.pdf>
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
+[115]
+File: 09-depen_files/figure-latex/co2-1.pdf Graphic file (type pdf)
+<use 09-depen_files/figure-latex/co2-1.pdf>
+File: 09-depen_files/figure-latex/co22-1.pdf Graphic file (type pdf)
+<use 09-depen_files/figure-latex/co22-1.pdf>
 [116] [117] [118
 
 ] [119] [120] [121] [122]
 No file book_remuestreo.bbl.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 7592.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 7661.
 [123]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 7592.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 7661.
 (book_remuestreo.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 7592.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 7592.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 7661.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 7661.
  ) 
 Here is how much of TeX's memory you used:
- 24440 strings out of 427836
- 444129 string characters out of 3152479
- 600483 words of memory out of 3000000
- 28105 multiletter control sequences out of 15000+200000
+ 24471 strings out of 427836
+ 444192 string characters out of 3152479
+ 600908 words of memory out of 3000000
+ 28112 multiletter control sequences out of 15000+200000
  576814 words of font info for 94 fonts, out of 3000000 for 9000
  1328 hyphenation exceptions out of 8191
  45i,15n,68p,814b,458s stack positions out of 5000i,500n,10000p,200000b,50000s

@@ -634,6 +634,7 @@ $p>1$.
 Para simular una serie de tiempo en `R`
 se puede emplear la función `arima.sim` del paquete base `stats`.
 Por ejemplo, podemos generar una serie autoregressiva con:
+[Figura \@ref(fig:arima.sim)]  
 
 ```r
 # Parametros
@@ -650,12 +651,16 @@ ry <- arima.sim(list(order = c(1,0,0), ar = rho),
 plot(ry)
 ```
 
+\begin{figure}[!htb]
 
+{\centering \includegraphics[width=0.7\linewidth]{09-depen_files/figure-latex/arima.sim-1} 
 
-\begin{center}\includegraphics[width=0.7\linewidth]{09-depen_files/figure-latex/unnamed-chunk-2-1} \end{center}
+}
+
+\caption{Simulación de un modelo autoregresivo.}(\#fig:arima.sim)
+\end{figure}
 En este caso el periodo de calentamiento se establece mediante el
 parámetro `n.start` (que se fija automáticamente a un valor adecuado).
-
 La recomendación es fijar la varianza de las series simuladas si se quieren
 comparar resultados considerando distintos parámetros de dependencia.
 
@@ -670,7 +675,7 @@ Otras opciones:
 * `start.innov = rand.gen(n.start, ...)`
 
 Ejemplo (`?arima.sim`):
-
+[Figura \@ref(fig:arima.sim2)]  
 
 ```r
 ry2 <- arima.sim(n = 63, list(ar = c(0.8897, -0.4858), 
@@ -680,9 +685,14 @@ ry2 <- arima.sim(n = 63, list(ar = c(0.8897, -0.4858),
 plot(ry2)
 ```
 
+\begin{figure}[!htb]
 
+{\centering \includegraphics[width=0.7\linewidth]{09-depen_files/figure-latex/arima.sim2-1} 
 
-\begin{center}\includegraphics[width=0.7\linewidth]{09-depen_files/figure-latex/unnamed-chunk-3-1} \end{center}
+}
+
+\caption{Simulación de un modelo autoregresivo con errores con distribución *t* de Student.}(\#fig:arima.sim2)
+\end{figure}
 
 
 ## Implementación en `R` con el paquete `boot`
@@ -708,7 +718,6 @@ Canty, A. J. (2002). Resampling methods in R: the boot package. Rnews: The Newsl
 > of this function being the time series itself), the number
 > of bootstrap replicates, the simulation type and
 > the (mean) block length.
-
 
 
 ```r
@@ -757,7 +766,7 @@ Canty, A. J. (2002). Resampling methods in R: the boot package. Rnews: The Newsl
 > it is recommended to generate a long time series
 > and then discard the initial burn-in stage. Since
 > the length of burn-in required is problem specific,
-> tsboot does not actually do the resampling. Instead
+> `tsboot` does not actually do the resampling. Instead
 > the user should give a function which will return the
 > bootstrap time series. This function should take three
 > arguments, the time series as supplied to `tsboot`, a
@@ -839,14 +848,21 @@ Reproducir el "Practical 8.1 (Lynx data)" en Davison, A. C., y Hinkley, D. V. (1
 > to the logarithm of which we fit the autoregressive
 > model that minimizes AIC:
 
+[Figura \@ref(fig:lynx-data)]  
+
 
 ```r
 ts.plot(log(lynx))
 ```
 
+\begin{figure}[!htb]
 
+{\centering \includegraphics[width=0.7\linewidth]{09-depen_files/figure-latex/lynx-data-1} 
 
-\begin{center}\includegraphics[width=0.7\linewidth]{09-depen_files/figure-latex/unnamed-chunk-7-1} \end{center}
+}
+
+\caption{Lynx data (logarithmic scale).}(\#fig:lynx-data)
+\end{figure}
 
 ```r
 lynx.ar <- ar(log(lynx))
@@ -864,7 +880,7 @@ lynx.ar$order
 > model, the series average, and saves the series itself.
     
 > Here are results for fixed-block bootstraps 
-> with block length l = 20:
+> with block length $l = 20$:
 
 
 ```r
@@ -920,15 +936,22 @@ Reproducir el "Practical 8.2  (Beaver data)" en Davison, A. C., y Hinkley, D. V.
 > and an indicator $x_1, \ldots, x_n$ of activity of 
 > a female beaver, Castor canadensis.
 
+[Figura \@ref(fig:beaver-data)]  
+
 
 ```r
 # ?beaver
 plot(beaver)
 ```
 
+\begin{figure}[!htb]
 
+{\centering \includegraphics[width=0.7\linewidth]{09-depen_files/figure-latex/beaver-data-1} 
 
-\begin{center}\includegraphics[width=0.7\linewidth]{09-depen_files/figure-latex/beaver-data-1} \end{center}
+}
+
+\caption{Beaver data}(\#fig:beaver-data)
+\end{figure}
 
 ```r
 class(beaver)
@@ -990,8 +1013,13 @@ data <- beaver
 #     ts
 # }
 # new.beaver <- beaver.gen( beaver, 100, beaver.args )
-# 
-# # Now we are able to generate data, we can bootstrap and see the results of beaver.boot as follows:
+```
+
+> Now we are able to generate data, 
+> we can bootstrap and see the results of `beaver.boot` as follows:
+
+
+```r
 # beaver.fun <- function(ts) fit(ts)$paras
 # beaver.boot <- tsboot( beaver, beaver.fun, R=99,sim="model", 
 #         n.sim=100,ran.gen=beaver.gen,ran.args=beaver.args) 
@@ -1020,6 +1048,8 @@ Reproducir el "Practical 8.3  (Sunspot data)" en Davison, A. C., y Hinkley, D. V
 > Consider scrambling the phases of the sunspot data. 
 > To see the original data, 
 
+[Figura \@ref(fig:sunspot)]  
+
 
 ```r
 data(sunspot.year)  # WarningR: data set 'sunspot' not found
@@ -1029,9 +1059,14 @@ plot(sunspot.year, ylim = yl)
 abline(h = 0, lty = 2)
 ```
 
+\begin{figure}[!htb]
 
+{\centering \includegraphics[width=0.7\linewidth]{09-depen_files/figure-latex/sunspot-1} 
 
-\begin{center}\includegraphics[width=0.7\linewidth]{09-depen_files/figure-latex/sunspot-1} \end{center}
+}
+
+\caption{Sunspot data (yearly numbers).}(\#fig:sunspot)
+\end{figure}
 
 > two replicates generated using ordinary phase scrambling, 
 > and two phase scrambled series whose marginal distribution is the same as that of the original data:
@@ -1040,7 +1075,7 @@ abline(h = 0, lty = 2)
 ```r
 set.seed(DNI)
 sunspot.1 <- tsboot(sunspot.year, ...
-.Random.seed <- sunspot.1$seed # set.seed(1)
+.Random.seed <- sunspot.1$seed # set.seed(DNI)
 sunspot.2 <- tsboot(sunspot.year, ...
 ```
     
@@ -1077,18 +1112,34 @@ ry <- simulate(fit, 12*4)
 lines(ry, col="red")
 ```
 
+\begin{figure}[!htb]
 
+{\centering \includegraphics[width=0.7\linewidth]{09-depen_files/figure-latex/co2-1} 
 
-\begin{center}\includegraphics[width=0.7\linewidth]{09-depen_files/figure-latex/unnamed-chunk-12-1} \end{center}
+}
+
+\caption{Datos de co2 (1990-1997) y simulación condicional (a partir de las observaciones desde 1990 hasta 1996).}(\#fig:co2)
+\end{figure}
+
+[Figura \@ref(fig:co2)]
+  
+
 
 ```r
 plot(forecast(fit, h=12*4), col="blue")
 lines(ry, col="red")
 ```
 
+\begin{figure}[!htb]
 
+{\centering \includegraphics[width=0.7\linewidth]{09-depen_files/figure-latex/co22-1} 
 
-\begin{center}\includegraphics[width=0.7\linewidth]{09-depen_files/figure-latex/unnamed-chunk-12-2} \end{center}
+}
+
+\caption{Predicción de los valores de co2 y simulación condicional (ambas a partir de las observaciones entre 1990 y 1996).}(\#fig:co22)
+\end{figure}
+
+[Figura \@ref(fig:co22)]
 
 Ver enlaces en referencias \@ref(forecast-links).
 

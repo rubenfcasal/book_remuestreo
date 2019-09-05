@@ -634,7 +634,8 @@ $p>1$.
 Para simular una serie de tiempo en `R`
 se puede emplear la función `arima.sim` del paquete base `stats`.
 Por ejemplo, podemos generar una serie autoregressiva con:
-```{r}
+`r latexfig("arima.sim", output = is_latex())`  
+```{r arima.sim, fig.cap="Simulación de un modelo autoregresivo."}
 # Parametros
 nsim <- 200   # Numero de simulaciones
 xvar <- 1     # Varianza
@@ -650,7 +651,6 @@ plot(ry)
 ```
 En este caso el periodo de calentamiento se establece mediante el
 parámetro `n.start` (que se fija automáticamente a un valor adecuado).
-
 La recomendación es fijar la varianza de las series simuladas si se quieren
 comparar resultados considerando distintos parámetros de dependencia.
 
@@ -665,8 +665,8 @@ Otras opciones:
 * `start.innov = rand.gen(n.start, ...)`
 
 Ejemplo (`?arima.sim`):
-
-```{r}
+`r latexfig("arima.sim2", output = is_latex())`  
+```{r arima.sim2, fig.cap="Simulación de un modelo autoregresivo con errores con distribución *t* de Student."}
 ry2 <- arima.sim(n = 63, list(ar = c(0.8897, -0.4858), 
           ma = c(-0.2279, 0.2488)),
           rand.gen = function(n, ...) sqrt(0.1796) * rt(n, df = 5))
@@ -698,7 +698,6 @@ Canty, A. J. (2002). Resampling methods in R: the boot package. Rnews: The Newsl
 > of bootstrap replicates, the simulation type and
 > the (mean) block length.
 
-
 ```{r }
 # Datos
 data(lynx)
@@ -728,7 +727,7 @@ Canty, A. J. (2002). Resampling methods in R: the boot package. Rnews: The Newsl
 > it is recommended to generate a long time series
 > and then discard the initial burn-in stage. Since
 > the length of burn-in required is problem specific,
-> tsboot does not actually do the resampling. Instead
+> `tsboot` does not actually do the resampling. Instead
 > the user should give a function which will return the
 > bootstrap time series. This function should take three
 > arguments, the time series as supplied to `tsboot`, a
@@ -794,7 +793,9 @@ Reproducir el "Practical 8.1 (Lynx data)" en Davison, A. C., y Hinkley, D. V. (1
 > to the logarithm of which we fit the autoregressive
 > model that minimizes AIC:
 
-```{r }
+`r latexfig("lynx-data", output = is_latex())`  
+
+```{r lynx-data, fig.cap="Lynx data (logarithmic scale)."}
 ts.plot(log(lynx))
 lynx.ar <- ar(log(lynx))
 lynx.ar$order
@@ -807,7 +808,7 @@ lynx.ar$order
 > model, the series average, and saves the series itself.
     
 > Here are results for fixed-block bootstraps 
-> with block length l = 20:
+> with block length $l = 20$:
 
 ```{r eval=FALSE}
 set.seed(DNI)
@@ -863,7 +864,9 @@ Reproducir el "Practical 8.2  (Beaver data)" en Davison, A. C., y Hinkley, D. V.
 > and an indicator $x_1, \ldots, x_n$ of activity of 
 > a female beaver, Castor canadensis.
 
-```{r beaver-data}
+`r latexfig("beaver-data", output = is_latex())`  
+
+```{r beaver-data, fig.cap="Beaver data"}
 # ?beaver
 plot(beaver)
 class(beaver)
@@ -910,8 +913,12 @@ data <- beaver
 #     ts
 # }
 # new.beaver <- beaver.gen( beaver, 100, beaver.args )
-# 
-# # Now we are able to generate data, we can bootstrap and see the results of beaver.boot as follows:
+```
+
+> Now we are able to generate data, 
+> we can bootstrap and see the results of `beaver.boot` as follows:
+
+```{r}
 # beaver.fun <- function(ts) fit(ts)$paras
 # beaver.boot <- tsboot( beaver, beaver.fun, R=99,sim="model", 
 #         n.sim=100,ran.gen=beaver.gen,ran.args=beaver.args) 
@@ -942,7 +949,9 @@ Reproducir el "Practical 8.3  (Sunspot data)" en Davison, A. C., y Hinkley, D. V
 > Consider scrambling the phases of the sunspot data. 
 > To see the original data, 
 
-```{r sunspot, message=TRUE, warning=TRUE}
+`r latexfig("sunspot", output = is_latex())`  
+
+```{r sunspot, fig.cap="Sunspot data (yearly numbers)."}
 data(sunspot.year)  # WarningR: data set 'sunspot' not found
 # ?sunspot.year
 yl <- c(-50, 200)
@@ -956,7 +965,7 @@ abline(h = 0, lty = 2)
 ```{r eval=FALSE}
 set.seed(DNI)
 sunspot.1 <- tsboot(sunspot.year, ...
-.Random.seed <- sunspot.1$seed # set.seed(1)
+.Random.seed <- sunspot.1$seed # set.seed(DNI)
 sunspot.2 <- tsboot(sunspot.year, ...
 ```
     
@@ -978,7 +987,7 @@ el modelo ajustado.
 Por ejemplo, en el caso de series de tiempo, se puede emplear la función `simulate`
 del paquete `forecast`:
 
-```{r}
+```{r co2, fig.cap="Datos de co2 (1990-1997) y simulación condicional (a partir de las observaciones desde 1990 hasta 1996)."}
 library(forecast)
 # ?co2
 data <- window(co2, 1990) # datos de co2 desde 1990 (hasta 1997)
@@ -990,10 +999,17 @@ fit <- ets(data2)
 set.seed(1)
 ry <- simulate(fit, 12*4)
 lines(ry, col="red")
+```
 
+`r latexfig("co2", output = is_latex())`
+  
+
+```{r co22, fig.cap="Predicción de los valores de co2 y simulación condicional (ambas a partir de las observaciones entre 1990 y 1996)."}
 plot(forecast(fit, h=12*4), col="blue")
 lines(ry, col="red")
 ```
+
+`r latexfig("co22", output = is_latex())`
 
 Ver enlaces en referencias \@ref(forecast-links).
 

@@ -276,8 +276,13 @@ evar &lt;-<span class="st"> </span>xvar<span class="op">*</span>(<span class="dv
 ry &lt;-<span class="st"> </span><span class="kw">arima.sim</span>(<span class="kw">list</span>(<span class="dt">order =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>), <span class="dt">ar =</span> rho), 
             <span class="dt">n =</span> nsim, <span class="dt">sd =</span> <span class="kw">sqrt</span>(evar)) <span class="co"># n.start = nburn</span>
 <span class="kw">plot</span>(ry)</code></pre></div>
-<p><img src="09-depen_files/figure-html/unnamed-chunk-2-1.png" width="70%" style="display: block; margin: auto;" /> En este caso el periodo de calentamiento se establece mediante el parámetro <code>n.start</code> (que se fija automáticamente a un valor adecuado).</p>
-<p>La recomendación es fijar la varianza de las series simuladas si se quieren comparar resultados considerando distintos parámetros de dependencia.</p>
+<div class="figure" style="text-align: center">
+<img src="09-depen_files/figure-html/arima.sim-1.png" alt="Simulación de un modelo autoregresivo." width="70%" />
+<p class="caption">
+(#fig:arima.sim)Simulación de un modelo autoregresivo.
+</p>
+</div>
+<p>En este caso el periodo de calentamiento se establece mediante el parámetro <code>n.start</code> (que se fija automáticamente a un valor adecuado). La recomendación es fijar la varianza de las series simuladas si se quieren comparar resultados considerando distintos parámetros de dependencia.</p>
 <p>Otras opciones:</p>
 <ul>
 <li><p><code>rand.gen = rnorm</code></p></li>
@@ -291,7 +296,12 @@ ry &lt;-<span class="st"> </span><span class="kw">arima.sim</span>(<span class="
           <span class="dt">rand.gen =</span> <span class="cf">function</span>(n, ...) <span class="kw">sqrt</span>(<span class="fl">0.1796</span>) <span class="op">*</span><span class="st"> </span><span class="kw">rt</span>(n, <span class="dt">df =</span> <span class="dv">5</span>))
 
 <span class="kw">plot</span>(ry2)</code></pre></div>
-<p><img src="09-depen_files/figure-html/unnamed-chunk-3-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<div class="figure" style="text-align: center">
+<img src="09-depen_files/figure-html/arima.sim2-1.png" alt="Simulación de un modelo autoregresivo con errores con distribución *t* de Student." width="70%" />
+<p class="caption">
+(#fig:arima.sim2)Simulación de un modelo autoregresivo con errores con distribución <em>t</em> de Student.
+</p>
+</div>
 </div>
             </section>
 

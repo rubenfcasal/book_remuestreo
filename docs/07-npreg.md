@@ -145,9 +145,10 @@ por Härdle y Marron (1991), procede del siguiente modo:
     $i=1, 2, \ldots, n$.
 
 2.  Para cada índice $i=1,2,\ldots ,n$, se arroja, condicionalmente a la
-    muestra observada, $\left\{ \left( X_1,Y_1 \right),\left(
-    X_2,Y_2 \right),\ldots ,\left( X_n,Y_n \right) \right\}$, un
-    residuo bootstrap $\hat{\varepsilon}_i^{\ast}$ de una
+    muestra observada, $\left\{ \left( X_1,Y_1 \right), \ \left(
+    X_2,Y_2 \right),\right.$ 
+    $\left.\ldots ,\ \left( X_n,Y_n \right) \right\}$, 
+    un residuo bootstrap $\hat{\varepsilon}_i^{\ast}$ de una
     distribución de probabilidad que cumpla,
     $E^{\ast}\left( \hat{\varepsilon}_i^{\ast} \right) =0$,
     $E^{\ast}\left( \hat{\varepsilon}_i^{\ast 2} \right) =\hat{
