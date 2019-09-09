@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>5.2 Método percentil (básico) | Técnicas de Remuestreo</title>
-  <meta name="description" content="Apuntes de la asignatura de Técnicas de Remuestreo del Máster en Técnicas Estadísticas.">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>5.4 Método percentil-t simetrizado | Técnicas de Remuestreo</title>
+  <meta name="description" content="Apuntes de la asignatura de Técnicas de Remuestreo del Máster en Técnicas Estadísticas." />
+  <meta name="generator" content="bookdown 0.10 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="5.2 Método percentil (básico) | Técnicas de Remuestreo" />
+  <meta property="og:title" content="5.4 Método percentil-t simetrizado | Técnicas de Remuestreo" />
   <meta property="og:type" content="book" />
   
   
@@ -17,23 +16,23 @@
   <meta name="github-repo" content="rubenfcasal/book_remuestreo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="5.2 Método percentil (básico) | Técnicas de Remuestreo" />
+  <meta name="twitter:title" content="5.4 Método percentil-t simetrizado | Técnicas de Remuestreo" />
   
   <meta name="twitter:description" content="Apuntes de la asignatura de Técnicas de Remuestreo del Máster en Técnicas Estadísticas." />
   
 
-<meta name="author" content="Ricardo Cao Abad (rcao@udc.es) y Rubén Fernández Casal (ruben.fcasal@udc.es)">
+<meta name="author" content="Ricardo Cao Abad (rcao@udc.es) y Rubén Fernández Casal (ruben.fcasal@udc.es)" />
 
 
-<meta name="date" content="2019-09-05">
+<meta name="date" content="2019-09-09" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="intervalos-basados-en-la-distribucion-normal-asintotica.html">
-<link rel="next" href="cap5-perc-t.html">
+<link rel="prev" href="cap5-perc-t.html">
+<link rel="next" href="cap5-err-cober.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -145,12 +144,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4.6" data-path="validez-de-la-aproximacion-bootstrap.html"><a href="validez-de-la-aproximacion-bootstrap.html"><i class="fa fa-check"></i><b>4.6</b> Validez de la aproximación Bootstrap</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="cap5.html"><a href="cap5.html"><i class="fa fa-check"></i><b>5</b> Intervalos de confianza bootstrap</a><ul>
-<li class="chapter" data-level="5.1" data-path="intervalos-basados-en-la-distribucion-normal-asintotica.html"><a href="intervalos-basados-en-la-distribucion-normal-asintotica.html"><i class="fa fa-check"></i><b>5.1</b> Intervalos basados en la distribución normal asintótica</a></li>
-<li class="chapter" data-level="5.2" data-path="metodo-percentil-basico.html"><a href="metodo-percentil-basico.html"><i class="fa fa-check"></i><b>5.2</b> Método percentil (básico)</a></li>
+<li class="chapter" data-level="5.1" data-path="cap5-norm.html"><a href="cap5-norm.html"><i class="fa fa-check"></i><b>5.1</b> Intervalos basados en la distribución normal asintótica</a></li>
+<li class="chapter" data-level="5.2" data-path="cap5-basic.html"><a href="cap5-basic.html"><i class="fa fa-check"></i><b>5.2</b> Método percentil (básico)</a></li>
 <li class="chapter" data-level="5.3" data-path="cap5-perc-t.html"><a href="cap5-perc-t.html"><i class="fa fa-check"></i><b>5.3</b> Método percentil-<em>t</em></a></li>
-<li class="chapter" data-level="5.4" data-path="metodo-percentil-t-simetrizado.html"><a href="metodo-percentil-t-simetrizado.html"><i class="fa fa-check"></i><b>5.4</b> Método percentil-<em>t</em> simetrizado</a></li>
-<li class="chapter" data-level="5.5" data-path="tabla-resumen-de-los-errores-de-cobertura.html"><a href="tabla-resumen-de-los-errores-de-cobertura.html"><i class="fa fa-check"></i><b>5.5</b> Tabla resumen de los errores de cobertura</a></li>
-<li class="chapter" data-level="5.6" data-path="ejemplos-1.html"><a href="ejemplos-1.html"><i class="fa fa-check"></i><b>5.6</b> Ejemplos</a></li>
+<li class="chapter" data-level="5.4" data-path="cap5-perc-t-sim.html"><a href="cap5-perc-t-sim.html"><i class="fa fa-check"></i><b>5.4</b> Método percentil-<em>t</em> simetrizado</a></li>
+<li class="chapter" data-level="5.5" data-path="cap5-err-cober.html"><a href="cap5-err-cober.html"><i class="fa fa-check"></i><b>5.5</b> Tabla resumen de los errores de cobertura</a></li>
+<li class="chapter" data-level="5.6" data-path="cap5-ejem.html"><a href="cap5-ejem.html"><i class="fa fa-check"></i><b>5.6</b> Ejemplos</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="cap6.html"><a href="cap6.html"><i class="fa fa-check"></i><b>6</b> Bootstrap y estimación no paramétrica de la densidad</a><ul>
 <li class="chapter" data-level="6.1" data-path="estimacion-no-parametrica-de-la-funcion-de-densidad.html"><a href="estimacion-no-parametrica-de-la-funcion-de-densidad.html"><i class="fa fa-check"></i><b>6.1</b> Estimación no paramétrica de la función de densidad</a></li>
@@ -194,11 +193,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="8.2" data-path="remuestreos-bootstrap-en-presencia-de-censura.html"><a href="remuestreos-bootstrap-en-presencia-de-censura.html"><i class="fa fa-check"></i><b>8.2</b> Remuestreos Bootstrap en presencia de censura</a><ul>
 <li class="chapter" data-level="8.2.1" data-path="remuestreos-bootstrap-en-presencia-de-censura.html"><a href="remuestreos-bootstrap-en-presencia-de-censura.html#el-bootstrap-simple"><i class="fa fa-check"></i><b>8.2.1</b> El bootstrap simple</a></li>
-<li class="chapter" data-level="8.2.2" data-path="remuestreos-bootstrap-en-presencia-de-censura.html"><a href="remuestreos-bootstrap-en-presencia-de-censura.html#el-bootstrap-obvio"><i class="fa fa-check"></i><b>8.2.2</b> El bootstrap obvio</a></li>
+<li class="chapter" data-level="8.2.2" data-path="remuestreos-bootstrap-en-presencia-de-censura.html"><a href="remuestreos-bootstrap-en-presencia-de-censura.html#cap8-obvio"><i class="fa fa-check"></i><b>8.2.2</b> El bootstrap obvio</a></li>
 </ul></li>
 <li class="chapter" data-level="8.3" data-path="relaciones-entre-los-metodos-de-remuestreo-bajo-censura.html"><a href="relaciones-entre-los-metodos-de-remuestreo-bajo-censura.html"><i class="fa fa-check"></i><b>8.3</b> Relaciones entre los métodos de remuestreo bajo censura</a><ul>
 <li class="chapter" data-level="8.3.1" data-path="relaciones-entre-los-metodos-de-remuestreo-bajo-censura.html"><a href="relaciones-entre-los-metodos-de-remuestreo-bajo-censura.html#equivalencia-entre-el-bootstrap-simple-y-el-obvio"><i class="fa fa-check"></i><b>8.3.1</b> Equivalencia entre el bootstrap simple y el obvio</a></li>
-<li class="chapter" data-level="8.3.2" data-path="relaciones-entre-los-metodos-de-remuestreo-bajo-censura.html"><a href="relaciones-entre-los-metodos-de-remuestreo-bajo-censura.html#el-bootstrap-de-reid"><i class="fa fa-check"></i><b>8.3.2</b> El bootstrap de Reid</a></li>
+<li class="chapter" data-level="8.3.2" data-path="relaciones-entre-los-metodos-de-remuestreo-bajo-censura.html"><a href="relaciones-entre-los-metodos-de-remuestreo-bajo-censura.html#cap8-reid"><i class="fa fa-check"></i><b>8.3.2</b> El bootstrap de Reid</a></li>
 <li class="chapter" data-level="8.3.3" data-path="relaciones-entre-los-metodos-de-remuestreo-bajo-censura.html"><a href="relaciones-entre-los-metodos-de-remuestreo-bajo-censura.html#validez-de-los-planes-de-remuestreo"><i class="fa fa-check"></i><b>8.3.3</b> Validez de los planes de remuestreo</a></li>
 </ul></li>
 <li class="chapter" data-level="8.4" data-path="implementacion-en-r-con-los-paquetes-boot-y-survival.html"><a href="implementacion-en-r-con-los-paquetes-boot-y-survival.html"><i class="fa fa-check"></i><b>8.4</b> Implementación en <code>R</code> (con los paquetes <code>boot</code> y <code>survival</code>)</a><ul>
@@ -235,11 +234,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="9.8" data-path="spatial-data.html"><a href="spatial-data.html"><i class="fa fa-check"></i><b>9.8</b> Spatial data</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="referencias.html"><a href="referencias.html"><i class="fa fa-check"></i>Referencias</a><ul>
-<li class="chapter" data-level="9.9" data-path="enlaces.html"><a href="enlaces.html"><i class="fa fa-check"></i><b>9.9</b> Enlaces</a><ul>
-<li class="chapter" data-level="9.9.1" data-path="enlaces.html"><a href="enlaces.html#forecast-links"><i class="fa fa-check"></i><b>9.9.1</b> Forecasting: Principles and Practice</a></li>
-<li class="chapter" data-level="9.9.2" data-path="enlaces.html"><a href="enlaces.html#spatial-links"><i class="fa fa-check"></i><b>9.9.2</b> Spatial data</a></li>
-</ul></li>
+<li class="chapter" data-level="" data-path="referencias.html"><a href="referencias.html"><i class="fa fa-check"></i>Referencias</a></li>
+<li class="appendix"><span><b>Apendices</b></span></li>
+<li class="chapter" data-level="A" data-path="links.html"><a href="links.html"><i class="fa fa-check"></i><b>A</b> Enlaces</a><ul>
+<li class="chapter" data-level="A.1" data-path="forecast-links.html"><a href="forecast-links.html"><i class="fa fa-check"></i><b>A.1</b> Forecasting: Principles and Practice</a></li>
+<li class="chapter" data-level="A.2" data-path="spatial-links.html"><a href="spatial-links.html"><i class="fa fa-check"></i><b>A.2</b> Spatial data</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Publicado con bookdown</a></li>
@@ -261,142 +260,67 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="metodo-percentil-basico" class="section level2">
-<h2><span class="header-section-number">5.2</span> Método percentil (básico)</h2>
-<p>Este método se basa en la construcción del intervalo de confianza, mediante bootstrap, a partir del estadístico no estandarizado <span class="math display">\[R_2=\sqrt{n}\left( \hat{\theta}-\theta \right).\]</span> Una vez realizado el correspondiente remuestreo (uniforme, suavizado, simetrizado, …), a partir de cierto estimador, <span class="math inline">\(\hat{F}\,\)</span>, de la distribución poblacional, <span class="math inline">\(F\)</span>, la distribución en el muestreo de <span class="math inline">\(R_2\)</span> se aproxima mediante la distribución bootstrap de <span class="math display">\[R_2^{\ast}=\sqrt{n}\left( \hat{\theta}^{\ast}-\theta \left( \hat{F}
- \right) \right).\]</span> Así se obtienen valores <span class="math inline">\(x_{\alpha /2}\)</span> y <span class="math inline">\(x_{1-\alpha /2}\)</span>, siendo <span class="math inline">\(x_{\beta }\)</span>, tal que <span class="math inline">\(P^{\ast}\left( R_2^{\ast }\leq x_{\beta } \right) =\beta\)</span>, y a partir de ellos sabemos que <span class="math display">\[\begin{aligned}
-1-\alpha &amp;= 1-\frac{\alpha }{2}-\frac{\alpha }{2}=P^{\ast}\left(
-R_2^{\ast}&lt;x_{1-\alpha /2} \right) -P^{\ast}\left( R_2^{\ast}\leq
-x_{\alpha /2} \right) \\
-&amp;= P^{\ast}\left( x_{\alpha /2}&lt;R_2^{\ast}&lt;x_{1-\alpha /2} \right),
-\end{aligned}\]</span> con lo cual decimos que también ha de ser aproximadamente igual a <span class="math inline">\(1-\alpha\)</span> la siguiente probabilidad<span class="math display">\[\begin{aligned}
-P\left( x_{\alpha /2}&lt;R_2&lt;x_{1-\alpha /2} \right) &amp;= P\left( x_{\alpha /2}&lt;
-\sqrt{n}\left( \hat{\theta}-\theta \right) &lt;x_{1-\alpha /2} \right) \\
-&amp;= P\left( \hat{\theta}-\frac{x_{1-\alpha /2}}{\sqrt{n}}&lt;\theta &lt;\hat{\theta}
--\frac{x_{\alpha /2}}{\sqrt{n}} \right).\end{aligned}\]</span> Ello da pie a definir el intervalo de confianza bootstrap calculado por el método percentil como <span class="math display">\[\hat{I}_1=\left( \hat{\theta}-\frac{x_{1-\alpha /2}}{\sqrt{n}},\hat{\theta}
--\frac{x_{\alpha /2}}{\sqrt{n}} \right).\]</span></p>
-<p>Para estudiar el error de cobertura de este intervalo de confianza conviene ver antes qué grado de aproximación existe entre la distribución en el muestreo de <span class="math inline">\(R_2\)</span> y la distribución bootstrap de <span class="math inline">\(R_2^{\ast}\)</span>. A partir del Teorema de Bhattacharya-Ghosh se tiene<span class="math display">\[\begin{aligned}
-P\left( R_2\leq v \right) &amp;= P\left( \sqrt{n}\left( \hat{\theta}-\theta
- \right) \leq v \right) =P\left( \sqrt{n}\frac{\hat{\theta}-\theta }{\sigma
-_{\theta }}\leq \frac{v}{\sigma _{\theta }} \right) \\
-&amp;= \Phi \left( \frac{v}{\sigma _{\theta }} \right) +O\left( n^{-\frac{1}{2}
-} \right) \\
-P^{\ast}\left( R_2^{\ast}\leq v \right) &amp;= P^{\ast}\left( \sqrt{n}\left( 
-\hat{\theta}^{\ast}-\theta \left( \hat{F} \right) \right) \leq v \right)
-\\
-&amp;=  P^{\ast}\left( \sqrt{n}\frac{\hat{\theta}^{\ast}-\theta \left( \hat{F}
- \right)}{\sigma _{\hat{\theta}}}\leq \frac{v}{\sigma _{\hat{\theta}}} \right)
-=\Phi \left( \frac{v}{\sigma _{\hat{\theta}}} \right) +O_{P}\left( n^{-
-\frac{1}{2}} \right).
+<div id="cap5-perc-t-sim" class="section level2">
+<h2><span class="header-section-number">5.4</span> Método percentil-<em>t</em> simetrizado</h2>
+<p>Es un método análogo al percentil-<span class="math inline">\(t\)</span>. Sólo difiere de él en la forma de seleccionar los cuantiles de la distribución bootstrap. En lugar de tomar cuantiles que dejen colas iguales (<span class="math inline">\(\frac{\alpha }{2}\)</span> a la izquierda y a la derecha, respectivamente), se eligen los cuantiles de forma que sean simétricos. Así, dado el estadístico <span class="math inline">\(R_1\)</span> y su versión bootstrap <span class="math inline">\(R_1^{\ast}\)</span>, se considera el valor <span class="math inline">\(y_{1-\alpha }\)</span> que cumple <span class="math inline">\(P^{\ast}\left( \left\vert R_1^{\ast}\right\vert \leq y_{1-\alpha } \right) =1-\alpha\)</span>. Así se tiene que <span class="math display">\[1-\alpha =P^{\ast}\left( -y_{1-\alpha }\leq R_1^{\ast}
+\leq y_{1-\alpha} \right).\]</span> De esa forma se razona que también ha de ser aproximadamente igual a <span class="math inline">\(1-\alpha\)</span> la siguiente probabilidad <span class="math display">\[\begin{aligned}
+P\left( -y_{1-\alpha }&lt;R_1&lt;y_{1-\alpha } \right) &amp;= P\left( -y_{1-\alpha }
+&lt; \sqrt{n}\frac{\hat{\theta}-\theta }{\hat{\sigma}_{\theta }}
+&lt; y_{1-\alpha} \right) \\
+&amp;= P\left( \hat{\theta}-\frac{\hat{\sigma}_{\theta }}{\sqrt{n}}y_{1-\alpha
+}&lt;\theta &lt;\hat{\theta}+\frac{\hat{\sigma}_{\theta }}{\sqrt{n}}y_{1-\alpha
+} \right).
 \end{aligned}\]</span></p>
-<p>Como consecuencia <span class="math display">\[P^{\ast}\left( R_2^{\ast}\leq v \right) -P\left( R_2\leq v \right) =\Phi
-\left( \frac{v}{\sigma _{\hat{\theta}}} \right) -\Phi \left( \frac{v}{\sigma
-_{\theta }} \right) +O_{P}\left( n^{-\frac{1}{2}} \right) =O_{P}\left( n^{-
-\frac{1}{2}} \right),\]</span> ya que, típicamente, <span class="math inline">\(\sigma _{\hat{\theta}}-\sigma _{\theta} = O_{P}\left( n^{-\frac{1}{2}} \right)\)</span>. En resumen, la distribución en el muestreo de <span class="math inline">\(R_2\)</span> y la distribución bootstrap de <span class="math inline">\(R_2^{\ast}\)</span> se aproximan, una a la otra, a la velocidad <span class="math inline">\(O_{P}\left( n^{-\frac{1}{2} } \right)\)</span>, cuando <span class="math inline">\(n\rightarrow \infty\)</span>.</p>
-<p>El error de cobertura del intervalo de confianza bilateral calculado mediante bootstrap por el método percentil es <span class="math display">\[\begin{aligned}
-P\left( \theta \in \hat{I}_1 \right) -\left( 1-\alpha \right) =&amp;\ P\left(
-R_2&lt;x_{1-\alpha /2} \right) -P\left( R_2\leq x_{\alpha /2} \right) \\
-&amp;-\left[ P^{\ast}\left( R_2^{\ast}&lt;x_{1-\alpha /2} \right) -P^{\ast
-}\left( R_2^{\ast}\leq x_{\alpha /2} \right) \right] \\
-=&amp;\ P\left( R_2&lt;x_{1-\alpha /2} \right) -P^{\ast}\left( R_2^{\ast
-}&lt;x_{1-\alpha /2} \right) \\
-&amp;-\left[ P\left( R_2\leq x_{\alpha /2} \right) -P^{\ast}\left(
-R_2^{\ast}\leq x_{\alpha /2} \right) \right] \\
-=&amp;\ O_{P}\left( n^{-\frac{1}{2}} \right)
+<p>Con lo cual, el intervalo de confianza bootstrap calculado por el método percentil-<span class="math inline">\(t\)</span> simetrizado se define como <span class="math display">\[\hat{I}_3=\left( \hat{\theta}-\frac{\hat{\sigma}_{\theta }}{\sqrt{n}}
+y_{1-\alpha },\hat{\theta}+\frac{\hat{\sigma}_{\theta }}{\sqrt{n}}
+y_{1-\alpha } \right).\]</span></p>
+<p>Utilizando el Teorema de Bhattacharya-Ghosh con desarrollos hasta el orden <span class="math inline">\(n^{-1}\)</span> se tiene: <span class="math display">\[\begin{aligned}
+P^{\ast}\left( R_1^{\ast}\leq u \right) -P\left( R_1\leq u \right) 
+=&amp;\ P^{\ast}\left( \sqrt{n}\frac{\hat{\theta}^{\ast}-\theta \left( \hat{F}
+ \right)}{\hat{\sigma}_{\theta }^{\ast}}\leq u \right) -P\left( \sqrt{n}
+\frac{\hat{\theta}-\theta }{\hat{\sigma}_{\theta }}\leq u \right) \\
+=&amp;\ \Phi \left( u \right) +n^{-\frac{1}{2}}\hat{q}_1\left( u \right) \phi
+\left( u \right) +n^{-1}\hat{q}_2\left( u \right) \phi \left( u \right)
++O_{P}\left( n^{-\frac{3}{2}} \right) \\
+&amp; -\left[ \Phi \left( u \right) +n^{-\frac{1}{2}}q_1\left( u \right) \phi
+\left( u \right) +n^{-1}q_2\left( u \right) \phi \left( u \right) +O\left(
+n^{-\frac{3}{2}} \right) \right] \\
+=&amp;\ n^{-\frac{1}{2}}\left[ \hat{q}_1\left( u \right) -q_1\left( u \right) 
+\right] \phi \left( u \right) 
++n^{-1}\left[ \hat{q}_2\left( u \right) -q_2\left( u \right) \right] \phi
+\left( u \right) +O_{P}\left( n^{-\frac{3}{2}} \right).
 \end{aligned}\]</span></p>
-<p>De esta forma el error de cobertura para los intervalos de confianza bilaterales bootstrap obtenidos mediante el método percentil es <span class="math inline">\(O\left( n^{-\frac{1}{2}} \right)\)</span>. Puede deducirse que ese es también el orden para los intervalos unilaterales obtenidos por este método. Así pues el orden del error de cobertura para el método percentil cuando se construyen intervalos de confianza unilaterales coincide con el de los construidos usando la normal asintótica pero el orden del error de cobertura de los intervalos bilaterales bootstrap constuidos por el método percentil es peor que el de los basados en la normal asintótica, que es del orden <span class="math inline">\(O\left( n^{-1} \right)\)</span>.</p>
-
-<div class="example">
-<p><span id="exm:media-dt-desconocida-perc" class="example"><strong>Ejemplo 5.1  (Inferencia sobre la media con varianza desconocida, continuación)  </strong></span><br> </p>
-Continuando con el ejemplo de los tiempos de vida de microorganismos (sin asumir varianza conocida), supongamos que queremos obtener una estimación por intervalo de confianza de su vida media empleando este método. El código necesario sería muy similar al del Ejemplo <a href="calculo-de-la-distribucion-bootstrap-exacta-y-aproximada.html#exm:media-dt-desconocida">1.5</a>:
-</div>
-
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">muestra &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.143</span>, <span class="fl">0.182</span>, <span class="fl">0.256</span>, <span class="fl">0.26</span>, <span class="fl">0.27</span>, <span class="fl">0.437</span>, <span class="fl">0.509</span>, 
-             <span class="fl">0.611</span>, <span class="fl">0.712</span>, <span class="fl">1.04</span>, <span class="fl">1.09</span>, <span class="fl">1.15</span>, <span class="fl">1.46</span>, <span class="fl">1.88</span>, <span class="fl">2.08</span>)
-n &lt;-<span class="st"> </span><span class="kw">length</span>(muestra)
-alfa &lt;-<span class="st"> </span><span class="fl">0.05</span>
-x_barra &lt;-<span class="st"> </span><span class="kw">mean</span>(muestra)
-
-<span class="co"># Remuestreo</span>
-<span class="kw">set.seed</span>(<span class="dv">1</span>)
-B &lt;-<span class="st"> </span><span class="dv">1000</span>
-remuestra &lt;-<span class="st"> </span><span class="kw">numeric</span>(n)
-x_barra_boot &lt;-<span class="st"> </span><span class="kw">numeric</span>(B) 
-estadistico_boot &lt;-<span class="st"> </span><span class="kw">numeric</span>(B)
-<span class="cf">for</span> (k <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>B) {
-  remuestra &lt;-<span class="st"> </span><span class="kw">sample</span>(muestra, n, <span class="dt">replace =</span> <span class="ot">TRUE</span>)
-  x_barra_boot[k] &lt;-<span class="st"> </span><span class="kw">mean</span>(remuestra)
-  estadistico_boot[k] &lt;-<span class="st"> </span><span class="kw">sqrt</span>(n) <span class="op">*</span><span class="st"> </span>(x_barra_boot[k] <span class="op">-</span><span class="st"> </span>x_barra)
-}
-
-<span class="co"># Aproximación bootstrap de los ptos críticos</span>
-pto_crit &lt;-<span class="st"> </span><span class="kw">quantile</span>(estadistico_boot, <span class="kw">c</span>(alfa<span class="op">/</span><span class="dv">2</span>, <span class="dv">1</span> <span class="op">-</span><span class="st"> </span>alfa<span class="op">/</span><span class="dv">2</span>))
-
-<span class="co"># Construcción del IC</span>
-ic_inf_boot &lt;-<span class="st"> </span>x_barra <span class="op">-</span><span class="st"> </span>pto_crit[<span class="dv">2</span>]<span class="op">/</span><span class="kw">sqrt</span>(n)
-ic_sup_boot &lt;-<span class="st"> </span>x_barra <span class="op">-</span><span class="st"> </span>pto_crit[<span class="dv">1</span>]<span class="op">/</span><span class="kw">sqrt</span>(n)
-IC_boot &lt;-<span class="st"> </span><span class="kw">c</span>(ic_inf_boot, ic_sup_boot)
-<span class="kw">names</span>(IC_boot) &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="dv">100</span><span class="op">*</span><span class="kw">c</span>(alfa, <span class="dv">1</span><span class="op">-</span>alfa), <span class="st">&quot;%&quot;</span>)
-IC_boot</code></pre></div>
-<pre><code>##       5%      95% 
-## 0.457700 1.092293</code></pre>
-<p>Aunque en este caso también podemos obtener el intervalo a partir de las réplicas bootstrap del estimador:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pto_crit &lt;-<span class="st"> </span><span class="kw">quantile</span>(x_barra_boot, <span class="kw">c</span>(alfa<span class="op">/</span><span class="dv">2</span>, <span class="dv">1</span> <span class="op">-</span><span class="st"> </span>alfa<span class="op">/</span><span class="dv">2</span>))
-ic_inf_boot &lt;-<span class="st"> </span><span class="dv">2</span><span class="op">*</span>x_barra <span class="op">-</span><span class="st"> </span>pto_crit[<span class="dv">2</span>]
-ic_sup_boot &lt;-<span class="st"> </span><span class="dv">2</span><span class="op">*</span>x_barra <span class="op">-</span><span class="st"> </span>pto_crit[<span class="dv">1</span>]
-IC_boot &lt;-<span class="st"> </span><span class="kw">c</span>(ic_inf_boot, ic_sup_boot)
-<span class="kw">names</span>(IC_boot) &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="dv">100</span><span class="op">*</span><span class="kw">c</span>(alfa, <span class="dv">1</span><span class="op">-</span>alfa), <span class="st">&quot;%&quot;</span>)
-IC_boot</code></pre></div>
-<pre><code>##       5%      95% 
-## 0.457700 1.092293</code></pre>
-<p>Esta forma de proceder es la que emplea el paquete <code>boot</code> para obtener el que denomina intervalo de confianza <em>bootstrap básico</em> (estableciendo <code>type=&quot;basic&quot;</code> en la llamada a la función <code>boot.ci()</code>):</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(boot)
-statistic &lt;-<span class="st"> </span><span class="cf">function</span>(data, i) <span class="kw">mean</span>(data[i])
-
-<span class="kw">set.seed</span>(<span class="dv">1</span>)
-res.boot &lt;-<span class="st"> </span><span class="kw">boot</span>(muestra, statistic, <span class="dt">R =</span> <span class="dv">1000</span>)
-res &lt;-<span class="st"> </span><span class="kw">boot.ci</span>(res.boot, <span class="dt">type =</span> <span class="st">&quot;basic&quot;</span>)
-res</code></pre></div>
-<pre><code>## BOOTSTRAP CONFIDENCE INTERVAL CALCULATIONS
-## Based on 1000 bootstrap replicates
-## 
-## CALL : 
-## boot.ci(boot.out = res.boot, type = &quot;basic&quot;)
-## 
-## Intervals : 
-## Level      Basic         
-## 95%   ( 0.4945,  1.1121 )  
-## Calculations and Intervals on Original Scale</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">IC_boot &lt;-<span class="st"> </span>res<span class="op">$</span>basic[<span class="dv">4</span><span class="op">:</span><span class="dv">5</span>]
-IC_boot</code></pre></div>
-<pre><code>## [1] 0.494535 1.112066</code></pre>
-<p>Además del paquete <code>boot</code>, otros autores también denominan a este método <em>bootstrap básico</em> (<em>bootstrap percentil básico</em> o incluso <em>bootstrap natural</em>), y utilizan la terminología <em>bootstrap percentil</em> cuando se emplea directamente el estimador como estadístico (<span class="math inline">\(R = \hat \theta\)</span>) para realizar inferencia. Con el paquete <code>boot</code> habrá que establecer <code>type=&quot;perc&quot;</code> en la llamada a la función <code>boot.ci()</code> para obtener el intervalo correspondiente:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">boot.ci</span>(res.boot, <span class="dt">type =</span> <span class="st">&quot;perc&quot;</span>)</code></pre></div>
-<pre><code>## BOOTSTRAP CONFIDENCE INTERVAL CALCULATIONS
-## Based on 1000 bootstrap replicates
-## 
-## CALL : 
-## boot.ci(boot.out = res.boot, type = &quot;perc&quot;)
-## 
-## Intervals : 
-## Level     Percentile     
-## 95%   ( 0.4986,  1.1161 )  
-## Calculations and Intervals on Original Scale</code></pre>
-<p>En este método se emplean directamente los cuantiles de las réplicas bootstrap del estadístico:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># IC_boot &lt;-  quantile(res.boot$t, c(alfa/2, 1 - alfa/2)) # type = 7</span>
-IC_boot &lt;-<span class="st">  </span><span class="kw">quantile</span>(res.boot<span class="op">$</span>t, <span class="kw">c</span>(alfa<span class="op">/</span><span class="dv">2</span>, <span class="dv">1</span> <span class="op">-</span><span class="st"> </span>alfa<span class="op">/</span><span class="dv">2</span>), <span class="dt">type =</span> <span class="dv">6</span>)
-IC_boot </code></pre></div>
-<pre><code>##      2.5%     97.5% 
-## 0.4985983 1.1161317</code></pre>
-<p>Asintóticamente ambos métodos son equivalentes, aunque en general es preferible (evita sesgos) el bootstrap percentil básico.</p>
+<p>Como consecuencia, el error de cobertura del intervalo de confianza bootstrap bilateral calculado por el método percentil-<span class="math inline">\(t\)</span> simetrizado es <span class="math display">\[\begin{aligned}
+P\left( \theta \in \hat{I}_3 \right) -\left( 1-\alpha \right) 
+=&amp;\ P\left(-y_{1-\alpha }&lt;R_1&lt;y_{1-\alpha } \right) -P^{\ast}\left( -y_{1-\alpha
+}&lt;R_1^{\ast}&lt;y_{1-\alpha } \right) \\
+=&amp;\ P\left( R_1&lt;y_{1-\alpha } \right) -P^{\ast}\left( R_1^{\ast
+}&lt;y_{1-\alpha } \right) - \\
+&amp;-\left[ P\left( R_1\leq -y_{1-\alpha } \right) -P^{\ast}\left( R_1^{\ast
+}\leq -y_{1-\alpha } \right) \right] \\
+=&amp;\ n^{-\frac{1}{2}}\left[ q_1\left( y_{1-\alpha } \right) -\hat{q}_1\left(
+y_{1-\alpha } \right) \right] \phi \left( y_{1-\alpha } \right) \\
+&amp;+n^{-1}\left[ q_2\left( y_{1-\alpha } \right) -\hat{q}_2\left(
+y_{1-\alpha } \right) \right] \phi \left( y_{1-\alpha } \right) \\
+&amp;-n^{-\frac{1}{2}}\left[ q_1\left( -y_{1-\alpha } \right) -\hat{q}_1\left(
+-y_{1-\alpha } \right) \right] \phi \left( -y_{1-\alpha } \right) \\
+&amp;-n^{-1}\left[ q_2\left( -y_{1-\alpha } \right) -\hat{q}_2\left(
+-y_{1-\alpha } \right) \right] \phi \left( -y_{1-\alpha } \right) +O_{P}\left(
+n^{-\frac{3}{2}} \right) \\
+=&amp;\ 2n^{-1}\left[ q_2\left( y_{1-\alpha } \right) -\hat{q}_2\left(
+y_{1-\alpha } \right) \right] \phi \left( y_{1-\alpha } \right) +O_{P}\left(
+n^{-\frac{3}{2}} \right) \\
+=&amp;\ O_{P}\left( n^{-\frac{3}{2}} \right)
+\end{aligned}\]</span></p>
+<p>ya que los polinomios <span class="math inline">\(q_1\left( u \right)\)</span> y <span class="math inline">\(\hat{q}_1\left( u \right)\)</span> son simétricos, <span class="math inline">\(q_2\left( u \right)\)</span> y <span class="math inline">\(\hat{q}_2\left( u \right)\)</span> son antisimétricos, la función <span class="math inline">\(\phi \left( u \right)\)</span> es simétrica y los coeficientes que aparecen en el polinomio <span class="math inline">\(\hat{q}_2\left( u \right)\)</span> son estimadores <span class="math inline">\(\sqrt{n}\)</span>-consistentes de los coeficientes del polinomio <span class="math inline">\(q_2\left( u \right)\)</span>. Como consecuencia, el error de cobertura para los intervalos de confianza bilaterales bootstrap obtenidos mediante el método percentil-<span class="math inline">\(t\)</span> simetrizado es <span class="math inline">\(O\left( n^{-\frac{3}{2}} \right)\)</span>. Puede deducirse que el orden para los intervalos unilaterales obtenidos por este método es <span class="math inline">\(O\left( n^{-1} \right)\)</span>. Así pues el orden del error de cobertura para el método percentil-<span class="math inline">\(t\)</span> simetrizado cuando se construyen intervalos de confianza unilaterales mejora al de los intervalos unilaterales basados en la normal asintótica, con un error de cobertura de orden <span class="math inline">\(O\left( n^{-\frac{1}{2}} \right)\)</span>, e iguala al orden del error de cobertura de los obtenidos mediante el percentil-<span class="math inline">\(t\)</span>. En el caso de los intervalos de confianza bilaterales, el orden del error de cobertura usando el método percentil-<span class="math inline">\(t\)</span> simetrizado es <span class="math inline">\(O\left( n^{-\frac{3}{2}} \right)\)</span>, el cual mejora el orden <span class="math inline">\(O\left( n^{-1} \right)\)</span>, que es el que presentan los intervalos basados en la normal asintótica o bien en el método percentil-<span class="math inline">\(t\)</span>.</p>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="intervalos-basados-en-la-distribucion-normal-asintotica.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="cap5-perc-t.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="cap5-perc-t.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="cap5-err-cober.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

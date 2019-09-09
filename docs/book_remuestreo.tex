@@ -127,7 +127,7 @@ Rubén Fernández Casal
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{2019-09-05}
+    \date{2019-09-09}
 
 \usepackage{booktabs}
 \usepackage{amsthm}
@@ -189,6 +189,9 @@ Se puede acceder a la versión en línea a través del siguiente enlace:
 
 \url{https://rubenfcasal.github.io/book_remuestreo}.
 
+donde puede descargarse en formato
+\href{https://rubenfcasal.github.io/book_remuestreo/book_remuestreo.pdf}{pdf}.
+
 Para ejecutar los ejemplos mostrados en el libro será necesario tener
 instalados los siguientes paquetes:
 \href{https://cran.r-project.org/web/packages/boot/index.html}{\texttt{boot}},
@@ -215,7 +218,7 @@ Commons Reconocimiento-NoComercial-SinObraDerivada 4.0 Internacional}
 (esperamos poder liberarlo bajo una licencia menos restrictiva más
 adelante\ldots{}).
 
-\includegraphics[width=1.22in]{images/by-nc-nd-88x31}
+\includegraphics{by-nc-nd-88x31.png}
 
 \chapter{Motivación del principio Bootstrap}\label{cap1}
 
@@ -519,7 +522,7 @@ Hemos observado 15 tiempos de vida de microorganismos: 0.143, 0.182,
 intervalo de confianza de su vida media, suponiendo que la desviación
 típica es conocida e igual a 0.6 (en el Capítulo \ref{cap5} se tratará
 con más detalle la construcción de intervalos de confianza).
-\EndKnitrBlock{example} {[}Figura \ref{fig:microorganismos}{]}
+\EndKnitrBlock{example}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -560,6 +563,8 @@ con más detalle la construcción de intervalos de confianza).
 
 \caption{Distribución del tiempo de vida de microorganismos.}\label{fig:microorganismos}
 \end{figure}
+
+{[}Figura \ref{fig:microorganismos}{]}
 
 \textbf{\emph{Contexto clásico}}
 
@@ -636,7 +641,7 @@ de \(R^{\ast}\). En este caso nos interesa aproximar los puntos críticos
 \[P\left( x_{\alpha /2} < R < x_{1-\alpha /2} \right) = 1-\alpha.\] Para
 lo que podemos emplear los cuantiles muestrales\footnote{Se podrían
   considerar distintos estimadores del cuantil \(x_{\alpha}\) (ver p.e.
-  la ayuda de la función \texttt{quantile}). Si empleamos directamente
+  la ayuda de la función \texttt{quantile()}). Si empleamos directamente
   la distribución empírica, el cuantil se correspondería con la
   observación ordenada en la posición \(B \alpha\) (se suele hacer una
   interpolación lineal si este valor no es entero), lo que equivale a
@@ -645,7 +650,8 @@ lo que podemos emplear los cuantiles muestrales\footnote{Se podrían
   \(1 + (B - 1) \alpha\) (\texttt{type\ =\ 7}). En el libro de Davison y
   Hinkley (1997), y en el paquete \texttt{boot}, se emplea
   \((B + 1) \alpha\) (equivalente a \texttt{type\ =\ 6}; lo que
-  justifica que consideren habitualmente 999 réplicas bootstrap).}:
+  justifica que consideren habitualmente 99, 199 ó 999 réplicas
+  bootstrap).}:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -677,13 +683,13 @@ boostrap: \[\hat{IC}^{boot}_{1-\alpha}\left(  \mu\right)  =
 \NormalTok{ic_inf_boot <-}\StringTok{ }\NormalTok{x_barra }\OperatorTok{-}\StringTok{ }\NormalTok{pto_crit[}\DecValTok{2}\NormalTok{] }\OperatorTok{*}\StringTok{ }\NormalTok{sigma}\OperatorTok{/}\KeywordTok{sqrt}\NormalTok{(n)}
 \NormalTok{ic_sup_boot <-}\StringTok{ }\NormalTok{x_barra }\OperatorTok{-}\StringTok{ }\NormalTok{pto_crit[}\DecValTok{1}\NormalTok{] }\OperatorTok{*}\StringTok{ }\NormalTok{sigma}\OperatorTok{/}\KeywordTok{sqrt}\NormalTok{(n)}
 \NormalTok{IC_boot <-}\StringTok{ }\KeywordTok{c}\NormalTok{(ic_inf_boot, ic_sup_boot)}
-\KeywordTok{names}\NormalTok{(IC_boot) <-}\StringTok{ }\KeywordTok{paste0}\NormalTok{(}\DecValTok{100}\OperatorTok{*}\KeywordTok{c}\NormalTok{(alfa, }\DecValTok{1}\OperatorTok{-}\NormalTok{alfa), }\StringTok{"%"}\NormalTok{) }\CommentTok{# rev(names(IC_boot))}
+\KeywordTok{names}\NormalTok{(IC_boot) <-}\StringTok{ }\KeywordTok{paste0}\NormalTok{(}\DecValTok{100}\OperatorTok{*}\KeywordTok{c}\NormalTok{(alfa}\OperatorTok{/}\DecValTok{2}\NormalTok{, }\DecValTok{1}\OperatorTok{-}\NormalTok{alfa}\OperatorTok{/}\DecValTok{2}\NormalTok{), }\StringTok{"%"}\NormalTok{) }\CommentTok{# rev(names(IC_boot))}
 \NormalTok{IC_boot}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-##        5%       95% 
+##      2.5%     97.5% 
 ## 0.7135570 0.8960555
 \end{verbatim}
 
@@ -845,8 +851,8 @@ Var^{\ast}\left( R^{\ast} \right) &= n\frac{Var^{\ast}\left( \bar{X}^{\ast} \rig
 Es curioso observar que la esperanza de \(R\) y la esperanza bootstrap
 de \(R^{\ast}\) coinciden (son ambas cero), pero no ocurre lo mismo con
 sus varianzas: la de \(R\) es \(1\) y la varianza bootstrap de
-\(R^{\ast}\) es \(\frac{S_n^2}{\sigma^2}\), que, aunque tiende a \(1\)
-(en probabilidad o de forma casi segura, bajo las condiciones adecuadas)
+\(R^{\ast}\) es \(S_n^2/\sigma^2\), que, aunque tiende a \(1\) (en
+probabilidad o de forma casi segura, bajo las condiciones adecuadas)
 cuando \(n\rightarrow \infty\), no es igual a \(1\). Eso nos lleva a
 intuir que el método de remuestreo bootstrap propuesto quizá podría
 modificarse ligeramente para que imitase exactamente al caso no
@@ -918,13 +924,13 @@ de la muestra perturbando es análogo:
 \NormalTok{ic_inf_boot <-}\StringTok{ }\NormalTok{x_barra }\OperatorTok{-}\StringTok{ }\NormalTok{pto_crit[}\DecValTok{2}\NormalTok{] }\OperatorTok{*}\StringTok{ }\NormalTok{sigma}\OperatorTok{/}\KeywordTok{sqrt}\NormalTok{(n)}
 \NormalTok{ic_sup_boot <-}\StringTok{ }\NormalTok{x_barra }\OperatorTok{-}\StringTok{ }\NormalTok{pto_crit[}\DecValTok{1}\NormalTok{] }\OperatorTok{*}\StringTok{ }\NormalTok{sigma}\OperatorTok{/}\KeywordTok{sqrt}\NormalTok{(n)}
 \NormalTok{IC_boot <-}\StringTok{ }\KeywordTok{c}\NormalTok{(ic_inf_boot, ic_sup_boot)}
-\KeywordTok{names}\NormalTok{(IC_boot) <-}\StringTok{ }\KeywordTok{paste0}\NormalTok{(}\DecValTok{100}\OperatorTok{*}\KeywordTok{c}\NormalTok{(alfa, }\DecValTok{1}\OperatorTok{-}\NormalTok{alfa), }\StringTok{"%"}\NormalTok{)}
+\KeywordTok{names}\NormalTok{(IC_boot) <-}\StringTok{ }\KeywordTok{paste0}\NormalTok{(}\DecValTok{100}\OperatorTok{*}\KeywordTok{c}\NormalTok{(alfa}\OperatorTok{/}\DecValTok{2}\NormalTok{, }\DecValTok{1}\OperatorTok{-}\NormalTok{alfa}\OperatorTok{/}\DecValTok{2}\NormalTok{), }\StringTok{"%"}\NormalTok{)}
 \NormalTok{IC_boot}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-##        5%       95% 
+##      2.5%     97.5% 
 ## 0.7132745 0.8953890
 \end{verbatim}
 
@@ -1020,13 +1026,13 @@ anteriores:
 \NormalTok{ic_inf_boot <-}\StringTok{ }\NormalTok{x_mediana }\OperatorTok{-}\StringTok{ }\NormalTok{pto_crit[}\DecValTok{2}\NormalTok{]}\OperatorTok{/}\KeywordTok{sqrt}\NormalTok{(n)}
 \NormalTok{ic_sup_boot <-}\StringTok{ }\NormalTok{x_mediana }\OperatorTok{-}\StringTok{ }\NormalTok{pto_crit[}\DecValTok{1}\NormalTok{]}\OperatorTok{/}\KeywordTok{sqrt}\NormalTok{(n)}
 \NormalTok{IC_boot <-}\StringTok{ }\KeywordTok{c}\NormalTok{(ic_inf_boot, ic_sup_boot)}
-\KeywordTok{names}\NormalTok{(IC_boot) <-}\StringTok{ }\KeywordTok{paste0}\NormalTok{(}\DecValTok{100}\OperatorTok{*}\KeywordTok{c}\NormalTok{(alfa, }\DecValTok{1}\OperatorTok{-}\NormalTok{alfa), }\StringTok{"%"}\NormalTok{)}
+\KeywordTok{names}\NormalTok{(IC_boot) <-}\StringTok{ }\KeywordTok{paste0}\NormalTok{(}\DecValTok{100}\OperatorTok{*}\KeywordTok{c}\NormalTok{(alfa}\OperatorTok{/}\DecValTok{2}\NormalTok{, }\DecValTok{1}\OperatorTok{-}\NormalTok{alfa}\OperatorTok{/}\DecValTok{2}\NormalTok{), }\StringTok{"%"}\NormalTok{)}
 \NormalTok{IC_boot}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-##    5%   95% 
+##  2.5% 97.5% 
 ## 0.510 0.713
 \end{verbatim}
 
@@ -1281,14 +1287,12 @@ la muestra original) y por la sencillez del bootstrap uniforme.
 Veámoslo: \[P^{\ast}\left( X_{(m)}^{\ast}>X_{(j)} \right)
 =P^{\ast}\left( \#\left\{ X_i^{\ast}\leq X_{(j)}\right\}
 \leq m-1 \right),\] pero
-\(\#\left\{ X_i^{\ast}\leq X_{(j)}\right\} \sim \mathcal{B}\left( n,\frac{j}{n} \right)\),
-con lo cual
-
+\[\#\left\{ X_i^{\ast}\leq X_{(j)}\right\} \sim \mathcal{B}\left(
+n,\frac{j}{n} \right),\] con lo cual
 \[P^{\ast}\left( X_{(m)}^{\ast}>X_{(j)} \right)
 =\sum_{k=0}^{m-1}\binom{n}{k}\left( \frac{j}{n} \right)^{k}
-\left( \frac{n-j}{n} \right)^{n-k}\]
-
-y, por lo tanto, si \(j\geq 2\), \[\begin{aligned}
+\left( \frac{n-j}{n} \right)^{n-k}\] y, por lo tanto, si \(j\geq 2\),
+\[\begin{aligned}
 P^{\ast}\left( X_{(m)}^{\ast}=X_{(j)} \right)
 =&\ P^{\ast}\left( X_{(m)}^{\ast}>X_{\left( j-1 \right)} \right)
 -P^{\ast}\left( X_{(m)}^{\ast}>X_{(j)} \right) \\
@@ -1442,13 +1446,13 @@ varianza conocida del Ejemplo \ref{exm:media-dt-conocida}:
 \NormalTok{ic_inf_boot <-}\StringTok{ }\NormalTok{x_barra }\OperatorTok{-}\StringTok{ }\NormalTok{pto_crit[}\DecValTok{2}\NormalTok{] }\OperatorTok{*}\StringTok{ }\NormalTok{cuasi_dt}\OperatorTok{/}\KeywordTok{sqrt}\NormalTok{(n)}
 \NormalTok{ic_sup_boot <-}\StringTok{ }\NormalTok{x_barra }\OperatorTok{-}\StringTok{ }\NormalTok{pto_crit[}\DecValTok{1}\NormalTok{] }\OperatorTok{*}\StringTok{ }\NormalTok{cuasi_dt}\OperatorTok{/}\KeywordTok{sqrt}\NormalTok{(n)}
 \NormalTok{IC_boot <-}\StringTok{ }\KeywordTok{c}\NormalTok{(ic_inf_boot, ic_sup_boot)}
-\KeywordTok{names}\NormalTok{(IC_boot) <-}\StringTok{ }\KeywordTok{paste0}\NormalTok{(}\DecValTok{100}\OperatorTok{*}\KeywordTok{c}\NormalTok{(alfa, }\DecValTok{1}\OperatorTok{-}\NormalTok{alfa), }\StringTok{"%"}\NormalTok{)}
+\KeywordTok{names}\NormalTok{(IC_boot) <-}\StringTok{ }\KeywordTok{paste0}\NormalTok{(}\DecValTok{100}\OperatorTok{*}\KeywordTok{c}\NormalTok{(alfa}\OperatorTok{/}\DecValTok{2}\NormalTok{, }\DecValTok{1}\OperatorTok{-}\NormalTok{alfa}\OperatorTok{/}\DecValTok{2}\NormalTok{), }\StringTok{"%"}\NormalTok{)}
 \NormalTok{IC_boot}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-##        5%       95% 
+##      2.5%     97.5% 
 ## 0.4940304 1.2260180
 \end{verbatim}
 
@@ -1470,13 +1474,13 @@ necesarios valores mayores, del tipo \(B = 500, 1000, 2000, 5000\).
 Evidentemente, la función de distribución del estadístico de interés,
 \(\psi \left( u \right) =P\left( R\leq u \right)\), se estimaría
 mediante la distribución empírica de las \(B\) realizaciones de la
-aproximación de Monte Carlo,
-\(\hat{\psi}_{B}\left( u \right) = \frac{1}{B}\sum_{i=1}^{B}\mathbf{1}\left\{ R^{\ast (i)}\leq u\right\}\),
+aproximación de Monte Carlo, \[\hat{\psi}_{B}\left( u \right) =
+\frac{1}{B}\sum_{i=1}^{B}\mathbf{1}\left\{ R^{\ast (i)}\leq u\right\},\]
 de la verdadera distribución bootstrap exacta:
-\(\hat{\psi}\left( u \right) =P^{\ast}\left( R^{\ast}\leq u \right)\).
-El error de Monte Carlo de \(\hat{\psi}_{B}\left( u \right)\) con
-respecto a \(\hat{\psi}\left( u \right)\) viene dado por su varianza
-Monte Carlo, pues su sesgo Monte Carlo es cero:
+\(\hat{\psi}\left(u \right) =P^{\ast}\left( R^{\ast}\leq u \right)\). El
+error de MonteCarlo de \(\hat{\psi}_{B}\left( u \right)\) con respecto a
+\(\hat{\psi}\left( u \right)\) viene dado por su varianza Monte Carlo,
+pues su sesgo Monte Carlo es cero:
 
 \[\begin{aligned}
 E^{MC}\left( \hat{\psi}_{B}\left( u \right) \right) &= \frac{1}{B}
@@ -2187,7 +2191,7 @@ llevar a cabo mediante el siguiente código:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.1559049
+## [1] 0.1552919
 \end{verbatim}
 
 \begin{Shaded}
@@ -2197,7 +2201,7 @@ llevar a cabo mediante el siguiente código:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.2512371
+## [1] 0.2497064
 \end{verbatim}
 
 \begin{Shaded}
@@ -2210,7 +2214,7 @@ llevar a cabo mediante el siguiente código:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.00145046
+## [1] -0.00056106
 \end{verbatim}
 
 \begin{Shaded}
@@ -2220,7 +2224,7 @@ llevar a cabo mediante el siguiente código:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.0493702
+## [1] 0.0462533
 \end{verbatim}
 
 Empleando el paquete \texttt{boot} el código sería más simple:
@@ -2384,15 +2388,16 @@ así que
 es un estimador insesgado del sesgo de \(\bar{X}\) (que es cero). De
 esta forma, utilizando un factor de elevación arbitrario, \(c\), se
 tiene igualmente que
-\(c\left( \overline{\theta \left( \mathbf{X}_{(\cdot)} \right)}-\hat{\theta}  \right) =0\),
-así que es también un estimador insesgado de
-\(Sesgo\left( \bar{X} \right) =0\). Determinaremos el valor de \(c\)
-imponiendo que el estimador jackknife de la varianza de dicho estimador
-(\(\hat{\theta}=\bar{X}\)) es una estimador insesgado de la varianza de
-dicho estimador. Por una parte, es bien conocido que la varianza de
-\(\hat{\theta}\) es \(Var\left( \bar{X} \right) =\frac{\sigma^2}{n}\).
-Por otra parte, la estimación jackknife de la varianza de
-\(\hat{\theta}\), con factor de elevación \(c\) es
+\[c\left( \overline{\theta \left( \mathbf{X}_{(\cdot)} \right)}
+- \hat{\theta} \right) = 0,\] así que es también un estimador insesgado
+de \(Sesgo\left( \bar{X} \right) =0.\)\$ Determinaremos el valor de
+\(c\) imponiendo que el estimador jackknife de la varianza de dicho
+estimador (\(\hat{\theta}=\bar{X}\)) es una estimador insesgado de la
+varianza de dicho estimador. Por una parte, es bien conocido que la
+varianza de \(\hat{\theta}\) es
+\(Var\left( \bar{X} \right) = \sigma^2 /n\). Por otra parte, la
+estimación jackknife de la varianza de \(\hat{\theta}\), con factor de
+elevación \(c\) es
 
 \[\begin{aligned}
 Var_{jackk}^{\ast}\left( \bar{X} \right) &= \frac{c}{n}\sum_{i=1}^{n}
@@ -2504,8 +2509,8 @@ i,k\neq j}^{n}\left( X_{k}-\mu \right) \right] \\
 \end{aligned}\]
 
 Además, ya hemos visto anteriormente que
-\(E\left( S_n^2 \right) = \frac{n-1}{n}\sigma^2\), con o cual la
-esperanza del estimador jackknife del sesgo es \[\begin{aligned}
+\(E\left( S_n^2 \right) = (n-1)\sigma^2/n\), con o cual la esperanza del
+estimador jackknife del sesgo es \[\begin{aligned}
 c\left( \frac{n-2}{n-1}\sigma^2-\frac{n-1}{n}\sigma^2 \right)
 &= c\sigma^2\left( \frac{n-2}{n-1}-\frac{n-1}{n} \right) \\
 &= c\sigma^2\frac{n\left( n-2 \right) -\left( n-1 \right)^2}{n\left( n-1 \right)} \\
@@ -2605,7 +2610,7 @@ Si \(\hat{\theta}\) es un estimador lineal, entonces
 Dicho en otras palabras, para cualquier estimador cuadrático, el sesgo
 jackknife es mayor que el sesgo bootstrap. Si el estimador es lineal, la
 varianza jackknife es mayor que la varianza bootstrap. En ambos casos,
-el factor multiplicador es \(\frac{n}{n-1}\).
+el factor multiplicador es \(n/(n-1)\).
 
 \BeginKnitrBlock{example}[Aproximación jackknife de la precisión de estimaciones del tiempo de vida medio de microorganismos]
 \protect\hypertarget{exm:estimacion-jack-precision}{}{\label{exm:estimacion-jack-precision}
@@ -2900,13 +2905,13 @@ intervalo de confianza para la media poblacional.
 \NormalTok{ic_inf_boot <-}\StringTok{ }\NormalTok{x_barra }\OperatorTok{-}\StringTok{ }\NormalTok{pto_crit[}\DecValTok{2}\NormalTok{] }\OperatorTok{*}\StringTok{ }\NormalTok{sigma}\OperatorTok{/}\KeywordTok{sqrt}\NormalTok{(n)}
 \NormalTok{ic_sup_boot <-}\StringTok{ }\NormalTok{x_barra }\OperatorTok{-}\StringTok{ }\NormalTok{pto_crit[}\DecValTok{1}\NormalTok{] }\OperatorTok{*}\StringTok{ }\NormalTok{sigma}\OperatorTok{/}\KeywordTok{sqrt}\NormalTok{(n)}
 \NormalTok{IC_boot <-}\StringTok{ }\KeywordTok{c}\NormalTok{(ic_inf_boot, ic_sup_boot)}
-\KeywordTok{names}\NormalTok{(IC_boot) <-}\StringTok{ }\KeywordTok{paste0}\NormalTok{(}\DecValTok{100}\OperatorTok{*}\KeywordTok{c}\NormalTok{(alfa, }\DecValTok{1}\OperatorTok{-}\NormalTok{alfa), }\StringTok{"%"}\NormalTok{)}
+\KeywordTok{names}\NormalTok{(IC_boot) <-}\StringTok{ }\KeywordTok{paste0}\NormalTok{(}\DecValTok{100}\OperatorTok{*}\KeywordTok{c}\NormalTok{(alfa}\OperatorTok{/}\DecValTok{2}\NormalTok{, }\DecValTok{1}\OperatorTok{-}\NormalTok{alfa}\OperatorTok{/}\DecValTok{2}\NormalTok{), }\StringTok{"%"}\NormalTok{)}
 \NormalTok{IC_boot}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-##        5%       95% 
+##      2.5%     97.5% 
 ## 0.5236922 1.1217871
 \end{verbatim}
 
@@ -3004,7 +3009,7 @@ simétrica entorno a cierto valor. Eso significa que existe un valor
 \(c\) tal que \(F\left( c-h \right) =1-F\left( c+h \right)\) para todo
 \(h>0\). Equivalentemente, una variable aleatoria es simétrica entorno a
 \(c\) si su función de distribución verifica
-\(F\left( x \right) =1-F\left( 2c-x \right)\) para todo
+\[F\left( x \right) = 1 - F\left( 2c - x \right)\] para todo
 \(x\in \mathbb{R}\). Puede demostrarse que dicho centro de simetría,
 \(c\), ha de ser la media de la distribución, \(\mu\), en caso de que
 exista. Esa información (la simetría) sobre la distribución poblacional
@@ -3024,9 +3029,10 @@ X_i & \text{si } i=1,\ldots ,n \\
 \right.\]
 
 con lo cual
-\(F_n^{sim}\left( x \right) =\frac{1}{2n}\sum_{i=1}^{2n}\mathbf{1}\left( Y_i\leq x \right)\).
+\[F_n^{sim}\left( x \right) =\frac{1}{2n}\sum_{i=1}^{2n}\mathbf{1}\left( Y_i\leq x \right).\]
 Puede demostrarse fácilmente que
-\(F_n^{sim}\left( x \right) =\frac{1}{2}\left( F_n\left( x \right) +1-F_n\left( 2\bar{X}-x \right) \right)\).
+\[F_n^{sim}\left( x \right) =\frac{1}{2}\left( F_n\left( x \right)
++1-F_n\left( 2\bar{X}-x \right) \right).\]
 
 Al diseñar el plan de remuestreo debemos utilizar \(F_n^{sim}\)
 (bootstrap simetrizado), en lugar de \(F_n\) (bootstrap uniforme).
@@ -3135,13 +3141,13 @@ la de \(F_n\left( x \right)\), que es \(S_n^2\).
 En general, cuando la distribución de partida es simétrica, es más
 adecuado utilizar el bootstrap simetrizado que el bootstrap uniforme.
 Aún así, cuando se realiza inferencia sobre algún estadístico (como
-\(\sqrt{n}\frac{\bar{X}-\mu }{\sigma }\)) cuya distribución asintótica
-ya es simétrica (como la normal), la aproximación bootstrap uniforme
-para distribuciones de partida simétricas, ya es especialmente buena y,
-por tanto, la ganancia del bootstrap simétrizado aporta una mejora
-difícil de detectar en la práctica. Ese no es el caso de otros
-estadísticos (como los asociados a inferencia sobre la varianza) con
-distribución más alejada de la simetría.
+\(\sqrt{n}(\bar{X}-\mu)/\sigma\)) cuya distribución asintótica ya es
+simétrica (como la normal), la aproximación bootstrap uniforme para
+distribuciones de partida simétricas, ya es especialmente buena y, por
+tanto, la ganancia del bootstrap simétrizado aporta una mejora difícil
+de detectar en la práctica. Ese no es el caso de otros estadísticos
+(como los asociados a inferencia sobre la varianza) con distribución más
+alejada de la simetría.
 
 \BeginKnitrBlock{exercise}[Inferencia sobre la media con varianza conocida empleando bootstrap simetrizado]
 \protect\hypertarget{exr:media-dt-conocida-sim}{}{\label{exr:media-dt-conocida-sim}
@@ -3176,7 +3182,7 @@ por Parzen (1962) y Rosenblatt (1956), que viene dado por
 \[\hat{f}_{h}\left( x \right) =\frac{1}{nh}\sum_{i=1}^{n}K\left( \frac{x-X_i}{
 h} \right) =\frac{1}{n}\sum_{i=1}^{n}K_{h}\left( x-X_i \right),\]
 
-donde \(K_{h}\left( u \right) =\frac{1}{h}K\left( \frac{u}{h} \right)\),
+donde \[K_{h}\left( u \right) =\frac{1}{h}K\left( \frac{u}{h} \right),\]
 \(K\) es una función núcleo (normalmente una densidad simétrica en torno
 al cero) y \(h>0\) es una parámetro de suavizado, llamado ventana, que
 regula el tamaño del entorno que se usa para llevar a cabo la
@@ -3275,7 +3281,8 @@ K\left( \frac{y-X_i}{h} \right) dy \\
 =\frac{1}{n}\sum_{i=1}^{n}\mathbb{K}\left( \frac{x-X_i}{h} \right)
 \end{aligned}\] donde \(\mathbb{K}\) es la función de distribución
 asociada al núcleo \(K\), es decir
-\(\mathbb{K}\left( t \right) =\int_{-\infty }^{t}K\left( u \right) du\).
+\[\mathbb{K}\left( t \right) =\int_{-\infty }^{t}K\left(
+u \right) du.\]
 
 El método bootstrap suavizado procede de la siguiente forma:
 
@@ -3432,13 +3439,13 @@ la media poblacional con desviación típica conocida:
 \NormalTok{ic_inf_boot <-}\StringTok{ }\NormalTok{x_barra }\OperatorTok{-}\StringTok{ }\NormalTok{pto_crit[}\DecValTok{2}\NormalTok{] }\OperatorTok{*}\StringTok{ }\NormalTok{sigma}\OperatorTok{/}\KeywordTok{sqrt}\NormalTok{(n)}
 \NormalTok{ic_sup_boot <-}\StringTok{ }\NormalTok{x_barra }\OperatorTok{-}\StringTok{ }\NormalTok{pto_crit[}\DecValTok{1}\NormalTok{] }\OperatorTok{*}\StringTok{ }\NormalTok{sigma}\OperatorTok{/}\KeywordTok{sqrt}\NormalTok{(n)}
 \NormalTok{IC_boot <-}\StringTok{ }\KeywordTok{c}\NormalTok{(ic_inf_boot, ic_sup_boot)}
-\KeywordTok{names}\NormalTok{(IC_boot) <-}\StringTok{ }\KeywordTok{paste0}\NormalTok{(}\DecValTok{100}\OperatorTok{*}\KeywordTok{c}\NormalTok{(alfa, }\DecValTok{1}\OperatorTok{-}\NormalTok{alfa), }\StringTok{"%"}\NormalTok{)}
+\KeywordTok{names}\NormalTok{(IC_boot) <-}\StringTok{ }\KeywordTok{paste0}\NormalTok{(}\DecValTok{100}\OperatorTok{*}\KeywordTok{c}\NormalTok{(alfa}\OperatorTok{/}\DecValTok{2}\NormalTok{, }\DecValTok{1}\OperatorTok{-}\NormalTok{alfa}\OperatorTok{/}\DecValTok{2}\NormalTok{), }\StringTok{"%"}\NormalTok{)}
 \NormalTok{IC_boot}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-##        5%       95% 
+##      2.5%     97.5% 
 ## 0.4592311 1.1103890
 \end{verbatim}
 
@@ -3552,9 +3559,9 @@ Como consecuencia podemos hallar fácilmente el sesgo del estimador
 \[E\left( \hat{\theta} \right) =\int_{0}^{\theta }x\frac{n}{\theta }\left( 
 \frac{x}{\theta } \right)^{n-1}dx=\left[ \frac{n}{n+1}\frac{x^{n+1}}{\theta
 ^{n}}\right] _{x=0}^{x=\theta }=\frac{n}{n+1}\theta ,\] con lo cual
-\(Sesgo\left( \hat{\theta} \right) =E\left( \hat{\theta} \right) -\theta =\)
-\(-\frac{\theta }{n+1}\). Se ve claramente que \(\hat{\theta}\) es un
-estimador sesgado de \(\theta\), puesto que se tiene que
+\[Sesgo\left( \hat{\theta} \right) =E\left( \hat{\theta} \right)
+-\theta = -\frac{\theta }{n+1}.\] Se ve claramente que \(\hat{\theta}\)
+es un estimador sesgado de \(\theta\), puesto que se tiene que
 \(\hat{\theta}\leq \theta\) con probabilidad 1.
 
 Si deseamos aproximar mediante bootstrap la distribución en el muestreo
@@ -3781,11 +3788,11 @@ viceversa.
 
 Como consecuencia de este resultado teórico, el grado de aproximación
 entre la distribución de \(R\) y la normal estándar límite es
-\(O\left( n^{-\frac{1}{2}} \right)\). Sin embargo, puede razonarse
-fácilmente que este orden de aproximación mejorará cuando utilizamos el
-bootstrap uniforme, en lugar de la normal estándar, para aproximar la
-distribución de \(R\). Un desarrollo de Edgeworth para la distribución
-en el remuestreo de \(R^{\ast}\) permite obtener la siguiente expresión:
+\(O (n^{-\frac{1}{2}})\). Sin embargo, puede razonarse fácilmente que
+este orden de aproximación mejorará cuando utilizamos el bootstrap
+uniforme, en lugar de la normal estándar, para aproximar la distribución
+de \(R\). Un desarrollo de Edgeworth para la distribución en el
+remuestreo de \(R^{\ast}\) permite obtener la siguiente expresión:
 \[\begin{aligned}
 P^{\ast}\left( R^{\ast}\leq u \right) &= \Phi \left( u \right) +n^{-\frac{1}{2}
 }\hat{p}_1\left( u \right) \phi \left( u \right) +\cdots +n^{-\frac{j-1}{2}}
@@ -3797,10 +3804,9 @@ donde los polinomios \(\hat{p}_i\left( u \right)\) tienen la misma
 estructura que los \(p_i\left( u \right)\) pero reemplazando los
 cumulantes teóricos por los empíricos y la desviación típica teórica por
 la empírica. Así pues el grado de aproximación entre cada polinomio
-\(\hat{p}_i\left( u \right)\) y su análogo teórico
-\(p_i\left( u \right)\) es
-\(\hat{p}_i\left( u \right) -p_i\left( u \right) =O_{P}\left( n^{-\frac{1}{2}} \right)\).
-Como consecuencia, puede obtenerse el orden de aproximación entre la
+\(\hat{p}_i( u )\) y su análogo teórico \(p_i( u )\) es
+\(\hat{p}_i( u ) -p_i( u ) = O_{P}( n^{-\frac{1}{2}} )\). Como
+consecuencia, puede obtenerse el orden de aproximación entre la
 distribución en el muestreo de \(R\) y la distribución en el remuestreo
 de \(R^{\ast}\): \[\begin{aligned}
 P\left( R\leq u \right) -P^{\ast}\left( R^{\ast}\leq u \right) &=  n^{-\frac{1}{
@@ -3890,7 +3896,7 @@ el error de cobertura de los intervalos de confianza clásicos, los
 basados en la distribución normal asintótica.
 
 \section{Intervalos basados en la distribución normal
-asintótica}\label{intervalos-basados-en-la-distribucion-normal-asintotica}
+asintótica}\label{cap5_norm}
 
 Consideremos primeramente el caso más sencillo (y poco realista) de
 construcción de un intervalo de confianza para la media, \(\mu \,\), con
@@ -3963,7 +3969,7 @@ que el error de cobertura del intervalo de confianza bilateral tiene un
 orden de \(O\left( n^{-1} \right)\), mientras que para intervalos
 unilaterales el orden es \(O\left( n^{-\frac{1}{2}} \right)\).
 
-\section{Método percentil (básico)}\label{metodo-percentil-basico}
+\section{Método percentil (básico)}\label{cap5_basic}
 
 Este método se basa en la construcción del intervalo de confianza,
 mediante bootstrap, a partir del estadístico no estandarizado
@@ -4086,13 +4092,13 @@ método. El código necesario sería muy similar al del Ejemplo
 \NormalTok{ic_inf_boot <-}\StringTok{ }\NormalTok{x_barra }\OperatorTok{-}\StringTok{ }\NormalTok{pto_crit[}\DecValTok{2}\NormalTok{]}\OperatorTok{/}\KeywordTok{sqrt}\NormalTok{(n)}
 \NormalTok{ic_sup_boot <-}\StringTok{ }\NormalTok{x_barra }\OperatorTok{-}\StringTok{ }\NormalTok{pto_crit[}\DecValTok{1}\NormalTok{]}\OperatorTok{/}\KeywordTok{sqrt}\NormalTok{(n)}
 \NormalTok{IC_boot <-}\StringTok{ }\KeywordTok{c}\NormalTok{(ic_inf_boot, ic_sup_boot)}
-\KeywordTok{names}\NormalTok{(IC_boot) <-}\StringTok{ }\KeywordTok{paste0}\NormalTok{(}\DecValTok{100}\OperatorTok{*}\KeywordTok{c}\NormalTok{(alfa, }\DecValTok{1}\OperatorTok{-}\NormalTok{alfa), }\StringTok{"%"}\NormalTok{)}
+\KeywordTok{names}\NormalTok{(IC_boot) <-}\StringTok{ }\KeywordTok{paste0}\NormalTok{(}\DecValTok{100}\OperatorTok{*}\KeywordTok{c}\NormalTok{(alfa}\OperatorTok{/}\DecValTok{2}\NormalTok{, }\DecValTok{1}\OperatorTok{-}\NormalTok{alfa}\OperatorTok{/}\DecValTok{2}\NormalTok{), }\StringTok{"%"}\NormalTok{)}
 \NormalTok{IC_boot}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-##       5%      95% 
+##     2.5%    97.5% 
 ## 0.457700 1.092293
 \end{verbatim}
 
@@ -4105,13 +4111,13 @@ réplicas bootstrap del estimador:
 \NormalTok{ic_inf_boot <-}\StringTok{ }\DecValTok{2}\OperatorTok{*}\NormalTok{x_barra }\OperatorTok{-}\StringTok{ }\NormalTok{pto_crit[}\DecValTok{2}\NormalTok{]}
 \NormalTok{ic_sup_boot <-}\StringTok{ }\DecValTok{2}\OperatorTok{*}\NormalTok{x_barra }\OperatorTok{-}\StringTok{ }\NormalTok{pto_crit[}\DecValTok{1}\NormalTok{]}
 \NormalTok{IC_boot <-}\StringTok{ }\KeywordTok{c}\NormalTok{(ic_inf_boot, ic_sup_boot)}
-\KeywordTok{names}\NormalTok{(IC_boot) <-}\StringTok{ }\KeywordTok{paste0}\NormalTok{(}\DecValTok{100}\OperatorTok{*}\KeywordTok{c}\NormalTok{(alfa, }\DecValTok{1}\OperatorTok{-}\NormalTok{alfa), }\StringTok{"%"}\NormalTok{)}
+\KeywordTok{names}\NormalTok{(IC_boot) <-}\StringTok{ }\KeywordTok{paste0}\NormalTok{(}\DecValTok{100}\OperatorTok{*}\KeywordTok{c}\NormalTok{(alfa}\OperatorTok{/}\DecValTok{2}\NormalTok{, }\DecValTok{1}\OperatorTok{-}\NormalTok{alfa}\OperatorTok{/}\DecValTok{2}\NormalTok{), }\StringTok{"%"}\NormalTok{)}
 \NormalTok{IC_boot}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-##       5%      95% 
+##     2.5%    97.5% 
 ## 0.457700 1.092293
 \end{verbatim}
 
@@ -4288,7 +4294,7 @@ estableciendo \texttt{type="stud"} en la llamada a la función
 \texttt{boot.ci()}).
 
 \section{\texorpdfstring{Método percentil-\emph{t}
-simetrizado}{Método percentil-t simetrizado}}\label{metodo-percentil-t-simetrizado}
+simetrizado}{Método percentil-t simetrizado}}\label{cap5-perc-t-sim}
 
 Es un método análogo al percentil-\(t\). Sólo difiere de él en la forma
 de seleccionar los cuantiles de la distribución bootstrap. En lugar de
@@ -4384,7 +4390,7 @@ cobertura usando el método percentil-\(t\) simetrizado es
 basados en la normal asintótica o bien en el método percentil-\(t\).
 
 \section{Tabla resumen de los errores de
-cobertura}\label{tabla-resumen-de-los-errores-de-cobertura}
+cobertura}\label{cap5_err_cober}
 
 \begin{longtable}[]{@{}lll@{}}
 \toprule
@@ -4400,7 +4406,7 @@ Percentil-\(t\) simetrizado & \(O_{P}\left( n^{-1} \right)\) &
 \bottomrule
 \end{longtable}
 
-\section{Ejemplos}\label{ejemplos-1}
+\section{Ejemplos}\label{cap5_ejem}
 
 \BeginKnitrBlock{example}[Inferencia sobre la media con varianza desconocida, continuación]
 \protect\hypertarget{exm:media-dt-desconocida-persim}{}{\label{exm:media-dt-desconocida-persim}
@@ -4409,8 +4415,9 @@ continuación) \fi{} } \vspace{0.5cm}
 
 Continuando con el ejemplo de los tiempos de vida de microorganismos
 (sin asumir varianza conocida), para obtener una estimación por
-intervalo de confianza de su vida media empleando este método se podría
-utilizar (ver Ejemplo \ref{exm:media-dt-desconocida}):
+intervalo de confianza de su vida media empleando el método bootstrap
+percentil-\emph{t} simetrizado se podría utilizar (ver Ejemplo
+\ref{exm:media-dt-desconocida}):
 \EndKnitrBlock{example}
 
 \begin{Shaded}
@@ -4441,13 +4448,13 @@ utilizar (ver Ejemplo \ref{exm:media-dt-desconocida}):
 \NormalTok{ic_inf_boot <-}\StringTok{ }\NormalTok{x_barra }\OperatorTok{-}\StringTok{ }\NormalTok{pto_crit }\OperatorTok{*}\StringTok{ }\NormalTok{cuasi_dt}\OperatorTok{/}\KeywordTok{sqrt}\NormalTok{(n)}
 \NormalTok{ic_sup_boot <-}\StringTok{ }\NormalTok{x_barra }\OperatorTok{+}\StringTok{ }\NormalTok{pto_crit }\OperatorTok{*}\StringTok{ }\NormalTok{cuasi_dt}\OperatorTok{/}\KeywordTok{sqrt}\NormalTok{(n)}
 \NormalTok{IC_boot <-}\StringTok{ }\KeywordTok{c}\NormalTok{(ic_inf_boot, ic_sup_boot)}
-\KeywordTok{names}\NormalTok{(IC_boot) <-}\StringTok{ }\KeywordTok{paste0}\NormalTok{(}\DecValTok{100}\OperatorTok{*}\KeywordTok{c}\NormalTok{(alfa, }\DecValTok{1}\OperatorTok{-}\NormalTok{alfa), }\StringTok{"%"}\NormalTok{)}
+\KeywordTok{names}\NormalTok{(IC_boot) <-}\StringTok{ }\KeywordTok{paste0}\NormalTok{(}\DecValTok{100}\OperatorTok{*}\KeywordTok{c}\NormalTok{(alfa}\OperatorTok{/}\DecValTok{2}\NormalTok{, }\DecValTok{1}\OperatorTok{-}\NormalTok{alfa}\OperatorTok{/}\DecValTok{2}\NormalTok{), }\StringTok{"%"}\NormalTok{)}
 \NormalTok{IC_boot}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-##        5%       95% 
+##      2.5%     97.5% 
 ## 0.4293376 1.1813290
 \end{verbatim}
 
@@ -4475,7 +4482,7 @@ bootstrap para un nivel de confianza nominal del 90\%
 \NormalTok{n <-}\StringTok{ }\DecValTok{100}
 
 \NormalTok{alfa <-}\StringTok{ }\FloatTok{0.1}
-\NormalTok{namesI <-}\StringTok{ }\KeywordTok{paste0}\NormalTok{(}\DecValTok{100}\OperatorTok{*}\KeywordTok{c}\NormalTok{(alfa, }\DecValTok{1}\OperatorTok{-}\NormalTok{alfa), }\StringTok{"%"}\NormalTok{)}
+\NormalTok{namesI <-}\StringTok{ }\KeywordTok{paste0}\NormalTok{(}\DecValTok{100}\OperatorTok{*}\KeywordTok{c}\NormalTok{(alfa}\OperatorTok{/}\DecValTok{2}\NormalTok{, }\DecValTok{1}\OperatorTok{-}\NormalTok{alfa}\OperatorTok{/}\DecValTok{2}\NormalTok{), }\StringTok{"%"}\NormalTok{)}
 
 \NormalTok{B <-}\StringTok{ }\DecValTok{1000}
 \NormalTok{percentil <-}\StringTok{ }\KeywordTok{numeric}\NormalTok{(B)}
@@ -4547,7 +4554,7 @@ bootstrap para un nivel de confianza nominal del 90\%
 
 \begin{verbatim}
 ##    user  system elapsed 
-##   26.97    0.02   26.98
+##   25.18    0.02   25.22
 \end{verbatim}
 
 \begin{Shaded}
@@ -5381,21 +5388,23 @@ entonces somos capaces de observar la variable de interés y además el
 valor de \(\delta\).
 
 En resumen, en lugar de observar la muestra
-\(\left( X_1,X_2,\ldots ,X_n \right)\), sólo podemos observar
-\(\left( \left( T_1,\delta _1 \right),\left( T_2,\delta _2 \right),\ldots ,\left( T_n,\delta _n \right) \right)\),
-siendo \(T_i=\min \left\{ X_i,C_i\right\}\) los tiempos de vida
-observados y
-\(\delta _i=\mathbf{1}_{\left\{ X_i\leq C_i\right\} }=\mathbf{1}_{\left\{ T_i=X_i\right\} }\)
-los indicadores de censura, para \(i=1,2,\ldots ,n\). En el modelo de
-censura aleatoria por la derecha, que es el más habitual, se supone que
-\(X_i\) y \(C_i\) (\(i=1,2,\ldots ,n\)) son independientes. Además
-\(\left( X_1,X_2,\ldots ,X_n \right)\) son mutuamente independientes,
-como también lo son \(\left( C_1,C_2,\ldots ,C_n \right)\).
+\(\left( X_1, X_2, \ldots, X_n \right)\), sólo podemos observar
+\[\left( \left( T_1, \delta _1 \right), \left( T_2, \delta _2 \right),
+\ldots ,\left( T_n, \delta_n \right) \right),\] siendo
+\(T_i=\min \left\{ X_i,C_i\right\}\) los tiempos de vida observados y
+\[\delta _i=\mathbf{1}_{\left\{ X_i\leq
+C_i\right\} }=\mathbf{1}_{\left\{ T_i=X_i\right\} }\] los indicadores de
+censura, para \(i=1,2,\ldots ,n\). En el modelo de censura aleatoria por
+la derecha, que es el más habitual, se supone que \(X_i\) y \(C_i\)
+(\(i=1,2,\ldots ,n\)) son independientes. Además
+\(\left( X_1, X_2, \ldots ,X_n \right)\) son mutuamente independientes,
+como también lo son \(\left( C_1, C_2,\ldots ,C_n \right)\).
 
 Denotando por \(F\) (respectivamente \(G\) y \(H\)) la función de
 distribución de la variable aleatoria \(X\) (respectivamente \(C\) y
 \(T\)), la condición de independencia implica que
-\(1-H\left( t \right) =\left( 1-F\left( t \right) \right) \left( 1-G\left( t \right) \right)\).
+\[1-H\left( t \right) =\left( 1-F\left(
+t \right) \right) \left( 1-G\left( t \right) \right).\]
 
 \subsection{Estimador de Kaplan-Meier}\label{estimador-de-kaplan-meier}
 
@@ -5526,7 +5535,7 @@ u,\delta =1 \right).
 \end{aligned}\] También existen resultados de convergencia en
 distribución del proceso estocástico
 \[\left\{ \sqrt{n}\left( \hat{F}\left( t \right) - F\left( t \right)
- \right), t \in \left[ 0,H^{-1}(1) \right] \right\}\] a un proceso
+ \right) : t \in \left[ 0,H^{-1}(1) \right] \right\}\] a un proceso
 gaussiano límite.
 
 \section{Remuestreos Bootstrap en presencia de
@@ -5574,7 +5583,7 @@ Procede de la siguiente forma:
 
 Este método es de muy rápida implementación y ejecución.
 
-\subsection{El bootstrap obvio}\label{el-bootstrap-obvio}
+\subsection{El bootstrap obvio}\label{cap8-obvio}
 
 Para detallar el método es necesario definir el estimador de
 Kaplan-Meier, \(\hat{G}\left( t \right)\), de la variable censurante, a
@@ -5649,7 +5658,8 @@ t}\left( \frac{n-i}{n-i+1} \right)^{1-\delta _{(i)}}\right] \\
 T_{(j)}\leq t\right\} }{n-\#\left\{ T_{(j)}\leq
 t\right\} +1} \\
 &= \frac{n-\#\left\{ T_{(j)}\leq t\right\} }{n}=1-H_n\left(
-t \right) =\frac{\#\left\{ T_{(j)}>t\right\} }{n},\end{aligned}\]
+t \right) =\frac{\#\left\{ T_{(j)}>t\right\} }{n},
+\end{aligned}\]
 
 siendo \(H_n\left( t \right)\) la distribución empírica de la muestra
 \(\left( T_1,T_2,\ldots ,T_n \right)\).
@@ -5661,7 +5671,7 @@ distribución condicionada
 casos. Pero esto es inmediato ya que, en los dos remuestreos esa
 distribución condicionada es la degenerada en el valor \(\delta _i\).
 
-\subsection{El bootstrap de Reid}\label{el-bootstrap-de-reid}
+\subsection{El bootstrap de Reid}\label{cap8-reid}
 
 Es otro método alternativo propuesto por Reid (1981). Consta de los
 siguientes pasos:
@@ -5686,11 +5696,12 @@ siguientes pasos:
 \subsection{Validez de los planes de
 remuestreo}\label{validez-de-los-planes-de-remuestreo}
 
-Akritas (1986) demuestra que los procesos bootstrap
-\(\sqrt{n}\left( \hat{F} ^{\ast}_{Efron}\left( t \right) -\hat{F}\left( t \right) \right)\)
-y
-\(\sqrt{n}\left( \hat{F}^{\ast}_{Reid}\left( t \right) -\hat{F}\left( t \right) \right)\)
-tienden a sendos procesos límite distintos. Aquí
+Akritas (1986) demuestra que los procesos bootstrap \[\begin{aligned}
+\sqrt{n}\left( \hat{F}^{\ast}_{Efron}\left( t \right) 
+- \hat{F}\left( t \right) \right) \\ 
+\sqrt{n}\left( \hat{F}^{\ast}_{Reid} \left( t \right) 
+- \hat{F}\left( t \right) \right)
+\end{aligned}\] tienden a sendos procesos límite distintos. Aquí
 \(\hat{F}^{\ast}_{Efron}\) denota la versión bootstrap del estimador de
 Kaplan-Meier bajo el remuestreo de Efron (cualquiera de ellos, ya que el
 remuestreo simple y el obvio son equivalentes) y
@@ -5838,8 +5849,10 @@ recomienda estimarlas con la función \texttt{survfit()} del paquete
 \end{Shaded}
 
 En el \emph{boostrap condicional} (\texttt{sim\ =\ "cond"}) se
-condiciona el muestreo al patrón de censura observado. El mecanismo es
-similar al del bootstrap obvio:
+condiciona el muestreo al patrón de censura observado (en lugar de
+fijarlo a \(\mathbf{1}\) como en el bootstrap de Reid; Sección
+\ref{cap8-reid}). El mecanismo es similar al del bootstrap obvio
+(Sección \ref{cap8-obvio}):
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -6034,8 +6047,9 @@ estrato (i.e. \texttt{Surv(age,\ cens)\ \textasciitilde{}\ sex} y
 \BeginKnitrBlock{exercise}[Bootstrap censurado con riesgo proporcional de Cox]
 \protect\hypertarget{exr:censboot-cox-ej}{}{\label{exr:censboot-cox-ej}
 \iffalse (Bootstrap censurado con riesgo proporcional de Cox) \fi{} }
-Reproducir el ejemplo del modelo de riesgo proporcional de Cox en
-(Canty, 2002, Rnews\_2002-3):
+Reproducir el ejemplo en Canty (2002,
+\href{http://cran.fhcrc.org/doc/Rnews/Rnews_2002-3.pdf}{Rnews\_2002-3})
+del modelo de riesgo proporcional de Cox (Cox, 1972):
 \EndKnitrBlock{exercise}
 
 \begin{Shaded}
@@ -6056,10 +6070,10 @@ Reproducir el ejemplo del modelo de riesgo proporcional de Cox en
 ## Call:
 ## coxph(formula = Surv(time, cens) ~ thickness, data = mel)
 ## 
-##              coef exp(coef) se(coef)    z      p
-## thickness 0.09968   1.10481  0.04052 2.46 0.0139
+##             coef exp(coef) se(coef)    z     p
+## thickness 0.0997    1.1048   0.0405 2.46 0.014
 ## 
-## Likelihood ratio test=5  on 1 df, p=0.02541
+## Likelihood ratio test=5  on 1 df, p=0.03
 ## n= 90, number of events= 41
 \end{verbatim}
 
@@ -6222,12 +6236,9 @@ pueden extenderse al bootstrap de series temporales autorregresivas y de
 media móvil. Consideremos un modelo \(ARMA(p,q)\): \[\begin{aligned}
 X_{t} =&\ \phi _1X_{t-1}+\phi _2X_{t-2}+\cdots +\phi _{p}X_{t-p} \\
 &+a_{t}-\theta _1a_{t-1}-\theta _2a_{t-2}-\cdots -\theta _{q}a_{t-q},\end{aligned}\]o,
-equivalentemente,
-
-\[\phi (B)X_{t}=\theta (B)a_{t},\]
-
-donde \(\phi (B)=1-\phi _1B-\phi _2B^2-\cdots -\phi _{p}B^{p}\),
-\(\theta(B)=1-\theta _1B-\theta _2B^2-\cdots -\theta _{q}B^{q}\) y \(B\)
+equivalentemente, \[\phi (B)X_{t}=\theta (B)a_{t},\] donde
+\[\phi (B)=1-\phi _1B-\phi _2B^2-\cdots -\phi _{p}B^{p}\\ 
+\theta(B)=1-\theta _1B-\theta _2B^2-\cdots -\theta _{q}B^{q}\] y \(B\)
 es el operador retardo: \(BX_{t}=X_{t-1}\). La diferencia principal con
 respecto al caso autorregresivo es que ahora se necesitan estimar los
 coeficientes la parte de media móvil, al objeto de calcular los
@@ -6235,7 +6246,7 @@ residuos, \(\widehat{a}_{t}\). Así, el algoritmo bootstrap para una
 serie \(AR(p)\) puede adaptarse a este caso de manera inmediata. En este
 contexto, Kreiss y Franke (1992) usan la representación\\
 \(MA(\infty )\) del proceso de error en términos de la series original,
-\(a_{t}=\theta (B)^{-1}\phi(B) X_{t}\), para construir los residuos
+\[a_{t}=\theta (B)^{-1}\phi(B) X_{t},\] para construir los residuos
 (utilizando los parámetros estimados en la fórmula anterior) y
 demuestran la validez asintótica del bootstrap (en el sentido de la
 distancia de Mallows) para aproximar la distribución en el muestreo del
@@ -6318,7 +6329,7 @@ condición de que \(b=O(n^{1/2-\varepsilon })\), para algún
 extiende al caso multivariante y debilita la condición sobre
 \(\varepsilon\), siendo \(\varepsilon \in (0,\frac{1}{2})\).
 
-Carlstein, Do, Hall, Hesterberg y Künsch (1995) propusieron una
+Carlstein, Do, Hall, Hesterberg y Künsch (1998) propusieron una
 modificación del MBB. Su idea consiste en seleccionar las remuestras de
 bloques de acuerdo a una cadena de Markov. El primer bloque de la
 remuestra bootstrap se genera igual que para el MBB ordinario. Una vez
@@ -6344,7 +6355,7 @@ Un asunto importante en el método bootstrap por bloques es la elección
 del tamaño del bloque, \(b\). Hall, Horowitz y Jing (1995) considera
 este problema en el contexto de la estimación bootstrap del sesgo y la
 varianza. Obtienen una expresión asintótica para el error cuadrático
-medio: \(n^{-2}(C_1b^{-2}+C_2n^{-1}b)\), donde \(C_1\) y \(C_2\) son
+medio: \[n^{-2}(C_1b^{-2}+C_2n^{-1}b),\] donde \(C_1\) y \(C_2\) son
 constantes desconocidas que dependen del problema de estimación del que
 se trate. Está claro entonces que el tamaño óptimo del bloque (en el
 sentido del error cuadrático medio) es de orden \(n^{1/3}\).
@@ -6668,12 +6679,11 @@ general}\label{situaciones-de-dependencia-general-2}
 Cuando la estructura de dependencia de la serie no es explícita los
 métodos bootstrap existentes para la estimación (como el MBB, el SB o el
 método de submuestreo) no funcionan para la predicción. El motivo es que
-estos métodos no estiman consistentemente la distribución
-condictional\[X_{n+k}|_{X_1,X_2,\ldots ,X_n}.\]Esta situación es
-completamente diferente del caso en que la dependencia de modeliza
-paramétricamente, ya que en ese otro caso los métodos bootstrap usados
-para la estimación permanecen válidos, en general, en el contexto de
-predicción.
+estos métodos no estiman consistentemente la distribución condictional
+\[X_{n+k}|_{X_1,X_2,\ldots ,X_n}.\] Esta situación es completamente
+diferente del caso en que la dependencia se modeliza paramétricamente,
+ya que en ese otro caso los métodos bootstrap usados para la estimación
+permanecen válidos, en general, en el contexto de predicción.
 
 Es poco menos que imposible estimar la distribución condicional anterior
 sin hacer ninguna suposición sobre el tipo de dependencia. Sin embargo
@@ -6745,9 +6755,9 @@ puede extenderse fácilmente para procesos de Markov de orden \(p>1\).
 \texttt{R}}{Implementación en R}}\label{implementacion-en-r}
 
 Para simular una serie de tiempo en \texttt{R} se puede emplear la
-función \texttt{arima.sim} del paquete base \texttt{stats}. Por ejemplo,
-podemos generar una serie autoregressiva con: {[}Figura
-@ref(fig:arima.sim){]}
+función \texttt{arima.sim()} del paquete base \texttt{stats}. Por
+ejemplo, podemos generar una serie autoregressiva con: {[}Figura
+\ref{fig:arima-sim}{]}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -6768,11 +6778,11 @@ podemos generar una serie autoregressiva con: {[}Figura
 
 \begin{figure}[!htb]
 
-{\centering \includegraphics[width=0.7\linewidth]{09-depen_files/figure-latex/arima.sim-1} 
+{\centering \includegraphics[width=0.7\linewidth]{09-depen_files/figure-latex/arima-sim-1} 
 
 }
 
-\caption{Simulación de un modelo autoregresivo.}(\#fig:arima.sim)
+\caption{Simulación de un modelo autoregresivo.}\label{fig:arima-sim}
 \end{figure}
 
 En este caso el periodo de calentamiento se establece mediante el
@@ -6794,7 +6804,7 @@ Otras opciones:
   \texttt{start.innov\ =\ rand.gen(n.start,\ ...)}
 \end{itemize}
 
-Ejemplo (\texttt{?arima.sim}): {[}Figura @ref(fig:arima.sim2){]}
+Ejemplo (\texttt{?arima.sim}): {[}Figura \ref{fig:arima-sim2}{]}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -6808,11 +6818,11 @@ Ejemplo (\texttt{?arima.sim}): {[}Figura @ref(fig:arima.sim2){]}
 
 \begin{figure}[!htb]
 
-{\centering \includegraphics[width=0.7\linewidth]{09-depen_files/figure-latex/arima.sim2-1} 
+{\centering \includegraphics[width=0.7\linewidth]{09-depen_files/figure-latex/arima-sim2-1} 
 
 }
 
-\caption{Simulación de un modelo autoregresivo con errores con distribución *t* de Student.}(\#fig:arima.sim2)
+\caption{Simulación de un modelo autoregresivo con errores con distribución *t* de Student.}\label{fig:arima-sim2}
 \end{figure}
 
 \section{\texorpdfstring{Implementación en \texttt{R} con el paquete
@@ -6830,16 +6840,18 @@ distintos métodos de remuestreo para series de tiempo.
 
 \subsection{Rnews 1}\label{rnews-1}
 
-Canty, A. J. (2002). Resampling methods in R: the boot package. Rnews:
-The Newsletter of the R Project, 2 (3), pp.~2-7.
+Canty, A. J. (2002).
+\href{http://cran.fhcrc.org/doc/Rnews/Rnews_2002-3.pdf}{Resampling
+methods in R: the boot package}. Rnews: The Newsletter of the R Project,
+2 (3), pp.~2-7.
 
 \begin{quote}
-\texttt{tsboot()} can do either of these methods by specifying
+``\texttt{tsboot()} can do either of these methods by specifying
 \texttt{sim="fixed"} or \texttt{sim="geom"} respectively. A simple call
 to tsboot includes the time series, a function for the
 \texttt{statistic} (the first argument of this function being the time
 series itself), the number of bootstrap replicates, the simulation type
-and the (mean) block length.
+and the (mean) block length''.
 \end{quote}
 
 \begin{Shaded}
@@ -6878,25 +6890,27 @@ and the (mean) block length.
 
 \subsection{Rnews 2}\label{rnews-2}
 
-Canty, A. J. (2002). Resampling methods in R: the boot package. Rnews:
-The Newsletter of the R Project, 2 (3), pp.~2-7.
+Canty, A. J. (2002).
+\href{http://cran.fhcrc.org/doc/Rnews/Rnews_2002-3.pdf}{Resampling
+methods in R: the boot package}. Rnews: The Newsletter of the R Project,
+2 (3), pp.~2-7.
 
 \begin{quote}
-An alternative to the block bootstrap is to use model based resampling.
-In this case a model is fitted to the time series so that the errors are
-i.i.d. The observed residuals are sampled as an i.i.d. series and then a
-bootstrap time series is reconstructed. In constructing the bootstrap
-time series from the residuals, it is recommended to generate a long
-time series and then discard the initial burn-in stage. Since the length
-of burn-in required is problem specific, \texttt{tsboot} does not
-actually do the resampling. Instead the user should give a function
-which will return the bootstrap time series. This function should take
-three arguments, the time series as supplied to \texttt{tsboot}, a value
-\texttt{n.sim} which is the length of the time series required and the
-third argument containing any other information needed by the random
-generation function such as coefficient estimates. When the random
-generation function is called it will be passed the arguments
-\texttt{data}, \texttt{n.sim} and \texttt{ran.args} passed to
+``An alternative to the block bootstrap is to use model based
+resampling. In this case a model is fitted to the time series so that
+the errors are i.i.d. The observed residuals are sampled as an i.i.d.
+series and then a bootstrap time series is reconstructed. In
+constructing the bootstrap time series from the residuals, it is
+recommended to generate a long time series and then discard the initial
+burn-in stage. Since the length of burn-in required is problem specific,
+\texttt{tsboot} does not actually do the resampling. Instead the user
+should give a function which will return the bootstrap time series. This
+function should take three arguments, the time series as supplied to
+\texttt{tsboot}, a value \texttt{n.sim} which is the length of the time
+series required and the third argument containing any other information
+needed by the random generation function such as coefficient estimates.
+When the random generation function is called it will be passed the
+arguments \texttt{data}, \texttt{n.sim} and \texttt{ran.args} passed to
 \texttt{tsboot} or their defaults.
 
 One problem with the model-based bootstrap is that it is critically
@@ -6907,7 +6921,7 @@ is fitted and the residuals are found. These residuals are passed as the
 dataset to \texttt{tsboot} and are resampled using the block (or
 stationary) bootstrap. To create the bootstrap time series the resampled
 residuals should be put back through the fitted model filter. The
-function \texttt{ran.gen} can be used to do this.
+function \texttt{ran.gen} can be used to do this''.
 \end{quote}
 
 \begin{Shaded}
@@ -6966,7 +6980,7 @@ Cambridge university press, \url{http://statwww.epfl.ch/davison/BMA}
 \EndKnitrBlock{exercise}
 
 \begin{quote}
-Dataframe lynx contains the Canadian lynx data, to the logarithm of
+``Dataframe lynx contains the Canadian lynx data, to the logarithm of
 which we fit the autoregressive model that minimizes AIC:
 \end{quote}
 
@@ -7065,7 +7079,7 @@ For post-blackening we need to define yet another function:
 
 \begin{quote}
 Compare these results with those above, and try the post-blackened
-bootstrap with \texttt{sim="geom"}. (Sections 8.2.2, 8.2.3)
+bootstrap with \texttt{sim="geom"}. (Sections 8.2.2, 8.2.3)''.
 \end{quote}
 
 \BeginKnitrBlock{exercise}[Practical 8.2, Beaver data: Davison y Hinkley, 1997]
@@ -7078,9 +7092,10 @@ Cambridge university press, \url{http://statwww.epfl.ch/davison/BMA}
 \EndKnitrBlock{exercise}
 
 \begin{quote}
-The data in beaver consist of a time series of \(n = 100\) observations
-on the body temperature \(y_1, \ldots, y_n\) and an indicator
-\(x_1, \ldots, x_n\) of activity of a female beaver, Castor canadensis.
+``The data in beaver consist of a time series of \(n = 100\)
+observations on the body temperature \(y_1, \ldots, y_n\) and an
+indicator \(x_1, \ldots, x_n\) of activity of a female beaver, Castor
+canadensis.
 \end{quote}
 
 {[}Figura \ref{fig:beaver-data}{]}
@@ -7194,7 +7209,7 @@ first 10 replicate series. Are the estimated mean temperatures for the
 normal and basic bootstrap confidence intervals for the resting and
 active temperatures. In this analysis we have assumed that the linear
 model with AR(1) errors is appropriate. How would you proceed if it were
-not? (Section 8.2; Reynolds, 1994)
+not? (Section 8.2; Reynolds, 1994)''.
 \end{quote}
 
 \BeginKnitrBlock{exercise}[Practical 8.3, Sunspot data: Davison y Hinkley, 1997]
@@ -7207,8 +7222,8 @@ Cambridge university press, \url{http://statwww.epfl.ch/davison/BMA}
 \EndKnitrBlock{exercise}
 
 \begin{quote}
-Consider scrambling the phases of the sunspot data. To see the original
-data,
+``Consider scrambling the phases of the sunspot data. To see the
+original data,
 \end{quote}
 
 {[}Figura \ref{fig:sunspot}{]}
@@ -7250,7 +7265,7 @@ original data:
 \begin{quote}
 What features of the original data are preserved by the two algorithms?
 (You may find it helpful to experiment with different shapes for the
-figures.) (Section 8.2.4; Problem 8.4; Theiler et al, 1992)
+figures.) (Section 8.2.4; Problem 8.4; Theiler et al, 1992)''.
 \end{quote}
 
 \section{\texorpdfstring{Implementación en \texttt{R} con el paquete
@@ -7264,7 +7279,8 @@ posteriormente se obtienen las simulaciones condicionadas empleando el
 modelo ajustado.
 
 Por ejemplo, en el caso de series de tiempo, se puede emplear la función
-\texttt{simulate} del paquete \texttt{forecast}:
+\texttt{simulate} del paquete \texttt{forecast}: {[}Figura
+\ref{fig:co2}{]}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -7291,8 +7307,6 @@ Por ejemplo, en el caso de series de tiempo, se puede emplear la función
 \caption{Datos de co2 (1990-1997) y simulación condicional (a partir de las observaciones desde 1990 hasta 1996).}\label{fig:co2}
 \end{figure}
 
-{[}Figura \ref{fig:co2}{]}
-
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{plot}\NormalTok{(}\KeywordTok{forecast}\NormalTok{(fit, }\DataTypeTok{h=}\DecValTok{12}\OperatorTok{*}\DecValTok{4}\NormalTok{), }\DataTypeTok{col=}\StringTok{"blue"}\NormalTok{)}
@@ -7311,29 +7325,32 @@ Por ejemplo, en el caso de series de tiempo, se puede emplear la función
 
 {[}Figura \ref{fig:co22}{]}
 
-Ver enlaces en referencias \ref{forecast-links}.
+Ver enlaces en apéndice \ref{forecast-links}.
 
 \section{Spatial data}\label{spatial-data}
 
-Ver enlaces en referencias \ref{spatial-links}.
+Ver enlaces en apéndice \ref{spatial-links}.
 
 \chapter*{Referencias}\label{referencias}
 \addcontentsline{toc}{chapter}{Referencias}
 
-Akritas, M. G. (1986). Bootstrapping the Kaplan--Meier estimator.
-\emph{J. Amer. Statist. Assoc.} \textbf{81}, 1032--1038.
+Akritas, M. G. (1986).
+\href{https://www.tandfonline.com/doi/abs/10.1080/01621459.1986.10478369}{Bootstrapping
+the Kaplan--Meier estimator}. \emph{J. Amer. Stat. Assoc.} \textbf{81},
+1032--1038.
 
 Beran, R. (1987). Prepivoting to reduce level error of confidence sets.
-Biometrika 74, 457-468.
+\emph{Biometrika} \textbf{74}, 457-468.
 
 Bhattacharya, R.N. and Ghosh, J.K. (1978). On the validity of the formal
 Edgeworth expansion. \emph{Ann. Statist.} \textbf{6}, 434--451.
 
 Bickel, P.J. and Freedman, D.A. (1981). Some Asymptotic theory for the
-bootstrap. Ann. Statist. 12, 2, 470-482.
+bootstrap. \emph{Ann. Statist.} \textbf{12} 2, 470-482.
 
 Bowman, A., Hall, P. and Prvan, T. (1998). Bandwidth selection for the
-smoothing of distribution functions. Biometrika, 85, 4, 799-808.
+smoothing of distribution functions. \emph{Biometrika} \textbf{85} 4,
+799-808.
 
 Breslow, N. and Crowley, J. (1974). A large sample study of the life
 table and product limit estimates under random censorship. \emph{Ann.
@@ -7347,6 +7364,11 @@ Bühlmann, P. (1997). Sieve bootstrap for time series. \emph{Bernoulli}
 
 Bühlmann, P. (1998). Sieve bootstrap for smoothing in nonstationary time
 series. \emph{Ann. Statist.} \textbf{26}, 48-83.
+
+Canty, A. J. (2002).
+\href{http://cran.fhcrc.org/doc/Rnews/Rnews_2002-3.pdf}{Resampling
+methods in R: the boot package}. \emph{The Newsletter of the R Project}
+\textbf{2}, 2-7.
 
 Cao, R. (1990). Órdenes de convergencia para las aproximaciones normal y
 bootstrap en la estimación no paramétrica de la función de densidad.
@@ -7375,38 +7397,53 @@ regression smoothing. \emph{Journal of Nonparametric Statistics}
 \textbf{2}, 379-388.
 
 Cao, R. and Prada-Sánchez, J.M. (1993). Bootstrapping the mean of a
-symmetric population. Statistics \& Probability Letters 17, 43-48.
+symmetric population. \emph{Statistics \& Probability Letters}
+\textbf{17}, 43-48.
 
-Carlstein, E., Do, K-A., Hall, P., Hesterberg, T. and Künsch, H.R.
-(1995). Matched-block bootstrap for dependent data. Preprint.
+Castillo-Páez, S., Fernández-Casal, R. and García-Soidán, P. (2019).
+\href{https://www.sciencedirect.com/science/article/pii/S0167947319300325?via\%3Dihub}{A
+nonparametric bootstrap method for spatial data}, \emph{Computational
+Statistics and Data Analysis} \textbf{137}, 1-15.
 
-Davison, A.C. and Hinkley, D.V. (1997). Bootstrap Methods and their
-Application. Cambridge University Press.
+Carlstein, E., Do, K. A., Hall, P., Hesterberg, T., and Künsch, H. R.
+(1998).
+\href{https://projecteuclid.org/euclid.bj/1174324983}{Matched-block
+bootstrap for dependent data .} \emph{Bernoulli} \textbf{4} 3, 305-328.
 
-Efron, B. (1979). Bootstrap Methods: Another look at the Jackknife. Ann.
-Statist., 7, 1-26.
+Cox, D. R. (1972).
+\href{https://rss.onlinelibrary.wiley.com/doi/abs/10.1111/j.2517-6161.1972.tb00899.x}{Regression
+Models and Life Tables} (with discussion), \emph{Journal of the Royal
+Statistical Society series B} \textbf{34}, 187--220.
+
+Davison, A.C. and Hinkley, D.V. (1997). \emph{Bootstrap Methods and
+their Application}. Cambridge University Press.
+
+Efron, B. (1979). Bootstrap Methods: Another look at the Jackknife.
+\emph{Ann. Statist.} \textbf{7}, 1-26.
 
 Efron, B. (1981). Censored data and the bootstrap. \emph{J. Amer.
 Statist. Assoc.} \textbf{76}, 312--319.
 
 Efron, B. (1982). The Jackknife, the Bootstrap and other Resampling
-Plans. CBMS-NSF. Regional Conference series in applied mathematics.
+Plans. CBMS-NSF. \emph{Regional Conference series in applied
+mathematics}.
 
 Efron, B. (1983). Estimating the error rate of a prediction rule:
-improvements on cross-validation. J. Amer. Stat. Assoc. 78, 316-331.
+improvements on cross-validation. \emph{J. Amer. Stat. Assoc.}
+\textbf{78}, 316-331.
 
 Efron, B. (1987). Better Bootstrap confidence intervals (with
-discussion). J. Amer. Statist. Assoc. 82, 171-200.
+discussion). \emph{J. Amer. Stat. Assoc.} \textbf{82}, 171-200.
 
-Efron, B. (1990). More Efficient Bootstrap Computations. J. Amer.
-Statist. Assoc. 85, 79-89.
+Efron, B. (1990). More Efficient Bootstrap Computations. \emph{J. Amer.
+Statist. Assoc.} \textbf{85}, 79-89.
 
 Efron, B. and Tibshirani, R. (1986). Bootstrap methods for standard
 errors, confidence intervals, and other measures of statistical
-accuracy. Statistical Science 1, 54-77.
+accuracy. \emph{Statistical Science} \textbf{1}, 54-77.
 
-Efron, B. and Tibshirani, R.J. (1993). An Introduction to the Bootstrap.
-Chapman and Hall.
+Efron, B. and Tibshirani, R.J. (1993). \emph{An Introduction to the
+Bootstrap}. Chapman and Hall.
 
 Faraway, J.J. and Jhun, M. (1990). Bootstrap choice of bandwidth for
 density estimation. \emph{Jr. Amer. Statist. Assoc.} \textbf{85},
@@ -7415,11 +7452,11 @@ density estimation. \emph{Jr. Amer. Statist. Assoc.} \textbf{85},
 Ferretti, N. and Romo, J. (1996). Unit root bootstrap test for AR(1)
 models. \emph{Biometrika} \textbf{83}, 849-860.
 
-Freedman, D.A. (1981). Bootstrapping regression models. Ann. Statis. 9,
-6, 118-1228.
+Freedman, D.A. (1981). Bootstrapping regression models. \emph{Ann.
+Statis.} \textbf{9} 6, 118-1228.
 
-Fuller, W.A. (1976). Introduction to statistical time series. New York:
-Wiley.
+Fuller, W.A. (1976). \emph{Introduction to statistical time series}. New
+York: Wiley.
 
 Gannoun, A. (1990). Estimation non paramétrique de la médiane
 conditionnelle. Application à la prévision. \emph{C. R. Acad. Sci.
@@ -7432,25 +7469,27 @@ nonparametric and bootstrap techniques. \emph{Technometrics}
 
 González-Manteiga, W. and Prada-Sánchez, J.M. (1985). Una aplicación de
 los métodos de suavización no paramétricos en la técnica bootstrap.
-Proceedings Jornadas Hispano-Lusas de Matemáticas. Murcia, 1985.
+\emph{Proceedings Jornadas Hispano-Lusas de Matemáticas}. Murcia, 1985.
 
 González-Manteiga, W., Prada-Sánchez, J.M. and Romo, J. (1994). The
-Bootstrap-A Review. Computational Statistics, 9, 165-205.
+Bootstrap-A Review. \emph{Computational Statistics} \textbf{9}, 165-205.
 
-Hall, P. (1986). On the bootstrap and confidence intervals. Ann.
-Statist. 14, 1431-1452.
+Hall, P. (1986). On the bootstrap and confidence intervals. \emph{Ann.
+Statist.} \textbf{14}, 1431-1452.
 
 Hall, P. (1988-a) Theoretical comparison of bootstrap confidence
-intervals. Ann. Statist. 16, 927-953.
+intervals. \emph{Ann. Statist.} \textbf{16}, 927-953.
 
-Hall, P. (1988-b). Rate of convergence in bootstrap approximations. Ann.
-Probab. 16, 4, 1665-1684.
+Hall, P. (1988-b). Rate of convergence in bootstrap approximations.
+\emph{Ann. Probab.} \textbf{16} 4, 1665-1684.
 
 Hall, P. (1990). Using the bootstrap to estimate mean squared error and
 select smoothing parameter in nonparametric problems. \emph{J.
 Multivariate Anal.} \textbf{32}, 177--203.
 
-Hall. P. (1992). The Bootstrap and Edgeworth Expansion. Springer Verlag.
+Hall. P. (1992).
+\href{https://books.google.es/books?hl=es\&lr=\&id=CwLaBwAAQBAJ\&oi=fnd\&pg=PR11\&dq=The+Bootstrap+and+Edgeworth+Expansion}{\emph{The
+Bootstrap and Edgeworth Expansion}}. Springer Verlag.
 
 Hall, P., Horowitz, J.L. and Jing, B-Y. (1995). On blocking rules for
 the bootstrap with dependent data. \emph{Biometrika} \textbf{82},
@@ -7460,24 +7499,23 @@ Hall, P., Marron, J.S. and Park, B. (1992). Smoothed cross-validation.
 \emph{Probab. Theor. Rel. Fields} \textbf{92}, 1--20.
 
 Hall, P. and Martin, M.A. (1988). On bootstrap resampling and iteration.
-Biometrika 75, 661-671.
+\emph{Biometrika} \textbf{75}, 661-671.
 
 Härdle, W. and Mammen, E. (1993). Comparing nonparametric versus
-parametric regression fits. Ann. Statist. 21, 1926-1947.
+parametric regression fits. \emph{Ann. Statist.} \textbf{21}, 1926-1947.
 
 Härdle, W. and Marron, J. S. (1991). Bootstrap simultaneous error bars
 for nonparametric regression. \emph{Ann. Statist.} \textbf{19},
 778--796.
 
 Hartigan, J.A. (1969). Using subsample values as typical values. J.
-Amer. Statist. Assoc. 64, 1303-1317.
+\emph{Amer. Statist. Assoc.} \textbf{64}, 1303-1317.
 
 Heimann, G. and Kreiss, J-P. (1996). Bootstrapping general first order
 autoregression. \emph{Statist. Prob. Lett.} \textbf{30}, 87-98.
 
 Kaplan, E. L. and P. Meier, Nonparametric estimation from incomplete
-observations, \emph{J. Amer. Statist. Assoc.} \textbf{53} (1958)
-457--481.
+observations, \emph{J. Amer. Stat. Assoc.} \textbf{53} (1958) 457--481.
 
 Kreiss, J-P. and Franke, J. (1992). Bootstrapping stationary
 autoregressive moving average models. \emph{J. Time Ser. Anal.}
@@ -7487,13 +7525,17 @@ Künsch, H.R. (1989). The jackknife and the bootstrap for general
 stationary observations. \emph{Ann. Statist.} \textbf{17}, 1217-1241.
 
 Liu, R.Y. and Singh, K. (1992). Moving blocks jackknife and bootstrap
-capture weak dependence. In \emph{Exploring the limits of bootstrap} (R.
-LePage and L Billard, Eds.), pp.~225-248. New York: Wiley.
+capture weak dependence. In
+\href{https://books.google.es/books?hl=es\&lr=\&id=ZJzIpNZNVLgC\&oi=fnd\&pg=PA3\&dq=Exploring+the+limits+of+the+bootstrap}{\emph{Exploring
+the limits of bootstrap}} (R. LePage and L Billard, Eds.), pp.~225-248.
+New York: Wiley.
 
-Mammen, E. (1992). When does Bootstrap Work?. Springer Verlag.
+Mammen, E. (1992).
+\href{https://books.google.es/books?hl=es\&lr=\&id=zpDfBwAAQBAJ\&oi=fnd\&pg=PP8\&dq=When+does+Bootstrap+Work\%3F}{\emph{When
+does Bootstrap Work?}}. Springer Verlag.
 
 Maritz, J.S. (1979). A note on exact robust confidence intervals for
-location. Biometrika, 66, 163-166.
+location. \emph{Biometrika} \textbf{66}, 163-166.
 
 Marron, J.S. (1992). Bootstrap bandwidth selection. In \emph{Exploring
 the limits of the bootstrap}, LePage, R. and Billard, L. eds.,
@@ -7507,7 +7549,7 @@ bootstrap for empirical processes with stationary observations.
 \emph{Ann. Statist.} \textbf{22}, 980-994.
 
 Navidi, W. (1989). Edgeworth expansions for bootstrapping regression
-models. Ann. Statist. 17, 4, 1472-1478.
+models. \emph{Ann. Statist.} \textbf{17} 4, 1472-1478.
 
 Paparoditis, E. (1996). Bootstrapping autoregressive and moving average
 parameters estimates of infinite order vector autoregressive processes.
@@ -7518,7 +7560,7 @@ mode. \emph{Ann. Math. Statist.} \textbf{33}, 1065--1076.
 
 Pascual, L., Romo, J. and Ruiz, E. (2001). Effects of parameter
 estimation on prediction densities: a bootstrap approach. \emph{Int. J.
-Forecasting}, 17, 83-103
+Forecasting} \textbf{17}, 83-103
 
 Politis, D.N. and Romano, J.R. (1994a). The stationary bootstrap.
 \emph{J. Amer. Statist. Assoc.} \textbf{89}, 1303-1313.
@@ -7531,19 +7573,21 @@ Politis, D.N. and Romano, J.R. (1994c). Limit theorems for weakly
 dependent Hilbert space valued random variables with application to the
 stationary bootstrap. \emph{Statist. Sin.} \textbf{4}, 461-476.
 
-Politis, D.N., Romano, J.P. and Wolf, M. (1999). Subsampling. Springer
-Verlag.
+Politis, D.N., Romano, J.P. and Wolf, M. (1999).
+\href{https://books.google.es/books?hl=es\&lr=\&id=nGu6rqjE6JoC\&oi=fnd\&pg=PR7\&dq=Subsampling}{\emph{Subsampling}}.
+Springer Verlag.
 
 Prada-Sánchez, J.M. and Cotos-Yáñez, T. (1997). A Simulation Study of
 Iterated and Non-iterated Bootstrap Methods for Bias Reduction and
-Confidence Interval Estimation. Comm. Statist .-Simula., 26(3), 927-946.
+Confidence Interval Estimation. \emph{Comm. Statist .-Simula.}
+\textbf{26} 3, 927-946.
 
 Prada-Sánchez, J.M. and Otero-Cepeda, X.L. (1989). The use of smooth
 bootstrap techniques for estimating the error rate of a prediction rule.
-Comm. Statist .-Simula., 18(3), 1169-1186.
+\emph{Comm. Statist .-Simula.} \textbf{18} 3, 1169-1186.
 
 Quenouille, M. (1949). Approximate test of correlation in time series.
-J. Roy. Statist. Soc. Ser. B, 11, 18-84.
+\emph{J. Roy. Statist. Soc. Ser. B} \textbf{11}, 18-84.
 
 Radulović, D. (1996). The bootstrap for the mean of strong mixing
 sequences under minimal conditions. \emph{Statist. Prob. Lett.}
@@ -7552,60 +7596,290 @@ sequences under minimal conditions. \emph{Statist. Prob. Lett.}
 Reid, N. (1981). Estimating the median survival time. \emph{Biometrika}
 \textbf{68}, 601--608.
 
-Rizzo, M.L. (2008). Statistical Computing with R. Chapman\&Hall/CRC
+Rizzo, M.L. (2008). \emph{Statistical Computing with R}.
+Chapman\&Hall/CRC
 
 Rosenblatt, M. (1956). Remarks on some nonparametric estimate of a
 density function. \emph{Ann. Math. Statist.} \textbf{27}, 832--837.
 
-Rubin, D.B. (1981). The Bayesian Bootstrap. Ann. Statist., 9, 1,
-130-134.
+Rubin, D.B. (1981). The Bayesian Bootstrap. \emph{Ann. Statist.}
+\textbf{9} 1, 130-134.
 
-Rubinstein, R.Y. (1981). Simulation and the Monte Carlo Method. Wiley.
+Rubinstein, R.Y. (1981).
+\href{https://books.google.es/books?hl=es\&lr=\&id=r2VODQAAQBAJ\&oi=fnd\&pg=PR1\&dq=Simulation+and+the+Monte+Carlo+Method}{\emph{Simulation
+and the Monte Carlo Method}}. Wiley.
 
 Schucany, W., Gray, H. and Owen, O. (1971). On bias reduction in
-estimation. J. Amer. Statist. Assoc., 66, 524-533.
+estimation. \emph{J. Amer. Stat. Assoc.} \textbf{66}, 524-533.
 
-Shao, J. (1999). Mathematical Statistics. Springer.
+Shao, J. (1999).
+\href{https://www.springer.com/gp/book/9780387953823}{\emph{Mathematical
+Statistics}}. Springer.
+
+Shao, J. (2006).
+\href{http://www.stewartschultz.com/statistics/books/Mathematical\%20Statistics\%20-\%20Exercises\%20and\%20Solutions.pdf}{\emph{Mathematical
+Statistics: exercises and solutions}}. Springer.
 
 Sheather, S.J. and Jones, M.C. (1991). A reliable data-based bandwidth
 selection method for kernel density estimation. \emph{Jr. Royal Statist.
 Soc. Ser. B} \textbf{53}, 683--690.
 
-Silverman, B.W. (1986). Density Estimation. Chapman and Hall.Shao, J.
-and Tu, D. (1995). The Jackknife and Bootstrap. Springer Verlag.
+Silverman, B.W. (1986).
+\href{http://users.stat.ufl.edu/~rrandles/sta6934/smhandout.pdf}{\emph{Density
+Estimation}}. Chapman and Hall.
 
-Sing, K. (1981). On the asymptotic accuracy of Efron's bootstrap. Ann.
-Statist. 9, 6, 1.187-1195.
+Shao, J. and Tu, D. (1995).
+\href{https://books.google.es/books?hl=es\&lr=\&id=VO3SBwAAQBAJ\&oi=fnd\&pg=PA1\&dq=The+Jackknife+and+Bootstrap}{\emph{The
+Jackknife and Bootstrap}}. Springer Verlag.
+
+Sing, K. (1981). On the asymptotic accuracy of Efron's bootstrap.
+\emph{Ann. Statist.} \textbf{9} 6, 1187-1195.
 
 Stine, R.A. (1987). Estimating properties of autoregressive forecasts.
-\emph{J. Amer. Statist. Assoc.} \textbf{82}, 1072-1078.
+\emph{J. Amer. Stat. Assoc.} \textbf{82}, 1072-1078.
 
 Taylor, C. C. (1989). Bootstrap choice of the smoothing parameter in
 kernel density estimation. \emph{Biometrika} \textbf{76}, 705--712.
 
 Thombs, L.A. and Schucany, W.R. (1990). Bootstrap prediction intervals
-for autoregression. \emph{J. Amer. Statist. Assoc.} \textbf{85},
-486-492.
+for autoregression. \emph{J. Amer. Stat. Assoc.} \textbf{85}, 486-492.
 
 Tukey, J. (1958). Bias and confidence in not quite large samples,
-abstract, Ann. Math. Statist., 29, 614.
+abstract, \emph{Ann. Math. Statist.} \textbf{29}, 614.
 
-Watson, G.S. (1964). Smooth regression analysis. \emph{Sankhy{ā}} Ser. A
-\textbf{26}, 359-372.
+Watson, G.S. (1964).
+\href{https://www.jstor.org/stable/25049340?seq=1\#page_scan_tab_contents}{Smooth
+regression analysis}. \emph{Sankhy{ā}: The Indian Journal of Statistics
+Ser. A} \textbf{26}, 359-372.
 
 Wu, C.-F. J. (1986). Jackknife, bootstrap and other resampling methods
 in regression analysis. \emph{Ann. Statist.} \textbf{14}, 1261--1350.
 
-\section{Enlaces}\label{enlaces}
+\appendix
+
+
+\chapter{Enlaces}\label{links}
+
+\textbf{Recursos para el aprendizaje de R} (
+\url{https://rubenfcasal.github.io/post/ayuda-y-recursos-para-el-aprendizaje-de-r}
+): A continuación se muestran algunos recursos que pueden ser útiles
+para el aprendizaje de R y la obtención de ayuda\ldots{}
+
+\textbf{\emph{Ayuda online}}:
+
+\begin{itemize}
+\item
+  Ayuda en línea sobre funciones o paquetes:
+  \href{https://www.rdocumentation.org/}{RDocumentation}
+\item
+  Buscador \href{http://rseek.org/}{RSeek}
+\item
+  \href{http://stackoverflow.com/questions/tagged/r}{StackOverflow}
+\end{itemize}
+
+\textbf{\emph{Cursos}}: algunos cursos gratuitos:
+
+\begin{itemize}
+\item
+  \href{https://www.coursera.org/}{Coursera}:
+
+  \begin{itemize}
+  \item
+    \href{https://www.coursera.org/learn/intro-data-science-programacion-estadistica-r}{Introducción
+    a Data Science: Programación Estadística con R}
+  \item
+    \href{https://www.coursera.org/specializations/r}{Mastering Software
+    Development in R}
+  \end{itemize}
+\end{itemize}
+
+\begin{itemize}
+\item
+  \href{https://www.datacamp.com/courses}{DataCamp}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \href{https://www.datacamp.com/courses/introduccion-a-r/}{Introducción
+    a R}
+  \end{itemize}
+\end{itemize}
+
+\begin{itemize}
+\item
+  \href{http://online.stanford.edu/courses}{Stanford online}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \href{http://online.stanford.edu/course/statistical-learning}{Statistical
+    Learning}
+  \end{itemize}
+\end{itemize}
 
 \begin{itemize}
 \tightlist
 \item
-  \href{https://rubenfcasal.github.io/post/ayuda-y-recursos-para-el-aprendizaje-de-r}{Recursos
-  para el aprendizaje de R}
+  Curso UCA:
+  \href{http://knuth.uca.es/moodle/course/view.php?id=51}{Introducción a
+  R, R-commander y shiny}
 \end{itemize}
 
-\subsection{Forecasting: Principles and Practice}\label{forecast-links}
+\begin{itemize}
+\tightlist
+\item
+  Udacity:
+  \href{https://eu.udacity.com/course/data-analysis-with-r--ud651}{Data
+  Analysis with R}
+\end{itemize}
+
+\begin{itemize}
+\tightlist
+\item
+  \href{https://swirlstats.com/scn/title.html}{Swirl Courses}: se pueden
+  hacer cursos desde el propio R con el paquete
+  \href{https://swirlstats.com}{swirl}.
+\end{itemize}
+
+Para información sobre cursos en castellano se puede recurrir a la web
+de \href{http://r-es.org/}{R-Hispano} en el apartado
+\href{http://r-es.org/category/formacion}{formación}. Algunos de los
+cursos que aparecen en entradas antiguas son gratuitos. Ver:
+\href{http://r-es.org/2016/02/12/cursos-masivos-y-otra-formacion-on-line-sobre-r/}{Cursos
+MOOC relacionados con R}.
+
+\textbf{\emph{Libros}}
+
+\begin{itemize}
+\item
+  \textbf{\emph{Iniciación}}:
+
+  \begin{itemize}
+  \item
+    2011 - The Art of R Programming. A Tour of Statistical Software
+    Design, (\href{https://www.nostarch.com/artofr.htm}{No Starch
+    Press})
+  \item
+    R for Data Science (\href{http://r4ds.had.co.nz/}{online},
+    \href{http://shop.oreilly.com/product/0636920034407.do}{O'Reilly})
+  \item
+    Hands-On Programming with R: Write Your Own Functions and
+    Simulations, by Garrett Grolemund
+    (\href{http://shop.oreilly.com/product/0636920028574.do}{O'Reilly})
+  \end{itemize}
+\item
+  \textbf{\emph{Avanzados}}:
+
+  \begin{itemize}
+  \item
+    2008 - Software for Data Analysis: Programming with R - Chambers
+    (\href{http://www.springer.com/la/book/9780387759357}{Springer})
+  \item
+    Advanced R by Hadley Wickham (online:
+    \href{http://adv-r.had.co.nz/}{1ª ed},
+    \href{https://adv-r.hadley.nz/}{2ª ed},
+    \href{https://www.amazon.com/dp/1466586966}{Chapman \& Hall})
+  \item
+    R packages by Hadley Wickham
+    (\href{http://r-pkgs.had.co.nz/}{online},
+    \href{http://shop.oreilly.com/product/0636920034421.do}{O'Reilly})
+  \end{itemize}
+\item
+  \textbf{\emph{Bookdown}}: el paquete
+  \href{https://bookdown.org}{\texttt{bookdown}} de R permite escribir
+  libros empleando \href{http://rmarkdown.rstudio.com}{R Markdown} y
+  compartirlos. En \url{https://bookdown.org} está disponible una
+  selección de libros escritos con este paquete (un listado más completo
+  está disponible \href{https://bookdown.org/home/archive/}{aquí}).
+  Algunos libros en este formato en castellano son:
+
+  \begin{itemize}
+  \item
+    \href{https://rubenfcasal.github.io/simbook}{Prácticas de
+    Simulación} (disponible en el repositorio de GitHub
+    \href{https://github.com/rubenfcasal/simbook}{rubenfcasal/simbook}).
+  \item
+    \href{https://rubenfcasal.github.io/bookdown_intro/}{Escritura de
+    libros con bookdown} (disponible en el repositorio de GitHub
+    \href{https://github.com/rubenfcasal/bookdown_intro}{rubenfcasal/bookdown\_intro}).
+  \item
+    \href{https://www.datanalytics.com/libro_r/index.html}{R para
+    profesionales de los datos: una introducción}.
+  \item
+    \href{https://bookdown.org/aquintela/EBE}{Estadística Básica
+    Edulcorada}.
+  \end{itemize}
+\end{itemize}
+
+\textbf{\emph{Material online}}: en la web se puede encontrar mucho
+material adicional, por ejemplo:
+
+\begin{itemize}
+\item
+  \href{https://www.r-project.org/other-docs.html}{CRAN: Other R
+  documentation}
+\item
+  \href{https://www.rstudio.com}{RStudio}:
+  \href{https://www.rstudio.com/online-learning}{Online learning},
+  \href{https://resources.rstudio.com/webinars}{Webinars},
+  \href{http://shiny.rstudio.com}{shiny},
+  \href{https://www.tidyverse.org/}{tidyverse}.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \href{https://resources.rstudio.com/rstudio-cheatsheets}{CheatSheets}:
+    \href{https://resources.rstudio.com/rstudio-cheatsheets/rmarkdown-2-0-cheat-sheet}{RMarkdown},
+    \href{https://resources.rstudio.com/rstudio-cheatsheets/shiny-cheat-sheet}{Shiny},
+    \href{https://github.com/rstudio/cheatsheets/blob/master/data-transformation.pdf}{dplyr},
+    \href{https://github.com/rstudio/cheatsheets/blob/master/data-import.pdf}{tidyr},
+    \href{https://resources.rstudio.com/rstudio-cheatsheets/stringr-cheat-sheet}{stringr}.
+  \end{itemize}
+\item
+  Blogs en inglés:
+
+  \begin{itemize}
+  \item
+    \url{https://www.r-bloggers.com/}
+  \item
+    \url{https://www.littlemissdata.com/blog/rstudioconf2019}
+  \item
+    RStudio: \url{https://blog.rstudio.com}
+  \item
+    Microsoft Revolutions: \url{https://blog.revolutionanalytics.com}
+  \end{itemize}
+\item
+  Blogs en castellano:
+
+  \begin{itemize}
+  \item
+    \url{https://www.datanalytics.com}
+  \item
+    \url{http://oscarperpinan.github.io/R}
+  \item
+    \url{http://rubenfcasal.github.io}
+  \end{itemize}
+\item
+  Listas de correo:
+
+  \begin{itemize}
+  \item
+    Listas de distribución de r-project.org:
+    \url{https://stat.ethz.ch/mailman/listinfo}
+  \item
+    Búsqueda en R-help:
+    \url{http://r.789695.n4.nabble.com/R-help-f789696.html}
+  \item
+    Búsqueda en R-help-es: \url{https://r-help-es.r-project.narkive.com}
+
+    \url{https://grokbase.com/g/r/r-help-es}
+  \item
+    Archivos de R-help-es:
+    \url{https://stat.ethz.ch/pipermail/r-help-es}
+  \end{itemize}
+\end{itemize}
+
+\section{Forecasting: Principles and Practice}\label{forecast-links}
 
 \href{https://otexts.com/fpp2}{Forecasting: Principles and Practice, 2ª
 ed} by Rob J. Hyndman and George Athanasopoulos:
@@ -7625,7 +7899,7 @@ ed} by Rob J. Hyndman and George Athanasopoulos:
   For instructors}
 \end{itemize}
 
-\subsection{Spatial data}\label{spatial-links}
+\section{Spatial data}\label{spatial-links}
 
 \begin{itemize}
 \item

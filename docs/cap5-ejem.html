@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>3.1 Estimación Jackknife de la precisión y el sesgo de un estimador | Técnicas de Remuestreo</title>
+  <title>5.6 Ejemplos | Técnicas de Remuestreo</title>
   <meta name="description" content="Apuntes de la asignatura de Técnicas de Remuestreo del Máster en Técnicas Estadísticas." />
   <meta name="generator" content="bookdown 0.10 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="3.1 Estimación Jackknife de la precisión y el sesgo de un estimador | Técnicas de Remuestreo" />
+  <meta property="og:title" content="5.6 Ejemplos | Técnicas de Remuestreo" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="rubenfcasal/book_remuestreo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="3.1 Estimación Jackknife de la precisión y el sesgo de un estimador | Técnicas de Remuestreo" />
+  <meta name="twitter:title" content="5.6 Ejemplos | Técnicas de Remuestreo" />
   
   <meta name="twitter:description" content="Apuntes de la asignatura de Técnicas de Remuestreo del Máster en Técnicas Estadísticas." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="cap3.html">
-<link rel="next" href="relacion-bootstrapjackknife-en-dicha-estimacion.html">
+<link rel="prev" href="cap5-err-cober.html">
+<link rel="next" href="cap6.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -260,160 +260,212 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="estimacion-jackknife-de-la-precision-y-el-sesgo-de-un-estimador" class="section level2">
-<h2><span class="header-section-number">3.1</span> Estimación Jackknife de la precisión y el sesgo de un estimador</h2>
-<p>Cuando estamos interesados en el sesgo o la varianza de un estimador <span class="math inline">\(\hat{\theta}=\theta \left( \mathbf{X} \right)\)</span> de un parámetro <span class="math inline">\(\theta =\theta \left( F \right)\)</span>, el estadístico de interés suele definirse como <span class="math inline">\(R=R\left( \mathbf{X},F \right) =\hat{\theta}-\theta\)</span>. En este caso <span class="math display">\[\begin{aligned}
-Sesgo\left( \hat{\theta} \right) &amp;= E\left( \hat{\theta} \right) -\theta
-=E\left( R \right), \\
-Var\left( \hat{\theta} \right) &amp;= Var\left( \hat{\theta}-\theta \right)
-=Var\left( R \right).
-\end{aligned}\]</span> Así pues trataremos de usar el jackknife para aproximar la esperanza y varianza de <span class="math inline">\(R\)</span>, o, equivalentemente, el sesgo y la varianza de <span class="math inline">\(\hat{\theta}\)</span>.</p>
-<p>El conjunto de remuestras jackknife es <span class="math display">\[\mathcal{X}_{jackk}=\left\{ \mathbf{X}^{\ast}=
-\mathbf{X}_{(i)}=\left( X_1,\ldots ,X_{i-1},X_{i+1},\ldots
-,X_n \right) : i=1,\ldots ,n\right\}\]</span> y todas ellas se consideran con equiprobabilidad en el universo jackknife. Como primera tentativa estimaríamos el sesgo y la varianza jackknife mediante: <span class="math display">\[\begin{aligned}
-E^{\ast}\left( R^{\ast} \right) &amp;= E_{jackk}^{\ast}\left( \hat{\theta}
-^{\ast} \right) -\theta \left( \mathbf{X} \right) =\frac{1}{n}
-\sum_{i=1}^{n}\theta \left( \mathbf{X}_{(i)} \right) -
-\hat{\theta}=\overline{\theta \left( \mathbf{X}_{(\cdot)} \right)}-\hat{\theta}, \\
-Var^{\ast}\left( R^{\ast} \right) &amp;= Var_{jackk}^{\ast}\left( \hat{\theta}
-^{\ast} \right) =\frac{1}{n}\sum_{i=1}^{n}\left[ \theta \left( 
-\mathbf{X}_{(i)} \right) -\overline{\theta \left( 
-\mathbf{X}_{(\cdot)} \right)}\right]^2,
-\end{aligned}\]</span> con <span class="math inline">\(\overline{\theta \left( \mathbf{X}_{(\cdot)} \right)} = \frac{1}{n}\sum_{j=1}^{n}\theta \left( \mathbf{X}_{(j)} \right)\)</span>.</p>
-<p>Sin embargo es evidente que las réplicas jackknife son mucho más parecidas a la muestra original de lo que lo son las remuestras bootstrap, en general. De hecho se puede demostrar que el valor absoluto de ese estimador jackknife del sesgo es siempre menor que el valor absoluto del sesgo bootstrap y que la estimación jackknife de la varianza que se acaba de proponer también es menor que la varianza bootstrap. En resumen, el método jackknife necesita de un <strong>factor de elevación</strong> para que las estimaciones que proporciona sean consistentes. La idea es elegir dicho factor de elevación como aquel que provoca que, al multiplicar los estadísticos anteriores por él, y considerando como parámetro a estimar la media o la varianza poblacional, el estimador jackknife finalmente resultante sea insesgado. Así, el factor de elevación resulta ser <span class="math inline">\(n-1\)</span> y las estimaciones jackknife finales son</p>
-<p><span class="math display">\[\begin{aligned}
-Sesgo_{jackk}^{\ast}\left( \hat{\theta}^{\ast} \right) &amp;= \left( n-1 \right)
-\left( \overline{\theta \left( \mathbf{X}_{(\cdot)}
- \right)}-\hat{\theta} \right) =\frac{n-1}{n}\sum_{i=1}^{n}\left( \theta
-\left( \mathbf{X}_{(i)} \right) -\hat{\theta} \right), \\
-Var_{jackk}^{\ast}\left( \hat{\theta}^{\ast} \right) &amp;= \frac{n-1}{n}
-\sum_{i=1}^{n}\left[ \theta \left( \mathbf{X}_{(i)}
- \right) -\overline{\theta \left( \mathbf{X}_{(\cdot)}
- \right)}\right]^2.
-\end{aligned}\]</span></p>
-<p>Tomando como parámetro de interés la media, <span class="math inline">\(\theta =\mu\)</span>, tenemos que <span class="math display">\[\begin{aligned}
-\overline{\theta \left( \mathbf{X}_{(\cdot)} \right)}-
-\hat{\theta} &amp;= \frac{1}{n}\sum_{i=1}^{n}\theta \left( 
-\mathbf{X}_{(i)} \right) -\hat{\theta}=\frac{1}{n}\sum_{i=1}^{n}
-\overline{X_{(i)}}-\bar{X}= \\
-&amp;= \frac{1}{n}\sum_{i=1}^{n}\frac{1}{n-1}\sum_{j=1,j\neq i}^{n}X_j-
-\bar{X}=\frac{1}{n\left( n-1 \right)}\sum_{i,j=1,i\neq j}^{n}X_j-
-\bar{X} \\
-&amp;= \frac{1}{n\left( n-1 \right)}\sum_{j=1}^{n}\left( n-1 \right) X_j-
-\bar{X}=\frac{1}{n}\sum_{j=1}^{n}X_j-\bar{X}=0,\end{aligned}\]</span></p>
-<p>así que <span class="math inline">\(\overline{\theta \left( \mathbf{X}_{(\cdot)} \right)}-\hat{\theta}\)</span> es un estimador insesgado del sesgo de <span class="math inline">\(\bar{X}\)</span> (que es cero). De esta forma, utilizando un factor de elevación arbitrario, <span class="math inline">\(c\)</span>, se tiene igualmente que <span class="math display">\[c\left( \overline{\theta \left( \mathbf{X}_{(\cdot)} \right)}
-- \hat{\theta} \right) = 0,\]</span> así que es también un estimador insesgado de <span class="math inline">\(Sesgo\left( \bar{X} \right) =0.\)</span>$ Determinaremos el valor de <span class="math inline">\(c\)</span> imponiendo que el estimador jackknife de la varianza de dicho estimador (<span class="math inline">\(\hat{\theta}=\bar{X}\)</span>) es una estimador insesgado de la varianza de dicho estimador. Por una parte, es bien conocido que la varianza de <span class="math inline">\(\hat{\theta}\)</span> es <span class="math inline">\(Var\left( \bar{X} \right) = \sigma^2 /n\)</span>. Por otra parte, la estimación jackknife de la varianza de <span class="math inline">\(\hat{\theta}\)</span>, con factor de elevación <span class="math inline">\(c\)</span> es</p>
-<p><span class="math display">\[\begin{aligned}
-Var_{jackk}^{\ast}\left( \bar{X} \right) &amp;= \frac{c}{n}\sum_{i=1}^{n}
-\left[ \overline{X_{(i)}}-\overline{\overline{X_{\left( \cdot
- \right)}}}\right]^2 \\
-&amp;= \frac{c}{n}\sum_{i=1}^{n}\left[ \frac{1}{n-1}\sum_{j=1,j\neq i}^{n}X_j-
-\frac{1}{n}\sum_{k=1}^{n}\frac{1}{n-1}\sum_{j=1,j\neq k}^{n}X_j\right]^2
-\\
-&amp;= \frac{c}{n}\sum_{i=1}^{n}\left[ \frac{1}{n-1}\sum_{j=1,j\neq i}^{n}X_j-
-\frac{1}{n\left( n-1 \right)}\sum_{k,j=1,j\neq k}^{n}X_j\right]^2 \\
-&amp;= \frac{c}{n}\sum_{i=1}^{n}\left[ \frac{1}{n\left( n-1 \right)}
-\sum_{j=1,j\neq i}^{n}X_j-\frac{1}{n}X_i\right]^2.\end{aligned}\]</span></p>
-<p>La esperanza de esta cantidad resulta: <span class="math display">\[\begin{aligned}
-&amp;E\left[ \frac{c}{n}\sum_{i=1}^{n}\left( \frac{1}{n\left( n-1 \right)}
-\sum_{j=1,j\neq i}^{n}X_j-\frac{1}{n}X_i \right)^2\right] \\
-&amp;= \frac{c}{n}\sum_{i=1}^{n}E\left[ \left( \frac{1}{n\left( n-1 \right)}
-\sum_{j=1,j\neq i}^{n}X_j-\frac{1}{n}X_i \right)^2\right] \\
-&amp;= \frac{c}{n}\sum_{i=1}^{n}E\left[ \left( \frac{1}{n\left( n-1 \right)}
-\sum_{j=1,j\neq i}^{n}\left( X_j-\mu \right) 
--\frac{1}{n}\left( X_i-\mu \right) \right)^2\right] \\
-&amp;= \frac{c}{n}\sum_{i=1}^{n}Var\left[ \frac{1}{n\left( n-1 \right)}
-\sum_{j=1,j\neq i}^{n}\left( X_j-\mu \right) 
--\frac{1}{n}\left( X_i-\mu \right) \right]\\
-&amp;= \frac{c}{n}\sum_{i=1}^{n}\left( \frac{1}{n^2\left( n-1 \right)^2}
-\sum_{j=1,j\neq i}^{n}\sigma^2+\frac{1}{n^2}\sigma^2 \right) \\
-&amp;= \frac{c}{n}\sum_{i=1}^{n}\left( \frac{1}{n^2\left( n-1 \right)}\sigma^2+\frac{1}{n^2}\sigma^2 \right) 
-=\frac{c\sigma^2}{n\left(n-1 \right)}.
-\end{aligned}\]</span></p>
-<p>Así pues, el sesgo del estimador jackknife de la varianza de la media muestral es <span class="math display">\[E\left[ Var_{jackk}^{\ast}\left( \bar{X} \right) \right] -\frac{\sigma
-^2}{n}=\frac{c\sigma^2}{n\left( n-1 \right)}-\frac{\sigma^2}{n}=
-\frac{\sigma^2}{n}\left( \frac{c}{n-1}-1 \right),\]</span> que vale cero si y solamente si <span class="math inline">\(c=n-1\)</span>. Dicho en otras palabras, tomando como factor de elevación <span class="math inline">\(c=n-1\)</span>, entonces, tanto el estimador jackknife del sesgo de <span class="math inline">\(\bar{X}\)</span> como el estimador jackknife de la varianza de <span class="math inline">\(\bar{X}\)</span> son estimadores insesgados, respectivamente, del sesgo y la varianza de <span class="math inline">\(\bar{X}\)</span>.</p>
-<p>Dichos estimadores resultan<span class="math display">\[\begin{aligned}
-Sesgo_{jackk}^{\ast}\left( \bar{X} \right) &amp;= \left( n-1 \right) \left( 
-\overline{\overline{X_{(\cdot)}}}-\bar{X} \right), \\
-Var_{jackk}^{\ast}\left( \bar{X} \right) &amp;= \frac{n-1}{n}\sum_{i=1}^{n}
-\left[ \overline{X_{(i)}}-\overline{\overline{X_{\left( \cdot
- \right)}}}\right]^2.\end{aligned}\]</span></p>
-<p>Podemos realizar un razonamiento análogo cuando el parámetro de interés es la varianza poblacional, <span class="math inline">\(\theta =\sigma^2\)</span>. En ese caso, considerando el estimador varianza muestral: <span class="math inline">\(\hat{\theta}=S_n^2\)</span>, se tiene que su esperanza viene dada por</p>
-<p><span class="math display">\[\begin{aligned}
-E\left( S_n^2 \right) &amp;= E\left[ \frac{1}{n}\sum_{i=1}^{n}\left( X_i-
-\bar{X} \right)^2\right] =\frac{1}{n}\sum_{i=1}^{n}E\left[ \left(
-X_i-\bar{X} \right)^2\right] \\
-&amp;= E\left[ \left( X_1-\frac{1}{n}\sum_{j=1}^{n}X_j \right)^2\right] =E
-\left[ \left( \left( X_1-\mu \right) -\frac{1}{n}\sum_{j=1}^{n}\left(
-X_j-\mu \right) \right)^2\right] \\
-&amp;= Var\left[ \left( X_1-\mu \right) -\frac{1}{n}\sum_{j=1}^{n}\left(
-X_j-\mu \right) \right] \\
-&amp;= Var\left[ \frac{n-1}{n}\left( X_1-\mu \right) -\frac{1}{n}
-\sum_{j=1,j\neq 1}^{n}\left( X_j-\mu \right) \right] \\
-&amp;= \left( \frac{n-1}{n} \right)^2\sigma^2+\frac{1}{n^2}
-\sum_{j=2}^{n}\sigma^2 \\
-&amp;= \frac{\left( n-1 \right)}{n^2}^2\sigma^2+\frac{n-1}{n^2}\sigma
-^2=\frac{n\left( n-1 \right)}{n^2}\sigma^2=\frac{n-1}{n}\sigma^2,\end{aligned}\]</span></p>
-<p>así que su sesgo es <span class="math display">\[Sesgo\left( S_n^2 \right) =E\left( S_n^2 \right) -\sigma^2=-\frac{1
-}{n}\sigma^2.\]</span>Para un factor de elevación, <span class="math inline">\(c\)</span>, el estimador jackknife del sesgo de este estimador es<span class="math display">\[Sesgo_{jackk}^{\ast}\left( S_n^2 \right) =c\left( \overline{\theta
-\left( \mathbf{X}_{(\cdot)} \right)}-\hat{\theta}
- \right) =c\left( \overline{S_{n,(\cdot)}^2}-S_n^2 \right)
-.\]</span>Con lo cual la esperanza de este estimador resulta <span class="math display">\[E\left( c\left( \overline{S_{n,(\cdot)}^2}-S_n^2 \right)
- \right) =c\left[ E\left( \overline{S_{n,(\cdot)}^2} \right)
--E\left( S_n^2 \right) \right]\]</span></p>
-<p>Estudiemos por separado cada término: <span class="math display">\[\begin{aligned}
-\overline{S_{n,(\cdot)}^2} &amp;= \frac{1}{n}\sum_{i=1}^{n}S_{n,
-(i)}^2=\frac{1}{n}\sum_{i=1}^{n}\frac{1}{n-1}\sum_{j=1,j\neq
-i}^{n}\left( X_j-\overline{X_{(i)}} \right)^2 \\
-&amp;= \frac{1}{n}\sum_{i=1}^{n}\frac{1}{n-1}\sum_{j=1,j\neq i}^{n}\left( X_j-
-\frac{1}{n-1}\sum_{k=1,k\neq i}^{n}X_{k} \right)^2 \\
-&amp;= \frac{1}{n\left( n-1 \right)}\sum_{i=1}^{n}\sum_{j=1,j\neq i}^{n}\left( 
-\frac{n-2}{n-1}X_j-\frac{1}{n-1}\sum_{k=1,k\neq i,k\neq j}^{n}X_{k} \right)^2,
-\end{aligned}\]</span> con lo cual</p>
-<p><span class="math display">\[\begin{aligned}
-E\left( \overline{S_{n,(\cdot)}^2} \right) 
-&amp;=\frac{1}{n\left(
-n-1 \right)}\sum_{i=1}^{n}\sum_{j=1,j\neq i}^{n}E\left[ \left( \frac{n-2}{n-1
-}X_j-\frac{1}{n-1}\sum_{k=1,k\neq i,k\neq j}^{n}X_{k} \right)^2\right] \\
-&amp;=\frac{1}{n\left( n-1 \right)}\sum_{i=1}^{n}\sum_{j=1,j\neq i}^{n}E\left[
-\left( \frac{n-2}{n-1}\left( X_j-\mu \right) -\frac{1}{n-1}\sum_{k=1,k\neq
-i,k\neq j}^{n}\left( X_{k}-\mu \right) \right)^2\right] \\
-&amp;=\frac{1}{n\left( n-1 \right)}\sum_{i=1}^{n}\sum_{j=1,j\neq i}^{n}Var\left[ 
-\frac{n-2}{n-1}\left( X_j-\mu \right) -\frac{1}{n-1}\sum_{k=1,k\neq
-i,k\neq j}^{n}\left( X_{k}-\mu \right) \right] \\
-&amp;=\frac{1}{n\left( n-1 \right)}\sum_{i=1}^{n}\sum_{j=1,j\neq i}^{n}\left[ 
-\frac{\left( n-2 \right)^2}{\left( n-1 \right)^2}\sigma^2+\frac{1}{
-\left( n-1 \right)^2}\left( n-2 \right) \sigma^2\right] \\
-&amp;=\frac{1}{n\left( n-1 \right)}\sum_{i=1}^{n}\sum_{j=1,j\neq i}^{n}\left[ 
-\frac{\left( n-2 \right) \left( n-1 \right)}{\left( n-1 \right)^2}\sigma
-^2\right] =\frac{n-2}{n-1}\sigma^2
-\end{aligned}\]</span></p>
-<p>Además, ya hemos visto anteriormente que <span class="math inline">\(E\left( S_n^2 \right) = (n-1)\sigma^2/n\)</span>, con o cual la esperanza del estimador jackknife del sesgo es <span class="math display">\[\begin{aligned}
-c\left( \frac{n-2}{n-1}\sigma^2-\frac{n-1}{n}\sigma^2 \right)
-&amp;= c\sigma^2\left( \frac{n-2}{n-1}-\frac{n-1}{n} \right) \\
-&amp;= c\sigma^2\frac{n\left( n-2 \right) -\left( n-1 \right)^2}{n\left( n-1 \right)} \\
-&amp;= c\sigma^2\frac{-1}{n\left( n-1 \right)}
-=-\frac{c\sigma^2}{n\left(n-1 \right)}.
-\end{aligned}\]</span></p>
-<p>De esta forma, el sesgo del estimador jackknife del sesgo de <span class="math inline">\(S_n^2\)</span> resulta ser <span class="math display">\[\begin{aligned}
-E\left[ Sesgo_{jackk}^{\ast}\left( S_n^2 \right) \right] 
--Sesgo\left(S_n^2 \right) &amp;= -\frac{c\sigma^2}{n\left( n-1 \right)}
--\left( -\frac{1}{n}\sigma^2 \right) \\
-&amp;= -\frac{\sigma^2}{n}\left( \frac{c}{n-1}-1 \right),
-\end{aligned}\]</span></p>
-<p>con lo cual este sesgo será cero si y sólo si <span class="math inline">\(c=n-1\)</span>.</p>
-<p>Esto da pie al estimador jackknife del sesgo de la varianza muestral: <span class="math display">\[Sesgo_{jackk}^{\ast}\left( S_n^2 \right) =\left( n-1 \right) \left( 
-\overline{S_{n,(\cdot)}^2}-S_n^2 \right).\]</span></p>
-<p>Así pues, queda justificado, en el caso de estimación de los parámetros media y varianza, la razón de la elección del factor de elevación <span class="math inline">\(c=n-1\)</span>.</p>
+<div id="cap5_ejem" class="section level2">
+<h2><span class="header-section-number">5.6</span> Ejemplos</h2>
+
+<div class="example">
+<p><span id="exm:media-dt-desconocida-persim" class="example"><strong>Ejemplo 5.2  (Inferencia sobre la media con varianza desconocida, continuación)  </strong></span><br> </p>
+Continuando con el ejemplo de los tiempos de vida de microorganismos (sin asumir varianza conocida), para obtener una estimación por intervalo de confianza de su vida media empleando el método bootstrap percentil-<em>t</em> simetrizado se podría utilizar (ver Ejemplo <a href="calculo-de-la-distribucion-bootstrap-exacta-y-aproximada.html#exm:media-dt-desconocida">1.5</a>):
 </div>
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">muestra &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.143</span>, <span class="fl">0.182</span>, <span class="fl">0.256</span>, <span class="fl">0.26</span>, <span class="fl">0.27</span>, <span class="fl">0.437</span>, <span class="fl">0.509</span>, 
+             <span class="fl">0.611</span>, <span class="fl">0.712</span>, <span class="fl">1.04</span>, <span class="fl">1.09</span>, <span class="fl">1.15</span>, <span class="fl">1.46</span>, <span class="fl">1.88</span>, <span class="fl">2.08</span>)
+n &lt;-<span class="st"> </span><span class="kw">length</span>(muestra)
+alfa &lt;-<span class="st"> </span><span class="fl">0.05</span>
+x_barra &lt;-<span class="st"> </span><span class="kw">mean</span>(muestra)
+cuasi_dt &lt;-<span class="st"> </span><span class="kw">sd</span>(muestra)
+
+<span class="co"># Remuestreo</span>
+<span class="kw">set.seed</span>(<span class="dv">1</span>)
+B &lt;-<span class="st"> </span><span class="dv">1000</span>
+remuestra &lt;-<span class="st"> </span><span class="kw">numeric</span>(n)
+estadistico_boot &lt;-<span class="st"> </span><span class="kw">numeric</span>(B)
+<span class="cf">for</span> (k <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>B) {
+  remuestra &lt;-<span class="st"> </span><span class="kw">sample</span>(muestra, n, <span class="dt">replace =</span> <span class="ot">TRUE</span>)
+  x_barra_boot &lt;-<span class="st"> </span><span class="kw">mean</span>(remuestra)
+  cuasi_dt_boot &lt;-<span class="st"> </span><span class="kw">sd</span>(remuestra)
+  estadistico_boot[k] &lt;-<span class="st"> </span><span class="kw">sqrt</span>(n) <span class="op">*</span><span class="st"> </span><span class="kw">abs</span>(x_barra_boot <span class="op">-</span><span class="st"> </span>x_barra)<span class="op">/</span>cuasi_dt_boot
+}
+
+<span class="co"># Aproximación bootstrap del pto crítico</span>
+pto_crit &lt;-<span class="st"> </span><span class="kw">quantile</span>(estadistico_boot, <span class="dv">1</span> <span class="op">-</span><span class="st"> </span>alfa)
+
+<span class="co"># Construcción del IC</span>
+ic_inf_boot &lt;-<span class="st"> </span>x_barra <span class="op">-</span><span class="st"> </span>pto_crit <span class="op">*</span><span class="st"> </span>cuasi_dt<span class="op">/</span><span class="kw">sqrt</span>(n)
+ic_sup_boot &lt;-<span class="st"> </span>x_barra <span class="op">+</span><span class="st"> </span>pto_crit <span class="op">*</span><span class="st"> </span>cuasi_dt<span class="op">/</span><span class="kw">sqrt</span>(n)
+IC_boot &lt;-<span class="st"> </span><span class="kw">c</span>(ic_inf_boot, ic_sup_boot)
+<span class="kw">names</span>(IC_boot) &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="dv">100</span><span class="op">*</span><span class="kw">c</span>(alfa<span class="op">/</span><span class="dv">2</span>, <span class="dv">1</span><span class="op">-</span>alfa<span class="op">/</span><span class="dv">2</span>), <span class="st">&quot;%&quot;</span>)
+IC_boot</code></pre></div>
+<pre><code>##      2.5%     97.5% 
+## 0.4293376 1.1813290</code></pre>
+<!-- 
+Tabla resumen de los ics del tiempo de vida medio de microorganismos 
+Algunos de esos intervalos (y
+también otros no comentados aquí) se pueden obtener usando la
+rutina` boot.ci` del paquete `boot`.
+-->
+
+<div class="example">
+<p><span id="exm:estudio-sim-exp" class="example"><strong>Ejemplo 5.3  (Estudio de simulación)  </strong></span><br> </p>
+El siguiente código permite realizar estudios de simulación comparando las probabilidades de cobertura y las longitudes de los intervalos de confianza clásicos (basados en normalidad), bootstrap percentil, bootstrap percentil-<span class="math inline">\(t\)</span> y bootstrap percentil-<span class="math inline">\(t\)</span> simetrizado para la media, en el caso de muestras procedentes de una distribución <span class="math inline">\(\exp \left( \lambda \right)\)</span>. En este caso se obtienen las estimaciones Monte Carlo a partir de 500 simulaciones con <span class="math inline">\(\lambda = 0.01\)</span>, tamaño muestral <span class="math inline">\(n=100\)</span> y <span class="math inline">\(B=1000\)</span> réplicas bootstrap para un nivel de confianza nominal del 90% (<span class="math inline">\(\alpha =0.10\)</span>).
+</div>
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">t.ini &lt;-<span class="st"> </span><span class="kw">proc.time</span>()
+rate &lt;-<span class="st"> </span><span class="fl">0.01</span>
+mu &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">/</span>rate
+n &lt;-<span class="st"> </span><span class="dv">100</span>
+
+alfa &lt;-<span class="st"> </span><span class="fl">0.1</span>
+namesI &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="dv">100</span><span class="op">*</span><span class="kw">c</span>(alfa<span class="op">/</span><span class="dv">2</span>, <span class="dv">1</span><span class="op">-</span>alfa<span class="op">/</span><span class="dv">2</span>), <span class="st">&quot;%&quot;</span>)
+
+B &lt;-<span class="st"> </span><span class="dv">1000</span>
+percentil &lt;-<span class="st"> </span><span class="kw">numeric</span>(B)
+percentilt &lt;-<span class="st"> </span><span class="kw">numeric</span>(B)
+percentilts &lt;-<span class="st"> </span><span class="kw">numeric</span>(B)
+
+nsim &lt;-<span class="st"> </span><span class="dv">500</span>
+resultados &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="dt">dim =</span> <span class="kw">c</span>(nsim, <span class="dv">2</span>, <span class="dv">4</span>))
+<span class="kw">dimnames</span>(resultados) &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="ot">NULL</span>, <span class="kw">c</span>(<span class="st">&quot;Cobertura&quot;</span>, <span class="st">&quot;Longitud&quot;</span>),
+        <span class="kw">c</span>(<span class="st">&quot;Normal&quot;</span>, <span class="st">&quot;Percentil&quot;</span>, <span class="st">&quot;Percentil-t&quot;</span>, <span class="st">&quot;Percentil-t simetrizado&quot;</span>))
+<span class="co"># Bucle simulación</span>
+<span class="kw">set.seed</span>(<span class="dv">1</span>)
+<span class="cf">for</span> (isim <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>nsim) {
+    <span class="co"># Aproximación clásica</span>
+    muestra &lt;-<span class="st"> </span><span class="kw">rexp</span>(n, <span class="dt">rate =</span> <span class="fl">0.01</span>)
+    media &lt;-<span class="st"> </span><span class="kw">mean</span>(muestra)
+    desv &lt;-<span class="st"> </span><span class="kw">sd</span>(muestra)
+    z &lt;-<span class="st"> </span><span class="kw">qnorm</span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>alfa<span class="op">/</span><span class="dv">2</span>)
+    ic_inf &lt;-<span class="st"> </span>media <span class="op">-</span><span class="st"> </span>z<span class="op">*</span>desv<span class="op">/</span><span class="kw">sqrt</span>(n)
+    ic_sup &lt;-<span class="st"> </span>media <span class="op">+</span><span class="st"> </span>z<span class="op">*</span>desv<span class="op">/</span><span class="kw">sqrt</span>(n)
+    I0 &lt;-<span class="st"> </span><span class="kw">c</span>(ic_inf, ic_sup)
+    <span class="co"># names(I0) &lt;- namesI</span>
+    resultados[isim, <span class="dv">1</span>, <span class="dv">1</span>] &lt;-<span class="st"> </span>(I0[<span class="dv">1</span>] <span class="op">&lt;</span><span class="st"> </span>mu) <span class="op">&amp;&amp;</span><span class="st"> </span>(mu <span class="op">&lt;</span><span class="st"> </span>I0[<span class="dv">2</span>])
+    resultados[isim, <span class="dv">2</span>, <span class="dv">1</span>] &lt;-<span class="st"> </span>I0[<span class="dv">2</span>] <span class="op">-</span><span class="st"> </span>I0[<span class="dv">1</span>]
+    
+    <span class="co"># Remuestreo bootstrap</span>
+    <span class="cf">for</span> (k <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>B) {
+        remuestra &lt;-<span class="st"> </span><span class="kw">sample</span>(muestra, n, <span class="dt">replace =</span> <span class="ot">TRUE</span>)
+        percentil[k] &lt;-<span class="st"> </span><span class="kw">sqrt</span>(n) <span class="op">*</span><span class="st"> </span>(<span class="kw">mean</span>(remuestra) <span class="op">-</span><span class="st"> </span>media)
+        percentilt[k] &lt;-<span class="st"> </span>percentil[k]<span class="op">/</span><span class="kw">sd</span>(remuestra)
+        percentilts[k] &lt;-<span class="st"> </span><span class="kw">abs</span>(percentilt[k])
+    }
+    
+    <span class="co"># Aproximación bootstrap percentil</span>
+    pto_crit &lt;-<span class="st"> </span><span class="kw">quantile</span>(percentil, <span class="kw">c</span>(alfa<span class="op">/</span><span class="dv">2</span>, <span class="dv">1</span> <span class="op">-</span><span class="st"> </span>alfa<span class="op">/</span><span class="dv">2</span>))
+    <span class="co"># Construcción del IC</span>
+    ic_inf_boot &lt;-<span class="st"> </span>media <span class="op">-</span><span class="st"> </span>pto_crit[<span class="dv">2</span>]<span class="op">/</span><span class="kw">sqrt</span>(n)
+    ic_sup_boot &lt;-<span class="st"> </span>media <span class="op">-</span><span class="st"> </span>pto_crit[<span class="dv">1</span>]<span class="op">/</span><span class="kw">sqrt</span>(n)
+    I1 &lt;-<span class="st"> </span><span class="kw">c</span>(ic_inf_boot, ic_sup_boot)
+    <span class="co"># names(I1) &lt;- namesI</span>
+    resultados[isim, <span class="dv">1</span>, <span class="dv">2</span>] &lt;-<span class="st"> </span>(I1[<span class="dv">1</span>] <span class="op">&lt;</span><span class="st"> </span>mu) <span class="op">&amp;&amp;</span><span class="st"> </span>(mu <span class="op">&lt;</span><span class="st"> </span>I1[<span class="dv">2</span>])
+    resultados[isim, <span class="dv">2</span>, <span class="dv">2</span>] &lt;-<span class="st"> </span>I1[<span class="dv">2</span>] <span class="op">-</span><span class="st"> </span>I1[<span class="dv">1</span>]
+    
+    <span class="co"># Aproximación bootstrap percentil-t</span>
+    pto_crit &lt;-<span class="st"> </span><span class="kw">quantile</span>(percentilt, <span class="kw">c</span>(alfa<span class="op">/</span><span class="dv">2</span>, <span class="dv">1</span> <span class="op">-</span><span class="st"> </span>alfa<span class="op">/</span><span class="dv">2</span>))
+    <span class="co"># Construcción del IC</span>
+    ic_inf_boot &lt;-<span class="st"> </span>media <span class="op">-</span><span class="st"> </span>pto_crit[<span class="dv">2</span>] <span class="op">*</span><span class="st"> </span>desv<span class="op">/</span><span class="kw">sqrt</span>(n)
+    ic_sup_boot &lt;-<span class="st"> </span>media <span class="op">-</span><span class="st"> </span>pto_crit[<span class="dv">1</span>] <span class="op">*</span><span class="st"> </span>desv<span class="op">/</span><span class="kw">sqrt</span>(n)
+    I2 &lt;-<span class="st"> </span><span class="kw">c</span>(ic_inf_boot, ic_sup_boot)
+    <span class="co"># names(I2) &lt;- namesI</span>
+    resultados[isim, <span class="dv">1</span>, <span class="dv">3</span>] &lt;-<span class="st"> </span>(I2[<span class="dv">1</span>] <span class="op">&lt;</span><span class="st"> </span>mu) <span class="op">&amp;&amp;</span><span class="st"> </span>(mu <span class="op">&lt;</span><span class="st"> </span>I2[<span class="dv">2</span>])
+    resultados[isim, <span class="dv">2</span>, <span class="dv">3</span>] &lt;-<span class="st"> </span>I2[<span class="dv">2</span>] <span class="op">-</span><span class="st"> </span>I2[<span class="dv">1</span>]
+    
+    <span class="co"># Aproximación bootstrap percentil-t simetrizado</span>
+    pto_crit &lt;-<span class="st"> </span><span class="kw">quantile</span>(percentilts, <span class="dv">1</span> <span class="op">-</span><span class="st"> </span>alfa)
+    <span class="co"># Construcción del IC</span>
+    ic_inf_boot &lt;-<span class="st"> </span>media <span class="op">-</span><span class="st"> </span>pto_crit <span class="op">*</span><span class="st"> </span>desv<span class="op">/</span><span class="kw">sqrt</span>(n)
+    ic_sup_boot &lt;-<span class="st"> </span>media <span class="op">+</span><span class="st"> </span>pto_crit <span class="op">*</span><span class="st"> </span>desv<span class="op">/</span><span class="kw">sqrt</span>(n)
+    I3 &lt;-<span class="st"> </span><span class="kw">c</span>(ic_inf_boot, ic_sup_boot)
+    <span class="co"># names(I3) &lt;- namesI</span>
+    resultados[isim, <span class="dv">1</span>, <span class="dv">4</span>] &lt;-<span class="st"> </span>(I3[<span class="dv">1</span>] <span class="op">&lt;</span><span class="st"> </span>mu) <span class="op">&amp;&amp;</span><span class="st"> </span>(mu <span class="op">&lt;</span><span class="st"> </span>I3[<span class="dv">2</span>])
+    resultados[isim, <span class="dv">2</span>, <span class="dv">4</span>] &lt;-<span class="st"> </span>I3[<span class="dv">2</span>] <span class="op">-</span><span class="st"> </span>I3[<span class="dv">1</span>]
+}
+
+t.fin &lt;-<span class="st"> </span><span class="kw">proc.time</span>() <span class="op">-</span><span class="st"> </span>t.ini
+t.fin</code></pre></div>
+<pre><code>##    user  system elapsed 
+##   27.03    0.03   27.18</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">apply</span>(resultados, <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">3</span>), mean)</code></pre></div>
+<pre><code>##             Normal Percentil Percentil-t Percentil-t simetrizado
+## Cobertura  0.89200   0.88600     0.91200                 0.90400
+## Longitud  32.24304  32.05088    33.39516                33.34209</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># knitr::kable(t(apply(resultados, c(2, 3), mean)), digits = 3)</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Aproximación</th>
+<th align="right">Cobertura</th>
+<th align="right">Longitud</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Normal</td>
+<td align="right">0.892</td>
+<td align="right">32.243</td>
+</tr>
+<tr class="even">
+<td align="left">Percentil</td>
+<td align="right">0.886</td>
+<td align="right">32.051</td>
+</tr>
+<tr class="odd">
+<td align="left">Percentil-t</td>
+<td align="right">0.912</td>
+<td align="right">33.395</td>
+</tr>
+<tr class="even">
+<td align="left">Percentil-t simetrizado</td>
+<td align="right">0.904</td>
+<td align="right">33.342</td>
+</tr>
+</tbody>
+</table>
+<p>La siguiente tabla recoge las probabilidades de cobertura, estimadas por Monte Carlo, en una ejecución con tamaño muestral <span class="math inline">\(n=100\)</span>, <span class="math inline">\(N=10000\)</span> trials y <span class="math inline">\(B=1000\)</span> réplicas bootstrap para un nivel de confianza nominal del 90% (<span class="math inline">\(\alpha =0.10\)</span>).</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Aproximación</th>
+<th align="left">Cobertura IC</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Normal</td>
+<td align="left">88.60%</td>
+</tr>
+<tr class="even">
+<td align="left">Boot. percentil</td>
+<td align="left">88.60%</td>
+</tr>
+<tr class="odd">
+<td align="left">Boot. percentil-<span class="math inline">\(t\)</span></td>
+<td align="left">89.76%</td>
+</tr>
+<tr class="even">
+<td align="left">Boot. percentil-<span class="math inline">\(t\)</span> simetrizado</td>
+<td align="left">89.46%</td>
+</tr>
+</tbody>
+</table>
+<!-- 
+n = 30, n = 100, t.fin
+Example 5.12 (Exponential mean) 
+
+Implementar simulación con boot empleando
+ejecución en paralelo, 
+y bucles en paralelo?
+-->
+
+</div>
+<!-- </div> -->
             </section>
 
           </div>
         </div>
       </div>
-<a href="cap3.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="relacion-bootstrapjackknife-en-dicha-estimacion.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="cap5-err-cober.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="cap6.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -443,7 +495,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rubenfcasal/book_remuestreo/edit/master/03-jackknife.Rmd",
+"link": "https://github.com/rubenfcasal/book_remuestreo/edit/master/05-ic_boot.Rmd",
 "text": "Edit"
 },
 "history": {

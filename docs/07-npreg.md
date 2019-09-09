@@ -3,6 +3,7 @@
 
 
 
+
 ## Estimación no paramétrica de la función de regresión
 
 Sea $\left\{ \left( X_1,Y_1 \right),\left( X_2,Y_2 \right),\ldots

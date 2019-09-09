@@ -1,6 +1,5 @@
 # Estimación de la precisión y el sesgo de un estimador {#cap2}
 
-
 ```{r , child = '_global_options.Rmd'}
 ```
 

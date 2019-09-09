@@ -3,6 +3,7 @@
 ```{r , child = '_global_options.Rmd'}
 ``` 
 
+
 El jackknife es probablemente el método de remuestreo, propiamente
 dicho, más antiguo. Fue propuesto por Quenouille (1949) para estimar el
 sesgo de un estimador. Tukey (1958) bautiza el método y lo utiliza para
@@ -109,15 +110,15 @@ así que $\overline{\theta \left( \mathbf{X}_{(\cdot)}
 \right)}-\hat{\theta}$ es un estimador insesgado del sesgo de
 $\bar{X}$ (que es cero). De esta forma, utilizando un factor de
 elevación arbitrario, $c$, se tiene igualmente que
-$c\left( \overline{\theta
-\left( \mathbf{X}_{(\cdot)} \right)}-\hat{\theta}
- \right) =0$, así que es también un estimador insesgado de 
-$Sesgo\left( \bar{X} \right) =0$. 
+$$c\left( \overline{\theta \left( \mathbf{X}_{(\cdot)} \right)}
+- \hat{\theta} \right) = 0,$$
+así que es también un estimador insesgado de 
+$Sesgo\left( \bar{X} \right) =0.$$
 Determinaremos el valor de $c$
 imponiendo que el estimador jackknife de la varianza de dicho estimador
 ($\hat{\theta}=\bar{X}$) es una estimador insesgado de la varianza de
 dicho estimador. Por una parte, es bien conocido que la varianza de
-$\hat{\theta}$ es $Var\left( \bar{X} \right) =\frac{\sigma^2}{n}$. 
+$\hat{\theta}$ es $Var\left( \bar{X} \right) = \sigma^2 /n$. 
 Por otra parte, la estimación jackknife de la varianza de $\hat{\theta}$,
 con factor de elevación $c$ es
 
@@ -235,7 +236,7 @@ i,k\neq j}^{n}\left( X_{k}-\mu \right) \right] \\
 \end{aligned}$$
 
 Además, ya hemos visto anteriormente que $E\left( S_n^2 \right) =
-\frac{n-1}{n}\sigma^2$, con o cual la esperanza del estimador
+(n-1)\sigma^2/n$, con o cual la esperanza del estimador
 jackknife del sesgo es
 $$\begin{aligned}
 c\left( \frac{n-2}{n-1}\sigma^2-\frac{n-1}{n}\sigma^2 \right)
@@ -332,7 +333,7 @@ $$Var_{jackk}\left( \hat{\theta} \right) =\frac{n}{n-1}Var_{boot}\left( \hat{
 Dicho en otras palabras, para cualquier estimador cuadrático, el sesgo
 jackknife es mayor que el sesgo bootstrap. Si el estimador es lineal, la
 varianza jackknife es mayor que la varianza bootstrap. En ambos casos,
-el factor multiplicador es $\frac{n}{n-1}$.
+el factor multiplicador es $n/(n-1)$.
 
 
 ```{example, label="estimacion-jack-precision", name="Aproximación jackknife de la precisión de estimaciones del tiempo de vida medio de microorganismos"}

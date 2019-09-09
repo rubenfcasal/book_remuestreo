@@ -3,7 +3,6 @@
 
 
 
-
 Etimología: bootstrap = cinta de la bota (oreja lateral para calzarse
 las botas). Modismo anglosajón: to pull oneself up by one’s bootstraps.
 
@@ -111,14 +110,10 @@ hist(muestra, freq = FALSE, xlim = c(-3, 3),
 curve(dnorm, lty = 2, add = TRUE)
 ```
 
-\begin{figure}[!htb]
-
-{\centering \includegraphics[width=0.7\linewidth]{01-intro_files/figure-latex/muestra-sim-1} 
-
-}
-
-\caption{Distribución de la muestra simulada.}(\#fig:muestra-sim)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="01-intro_files/figure-html/muestra-sim-1.png" alt="Distribución de la muestra simulada." width="70%" />
+<p class="caption">(\#fig:muestra-sim)Distribución de la muestra simulada.</p>
+</div>
 Como aproximación de la distribución poblacional, desconocida en la práctica,
 siempre podemos considerar la distribución empírica 
 (o una versión suavizada: bootstrap suavizado; Sección \@ref(cap4-boot-suav)). 
@@ -134,14 +129,10 @@ curve(pnorm, lty = 3, add = TRUE)
 legend("bottomright", legend = c("Empírica", "Aprox. paramétrica", "Teórica"), lty = 1:3)
 ```
 
-\begin{figure}[!htb]
-
-{\centering \includegraphics[width=0.7\linewidth]{01-intro_files/figure-latex/muestra-sim-aprox-1} 
-
-}
-
-\caption{Distribución teórica de la muestra simulada y distintas aproximaciones.}(\#fig:muestra-sim-aprox)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="01-intro_files/figure-html/muestra-sim-aprox-1.png" alt="Distribución teórica de la muestra simulada y distintas aproximaciones." width="70%" />
+<p class="caption">(\#fig:muestra-sim-aprox)Distribución teórica de la muestra simulada y distintas aproximaciones.</p>
+</div>
 
 
 A partir de la aproximación $\hat{F}$ podríamos generar, condicionalmente a la muestra observada, 
@@ -274,7 +265,6 @@ A partir de los cuales queremos
 obtener una estimación por intervalo de confianza de su vida media,
 suponiendo que la desviación típica es conocida e igual a 0.6
 (en el Capítulo \@ref(cap5) se tratará con más detalle la construcción de intervalos de confianza).</div>\EndKnitrBlock{example}
-[Figura \@ref(fig:microorganismos)]
 
 ```r
 muestra <- c(0.143, 0.182, 0.256, 0.26, 0.27, 0.437, 0.509, 
@@ -301,14 +291,11 @@ hist(muestra)
 rug(muestra)
 ```
 
-\begin{figure}[!htb]
+<div class="figure" style="text-align: center">
+<img src="01-intro_files/figure-html/microorganismos-1.png" alt="Distribución del tiempo de vida de microorganismos." width="70%" />
+<p class="caption">(\#fig:microorganismos)Distribución del tiempo de vida de microorganismos.</p>
+</div>
 
-{\centering \includegraphics[width=0.7\linewidth]{01-intro_files/figure-latex/microorganismos-1} 
-
-}
-
-\caption{Distribución del tiempo de vida de microorganismos.}(\#fig:microorganismos)
-\end{figure}
 
 ***Contexto clásico***
 
@@ -380,7 +367,7 @@ $x_{1-\alpha /2}$, tales que:
 $$P\left( x_{\alpha /2} < R < x_{1-\alpha /2} \right) = 1-\alpha.$$
 Para lo que podemos emplear los cuantiles muestrales^[
 Se podrían considerar distintos estimadores del cuantil $x_{\alpha}$ 
-(ver p.e. la ayuda de la función `quantile`).
+(ver p.e. la ayuda de la función `quantile()`).
 Si empleamos directamente la distribución empírica, el cuantil se 
 correspondería con la observación ordenada en la posición $B \alpha$ 
 (se suele hacer una interpolación lineal si este valor no es entero), 
@@ -388,9 +375,8 @@ lo que equivale a emplear la función `quantile()` de `R` con el parámetro
 `type = 1`. Esta función considera por defecto la posición 
 $1 + (B - 1) \alpha$ (`type = 7`).
 En el libro de Davison y Hinkley (1997), y en el paquete `boot`, se emplea $(B + 1) \alpha$ (equivalente a `type = 6`; lo que justifica que
-consideren habitualmente 999 réplicas bootstrap).]:
+consideren habitualmente 99, 199 ó 999 réplicas bootstrap).]:
 
-<!-- probar type = 1 en quantile -->
 
 
 ```r
@@ -421,12 +407,12 @@ $$\hat{IC}^{boot}_{1-\alpha}\left(  \mu\right)  =
 ic_inf_boot <- x_barra - pto_crit[2] * sigma/sqrt(n)
 ic_sup_boot <- x_barra - pto_crit[1] * sigma/sqrt(n)
 IC_boot <- c(ic_inf_boot, ic_sup_boot)
-names(IC_boot) <- paste0(100*c(alfa, 1-alfa), "%") # rev(names(IC_boot))
+names(IC_boot) <- paste0(100*c(alfa/2, 1-alfa/2), "%") # rev(names(IC_boot))
 IC_boot
 ```
 
 ```
-##        5%       95% 
+##      2.5%     97.5% 
 ## 0.7135570 0.8960555
 ```
 Nótese que este intervalo de confianza no está centrado en la media,
@@ -444,14 +430,10 @@ curve(dnorm, lty = 2, add = TRUE)
 abline(v = c(-z, z), lty = 2)
 ```
 
-\begin{figure}[!htb]
-
-{\centering \includegraphics[width=0.7\linewidth]{01-intro_files/figure-latex/estad-boot-1} 
-
-}
-
-\caption{Distribución del estadístico boostrap y aproximaciones de los cuantiles. Con línea discontinua se muestra la distribución normal asintótica.}(\#fig:estad-boot)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="01-intro_files/figure-html/estad-boot-1.png" alt="Distribución del estadístico boostrap y aproximaciones de los cuantiles. Con línea discontinua se muestra la distribución normal asintótica." width="70%" />
+<p class="caption">(\#fig:estad-boot)Distribución del estadístico boostrap y aproximaciones de los cuantiles. Con línea discontinua se muestra la distribución normal asintótica.</p>
+</div>
 
 
 ## El Bootstrap uniforme {#cap1-unif}
@@ -576,7 +558,7 @@ Var^{\ast}\left( R^{\ast} \right) &= n\frac{Var^{\ast}\left( \bar{X}^{\ast} \rig
 Es curioso observar que la esperanza de $R$ y la esperanza bootstrap de
 $R^{\ast}$ coinciden (son ambas cero), pero no ocurre lo mismo con sus
 varianzas: la de $R$ es $1$ y la varianza bootstrap de $R^{\ast}$ es
-$\frac{S_n^2}{\sigma^2}$, que, aunque tiende a $1$ (en probabilidad o de
+$S_n^2/\sigma^2$, que, aunque tiende a $1$ (en probabilidad o de
 forma casi segura, bajo las condiciones adecuadas) cuando $n\rightarrow
 \infty$, no es igual a $1$. Eso nos lleva a intuir que el método de
 remuestreo bootstrap propuesto quizá podría modificarse ligeramente para
@@ -653,12 +635,12 @@ pto_crit <- quantile(estadistico_boot, c(alfa/2, 1 - alfa/2))
 ic_inf_boot <- x_barra - pto_crit[2] * sigma/sqrt(n)
 ic_sup_boot <- x_barra - pto_crit[1] * sigma/sqrt(n)
 IC_boot <- c(ic_inf_boot, ic_sup_boot)
-names(IC_boot) <- paste0(100*c(alfa, 1-alfa), "%")
+names(IC_boot) <- paste0(100*c(alfa/2, 1-alfa/2), "%")
 IC_boot
 ```
 
 ```
-##        5%       95% 
+##      2.5%     97.5% 
 ## 0.7132745 0.8953890
 ```
 
@@ -746,12 +728,12 @@ pto_crit <- quantile(estadistico_boot, c(alfa/2, 1 - alfa/2))
 ic_inf_boot <- x_mediana - pto_crit[2]/sqrt(n)
 ic_sup_boot <- x_mediana - pto_crit[1]/sqrt(n)
 IC_boot <- c(ic_inf_boot, ic_sup_boot)
-names(IC_boot) <- paste0(100*c(alfa, 1-alfa), "%")
+names(IC_boot) <- paste0(100*c(alfa/2, 1-alfa/2), "%")
 IC_boot
 ```
 
 ```
-##    5%   95% 
+##  2.5% 97.5% 
 ## 0.510 0.713
 ```
 
@@ -898,13 +880,13 @@ Veámoslo:
 $$P^{\ast}\left( X_{(m)}^{\ast}>X_{(j)} \right)
 =P^{\ast}\left( \#\left\{ X_i^{\ast}\leq X_{(j)}\right\}
 \leq m-1 \right),$$
-pero $\#\left\{ X_i^{\ast}\leq X_{(j)}\right\} \sim \mathcal{B}\left(
-n,\frac{j}{n} \right)$, con lo cual
-
+pero 
+$$\#\left\{ X_i^{\ast}\leq X_{(j)}\right\} \sim \mathcal{B}\left(
+n,\frac{j}{n} \right),$$
+con lo cual
 $$P^{\ast}\left( X_{(m)}^{\ast}>X_{(j)} \right)
 =\sum_{k=0}^{m-1}\binom{n}{k}\left( \frac{j}{n} \right)^{k}
 \left( \frac{n-j}{n} \right)^{n-k}$$
-
 y, por lo tanto, si $j\geq 2$, 
 $$\begin{aligned}
 P^{\ast}\left( X_{(m)}^{\ast}=X_{(j)} \right)
@@ -1047,12 +1029,12 @@ pto_crit <- quantile(estadistico_boot, c(alfa/2, 1 - alfa/2))
 ic_inf_boot <- x_barra - pto_crit[2] * cuasi_dt/sqrt(n)
 ic_sup_boot <- x_barra - pto_crit[1] * cuasi_dt/sqrt(n)
 IC_boot <- c(ic_inf_boot, ic_sup_boot)
-names(IC_boot) <- paste0(100*c(alfa, 1-alfa), "%")
+names(IC_boot) <- paste0(100*c(alfa/2, 1-alfa/2), "%")
 IC_boot
 ```
 
 ```
-##        5%       95% 
+##      2.5%     97.5% 
 ## 0.4940304 1.2260180
 ```
 
@@ -1077,14 +1059,14 @@ media, error estándar y cuantiles
 Evidentemente, la función de distribución del estadístico de interés,
 $\psi \left( u \right) =P\left( R\leq u \right)$, se estimaría mediante
 la distribución empírica de las $B$ realizaciones de la aproximación de
-Monte Carlo, $\hat{\psi}_{B}\left( u \right) =
-\frac{1}{B}\sum_{i=1}^{B}\mathbf{1}\left\{ R^{\ast (i)}\leq u\right\}$, 
-de la verdadera distribución bootstrap exacta: $\hat{\psi}\left(
-u \right) =P^{\ast}\left( R^{\ast}\leq u \right)$. El error de Monte
-Carlo de $\hat{\psi}_{B}\left( u \right)$ con respecto a
-$\hat{\psi}\left(
-u \right)$ viene dado por su varianza Monte Carlo, pues su sesgo Monte
-Carlo es cero:
+Monte Carlo, 
+$$\hat{\psi}_{B}\left( u \right) =
+\frac{1}{B}\sum_{i=1}^{B}\mathbf{1}\left\{ R^{\ast (i)}\leq u\right\},$$
+de la verdadera distribución bootstrap exacta: 
+$\hat{\psi}\left(u \right) =P^{\ast}\left( R^{\ast}\leq u \right)$. 
+El error de MonteCarlo de $\hat{\psi}_{B}\left( u \right)$ con respecto 
+a $\hat{\psi}\left( u \right)$ viene dado por su varianza Monte Carlo, 
+pues su sesgo Monte Carlo es cero:
 
 $$\begin{aligned}
 E^{MC}\left( \hat{\psi}_{B}\left( u \right) \right) &= \frac{1}{B}
@@ -1282,21 +1264,17 @@ res.boot
 ## t1*    0.611 0.042895   0.2495372
 ```
 y el método `plot()` que genera gráficas básicas de diagnosis
-de los resultados (correspondientes al estadístico determinado por el parámetro `index`, por defecto `= 1`): [Figura \@ref(fig:plot-res-boot)]
+de los resultados (correspondientes al estadístico determinado por el parámetro `index`, por defecto `= 1`): 
 
 
 ```r
 plot(res.boot)
 ```
 
-\begin{figure}[!htb]
-
-{\centering \includegraphics[width=0.7\linewidth]{01-intro_files/figure-latex/plot-res-boot-1} 
-
-}
-
-\caption{Gráficos de diagnóstico de los resultados bootstrap de la mediana de los tiempos de vida de microorganismos.}(\#fig:plot-res-boot)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="01-intro_files/figure-html/plot-res-boot-1.png" alt="Gráficos de diagnóstico de los resultados bootstrap de la mediana de los tiempos de vida de microorganismos." width="70%" />
+<p class="caption">(\#fig:plot-res-boot)Gráficos de diagnóstico de los resultados bootstrap de la mediana de los tiempos de vida de microorganismos.</p>
+</div>
 
 
 Además de estos métodos, las principales funciones de interés serían:

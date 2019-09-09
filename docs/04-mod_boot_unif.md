@@ -3,6 +3,7 @@
 
 
 
+
 El bootstrap uniforme (o naïve) es aquel en el que remuestreamos a
 partir de la función de distribución empírica. Eso es muy razonable
 cuando no tenemos ninguna información adicional sobre la función de
@@ -128,12 +129,12 @@ pto_crit <- quantile(estadistico_boot, c(alfa/2, 1 - alfa/2))
 ic_inf_boot <- x_barra - pto_crit[2] * sigma/sqrt(n)
 ic_sup_boot <- x_barra - pto_crit[1] * sigma/sqrt(n)
 IC_boot <- c(ic_inf_boot, ic_sup_boot)
-names(IC_boot) <- paste0(100*c(alfa, 1-alfa), "%")
+names(IC_boot) <- paste0(100*c(alfa/2, 1-alfa/2), "%")
 IC_boot
 ```
 
 ```
-##        5%       95% 
+##      2.5%     97.5% 
 ## 0.5236922 1.1217871
 ```
 
@@ -197,14 +198,10 @@ curve(pexp(x, 1/mean(muestra)), lty = 3, add = TRUE)
 legend("bottomright", legend = c("Empírica", "Aprox. normal", "Aprox. exponencial"), lty = 1:3)
 ```
 
-\begin{figure}[!htb]
-
-{\centering \includegraphics[width=0.7\linewidth]{04-mod_boot_unif_files/figure-latex/boot-par-aprox-1} 
-
-}
-
-\caption{Distribución empírica de la muestra de tiempos de vida de microorganismos y aproximaciones paramétricas.}(\#fig:boot-par-aprox)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="04-mod_boot_unif_files/figure-html/boot-par-aprox-1.png" alt="Distribución empírica de la muestra de tiempos de vida de microorganismos y aproximaciones paramétricas." width="70%" />
+<p class="caption">(\#fig:boot-par-aprox)Distribución empírica de la muestra de tiempos de vida de microorganismos y aproximaciones paramétricas.</p>
+</div>
 Solo tendríamos que cambiar la función que genera los datos:
 
 ```r
@@ -228,8 +225,9 @@ Supongamos que conocemos que la función de distribución poblacional es
 simétrica entorno a cierto valor. Eso significa que existe un valor $c$
 tal que $F\left( c-h \right) =1-F\left( c+h \right)$ para todo $h>0$.
 Equivalentemente, una variable aleatoria es simétrica entorno a $c$ si
-su función de distribución verifica $F\left( x \right) =1-F\left(
-2c-x \right)$ para todo $x\in \mathbb{R}$. Puede demostrarse que dicho
+su función de distribución verifica 
+$$F\left( x \right) = 1 - F\left( 2c - x \right)$$ 
+para todo $x\in \mathbb{R}$. Puede demostrarse que dicho
 centro de simetría, $c$, ha de ser la media de la distribución, 
 $\mu$, en caso de que exista. Esa información (la simetría) sobre la
 distribución poblacional también se debe incorporarse en el bootstrap.
@@ -248,10 +246,10 @@ X_i & \text{si } i=1,\ldots ,n \\
 \right.$$
 
 con lo cual
-$F_n^{sim}\left( x \right) =\frac{1}{2n}\sum_{i=1}^{2n}\mathbf{1}\left( Y_i\leq x \right)$. 
+$$F_n^{sim}\left( x \right) =\frac{1}{2n}\sum_{i=1}^{2n}\mathbf{1}\left( Y_i\leq x \right).$$
 Puede demostrarse fácilmente que
-$F_n^{sim}\left( x \right) =\frac{1}{2}\left( F_n\left( x \right)
-+1-F_n\left( 2\bar{X}-x \right) \right)$.
+$$F_n^{sim}\left( x \right) =\frac{1}{2}\left( F_n\left( x \right)
++1-F_n\left( 2\bar{X}-x \right) \right).$$
 
 Al diseñar el plan de remuestreo debemos utilizar $F_n^{sim}$
 (bootstrap simetrizado), en lugar de $F_n$ (bootstrap uniforme).
@@ -344,7 +342,7 @@ la de $F_n\left( x \right)$, que es $S_n^2$.
 En general, cuando la distribución de partida es simétrica, es más
 adecuado utilizar el bootstrap simetrizado que el bootstrap uniforme.
 Aún así, cuando se realiza inferencia sobre algún estadístico (como
-$\sqrt{n}\frac{\bar{X}-\mu }{\sigma }$) cuya distribución
+$\sqrt{n}(\bar{X}-\mu)/\sigma$) cuya distribución
 asintótica ya es simétrica (como la normal), la aproximación bootstrap
 uniforme para distribuciones de partida simétricas, ya es especialmente
 buena y, por tanto, la ganancia del bootstrap simétrizado aporta una
@@ -383,7 +381,8 @@ por Parzen (1962) y Rosenblatt (1956), que viene dado por
 $$\hat{f}_{h}\left( x \right) =\frac{1}{nh}\sum_{i=1}^{n}K\left( \frac{x-X_i}{
 h} \right) =\frac{1}{n}\sum_{i=1}^{n}K_{h}\left( x-X_i \right),$$
 
-donde $K_{h}\left( u \right) =\frac{1}{h}K\left( \frac{u}{h} \right)$,
+donde 
+$$K_{h}\left( u \right) =\frac{1}{h}K\left( \frac{u}{h} \right),$$
 $K$ es una función núcleo (normalmente una densidad simétrica en torno
 al cero) y $h>0$ es una parámetro de suavizado, llamado ventana, que
 regula el tamaño del entorno que se usa para llevar a cabo la
@@ -435,14 +434,10 @@ lines(npden, lwd = 2)
 rug(x, col = "darkgray")
 ```
 
-\begin{figure}[!htb]
-
-{\centering \includegraphics[width=0.7\linewidth]{04-mod_boot_unif_files/figure-latex/density-1} 
-
-}
-
-\caption{Estimación tipo núcleo de la densidad de `precip`. }(\#fig:density)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="04-mod_boot_unif_files/figure-html/density-1.png" alt="Estimación tipo núcleo de la densidad de `precip`. " width="70%" />
+<p class="caption">(\#fig:density)Estimación tipo núcleo de la densidad de `precip`. </p>
+</div>
 
 La sensibilidad del estimador tipo núcleo al parámetro de suavizado puede
 observarse ejecutando el siguiente código (ver Figura \@ref(fig:bandwidth-movie), [bandwidth-movie.gif](./bandwidth-movie.gif)):
@@ -457,14 +452,10 @@ for (bw in bws)
 ```
 
 
-\begin{figure}[!htb]
-
-{\centering \includegraphics[width=0.7\linewidth]{04-mod_boot_unif_files/figure-latex/bandwidth-movie-1} 
-
-}
-
-\caption{Efecto de cambio en la ventana en la estimación tipo núcleo de la densidad.}(\#fig:bandwidth-movie)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="bandwidth-movie.gif" alt="Efecto de cambio en la ventana en la estimación tipo núcleo de la densidad." width="70%" />
+<p class="caption">(\#fig:bandwidth-movie)Efecto de cambio en la ventana en la estimación tipo núcleo de la densidad.</p>
+</div>
 
 
 La función de distribución asociada al estimador tipo núcleo de la
@@ -480,8 +471,8 @@ K\left( \frac{y-X_i}{h} \right) dy \\
 \end{aligned}$$
 donde $\mathbb{K}$ es la función de distribución
 asociada al núcleo $K$, es decir
-$\mathbb{K}\left( t \right) =\int_{-\infty }^{t}K\left(
-u \right) du$.
+$$\mathbb{K}\left( t \right) =\int_{-\infty }^{t}K\left(
+u \right) du.$$
 
 El método bootstrap suavizado procede de la siguiente forma:
 
@@ -561,14 +552,10 @@ plot(npden)
 lines(density(x_boot), col = "blue", lwd = 2, lty = 2)
 ```
 
-\begin{figure}[!htb]
-
-{\centering \includegraphics[width=0.7\linewidth]{04-mod_boot_unif_files/figure-latex/density-sim-1} 
-
-}
-
-\caption{Estimaciónes tipo núcleo de las densidades de `precip` y de una simulación.}(\#fig:density-sim)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="04-mod_boot_unif_files/figure-html/density-sim-1.png" alt="Estimaciónes tipo núcleo de las densidades de `precip` y de una simulación." width="70%" />
+<p class="caption">(\#fig:density-sim)Estimaciónes tipo núcleo de las densidades de `precip` y de una simulación.</p>
+</div>
 
 Es fácil percatarse de que los posibles valores que puede tomar una
 observación $X_i^{\ast}$ de cada remuestra bootstrap son infinitos,
@@ -624,12 +611,12 @@ pto_crit <- quantile(estadistico_boot, c(alfa/2, 1 - alfa/2))
 ic_inf_boot <- x_barra - pto_crit[2] * sigma/sqrt(n)
 ic_sup_boot <- x_barra - pto_crit[1] * sigma/sqrt(n)
 IC_boot <- c(ic_inf_boot, ic_sup_boot)
-names(IC_boot) <- paste0(100*c(alfa, 1-alfa), "%")
+names(IC_boot) <- paste0(100*c(alfa/2, 1-alfa/2), "%")
 IC_boot
 ```
 
 ```
-##        5%       95% 
+##      2.5%     97.5% 
 ## 0.4592311 1.1103890
 ```
 
@@ -724,14 +711,10 @@ n <- 50
 curve(n/theta * (x/theta)^(n - 1), 0, theta, ylab = "Density")
 ```
 
-\begin{figure}[!htb]
-
-{\centering \includegraphics[width=0.7\linewidth]{04-mod_boot_unif_files/figure-latex/den-max-1} 
-
-}
-
-\caption{Función de densidad del máximo de una muestra procedente de una uniforme.}(\#fig:den-max)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="04-mod_boot_unif_files/figure-html/den-max-1.png" alt="Función de densidad del máximo de una muestra procedente de una uniforme." width="70%" />
+<p class="caption">(\#fig:den-max)Función de densidad del máximo de una muestra procedente de una uniforme.</p>
+</div>
 
 Como consecuencia podemos hallar fácilmente el sesgo del estimador
 $\hat{\theta}$, ya que
@@ -739,8 +722,9 @@ $$E\left( \hat{\theta} \right) =\int_{0}^{\theta }x\frac{n}{\theta }\left(
 \frac{x}{\theta } \right)^{n-1}dx=\left[ \frac{n}{n+1}\frac{x^{n+1}}{\theta
 ^{n}}\right] _{x=0}^{x=\theta }=\frac{n}{n+1}\theta ,$$
 con lo cual
-$Sesgo\left( \hat{\theta} \right) =E\left( \hat{\theta} \right)
--\theta =$ $-\frac{\theta }{n+1}$. Se ve claramente que $\hat{\theta}$
+$$Sesgo\left( \hat{\theta} \right) =E\left( \hat{\theta} \right)
+-\theta = -\frac{\theta }{n+1}.$$
+Se ve claramente que $\hat{\theta}$
 es un estimador sesgado de $\theta$, puesto que se tiene que
 $\hat{\theta}\leq
 \theta$ con probabilidad 1.
@@ -817,14 +801,10 @@ rug(estadistico, col = "darkgray")
 curve(n/theta * ((x + theta)/theta)^(n - 1), col = "blue", lty = 2, lwd = 2, add = TRUE)
 ```
 
-\begin{figure}[!htb]
-
-{\centering \includegraphics[width=0.7\linewidth]{04-mod_boot_unif_files/figure-latex/boot-uniforme-maximo-1} 
-
-}
-
-\caption{Distribución de las réplicas bootstrap (uniforme) del estadístico y distribución poblacional.}(\#fig:boot-uniforme-maximo)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="04-mod_boot_unif_files/figure-html/boot-uniforme-maximo-1.png" alt="Distribución de las réplicas bootstrap (uniforme) del estadístico y distribución poblacional." width="70%" />
+<p class="caption">(\#fig:boot-uniforme-maximo)Distribución de las réplicas bootstrap (uniforme) del estadístico y distribución poblacional.</p>
+</div>
 
 ### Ejemplo (método alternativo)
 
@@ -875,14 +855,10 @@ rug(estadistico, col = "darkgray")
 curve(n/theta * ((x + theta)/theta)^(n - 1), col = "blue", lty = 2, lwd = 2, add = TRUE)
 ```
 
-\begin{figure}[!htb]
-
-{\centering \includegraphics[width=0.7\linewidth]{04-mod_boot_unif_files/figure-latex/boot-parametrico-maximo-1} 
-
-}
-
-\caption{Distribución bootstrap paramétrica y distribución poblacional.}(\#fig:boot-parametrico-maximo)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="04-mod_boot_unif_files/figure-html/boot-parametrico-maximo-1.png" alt="Distribución bootstrap paramétrica y distribución poblacional." width="70%" />
+<p class="caption">(\#fig:boot-parametrico-maximo)Distribución bootstrap paramétrica y distribución poblacional.</p>
+</div>
 
 <!-- 
 Ejercicio con el máximo de otra distribución?
@@ -964,7 +940,7 @@ viceversa.
 
 Como consecuencia de este resultado teórico, el grado de aproximación
 entre la distribución de $R$ y la normal estándar límite es
-$O\left( n^{-\frac{1}{2}} \right)$. Sin embargo, puede razonarse
+$O (n^{-\frac{1}{2}})$. Sin embargo, puede razonarse
 fácilmente que este orden de aproximación mejorará cuando utilizamos el
 bootstrap uniforme, en lugar de la normal estándar, para aproximar la
 distribución de $R$. Un desarrollo de Edgeworth para la distribución en
@@ -980,10 +956,8 @@ donde los polinomios $\hat{p}_i\left( u \right)$ tienen la misma
 estructura que los $p_i\left( u \right)$ pero reemplazando los
 cumulantes teóricos por los empíricos y la desviación típica teórica por
 la empírica. Así pues el grado de aproximación entre cada polinomio
-$\hat{p}_i\left( u \right)$ y su análogo teórico
-$p_i\left( u \right)$ es
-$\hat{p}_i\left( u \right) -p_i\left( u \right)
-=O_{P}\left( n^{-\frac{1}{2}} \right)$. 
+$\hat{p}_i( u )$ y su análogo teórico $p_i( u )$ es
+$\hat{p}_i( u ) -p_i( u ) = O_{P}( n^{-\frac{1}{2}} )$. 
 Como consecuencia, puede obtenerse el orden de aproximación entre la distribución 
 en el muestreo de $R$ y la distribución en el remuestreo de $R^{\ast}$:
 $$\begin{aligned}

@@ -3,8 +3,6 @@
 
 
 
-
-
 En este capítulo se hace una introducción a los datos censurados y se
 presentan diversos métodos de remuestreo para este contexto, analizando
 la validez de los mismos.
@@ -25,23 +23,26 @@ observación es censurada y sólo seremos capaces de observar $C$ junto
 con el valor de $\delta$. Cuando $X\leq C$ entonces somos capaces de
 observar la variable de interés y además el valor de $\delta$.
 
-En resumen, en lugar de observar la muestra $\left( X_1,X_2,\ldots
-,X_n \right)$, sólo podemos observar $\left( \left( T_1,\delta
-_1 \right),\left( T_2,\delta _2 \right),\ldots ,\left( T_n,\delta
-_n \right) \right)$, siendo $T_i=\min \left\{ X_i,C_i\right\}$
+En resumen, en lugar de observar la muestra 
+$\left( X_1, X_2, \ldots, X_n \right)$, sólo podemos observar 
+$$\left( \left( T_1, \delta _1 \right), \left( T_2, \delta _2 \right),
+\ldots ,\left( T_n, \delta_n \right) \right),$$
+siendo $T_i=\min \left\{ X_i,C_i\right\}$
 los tiempos de vida observados y
-$\delta _i=\mathbf{1}_{\left\{ X_i\leq
-C_i\right\} }=\mathbf{1}_{\left\{ T_i=X_i\right\} }$ los
-indicadores de censura, para $i=1,2,\ldots ,n$. En el modelo de censura
-aleatoria por la derecha, que es el más habitual, se supone que $X_i$
-y $C_i$ ($i=1,2,\ldots ,n$) son independientes. Además $\left( X_1,X_2,\ldots
-,X_n \right)$ son mutuamente independientes, como también lo son
-$\left( C_1,C_2,\ldots ,C_n \right)$.
+$$\delta _i=\mathbf{1}_{\left\{ X_i\leq
+C_i\right\} }=\mathbf{1}_{\left\{ T_i=X_i\right\} }$$ 
+los indicadores de censura, para $i=1,2,\ldots ,n$. 
+En el modelo de censura aleatoria por la derecha, 
+que es el más habitual, se supone que $X_i$
+y $C_i$ ($i=1,2,\ldots ,n$) son independientes. 
+Además $\left( X_1, X_2, \ldots ,X_n \right)$ son mutuamente independientes, 
+como también lo son $\left( C_1, C_2,\ldots ,C_n \right)$.
 
 Denotando por $F$ (respectivamente $G$ y $H$) la función de distribución
 de la variable aleatoria $X$ (respectivamente $C$ y $T$), la condición
-de independencia implica que $1-H\left( t \right) =\left( 1-F\left(
-t \right) \right) \left( 1-G\left( t \right) \right)$.
+de independencia implica que 
+$$1-H\left( t \right) =\left( 1-F\left(
+t \right) \right) \left( 1-G\left( t \right) \right).$$
 
 ### Estimador de Kaplan-Meier
 
@@ -120,14 +121,10 @@ with(fit, {
 })
 ```
 
-\begin{figure}[!htb]
-
-{\centering \includegraphics[width=0.7\linewidth]{08-dat_cen_files/figure-latex/survival-1} 
-
-}
-
-\caption{Estimaciones Kaplan-Meier de la función de supervivencia y de la función de distribución.}(\#fig:survival)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="08-dat_cen_files/figure-html/survival-1.png" alt="Estimaciones Kaplan-Meier de la función de supervivencia y de la función de distribución." width="70%" />
+<p class="caption">(\#fig:survival)Estimaciones Kaplan-Meier de la función de supervivencia y de la función de distribución.</p>
+</div>
 
 ```r
 par(old.par)
@@ -165,7 +162,7 @@ u,\delta =1 \right).
 También existen resultados de convergencia en distribución del 
 proceso estocástico
 $$\left\{ \sqrt{n}\left( \hat{F}\left( t \right) - F\left( t \right)
- \right), t \in \left[ 0,H^{-1}(1) \right] \right\}$$
+ \right) : t \in \left[ 0,H^{-1}(1) \right] \right\}$$
 a un proceso gaussiano límite.
 
 
@@ -210,7 +207,7 @@ Procede de la siguiente forma:
 
 Este método es de muy rápida implementación y ejecución.
 
-### El bootstrap obvio
+### El bootstrap obvio {#cap8-obvio}
 
 Para detallar el método es necesario definir el estimador de
 Kaplan-Meier, $\hat{G}\left( t \right)$, de la variable censurante, a
@@ -281,7 +278,8 @@ t}\left( \frac{n-i}{n-i+1} \right)^{1-\delta _{(i)}}\right] \\
 T_{(j)}\leq t\right\} }{n-\#\left\{ T_{(j)}\leq
 t\right\} +1} \\
 &= \frac{n-\#\left\{ T_{(j)}\leq t\right\} }{n}=1-H_n\left(
-t \right) =\frac{\#\left\{ T_{(j)}>t\right\} }{n},\end{aligned}$$
+t \right) =\frac{\#\left\{ T_{(j)}>t\right\} }{n},
+\end{aligned}$$
 
 siendo $H_n\left( t \right)$ la distribución empírica de la muestra
 $\left( T_1,T_2,\ldots ,T_n \right)$.
@@ -294,7 +292,7 @@ ambos casos. Pero esto es inmediato ya que, en los dos remuestreos esa
 distribución condicionada es la degenerada en el valor
 $\delta _i$.
 
-### El bootstrap de Reid
+### El bootstrap de Reid {#cap8-reid}
 
 Es otro método alternativo propuesto por Reid (1981). Consta de los
 siguientes pasos:
@@ -316,10 +314,13 @@ siguientes pasos:
 ### Validez de los planes de remuestreo
 
 Akritas (1986) demuestra que los procesos bootstrap
-$\sqrt{n}\left( \hat{F}
-^{\ast}_{Efron}\left( t \right) -\hat{F}\left( t \right) \right)$ y
-$\sqrt{n}\left( \hat{F}^{\ast}_{Reid}\left( t \right) -\hat{F}\left(
-t \right) \right)$ tienden a sendos procesos límite distintos. Aquí
+$$\begin{aligned}
+\sqrt{n}\left( \hat{F}^{\ast}_{Efron}\left( t \right) 
+- \hat{F}\left( t \right) \right) \\ 
+\sqrt{n}\left( \hat{F}^{\ast}_{Reid} \left( t \right) 
+- \hat{F}\left( t \right) \right)
+\end{aligned}$$ 
+tienden a sendos procesos límite distintos. Aquí
 $\hat{F}^{\ast}_{Efron}$ denota la versión bootstrap del estimador
 de Kaplan-Meier bajo el remuestreo de Efron (cualquiera de ellos, ya que
 el remuestreo simple y el obvio son equivalentes) y
@@ -440,21 +441,18 @@ plot(chan.G, main = "Supervivencia variable censurante (partida)",
      mark.time = TRUE, xlim = c(60, 100))
 ```
 
-\begin{figure}[!htb]
-
-{\centering \includegraphics[width=0.7\linewidth]{08-dat_cen_files/figure-latex/survfit-f-g-1} 
-
-}
-
-\caption{Estimaciones de la supervivencia (izquierda; indicando los tiempos de las observaciones censuradas) y de la variable censurante (derecha; indicando los de las no censuradas).}(\#fig:survfit-f-g)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="08-dat_cen_files/figure-html/survfit-f-g-1.png" alt="Estimaciones de la supervivencia (izquierda; indicando los tiempos de las observaciones censuradas) y de la variable censurante (derecha; indicando los de las no censuradas)." width="70%" />
+<p class="caption">(\#fig:survfit-f-g)Estimaciones de la supervivencia (izquierda; indicando los tiempos de las observaciones censuradas) y de la variable censurante (derecha; indicando los de las no censuradas).</p>
+</div>
 
 ```r
 par(old.par)
 ```
 
 En el *boostrap condicional* (`sim = "cond"`) se condiciona el muestreo al 
-patrón de censura observado. El mecanismo es similar al del bootstrap obvio:
+patrón de censura observado (en lugar de fijarlo a $\mathbf{1}$ como en el bootstrap de Reid; Sección \@ref(cap8-reid)). 
+El mecanismo es similar al del bootstrap obvio (Sección \@ref(cap8-obvio)):
 
 1.  Construir los estimadores de Kaplan-Meier de las distribuciones de
     la variable de interés, $\hat{F}\left( t \right)$, y de la variable
@@ -567,14 +565,10 @@ chan.F
 plot(chan.F, lty = 1:2, xlim = c(60, 100))
 ```
 
-\begin{figure}[!htb]
-
-{\centering \includegraphics[width=0.7\linewidth]{08-dat_cen_files/figure-latex/surv-strata-1} 
-
-}
-
-\caption{Estimaciones de la supervivencia.}(\#fig:surv-strata)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="08-dat_cen_files/figure-html/surv-strata-1.png" alt="Estimaciones de la supervivencia." width="70%" />
+<p class="caption">(\#fig:surv-strata)Estimaciones de la supervivencia.</p>
+</div>
 
 ```r
 res <- summary(chan.F)
@@ -627,7 +621,7 @@ as.numeric(res$table[, c("*rmean", "median")])
 
 
 \BeginKnitrBlock{exercise}\iffalse{-91-66-111-111-116-115-116-114-97-112-32-99-101-110-115-117-114-97-100-111-32-99-111-110-32-114-105-101-115-103-111-32-112-114-111-112-111-114-99-105-111-110-97-108-32-100-101-32-67-111-120-93-}\fi{}<div class="exercise"><span class="exercise" id="exr:censboot-cox-ej"><strong>(\#exr:censboot-cox-ej)  \iffalse (Bootstrap censurado con riesgo proporcional de Cox) \fi{} </strong></span>
-Reproducir el ejemplo del modelo de riesgo proporcional de Cox en (Canty, 2002, Rnews_2002-3):
+Reproducir el ejemplo en Canty (2002, [Rnews_2002-3](http://cran.fhcrc.org/doc/Rnews/Rnews_2002-3.pdf)) del modelo de riesgo proporcional de Cox (Cox, 1972):
 </div>\EndKnitrBlock{exercise}
 
 
@@ -647,10 +641,10 @@ mel.cox
 ## Call:
 ## coxph(formula = Surv(time, cens) ~ thickness, data = mel)
 ## 
-##              coef exp(coef) se(coef)    z      p
-## thickness 0.09968   1.10481  0.04052 2.46 0.0139
+##             coef exp(coef) se(coef)    z     p
+## thickness 0.0997    1.1048   0.0405 2.46 0.014
 ## 
-## Likelihood ratio test=5  on 1 df, p=0.02541
+## Likelihood ratio test=5  on 1 df, p=0.03
 ## n= 90, number of events= 41
 ```
 
