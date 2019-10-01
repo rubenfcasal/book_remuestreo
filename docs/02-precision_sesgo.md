@@ -3,7 +3,6 @@
 
 
 
-
 Uno de los problemas más interesantes que pueden ser abordados desde la
 perspectiva de los métodos de remuestreo es el de la estimación del
 sesgo y la precisión de un estimador. En dicho contexto surgió el método
@@ -281,7 +280,7 @@ desvmediaboot
 ```
 
 ```
-## [1] 0.1559049
+## [1] 0.1579876
 ```
 
 ```r
@@ -289,7 +288,7 @@ desvmedianaboot
 ```
 
 ```
-## [1] 0.2512371
+## [1] 0.2531882
 ```
 
 ```r
@@ -300,7 +299,7 @@ sesgomediaboot
 ```
 
 ```
-## [1] 0.00145046
+## [1] -6.846667e-05
 ```
 
 ```r
@@ -308,7 +307,7 @@ sesgomedianaboot
 ```
 
 ```
-## [1] 0.0493702
+## [1] 0.0472551
 ```
 Empleando el paquete `boot` el código sería más simple:
 

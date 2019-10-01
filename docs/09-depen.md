@@ -3,7 +3,6 @@
 
 
 
-
 En este capítulo se presentan gran cantidad de métodos bootstrap para
 realizar inferencia, así como predicción, en el contexto de datos
 dependientes. En primer lugar se hace una introducción a las condiciones
@@ -142,12 +141,12 @@ media móvil. Consideremos un modelo $ARMA(p,q)$: $$\begin{aligned}
 X_{t} =&\ \phi _1X_{t-1}+\phi _2X_{t-2}+\cdots +\phi _{p}X_{t-p} \\
 &+a_{t}-\theta _1a_{t-1}-\theta _2a_{t-2}-\cdots -\theta _{q}a_{t-q},\end{aligned}$$o,
 equivalentemente,
-
 $$\phi (B)X_{t}=\theta (B)a_{t},$$
-
-donde $\phi (B)=1-\phi _1B-\phi _2B^2-\cdots -\phi _{p}B^{p}$,
-$\theta(B)=1-\theta _1B-\theta _2B^2-\cdots -\theta _{q}B^{q}$ y $B$ es
-el operador retardo: $BX_{t}=X_{t-1}$. La diferencia principal con
+donde 
+$$\phi (B)=1-\phi _1B-\phi _2B^2-\cdots -\phi _{p}B^{p}\\ 
+\theta(B)=1-\theta _1B-\theta _2B^2-\cdots -\theta _{q}B^{q}$$ 
+y $B$ es el operador retardo: $BX_{t}=X_{t-1}$. 
+La diferencia principal con
 respecto al caso autorregresivo es que ahora se necesitan estimar los
 coeficientes la parte de media móvil, al objeto de calcular los
 residuos, $\widehat{a}_{t}$. 
@@ -155,7 +154,8 @@ Así, el algoritmo bootstrap para una serie $AR(p)$ puede
 adaptarse a este caso de manera inmediata. 
 En este contexto, Kreiss y Franke (1992) usan la representación  
 $MA(\infty )$ del proceso de error en términos de la series original,
-$a_{t}=\theta (B)^{-1}\phi(B) X_{t}$, para construir los residuos 
+$$a_{t}=\theta (B)^{-1}\phi(B) X_{t},$$ 
+para construir los residuos 
 (utilizando los parámetros estimados en la fórmula anterior) y demuestran 
 la validez asintótica del bootstrap (en el sentido de la distancia de Mallows) 
 para aproximar la distribución en el muestreo del $M$-estimador de los
@@ -232,7 +232,7 @@ $\varepsilon \in (\frac{1}{4},\frac{1}{2})$. Bühlmann (1994) lo extiende
 al caso multivariante y debilita la condición sobre $\varepsilon$,
 siendo $\varepsilon \in (0,\frac{1}{2})$.
 
-Carlstein, Do, Hall, Hesterberg y Künsch (1995) propusieron una
+Carlstein, Do, Hall, Hesterberg y Künsch (1998) propusieron una
 modificación del MBB. Su idea consiste en seleccionar las remuestras de
 bloques de acuerdo a una cadena de Markov. El primer bloque de la
 remuestra bootstrap se genera igual que para el MBB ordinario. Una vez
@@ -257,7 +257,9 @@ Un asunto importante en el método bootstrap por bloques es la elección
 del tamaño del bloque, $b$. Hall, Horowitz y Jing (1995) considera este
 problema en el contexto de la estimación bootstrap del sesgo y la
 varianza. Obtienen una expresión asintótica para el error cuadrático
-medio: $n^{-2}(C_1b^{-2}+C_2n^{-1}b)$, donde $C_1$ y $C_2$ son
+medio: 
+$$n^{-2}(C_1b^{-2}+C_2n^{-1}b),$$
+donde $C_1$ y $C_2$ son
 constantes desconocidas que dependen del problema de estimación del que
 se trate. Está claro entonces que el tamaño óptimo del bloque (en el
 sentido del error cuadrático medio) es de orden $n^{1/3}$.
@@ -556,9 +558,10 @@ la variabilidad en la estimación de los parámetros de la serie.
 Cuando la estructura de dependencia de la serie no es explícita los
 métodos bootstrap existentes para la estimación (como el MBB, el SB o el
 método de submuestreo) no funcionan para la predicción. El motivo es que
-estos métodos no estiman consistentemente la distribución
-condictional$$X_{n+k}|_{X_1,X_2,\ldots ,X_n}.$$Esta situación es
-completamente diferente del caso en que la dependencia de modeliza
+estos métodos no estiman consistentemente la distribución condictional
+$$X_{n+k}|_{X_1,X_2,\ldots ,X_n}.$$
+Esta situación es
+completamente diferente del caso en que la dependencia se modeliza
 paramétricamente, ya que en ese otro caso los métodos bootstrap usados
 para la estimación permanecen válidos, en general, en el contexto de
 predicción.
@@ -632,9 +635,9 @@ $p>1$.
 ## Implementación en `R` 
 
 Para simular una serie de tiempo en `R`
-se puede emplear la función `arima.sim` del paquete base `stats`.
+se puede emplear la función `arima.sim()` del paquete base `stats`.
 Por ejemplo, podemos generar una serie autoregressiva con:
-[Figura \@ref(fig:arima.sim)]  
+  
 
 ```r
 # Parametros
@@ -651,14 +654,10 @@ ry <- arima.sim(list(order = c(1,0,0), ar = rho),
 plot(ry)
 ```
 
-\begin{figure}[!htb]
-
-{\centering \includegraphics[width=0.7\linewidth]{09-depen_files/figure-latex/arima.sim-1} 
-
-}
-
-\caption{Simulación de un modelo autoregresivo.}(\#fig:arima.sim)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="09-depen_files/figure-html/arima-sim-1.png" alt="Simulación de un modelo autoregresivo." width="70%" />
+<p class="caption">(\#fig:arima-sim)Simulación de un modelo autoregresivo.</p>
+</div>
 En este caso el periodo de calentamiento se establece mediante el
 parámetro `n.start` (que se fija automáticamente a un valor adecuado).
 La recomendación es fijar la varianza de las series simuladas si se quieren
@@ -675,7 +674,7 @@ Otras opciones:
 * `start.innov = rand.gen(n.start, ...)`
 
 Ejemplo (`?arima.sim`):
-[Figura \@ref(fig:arima.sim2)]  
+  
 
 ```r
 ry2 <- arima.sim(n = 63, list(ar = c(0.8897, -0.4858), 
@@ -685,14 +684,10 @@ ry2 <- arima.sim(n = 63, list(ar = c(0.8897, -0.4858),
 plot(ry2)
 ```
 
-\begin{figure}[!htb]
-
-{\centering \includegraphics[width=0.7\linewidth]{09-depen_files/figure-latex/arima.sim2-1} 
-
-}
-
-\caption{Simulación de un modelo autoregresivo con errores con distribución *t* de Student.}(\#fig:arima.sim2)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="09-depen_files/figure-html/arima-sim2-1.png" alt="Simulación de un modelo autoregresivo con errores con distribución *t* de Student." width="70%" />
+<p class="caption">(\#fig:arima-sim2)Simulación de un modelo autoregresivo con errores con distribución *t* de Student.</p>
+</div>
 
 
 ## Implementación en `R` con el paquete `boot`
@@ -709,15 +704,15 @@ library(boot)
 
 ### Rnews  1
 
-Canty, A. J. (2002). Resampling methods in R: the boot package. Rnews: The Newsletter of the R Project, 2 (3), pp. 2-7.
+Canty, A. J. (2002). [Resampling methods in R: the boot package ](http://cran.fhcrc.org/doc/Rnews/Rnews_2002-3.pdf). Rnews: The Newsletter of the R Project, 2 (3), pp. 2-7.
 
-> `tsboot()` can do either of these methods
+> "`tsboot()` can do either of these methods
 > by specifying `sim="fixed"` or `sim="geom"` respectively.
 > A simple call to tsboot includes the time
 > series, a function for the `statistic` (the first argument
 > of this function being the time series itself), the number
 > of bootstrap replicates, the simulation type and
-> the (mean) block length.
+> the (mean) block length''.
 
 
 ```r
@@ -755,9 +750,9 @@ tsboot(log(lynx), lynx.fun, R = 199, sim = "geom", l = 20)
 
 ### Rnews 2
 
-Canty, A. J. (2002). Resampling methods in R: the boot package. Rnews: The Newsletter of the R Project, 2 (3), pp. 2-7.
+Canty, A. J. (2002). [Resampling methods in R: the boot package ](http://cran.fhcrc.org/doc/Rnews/Rnews_2002-3.pdf). Rnews: The Newsletter of the R Project, 2 (3), pp. 2-7.
 
-> An alternative to the block bootstrap is to use
+> "An alternative to the block bootstrap is to use
 > model based resampling. In this case a model is fitted
 > to the time series so that the errors are i.i.d. The
 > observed residuals are sampled as an i.i.d. series and
@@ -789,7 +784,7 @@ Canty, A. J. (2002). Resampling methods in R: the boot package. Rnews: The Newsl
 > bootstrap. To create the bootstrap time series
 > the resampled residuals should be put back through
 > the fitted model filter. The function `ran.gen` can be
-> used to do this.
+> used to do this''.
 
 
 
@@ -844,25 +839,21 @@ Reproducir el "Practical 8.1 (Lynx data)" en Davison, A. C., y Hinkley, D. V. (1
 </div>\EndKnitrBlock{exercise}
 
 
-> Dataframe lynx contains the Canadian lynx data, 
+> "Dataframe lynx contains the Canadian lynx data, 
 > to the logarithm of which we fit the autoregressive
 > model that minimizes AIC:
 
-[Figura \@ref(fig:lynx-data)]  
+  
 
 
 ```r
 ts.plot(log(lynx))
 ```
 
-\begin{figure}[!htb]
-
-{\centering \includegraphics[width=0.7\linewidth]{09-depen_files/figure-latex/lynx-data-1} 
-
-}
-
-\caption{Lynx data (logarithmic scale).}(\#fig:lynx-data)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="09-depen_files/figure-html/lynx-data-1.png" alt="Lynx data (logarithmic scale)." width="70%" />
+<p class="caption">(\#fig:lynx-data)Lynx data (logarithmic scale).</p>
+</div>
 
 ```r
 lynx.ar <- ar(log(lynx))
@@ -923,7 +914,7 @@ lynx.2 <- tsboot(log(lynx), lynx.fun, ...
 > For post-blackening we need to define yet another function:
 
 > Compare these results with those above, and try the post-blackened bootstrap with `sim="geom"`.
-> (Sections 8.2.2, 8.2.3)
+> (Sections 8.2.2, 8.2.3)''.
 
 
 \BeginKnitrBlock{exercise}\iffalse{-91-80-114-97-99-116-105-99-97-108-32-56-46-50-44-32-66-101-97-118-101-114-32-100-97-116-97-58-32-68-97-118-105-115-111-110-32-121-32-72-105-110-107-108-101-121-44-32-49-57-57-55-93-}\fi{}<div class="exercise"><span class="exercise" id="exr:tsboot-beaver"><strong>(\#exr:tsboot-beaver)  \iffalse (Practical 8.2, Beaver data: Davison y Hinkley, 1997) \fi{} </strong></span>
@@ -931,12 +922,12 @@ Reproducir el "Practical 8.2  (Beaver data)" en Davison, A. C., y Hinkley, D. V.
 ([caché](http://webcache.googleusercontent.com/search?q=cache:a4nFL5ymMMoJ:statwww.epfl.ch/davison/BMA/+&cd=1&hl=gl&ct=clnk&gl=es)):
 </div>\EndKnitrBlock{exercise}
 
-> The data in beaver consist of a time series of $n = 100$
+> "The data in beaver consist of a time series of $n = 100$
 > observations on the body temperature $y_1, \ldots, y_n$ 
 > and an indicator $x_1, \ldots, x_n$ of activity of 
 > a female beaver, Castor canadensis.
 
-[Figura \@ref(fig:beaver-data)]  
+  
 
 
 ```r
@@ -944,14 +935,10 @@ Reproducir el "Practical 8.2  (Beaver data)" en Davison, A. C., y Hinkley, D. V.
 plot(beaver)
 ```
 
-\begin{figure}[!htb]
-
-{\centering \includegraphics[width=0.7\linewidth]{09-depen_files/figure-latex/beaver-data-1} 
-
-}
-
-\caption{Beaver data}(\#fig:beaver-data)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="09-depen_files/figure-html/beaver-data-1.png" alt="Beaver data" width="70%" />
+<p class="caption">(\#fig:beaver-data)Beaver data</p>
+</div>
 
 ```r
 class(beaver)
@@ -1037,7 +1024,7 @@ data <- beaver
 > In this analysis we have assumed that 
 > the linear model with AR(1) errors is appropriate. 
 > How would you proceed if it were not?
-> (Section 8.2; Reynolds, 1994)
+> (Section 8.2; Reynolds, 1994)''.
 
 
 \BeginKnitrBlock{exercise}\iffalse{-91-80-114-97-99-116-105-99-97-108-32-56-46-51-44-32-83-117-110-115-112-111-116-32-100-97-116-97-58-32-68-97-118-105-115-111-110-32-121-32-72-105-110-107-108-101-121-44-32-49-57-57-55-93-}\fi{}<div class="exercise"><span class="exercise" id="exr:tsboot-sunspot"><strong>(\#exr:tsboot-sunspot)  \iffalse (Practical 8.3, Sunspot data: Davison y Hinkley, 1997) \fi{} </strong></span>
@@ -1045,10 +1032,10 @@ Reproducir el "Practical 8.3  (Sunspot data)" en Davison, A. C., y Hinkley, D. V
 ([caché](http://webcache.googleusercontent.com/search?q=cache:a4nFL5ymMMoJ:statwww.epfl.ch/davison/BMA/+&cd=1&hl=gl&ct=clnk&gl=es)):
 </div>\EndKnitrBlock{exercise}
 
-> Consider scrambling the phases of the sunspot data. 
+> "Consider scrambling the phases of the sunspot data. 
 > To see the original data, 
 
-[Figura \@ref(fig:sunspot)]  
+  
 
 
 ```r
@@ -1059,14 +1046,10 @@ plot(sunspot.year, ylim = yl)
 abline(h = 0, lty = 2)
 ```
 
-\begin{figure}[!htb]
-
-{\centering \includegraphics[width=0.7\linewidth]{09-depen_files/figure-latex/sunspot-1} 
-
-}
-
-\caption{Sunspot data (yearly numbers).}(\#fig:sunspot)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="09-depen_files/figure-html/sunspot-1.png" alt="Sunspot data (yearly numbers)." width="70%" />
+<p class="caption">(\#fig:sunspot)Sunspot data (yearly numbers).</p>
+</div>
 
 > two replicates generated using ordinary phase scrambling, 
 > and two phase scrambled series whose marginal distribution is the same as that of the original data:
@@ -1083,7 +1066,7 @@ sunspot.2 <- tsboot(sunspot.year, ...
 > by the two algorithms?
 > (You may find it helpful to experiment with
 > different shapes for the figures.)
-> (Section 8.2.4; Problem 8.4; Theiler et al, 1992)
+> (Section 8.2.4; Problem 8.4; Theiler et al, 1992)''.
 
 
 ## Implementación en `R` con el paquete `forecast`
@@ -1095,7 +1078,7 @@ posteriormente se obtienen las simulaciones condicionadas empleando
 el modelo ajustado.
 
 Por ejemplo, en el caso de series de tiempo, se puede emplear la función `simulate`
-del paquete `forecast`:
+del paquete `forecast`: 
 
 
 ```r
@@ -1112,17 +1095,11 @@ ry <- simulate(fit, 12*4)
 lines(ry, col="red")
 ```
 
-\begin{figure}[!htb]
+<div class="figure" style="text-align: center">
+<img src="09-depen_files/figure-html/co2-1.png" alt="Datos de co2 (1990-1997) y simulación condicional (a partir de las observaciones desde 1990 hasta 1996)." width="70%" />
+<p class="caption">(\#fig:co2)Datos de co2 (1990-1997) y simulación condicional (a partir de las observaciones desde 1990 hasta 1996).</p>
+</div>
 
-{\centering \includegraphics[width=0.7\linewidth]{09-depen_files/figure-latex/co2-1} 
-
-}
-
-\caption{Datos de co2 (1990-1997) y simulación condicional (a partir de las observaciones desde 1990 hasta 1996).}(\#fig:co2)
-\end{figure}
-
-[Figura \@ref(fig:co2)]
-  
 
 
 ```r
@@ -1130,21 +1107,16 @@ plot(forecast(fit, h=12*4), col="blue")
 lines(ry, col="red")
 ```
 
-\begin{figure}[!htb]
+<div class="figure" style="text-align: center">
+<img src="09-depen_files/figure-html/co22-1.png" alt="Predicción de los valores de co2 y simulación condicional (ambas a partir de las observaciones entre 1990 y 1996)." width="70%" />
+<p class="caption">(\#fig:co22)Predicción de los valores de co2 y simulación condicional (ambas a partir de las observaciones entre 1990 y 1996).</p>
+</div>
 
-{\centering \includegraphics[width=0.7\linewidth]{09-depen_files/figure-latex/co22-1} 
 
-}
-
-\caption{Predicción de los valores de co2 y simulación condicional (ambas a partir de las observaciones entre 1990 y 1996).}(\#fig:co22)
-\end{figure}
-
-[Figura \@ref(fig:co22)]
-
-Ver enlaces en referencias \@ref(forecast-links).
+Ver enlaces en apéndice \@ref(forecast-links).
 
 
 ## Spatial data
 
-Ver enlaces en referencias \@ref(spatial-links).
+Ver enlaces en apéndice \@ref(spatial-links).
 

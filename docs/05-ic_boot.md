@@ -3,6 +3,7 @@
 
 
 
+
 Consideremos el problema de construcción, mediante bootstrap, de un
 intervalo de confianza bilateral, con nivel de confianza $1-\alpha$,
 para un parámetro $\theta$ de la distribución $F$. Una vez elegido el
@@ -14,7 +15,7 @@ parecida posible al nivel nominal $1-\alpha$. Comenzaremos analizando
 el error de cobertura de los intervalos de confianza clásicos, los
 basados en la distribución normal asintótica.
 
-## Intervalos basados en la distribución normal asintótica
+## Intervalos basados en la distribución normal asintótica {#cap5_norm}
 
 Consideremos primeramente el caso más sencillo (y poco realista) de
 construcción de un intervalo de confianza para la media, $\mu \,$, con
@@ -96,7 +97,7 @@ $\frac{\hat{\sigma}_{\theta}}{\sqrt{n}}$ err. std.
 -->
 
 
-## Método percentil (básico)
+## Método percentil (básico) {#cap5_basic}
 
 Este método se basa en la construcción del intervalo de confianza,
 mediante bootstrap, a partir del estadístico no estandarizado
@@ -219,12 +220,12 @@ pto_crit <- quantile(estadistico_boot, c(alfa/2, 1 - alfa/2))
 ic_inf_boot <- x_barra - pto_crit[2]/sqrt(n)
 ic_sup_boot <- x_barra - pto_crit[1]/sqrt(n)
 IC_boot <- c(ic_inf_boot, ic_sup_boot)
-names(IC_boot) <- paste0(100*c(alfa, 1-alfa), "%")
+names(IC_boot) <- paste0(100*c(alfa/2, 1-alfa/2), "%")
 IC_boot
 ```
 
 ```
-##       5%      95% 
+##     2.5%    97.5% 
 ## 0.457700 1.092293
 ```
 
@@ -236,12 +237,12 @@ pto_crit <- quantile(x_barra_boot, c(alfa/2, 1 - alfa/2))
 ic_inf_boot <- 2*x_barra - pto_crit[2]
 ic_sup_boot <- 2*x_barra - pto_crit[1]
 IC_boot <- c(ic_inf_boot, ic_sup_boot)
-names(IC_boot) <- paste0(100*c(alfa, 1-alfa), "%")
+names(IC_boot) <- paste0(100*c(alfa/2, 1-alfa/2), "%")
 IC_boot
 ```
 
 ```
-##       5%      95% 
+##     2.5%    97.5% 
 ## 0.457700 1.092293
 ```
 
@@ -323,6 +324,13 @@ IC_boot
 Asintóticamente ambos métodos son equivalentes, aunque en general
 es preferible (evita sesgos) el bootstrap percentil básico.
 
+<!-- 
+ejercicio 
+Obtener los ICs mediante los método básico y percentil
+de la varianza y cuasivarianza muestrales.
+
+Recorrido intercuartílico?
+-->
 
 ## Método percentil-*t* {#cap5-perc-t}
 
@@ -413,7 +421,7 @@ la función `statistic` devuelva también la varianza del estadístico
 y estableciendo `type="stud"` en la llamada a la función `boot.ci()`).
 
 
-## Método percentil-*t* simetrizado
+## Método percentil-*t* simetrizado {#cap5-perc-t-sim}
 
 Es un método análogo al percentil-$t$. Sólo difiere de él en la forma de
 seleccionar los cuantiles de la distribución bootstrap. En lugar de
@@ -511,7 +519,7 @@ $O\left( n^{-\frac{3}{2}} \right)$, el cual mejora el orden
 $O\left( n^{-1} \right)$, que es el que presentan los intervalos basados
 en la normal asintótica o bien en el método percentil-$t$.
 
-## Tabla resumen de los errores de cobertura
+## Tabla resumen de los errores de cobertura {#cap5_err_cober}
 
   Tipo de I.C.                Unilateral                              Bilateral 
   ------------                --------------------------              -------------------------- 
@@ -521,15 +529,15 @@ en la normal asintótica o bien en el método percentil-$t$.
           
                 
 
-## Ejemplos
+## Ejemplos {#cap5_ejem}
 
 \BeginKnitrBlock{example}\iffalse{-91-73-110-102-101-114-101-110-99-105-97-32-115-111-98-114-101-32-108-97-32-109-101-100-105-97-32-99-111-110-32-118-97-114-105-97-110-122-97-32-100-101-115-99-111-110-111-99-105-100-97-44-32-99-111-110-116-105-110-117-97-99-105-243-110-93-}\fi{}<div class="example"><span class="example" id="exm:media-dt-desconocida-persim"><strong>(\#exm:media-dt-desconocida-persim)  \iffalse (Inferencia sobre la media con varianza desconocida, continuación) \fi{} </strong></span><br> \vspace{0.5cm}
 
 Continuando con el ejemplo de los tiempos de vida de microorganismos
 (sin asumir varianza conocida),
 para obtener una estimación por intervalo de confianza 
-de su vida media empleando este método se podría utilizar
-(ver Ejemplo \@ref(exm:media-dt-desconocida)):</div>\EndKnitrBlock{example}
+de su vida media empleando el método bootstrap percentil-*t* simetrizado 
+se podría utilizar (ver Ejemplo \@ref(exm:media-dt-desconocida)):</div>\EndKnitrBlock{example}
 
 
 ```r
@@ -559,12 +567,12 @@ pto_crit <- quantile(estadistico_boot, 1 - alfa)
 ic_inf_boot <- x_barra - pto_crit * cuasi_dt/sqrt(n)
 ic_sup_boot <- x_barra + pto_crit * cuasi_dt/sqrt(n)
 IC_boot <- c(ic_inf_boot, ic_sup_boot)
-names(IC_boot) <- paste0(100*c(alfa, 1-alfa), "%")
+names(IC_boot) <- paste0(100*c(alfa/2, 1-alfa/2), "%")
 IC_boot
 ```
 
 ```
-##        5%       95% 
+##      2.5%     97.5% 
 ## 0.4293376 1.1813290
 ```
 
@@ -595,7 +603,7 @@ mu <- 1/rate
 n <- 100
 
 alfa <- 0.1
-namesI <- paste0(100*c(alfa, 1-alfa), "%")
+namesI <- paste0(100*c(alfa/2, 1-alfa/2), "%")
 
 B <- 1000
 percentil <- numeric(B)
@@ -666,7 +674,7 @@ t.fin
 
 ```
 ##    user  system elapsed 
-##   26.97    0.02   26.98
+##   27.03    0.03   27.18
 ```
 
 ```r
@@ -706,4 +714,8 @@ del 90\% ($\alpha =0.10$).
 <!-- 
 n = 30, n = 100, t.fin
 Example 5.12 (Exponential mean) 
+
+Implementar simulación con boot empleando
+ejecución en paralelo, 
+y bucles en paralelo?
 -->

@@ -5,7 +5,7 @@ institute:
    - "Departamento de Matemáticas"
    - "Grupo de investigación de Modelización, Optimización e Inferencia Estadística (MODES)"
    - "Centro de Investigación en Tecnologías de la Información y las Comunicaciones (CITIC)"
-date: "2019-09-05"
+date: "2019-09-09"
 site: bookdown::bookdown_site
 output: bookdown::gitbook
 documentclass: book
@@ -26,6 +26,12 @@ Se puede acceder a la versión en línea a través del siguiente enlace:
 
 <https://rubenfcasal.github.io/book_remuestreo>.
 
+<!-- 
+<a class="btn pull-left js-toolbar-action" aria-label="PDF" title="PDF" href="#"><i class="fa fa-file-pdf-o"></i></a> 
+-->
+
+donde puede descargarse en formato [pdf](https://rubenfcasal.github.io/book_remuestreo/book_remuestreo.pdf).
+
 Para ejecutar los ejemplos mostrados en el libro será necesario tener instalados los siguientes paquetes:
 [`boot`](https://cran.r-project.org/web/packages/boot/index.html), [`bootstrap`](https://cran.r-project.org/web/packages/bootstrap/index.html), [`survival`](https://cran.r-project.org/web/packages/survival/index.html), [`forecast`](https://cran.r-project.org/web/packages/forecast/index.html), [`MASS`](https://cran.r-project.org/web/packages/MASS/index.html).
 Por ejemplo mediante el comando:
@@ -41,8 +47,7 @@ para lo que se recomendaría consultar el libro de ["Escritura de libros con boo
 Este obra está bajo una licencia de [Creative Commons Reconocimiento-NoComercial-SinObraDerivada 4.0 Internacional ](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.es_ES) 
 (esperamos poder liberarlo bajo una licencia menos restrictiva más adelante...).
 
-
-\includegraphics[width=1.22in]{images/by-nc-nd-88x31} 
+![](by-nc-nd-88x31.png)<!-- -->
 
 
 

@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>9.2 El bootstrap en la estimación con datos dependientes | Técnicas de Remuestreo</title>
-  <meta name="description" content="Apuntes de la asignatura de Técnicas de Remuestreo del Máster en Técnicas Estadísticas.">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta name="description" content="Apuntes de la asignatura de Técnicas de Remuestreo del Máster en Técnicas Estadísticas." />
+  <meta name="generator" content="bookdown 0.10 and GitBook 2.6.7" />
 
   <meta property="og:title" content="9.2 El bootstrap en la estimación con datos dependientes | Técnicas de Remuestreo" />
   <meta property="og:type" content="book" />
@@ -22,14 +21,14 @@
   <meta name="twitter:description" content="Apuntes de la asignatura de Técnicas de Remuestreo del Máster en Técnicas Estadísticas." />
   
 
-<meta name="author" content="Ricardo Cao Abad (rcao@udc.es) y Rubén Fernández Casal (ruben.fcasal@udc.es)">
+<meta name="author" content="Ricardo Cao Abad (rcao@udc.es) y Rubén Fernández Casal (ruben.fcasal@udc.es)" />
 
 
-<meta name="date" content="2019-09-05">
+<meta name="date" content="2019-09-09" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
 <link rel="prev" href="introduccion-a-las-condiciones-de-dependencia-y-modelos-habituales-de-datos-dependientes.html">
@@ -145,12 +144,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4.6" data-path="validez-de-la-aproximacion-bootstrap.html"><a href="validez-de-la-aproximacion-bootstrap.html"><i class="fa fa-check"></i><b>4.6</b> Validez de la aproximación Bootstrap</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="cap5.html"><a href="cap5.html"><i class="fa fa-check"></i><b>5</b> Intervalos de confianza bootstrap</a><ul>
-<li class="chapter" data-level="5.1" data-path="intervalos-basados-en-la-distribucion-normal-asintotica.html"><a href="intervalos-basados-en-la-distribucion-normal-asintotica.html"><i class="fa fa-check"></i><b>5.1</b> Intervalos basados en la distribución normal asintótica</a></li>
-<li class="chapter" data-level="5.2" data-path="metodo-percentil-basico.html"><a href="metodo-percentil-basico.html"><i class="fa fa-check"></i><b>5.2</b> Método percentil (básico)</a></li>
+<li class="chapter" data-level="5.1" data-path="cap5-norm.html"><a href="cap5-norm.html"><i class="fa fa-check"></i><b>5.1</b> Intervalos basados en la distribución normal asintótica</a></li>
+<li class="chapter" data-level="5.2" data-path="cap5-basic.html"><a href="cap5-basic.html"><i class="fa fa-check"></i><b>5.2</b> Método percentil (básico)</a></li>
 <li class="chapter" data-level="5.3" data-path="cap5-perc-t.html"><a href="cap5-perc-t.html"><i class="fa fa-check"></i><b>5.3</b> Método percentil-<em>t</em></a></li>
-<li class="chapter" data-level="5.4" data-path="metodo-percentil-t-simetrizado.html"><a href="metodo-percentil-t-simetrizado.html"><i class="fa fa-check"></i><b>5.4</b> Método percentil-<em>t</em> simetrizado</a></li>
-<li class="chapter" data-level="5.5" data-path="tabla-resumen-de-los-errores-de-cobertura.html"><a href="tabla-resumen-de-los-errores-de-cobertura.html"><i class="fa fa-check"></i><b>5.5</b> Tabla resumen de los errores de cobertura</a></li>
-<li class="chapter" data-level="5.6" data-path="ejemplos-1.html"><a href="ejemplos-1.html"><i class="fa fa-check"></i><b>5.6</b> Ejemplos</a></li>
+<li class="chapter" data-level="5.4" data-path="cap5-perc-t-sim.html"><a href="cap5-perc-t-sim.html"><i class="fa fa-check"></i><b>5.4</b> Método percentil-<em>t</em> simetrizado</a></li>
+<li class="chapter" data-level="5.5" data-path="cap5-err-cober.html"><a href="cap5-err-cober.html"><i class="fa fa-check"></i><b>5.5</b> Tabla resumen de los errores de cobertura</a></li>
+<li class="chapter" data-level="5.6" data-path="cap5-ejem.html"><a href="cap5-ejem.html"><i class="fa fa-check"></i><b>5.6</b> Ejemplos</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="cap6.html"><a href="cap6.html"><i class="fa fa-check"></i><b>6</b> Bootstrap y estimación no paramétrica de la densidad</a><ul>
 <li class="chapter" data-level="6.1" data-path="estimacion-no-parametrica-de-la-funcion-de-densidad.html"><a href="estimacion-no-parametrica-de-la-funcion-de-densidad.html"><i class="fa fa-check"></i><b>6.1</b> Estimación no paramétrica de la función de densidad</a></li>
@@ -194,11 +193,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="8.2" data-path="remuestreos-bootstrap-en-presencia-de-censura.html"><a href="remuestreos-bootstrap-en-presencia-de-censura.html"><i class="fa fa-check"></i><b>8.2</b> Remuestreos Bootstrap en presencia de censura</a><ul>
 <li class="chapter" data-level="8.2.1" data-path="remuestreos-bootstrap-en-presencia-de-censura.html"><a href="remuestreos-bootstrap-en-presencia-de-censura.html#el-bootstrap-simple"><i class="fa fa-check"></i><b>8.2.1</b> El bootstrap simple</a></li>
-<li class="chapter" data-level="8.2.2" data-path="remuestreos-bootstrap-en-presencia-de-censura.html"><a href="remuestreos-bootstrap-en-presencia-de-censura.html#el-bootstrap-obvio"><i class="fa fa-check"></i><b>8.2.2</b> El bootstrap obvio</a></li>
+<li class="chapter" data-level="8.2.2" data-path="remuestreos-bootstrap-en-presencia-de-censura.html"><a href="remuestreos-bootstrap-en-presencia-de-censura.html#cap8-obvio"><i class="fa fa-check"></i><b>8.2.2</b> El bootstrap obvio</a></li>
 </ul></li>
 <li class="chapter" data-level="8.3" data-path="relaciones-entre-los-metodos-de-remuestreo-bajo-censura.html"><a href="relaciones-entre-los-metodos-de-remuestreo-bajo-censura.html"><i class="fa fa-check"></i><b>8.3</b> Relaciones entre los métodos de remuestreo bajo censura</a><ul>
 <li class="chapter" data-level="8.3.1" data-path="relaciones-entre-los-metodos-de-remuestreo-bajo-censura.html"><a href="relaciones-entre-los-metodos-de-remuestreo-bajo-censura.html#equivalencia-entre-el-bootstrap-simple-y-el-obvio"><i class="fa fa-check"></i><b>8.3.1</b> Equivalencia entre el bootstrap simple y el obvio</a></li>
-<li class="chapter" data-level="8.3.2" data-path="relaciones-entre-los-metodos-de-remuestreo-bajo-censura.html"><a href="relaciones-entre-los-metodos-de-remuestreo-bajo-censura.html#el-bootstrap-de-reid"><i class="fa fa-check"></i><b>8.3.2</b> El bootstrap de Reid</a></li>
+<li class="chapter" data-level="8.3.2" data-path="relaciones-entre-los-metodos-de-remuestreo-bajo-censura.html"><a href="relaciones-entre-los-metodos-de-remuestreo-bajo-censura.html#cap8-reid"><i class="fa fa-check"></i><b>8.3.2</b> El bootstrap de Reid</a></li>
 <li class="chapter" data-level="8.3.3" data-path="relaciones-entre-los-metodos-de-remuestreo-bajo-censura.html"><a href="relaciones-entre-los-metodos-de-remuestreo-bajo-censura.html#validez-de-los-planes-de-remuestreo"><i class="fa fa-check"></i><b>8.3.3</b> Validez de los planes de remuestreo</a></li>
 </ul></li>
 <li class="chapter" data-level="8.4" data-path="implementacion-en-r-con-los-paquetes-boot-y-survival.html"><a href="implementacion-en-r-con-los-paquetes-boot-y-survival.html"><i class="fa fa-check"></i><b>8.4</b> Implementación en <code>R</code> (con los paquetes <code>boot</code> y <code>survival</code>)</a><ul>
@@ -235,11 +234,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="9.8" data-path="spatial-data.html"><a href="spatial-data.html"><i class="fa fa-check"></i><b>9.8</b> Spatial data</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="referencias.html"><a href="referencias.html"><i class="fa fa-check"></i>Referencias</a><ul>
-<li class="chapter" data-level="9.9" data-path="enlaces.html"><a href="enlaces.html"><i class="fa fa-check"></i><b>9.9</b> Enlaces</a><ul>
-<li class="chapter" data-level="9.9.1" data-path="enlaces.html"><a href="enlaces.html#forecast-links"><i class="fa fa-check"></i><b>9.9.1</b> Forecasting: Principles and Practice</a></li>
-<li class="chapter" data-level="9.9.2" data-path="enlaces.html"><a href="enlaces.html#spatial-links"><i class="fa fa-check"></i><b>9.9.2</b> Spatial data</a></li>
-</ul></li>
+<li class="chapter" data-level="" data-path="referencias.html"><a href="referencias.html"><i class="fa fa-check"></i>Referencias</a></li>
+<li class="appendix"><span><b>Apendices</b></span></li>
+<li class="chapter" data-level="A" data-path="links.html"><a href="links.html"><i class="fa fa-check"></i><b>A</b> Enlaces</a><ul>
+<li class="chapter" data-level="A.1" data-path="forecast-links.html"><a href="forecast-links.html"><i class="fa fa-check"></i><b>A.1</b> Forecasting: Principles and Practice</a></li>
+<li class="chapter" data-level="A.2" data-path="spatial-links.html"><a href="spatial-links.html"><i class="fa fa-check"></i><b>A.2</b> Spatial data</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Publicado con bookdown</a></li>
@@ -284,10 +283,9 @@ X_{t-2}^{\ast}+\cdots +\widehat{\phi}_{p}X_{t-p}^{\ast}+a_{t}^{\ast},
 <p>Ferretti y Romo (1996) demuestran la consistencia de un bootstrap basado en los residuos (en el sentido de convergencia débil de la distribución bootstrap) para contrastes de raíz unitaria en series temporales del tipo <span class="math inline">\(AR(1)\)</span>, tanto en el caso de errores iid como cuando el error sigue también un modelo <span class="math inline">\(AR(1)\)</span>. Heimann y Kreiss (1996) dan un resultado similar, sólo para el caso de errores iid, cuando el tamaño muestral de las remuestras bootstrap es <span class="math inline">\(m_n\)</span>, de forma que <span class="math inline">\(\frac{m_n}{n} \rightarrow 0\)</span> (subremuestreo).</p>
 <p>Las ideas generales sobre el bootstrap para modelos autorregresivos pueden extenderse al bootstrap de series temporales autorregresivas y de media móvil. Consideremos un modelo <span class="math inline">\(ARMA(p,q)\)</span>: <span class="math display">\[\begin{aligned}
 X_{t} =&amp;\ \phi _1X_{t-1}+\phi _2X_{t-2}+\cdots +\phi _{p}X_{t-p} \\
-&amp;+a_{t}-\theta _1a_{t-1}-\theta _2a_{t-2}-\cdots -\theta _{q}a_{t-q},\end{aligned}\]</span>o, equivalentemente,</p>
-<p><span class="math display">\[\phi (B)X_{t}=\theta (B)a_{t},\]</span></p>
-<p>donde <span class="math inline">\(\phi (B)=1-\phi _1B-\phi _2B^2-\cdots -\phi _{p}B^{p}\)</span>, <span class="math inline">\(\theta(B)=1-\theta _1B-\theta _2B^2-\cdots -\theta _{q}B^{q}\)</span> y <span class="math inline">\(B\)</span> es el operador retardo: <span class="math inline">\(BX_{t}=X_{t-1}\)</span>. La diferencia principal con respecto al caso autorregresivo es que ahora se necesitan estimar los coeficientes la parte de media móvil, al objeto de calcular los residuos, <span class="math inline">\(\widehat{a}_{t}\)</span>. Así, el algoritmo bootstrap para una serie <span class="math inline">\(AR(p)\)</span> puede adaptarse a este caso de manera inmediata. En este contexto, Kreiss y Franke (1992) usan la representación<br />
-<span class="math inline">\(MA(\infty )\)</span> del proceso de error en términos de la series original, <span class="math inline">\(a_{t}=\theta (B)^{-1}\phi(B) X_{t}\)</span>, para construir los residuos (utilizando los parámetros estimados en la fórmula anterior) y demuestran la validez asintótica del bootstrap (en el sentido de la distancia de Mallows) para aproximar la distribución en el muestreo del <span class="math inline">\(M\)</span>-estimador de los parámetros de un modelo <span class="math inline">\(ARMA(p,q)\)</span>.</p>
+&amp;+a_{t}-\theta _1a_{t-1}-\theta _2a_{t-2}-\cdots -\theta _{q}a_{t-q},\end{aligned}\]</span>o, equivalentemente, <span class="math display">\[\phi (B)X_{t}=\theta (B)a_{t},\]</span> donde <span class="math display">\[\phi (B)=1-\phi _1B-\phi _2B^2-\cdots -\phi _{p}B^{p}\\ 
+\theta(B)=1-\theta _1B-\theta _2B^2-\cdots -\theta _{q}B^{q}\]</span> y <span class="math inline">\(B\)</span> es el operador retardo: <span class="math inline">\(BX_{t}=X_{t-1}\)</span>. La diferencia principal con respecto al caso autorregresivo es que ahora se necesitan estimar los coeficientes la parte de media móvil, al objeto de calcular los residuos, <span class="math inline">\(\widehat{a}_{t}\)</span>. Así, el algoritmo bootstrap para una serie <span class="math inline">\(AR(p)\)</span> puede adaptarse a este caso de manera inmediata. En este contexto, Kreiss y Franke (1992) usan la representación<br />
+<span class="math inline">\(MA(\infty )\)</span> del proceso de error en términos de la series original, <span class="math display">\[a_{t}=\theta (B)^{-1}\phi(B) X_{t},\]</span> para construir los residuos (utilizando los parámetros estimados en la fórmula anterior) y demuestran la validez asintótica del bootstrap (en el sentido de la distancia de Mallows) para aproximar la distribución en el muestreo del <span class="math inline">\(M\)</span>-estimador de los parámetros de un modelo <span class="math inline">\(ARMA(p,q)\)</span>.</p>
 <p>Paparoditis (1996) demuestra la validez del bootstrap para la inferencia acerca de los parámetros de un proceso <span class="math inline">\(ARMA\)</span> multidimensional de orden infinito. El autor propone arrojar réplicas bootstrap de modelos <span class="math inline">\(ARMA\)</span> de orden finito creciente, de forma que ese orden tienda a infinito a cierta tasa, según crece el tamaño muestral. Bühlmann (1997) desarrolla ideas semejantes en el contexto de procesos <span class="math inline">\(AR\left( \infty \right)\)</span>, introduciendo el llamado <em>sieve bootstrap</em>. Este método se ha extendido estimación no paramétrica de la regresión cuando la variable explicativa sigue un modelo <span class="math inline">\(AR\left( \infty \right)\)</span> (ver Bühlmann (1998)).</p>
 </div>
 <div id="situaciones-de-dependencia-general-1" class="section level3">
@@ -310,11 +308,11 @@ _{2,b},\ldots ,\xi _{k,1},\xi _{k,2},\ldots ,\xi _{k,b}).\]</span></p></li>
 T(F_n^{\ast})-T\left( F_n \right) \right) \leq x\right\} -P\left\{ \sqrt{
 n}\left( T(F_n)-T\left( F \right) \right) \leq x\right\} \right\vert
 \rightarrow 0\mathrm{,}\]</span>en probabilidad. Naik-Nimbalkar y Rajarshi (1994) demuestran la consistencia del proceso empírico MBB bajo la condición de que <span class="math inline">\(b=O(n^{1/2-\varepsilon })\)</span>, para algún <span class="math inline">\(\varepsilon \in (\frac{1}{4},\frac{1}{2})\)</span>. Bühlmann (1994) lo extiende al caso multivariante y debilita la condición sobre <span class="math inline">\(\varepsilon\)</span>, siendo <span class="math inline">\(\varepsilon \in (0,\frac{1}{2})\)</span>.</p>
-<p>Carlstein, Do, Hall, Hesterberg y Künsch (1995) propusieron una modificación del MBB. Su idea consiste en seleccionar las remuestras de bloques de acuerdo a una cadena de Markov. El primer bloque de la remuestra bootstrap se genera igual que para el MBB ordinario. Una vez que se se seleccionado en la remuestra el bloque <span class="math inline">\(B_i\)</span>, el siguiente bloque de la remuestra bootstrap se elige dentro de todos los posibles bloques, <span class="math inline">\(B_j\)</span>, poniendo más probabilidad a aquellos que son precedidos por un bloque, <span class="math inline">\(B_{j-1}\)</span>, cuyo último valor, <span class="math inline">\(X_{j+b-2}\)</span>, es más cercano al último valor, <span class="math inline">\(X_{i+b-1}\)</span>, del bloque <span class="math inline">\(B_i\)</span>. En el caso <span class="math inline">\(j=1\)</span>, esta regla no tiene sentido, ya que no existe un bloque anterior al <span class="math inline">\(B_1\)</span>, así que, en ese caso los autores proponen hacer que la probabilidad dependa de la distancia entre <span class="math inline">\(X_1\)</span> (el primer valor del bloque <span class="math inline">\(B_1\)</span>) y el valor siguiente al último del bloque <span class="math inline">\(B_i\)</span>, es decir <span class="math inline">\(X_{i+b}\)</span>. De nuevo esto sólo es posible si <span class="math inline">\(i&lt;q\)</span>. Si <span class="math inline">\(i=q\)</span> usan <span class="math inline">\(X_1\)</span> en lugar de <span class="math inline">\(X_{i+b}\)</span>. Estas probabilidades se calculan usando pesos de tipo núcleo. Estos autores demuestran la consistencia de esta versión del MBB para el estimador bootstrap de la varianza de la media muestral.</p>
+<p>Carlstein, Do, Hall, Hesterberg y Künsch (1998) propusieron una modificación del MBB. Su idea consiste en seleccionar las remuestras de bloques de acuerdo a una cadena de Markov. El primer bloque de la remuestra bootstrap se genera igual que para el MBB ordinario. Una vez que se se seleccionado en la remuestra el bloque <span class="math inline">\(B_i\)</span>, el siguiente bloque de la remuestra bootstrap se elige dentro de todos los posibles bloques, <span class="math inline">\(B_j\)</span>, poniendo más probabilidad a aquellos que son precedidos por un bloque, <span class="math inline">\(B_{j-1}\)</span>, cuyo último valor, <span class="math inline">\(X_{j+b-2}\)</span>, es más cercano al último valor, <span class="math inline">\(X_{i+b-1}\)</span>, del bloque <span class="math inline">\(B_i\)</span>. En el caso <span class="math inline">\(j=1\)</span>, esta regla no tiene sentido, ya que no existe un bloque anterior al <span class="math inline">\(B_1\)</span>, así que, en ese caso los autores proponen hacer que la probabilidad dependa de la distancia entre <span class="math inline">\(X_1\)</span> (el primer valor del bloque <span class="math inline">\(B_1\)</span>) y el valor siguiente al último del bloque <span class="math inline">\(B_i\)</span>, es decir <span class="math inline">\(X_{i+b}\)</span>. De nuevo esto sólo es posible si <span class="math inline">\(i&lt;q\)</span>. Si <span class="math inline">\(i=q\)</span> usan <span class="math inline">\(X_1\)</span> en lugar de <span class="math inline">\(X_{i+b}\)</span>. Estas probabilidades se calculan usando pesos de tipo núcleo. Estos autores demuestran la consistencia de esta versión del MBB para el estimador bootstrap de la varianza de la media muestral.</p>
 </div>
 <div id="eleccion-de-b" class="section level3">
 <h3><span class="header-section-number">9.2.4</span> Elección de <span class="math inline">\(b\)</span></h3>
-<p>Un asunto importante en el método bootstrap por bloques es la elección del tamaño del bloque, <span class="math inline">\(b\)</span>. Hall, Horowitz y Jing (1995) considera este problema en el contexto de la estimación bootstrap del sesgo y la varianza. Obtienen una expresión asintótica para el error cuadrático medio: <span class="math inline">\(n^{-2}(C_1b^{-2}+C_2n^{-1}b)\)</span>, donde <span class="math inline">\(C_1\)</span> y <span class="math inline">\(C_2\)</span> son constantes desconocidas que dependen del problema de estimación del que se trate. Está claro entonces que el tamaño óptimo del bloque (en el sentido del error cuadrático medio) es de orden <span class="math inline">\(n^{1/3}\)</span>.</p>
+<p>Un asunto importante en el método bootstrap por bloques es la elección del tamaño del bloque, <span class="math inline">\(b\)</span>. Hall, Horowitz y Jing (1995) considera este problema en el contexto de la estimación bootstrap del sesgo y la varianza. Obtienen una expresión asintótica para el error cuadrático medio: <span class="math display">\[n^{-2}(C_1b^{-2}+C_2n^{-1}b),\]</span> donde <span class="math inline">\(C_1\)</span> y <span class="math inline">\(C_2\)</span> son constantes desconocidas que dependen del problema de estimación del que se trate. Está claro entonces que el tamaño óptimo del bloque (en el sentido del error cuadrático medio) es de orden <span class="math inline">\(n^{1/3}\)</span>.</p>
 <p>Un resultado importante de utilidad para probar la validez del MBB en muchos contextos es el dado por Radulović (1996). Este autor demuestra que siempre que una sucesión de variables aleatorias fuertemente mixing satisface el Teorema Central del Límite, dicho resultado también es válido para la versión bootstrap por bloques.</p>
 </div>
 <div id="el-bootstrap-estacionario" class="section level3">

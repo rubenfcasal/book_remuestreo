@@ -3,6 +3,7 @@
 ```{r , child = '_global_options.Rmd'}
 ```
 
+
 En este capítulo se presentarán diversos métodos bootstrap adecuados
 para realizar inferencia en algunos problemas en el contexto de la
 estimación no paramétrica de la densidad. Concretamente, se abordará el
