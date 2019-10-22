@@ -25,7 +25,7 @@
 \usepackage{hyperref}
 \hypersetup{unicode=true,
             pdftitle={Técnicas de Remuestreo},
-            pdfauthor={Ricardo Cao Abad (rcao@udc.es) y Rubén Fernández Casal (ruben.fcasal@udc.es)},
+            pdfauthor={Ricardo Cao Abad (rcao@udc.es) y Rubén Fernández Casal (rfcasal@udc.es)},
             pdfborder={0 0 0},
             breaklinks=true}
 \urlstyle{same}  % don't use monospace font for urls
@@ -122,12 +122,12 @@
   \posttitle{\par}
     \author{Ricardo Cao Abad (\href{mailto:rcao@udc.es}{\nolinkurl{rcao@udc.es}}) y
 Rubén Fernández Casal
-(\href{mailto:ruben.fcasal@udc.es}{\nolinkurl{ruben.fcasal@udc.es}})}
+(\href{mailto:rfcasal@udc.es}{\nolinkurl{rfcasal@udc.es}})}
     \preauthor{\centering\large\emph}
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{2019-09-09}
+    \date{2019-10-23}
 
 \usepackage{booktabs}
 \usepackage{amsthm}
@@ -218,7 +218,7 @@ Commons Reconocimiento-NoComercial-SinObraDerivada 4.0 Internacional}
 (esperamos poder liberarlo bajo una licencia menos restrictiva más
 adelante\ldots{}).
 
-\includegraphics{by-nc-nd-88x31.png}
+\includegraphics[width=1.22in]{by-nc-nd-88x31}
 
 \chapter{Motivación del principio Bootstrap}\label{cap1}
 
@@ -595,6 +595,7 @@ confianza asintótico (de nivel \(1-\alpha\)) para la media \(\mu\):
 \NormalTok{alfa <-}\StringTok{ }\FloatTok{0.05}
 \NormalTok{x_barra <-}\StringTok{ }\KeywordTok{mean}\NormalTok{(muestra)}
 \NormalTok{z <-}\StringTok{ }\KeywordTok{qnorm}\NormalTok{(}\DecValTok{1} \OperatorTok{-}\StringTok{ }\NormalTok{alfa}\OperatorTok{/}\DecValTok{2}\NormalTok{)}
+\NormalTok{n <-}\StringTok{ }\KeywordTok{length}\NormalTok{(muestra)}
 \NormalTok{ic_inf <-}\StringTok{ }\NormalTok{x_barra }\OperatorTok{-}\StringTok{ }\NormalTok{z}\OperatorTok{*}\NormalTok{sigma}\OperatorTok{/}\KeywordTok{sqrt}\NormalTok{(n)}
 \NormalTok{ic_sup <-}\StringTok{ }\NormalTok{x_barra }\OperatorTok{+}\StringTok{ }\NormalTok{z}\OperatorTok{*}\NormalTok{sigma}\OperatorTok{/}\KeywordTok{sqrt}\NormalTok{(n)}
 \NormalTok{IC <-}\StringTok{ }\KeywordTok{c}\NormalTok{(ic_inf, ic_sup)}
@@ -603,7 +604,7 @@ confianza asintótico (de nivel \(1-\alpha\)) para la media \(\mu\):
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.7093151 0.9013516
+## [1] 0.501697 1.108970
 \end{verbatim}
 
 \textbf{\emph{Contexto bootstrap}}
@@ -669,7 +670,7 @@ lo que podemos emplear los cuantiles muestrales\footnote{Se podrían
 
 \begin{verbatim}
 ##      2.5%     97.5% 
-## -1.851858  1.873377
+## -1.852319  2.243964
 \end{verbatim}
 
 A partir de los cuales obtenemos la correspondiente estimación por IC
@@ -689,8 +690,8 @@ boostrap: \[\hat{IC}^{boot}_{1-\alpha}\left(  \mu\right)  =
 \end{Shaded}
 
 \begin{verbatim}
-##      2.5%     97.5% 
-## 0.7135570 0.8960555
+##     2.5%    97.5% 
+## 0.457700 1.092293
 \end{verbatim}
 
 Nótese que este intervalo de confianza no está centrado en la media, al
@@ -931,7 +932,7 @@ de la muestra perturbando es análogo:
 
 \begin{verbatim}
 ##      2.5%     97.5% 
-## 0.7132745 0.8953890
+## 0.5127411 1.0866077
 \end{verbatim}
 
 \BeginKnitrBlock{example}[Inferencia sobre la mediana]
@@ -1032,8 +1033,8 @@ anteriores:
 \end{Shaded}
 
 \begin{verbatim}
-##  2.5% 97.5% 
-## 0.510 0.713
+##    2.5%   97.5% 
+## 0.07200 0.95225
 \end{verbatim}
 
 Sin embargo, como veremos más adelante, este caso de inferencia de la
@@ -2191,7 +2192,7 @@ llevar a cabo mediante el siguiente código:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.1552919
+## [1] 0.1562858
 \end{verbatim}
 
 \begin{Shaded}
@@ -2201,7 +2202,7 @@ llevar a cabo mediante el siguiente código:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.2497064
+## [1] 0.2491157
 \end{verbatim}
 
 \begin{Shaded}
@@ -2214,7 +2215,7 @@ llevar a cabo mediante el siguiente código:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] -0.00056106
+## [1] -0.00104408
 \end{verbatim}
 
 \begin{Shaded}
@@ -2224,7 +2225,7 @@ llevar a cabo mediante el siguiente código:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.0462533
+## [1] 0.0420326
 \end{verbatim}
 
 Empleando el paquete \texttt{boot} el código sería más simple:
@@ -4554,7 +4555,7 @@ bootstrap para un nivel de confianza nominal del 90\%
 
 \begin{verbatim}
 ##    user  system elapsed 
-##   25.18    0.02   25.22
+##   26.01    0.03   26.14
 \end{verbatim}
 
 \begin{Shaded}

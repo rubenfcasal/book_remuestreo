@@ -21,10 +21,10 @@
   <meta name="twitter:description" content="Apuntes de la asignatura de Técnicas de Remuestreo del Máster en Técnicas Estadísticas." />
   
 
-<meta name="author" content="Ricardo Cao Abad (rcao@udc.es) y Rubén Fernández Casal (ruben.fcasal@udc.es)" />
+<meta name="author" content="Ricardo Cao Abad (rcao@udc.es) y Rubén Fernández Casal (rfcasal@udc.es)" />
 
 
-<meta name="date" content="2019-09-09" />
+<meta name="date" content="2019-10-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -412,16 +412,16 @@ desvmedianaboot &lt;-<span class="st"> </span><span class="kw">sqrt</span>(varme
 desvmedia</code></pre></div>
 <pre><code>## [1] 0.1555792</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">desvmediaboot</code></pre></div>
-<pre><code>## [1] 0.1579876</code></pre>
+<pre><code>## [1] 0.1541684</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">desvmedianaboot</code></pre></div>
-<pre><code>## [1] 0.2531882</code></pre>
+<pre><code>## [1] 0.2495883</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Aproximaciones sesgo</span>
 sesgomediaboot &lt;-<span class="st"> </span><span class="kw">mean</span>(media) <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(muestra)
 sesgomedianaboot &lt;-<span class="st"> </span><span class="kw">mean</span>(mediana) <span class="op">-</span><span class="st"> </span>muestra[<span class="dv">8</span>]
 sesgomediaboot</code></pre></div>
-<pre><code>## [1] -6.846667e-05</code></pre>
+<pre><code>## [1] 0.00306514</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sesgomedianaboot</code></pre></div>
-<pre><code>## [1] 0.0472551</code></pre>
+<pre><code>## [1] 0.0494356</code></pre>
 <p>Empleando el paquete <code>boot</code> el código sería más simple:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(boot)
 statistic &lt;-<span class="st"> </span><span class="cf">function</span>(data, i){

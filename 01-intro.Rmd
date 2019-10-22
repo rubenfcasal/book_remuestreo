@@ -260,6 +260,7 @@ $$\hat{IC}_{1-\alpha}\left(  \mu\right)  =
 alfa <- 0.05
 x_barra <- mean(muestra)
 z <- qnorm(1 - alfa/2)
+n <- length(muestra)
 ic_inf <- x_barra - z*sigma/sqrt(n)
 ic_sup <- x_barra + z*sigma/sqrt(n)
 IC <- c(ic_inf, ic_sup)

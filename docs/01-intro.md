@@ -110,10 +110,14 @@ hist(muestra, freq = FALSE, xlim = c(-3, 3),
 curve(dnorm, lty = 2, add = TRUE)
 ```
 
-<div class="figure" style="text-align: center">
-<img src="01-intro_files/figure-html/muestra-sim-1.png" alt="Distribución de la muestra simulada." width="70%" />
-<p class="caption">(\#fig:muestra-sim)Distribución de la muestra simulada.</p>
-</div>
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{01-intro_files/figure-latex/muestra-sim-1} 
+
+}
+
+\caption{Distribución de la muestra simulada.}(\#fig:muestra-sim)
+\end{figure}
 Como aproximación de la distribución poblacional, desconocida en la práctica,
 siempre podemos considerar la distribución empírica 
 (o una versión suavizada: bootstrap suavizado; Sección \@ref(cap4-boot-suav)). 
@@ -129,10 +133,14 @@ curve(pnorm, lty = 3, add = TRUE)
 legend("bottomright", legend = c("Empírica", "Aprox. paramétrica", "Teórica"), lty = 1:3)
 ```
 
-<div class="figure" style="text-align: center">
-<img src="01-intro_files/figure-html/muestra-sim-aprox-1.png" alt="Distribución teórica de la muestra simulada y distintas aproximaciones." width="70%" />
-<p class="caption">(\#fig:muestra-sim-aprox)Distribución teórica de la muestra simulada y distintas aproximaciones.</p>
-</div>
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{01-intro_files/figure-latex/muestra-sim-aprox-1} 
+
+}
+
+\caption{Distribución teórica de la muestra simulada y distintas aproximaciones.}(\#fig:muestra-sim-aprox)
+\end{figure}
 
 
 A partir de la aproximación $\hat{F}$ podríamos generar, condicionalmente a la muestra observada, 
@@ -291,11 +299,15 @@ hist(muestra)
 rug(muestra)
 ```
 
-<div class="figure" style="text-align: center">
-<img src="01-intro_files/figure-html/microorganismos-1.png" alt="Distribución del tiempo de vida de microorganismos." width="70%" />
-<p class="caption">(\#fig:microorganismos)Distribución del tiempo de vida de microorganismos.</p>
-</div>
+\begin{figure}[!htb]
 
+{\centering \includegraphics[width=0.7\linewidth]{01-intro_files/figure-latex/microorganismos-1} 
+
+}
+
+\caption{Distribución del tiempo de vida de microorganismos.}(\#fig:microorganismos)
+\end{figure}
+[Figura \@ref(fig:microorganismos)]
 
 ***Contexto clásico***
 
@@ -323,6 +335,7 @@ $$\hat{IC}_{1-\alpha}\left(  \mu\right)  =
 alfa <- 0.05
 x_barra <- mean(muestra)
 z <- qnorm(1 - alfa/2)
+n <- length(muestra)
 ic_inf <- x_barra - z*sigma/sqrt(n)
 ic_sup <- x_barra + z*sigma/sqrt(n)
 IC <- c(ic_inf, ic_sup)
@@ -330,7 +343,7 @@ IC
 ```
 
 ```
-## [1] 0.7093151 0.9013516
+## [1] 0.501697 1.108970
 ```
 
 ***Contexto bootstrap*** 
@@ -393,7 +406,7 @@ pto_crit
 
 ```
 ##      2.5%     97.5% 
-## -1.851858  1.873377
+## -1.852319  2.243964
 ```
 A partir de los cuales obtenemos la correspondiente estimación por IC
 boostrap:
@@ -412,8 +425,8 @@ IC_boot
 ```
 
 ```
-##      2.5%     97.5% 
-## 0.7135570 0.8960555
+##     2.5%    97.5% 
+## 0.457700 1.092293
 ```
 Nótese que este intervalo de confianza no está centrado en la media,
 al contrario que el obtenido con la aproximación tradicional.
@@ -430,10 +443,14 @@ curve(dnorm, lty = 2, add = TRUE)
 abline(v = c(-z, z), lty = 2)
 ```
 
-<div class="figure" style="text-align: center">
-<img src="01-intro_files/figure-html/estad-boot-1.png" alt="Distribución del estadístico boostrap y aproximaciones de los cuantiles. Con línea discontinua se muestra la distribución normal asintótica." width="70%" />
-<p class="caption">(\#fig:estad-boot)Distribución del estadístico boostrap y aproximaciones de los cuantiles. Con línea discontinua se muestra la distribución normal asintótica.</p>
-</div>
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{01-intro_files/figure-latex/estad-boot-1} 
+
+}
+
+\caption{Distribución del estadístico boostrap y aproximaciones de los cuantiles. Con línea discontinua se muestra la distribución normal asintótica.}(\#fig:estad-boot)
+\end{figure}
 
 
 ## El Bootstrap uniforme {#cap1-unif}
@@ -641,7 +658,7 @@ IC_boot
 
 ```
 ##      2.5%     97.5% 
-## 0.7132745 0.8953890
+## 0.5127411 1.0866077
 ```
 
 
@@ -733,8 +750,8 @@ IC_boot
 ```
 
 ```
-##  2.5% 97.5% 
-## 0.510 0.713
+##    2.5%   97.5% 
+## 0.07200 0.95225
 ```
 
 Sin embargo, como veremos más adelante, este caso de inferencia de la
@@ -1264,17 +1281,21 @@ res.boot
 ## t1*    0.611 0.042895   0.2495372
 ```
 y el método `plot()` que genera gráficas básicas de diagnosis
-de los resultados (correspondientes al estadístico determinado por el parámetro `index`, por defecto `= 1`): 
+de los resultados (correspondientes al estadístico determinado por el parámetro `index`, por defecto `= 1`): [Figura \@ref(fig:plot-res-boot)]
 
 
 ```r
 plot(res.boot)
 ```
 
-<div class="figure" style="text-align: center">
-<img src="01-intro_files/figure-html/plot-res-boot-1.png" alt="Gráficos de diagnóstico de los resultados bootstrap de la mediana de los tiempos de vida de microorganismos." width="70%" />
-<p class="caption">(\#fig:plot-res-boot)Gráficos de diagnóstico de los resultados bootstrap de la mediana de los tiempos de vida de microorganismos.</p>
-</div>
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{01-intro_files/figure-latex/plot-res-boot-1} 
+
+}
+
+\caption{Gráficos de diagnóstico de los resultados bootstrap de la mediana de los tiempos de vida de microorganismos.}(\#fig:plot-res-boot)
+\end{figure}
 
 
 Además de estos métodos, las principales funciones de interés serían:

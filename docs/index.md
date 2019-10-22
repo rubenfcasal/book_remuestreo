@@ -1,11 +1,11 @@
 --- 
 title: "Técnicas de Remuestreo"
-author: "Ricardo Cao Abad (rcao@udc.es) y Rubén Fernández Casal (ruben.fcasal@udc.es)"
+author: "Ricardo Cao Abad (rcao@udc.es) y Rubén Fernández Casal (rfcasal@udc.es)"
 institute: 
    - "Departamento de Matemáticas"
    - "Grupo de investigación de Modelización, Optimización e Inferencia Estadística (MODES)"
    - "Centro de Investigación en Tecnologías de la Información y las Comunicaciones (CITIC)"
-date: "2019-09-09"
+date: "2019-10-23"
 site: bookdown::bookdown_site
 output: bookdown::gitbook
 documentclass: book
@@ -47,7 +47,8 @@ para lo que se recomendaría consultar el libro de ["Escritura de libros con boo
 Este obra está bajo una licencia de [Creative Commons Reconocimiento-NoComercial-SinObraDerivada 4.0 Internacional ](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.es_ES) 
 (esperamos poder liberarlo bajo una licencia menos restrictiva más adelante...).
 
-![](by-nc-nd-88x31.png)<!-- -->
+
+\includegraphics[width=1.22in]{by-nc-nd-88x31} 
 
 
 

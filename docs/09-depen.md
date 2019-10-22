@@ -637,7 +637,7 @@ $p>1$.
 Para simular una serie de tiempo en `R`
 se puede emplear la función `arima.sim()` del paquete base `stats`.
 Por ejemplo, podemos generar una serie autoregressiva con:
-  
+[Figura \@ref(fig:arima-sim)]  
 
 ```r
 # Parametros
@@ -654,10 +654,14 @@ ry <- arima.sim(list(order = c(1,0,0), ar = rho),
 plot(ry)
 ```
 
-<div class="figure" style="text-align: center">
-<img src="09-depen_files/figure-html/arima-sim-1.png" alt="Simulación de un modelo autoregresivo." width="70%" />
-<p class="caption">(\#fig:arima-sim)Simulación de un modelo autoregresivo.</p>
-</div>
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{09-depen_files/figure-latex/arima-sim-1} 
+
+}
+
+\caption{Simulación de un modelo autoregresivo.}(\#fig:arima-sim)
+\end{figure}
 En este caso el periodo de calentamiento se establece mediante el
 parámetro `n.start` (que se fija automáticamente a un valor adecuado).
 La recomendación es fijar la varianza de las series simuladas si se quieren
@@ -674,7 +678,7 @@ Otras opciones:
 * `start.innov = rand.gen(n.start, ...)`
 
 Ejemplo (`?arima.sim`):
-  
+[Figura \@ref(fig:arima-sim2)]  
 
 ```r
 ry2 <- arima.sim(n = 63, list(ar = c(0.8897, -0.4858), 
@@ -684,10 +688,14 @@ ry2 <- arima.sim(n = 63, list(ar = c(0.8897, -0.4858),
 plot(ry2)
 ```
 
-<div class="figure" style="text-align: center">
-<img src="09-depen_files/figure-html/arima-sim2-1.png" alt="Simulación de un modelo autoregresivo con errores con distribución *t* de Student." width="70%" />
-<p class="caption">(\#fig:arima-sim2)Simulación de un modelo autoregresivo con errores con distribución *t* de Student.</p>
-</div>
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{09-depen_files/figure-latex/arima-sim2-1} 
+
+}
+
+\caption{Simulación de un modelo autoregresivo con errores con distribución *t* de Student.}(\#fig:arima-sim2)
+\end{figure}
 
 
 ## Implementación en `R` con el paquete `boot`
@@ -843,17 +851,21 @@ Reproducir el "Practical 8.1 (Lynx data)" en Davison, A. C., y Hinkley, D. V. (1
 > to the logarithm of which we fit the autoregressive
 > model that minimizes AIC:
 
-  
+[Figura \@ref(fig:lynx-data)]  
 
 
 ```r
 ts.plot(log(lynx))
 ```
 
-<div class="figure" style="text-align: center">
-<img src="09-depen_files/figure-html/lynx-data-1.png" alt="Lynx data (logarithmic scale)." width="70%" />
-<p class="caption">(\#fig:lynx-data)Lynx data (logarithmic scale).</p>
-</div>
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{09-depen_files/figure-latex/lynx-data-1} 
+
+}
+
+\caption{Lynx data (logarithmic scale).}(\#fig:lynx-data)
+\end{figure}
 
 ```r
 lynx.ar <- ar(log(lynx))
@@ -927,7 +939,7 @@ Reproducir el "Practical 8.2  (Beaver data)" en Davison, A. C., y Hinkley, D. V.
 > and an indicator $x_1, \ldots, x_n$ of activity of 
 > a female beaver, Castor canadensis.
 
-  
+[Figura \@ref(fig:beaver-data)]  
 
 
 ```r
@@ -935,10 +947,14 @@ Reproducir el "Practical 8.2  (Beaver data)" en Davison, A. C., y Hinkley, D. V.
 plot(beaver)
 ```
 
-<div class="figure" style="text-align: center">
-<img src="09-depen_files/figure-html/beaver-data-1.png" alt="Beaver data" width="70%" />
-<p class="caption">(\#fig:beaver-data)Beaver data</p>
-</div>
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{09-depen_files/figure-latex/beaver-data-1} 
+
+}
+
+\caption{Beaver data}(\#fig:beaver-data)
+\end{figure}
 
 ```r
 class(beaver)
@@ -1035,7 +1051,7 @@ Reproducir el "Practical 8.3  (Sunspot data)" en Davison, A. C., y Hinkley, D. V
 > "Consider scrambling the phases of the sunspot data. 
 > To see the original data, 
 
-  
+[Figura \@ref(fig:sunspot)]  
 
 
 ```r
@@ -1046,10 +1062,14 @@ plot(sunspot.year, ylim = yl)
 abline(h = 0, lty = 2)
 ```
 
-<div class="figure" style="text-align: center">
-<img src="09-depen_files/figure-html/sunspot-1.png" alt="Sunspot data (yearly numbers)." width="70%" />
-<p class="caption">(\#fig:sunspot)Sunspot data (yearly numbers).</p>
-</div>
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{09-depen_files/figure-latex/sunspot-1} 
+
+}
+
+\caption{Sunspot data (yearly numbers).}(\#fig:sunspot)
+\end{figure}
 
 > two replicates generated using ordinary phase scrambling, 
 > and two phase scrambled series whose marginal distribution is the same as that of the original data:
@@ -1078,7 +1098,7 @@ posteriormente se obtienen las simulaciones condicionadas empleando
 el modelo ajustado.
 
 Por ejemplo, en el caso de series de tiempo, se puede emplear la función `simulate`
-del paquete `forecast`: 
+del paquete `forecast`: [Figura \@ref(fig:co2)]
 
 
 ```r
@@ -1095,10 +1115,14 @@ ry <- simulate(fit, 12*4)
 lines(ry, col="red")
 ```
 
-<div class="figure" style="text-align: center">
-<img src="09-depen_files/figure-html/co2-1.png" alt="Datos de co2 (1990-1997) y simulación condicional (a partir de las observaciones desde 1990 hasta 1996)." width="70%" />
-<p class="caption">(\#fig:co2)Datos de co2 (1990-1997) y simulación condicional (a partir de las observaciones desde 1990 hasta 1996).</p>
-</div>
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{09-depen_files/figure-latex/co2-1} 
+
+}
+
+\caption{Datos de co2 (1990-1997) y simulación condicional (a partir de las observaciones desde 1990 hasta 1996).}(\#fig:co2)
+\end{figure}
 
 
 
@@ -1107,11 +1131,15 @@ plot(forecast(fit, h=12*4), col="blue")
 lines(ry, col="red")
 ```
 
-<div class="figure" style="text-align: center">
-<img src="09-depen_files/figure-html/co22-1.png" alt="Predicción de los valores de co2 y simulación condicional (ambas a partir de las observaciones entre 1990 y 1996)." width="70%" />
-<p class="caption">(\#fig:co22)Predicción de los valores de co2 y simulación condicional (ambas a partir de las observaciones entre 1990 y 1996).</p>
-</div>
+\begin{figure}[!htb]
 
+{\centering \includegraphics[width=0.7\linewidth]{09-depen_files/figure-latex/co22-1} 
+
+}
+
+\caption{Predicción de los valores de co2 y simulación condicional (ambas a partir de las observaciones entre 1990 y 1996).}(\#fig:co22)
+\end{figure}
+[Figura \@ref(fig:co22)]
 
 Ver enlaces en apéndice \@ref(forecast-links).
 

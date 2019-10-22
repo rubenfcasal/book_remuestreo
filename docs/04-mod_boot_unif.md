@@ -198,10 +198,14 @@ curve(pexp(x, 1/mean(muestra)), lty = 3, add = TRUE)
 legend("bottomright", legend = c("Empírica", "Aprox. normal", "Aprox. exponencial"), lty = 1:3)
 ```
 
-<div class="figure" style="text-align: center">
-<img src="04-mod_boot_unif_files/figure-html/boot-par-aprox-1.png" alt="Distribución empírica de la muestra de tiempos de vida de microorganismos y aproximaciones paramétricas." width="70%" />
-<p class="caption">(\#fig:boot-par-aprox)Distribución empírica de la muestra de tiempos de vida de microorganismos y aproximaciones paramétricas.</p>
-</div>
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{04-mod_boot_unif_files/figure-latex/boot-par-aprox-1} 
+
+}
+
+\caption{Distribución empírica de la muestra de tiempos de vida de microorganismos y aproximaciones paramétricas.}(\#fig:boot-par-aprox)
+\end{figure}
 Solo tendríamos que cambiar la función que genera los datos:
 
 ```r
@@ -434,10 +438,14 @@ lines(npden, lwd = 2)
 rug(x, col = "darkgray")
 ```
 
-<div class="figure" style="text-align: center">
-<img src="04-mod_boot_unif_files/figure-html/density-1.png" alt="Estimación tipo núcleo de la densidad de `precip`. " width="70%" />
-<p class="caption">(\#fig:density)Estimación tipo núcleo de la densidad de `precip`. </p>
-</div>
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{04-mod_boot_unif_files/figure-latex/density-1} 
+
+}
+
+\caption{Estimación tipo núcleo de la densidad de `precip`. }(\#fig:density)
+\end{figure}
 
 La sensibilidad del estimador tipo núcleo al parámetro de suavizado puede
 observarse ejecutando el siguiente código (ver Figura \@ref(fig:bandwidth-movie), [bandwidth-movie.gif](./bandwidth-movie.gif)):
@@ -452,10 +460,14 @@ for (bw in bws)
 ```
 
 
-<div class="figure" style="text-align: center">
-<img src="bandwidth-movie.gif" alt="Efecto de cambio en la ventana en la estimación tipo núcleo de la densidad." width="70%" />
-<p class="caption">(\#fig:bandwidth-movie)Efecto de cambio en la ventana en la estimación tipo núcleo de la densidad.</p>
-</div>
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{04-mod_boot_unif_files/figure-latex/bandwidth-movie-1} 
+
+}
+
+\caption{Efecto de cambio en la ventana en la estimación tipo núcleo de la densidad.}(\#fig:bandwidth-movie)
+\end{figure}
 
 
 La función de distribución asociada al estimador tipo núcleo de la
@@ -552,10 +564,14 @@ plot(npden)
 lines(density(x_boot), col = "blue", lwd = 2, lty = 2)
 ```
 
-<div class="figure" style="text-align: center">
-<img src="04-mod_boot_unif_files/figure-html/density-sim-1.png" alt="Estimaciónes tipo núcleo de las densidades de `precip` y de una simulación." width="70%" />
-<p class="caption">(\#fig:density-sim)Estimaciónes tipo núcleo de las densidades de `precip` y de una simulación.</p>
-</div>
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{04-mod_boot_unif_files/figure-latex/density-sim-1} 
+
+}
+
+\caption{Estimaciónes tipo núcleo de las densidades de `precip` y de una simulación.}(\#fig:density-sim)
+\end{figure}
 
 Es fácil percatarse de que los posibles valores que puede tomar una
 observación $X_i^{\ast}$ de cada remuestra bootstrap son infinitos,
@@ -711,10 +727,14 @@ n <- 50
 curve(n/theta * (x/theta)^(n - 1), 0, theta, ylab = "Density")
 ```
 
-<div class="figure" style="text-align: center">
-<img src="04-mod_boot_unif_files/figure-html/den-max-1.png" alt="Función de densidad del máximo de una muestra procedente de una uniforme." width="70%" />
-<p class="caption">(\#fig:den-max)Función de densidad del máximo de una muestra procedente de una uniforme.</p>
-</div>
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{04-mod_boot_unif_files/figure-latex/den-max-1} 
+
+}
+
+\caption{Función de densidad del máximo de una muestra procedente de una uniforme.}(\#fig:den-max)
+\end{figure}
 
 Como consecuencia podemos hallar fácilmente el sesgo del estimador
 $\hat{\theta}$, ya que
@@ -801,10 +821,14 @@ rug(estadistico, col = "darkgray")
 curve(n/theta * ((x + theta)/theta)^(n - 1), col = "blue", lty = 2, lwd = 2, add = TRUE)
 ```
 
-<div class="figure" style="text-align: center">
-<img src="04-mod_boot_unif_files/figure-html/boot-uniforme-maximo-1.png" alt="Distribución de las réplicas bootstrap (uniforme) del estadístico y distribución poblacional." width="70%" />
-<p class="caption">(\#fig:boot-uniforme-maximo)Distribución de las réplicas bootstrap (uniforme) del estadístico y distribución poblacional.</p>
-</div>
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{04-mod_boot_unif_files/figure-latex/boot-uniforme-maximo-1} 
+
+}
+
+\caption{Distribución de las réplicas bootstrap (uniforme) del estadístico y distribución poblacional.}(\#fig:boot-uniforme-maximo)
+\end{figure}
 
 ### Ejemplo (método alternativo)
 
@@ -855,10 +879,14 @@ rug(estadistico, col = "darkgray")
 curve(n/theta * ((x + theta)/theta)^(n - 1), col = "blue", lty = 2, lwd = 2, add = TRUE)
 ```
 
-<div class="figure" style="text-align: center">
-<img src="04-mod_boot_unif_files/figure-html/boot-parametrico-maximo-1.png" alt="Distribución bootstrap paramétrica y distribución poblacional." width="70%" />
-<p class="caption">(\#fig:boot-parametrico-maximo)Distribución bootstrap paramétrica y distribución poblacional.</p>
-</div>
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{04-mod_boot_unif_files/figure-latex/boot-parametrico-maximo-1} 
+
+}
+
+\caption{Distribución bootstrap paramétrica y distribución poblacional.}(\#fig:boot-parametrico-maximo)
+\end{figure}
 
 <!-- 
 Ejercicio con el máximo de otra distribución?

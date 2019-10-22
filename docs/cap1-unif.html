@@ -21,10 +21,10 @@
   <meta name="twitter:description" content="Apuntes de la asignatura de Técnicas de Remuestreo del Máster en Técnicas Estadísticas." />
   
 
-<meta name="author" content="Ricardo Cao Abad (rcao@udc.es) y Rubén Fernández Casal (ruben.fcasal@udc.es)" />
+<meta name="author" content="Ricardo Cao Abad (rcao@udc.es) y Rubén Fernández Casal (rfcasal@udc.es)" />
 
 
-<meta name="date" content="2019-09-09" />
+<meta name="date" content="2019-10-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -381,7 +381,7 @@ IC_boot &lt;-<span class="st"> </span><span class="kw">c</span>(ic_inf_boot, ic_
 <span class="kw">names</span>(IC_boot) &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="dv">100</span><span class="op">*</span><span class="kw">c</span>(alfa<span class="op">/</span><span class="dv">2</span>, <span class="dv">1</span><span class="op">-</span>alfa<span class="op">/</span><span class="dv">2</span>), <span class="st">&quot;%&quot;</span>)
 IC_boot</code></pre></div>
 <pre><code>##      2.5%     97.5% 
-## 0.7132745 0.8953890</code></pre>
+## 0.5127411 1.0866077</code></pre>
 
 <div class="example">
 <p><span id="exm:mediana" class="example"><strong>Ejemplo 1.3  (Inferencia sobre la mediana)  </strong></span><br> </p>
@@ -431,8 +431,8 @@ ic_sup_boot &lt;-<span class="st"> </span>x_mediana <span class="op">-</span><sp
 IC_boot &lt;-<span class="st"> </span><span class="kw">c</span>(ic_inf_boot, ic_sup_boot)
 <span class="kw">names</span>(IC_boot) &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="dv">100</span><span class="op">*</span><span class="kw">c</span>(alfa<span class="op">/</span><span class="dv">2</span>, <span class="dv">1</span><span class="op">-</span>alfa<span class="op">/</span><span class="dv">2</span>), <span class="st">&quot;%&quot;</span>)
 IC_boot</code></pre></div>
-<pre><code>##  2.5% 97.5% 
-## 0.510 0.713</code></pre>
+<pre><code>##    2.5%   97.5% 
+## 0.07200 0.95225</code></pre>
 <p>Sin embargo, como veremos más adelante, este caso de inferencia de la mediana es uno de los pocos casos en los que la distribución bootstrap se puede calcular de forma exacta, siendo dicha expresión utilizable en la práctica.</p>
 </div>
 </div>

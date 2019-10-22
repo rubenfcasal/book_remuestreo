@@ -21,10 +21,10 @@
   <meta name="twitter:description" content="Apuntes de la asignatura de Técnicas de Remuestreo del Máster en Técnicas Estadísticas." />
   
 
-<meta name="author" content="Ricardo Cao Abad (rcao@udc.es) y Rubén Fernández Casal (ruben.fcasal@udc.es)" />
+<meta name="author" content="Ricardo Cao Abad (rcao@udc.es) y Rubén Fernández Casal (rfcasal@udc.es)" />
 
 
-<meta name="date" content="2019-09-09" />
+<meta name="date" content="2019-10-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -406,11 +406,12 @@ Figura 1.3: Distribución del tiempo de vida de microorganismos.
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">alfa &lt;-<span class="st"> </span><span class="fl">0.05</span>
 x_barra &lt;-<span class="st"> </span><span class="kw">mean</span>(muestra)
 z &lt;-<span class="st"> </span><span class="kw">qnorm</span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>alfa<span class="op">/</span><span class="dv">2</span>)
+n &lt;-<span class="st"> </span><span class="kw">length</span>(muestra)
 ic_inf &lt;-<span class="st"> </span>x_barra <span class="op">-</span><span class="st"> </span>z<span class="op">*</span>sigma<span class="op">/</span><span class="kw">sqrt</span>(n)
 ic_sup &lt;-<span class="st"> </span>x_barra <span class="op">+</span><span class="st"> </span>z<span class="op">*</span>sigma<span class="op">/</span><span class="kw">sqrt</span>(n)
 IC &lt;-<span class="st"> </span><span class="kw">c</span>(ic_inf, ic_sup)
 IC</code></pre></div>
-<pre><code>## [1] 0.7093151 0.9013516</code></pre>
+<pre><code>## [1] 0.501697 1.108970</code></pre>
 <p><strong><em>Contexto bootstrap</em></strong></p>
 <p>Consideramos la función de distribución empírica <span class="math inline">\(\hat{F}=F_n\)</span> como aproximación de la distribución poblacional (bootstrap uniforme). Para aproximar la distribución bootstrap del estadístico por Monte Carlo, se generan <span class="math inline">\(B=1000\)</span> muestras bootstrap <span class="math inline">\(\mathbf{X}^{\ast (b)}=\left( X_1^{\ast (b)},\ldots ,X_n^{\ast (b)} \right)\)</span> de forma que <span class="math inline">\(P^{\ast (b)}\left( X_i^{\ast}=X_j \right) = \frac{1}{n}\)</span>, <span class="math inline">\(j=1,\ldots ,n\)</span>, para <span class="math inline">\(i=1,\ldots, n\)</span> y <span class="math inline">\(b=1,\ldots, B\)</span>. A partir de las cuales se obtienen las <span class="math inline">\(B\)</span> réplicas bootstrap del estadístico: <span class="math display">\[R^{\ast (b)}=R\left( \mathbf{X}^{\ast (b)},\hat{F} \right) =\sqrt{n}\frac{
 \bar{X}^{\ast  (b)}-\bar{X}}{\sigma }, \ b=1,\ldots, B, \]</span> con <span class="math inline">\(\bar{X}^{\ast (b)} = \frac{1}{n}\sum X_i^{\ast (b)}\)</span>.</p>
@@ -433,7 +434,7 @@ pto_crit &lt;-<span class="st"> </span>estadistico_boot_ordenado[<span class="kw
 pto_crit &lt;-<span class="st"> </span><span class="kw">quantile</span>(estadistico_boot, <span class="kw">c</span>(alfa<span class="op">/</span><span class="dv">2</span>, <span class="dv">1</span> <span class="op">-</span><span class="st"> </span>alfa<span class="op">/</span><span class="dv">2</span>))
 pto_crit</code></pre></div>
 <pre><code>##      2.5%     97.5% 
-## -1.851858  1.873377</code></pre>
+## -1.852319  2.243964</code></pre>
 <p>A partir de los cuales obtenemos la correspondiente estimación por IC boostrap: <span class="math display">\[\hat{IC}^{boot}_{1-\alpha}\left(  \mu\right)  = 
 \left(  \overline{X}-x_{1-\alpha/2}\dfrac{\sigma}{\sqrt{n}},\ \overline{X} 
 - x_{\alpha/2}\dfrac{\sigma}{\sqrt{n}} \right).\]</span></p>
@@ -443,8 +444,8 @@ ic_sup_boot &lt;-<span class="st"> </span>x_barra <span class="op">-</span><span
 IC_boot &lt;-<span class="st"> </span><span class="kw">c</span>(ic_inf_boot, ic_sup_boot)
 <span class="kw">names</span>(IC_boot) &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="dv">100</span><span class="op">*</span><span class="kw">c</span>(alfa<span class="op">/</span><span class="dv">2</span>, <span class="dv">1</span><span class="op">-</span>alfa<span class="op">/</span><span class="dv">2</span>), <span class="st">&quot;%&quot;</span>) <span class="co"># rev(names(IC_boot))</span>
 IC_boot</code></pre></div>
-<pre><code>##      2.5%     97.5% 
-## 0.7135570 0.8960555</code></pre>
+<pre><code>##     2.5%    97.5% 
+## 0.457700 1.092293</code></pre>
 <p>Nótese que este intervalo de confianza no está centrado en la media, al contrario que el obtenido con la aproximación tradicional. Aunque en este caso no se observan grandes diferencias ya que la distribución bootstrap obtenida es muy similar a la aproximación normal (ver Figura <a href="introduccion.html#fig:estad-boot">1.4</a>).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hist</span>(estadistico_boot, <span class="dt">freq =</span> <span class="ot">FALSE</span>)
 <span class="kw">lines</span>(<span class="kw">density</span>(estadistico_boot))
