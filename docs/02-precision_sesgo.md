@@ -280,7 +280,7 @@ desvmediaboot
 ```
 
 ```
-## [1] 0.1562858
+## [1] 0.1556006
 ```
 
 ```r
@@ -288,7 +288,7 @@ desvmedianaboot
 ```
 
 ```
-## [1] 0.2491157
+## [1] 0.2498933
 ```
 
 ```r
@@ -299,7 +299,7 @@ sesgomediaboot
 ```
 
 ```
-## [1] -0.00104408
+## [1] -0.002349973
 ```
 
 ```r
@@ -307,7 +307,7 @@ sesgomedianaboot
 ```
 
 ```
-## [1] 0.0420326
+## [1] 0.0416917
 ```
 Empleando el paquete `boot` el código sería más simple:
 
@@ -333,9 +333,9 @@ res.boot
 ## 
 ## 
 ## Bootstrap Statistics :
-##      original      bias    std. error
-## t1* 0.8053333 -0.00046904   0.1550047
-## t2* 0.6110000  0.04636960   0.2498358
+##      original       bias    std. error
+## t1* 0.8053333 7.115333e-05   0.1572396
+## t2* 0.6110000 4.529410e-02   0.2511022
 ```
 Lamentablemente la función `print.boot()` calcula las aproximaciones
 bootstrap del sesgo y de la precisión pero no las almacena. 
@@ -352,8 +352,8 @@ op
 ```
 
 ```
-##      original      bias    std. error
-## t1* 0.8053333 -0.00046904   0.1550047
-## t2* 0.6110000  0.04636960   0.2498358
+##      original       bias    std. error
+## t1* 0.8053333 7.115333e-05   0.1572396
+## t2* 0.6110000 4.529410e-02   0.2511022
 ```
 

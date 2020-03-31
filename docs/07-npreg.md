@@ -3,11 +3,12 @@
 
 
 
+En este capítulo se introducirá la estimación no paramétrica de la función de regresión y distintos métodos de remuestreo y resultados para ellos...
+
 
 ## Estimación no paramétrica de la función de regresión
 
-Sea $\left\{ \left( X_1,Y_1 \right),\left( X_2,Y_2 \right),\ldots
-,\left( X_n,Y_n \right) \right\}$ una m.a.s. de una población
+Sea $\left\{ \left( X_1,Y_1 \right),\left( X_2,Y_2 \right), \ldots, \left( X_n,Y_n \right) \right\}$ una m.a.s. de una población
 bidimensional $\left( X,Y \right)$, con $E\left( \left\vert Y\right\vert
  \right) <\infty$, para la cual queremos estimar la función de regresión
 de $Y$ dada $X$: 
@@ -134,7 +135,7 @@ la tasa teórica de la aproximación normal límite (ver Cao (1991)).
 
 ## Distintos métodos de remuestreo y resultados para ellos
 
-### Wild bootstrap
+### Wild bootstrap {#wild-bootstrap}
 
 Este método de remuestreo bootstrap, propuesto por Wu (1986) y estudiado
 por Härdle y Marron (1991), procede del siguiente modo:

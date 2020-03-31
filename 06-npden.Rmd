@@ -123,7 +123,7 @@ f\left( x \right)^2dx \\
 En ella se puede ver el efecto negativo de tomar ventanas ($h$) demasiado
 grandes o demasiado pequeñas.
 
-## Aproximación Bootstrap de la distribución del estimador de Parzen-Rosenblatt
+## Aproximación Bootstrap de la distribución del estimador de Parzen-Rosenblatt {# aproximacion-bootstrap}
 
 Antes de proceder a abordar el bootstrap en este contexto conviene
 presentar la distribución asintótica del estimador y otras

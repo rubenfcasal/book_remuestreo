@@ -15,7 +15,7 @@ parecida posible al nivel nominal $1-\alpha$. Comenzaremos analizando
 el error de cobertura de los intervalos de confianza clásicos, los
 basados en la distribución normal asintótica.
 
-## Intervalos basados en la distribución normal asintótica {#cap5_norm}
+## Intervalos basados en la distribución normal asintótica {#cap5-norm}
 
 Consideremos primeramente el caso más sencillo (y poco realista) de
 construcción de un intervalo de confianza para la media, $\mu \,$, con
@@ -97,7 +97,7 @@ $\frac{\hat{\sigma}_{\theta}}{\sqrt{n}}$ err. std.
 -->
 
 
-## Método percentil (básico) {#cap5_basic}
+## Método percentil (básico) {#cap5-basic}
 
 Este método se basa en la construcción del intervalo de confianza,
 mediante bootstrap, a partir del estadístico no estandarizado
@@ -225,8 +225,8 @@ IC_boot
 ```
 
 ```
-##     2.5%    97.5% 
-## 0.457700 1.092293
+##      2.5%     97.5% 
+## 0.4837233 1.1025650
 ```
 
 Aunque en este caso también podemos obtener el intervalo a
@@ -242,8 +242,8 @@ IC_boot
 ```
 
 ```
-##     2.5%    97.5% 
-## 0.457700 1.092293
+##      2.5%     97.5% 
+## 0.4837233 1.1025650
 ```
 
 Esta forma de proceder es la que emplea el paquete `boot` para obtener
@@ -269,7 +269,7 @@ res
 ## 
 ## Intervals : 
 ## Level      Basic         
-## 95%   ( 0.4945,  1.1121 )  
+## 95%   ( 0.4825,  1.0980 )  
 ## Calculations and Intervals on Original Scale
 ```
 
@@ -279,7 +279,7 @@ IC_boot
 ```
 
 ```
-## [1] 0.494535 1.112066
+## [1] 0.4824717 1.0980120
 ```
 
 Además del paquete `boot`, otros autores también denominan a este método
@@ -303,7 +303,7 @@ boot.ci(res.boot, type = "perc")
 ## 
 ## Intervals : 
 ## Level     Percentile     
-## 95%   ( 0.4986,  1.1161 )  
+## 95%   ( 0.5127,  1.1282 )  
 ## Calculations and Intervals on Original Scale
 ```
 
@@ -318,7 +318,7 @@ IC_boot
 
 ```
 ##      2.5%     97.5% 
-## 0.4985983 1.1161317
+## 0.5126517 1.1281950
 ```
 
 Asintóticamente ambos métodos son equivalentes, aunque en general
@@ -519,7 +519,7 @@ $O\left( n^{-\frac{3}{2}} \right)$, el cual mejora el orden
 $O\left( n^{-1} \right)$, que es el que presentan los intervalos basados
 en la normal asintótica o bien en el método percentil-$t$.
 
-## Tabla resumen de los errores de cobertura {#cap5_err_cober}
+## Tabla resumen de los errores de cobertura {#cap-err-cober}
 
   Tipo de I.C.                Unilateral                              Bilateral 
   ------------                --------------------------              -------------------------- 
@@ -529,7 +529,7 @@ en la normal asintótica o bien en el método percentil-$t$.
           
                 
 
-## Ejemplos {#cap5_ejem}
+## Ejemplos {#cap5-ejem}
 
 \BeginKnitrBlock{example}\iffalse{-91-73-110-102-101-114-101-110-99-105-97-32-115-111-98-114-101-32-108-97-32-109-101-100-105-97-32-99-111-110-32-118-97-114-105-97-110-122-97-32-100-101-115-99-111-110-111-99-105-100-97-44-32-99-111-110-116-105-110-117-97-99-105-243-110-93-}\fi{}<div class="example"><span class="example" id="exm:media-dt-desconocida-persim"><strong>(\#exm:media-dt-desconocida-persim)  \iffalse (Inferencia sobre la media con varianza desconocida, continuación) \fi{} </strong></span><br> \vspace{0.5cm}
 
@@ -573,7 +573,7 @@ IC_boot
 
 ```
 ##      2.5%     97.5% 
-## 0.4293376 1.1813290
+## 0.4334742 1.1771924
 ```
 
 <!-- 
@@ -674,7 +674,7 @@ t.fin
 
 ```
 ##    user  system elapsed 
-##   26.01    0.03   26.14
+##   14.88    0.00   14.93
 ```
 
 ```r
@@ -682,9 +682,9 @@ apply(resultados, c(2, 3), mean)
 ```
 
 ```
-##             Normal Percentil Percentil-t Percentil-t simetrizado
-## Cobertura  0.89200   0.88600     0.91200                 0.90400
-## Longitud  32.24304  32.05088    33.39516                33.34209
+##            Normal Percentil Percentil-t Percentil-t simetrizado
+## Cobertura  0.8800   0.86600      0.8880                 0.88800
+## Longitud  32.5022  32.13928     33.5653                33.49959
 ```
 
 ```r

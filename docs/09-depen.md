@@ -750,9 +750,9 @@ tsboot(log(lynx), lynx.fun, R = 199, sim = "geom", l = 20)
 ## 
 ## 
 ## Bootstrap Statistics :
-##      original       bias    std. error
-## t1* 11.000000 -6.216080402   2.8210147
-## t2*  6.685933  0.004037546   0.1133995
+##      original      bias    std. error
+## t1* 11.000000 -6.46733668   2.4675036
+## t2*  6.685933 -0.01494926   0.1163515
 ```
 
 
@@ -834,8 +834,8 @@ tsboot(lynx.res, lynx.fun, R = 199, l = 20,
 ## 
 ## Bootstrap Statistics :
 ##       original   bias    std. error
-## t1* 0.0000e+00 9.954774  3.24628223
-## t2* 6.1989e-18 6.678628  0.09172397
+## t1* 0.0000e+00 9.819095  3.46664295
+## t2* 6.1989e-18 6.683323  0.09551445
 ```
 
 

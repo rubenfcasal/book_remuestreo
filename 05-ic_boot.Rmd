@@ -15,7 +15,7 @@ parecida posible al nivel nominal $1-\alpha$. Comenzaremos analizando
 el error de cobertura de los intervalos de confianza clásicos, los
 basados en la distribución normal asintótica.
 
-## Intervalos basados en la distribución normal asintótica {#cap5_norm}
+## Intervalos basados en la distribución normal asintótica {#cap5-norm}
 
 Consideremos primeramente el caso más sencillo (y poco realista) de
 construcción de un intervalo de confianza para la media, $\mu \,$, con
@@ -97,7 +97,7 @@ $\frac{\hat{\sigma}_{\theta}}{\sqrt{n}}$ err. std.
 -->
 
 
-## Método percentil (básico) {#cap5_basic}
+## Método percentil (básico) {#cap5-basic}
 
 Este método se basa en la construcción del intervalo de confianza,
 mediante bootstrap, a partir del estadístico no estandarizado
@@ -468,7 +468,7 @@ $O\left( n^{-\frac{3}{2}} \right)$, el cual mejora el orden
 $O\left( n^{-1} \right)$, que es el que presentan los intervalos basados
 en la normal asintótica o bien en el método percentil-$t$.
 
-## Tabla resumen de los errores de cobertura {#cap5_err_cober}
+## Tabla resumen de los errores de cobertura {#cap-err-cober}
 
   Tipo de I.C.                Unilateral                              Bilateral 
   ------------                --------------------------              -------------------------- 
@@ -478,7 +478,7 @@ en la normal asintótica o bien en el método percentil-$t$.
           
                 
 
-## Ejemplos {#cap5_ejem}
+## Ejemplos {#cap5-ejem}
 
 ```{example, label="media-dt-desconocida-persim", name="Inferencia sobre la media con varianza desconocida, continuación"}
 <br> \vspace{0.5cm}

@@ -633,7 +633,7 @@ IC_boot
 
 ```
 ##      2.5%     97.5% 
-## 0.4592311 1.1103890
+## 0.4668897 1.0798549
 ```
 
 Con el paquete `boot`, la recomendación es implementarlo como
@@ -671,7 +671,7 @@ boot.ci(res.boot, type = "stud")
 ## 
 ## Intervals : 
 ## Level    Studentized     
-## 95%   ( 0.4580,  1.1132 )  
+## 95%   ( 0.4664,  1.0830 )  
 ## Calculations and Intervals on Original Scale
 ```
 

@@ -220,7 +220,7 @@ head(muestra_boot)
 ```
 
 ```
-## [1]  0.18879230 -0.41499456 -1.47075238 -0.47340064  0.02800216  0.78213630
+## [1] -1.4707524  0.7685329  0.3876716 -0.6887557  0.9189774  1.3586796
 ```
 
 En el caso multidimensional, cuando trabajamos con un conjunto de datos
@@ -253,11 +253,11 @@ str(data_boot)
 
 ```
 ## 'data.frame':	150 obs. of  5 variables:
-##  $ Sepal.Length: num  5 5.2 6.7 5 5.2 6.7 5.4 5.1 4.4 7.3 ...
-##  $ Sepal.Width : num  3.5 4.1 3 3.5 3.5 3 3 3.8 3 2.9 ...
-##  $ Petal.Length: num  1.3 1.5 5 1.3 1.5 5 4.5 1.5 1.3 6.3 ...
-##  $ Petal.Width : num  0.3 0.1 1.7 0.3 0.2 1.7 1.5 0.3 0.2 1.8 ...
-##  $ Species     : Factor w/ 3 levels "setosa","versicolor",..: 1 1 2 1 1 2 2 1 1 3 ...
+##  $ Sepal.Length: num  6.9 7.2 4.3 6.4 5.7 5.8 7.2 5.6 5.8 5.4 ...
+##  $ Sepal.Width : num  3.1 3.2 3 3.2 4.4 4 3 2.9 2.7 3.9 ...
+##  $ Petal.Length: num  5.4 6 1.1 5.3 1.5 1.2 5.8 3.6 5.1 1.3 ...
+##  $ Petal.Width : num  2.1 1.8 0.1 2.3 0.4 0.2 1.6 1.3 1.9 0.4 ...
+##  $ Species     : Factor w/ 3 levels "setosa","versicolor",..: 3 3 1 3 1 1 3 2 3 1 ...
 ```
 
 Esta forma de proceder es la que emplea por defecto el paquete `boot` que 
@@ -406,7 +406,7 @@ pto_crit
 
 ```
 ##      2.5%     97.5% 
-## -1.852319  2.243964
+## -1.918622  2.075984
 ```
 A partir de los cuales obtenemos la correspondiente estimación por IC
 boostrap:
@@ -425,8 +425,8 @@ IC_boot
 ```
 
 ```
-##     2.5%    97.5% 
-## 0.457700 1.092293
+##      2.5%     97.5% 
+## 0.4837233 1.1025650
 ```
 Nótese que este intervalo de confianza no está centrado en la media,
 al contrario que el obtenido con la aproximación tradicional.
@@ -658,7 +658,7 @@ IC_boot
 
 ```
 ##      2.5%     97.5% 
-## 0.5127411 1.0866077
+## 0.5024398 1.0827052
 ```
 
 
@@ -750,8 +750,8 @@ IC_boot
 ```
 
 ```
-##    2.5%   97.5% 
-## 0.07200 0.95225
+##  2.5% 97.5% 
+## 0.132 0.962
 ```
 
 Sin embargo, como veremos más adelante, este caso de inferencia de la
@@ -1052,7 +1052,7 @@ IC_boot
 
 ```
 ##      2.5%     97.5% 
-## 0.4940304 1.2260180
+## 0.5030131 1.2888063
 ```
 
 Este procedimiento para la construcción de intervalos de confianza
@@ -1177,7 +1177,7 @@ res.boot
 
 ```
 ## Estadístico       Sesgo  Error Std. 
-##   0.6110000   0.0374880   0.2580493
+##   0.6110000   0.0609260   0.2481362
 ```
 
 La función `boot.strap0()` anterior no es adecuada para el caso multivariante
@@ -1243,9 +1243,8 @@ names(res.boot)
 ```
 
 ```
-##  [1] "t0"        "t"         "R"         "data"      "seed"     
-##  [6] "statistic" "sim"       "call"      "stype"     "strata"   
-## [11] "weights"
+##  [1] "t0"        "t"         "R"         "data"      "seed"      "statistic"
+##  [7] "sim"       "call"      "stype"     "strata"    "weights"
 ```
 Además de los parámetros de entrada (incluyendo los valores por defecto), contiene tres componentes adicionales:
 
@@ -1278,7 +1277,7 @@ res.boot
 ## 
 ## Bootstrap Statistics :
 ##     original   bias    std. error
-## t1*    0.611 0.042895   0.2495372
+## t1*    0.611 0.058523   0.2526519
 ```
 y el método `plot()` que genera gráficas básicas de diagnosis
 de los resultados (correspondientes al estadístico determinado por el parámetro `index`, por defecto `= 1`): [Figura \@ref(fig:plot-res-boot)]
@@ -1375,8 +1374,8 @@ res.boot
 ## 
 ## Bootstrap Statistics :
 ##      original       bias    std. error
-## t1* 0.8053333  0.001745067 0.157310082
-## t2* 0.0259338 -0.001404917 0.007962592
+## t1* 0.8053333  0.003173267 0.158330646
+## t2* 0.0259338 -0.002155755 0.007594682
 ```
 
 ```r
@@ -1392,10 +1391,10 @@ boot.ci(res.boot)
 ## 
 ## Intervals : 
 ## Level      Normal              Basic             Studentized     
-## 95%   ( 0.4953,  1.1119 )   ( 0.4945,  1.1121 )   ( 0.5055,  1.2705 )  
+## 95%   ( 0.4918,  1.1125 )   ( 0.4825,  1.0980 )   ( 0.4715,  1.2320 )  
 ## 
 ## Level     Percentile            BCa          
-## 95%   ( 0.4986,  1.1161 )   ( 0.5289,  1.1285 )  
+## 95%   ( 0.5127,  1.1282 )   ( 0.5384,  1.1543 )  
 ## Calculations and Intervals on Original Scale
 ```
 
