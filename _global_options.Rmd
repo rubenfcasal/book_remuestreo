@@ -34,6 +34,6 @@ fig.path <- "images/"
         paste0("\\@ref(fig:", x, ")", collapse = ", "),
         "]")
     }  
-    latexfig <- function(..., output = TRUE) #  , output = is_latex()) 
+    latexfig <- function(..., output = is_latex()) #  output = TRUE) 
       if (output) citefig2(...) else ""
 ```

@@ -1,4 +1,4 @@
-# Introducción al procesamiento en paralelo en R
+# Introducción al procesamiento en paralelo en R {#intro-hpc}
 
 
 
@@ -79,7 +79,7 @@ ncores
 ```
 
 ```
-## [1] 8
+## [1] 4
 ```
 
 ```r
@@ -96,7 +96,7 @@ system.time(res.boot <- mclapply(1:100, func)) # En Windows llama a lapply() (mc
 
 ```
 ##    user  system elapsed 
-##    0.09    0.00    0.10
+##    0.10    0.00    0.09
 ```
 
 ```r
@@ -116,7 +116,7 @@ system.time(res.boot <- parSapply(cl, 1:100, func))
 
 ```
 ##    user  system elapsed 
-##    0.00    0.00    0.03
+##    0.00    0.00    0.07
 ```
 
 ```r
@@ -149,8 +149,8 @@ ctime
 ```
 
 ```
-## elapsed    send receive  node 1  node 2  node 3  node 4  node 5  node 6  node 7 
-##    0.03    0.02   -0.02    0.03    0.02    0.01    0.02    0.01    0.01    0.02
+## elapsed    send receive  node 1  node 2  node 3 
+##    0.05    0.00    0.00    0.03    0.05    0.03
 ```
 
 ```r
@@ -195,7 +195,7 @@ system.time(res.boot <- boot(muestra, statistic, R = B))
 
 ```
 ##    user  system elapsed 
-##    0.08    0.00    0.10
+##    0.06    0.00    0.07
 ```
 
 ```r
@@ -205,17 +205,17 @@ system.time(res.boot <- boot(muestra, statistic, R = B, parallel = "snow", cl = 
 
 ```
 ##    user  system elapsed 
-##    0.08    0.00    0.08
+##    0.05    0.00    0.04
 ```
 
-### Estudio de simulación
+### Estudio de simulación {#estudio-sim-boot}
 
 Si se trata de un estudio más complejo, como por ejemplo un estudio de simulación
 en el que se emplea bootstrap, la recomendación sería tratar de paralelizar
 en el nivel superior para minimizar la sobrecarga debida a la comunicación
 entre nodos.
 
-Por ejemplo, a continuación se realiza un estudio similar al Ejemplo \@ref(exm:estudio-sim-exp)
+Por ejemplo, a continuación se realiza un estudio similar al mostrado en la Sección \@ref(estudio-sim-exp)
 pero comparando las probabilidades de cobertura y las longitudes de los 
 intervalos de confianza implementados en la función `boot.ci()`.
 
@@ -269,7 +269,7 @@ print(t.fin)
 
 ```
 ##    user  system elapsed 
-##    0.00    0.00   11.52
+##    0.02    0.00   19.39
 ```
 
 ```r
@@ -287,10 +287,10 @@ res
 
 ```
 ##             Cobertura Longitud
-## Normal          0.866 57.05639
-## Basic           0.860 56.97389
-## Studentized     0.900 65.72609
-## Percentil       0.868 56.97389
+## Normal          0.872 56.76171
+## Basic           0.862 56.68745
+## Studentized     0.894 65.01878
+## Percentil       0.866 56.68745
 ```
 
 ```r
@@ -302,13 +302,13 @@ knitr::kable(res, digits = 3)
 \hline
   & Cobertura & Longitud\\
 \hline
-Normal & 0.866 & 57.056\\
+Normal & 0.872 & 56.762\\
 \hline
-Basic & 0.860 & 56.974\\
+Basic & 0.862 & 56.687\\
 \hline
-Studentized & 0.900 & 65.726\\
+Studentized & 0.894 & 65.019\\
 \hline
-Percentil & 0.868 & 56.974\\
+Percentil & 0.866 & 56.687\\
 \hline
 \end{tabular}
 

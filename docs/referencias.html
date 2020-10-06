@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Referencias | Técnicas de Remuestreo</title>
   <meta name="description" content="Apuntes de la asignatura de Técnicas de Remuestreo del Máster en Técnicas Estadísticas." />
-  <meta name="generator" content="bookdown 0.17 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Referencias | Técnicas de Remuestreo" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Ricardo Cao Abad (rcao@udc.es) y Rubén Fernández Casal (rfcasal@udc.es)" />
 
 
-<meta name="date" content="2020-03-31" />
+<meta name="date" content="2020-10-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -53,66 +53,41 @@
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
-}
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(title);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {  }
-@media screen {
-a.sourceLine::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 </style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -132,14 +107,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Prólogo</a></li>
-<li class="chapter" data-level="1" data-path="cap1.html"><a href="cap1.html"><i class="fa fa-check"></i><b>1</b> Motivación del principio Bootstrap</a><ul>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Motivación del principio Bootstrap</a><ul>
 <li class="chapter" data-level="1.1" data-path="introducción.html"><a href="introducción.html"><i class="fa fa-check"></i><b>1.1</b> Introducción</a><ul>
 <li class="chapter" data-level="1.1.1" data-path="introducción.html"><a href="introducción.html#breve-nota-histórica"><i class="fa fa-check"></i><b>1.1.1</b> Breve nota histórica</a></li>
 <li class="chapter" data-level="1.1.2" data-path="introducción.html"><a href="introducción.html#paradigma-inferencial-y-análogo-bootstrap"><i class="fa fa-check"></i><b>1.1.2</b> Paradigma inferencial y análogo bootstrap</a></li>
-<li class="chapter" data-level="1.1.3" data-path="introducción.html"><a href="introducción.html#cap1-implementacion"><i class="fa fa-check"></i><b>1.1.3</b> Implementación en la práctica</a></li>
+<li class="chapter" data-level="1.1.3" data-path="introducción.html"><a href="introducción.html#intro-implementacion"><i class="fa fa-check"></i><b>1.1.3</b> Implementación en la práctica</a></li>
 </ul></li>
-<li class="chapter" data-level="1.2" data-path="cap1-unif.html"><a href="cap1-unif.html"><i class="fa fa-check"></i><b>1.2</b> El Bootstrap uniforme</a><ul>
-<li class="chapter" data-level="1.2.1" data-path="cap1-unif.html"><a href="cap1-unif.html#ejemplos"><i class="fa fa-check"></i><b>1.2.1</b> Ejemplos</a></li>
+<li class="chapter" data-level="1.2" data-path="intro-unif.html"><a href="intro-unif.html"><i class="fa fa-check"></i><b>1.2</b> El Bootstrap uniforme</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="intro-unif.html"><a href="intro-unif.html#ejemplos"><i class="fa fa-check"></i><b>1.2.1</b> Ejemplos</a></li>
 </ul></li>
 <li class="chapter" data-level="1.3" data-path="cálculo-de-la-distribución-bootstrap-exacta-y-aproximada.html"><a href="cálculo-de-la-distribución-bootstrap-exacta-y-aproximada.html"><i class="fa fa-check"></i><b>1.3</b> Cálculo de la distribución Bootstrap: exacta y aproximada</a><ul>
 <li class="chapter" data-level="1.3.1" data-path="cálculo-de-la-distribución-bootstrap-exacta-y-aproximada.html"><a href="cálculo-de-la-distribución-bootstrap-exacta-y-aproximada.html#distribución-bootstrap-exacta"><i class="fa fa-check"></i><b>1.3.1</b> Distribución bootstrap exacta</a></li>
@@ -148,38 +123,59 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.3.4" data-path="cálculo-de-la-distribución-bootstrap-exacta-y-aproximada.html"><a href="cálculo-de-la-distribución-bootstrap-exacta-y-aproximada.html#distribución-bootstrap-aproximada-por-monte-carlo"><i class="fa fa-check"></i><b>1.3.4</b> Distribución Bootstrap aproximada por Monte Carlo</a></li>
 <li class="chapter" data-level="1.3.5" data-path="cálculo-de-la-distribución-bootstrap-exacta-y-aproximada.html"><a href="cálculo-de-la-distribución-bootstrap-exacta-y-aproximada.html#elección-del-número-de-réplicas-monte-carlo"><i class="fa fa-check"></i><b>1.3.5</b> Elección del número de réplicas Monte Carlo</a></li>
 </ul></li>
-<li class="chapter" data-level="1.4" data-path="cap1-paquetes.html"><a href="cap1-paquetes.html"><i class="fa fa-check"></i><b>1.4</b> Herramientas disponibles en R sobre bootstrap</a><ul>
-<li class="chapter" data-level="1.4.1" data-path="cap1-paquetes.html"><a href="cap1-paquetes.html#cap1-pkgboot"><i class="fa fa-check"></i><b>1.4.1</b> El paquete <code>boot</code></a></li>
+<li class="chapter" data-level="1.4" data-path="intro-paquetes.html"><a href="intro-paquetes.html"><i class="fa fa-check"></i><b>1.4</b> Herramientas disponibles en R sobre bootstrap</a><ul>
+<li class="chapter" data-level="1.4.1" data-path="intro-paquetes.html"><a href="intro-paquetes.html#intro-pkgboot"><i class="fa fa-check"></i><b>1.4.1</b> El paquete <code>boot</code></a></li>
+<li class="chapter" data-level="1.4.2" data-path="intro-paquetes.html"><a href="intro-paquetes.html#boot-unif-multi"><i class="fa fa-check"></i><b>1.4.2</b> Ejemplo: Bootstrap uniforme multidimensional</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="cap2.html"><a href="cap2.html"><i class="fa fa-check"></i><b>2</b> Estimación de la precisión y el sesgo de un estimador</a><ul>
-<li class="chapter" data-level="2.1" data-path="cap2-boot.html"><a href="cap2-boot.html"><i class="fa fa-check"></i><b>2.1</b> Estimación bootstrap de la precisión y el sesgo de un estimador</a><ul>
-<li class="chapter" data-level="2.1.1" data-path="cap2-boot.html"><a href="cap2-boot.html#ejemplo-la-media-muestral"><i class="fa fa-check"></i><b>2.1.1</b> Ejemplo: la media muestral</a></li>
+<li class="chapter" data-level="2" data-path="prec-sesgo.html"><a href="prec-sesgo.html"><i class="fa fa-check"></i><b>2</b> Estimación de la precisión y el sesgo de un estimador</a><ul>
+<li class="chapter" data-level="2.1" data-path="prec-sesgo-boot.html"><a href="prec-sesgo-boot.html"><i class="fa fa-check"></i><b>2.1</b> Estimación bootstrap de la precisión y el sesgo de un estimador</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="prec-sesgo-boot.html"><a href="prec-sesgo-boot.html#ejemplo-la-media-muestral"><i class="fa fa-check"></i><b>2.1.1</b> Ejemplo: la media muestral</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="jackknife.html"><a href="jackknife.html"><i class="fa fa-check"></i><b>2.2</b> Motivación del método Jackknife</a></li>
+<li class="chapter" data-level="2.3" data-path="estimación-jackknife-de-la-precisión-y-el-sesgo-de-un-estimador.html"><a href="estimación-jackknife-de-la-precisión-y-el-sesgo-de-un-estimador.html"><i class="fa fa-check"></i><b>2.3</b> Estimación Jackknife de la precisión y el sesgo de un estimador</a></li>
+<li class="chapter" data-level="2.4" data-path="relación-bootstrapjackknife-en-dicha-estimación.html"><a href="relación-bootstrapjackknife-en-dicha-estimación.html"><i class="fa fa-check"></i><b>2.4</b> Relación Bootstrap/Jackknife en dicha estimación</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="modunif.html"><a href="modunif.html"><i class="fa fa-check"></i><b>3</b> Modificaciones del Bootstrap uniforme</a><ul>
+<li class="chapter" data-level="3.1" data-path="modunif-boot-par.html"><a href="modunif-boot-par.html"><i class="fa fa-check"></i><b>3.1</b> Bootstrap paramétrico</a></li>
+<li class="chapter" data-level="3.2" data-path="bootstrap-simetrizado.html"><a href="bootstrap-simetrizado.html"><i class="fa fa-check"></i><b>3.2</b> Bootstrap simetrizado</a></li>
+<li class="chapter" data-level="3.3" data-path="modunif-boot-suav.html"><a href="modunif-boot-suav.html"><i class="fa fa-check"></i><b>3.3</b> Bootstrap suavizado</a></li>
+<li class="chapter" data-level="3.4" data-path="bootstrap-ponderado-y-bootstrap-sesgado.html"><a href="bootstrap-ponderado-y-bootstrap-sesgado.html"><i class="fa fa-check"></i><b>3.4</b> Bootstrap ponderado y bootstrap sesgado</a></li>
+<li class="chapter" data-level="3.5" data-path="deficien-unif.html"><a href="deficien-unif.html"><i class="fa fa-check"></i><b>3.5</b> Deficiencias del bootstrap uniforme</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="deficien-unif.html"><a href="deficien-unif.html#ejemplo-método-alternativo"><i class="fa fa-check"></i><b>3.5.1</b> Ejemplo (método alternativo)</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="validez-de-la-aproximación-bootstrap.html"><a href="validez-de-la-aproximación-bootstrap.html"><i class="fa fa-check"></i><b>3.6</b> Validez de la aproximación Bootstrap</a></li>
+<li class="chapter" data-level="3.7" data-path="boot-reg.html"><a href="boot-reg.html"><i class="fa fa-check"></i><b>3.7</b> Bootstrap semiparamétrico y bootstrap residual</a><ul>
+<li class="chapter" data-level="3.7.1" data-path="boot-reg.html"><a href="boot-reg.html#boot-unif-reg"><i class="fa fa-check"></i><b>3.7.1</b> Remuestreo de las observaciones</a></li>
+<li class="chapter" data-level="3.7.2" data-path="boot-reg.html"><a href="boot-reg.html#boot-residual"><i class="fa fa-check"></i><b>3.7.2</b> Bootstrap residual</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="cap3.html"><a href="cap3.html"><i class="fa fa-check"></i><b>3</b> Motivación del método Jackknife</a><ul>
-<li class="chapter" data-level="3.1" data-path="estimación-jackknife-de-la-precisión-y-el-sesgo-de-un-estimador.html"><a href="estimación-jackknife-de-la-precisión-y-el-sesgo-de-un-estimador.html"><i class="fa fa-check"></i><b>3.1</b> Estimación Jackknife de la precisión y el sesgo de un estimador</a></li>
-<li class="chapter" data-level="3.2" data-path="relación-bootstrapjackknife-en-dicha-estimación.html"><a href="relación-bootstrapjackknife-en-dicha-estimación.html"><i class="fa fa-check"></i><b>3.2</b> Relación Bootstrap/Jackknife en dicha estimación</a></li>
+<li class="chapter" data-level="4" data-path="icboot.html"><a href="icboot.html"><i class="fa fa-check"></i><b>4</b> Intervalos de confianza bootstrap</a><ul>
+<li class="chapter" data-level="4.1" data-path="icboot-norm.html"><a href="icboot-norm.html"><i class="fa fa-check"></i><b>4.1</b> Intervalos basados en la distribución normal asintótica</a></li>
+<li class="chapter" data-level="4.2" data-path="icboot-basic.html"><a href="icboot-basic.html"><i class="fa fa-check"></i><b>4.2</b> Método percentil (básico)</a></li>
+<li class="chapter" data-level="4.3" data-path="icboot-perc-t.html"><a href="icboot-perc-t.html"><i class="fa fa-check"></i><b>4.3</b> Método percentil-<em>t</em></a></li>
+<li class="chapter" data-level="4.4" data-path="icboot-perc-t-sim.html"><a href="icboot-perc-t-sim.html"><i class="fa fa-check"></i><b>4.4</b> Método percentil-<em>t</em> simetrizado</a></li>
+<li class="chapter" data-level="4.5" data-path="cap-err-cober.html"><a href="cap-err-cober.html"><i class="fa fa-check"></i><b>4.5</b> Tabla resumen de los errores de cobertura</a></li>
+<li class="chapter" data-level="4.6" data-path="icboot-ejem.html"><a href="icboot-ejem.html"><i class="fa fa-check"></i><b>4.6</b> Ejemplos</a><ul>
+<li class="chapter" data-level="4.6.1" data-path="icboot-ejem.html"><a href="icboot-ejem.html#media-dt-desconocida-persim"><i class="fa fa-check"></i><b>4.6.1</b> IC bootstrap para la media mediante el método percentil-<em>t</em> simetrizado</a></li>
+<li class="chapter" data-level="4.6.2" data-path="icboot-ejem.html"><a href="icboot-ejem.html#estudio-sim-exp"><i class="fa fa-check"></i><b>4.6.2</b> Estudio de simulación</a></li>
+<li class="chapter" data-level="4.6.3" data-path="icboot-ejem.html"><a href="icboot-ejem.html#icboot-trans"><i class="fa fa-check"></i><b>4.6.3</b> IC bootstrap para el coeficiente de correlación</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="cap4.html"><a href="cap4.html"><i class="fa fa-check"></i><b>4</b> Modificaciones del Bootstrap uniforme</a><ul>
-<li class="chapter" data-level="4.1" data-path="cap4-boot-par.html"><a href="cap4-boot-par.html"><i class="fa fa-check"></i><b>4.1</b> Bootstrap paramétrico</a></li>
-<li class="chapter" data-level="4.2" data-path="bootstrap-simetrizado.html"><a href="bootstrap-simetrizado.html"><i class="fa fa-check"></i><b>4.2</b> Bootstrap simetrizado</a></li>
-<li class="chapter" data-level="4.3" data-path="cap4-boot-suav.html"><a href="cap4-boot-suav.html"><i class="fa fa-check"></i><b>4.3</b> Bootstrap suavizado</a></li>
-<li class="chapter" data-level="4.4" data-path="bootstrap-ponderado-y-bootstrap-sesgado.html"><a href="bootstrap-ponderado-y-bootstrap-sesgado.html"><i class="fa fa-check"></i><b>4.4</b> Bootstrap ponderado y bootstrap sesgado</a></li>
-<li class="chapter" data-level="4.5" data-path="deficiencias-del-bootstrap-uniforme.html"><a href="deficiencias-del-bootstrap-uniforme.html"><i class="fa fa-check"></i><b>4.5</b> Deficiencias del bootstrap uniforme</a><ul>
-<li class="chapter" data-level="4.5.1" data-path="deficiencias-del-bootstrap-uniforme.html"><a href="deficiencias-del-bootstrap-uniforme.html#ejemplo-método-alternativo"><i class="fa fa-check"></i><b>4.5.1</b> Ejemplo (método alternativo)</a></li>
 </ul></li>
-<li class="chapter" data-level="4.6" data-path="validez-de-la-aproximación-bootstrap.html"><a href="validez-de-la-aproximación-bootstrap.html"><i class="fa fa-check"></i><b>4.6</b> Validez de la aproximación Bootstrap</a></li>
+<li class="chapter" data-level="5" data-path="contrastes.html"><a href="contrastes.html"><i class="fa fa-check"></i><b>5</b> Aplicaciones del Bootstrap en contrastes de hipótesis</a><ul>
+<li class="chapter" data-level="5.1" data-path="aproximación-del-p-valor-mediante-remuestreo.html"><a href="aproximación-del-p-valor-mediante-remuestreo.html"><i class="fa fa-check"></i><b>5.1</b> Aproximación del p-valor mediante remuestreo</a></li>
+<li class="chapter" data-level="5.2" data-path="contrastes-parametricos.html"><a href="contrastes-parametricos.html"><i class="fa fa-check"></i><b>5.2</b> Contrastes bootstrap paramétricos</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="contrastes-parametricos.html"><a href="contrastes-parametricos.html#ejemplo-contraste-de-kolmogorov-smirnov"><i class="fa fa-check"></i><b>5.2.1</b> Ejemplo: contraste de Kolmogorov-Smirnov</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="cap5.html"><a href="cap5.html"><i class="fa fa-check"></i><b>5</b> Intervalos de confianza bootstrap</a><ul>
-<li class="chapter" data-level="5.1" data-path="cap5-norm.html"><a href="cap5-norm.html"><i class="fa fa-check"></i><b>5.1</b> Intervalos basados en la distribución normal asintótica</a></li>
-<li class="chapter" data-level="5.2" data-path="cap5-basic.html"><a href="cap5-basic.html"><i class="fa fa-check"></i><b>5.2</b> Método percentil (básico)</a></li>
-<li class="chapter" data-level="5.3" data-path="cap5-perc-t.html"><a href="cap5-perc-t.html"><i class="fa fa-check"></i><b>5.3</b> Método percentil-<em>t</em></a></li>
-<li class="chapter" data-level="5.4" data-path="cap5-perc-t-sim.html"><a href="cap5-perc-t-sim.html"><i class="fa fa-check"></i><b>5.4</b> Método percentil-<em>t</em> simetrizado</a></li>
-<li class="chapter" data-level="5.5" data-path="cap-err-cober.html"><a href="cap-err-cober.html"><i class="fa fa-check"></i><b>5.5</b> Tabla resumen de los errores de cobertura</a></li>
-<li class="chapter" data-level="5.6" data-path="cap5-ejem.html"><a href="cap5-ejem.html"><i class="fa fa-check"></i><b>5.6</b> Ejemplos</a></li>
+<li class="chapter" data-level="5.3" data-path="contrastes-de-permutaciones.html"><a href="contrastes-de-permutaciones.html"><i class="fa fa-check"></i><b>5.3</b> Contrastes de permutaciones</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="contrastes-de-permutaciones.html"><a href="contrastes-de-permutaciones.html#ejemplo-inferencia-sobre-el-coeficiente-de-correlación-lineal"><i class="fa fa-check"></i><b>5.3.1</b> Ejemplo: Inferencia sobre el coeficiente de correlación lineal</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="cap6.html"><a href="cap6.html"><i class="fa fa-check"></i><b>6</b> Bootstrap y estimación no paramétrica de la densidad</a><ul>
+<li class="chapter" data-level="5.4" data-path="contrastes-semiparametricos.html"><a href="contrastes-semiparametricos.html"><i class="fa fa-check"></i><b>5.4</b> Contrastes bootstrap semiparamétricos</a><ul>
+<li class="chapter" data-level="5.4.1" data-path="contrastes-semiparametricos.html"><a href="contrastes-semiparametricos.html#ejemplo-inferencia-sobre-modelos-de-regresión"><i class="fa fa-check"></i><b>5.4.1</b> Ejemplo: Inferencia sobre modelos de regresión</a></li>
+<li class="chapter" data-level="5.4.2" data-path="contrastes-semiparametricos.html"><a href="contrastes-semiparametricos.html#ejercicio"><i class="fa fa-check"></i><b>5.4.2</b> Ejercicio</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="npden.html"><a href="npden.html"><i class="fa fa-check"></i><b>6</b> Bootstrap y estimación no paramétrica de la densidad</a><ul>
 <li class="chapter" data-level="6.1" data-path="estimación-no-paramétrica-de-la-función-de-densidad.html"><a href="estimación-no-paramétrica-de-la-función-de-densidad.html"><i class="fa fa-check"></i><b>6.1</b> Estimación no paramétrica de la función de densidad</a></li>
 <li class="chapter" data-level="6.2" data-path="sesgo-varianza-y-error-cuadrático-medio.html"><a href="sesgo-varianza-y-error-cuadrático-medio.html"><i class="fa fa-check"></i><b>6.2</b> Sesgo, varianza y error cuadrático medio</a><ul>
 <li class="chapter" data-level="6.2.1" data-path="sesgo-varianza-y-error-cuadrático-medio.html"><a href="sesgo-varianza-y-error-cuadrático-medio.html#sesgo"><i class="fa fa-check"></i><b>6.2.1</b> Sesgo</a></li>
@@ -187,10 +183,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.2.3" data-path="sesgo-varianza-y-error-cuadrático-medio.html"><a href="sesgo-varianza-y-error-cuadrático-medio.html#error-cuadrático-medio"><i class="fa fa-check"></i><b>6.2.3</b> Error cuadrático medio</a></li>
 <li class="chapter" data-level="6.2.4" data-path="sesgo-varianza-y-error-cuadrático-medio.html"><a href="sesgo-varianza-y-error-cuadrático-medio.html#error-cuadrático-medio-integrado-mise"><i class="fa fa-check"></i><b>6.2.4</b> Error cuadrático medio integrado (MISE)</a></li>
 </ul></li>
-<li class="chapter" data-level="6.3" data-path="aproximación-bootstrap-de-la-distribución-del-estimador-de-parzen-rosenblatt.html"><a href="aproximación-bootstrap-de-la-distribución-del-estimador-de-parzen-rosenblatt.html"><i class="fa fa-check"></i><b>6.3</b> Aproximación Bootstrap de la distribución del estimador de Parzen-Rosenblatt</a><ul>
-<li class="chapter" data-level="6.3.1" data-path="aproximación-bootstrap-de-la-distribución-del-estimador-de-parzen-rosenblatt.html"><a href="aproximación-bootstrap-de-la-distribución-del-estimador-de-parzen-rosenblatt.html#distribución-asintótica-del-estimador-de-parzen-rosenblatt"><i class="fa fa-check"></i><b>6.3.1</b> Distribución asintótica del estimador de Parzen-Rosenblatt</a></li>
-<li class="chapter" data-level="6.3.2" data-path="aproximación-bootstrap-de-la-distribución-del-estimador-de-parzen-rosenblatt.html"><a href="aproximación-bootstrap-de-la-distribución-del-estimador-de-parzen-rosenblatt.html#aproximación-plug-in"><i class="fa fa-check"></i><b>6.3.2</b> Aproximación plug-in</a></li>
-<li class="chapter" data-level="6.3.3" data-path="aproximación-bootstrap-de-la-distribución-del-estimador-de-parzen-rosenblatt.html"><a href="aproximación-bootstrap-de-la-distribución-del-estimador-de-parzen-rosenblatt.html#aproximación-bootstrap"><i class="fa fa-check"></i><b>6.3.3</b> Aproximación bootstrap</a></li>
+<li class="chapter" data-level="6.3" data-path="aproximacion-bootstrap.html"><a href="aproximacion-bootstrap.html"><i class="fa fa-check"></i><b>6.3</b> Aproximación Bootstrap de la distribución del estimador de Parzen-Rosenblatt</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="aproximacion-bootstrap.html"><a href="aproximacion-bootstrap.html#distribución-asintótica-del-estimador-de-parzen-rosenblatt"><i class="fa fa-check"></i><b>6.3.1</b> Distribución asintótica del estimador de Parzen-Rosenblatt</a></li>
+<li class="chapter" data-level="6.3.2" data-path="aproximacion-bootstrap.html"><a href="aproximacion-bootstrap.html#aproximación-plug-in"><i class="fa fa-check"></i><b>6.3.2</b> Aproximación plug-in</a></li>
+<li class="chapter" data-level="6.3.3" data-path="aproximacion-bootstrap.html"><a href="aproximacion-bootstrap.html#aproximación-bootstrap"><i class="fa fa-check"></i><b>6.3.3</b> Aproximación bootstrap</a></li>
 </ul></li>
 <li class="chapter" data-level="6.4" data-path="el-bootstrap-en-la-selección-del-parámetro-de-suavizado-.html"><a href="el-bootstrap-en-la-selección-del-parámetro-de-suavizado-.html"><i class="fa fa-check"></i><b>6.4</b> El Bootstrap en la selección del parámetro de suavizado.</a><ul>
 <li class="chapter" data-level="6.4.1" data-path="el-bootstrap-en-la-selección-del-parámetro-de-suavizado-.html"><a href="el-bootstrap-en-la-selección-del-parámetro-de-suavizado-.html#expresión-asintótica-de-la-ventana-óptima"><i class="fa fa-check"></i><b>6.4.1</b> Expresión asintótica de la ventana óptima</a></li>
@@ -201,31 +197,46 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.4.6" data-path="el-bootstrap-en-la-selección-del-parámetro-de-suavizado-.html"><a href="el-bootstrap-en-la-selección-del-parámetro-de-suavizado-.html#caso-particular-de-núcleo-gaussiano"><i class="fa fa-check"></i><b>6.4.6</b> Caso particular de núcleo gaussiano</a></li>
 <li class="chapter" data-level="6.4.7" data-path="el-bootstrap-en-la-selección-del-parámetro-de-suavizado-.html"><a href="el-bootstrap-en-la-selección-del-parámetro-de-suavizado-.html#comparación-con-otros-selectores"><i class="fa fa-check"></i><b>6.4.7</b> Comparación con otros selectores</a></li>
 </ul></li>
-</ul></li>
-<li class="chapter" data-level="7" data-path="cap7.html"><a href="cap7.html"><i class="fa fa-check"></i><b>7</b> Bootstrap y regresión no paramétrica</a><ul>
-<li class="chapter" data-level="7.1" data-path="estimación-no-paramétrica-de-la-función-de-regresión.html"><a href="estimación-no-paramétrica-de-la-función-de-regresión.html"><i class="fa fa-check"></i><b>7.1</b> Estimación no paramétrica de la función de regresión</a><ul>
-<li class="chapter" data-level="7.1.1" data-path="estimación-no-paramétrica-de-la-función-de-regresión.html"><a href="estimación-no-paramétrica-de-la-función-de-regresión.html#distribución-asintótica-del-estimador-de-nadaraya-watson"><i class="fa fa-check"></i><b>7.1.1</b> Distribución asintótica del estimador de Nadaraya-Watson</a></li>
-<li class="chapter" data-level="7.1.2" data-path="estimación-no-paramétrica-de-la-función-de-regresión.html"><a href="estimación-no-paramétrica-de-la-función-de-regresión.html#órdenes-de-convergencia-de-la-distribución-del-estimador-de-nadaraya-watson-a-su-distribución-asintótica"><i class="fa fa-check"></i><b>7.1.2</b> Órdenes de convergencia de la distribución del estimador de Nadaraya-Watson a su distribución asintótica</a></li>
-<li class="chapter" data-level="7.1.3" data-path="estimación-no-paramétrica-de-la-función-de-regresión.html"><a href="estimación-no-paramétrica-de-la-función-de-regresión.html#aproximación-plug-in-1"><i class="fa fa-check"></i><b>7.1.3</b> Aproximación plug-in</a></li>
-</ul></li>
-<li class="chapter" data-level="7.2" data-path="distintos-métodos-de-remuestreo-y-resultados-para-ellos.html"><a href="distintos-métodos-de-remuestreo-y-resultados-para-ellos.html"><i class="fa fa-check"></i><b>7.2</b> Distintos métodos de remuestreo y resultados para ellos</a><ul>
-<li class="chapter" data-level="7.2.1" data-path="distintos-métodos-de-remuestreo-y-resultados-para-ellos.html"><a href="distintos-métodos-de-remuestreo-y-resultados-para-ellos.html#wild-bootstrap"><i class="fa fa-check"></i><b>7.2.1</b> Wild bootstrap</a></li>
-<li class="chapter" data-level="7.2.2" data-path="distintos-métodos-de-remuestreo-y-resultados-para-ellos.html"><a href="distintos-métodos-de-remuestreo-y-resultados-para-ellos.html#bootstrap-suavizado-en-la-variable-explicativa"><i class="fa fa-check"></i><b>7.2.2</b> Bootstrap suavizado en la variable explicativa</a></li>
-<li class="chapter" data-level="7.2.3" data-path="distintos-métodos-de-remuestreo-y-resultados-para-ellos.html"><a href="distintos-métodos-de-remuestreo-y-resultados-para-ellos.html#resumen-comparativo"><i class="fa fa-check"></i><b>7.2.3</b> Resumen comparativo</a></li>
+<li class="chapter" data-level="6.5" data-path="npden-r.html"><a href="npden-r.html"><i class="fa fa-check"></i><b>6.5</b> Estimación no paramétrica de la densidad en R</a></li>
+<li class="chapter" data-level="6.6" data-path="ejemplos-1.html"><a href="ejemplos-1.html"><i class="fa fa-check"></i><b>6.6</b> Ejemplos</a><ul>
+<li class="chapter" data-level="6.6.1" data-path="ejemplos-1.html"><a href="ejemplos-1.html#bootstrap-y-estimación-del-sesgo"><i class="fa fa-check"></i><b>6.6.1</b> Bootstrap y estimación del sesgo</a></li>
+<li class="chapter" data-level="6.6.2" data-path="ejemplos-1.html"><a href="ejemplos-1.html#npden-r-ic"><i class="fa fa-check"></i><b>6.6.2</b> Estimación por intervalos de confianza</a></li>
+<li class="chapter" data-level="6.6.3" data-path="ejemplos-1.html"><a href="ejemplos-1.html#implementación-con-el-paquete-boot"><i class="fa fa-check"></i><b>6.6.3</b> Implementación con el paquete <code>boot</code></a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="cap8.html"><a href="cap8.html"><i class="fa fa-check"></i><b>8</b> El Bootstrap con datos censurados</a><ul>
+<li class="chapter" data-level="7" data-path="npreg.html"><a href="npreg.html"><i class="fa fa-check"></i><b>7</b> Bootstrap y regresión no paramétrica</a><ul>
+<li class="chapter" data-level="7.1" data-path="nadaraya-watson.html"><a href="nadaraya-watson.html"><i class="fa fa-check"></i><b>7.1</b> Estimador de Nadaraya-Watson</a><ul>
+<li class="chapter" data-level="7.1.1" data-path="nadaraya-watson.html"><a href="nadaraya-watson.html#distribución-asintótica-del-estimador-de-nadaraya-watson"><i class="fa fa-check"></i><b>7.1.1</b> Distribución asintótica del estimador de Nadaraya-Watson</a></li>
+<li class="chapter" data-level="7.1.2" data-path="nadaraya-watson.html"><a href="nadaraya-watson.html#órdenes-de-convergencia-de-la-distribución-del-estimador-de-nadaraya-watson-a-su-distribución-asintótica"><i class="fa fa-check"></i><b>7.1.2</b> Órdenes de convergencia de la distribución del estimador de Nadaraya-Watson a su distribución asintótica</a></li>
+<li class="chapter" data-level="7.1.3" data-path="nadaraya-watson.html"><a href="nadaraya-watson.html#aproximación-plug-in-1"><i class="fa fa-check"></i><b>7.1.3</b> Aproximación plug-in</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="métodos-de-remuestreo-en-regresión-no-paramétrica.html"><a href="métodos-de-remuestreo-en-regresión-no-paramétrica.html"><i class="fa fa-check"></i><b>7.2</b> Métodos de remuestreo en regresión no paramétrica</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="métodos-de-remuestreo-en-regresión-no-paramétrica.html"><a href="métodos-de-remuestreo-en-regresión-no-paramétrica.html#wild-bootstrap"><i class="fa fa-check"></i><b>7.2.1</b> Wild bootstrap</a></li>
+<li class="chapter" data-level="7.2.2" data-path="métodos-de-remuestreo-en-regresión-no-paramétrica.html"><a href="métodos-de-remuestreo-en-regresión-no-paramétrica.html#bootstrap-suavizado-en-la-variable-explicativa"><i class="fa fa-check"></i><b>7.2.2</b> Bootstrap suavizado en la variable explicativa</a></li>
+<li class="chapter" data-level="7.2.3" data-path="métodos-de-remuestreo-en-regresión-no-paramétrica.html"><a href="métodos-de-remuestreo-en-regresión-no-paramétrica.html#resumen-comparativo"><i class="fa fa-check"></i><b>7.2.3</b> Resumen comparativo</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="locpol-r.html"><a href="locpol-r.html"><i class="fa fa-check"></i><b>7.3</b> Regresión polinómica local en R</a><ul>
+<li class="chapter" data-level="7.3.1" data-path="locpol-r.html"><a href="locpol-r.html#estimación-de-la-varianza"><i class="fa fa-check"></i><b>7.3.1</b> Estimación de la varianza</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="ejemplos-2.html"><a href="ejemplos-2.html"><i class="fa fa-check"></i><b>7.4</b> Ejemplos</a><ul>
+<li class="chapter" data-level="7.4.1" data-path="ejemplos-2.html"><a href="ejemplos-2.html#bootstrap-residual"><i class="fa fa-check"></i><b>7.4.1</b> Bootstrap residual</a></li>
+<li class="chapter" data-level="7.4.2" data-path="ejemplos-2.html"><a href="ejemplos-2.html#intervalos-de-confianza-y-predicción"><i class="fa fa-check"></i><b>7.4.2</b> Intervalos de confianza y predicción</a></li>
+<li class="chapter" data-level="7.4.3" data-path="ejemplos-2.html"><a href="ejemplos-2.html#r-wild-bootstrap"><i class="fa fa-check"></i><b>7.4.3</b> Wild bootstrap</a></li>
+<li class="chapter" data-level="7.4.4" data-path="ejemplos-2.html"><a href="ejemplos-2.html#ejercicio-1"><i class="fa fa-check"></i><b>7.4.4</b> Ejercicio</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="bootcen.html"><a href="bootcen.html"><i class="fa fa-check"></i><b>8</b> El Bootstrap con datos censurados</a><ul>
 <li class="chapter" data-level="8.1" data-path="introducción-a-los-datos-censurados.html"><a href="introducción-a-los-datos-censurados.html"><i class="fa fa-check"></i><b>8.1</b> Introducción a los datos censurados</a><ul>
 <li class="chapter" data-level="8.1.1" data-path="introducción-a-los-datos-censurados.html"><a href="introducción-a-los-datos-censurados.html#estimador-de-kaplan-meier"><i class="fa fa-check"></i><b>8.1.1</b> Estimador de Kaplan-Meier</a></li>
 <li class="chapter" data-level="8.1.2" data-path="introducción-a-los-datos-censurados.html"><a href="introducción-a-los-datos-censurados.html#distribución-asintótica-del-estimador-de-kaplan-meier"><i class="fa fa-check"></i><b>8.1.2</b> Distribución asintótica del estimador de Kaplan-Meier</a></li>
 </ul></li>
 <li class="chapter" data-level="8.2" data-path="remuestreos-bootstrap-en-presencia-de-censura.html"><a href="remuestreos-bootstrap-en-presencia-de-censura.html"><i class="fa fa-check"></i><b>8.2</b> Remuestreos Bootstrap en presencia de censura</a><ul>
 <li class="chapter" data-level="8.2.1" data-path="remuestreos-bootstrap-en-presencia-de-censura.html"><a href="remuestreos-bootstrap-en-presencia-de-censura.html#el-bootstrap-simple"><i class="fa fa-check"></i><b>8.2.1</b> El bootstrap simple</a></li>
-<li class="chapter" data-level="8.2.2" data-path="remuestreos-bootstrap-en-presencia-de-censura.html"><a href="remuestreos-bootstrap-en-presencia-de-censura.html#cap8-obvio"><i class="fa fa-check"></i><b>8.2.2</b> El bootstrap obvio</a></li>
+<li class="chapter" data-level="8.2.2" data-path="remuestreos-bootstrap-en-presencia-de-censura.html"><a href="remuestreos-bootstrap-en-presencia-de-censura.html#bootcen-obvio"><i class="fa fa-check"></i><b>8.2.2</b> El bootstrap obvio</a></li>
 </ul></li>
 <li class="chapter" data-level="8.3" data-path="relaciones-entre-los-métodos-de-remuestreo-bajo-censura.html"><a href="relaciones-entre-los-métodos-de-remuestreo-bajo-censura.html"><i class="fa fa-check"></i><b>8.3</b> Relaciones entre los métodos de remuestreo bajo censura</a><ul>
 <li class="chapter" data-level="8.3.1" data-path="relaciones-entre-los-métodos-de-remuestreo-bajo-censura.html"><a href="relaciones-entre-los-métodos-de-remuestreo-bajo-censura.html#equivalencia-entre-el-bootstrap-simple-y-el-obvio"><i class="fa fa-check"></i><b>8.3.1</b> Equivalencia entre el bootstrap simple y el obvio</a></li>
-<li class="chapter" data-level="8.3.2" data-path="relaciones-entre-los-métodos-de-remuestreo-bajo-censura.html"><a href="relaciones-entre-los-métodos-de-remuestreo-bajo-censura.html#cap8-reid"><i class="fa fa-check"></i><b>8.3.2</b> El bootstrap de Reid</a></li>
+<li class="chapter" data-level="8.3.2" data-path="relaciones-entre-los-métodos-de-remuestreo-bajo-censura.html"><a href="relaciones-entre-los-métodos-de-remuestreo-bajo-censura.html#bootcen-reid"><i class="fa fa-check"></i><b>8.3.2</b> El bootstrap de Reid</a></li>
 <li class="chapter" data-level="8.3.3" data-path="relaciones-entre-los-métodos-de-remuestreo-bajo-censura.html"><a href="relaciones-entre-los-métodos-de-remuestreo-bajo-censura.html#validez-de-los-planes-de-remuestreo"><i class="fa fa-check"></i><b>8.3.3</b> Validez de los planes de remuestreo</a></li>
 </ul></li>
 <li class="chapter" data-level="8.4" data-path="implementación-en-r-con-los-paquetes-boot-y-survival.html"><a href="implementación-en-r-con-los-paquetes-boot-y-survival.html"><i class="fa fa-check"></i><b>8.4</b> Implementación en <code>R</code> (con los paquetes <code>boot</code> y <code>survival</code>)</a><ul>
@@ -234,7 +245,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="8.5" data-path="ejercicios.html"><a href="ejercicios.html"><i class="fa fa-check"></i><b>8.5</b> Ejercicios</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="cap9.html"><a href="cap9.html"><i class="fa fa-check"></i><b>9</b> El Bootstrap con datos dependientes</a><ul>
+<li class="chapter" data-level="9" data-path="bootdep.html"><a href="bootdep.html"><i class="fa fa-check"></i><b>9</b> El Bootstrap con datos dependientes</a><ul>
 <li class="chapter" data-level="9.1" data-path="introducción-a-las-condiciones-de-dependencia-y-modelos-habituales-de-datos-dependientes.html"><a href="introducción-a-las-condiciones-de-dependencia-y-modelos-habituales-de-datos-dependientes.html"><i class="fa fa-check"></i><b>9.1</b> Introducción a las condiciones de dependencia y modelos habituales de datos dependientes</a><ul>
 <li class="chapter" data-level="9.1.1" data-path="introducción-a-las-condiciones-de-dependencia-y-modelos-habituales-de-datos-dependientes.html"><a href="introducción-a-las-condiciones-de-dependencia-y-modelos-habituales-de-datos-dependientes.html#situaciones-de-dependencia-general"><i class="fa fa-check"></i><b>9.1.1</b> Situaciones de dependencia general</a></li>
 <li class="chapter" data-level="9.1.2" data-path="introducción-a-las-condiciones-de-dependencia-y-modelos-habituales-de-datos-dependientes.html"><a href="introducción-a-las-condiciones-de-dependencia-y-modelos-habituales-de-datos-dependientes.html#modelos-paramétricos-de-dependencia"><i class="fa fa-check"></i><b>9.1.2</b> Modelos paramétricos de dependencia</a></li>
@@ -268,53 +279,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="A.1" data-path="forecast-links.html"><a href="forecast-links.html"><i class="fa fa-check"></i><b>A.1</b> Forecasting: Principles and Practice</a></li>
 <li class="chapter" data-level="A.2" data-path="spatial-links.html"><a href="spatial-links.html"><i class="fa fa-check"></i><b>A.2</b> Spatial data</a></li>
 </ul></li>
-<li class="chapter" data-level="B" data-path="practica1.html"><a href="practica1.html"><i class="fa fa-check"></i><b>B</b> Práctica 1: Correlación y regresión lineal</a><ul>
-<li class="chapter" data-level="B.1" data-path="inferencia-sobre-el-coeficiente-de-correlación-lineal.html"><a href="inferencia-sobre-el-coeficiente-de-correlación-lineal.html"><i class="fa fa-check"></i><b>B.1</b> Inferencia sobre el coeficiente de correlación lineal</a><ul>
-<li class="chapter" data-level="B.1.1" data-path="inferencia-sobre-el-coeficiente-de-correlación-lineal.html"><a href="inferencia-sobre-el-coeficiente-de-correlación-lineal.html#ejercicio-para-entregar"><i class="fa fa-check"></i><b>B.1.1</b> Ejercicio (para entregar)</a></li>
-<li class="chapter" data-level="B.1.2" data-path="inferencia-sobre-el-coeficiente-de-correlación-lineal.html"><a href="inferencia-sobre-el-coeficiente-de-correlación-lineal.html#ejemplo-intervalo-de-confianza-bootstrap-en-escala-transformada"><i class="fa fa-check"></i><b>B.1.2</b> Ejemplo: Intervalo de confianza bootstrap en escala transformada</a></li>
-</ul></li>
-<li class="chapter" data-level="B.2" data-path="bootmod.html"><a href="bootmod.html"><i class="fa fa-check"></i><b>B.2</b> Inferencia sobre un modelo de regresión lineal</a><ul>
-<li class="chapter" data-level="B.2.1" data-path="bootmod.html"><a href="bootmod.html#ejercicio-para-entregar-1"><i class="fa fa-check"></i><b>B.2.1</b> Ejercicio (para entregar)</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="C" data-path="practica2.html"><a href="practica2.html"><i class="fa fa-check"></i><b>C</b> Práctica 2: Contrastes de hipótesis</a><ul>
-<li class="chapter" data-level="C.1" data-path="introducción-1.html"><a href="introducción-1.html"><i class="fa fa-check"></i><b>C.1</b> Introducción</a></li>
-<li class="chapter" data-level="C.2" data-path="aproximación-del-p-valor-mediante-remuestreo.html"><a href="aproximación-del-p-valor-mediante-remuestreo.html"><i class="fa fa-check"></i><b>C.2</b> Aproximación del p-valor mediante remuestreo</a></li>
-<li class="chapter" data-level="C.3" data-path="contrastes-bootstrap-paramétricos.html"><a href="contrastes-bootstrap-paramétricos.html"><i class="fa fa-check"></i><b>C.3</b> Contrastes bootstrap paramétricos</a><ul>
-<li class="chapter" data-level="C.3.1" data-path="contrastes-bootstrap-paramétricos.html"><a href="contrastes-bootstrap-paramétricos.html#ejemplo-contraste-de-kolmogorov-smirnov"><i class="fa fa-check"></i><b>C.3.1</b> Ejemplo: contraste de Kolmogorov-Smirnov</a></li>
-</ul></li>
-<li class="chapter" data-level="C.4" data-path="contrastes-de-permutaciones.html"><a href="contrastes-de-permutaciones.html"><i class="fa fa-check"></i><b>C.4</b> Contrastes de permutaciones</a><ul>
-<li class="chapter" data-level="C.4.1" data-path="contrastes-de-permutaciones.html"><a href="contrastes-de-permutaciones.html#ejemplo-inferencia-sobre-el-coeficiente-de-correlación-lineal"><i class="fa fa-check"></i><b>C.4.1</b> Ejemplo: Inferencia sobre el coeficiente de correlación lineal</a></li>
-</ul></li>
-<li class="chapter" data-level="C.5" data-path="contrastes-bootstrap-semiparamétricos.html"><a href="contrastes-bootstrap-semiparamétricos.html"><i class="fa fa-check"></i><b>C.5</b> Contrastes bootstrap semiparamétricos</a><ul>
-<li class="chapter" data-level="C.5.1" data-path="contrastes-bootstrap-semiparamétricos.html"><a href="contrastes-bootstrap-semiparamétricos.html#ejemplo-inferencia-sobre-modelos-de-regresión"><i class="fa fa-check"></i><b>C.5.1</b> Ejemplo: Inferencia sobre modelos de regresión</a></li>
-<li class="chapter" data-level="C.5.2" data-path="contrastes-bootstrap-semiparamétricos.html"><a href="contrastes-bootstrap-semiparamétricos.html#ejercicio-para-entregar-2"><i class="fa fa-check"></i><b>C.5.2</b> Ejercicio (para entregar)</a></li>
-</ul></li>
-<li class="chapter" data-level="C.6" data-path="bibliografía.html"><a href="bibliografía.html"><i class="fa fa-check"></i><b>C.6</b> Bibliografía</a></li>
-</ul></li>
-<li class="chapter" data-level="D" data-path="practica3.html"><a href="practica3.html"><i class="fa fa-check"></i><b>D</b> Práctica 3: Estimación no paramétrica</a><ul>
-<li class="chapter" data-level="D.1" data-path="estimación-no-paramétrica-de-la-densidad.html"><a href="estimación-no-paramétrica-de-la-densidad.html"><i class="fa fa-check"></i><b>D.1</b> Estimación no paramétrica de la densidad</a></li>
-<li class="chapter" data-level="D.2" data-path="bootstrap-y-estimación-no-paramétrica-de-la-densidad.html"><a href="bootstrap-y-estimación-no-paramétrica-de-la-densidad.html"><i class="fa fa-check"></i><b>D.2</b> Bootstrap y estimación no paramétrica de la densidad</a><ul>
-<li class="chapter" data-level="D.2.1" data-path="bootstrap-y-estimación-no-paramétrica-de-la-densidad.html"><a href="bootstrap-y-estimación-no-paramétrica-de-la-densidad.html#intervalos-de-confianza"><i class="fa fa-check"></i><b>D.2.1</b> Intervalos de confianza</a></li>
-<li class="chapter" data-level="D.2.2" data-path="bootstrap-y-estimación-no-paramétrica-de-la-densidad.html"><a href="bootstrap-y-estimación-no-paramétrica-de-la-densidad.html#implementación-con-el-paquete-boot"><i class="fa fa-check"></i><b>D.2.2</b> Implementación con el paquete <code>boot</code></a></li>
-</ul></li>
-<li class="chapter" data-level="D.3" data-path="estimación-no-paramétrica-de-la-regresión.html"><a href="estimación-no-paramétrica-de-la-regresión.html"><i class="fa fa-check"></i><b>D.3</b> Estimación no paramétrica de la regresión</a><ul>
-<li class="chapter" data-level="D.3.1" data-path="estimación-no-paramétrica-de-la-regresión.html"><a href="estimación-no-paramétrica-de-la-regresión.html#regresión-polinómica-local"><i class="fa fa-check"></i><b>D.3.1</b> Regresión polinómica local</a></li>
-<li class="chapter" data-level="D.3.2" data-path="estimación-no-paramétrica-de-la-regresión.html"><a href="estimación-no-paramétrica-de-la-regresión.html#estimación-de-la-varianza"><i class="fa fa-check"></i><b>D.3.2</b> Estimación de la varianza</a></li>
-</ul></li>
-<li class="chapter" data-level="D.4" data-path="bootstrap-residual.html"><a href="bootstrap-residual.html"><i class="fa fa-check"></i><b>D.4</b> Bootstrap residual</a><ul>
-<li class="chapter" data-level="D.4.1" data-path="bootstrap-residual.html"><a href="bootstrap-residual.html#intervalos-de-confianza-y-predicción"><i class="fa fa-check"></i><b>D.4.1</b> Intervalos de confianza y predicción</a></li>
-</ul></li>
-<li class="chapter" data-level="D.5" data-path="p3-wild-bootstrap.html"><a href="p3-wild-bootstrap.html"><i class="fa fa-check"></i><b>D.5</b> Wild bootstrap</a></li>
-<li class="chapter" data-level="D.6" data-path="ejercicio-para-entregar-3.html"><a href="ejercicio-para-entregar-3.html"><i class="fa fa-check"></i><b>D.6</b> Ejercicio (para entregar)</a></li>
-<li class="chapter" data-level="D.7" data-path="bibliografía-1.html"><a href="bibliografía-1.html"><i class="fa fa-check"></i><b>D.7</b> Bibliografía</a></li>
-</ul></li>
-<li class="chapter" data-level="E" data-path="introducción-al-procesamiento-en-paralelo-en-r.html"><a href="introducción-al-procesamiento-en-paralelo-en-r.html"><i class="fa fa-check"></i><b>E</b> Introducción al procesamiento en paralelo en R</a><ul>
-<li class="chapter" data-level="E.1" data-path="introducción-2.html"><a href="introducción-2.html"><i class="fa fa-check"></i><b>E.1</b> Introducción</a></li>
-<li class="chapter" data-level="E.2" data-path="paquetes-en-r.html"><a href="paquetes-en-r.html"><i class="fa fa-check"></i><b>E.2</b> Paquetes en R</a></li>
-<li class="chapter" data-level="E.3" data-path="ejemplos-1.html"><a href="ejemplos-1.html"><i class="fa fa-check"></i><b>E.3</b> Ejemplos</a><ul>
-<li class="chapter" data-level="E.3.1" data-path="ejemplos-1.html"><a href="ejemplos-1.html#procesamiento-en-paralelo-con-la-función-boot"><i class="fa fa-check"></i><b>E.3.1</b> Procesamiento en paralelo con la función <code>boot()</code></a></li>
-<li class="chapter" data-level="E.3.2" data-path="ejemplos-1.html"><a href="ejemplos-1.html#estudio-de-simulación"><i class="fa fa-check"></i><b>E.3.2</b> Estudio de simulación</a></li>
+<li class="chapter" data-level="B" data-path="intro-hpc.html"><a href="intro-hpc.html"><i class="fa fa-check"></i><b>B</b> Introducción al procesamiento en paralelo en R</a><ul>
+<li class="chapter" data-level="B.1" data-path="introducción-1.html"><a href="introducción-1.html"><i class="fa fa-check"></i><b>B.1</b> Introducción</a></li>
+<li class="chapter" data-level="B.2" data-path="paquetes-en-r.html"><a href="paquetes-en-r.html"><i class="fa fa-check"></i><b>B.2</b> Paquetes en R</a></li>
+<li class="chapter" data-level="B.3" data-path="ejemplos-3.html"><a href="ejemplos-3.html"><i class="fa fa-check"></i><b>B.3</b> Ejemplos</a><ul>
+<li class="chapter" data-level="B.3.1" data-path="ejemplos-3.html"><a href="ejemplos-3.html#procesamiento-en-paralelo-con-la-función-boot"><i class="fa fa-check"></i><b>B.3.1</b> Procesamiento en paralelo con la función <code>boot()</code></a></li>
+<li class="chapter" data-level="B.3.2" data-path="ejemplos-3.html"><a href="ejemplos-3.html#estudio-sim-boot"><i class="fa fa-check"></i><b>B.3.2</b> Estudio de simulación</a></li>
 </ul></li>
 </ul></li>
 <li class="divider"></li>
@@ -451,201 +421,107 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 }
 
 -->
-<p>Akritas, M. G. (1986). <a href="https://www.tandfonline.com/doi/abs/10.1080/01621459.1986.10478369">Bootstrapping the Kaplan–Meier estimator</a>.
-<em>J. Amer. Stat. Assoc.</em> <strong>81</strong>, 1032–1038.</p>
-<p>Beran, R. (1987). Prepivoting to reduce level error of confidence sets.
-<em>Biometrika</em> <strong>74</strong>, 457-468.</p>
-<p>Bhattacharya, R.N. and Ghosh, J.K. (1978). On the validity of the formal
-Edgeworth expansion. <em>Ann. Statist.</em> <strong>6</strong>, 434–451.</p>
-<p>Bickel, P.J. and Freedman, D.A. (1981). Some Asymptotic theory for the
-bootstrap. <em>Ann. Statist.</em> <strong>12</strong> 2, 470-482.</p>
-<p>Bowman, A., Hall, P. and Prvan, T. (1998). Bandwidth selection for the
-smoothing of distribution functions. <em>Biometrika</em> <strong>85</strong> 4, 799-808.</p>
-<p>Breslow, N. and Crowley, J. (1974). A large sample study of the life
-table and product limit estimates under random censorship. <em>Ann.
-Statist.</em> <strong>2</strong>, 437–453.</p>
-<p>Bühlmann, P. (1994). Blockwise bootstrap empirical processes for
-stationary sequences. <em>Ann. Statist.</em> <strong>22</strong>, 995-1012.</p>
-<p>Bühlmann, P. (1997). Sieve bootstrap for time series. <em>Bernoulli</em> <strong>3</strong>,
-123-148.</p>
-<p>Bühlmann, P. (1998). Sieve bootstrap for smoothing in nonstationary time
-series. <em>Ann. Statist.</em> <strong>26</strong>, 48-83.</p>
-<p>Canty, A. J. (2002). <a href="http://cran.fhcrc.org/doc/Rnews/Rnews_2002-3.pdf">Resampling methods in R: the boot package</a>.
-<em>The Newsletter of the R Project</em> <strong>2</strong>, 2-7.</p>
-<p>Cao, R. (1990). Órdenes de convergencia para las aproximaciones normal y
-bootstrap en la estimación no paramétrica de la función de densidad.
-<em>Trabajos de Estadística</em>, vol. <strong>5</strong>, 2, 23-32.</p>
-<p>Cao, R. (1991). Rate of convergence for the wild bootstrap in
-nonparametric regression. <em>Ann. Statist</em> <strong>19</strong>, 2226-2231.</p>
-<p>Cao, R. (1993). Bootstrapping the mean integrated squared error.
-<em>Jr. Mult. Anal.</em> <strong>45</strong>, 137–160.</p>
-<p>Cao, R. (1999). An overview of bootstrap methods for estimating and
-predicting in time series. <em>Test</em> <strong>8</strong>, 95-116.</p>
-<p>Cao, R., Cuevas, A. and González-Manteiga, W. (1993). A comparative
-study of several smoothing methods in density estimation.
-<em>Comp. Statist. Data Anal.</em> <strong>17</strong>, 153–176.</p>
-<p>Cao, R., Febrero-Bande, M., González-Manteiga, W., Prada-Sánchez, J.M.
-and García-Jurado, I. (1997). Saving computer time in constructing
-consistent bootstrap prediction intervals for autoregressive processes.
-<em>Commun. Statist. Simula.</em> <strong>26</strong>, 961-978.</p>
-<p>Cao, R. and González-Manteiga, W. (1993). Bootstrap methods in
-regression smoothing. <em>Journal of Nonparametric Statistics</em> <strong>2</strong>,
-379-388.</p>
-<p>Cao, R. and Prada-Sánchez, J.M. (1993). Bootstrapping the mean of a
-symmetric population. <em>Statistics &amp; Probability Letters</em> <strong>17</strong>, 43-48.</p>
-<p>Castillo-Páez, S., Fernández-Casal, R. and García-Soidán, P. (2019).
-<a href="https://www.sciencedirect.com/science/article/pii/S0167947319300325?via%3Dihub">A nonparametric bootstrap method for spatial data</a>,
-<em>Computational Statistics and Data Analysis</em> <strong>137</strong>, 1-15.</p>
-<p>Carlstein, E., Do, K. A., Hall, P., Hesterberg, T., and Künsch, H. R. (1998). <a href="https://projecteuclid.org/euclid.bj/1174324983">Matched-block bootstrap for dependent data .</a>
-<em>Bernoulli</em> <strong>4</strong> 3, 305-328.</p>
-<p>Cox, D. R. (1972). <a href="https://rss.onlinelibrary.wiley.com/doi/abs/10.1111/j.2517-6161.1972.tb00899.x">Regression Models and Life Tables</a>
-(with discussion), <em>Journal of the Royal Statistical Society series B</em> <strong>34</strong>, 187–220.</p>
-<p>Davison, A.C. and Hinkley, D.V. (1997).
-<em>Bootstrap Methods and their Application</em>. Cambridge University Press.</p>
-<p>Efron, B. (1979). Bootstrap Methods: Another look at the Jackknife.
-<em>Ann. Statist.</em> <strong>7</strong>, 1-26.</p>
-<p>Efron, B. (1981). Censored data and the bootstrap.
-<em>J. Amer. Statist. Assoc.</em> <strong>76</strong>, 312–319.</p>
-<p>Efron, B. (1982). The Jackknife, the Bootstrap and other Resampling
-Plans. CBMS-NSF. <em>Regional Conference series in applied mathematics</em>.</p>
-<p>Efron, B. (1983). Estimating the error rate of a prediction rule:
-improvements on cross-validation. <em>J. Amer. Stat. Assoc.</em> <strong>78</strong>, 316-331.</p>
-<p>Efron, B. (1987). Better Bootstrap confidence intervals (with
-discussion). <em>J. Amer. Stat. Assoc.</em> <strong>82</strong>, 171-200.</p>
-<p>Efron, B. (1990). More Efficient Bootstrap Computations.
-<em>J. Amer. Statist. Assoc.</em> <strong>85</strong>, 79-89.</p>
-<p>Efron, B. and Tibshirani, R. (1986). Bootstrap methods for standard
-errors, confidence intervals, and other measures of statistical
-accuracy. <em>Statistical Science</em> <strong>1</strong>, 54-77.</p>
-<p>Efron, B. and Tibshirani, R.J. (1993). <em>An Introduction to the Bootstrap</em>.
-Chapman and Hall.</p>
-<p>Faraway, J.J. and Jhun, M. (1990). Bootstrap choice of bandwidth for
-density estimation. <em>Jr. Amer. Statist. Assoc.</em> <strong>85</strong>, 1119–1122.</p>
-<p>Ferretti, N. and Romo, J. (1996). Unit root bootstrap test for AR(1)
-models. <em>Biometrika</em> <strong>83</strong>, 849-860.</p>
-<p>Freedman, D.A. (1981). Bootstrapping regression models.
-<em>Ann. Statis.</em> <strong>9</strong> 6, 118-1228.</p>
-<p>Fuller, W.A. (1976). <em>Introduction to statistical time series</em>. New York:
-Wiley.</p>
-<p>Gannoun, A. (1990). Estimation non paramétrique de la médiane
-conditionnelle. Application à la prévision. <em>C. R. Acad. Sci. Paris</em>
-<strong>310</strong>, 295-298.</p>
-<p>García-Jurado, I. González-Manteiga, W., Prada-Sánchez, J.M.,
-Febrero-Bande, M. and Cao, R. (1995). Predicting using Box-Jenkins,
-nonparametric and bootstrap techniques. <em>Technometrics</em> <strong>37</strong>, 303-310.</p>
-<p>González-Manteiga, W. and Prada-Sánchez, J.M. (1985). Una aplicación de
-los métodos de suavización no paramétricos en la técnica bootstrap.
-<em>Proceedings Jornadas Hispano-Lusas de Matemáticas</em>. Murcia, 1985.</p>
-<p>González-Manteiga, W., Prada-Sánchez, J.M. and Romo, J. (1994). The
-Bootstrap-A Review. <em>Computational Statistics</em> <strong>9</strong>, 165-205.</p>
-<p>Hall, P. (1986). On the bootstrap and confidence intervals.
-<em>Ann. Statist.</em> <strong>14</strong>, 1431-1452.</p>
-<p>Hall, P. (1988-a) Theoretical comparison of bootstrap confidence
-intervals. <em>Ann. Statist.</em> <strong>16</strong>, 927-953.</p>
-<p>Hall, P. (1988-b). Rate of convergence in bootstrap approximations.
-<em>Ann. Probab.</em> <strong>16</strong> 4, 1665-1684.</p>
-<p>Hall, P. (1990). Using the bootstrap to estimate mean squared error and
-select smoothing parameter in nonparametric problems.
-<em>J. Multivariate Anal.</em> <strong>32</strong>, 177–203.</p>
+<p>Akritas, M. G. (1986). <a href="https://www.tandfonline.com/doi/abs/10.1080/01621459.1986.10478369">Bootstrapping the Kaplan–Meier estimator</a>. <em>J. Amer. Stat. Assoc.</em> <strong>81</strong>, 1032–1038.</p>
+<p>Beran, R. (1987). Prepivoting to reduce level error of confidence sets. <em>Biometrika</em> <strong>74</strong>, 457-468.</p>
+<p>Bhattacharya, R.N. and Ghosh, J.K. (1978). On the validity of the formal Edgeworth expansion. <em>Ann. Statist.</em> <strong>6</strong>, 434–451.</p>
+<p>Bickel, P.J. and Freedman, D.A. (1981). Some Asymptotic theory for the bootstrap. <em>Ann. Statist.</em> <strong>12</strong> 2, 470-482.</p>
+<p>Bock M., Bowman A.W. and Ismail B. (2007). Estimation and inference for error variance in bivariate nonparametric regression. <em>Statistics and Computing</em> <strong>17</strong>, 39-47.</p>
+<p>Bowman A.W. and Azzalini A. (2019). <em>R package ‘sm’: nonparametric smoothing methods</em> (version 2.2). <a href="http://www.stats.gla.ac.uk/~adrian/sm" class="uri">http://www.stats.gla.ac.uk/~adrian/sm</a>.</p>
+<p>Bowman, A., Hall, P. and Prvan, T. (1998). Bandwidth selection for the smoothing of distribution functions. <em>Biometrika</em> <strong>85</strong> 4, 799-808.</p>
+<p>Breslow, N. and Crowley, J. (1974). A large sample study of the life table and product limit estimates under random censorship. <em>Ann. Statist.</em> <strong>2</strong>, 437–453.</p>
+<p>Bühlmann, P. (1994). Blockwise bootstrap empirical processes for stationary sequences. <em>Ann. Statist.</em> <strong>22</strong>, 995-1012.</p>
+<p>Bühlmann, P. (1997). Sieve bootstrap for time series. <em>Bernoulli</em> <strong>3</strong>, 123-148.</p>
+<p>Bühlmann, P. (1998). Sieve bootstrap for smoothing in nonstationary time series. <em>Ann. Statist.</em> <strong>26</strong>, 48-83.</p>
+<p>Canty, A. J. (2002). <a href="http://cran.fhcrc.org/doc/Rnews/Rnews_2002-3.pdf">Resampling methods in R: the boot package</a>. <em>The Newsletter of the R Project</em> <strong>2</strong>, 2-7.</p>
+<p>Cao, R. (1990). Órdenes de convergencia para las aproximaciones normal y bootstrap en la estimación no paramétrica de la función de densidad. <em>Trabajos de Estadística</em>, vol. <strong>5</strong>, 2, 23-32.</p>
+<p>Cao, R. (1991). Rate of convergence for the wild bootstrap in nonparametric regression. <em>Ann. Statist</em> <strong>19</strong>, 2226-2231.</p>
+<p>Cao, R. (1993). Bootstrapping the mean integrated squared error. <em>Jr. Mult. Anal.</em> <strong>45</strong>, 137–160.</p>
+<p>Cao, R. (1999). An overview of bootstrap methods for estimating and predicting in time series. <em>Test</em> <strong>8</strong>, 95-116.</p>
+<p>Cao, R., Cuevas, A. and González-Manteiga, W. (1993). A comparative study of several smoothing methods in density estimation. <em>Comp. Statist. Data Anal.</em> <strong>17</strong>, 153–176.</p>
+<p>Cao, R., Febrero-Bande, M., González-Manteiga, W., Prada-Sánchez, J.M. and García-Jurado, I. (1997). Saving computer time in constructing consistent bootstrap prediction intervals for autoregressive processes. <em>Commun. Statist. Simula.</em> <strong>26</strong>, 961-978.</p>
+<p>Cao, R. and González-Manteiga, W. (1993). Bootstrap methods in regression smoothing. <em>Journal of Nonparametric Statistics</em> <strong>2</strong>, 379-388.</p>
+<p>Cao, R. and Prada-Sánchez, J.M. (1993). Bootstrapping the mean of a symmetric population. <em>Statistics &amp; Probability Letters</em> <strong>17</strong>, 43-48.</p>
+<p>Castillo-Páez, S., Fernández-Casal, R. and García-Soidán, P. (2019). <a href="https://www.sciencedirect.com/science/article/pii/S0167947319300325?via%3Dihub">A nonparametric bootstrap method for spatial data</a>, <em>Computational Statistics and Data Analysis</em> <strong>137</strong>, 1-15.</p>
+<p>Castillo-Páez S., Fernández-Casal R. and García-Soidán P. (2020). <a href="https://doi.org/10.1016/j.spasta.2019.100389">Nonparametric bootstrap approach for unconditional risk mapping under heteroscedasticity</a>. <em>Spatial Statistics</em>. In Press.</p>
+<p>Carlstein, E., Do, K. A., Hall, P., Hesterberg, T., and Künsch, H. R. (1998). <a href="https://projecteuclid.org/euclid.bj/1174324983">Matched-block bootstrap for dependent data .</a> <em>Bernoulli</em> <strong>4</strong> 3, 305-328.</p>
+<p>Cox, D. R. (1972). <a href="https://rss.onlinelibrary.wiley.com/doi/abs/10.1111/j.2517-6161.1972.tb00899.x">Regression Models and Life Tables</a> (with discussion), <em>Journal of the Royal Statistical Society series B</em> <strong>34</strong>, 187–220.</p>
+<p>Davison, A.C. and Hinkley, D.V. (1997). <em>Bootstrap Methods and their Application</em>. Cambridge University Press.</p>
+<p>Efron, B. (1979). Bootstrap Methods: Another look at the Jackknife. <em>Ann. Statist.</em> <strong>7</strong>, 1-26.</p>
+<p>Efron, B. (1981). Censored data and the bootstrap. <em>J. Amer. Statist. Assoc.</em> <strong>76</strong>, 312–319.</p>
+<p>Efron, B. (1982). The Jackknife, the Bootstrap and other Resampling Plans. CBMS-NSF. <em>Regional Conference series in applied mathematics</em>.</p>
+<p>Efron, B. (1983). Estimating the error rate of a prediction rule: improvements on cross-validation. <em>J. Amer. Stat. Assoc.</em> <strong>78</strong>, 316-331.</p>
+<p>Efron, B. (1987). Better Bootstrap confidence intervals (with discussion). <em>J. Amer. Stat. Assoc.</em> <strong>82</strong>, 171-200.</p>
+<p>Efron, B. (1990). More Efficient Bootstrap Computations. <em>J. Amer. Statist. Assoc.</em> <strong>85</strong>, 79-89.</p>
+<p>Efron, B. and Tibshirani, R. (1986). Bootstrap methods for standard errors, confidence intervals, and other measures of statistical accuracy. <em>Statistical Science</em> <strong>1</strong>, 54-77.</p>
+<p>Efron, B. and Tibshirani, R.J. (1993). <em>An Introduction to the Bootstrap</em>. Chapman and Hall.</p>
+<p>Fan J. and Gijbels I. (1996). <em>Local Polynomial Modelling and Its Applications</em>. Chapman and Hall, London.</p>
+<p>Fan J. and Yao Q. (1998). Efficient estimation of conditional variance functions in stochastic regression. <em>Biometrika</em>, <strong>85</strong>, 645–660.</p>
+<p>Faraway, J.J. and Jhun, M. (1990). Bootstrap choice of bandwidth for density estimation. <em>Jr. Amer. Statist. Assoc.</em> <strong>85</strong>, 1119–1122.</p>
+<p>Ferretti, N. and Romo, J. (1996). Unit root bootstrap test for AR(1) models. <em>Biometrika</em> <strong>83</strong>, 849-860.</p>
+<p>Fisher, R.A. (1935). <em>The design of experiments</em>. Edinburgh: Oliver and Boyd.</p>
+<p>Fox, J., and Weisberg, S. (2018). <em>An R companion to applied regression</em>. Sage publications.</p>
+<p>Freedman, D.A. (1981). Bootstrapping regression models. <em>Ann. Statis.</em> <strong>9</strong> 6, 118-1228.</p>
+<p>Fuller, W.A. (1976). <em>Introduction to statistical time series</em>. New York: Wiley.</p>
+<p>Gannoun, A. (1990). Estimation non paramétrique de la médiane conditionnelle. Application à la prévision. <em>C. R. Acad. Sci. Paris</em> <strong>310</strong>, 295-298.</p>
+<p>García-Jurado, I. González-Manteiga, W., Prada-Sánchez, J.M., Febrero-Bande, M. and Cao, R. (1995). Predicting using Box-Jenkins, nonparametric and bootstrap techniques. <em>Technometrics</em> <strong>37</strong>, 303-310.</p>
+<p>González-Manteiga, W., and Cao, R. (1993). Testing the hypothesis of a general linear model using nonparametric regression estimation. <em>Test</em>, 2, 161-188.</p>
+<p>González-Manteiga, W. and Prada-Sánchez, J.M. (1985). Una aplicación de los métodos de suavización no paramétricos en la técnica bootstrap. <em>Proceedings Jornadas Hispano-Lusas de Matemáticas</em>. Murcia, 1985.</p>
+<p>González-Manteiga, W., Prada-Sánchez, J.M. and Romo, J. (1994). The Bootstrap-A Review. <em>Computational Statistics</em> <strong>9</strong>, 165-205.</p>
+<p>Hall, P. (1986). On the bootstrap and confidence intervals. <em>Ann. Statist.</em> <strong>14</strong>, 1431-1452.</p>
+<p>Hall, P. (1988-a) Theoretical comparison of bootstrap confidence intervals. <em>Ann. Statist.</em> <strong>16</strong>, 927-953.</p>
+<p>Hall, P. (1988-b). Rate of convergence in bootstrap approximations. <em>Ann. Probab.</em> <strong>16</strong> 4, 1665-1684.</p>
+<p>Hall, P. (1990). Using the bootstrap to estimate mean squared error and select smoothing parameter in nonparametric problems. <em>J. Multivariate Anal.</em> <strong>32</strong>, 177–203.</p>
 <p>Hall. P. (1992). <a href="https://books.google.es/books?hl=es&amp;lr=&amp;id=CwLaBwAAQBAJ&amp;oi=fnd&amp;pg=PR11&amp;dq=The+Bootstrap+and+Edgeworth+Expansion"><em>The Bootstrap and Edgeworth Expansion</em></a>. Springer Verlag.</p>
-<p>Hall, P., Horowitz, J.L. and Jing, B-Y. (1995). On blocking rules for
-the bootstrap with dependent data. <em>Biometrika</em> <strong>82</strong>, 561-574.</p>
-<p>Hall, P., Marron, J.S. and Park, B. (1992). Smoothed cross-validation.
-<em>Probab. Theor. Rel. Fields</em> <strong>92</strong>, 1–20.</p>
-<p>Hall, P. and Martin, M.A. (1988). On bootstrap resampling and iteration.
-<em>Biometrika</em> <strong>75</strong>, 661-671.</p>
-<p>Härdle, W. and Mammen, E. (1993). Comparing nonparametric versus
-parametric regression fits. <em>Ann. Statist.</em> <strong>21</strong>, 1926-1947.</p>
-<p>Härdle, W. and Marron, J. S. (1991). Bootstrap simultaneous error bars
-for nonparametric regression. <em>Ann. Statist.</em> <strong>19</strong>, 778–796.</p>
-<p>Hartigan, J.A. (1969). Using subsample values as typical values. J.
-<em>Amer. Statist. Assoc.</em> <strong>64</strong>, 1303-1317.</p>
-<p>Heimann, G. and Kreiss, J-P. (1996). Bootstrapping general first order
-autoregression. <em>Statist. Prob. Lett.</em> <strong>30</strong>, 87-98.</p>
-<p>Kaplan, E. L. and P. Meier, Nonparametric estimation from incomplete
-observations, <em>J. Amer. Stat. Assoc.</em> <strong>53</strong> (1958) 457–481.</p>
-<p>Kreiss, J-P. and Franke, J. (1992). Bootstrapping stationary
-autoregressive moving average models. <em>J. Time Ser. Anal.</em> <strong>13</strong>,
-297-317.</p>
-<p>Künsch, H.R. (1989). The jackknife and the bootstrap for general
-stationary observations. <em>Ann. Statist.</em> <strong>17</strong>, 1217-1241.</p>
-<p>Liu, R.Y. and Singh, K. (1992). Moving blocks jackknife and bootstrap
-capture weak dependence. In <a href="https://books.google.es/books?hl=es&amp;lr=&amp;id=ZJzIpNZNVLgC&amp;oi=fnd&amp;pg=PA3&amp;dq=Exploring+the+limits+of+the+bootstrap"><em>Exploring the limits of bootstrap</em></a>
-(R. LePage and L Billard, Eds.), pp. 225-248. New York: Wiley.</p>
-<p>Mammen, E. (1992). <a href="https://books.google.es/books?hl=es&amp;lr=&amp;id=zpDfBwAAQBAJ&amp;oi=fnd&amp;pg=PP8&amp;dq=When+does+Bootstrap+Work%3F"><em>When does Bootstrap Work?</em></a>.
-Springer Verlag.</p>
-<p>Maritz, J.S. (1979). A note on exact robust confidence intervals for
-location. <em>Biometrika</em> <strong>66</strong>, 163-166.</p>
-<p>Marron, J.S. (1992). Bootstrap bandwidth selection. In
-<em>Exploring the limits of the bootstrap</em>, LePage, R. and Billard,
-L. eds., pp. 249–262. New York: Wiley.</p>
-<p>Nadaraya, E.A. (1964). On estimating regression. <em>Theor. Probab. Appl.</em>
-<strong>9,</strong> 141-142.</p>
-<p>Naik-Nimbalkar, U.V. and Rajarshi, M.B. (1994). Validity of blockwise
-bootstrap for empirical processes with stationary observations.
-<em>Ann. Statist.</em> <strong>22</strong>, 980-994.</p>
-<p>Navidi, W. (1989). Edgeworth expansions for bootstrapping regression
-models. <em>Ann. Statist.</em> <strong>17</strong> 4, 1472-1478.</p>
-<p>Paparoditis, E. (1996). Bootstrapping autoregressive and moving average
-parameters estimates of infinite order vector autoregressive processes.
-<em>J. Mult. Anal.</em> <strong>57</strong>, 277-296.</p>
-<p>Parzen, E. (1962). On estimation of a probability density function and
-mode. <em>Ann. Math. Statist.</em> <strong>33</strong>, 1065–1076.</p>
-<p>Pascual, L., Romo, J. and Ruiz, E. (2001). Effects of parameter
-estimation on prediction densities: a bootstrap approach.
-<em>Int. J. Forecasting</em> <strong>17</strong>, 83-103</p>
-<p>Politis, D.N. and Romano, J.R. (1994a). The stationary bootstrap.
-<em>J. Amer. Statist. Assoc.</em> <strong>89</strong>, 1303-1313.</p>
-<p>Politis, D.N. and Romano, J.R. (1994b). Large sample confidence regions
-based on subsamples under minimal assumptions. <em>Ann. Statist.</em> <strong>22</strong>,
-2031-2050.</p>
-<p>Politis, D.N. and Romano, J.R. (1994c). Limit theorems for weakly
-dependent Hilbert space valued random variables with application to the
-stationary bootstrap. <em>Statist. Sin.</em> <strong>4</strong>, 461-476.</p>
-<p>Politis, D.N., Romano, J.P. and Wolf, M. (1999). <a href="https://books.google.es/books?hl=es&amp;lr=&amp;id=nGu6rqjE6JoC&amp;oi=fnd&amp;pg=PR7&amp;dq=Subsampling"><em>Subsampling</em></a>.
-Springer Verlag.</p>
-<p>Prada-Sánchez, J.M. and Cotos-Yáñez, T. (1997). A Simulation Study of
-Iterated and Non-iterated Bootstrap Methods for Bias Reduction and
-Confidence Interval Estimation. <em>Comm. Statist .-Simula.</em> <strong>26</strong> 3, 927-946.</p>
-<p>Prada-Sánchez, J.M. and Otero-Cepeda, X.L. (1989). The use of smooth
-bootstrap techniques for estimating the error rate of a prediction rule.
-<em>Comm. Statist .-Simula.</em> <strong>18</strong> 3, 1169-1186.</p>
-<p>Quenouille, M. (1949). Approximate test of correlation in time series.
-<em>J. Roy. Statist. Soc. Ser. B</em> <strong>11</strong>, 18-84.</p>
-<p>Radulović, D. (1996). The bootstrap for the mean of strong mixing
-sequences under minimal conditions. <em>Statist. Prob. Lett.</em> <strong>28</strong>,
-65-72.</p>
-<p>Reid, N. (1981). Estimating the median survival time. <em>Biometrika</em>
-<strong>68</strong>, 601–608.</p>
+<p>Hall, P., Horowitz, J.L. and Jing, B-Y. (1995). On blocking rules for the bootstrap with dependent data. <em>Biometrika</em> <strong>82</strong>, 561-574.</p>
+<p>Hall, P., Marron, J.S. and Park, B. (1992). Smoothed cross-validation. <em>Probab. Theor. Rel. Fields</em> <strong>92</strong>, 1–20.</p>
+<p>Hall, P. and Martin, M.A. (1988). On bootstrap resampling and iteration. <em>Biometrika</em> <strong>75</strong>, 661-671.</p>
+<p>Härdle, W. and Mammen, E. (1993). Comparing nonparametric versus parametric regression fits. <em>Ann. Statist.</em> <strong>21</strong>, 1926-1947.</p>
+<p>Härdle, W. and Marron, J. S. (1991). Bootstrap simultaneous error bars for nonparametric regression. <em>Ann. Statist.</em> <strong>19</strong>, 778–796.</p>
+<p>Hartigan, J.A. (1969). Using subsample values as typical values. J. <em>Amer. Statist. Assoc.</em> <strong>64</strong>, 1303-1317.</p>
+<p>Heimann, G. and Kreiss, J-P. (1996). Bootstrapping general first order autoregression. <em>Statist. Prob. Lett.</em> <strong>30</strong>, 87-98.</p>
+<p>Kaplan, E. L. and P. Meier, Nonparametric estimation from incomplete observations, <em>J. Amer. Stat. Assoc.</em> <strong>53</strong> (1958) 457–481.</p>
+<p>Kreiss, J-P. and Franke, J. (1992). Bootstrapping stationary autoregressive moving average models. <em>J. Time Ser. Anal.</em> <strong>13</strong>, 297-317.</p>
+<p>Künsch, H.R. (1989). The jackknife and the bootstrap for general stationary observations. <em>Ann. Statist.</em> <strong>17</strong>, 1217-1241.</p>
+<p>Liu, R.Y. and Singh, K. (1992). Moving blocks jackknife and bootstrap capture weak dependence. In <a href="https://books.google.es/books?hl=es&amp;lr=&amp;id=ZJzIpNZNVLgC&amp;oi=fnd&amp;pg=PA3&amp;dq=Exploring+the+limits+of+the+bootstrap"><em>Exploring the limits of bootstrap</em></a> (R. LePage and L Billard, Eds.), pp. 225-248. New York: Wiley.</p>
+<p>Mammen, E. (1992). <a href="https://books.google.es/books?hl=es&amp;lr=&amp;id=zpDfBwAAQBAJ&amp;oi=fnd&amp;pg=PP8&amp;dq=When+does+Bootstrap+Work%3F"><em>When does Bootstrap Work?</em></a>. Springer Verlag.</p>
+<p>Maritz, J.S. (1979). A note on exact robust confidence intervals for location. <em>Biometrika</em> <strong>66</strong>, 163-166.</p>
+<p>Marron, J.S. (1992). Bootstrap bandwidth selection. In <em>Exploring the limits of the bootstrap</em>, LePage, R. and Billard, L. eds., pp. 249–262. New York: Wiley.</p>
+<p>Nadaraya, E.A. (1964). On estimating regression. <em>Theor. Probab. Appl.</em> <strong>9,</strong> 141-142.</p>
+<p>Naik-Nimbalkar, U.V. and Rajarshi, M.B. (1994). Validity of blockwise bootstrap for empirical processes with stationary observations. <em>Ann. Statist.</em> <strong>22</strong>, 980-994.</p>
+<p>Navidi, W. (1989). Edgeworth expansions for bootstrapping regression models. <em>Ann. Statist.</em> <strong>17</strong> 4, 1472-1478.</p>
+<p>Paparoditis, E. (1996). Bootstrapping autoregressive and moving average parameters estimates of infinite order vector autoregressive processes. <em>J. Mult. Anal.</em> <strong>57</strong>, 277-296.</p>
+<p>Parzen, E. (1962). On estimation of a probability density function and mode. <em>Ann. Math. Statist.</em> <strong>33</strong>, 1065–1076.</p>
+<p>Pascual, L., Romo, J. and Ruiz, E. (2001). Effects of parameter estimation on prediction densities: a bootstrap approach. <em>Int. J. Forecasting</em> <strong>17</strong>, 83-103</p>
+<p>Pitman, E.J.G. (1937). Significance tests which may be applied to samples from any populations. <em>Journal of the Royal Statistical Society</em>, Series B, 4, 119–130.</p>
+<p>Politis, D.N. and Romano, J.R. (1994a). The stationary bootstrap. <em>J. Amer. Statist. Assoc.</em> <strong>89</strong>, 1303-1313.</p>
+<p>Politis, D.N. and Romano, J.R. (1994b). Large sample confidence regions based on subsamples under minimal assumptions. <em>Ann. Statist.</em> <strong>22</strong>, 2031-2050.</p>
+<p>Politis, D.N. and Romano, J.R. (1994c). Limit theorems for weakly dependent Hilbert space valued random variables with application to the stationary bootstrap. <em>Statist. Sin.</em> <strong>4</strong>, 461-476.</p>
+<p>Politis, D.N., Romano, J.P. and Wolf, M. (1999). <a href="https://books.google.es/books?hl=es&amp;lr=&amp;id=nGu6rqjE6JoC&amp;oi=fnd&amp;pg=PR7&amp;dq=Subsampling"><em>Subsampling</em></a>. Springer Verlag.</p>
+<p>Prada-Sánchez, J.M. and Cotos-Yáñez, T. (1997). A Simulation Study of Iterated and Non-iterated Bootstrap Methods for Bias Reduction and Confidence Interval Estimation. <em>Comm. Statist .-Simula.</em> <strong>26</strong> 3, 927-946.</p>
+<p>Prada-Sánchez, J.M. and Otero-Cepeda, X.L. (1989). The use of smooth bootstrap techniques for estimating the error rate of a prediction rule. <em>Comm. Statist .-Simula.</em> <strong>18</strong> 3, 1169-1186.</p>
+<p>Quenouille, M. (1949). Approximate test of correlation in time series. <em>J. Roy. Statist. Soc. Ser. B</em> <strong>11</strong>, 18-84.</p>
+<p>Radulović, D. (1996). The bootstrap for the mean of strong mixing sequences under minimal conditions. <em>Statist. Prob. Lett.</em> <strong>28</strong>, 65-72.</p>
+<p>Reid, N. (1981). Estimating the median survival time. <em>Biometrika</em> <strong>68</strong>, 601–608.</p>
 <p>Rizzo, M.L. (2008). <em>Statistical Computing with R</em>. Chapman&amp;Hall/CRC</p>
-<p>Rosenblatt, M. (1956). Remarks on some nonparametric estimate of a
-density function. <em>Ann. Math. Statist.</em> <strong>27</strong>, 832–837.</p>
-<p>Rubin, D.B. (1981). The Bayesian Bootstrap. <em>Ann. Statist.</em> <strong>9</strong> 1,
-130-134.</p>
+<p>Rosenblatt, M. (1956). Remarks on some nonparametric estimate of a density function. <em>Ann. Math. Statist.</em> <strong>27</strong>, 832–837.</p>
+<p>Rubin, D.B. (1981). The Bayesian Bootstrap. <em>Ann. Statist.</em> <strong>9</strong> 1, 130-134.</p>
 <p>Rubinstein, R.Y. (1981). <a href="https://books.google.es/books?hl=es&amp;lr=&amp;id=r2VODQAAQBAJ&amp;oi=fnd&amp;pg=PR1&amp;dq=Simulation+and+the+Monte+Carlo+Method"><em>Simulation and the Monte Carlo Method</em></a>. Wiley.</p>
-<p>Schucany, W., Gray, H. and Owen, O. (1971). On bias reduction in
-estimation. <em>J. Amer. Stat. Assoc.</em> <strong>66</strong>, 524-533.</p>
+<p>Schucany, W., Gray, H. and Owen, O. (1971). On bias reduction in estimation. <em>J. Amer. Stat. Assoc.</em> <strong>66</strong>, 524-533.</p>
 <p>Shao, J. (1999). <a href="https://www.springer.com/gp/book/9780387953823"><em>Mathematical Statistics</em></a>. Springer.</p>
 <p>Shao, J. (2006). <a href="http://www.stewartschultz.com/statistics/books/Mathematical%20Statistics%20-%20Exercises%20and%20Solutions.pdf"><em>Mathematical Statistics: exercises and solutions</em></a>. Springer.</p>
-<p>Sheather, S.J. and Jones, M.C. (1991). A reliable data-based bandwidth
-selection method for kernel density estimation.
-<em>Jr. Royal Statist. Soc. Ser. B</em> <strong>53</strong>, 683–690.</p>
+<p>Sheather, S.J. and Jones, M.C. (1991). A reliable data-based bandwidth selection method for kernel density estimation. <em>Jr. Royal Statist. Soc. Ser. B</em> <strong>53</strong>, 683–690.</p>
 <p>Silverman, B.W. (1986). <a href="http://users.stat.ufl.edu/~rrandles/sta6934/smhandout.pdf"><em>Density Estimation</em></a>. Chapman and Hall.</p>
 <p>Shao, J. and Tu, D. (1995). <a href="https://books.google.es/books?hl=es&amp;lr=&amp;id=VO3SBwAAQBAJ&amp;oi=fnd&amp;pg=PA1&amp;dq=The+Jackknife+and+Bootstrap"><em>The Jackknife and Bootstrap</em></a>. Springer Verlag.</p>
-<p>Sing, K. (1981). On the asymptotic accuracy of Efron’s bootstrap.
-<em>Ann. Statist.</em> <strong>9</strong> 6, 1187-1195.</p>
-<p>Stine, R.A. (1987). Estimating properties of autoregressive forecasts.
-<em>J. Amer. Stat. Assoc.</em> <strong>82</strong>, 1072-1078.</p>
-<p>Taylor, C. C. (1989). Bootstrap choice of the smoothing parameter in
-kernel density estimation. <em>Biometrika</em> <strong>76</strong>, 705–712.</p>
-<p>Thombs, L.A. and Schucany, W.R. (1990). Bootstrap prediction intervals
-for autoregression. <em>J. Amer. Stat. Assoc.</em> <strong>85</strong>, 486-492.</p>
-<p>Tukey, J. (1958). Bias and confidence in not quite large samples,
-abstract, <em>Ann. Math. Statist.</em> <strong>29</strong>, 614.</p>
-<p>Watson, G.S. (1964). <a href="https://www.jstor.org/stable/25049340?seq=1#page_scan_tab_contents">Smooth regression analysis</a>. <em>Sankhy<span>ā</span>: The Indian Journal of Statistics Ser. A</em>
-<strong>26</strong>, 359-372.</p>
-<p>Wu, C.-F. J. (1986). Jackknife, bootstrap and other resampling methods
-in regression analysis. <em>Ann. Statist.</em> <strong>14</strong>, 1261–1350.</p>
+<p>Sing, K. (1981). On the asymptotic accuracy of Efron’s bootstrap. <em>Ann. Statist.</em> <strong>9</strong> 6, 1187-1195.</p>
+<p>Stine, R.A. (1987). Estimating properties of autoregressive forecasts. <em>J. Amer. Stat. Assoc.</em> <strong>82</strong>, 1072-1078.</p>
+<p>Taylor, C. C. (1989). Bootstrap choice of the smoothing parameter in kernel density estimation. <em>Biometrika</em> <strong>76</strong>, 705–712.</p>
+<p>Thombs, L.A. and Schucany, W.R. (1990). Bootstrap prediction intervals for autoregression. <em>J. Amer. Stat. Assoc.</em> <strong>85</strong>, 486-492.</p>
+<p>Tukey, J. (1958). Bias and confidence in not quite large samples, abstract, <em>Ann. Math. Statist.</em> <strong>29</strong>, 614.</p>
+<p>Wand M.P. and Jones M.C. (1995) <em>Kernel Smoothing</em>. Chapman and Hall, London.</p>
+<p>Watson, G.S. (1964). <a href="https://www.jstor.org/stable/25049340?seq=1#page_scan_tab_contents">Smooth regression analysis</a>. <em>Sankhy<span>ā</span>: The Indian Journal of Statistics Ser. A</em> <strong>26</strong>, 359-372.</p>
+<p>Welch, B.L. (1937). On the z‐test in randomized blocks and Latin squares. <em>Biometrika</em>, 29, 21–52.</p>
+<p>Wu, C.-F. J. (1986). Jackknife, bootstrap and other resampling methods in regression analysis. <em>Ann. Statist.</em> <strong>14</strong>, 1261–1350.</p>
+<!-- Wood, S.N. (2017). *Generalized additive models: an introduction with R*. Chapman and Hall/CRC. -->
 
 </div>
 
@@ -712,7 +588,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "true";
+    var src = "";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))

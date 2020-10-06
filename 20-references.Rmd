@@ -125,6 +125,13 @@ Edgeworth expansion. *Ann. Statist.* **6**, 434–451.
 Bickel, P.J. and Freedman, D.A. (1981). Some Asymptotic theory for the
 bootstrap. *Ann. Statist.* **12** 2, 470-482.
 
+Bock M., Bowman A.W. and Ismail B. (2007). Estimation and inference for 
+error variance in bivariate nonparametric regression. *Statistics and Computing* 
+**17**, 39-47.
+
+Bowman A.W. and Azzalini A. (2019). *R package 'sm': nonparametric smoothing methods* 
+(version 2.2). <http://www.stats.gla.ac.uk/~adrian/sm>.
+
 Bowman, A., Hall, P. and Prvan, T. (1998). Bandwidth selection for the
 smoothing of distribution functions. *Biometrika* **85** 4, 799-808.
 
@@ -177,6 +184,10 @@ Castillo-Páez, S., Fernández-Casal, R. and García-Soidán, P. (2019).
 [A nonparametric bootstrap method for spatial data ](https://www.sciencedirect.com/science/article/pii/S0167947319300325?via%3Dihub),
 *Computational Statistics and Data Analysis* **137**,  1-15.
 
+Castillo-Páez S., Fernández-Casal R. and García-Soidán P. (2020).
+[Nonparametric bootstrap approach for unconditional risk mapping under heteroscedasticity ](https://doi.org/10.1016/j.spasta.2019.100389). 
+*Spatial Statistics*. In Press.
+
 Carlstein, E., Do, K. A., Hall, P., Hesterberg, T., and Künsch, H. R. (1998). [Matched-block bootstrap for dependent data .](https://projecteuclid.org/euclid.bj/1174324983) 
 *Bernoulli* **4** 3, 305-328.
 
@@ -211,11 +222,21 @@ accuracy. *Statistical Science* **1**, 54-77.
 Efron, B. and Tibshirani, R.J. (1993). *An Introduction to the Bootstrap*.
 Chapman and Hall.
 
+Fan J. and Gijbels I. (1996). *Local Polynomial Modelling and Its Applications*.
+Chapman and Hall, London.
+
+Fan J. and Yao Q. (1998). Efficient estimation of conditional variance functions in 
+stochastic regression. *Biometrika*, **85**, 645–660.
+    
 Faraway, J.J. and Jhun, M. (1990). Bootstrap choice of bandwidth for
 density estimation. *Jr. Amer. Statist. Assoc.* **85**, 1119–1122.
 
 Ferretti, N. and Romo, J. (1996). Unit root bootstrap test for AR(1)
 models. *Biometrika* **83**, 849-860.
+
+Fisher, R.A. (1935). *The design of experiments*. Edinburgh: Oliver and Boyd.
+
+Fox, J., and Weisberg, S. (2018). *An R companion to applied regression*. Sage publications.
 
 Freedman, D.A. (1981). Bootstrapping regression models. 
 *Ann. Statis.* **9** 6, 118-1228.
@@ -230,6 +251,9 @@ conditionnelle. Application à la prévision. *C. R. Acad. Sci. Paris*
 García-Jurado, I. González-Manteiga, W., Prada-Sánchez, J.M.,
 Febrero-Bande, M. and Cao, R. (1995). Predicting using Box-Jenkins,
 nonparametric and bootstrap techniques. *Technometrics* **37**, 303-310.
+
+González-Manteiga, W., and Cao, R. (1993). Testing the hypothesis of a general linear model using nonparametric regression estimation. *Test*, 2, 161-188.
+
 
 González-Manteiga, W. and Prada-Sánchez, J.M. (1985). Una aplicación de
 los métodos de suavización no paramétricos en la técnica bootstrap.
@@ -319,6 +343,8 @@ Pascual, L., Romo, J. and Ruiz, E. (2001). Effects of parameter
 estimation on prediction densities: a bootstrap approach. 
 *Int. J. Forecasting* **17**, 83-103
 
+Pitman, E.J.G. (1937). Significance tests which may be applied to samples from any populations. *Journal of the Royal Statistical Society*, Series B, 4, 119–130.
+
 Politis, D.N. and Romano, J.R. (1994a). The stationary bootstrap. 
 *J. Amer. Statist. Assoc.* **89**, 1303-1313.
 
@@ -391,9 +417,15 @@ for autoregression. *J. Amer. Stat. Assoc.* **85**, 486-492.
 Tukey, J. (1958). Bias and confidence in not quite large samples,
 abstract, *Ann. Math. Statist.* **29**, 614.
 
+Wand M.P. and Jones M.C. (1995) *Kernel Smoothing*. Chapman and Hall, London.
+
 Watson, G.S. (1964). [Smooth regression analysis ](https://www.jstor.org/stable/25049340?seq=1#page_scan_tab_contents). *Sankhy[ā]{}: The Indian Journal of Statistics Ser. A* 
 **26**, 359-372.
 
+Welch, B.L. (1937). On the z‐test in randomized blocks and Latin squares. *Biometrika*, 29, 21–52.
+
 Wu, C.-F. J. (1986). Jackknife, bootstrap and other resampling methods
 in regression analysis. *Ann. Statist.* **14**, 1261–1350.
+
+<!-- Wood, S.N. (2017). *Generalized additive models: an introduction with R*. Chapman and Hall/CRC. -->
 

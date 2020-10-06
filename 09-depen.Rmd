@@ -1,4 +1,4 @@
-# El Bootstrap con datos dependientes {#cap9}
+# El Bootstrap con datos dependientes {#bootdep}
 
 ```{r , child = '_global_options.Rmd'}
 ```

@@ -1,4 +1,4 @@
-# Introducción al procesamiento en paralelo en R
+# Introducción al procesamiento en paralelo en R {#intro-hpc}
 
 ```{r , child = '_global_options.Rmd'}
 ```
@@ -152,14 +152,14 @@ system.time(res.boot <- boot(muestra, statistic, R = B))
 system.time(res.boot <- boot(muestra, statistic, R = B, parallel = "snow", cl = cl))
 ```
 
-### Estudio de simulación
+### Estudio de simulación {#estudio-sim-boot}
 
 Si se trata de un estudio más complejo, como por ejemplo un estudio de simulación
 en el que se emplea bootstrap, la recomendación sería tratar de paralelizar
 en el nivel superior para minimizar la sobrecarga debida a la comunicación
 entre nodos.
 
-Por ejemplo, a continuación se realiza un estudio similar al Ejemplo \@ref(exm:estudio-sim-exp)
+Por ejemplo, a continuación se realiza un estudio similar al mostrado en la Sección \@ref(estudio-sim-exp)
 pero comparando las probabilidades de cobertura y las longitudes de los 
 intervalos de confianza implementados en la función `boot.ci()`.
 

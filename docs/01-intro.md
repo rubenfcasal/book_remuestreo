@@ -1,4 +1,4 @@
-# Motivación del principio Bootstrap  {#cap1}
+# Motivación del principio Bootstrap  {#intro}
 
 
 
@@ -97,8 +97,8 @@ distribución de los datos.
 
 El primer paso es reemplazar la distribución poblacional (desconocida) $F$ por una
 estimación, $\hat{F}$, de la misma. Por ejemplo, podríamos considerar la
-distribución empírica $\hat{F}=F_n$ (bootstrap uniforme; Sección \@ref(cap1-unif)), 
-o una aproximación paramétrica $\hat{F}=F_{\hat \theta}$ (bootstrap paramétrico; Sección \@ref(cap4-boot-par)).
+distribución empírica $\hat{F}=F_n$ (bootstrap uniforme; Sección \@ref(intro-unif)), 
+o una aproximación paramétrica $\hat{F}=F_{\hat \theta}$ (bootstrap paramétrico; Sección \@ref(modunif-boot-par)).
 
 Como ejemplo ilustrativo consideramos los datos simulados [Figura \@ref(fig:muestra-sim)]:
 
@@ -120,7 +120,7 @@ curve(dnorm, lty = 2, add = TRUE)
 \end{figure}
 Como aproximación de la distribución poblacional, desconocida en la práctica,
 siempre podemos considerar la distribución empírica 
-(o una versión suavizada: bootstrap suavizado; Sección \@ref(cap4-boot-suav)). 
+(o una versión suavizada: bootstrap suavizado; Sección \@ref(modunif-boot-suav)). 
 Alternativamente podríamos asumir un modelo paramétrico y estimar los parámetros a partir de la muestra [Figura \@ref(fig:muestra-sim-aprox)].
 
 ```r
@@ -169,7 +169,7 @@ Bootstrap básico o natural
 Boostrap estudentizado
 -->
 
-### Implementación en la práctica {#cap1-implementacion}
+### Implementación en la práctica {#intro-implementacion}
 
 En el caso i.i.d., si empleamos como aproximación la distribución empírica $\hat{F}=F_n$,
 la generación de las muestras bootstrap puede hacerse mediante remuestreo 
@@ -261,7 +261,7 @@ str(data_boot)
 ```
 
 Esta forma de proceder es la que emplea por defecto el paquete `boot` que 
-describiremos más adelante (Sección \@ref(cap1-pkgboot)).
+describiremos más adelante (Sección \@ref(intro-pkgboot)).
 
 \BeginKnitrBlock{example}\iffalse{-91-73-110-102-101-114-101-110-99-105-97-32-115-111-98-114-101-32-108-97-32-109-101-100-105-97-32-99-111-110-32-118-97-114-105-97-110-122-97-32-99-111-110-111-99-105-100-97-93-}\fi{}<div class="example"><span class="example" id="exm:media-dt-conocida"><strong>(\#exm:media-dt-conocida)  \iffalse (Inferencia sobre la media con varianza conocida) \fi{} </strong></span>
 <br> \vspace{0.5cm}
@@ -272,7 +272,7 @@ Hemos observado 15 tiempos de vida de microorganismos:
 A partir de los cuales queremos 
 obtener una estimación por intervalo de confianza de su vida media,
 suponiendo que la desviación típica es conocida e igual a 0.6
-(en el Capítulo \@ref(cap5) se tratará con más detalle la construcción de intervalos de confianza).</div>\EndKnitrBlock{example}
+(en el Capítulo \@ref(icboot) se tratará con más detalle la construcción de intervalos de confianza).</div>\EndKnitrBlock{example}
 
 ```r
 muestra <- c(0.143, 0.182, 0.256, 0.26, 0.27, 0.437, 0.509, 
@@ -453,7 +453,7 @@ abline(v = c(-z, z), lty = 2)
 \end{figure}
 
 
-## El Bootstrap uniforme {#cap1-unif}
+## El Bootstrap uniforme {#intro-unif}
 
 Como ya se comentó anteriormente el bootstrap uniforme es aquel en el que
 se reemplaza la distribución poblacional (desconocida) por la distribución
@@ -952,7 +952,7 @@ $R^{\ast (1)}$, $\ldots$, $R^{\ast (B)}$
 5. Utilizar esas réplicas bootstrap para aproximar la distribución en el
 muestreo de $R$
 
-Como se mostró en la Sección \@ref(cap1-implementacion), el paso 1 se puede llevar a cabo simulando una distribución uniforme discreta
+Como se mostró en la Sección \@ref(intro-implementacion), el paso 1 se puede llevar a cabo simulando una distribución uniforme discreta
 mediante el método de la transformación cuantil:
 
 1. Para cada $i=1,\ldots ,n$ arrojar $U_i\sim \mathcal{U}\left( 0,1 \right)$ y
@@ -1056,7 +1056,7 @@ IC_boot
 ```
 
 Este procedimiento para la construcción de intervalos de confianza
-se denomina *método percentil-t* y se tratará en la Sección \@ref(cap5-perc-t).
+se denomina *método percentil-t* y se tratará en la Sección \@ref(icboot-perc-t).
 
 ### Elección del número de réplicas Monte Carlo
 
@@ -1107,7 +1107,7 @@ Así, el error de la aproximación de Monte Carlo al bootstrap exacto
 (raíz cuadrada de la varianza del Monte Carlo), puede acotarse por
 $\frac{1}{2\sqrt{B}}$.
 
-## Herramientas disponibles en R sobre bootstrap  {#cap1-paquetes}
+## Herramientas disponibles en R sobre bootstrap  {#intro-paquetes}
 
 En `R` hay una gran cantidad de paquetes que implementan métodos bootstrap.
 Por ejemplo, al ejecutar el comando `??bootstrap` (o `help.search('bootstrap')`)
@@ -1128,10 +1128,8 @@ como las más empleadas:
 * `boot`: incluye las funciones y conjuntos de datos utilizados en el libro 
   "Bootstrap Methods and Their Applications" de A. C. Davison y D. V. Hinkley, 1997,
   Cambridge University Press. Esta librería fue desarrollada originalmente 
-  en `S` por Angelo J. Canty y posteriormente exportada a `R` (ver Canty, 2002).
-  Este paquete es mucho más completo que el paquete `bootstrap` 
-  y es el que emplearemos como referencia en este libro 
-  (ver Sección \@ref(cap1-pkgboot)).
+  en `S` por Angelo J. Canty y posteriormente exportada a `R` (ver Canty, 2002), actualmente .
+  Este paquete es mucho más completo que el paquete `bootstrap`, forma parte de la distribución estándar de `R` y es el que emplearemos como referencia en este libro (ver Sección \@ref(intro-pkgboot)).
 
 Por otra parte existen numerosas rutinas (scripts) realizadas en `R` por
 diversos autores, que están disponibles en Internet 
@@ -1182,7 +1180,7 @@ res.boot
 
 La función `boot.strap0()` anterior no es adecuada para el caso multivariante
 (por ejemplo cuando estamos interesados en regresión).
-Como se mostró en la Sección \@ref(cap1-implementacion)
+Como se mostró en la Sección \@ref(intro-implementacion)
 sería preferible emplear remuestras del vector de índices. Por ejemplo:
 
 
@@ -1203,12 +1201,10 @@ boot.strap <- function(datos, B=1000, statistic, ...) {
 
 El paquete `boot`, descrito a continuación, emplea una implementación similar.
 
-### El paquete `boot` {#cap1-pkgboot}
+### El paquete `boot` {#intro-pkgboot}
 
-La función principal de este paquete es la función `boot()` que implementa 
-distintos métodos de remuestreo para datos i.i.d..
-En su forma más simple permite realizar bootstrap uniforme
-(denominado *bootstrap noparamétrico básico* en este paquete):
+La función principal de este paquete es la función `boot()` que implementa distintos métodos de remuestreo para datos i.i.d..
+En su forma más simple permite realizar bootstrap uniforme (que en la práctica también se denomina habitualmente *bootstrap noparamétrico*):
 
 ```r
 boot(data, statistic, R)
@@ -1260,7 +1256,7 @@ Además de los parámetros de entrada (incluyendo los valores por defecto), cont
 Este tipo de objetos dispone de dos métodos principales:
 el método `print()` que muestra un resumen de los resultados
 (incluyendo  aproximaciones bootstrap del sesgo y del error
-estándar de los estadísticos; ver Capítulo \@ref(cap2)):
+estándar de los estadísticos; ver Capítulo \@ref(prec-sesgo)):
 
 ```r
 res.boot
@@ -1296,6 +1292,9 @@ plot(res.boot)
 \caption{Gráficos de diagnóstico de los resultados bootstrap de la mediana de los tiempos de vida de microorganismos.}(\#fig:plot-res-boot)
 \end{figure}
 
+Es recomendable examinar la distribución bootstrap del estimador (o estadístico) para detectar posibles problemas.
+Como en este caso puede ocurrir que el estadístico bootstrap tome pocos valores distintos, lo que indicaría que el número de réplicas bootstrap es insuficiente o que hay algún problema con método de remuestreo empleado (en este caso la distribución objetivo es continua). 
+Se darán más detalles sobre los posibles problemas del bootstrap uniforme en la Sección \@ref(deficien-unif).
 
 Además de estos métodos, las principales funciones de interés serían:
 
@@ -1305,11 +1304,10 @@ Además de estos métodos, las principales funciones de interés serían:
   al eliminar una observación; este gráfico también se puede obtener estableciendo
   `jack = TRUE` en `plot.boot()`).
   
-* `boot.array()`: genera la matriz de índices a partir de la que se obtuvieron las
-  remuestras (permite reconstruir las remuestras bootstrap).
+* `boot.array()`: genera la matriz de índices a partir de la que se obtuvieron las remuestras (permite reconstruir las remuestras bootstrap).
   
 * `boot.ci()`: construye distintos tipos de intervalos de confianza 
-  (se tratarán en el Capítulo \@ref(cap5)) dependiendo del parámetro `type`:
+  (se tratarán en el Capítulo \@ref(icboot)) dependiendo del parámetro `type`:
   
     - `"norm"`: utiliza la distribución asintótica normal considerando las
         aproximaciones bootstrap del sesgo y de la varianza.
@@ -1417,7 +1415,7 @@ Algunos de estos parámetros son los siguientes:
   descrito anteriormente. Entre el resto de opciones destacaríamos 
   `sim = "permutation"`, que permite realizar contrastes de
   permutaciones (remuestreo sin reemplazamiento), y `sim = "parametric"`,
-  que permite realizar bootstrap paramétrico (Sección \@ref(cap4-boot-par)). 
+  que permite realizar bootstrap paramétrico (Sección \@ref(modunif-boot-par)). 
   En este último caso también habrá que establecer los parámetros `ran.gen` y
   `mle`, y la función `statistics` no empleará el segundo parámetro de índices.
 
@@ -1428,13 +1426,125 @@ Algunos de estos parámetros son los siguientes:
 * `mle`: parámetros de la distribución (típicamente estimados por máxima verosimilitud)
   o parámetros adicionales para `ran.gen` ó `statistics`.
 
-Además hay otros parámetros para el procesamiento en paralelo: `parallel = c("no", "multicore", "snow")`, `ncpus`, `cl`. Para más detalles sobre los parámetros
-consultar la ayuda de la función `boot()` (`?boot`).
+Además hay otros parámetros para el procesamiento en paralelo: `parallel = c("no", "multicore", "snow")`, `ncpus`, `cl`. 
+En el Apéndice \@ref(intro-hpc) se incluye una pequeña introducción al procesamiento en paralelo y se muestran algunos ejemplos sobre el uso de estos parámetros.
+También se puede consultar la ayuda de la función `boot()` (`?boot`).
 
 El paquete `boot` también incluye otras funciones que implementan métodos
 boostrap para otros tipos de datos, como la función `censboot()` para datos 
-censurados (Capítulo \@ref(cap8)) o la función `tsboot()` para series de tiempo (Capítulo \@ref(cap9)).
+censurados (Capítulo \@ref(bootcen)) o la función `tsboot()` para series de tiempo (Capítulo \@ref(bootdep)).
+
+Finalmente destacar que hay numerosas extensiones implementadas en otros paquetes utilizando el paquete `boot` (ver *Reverse dependencies* en la [web de CRAN](https://cran.r-project.org/package=boot)).
+Por ejemplo en la Sección \@ref(boot-reg) se ilustrará el uso de la función `Boot()` del paquete `car` para hacer inferencia sobre modelos de regresión.
+
+
+### Ejemplo: Bootstrap uniforme multidimensional {#boot-unif-multi}
+
+Como ya se mostró en las Secciones \@ref(intro-implementacion) y \@ref(intro-paquetes) podemos implementar el bootstrap uniforme en el caso multidimensional (denominado también *remuestreo de casos* o *bootstrap de las observaciones*) de modo análogo al unidimensional.
+
+Consideraremos como ejemplo el conjunto de datos `Prestige` del paquete `carData`, y supongamos que queremos realizar inferencias sobre el coeficiente de correlación entre `prestige` (puntuación de ocupaciones obtenidas a partir de una encuesta) e`income` (media de ingresos en la ocupación).
+
+
+```r
+data(Prestige, package = "carData")
+str(Prestige)
+```
+
+```
+## 'data.frame':	102 obs. of  6 variables:
+##  $ education: num  13.1 12.3 12.8 11.4 14.6 ...
+##  $ income   : int  12351 25879 9271 8865 8403 11030 8258 14163 11377 11023 ...
+##  $ women    : num  11.16 4.02 15.7 9.11 11.68 ...
+##  $ prestige : num  68.8 69.1 63.4 56.8 73.5 77.6 72.6 78.1 73.1 68.8 ...
+##  $ census   : int  1113 1130 1171 1175 2111 2113 2133 2141 2143 2153 ...
+##  $ type     : Factor w/ 3 levels "bc","prof","wc": 2 2 2 2 2 2 2 2 2 2 ...
+```
+
+```r
+# with(Prestige, cor(income, prestige))
+cor(Prestige$income, Prestige$prestige)
+```
+
+```
+## [1] 0.7149057
+```
+
+En el siguiente código se emplea el paquete `boot` para realizar bootstrap uniforme multidimensional sobre este estadístico:
+
+
+```r
+library(boot)
+
+statistic <- function(data, i){
+  remuestra <- data[i, ]
+  cor(remuestra$income, remuestra$prestige)
+}
+
+set.seed(1)
+B <- 1000
+res.boot <- boot(Prestige, statistic, R = B)
+res.boot
+```
+
+```
+## 
+## ORDINARY NONPARAMETRIC BOOTSTRAP
+## 
+## 
+## Call:
+## boot(data = Prestige, statistic = statistic, R = B)
+## 
+## 
+## Bootstrap Statistics :
+##      original      bias    std. error
+## t1* 0.7149057 0.006306905  0.04406473
+```
+
+```r
+plot(res.boot)
+```
 
 
 
+\begin{center}\includegraphics[width=0.7\linewidth]{01-intro_files/figure-latex/unnamed-chunk-20-1} \end{center}
+
+En este caso podemos observar que la distribución bootstrap del estimador es asimétrica, por lo que asumir que su distribución es normal podría no ser adecuado (por ejemplo para la construcción de intervalos de confianza, que se tratarán en la Sección \@ref(icboot-trans)).
+
+Como comentario final, nótese que en principio el paquete boot está diseñado para obtener réplicas bootstrap de un estimador, por lo que si lo que nos interesa es emplear otro estadístico habría que construirlo a partir de ellas (como hacen otras funciones secundarias como `boot.ci()`).
+Por ejemplo, si queremos emplear el estadístico $R = \hat \theta - \theta$
+(bootstrap percentil básico o natural), podemos obtener la correspondiente distribución bootstrap (aproximada por Monte Carlo) con el siguiente código:
+
+
+```r
+estadistico_boot <- res.boot$t - res.boot$t0 
+hist(estadistico_boot)
+```
+
+
+
+\begin{center}\includegraphics[width=0.7\linewidth]{01-intro_files/figure-latex/unnamed-chunk-21-1} \end{center}
+
+A partir de la distribución empírica del estadístico bootstrap $R^{\ast} = \hat \theta^{\ast} - \hat \theta$ aproximaríamos la característica de interés de la distribución en el muestreo de $R = \hat \theta - \theta$.
+Por ejemplo, para aproximar $\psi \left( u \right) =P\left( R\leq u \right)$ emplearíamos la frecuencia relativa: 
+$$\hat{\psi}_{B}\left( u \right) =
+\frac{1}{B}\sum_{i=1}^{B}\mathbf{1}\left\{ R^{\ast (i)}\leq u\right\}.$$
+
+
+```r
+u <- 0
+sum(estadistico_boot <= u)/B
+```
+
+```
+## [1] 0.427
+```
+
+```r
+# Equivalentemente:
+mean(estadistico_boot <= u)
+```
+
+```
+## [1] 0.427
+```
 

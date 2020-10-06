@@ -1,4 +1,4 @@
-# Bootstrap y estimación no paramétrica de la densidad {#cap6}
+# Bootstrap y estimación no paramétrica de la densidad {#npden}
 
 
 
@@ -15,7 +15,7 @@ paramétricos de estimación de curvas.
 
 ## Estimación no paramétrica de la función de densidad
 
-Como ya se introdujo en la Sección \@ref(cap4-boot-suav), si 
+Como ya se introdujo en la Sección \@ref(modunif-boot-suav), si 
 $\left( X_1, X_2, \ldots, X_n \right)$ es una muestra aleatoria simple
 (m.a.s.),, de una población con función de distribución $F$, absolutamente
 continua, y función de densidad $f$, el estimador tipo núcleo propuesto por
@@ -123,7 +123,7 @@ f\left( x \right)^2dx \\
 En ella se puede ver el efecto negativo de tomar ventanas ($h$) demasiado
 grandes o demasiado pequeñas.
 
-## Aproximación Bootstrap de la distribución del estimador de Parzen-Rosenblatt {# aproximacion-bootstrap}
+## Aproximación Bootstrap de la distribución del estimador de Parzen-Rosenblatt {#aproximacion-bootstrap}
 
 Antes de proceder a abordar el bootstrap en este contexto conviene
 presentar la distribución asintótica del estimador y otras
@@ -362,4 +362,243 @@ Otros selectores bootstrap con mucho peor comportamiento son:
     h \right) \rightarrow 0$, cuando $h\rightarrow \infty$, lo cual
     produce un mínimo global de $MISE^{\ast}$ inconsistente con
     $h_{MISE}$.
+
+
+## Estimación no paramétrica de la densidad en R {#npden-r}
+
+Como ya se comentó en la Sección \@ref(modunif-boot-suav),
+en `R` podemos emplear la función `density()` del paquete base para obtener
+una estimación tipo núcleo de la densidad. 
+Los principales parámetros (con los valores por defecto) son los siguientes:
+
+```
+density(x, bw = "nrd0", adjust = 1, kernel = "gaussian", n = 512, from, to)
+```
+
+- `bw`: ventana, puede ser un valor numérico o una cadena de texto que la determine
+  (en ese caso llamará internamente a la función `bw.xxx()` donde `xxx` se corresponde
+  con la cadena de texto). Las opciones son:
+
+    - `"nrd0"`, `"nrd"`: Reglas del pulgar de Silverman (1986, page 48, eqn (3.31)) y 
+      Scott (1992), respectivamente. Como es de esperar que la densidad objetivo 
+      no sea tan suave como la normal, estos criterios tenderán a seleccionar 
+      ventanas que producen un sobresuavizado de las observaciones.
+
+    - `"ucv"`, `"bcv"`: Métodos de validación cruzada insesgada y sesgada, respectivamente.
+    
+    - `"sj"`, `"sj-ste"`, `"sj-dpi"`: Métodos de Sheather y Jones (1991), 
+        "solve-the-equation" y "direct plug-in", respectivamente.
+ 
+-   `adjust`: parameto para reescalado de la ventana, las estimaciones se calculan 
+    con la ventana `adjust*bw`.
+
+-   `kernel`: cadena de texto que determina la función núcleo, las opciones son: `"gaussian"`,
+    `"epanechnikov"`, `"rectangular"`, `"triangular"`, `"biweight"`, `"cosine"` y `"optcosine"`.
+    
+-   `n`, `from`, `to`: permiten establecer la rejilla en la que se obtendrán las estimaciones
+    (si $n>512$ se emplea `fft()` por lo que se recomienda establecer `n` a un múltiplo de 2;
+    por defecto `from` y `to` se establecen como `cut = 3` veces la ventana desde los extremos 
+    de las observaciones).
+
+Utilizaremos como punto de partida el código empleado en la Sección \@ref(modunif-boot-suav).
+Considerando el conjunto de datos `precip` (que contiene el promedio de precipitación, 
+en pulgadas de lluvia, de 70 ciudades de Estados Unidos).
+
+
+```r
+x <- precip
+h <- bw.SJ(x)
+npden <- density(x, bw = h)
+# npden <- density(x, bw = "SJ")
+
+# plot(npden)
+hist(x, freq = FALSE, main = "Kernel density estimation",
+     xlab = paste("Bandwidth =", formatC(h)), lty = 2,
+     border = "darkgray", xlim = c(0, 80), ylim = c(0, 0.04))
+lines(npden, lwd = 2)
+rug(x, col = "darkgray")
+```
+
+
+
+\begin{center}\includegraphics[width=0.7\linewidth]{06-npden_files/figure-latex/unnamed-chunk-2-1} \end{center}
+
+Alternativamente podríamos emplear implementaciones en otros paquetes de `R`.
+Uno de los más empleados es `ks` (Duong, 2019), que admite estimación 
+incondicional y condicional multidimensional.
+También se podrían emplear los paquetes `KernSmooth` (Wand y Ripley, 2019), 
+`sm` (Bowman y Azzalini, 2019), `np` (Tristen y Jeffrey, 2019), 
+`kedd` (Guidoum, 2019), `features` (Duong y Matt, 2019) y `npsp` (Fernández-Casal, 2019), 
+entre otros.
+
+## Ejemplos
+
+En esta sección nos centraremos en el bootstrap
+en la estimación tipo núcleo de la densidad 
+para la aproximación de la precisión y el sesgo,
+y también para el cálculo de intervalos de confianza.
+
+
+### Bootstrap y estimación del sesgo
+
+La idea sería aproximar la distribución del error de estimación 
+$\hat f(x) - f(x)$ por la distribución bootstrap de
+$\hat f^{\ast}(x) - \hat f(x)$ (bootstrap percentil básico).
+
+Como se comentó en la Sección \@ref(aproximacion-bootstrap) 
+la ventana $g$ ha de ser asintóticamente mayor que $h$ (de orden $n^{-1/5}$) 
+y la recomendación sería emplear la ventana óptima para la estimación de 
+$f^{\prime \prime }\left( x \right)$, de orden $n^{-1/9}$. 
+
+
+```r
+# Remuestreo
+set.seed(1)
+n <- length(x)
+g <- h * n^(4/45) # h*n^(-1/9)/n^(-1/5)
+range.x <- range(npden$x) # Para fijar las posiciones de estimación
+B <- 1000
+stat_den_boot <- matrix(nrow = length(npden$x), ncol = B)
+for (k in 1:B) {
+    # x_boot <- sample(x, n, replace = TRUE) + rnorm(n, 0, g)
+    x_boot <- rnorm(n, sample(x, n, replace = TRUE), g)
+    den_boot <- density(x_boot, bw = h, from = range.x[1], to = range.x[2])$y
+    # Si se quiere tener en cuenta la variabilidad debida a la selección de
+    # la ventana habría que emplear el mismo criterio en la función `density`.
+    stat_den_boot[, k] <- den_boot - npden$y
+}
+
+# Calculo del sesgo y error estándar 
+bias <- apply(stat_den_boot, 1, mean)
+std.err <- apply(stat_den_boot, 1, sd)
+
+# Representar estimación y corrección de sesgo bootstrap
+plot(npden, type="l", ylim = c(0, 0.05), lwd = 2)
+lines(npden$x, npden$y - bias)
+```
+
+
+
+\begin{center}\includegraphics[width=0.7\linewidth]{06-npden_files/figure-latex/unnamed-chunk-3-1} \end{center}
+
+```r
+# lines(npden$x, pmax(0, npden$y - bias))
+```
+
+
+### Estimación por intervalos de confianza {#npden-r-ic}
+
+Empleando la aproximación descrita en la Sección \@ref(icboot-basic)
+podemos cálcular de estimaciones por intervalo de confianza (puntuales)
+por el método percentil (básico).
+
+
+```r
+alfa <- 0.05
+pto_crit <- apply(stat_den_boot, 1, quantile, probs = c(alfa/2, 1 - alfa/2))
+# ic_inf_boot <- npden$y - pto_crit[2, ]
+ic_inf_boot <- pmax(0, npden$y - pto_crit[2, ])
+ic_sup_boot <- npden$y - pto_crit[1, ]
+
+plot(npden, type="l", ylim = c(0, 0.05), lwd = 2)
+lines(npden$x, pmax(0, npden$y - bias))
+lines(npden$x, ic_inf_boot, lty = 2)
+lines(npden$x, ic_sup_boot, lty = 2)
+```
+
+
+
+\begin{center}\includegraphics[width=0.7\linewidth]{06-npden_files/figure-latex/unnamed-chunk-4-1} \end{center}
+
+
+### Implementación con el paquete `boot`
+
+Como también se comentó en la Sección \@ref(modunif-boot-suav), 
+la recomendación es implementar el bootstrap suavizado como un bootstrap paramétrico:
+
+
+```r
+library(boot)
+
+# Los objetos necesarios para el cálculo del estadístico
+# hay que pasarlos a traves del argumento `data` de `boot`.
+range.x <- range(npden$x)
+data.precip <- list(x = x, h = h, range.x = range.x)
+
+ran.gen.smooth <- function(data, mle) {
+    # Función para generar muestras aleatorias mediante
+    # bootstrap suavizado con función núcleo gaussiana,
+    # mle contendrá la ventana
+    n <- length(data$x)
+    g <- mle
+    xboot <- rnorm(n, sample(data$x, n, replace = TRUE), g)
+    out <- list(x = xboot, h = data$h, range.x = data$range.x)
+}
+
+statistic <- function(data) 
+                density(data$x, bw = data$h, from = range.x[1], to = range.x[2])$y
+
+set.seed(1)
+res.boot <- boot(data.precip, statistic, R = B, sim = "parametric",
+                 ran.gen = ran.gen.smooth, mle = g)
+
+# Calculo del sesgo y error estándar
+bias <- with(res.boot, apply(t, 2, mean, na.rm = TRUE) -  t0)
+std.err <- apply(res.boot$t, 2, sd, na.rm = TRUE)
+```
+
+Además, la función `boot.ci()` solo permite el cálculo del intervalo de 
+confianza para cada valor de $x$ de forma independiente (parámetro `index`). 
+Por lo que podría ser recomendable obtenerlo a partir de las réplicas 
+bootstrap del estimador:
+
+
+```r
+# Método percentil básico calculado directamente 
+# a partir de las réplicas bootstrap del estimador
+alfa <- 0.05
+pto_crit <- apply(res.boot$t, 2, quantile, probs = c(alfa/2, 1 - alfa/2))
+ic_inf_boot <- pmax(0, 2*npden$y - pto_crit[2, ])
+ic_sup_boot <- 2*npden$y - pto_crit[1, ]
+
+plot(npden, ylim = c(0, 0.05), lwd = 2)
+lines(npden$x, pmax(0, npden$y - bias))
+
+lines(npden$x, ic_inf_boot, lty = 2)
+lines(npden$x, ic_sup_boot, lty = 2)
+```
+
+
+
+\begin{center}\includegraphics[width=0.7\linewidth]{06-npden_files/figure-latex/unnamed-chunk-6-1} \end{center}
+
+En la práctica, en muchas ocasiones se trabaja directamente con
+las réplicas bootstrap del estimador. Por ejemplo, es habitual
+generar envolventes como medida de la precisión de la estimación
+(que se interpretan de forma similar a una banda de confianza):
+
+
+```r
+matplot(npden$x, t(res.boot$t), type = "l", col = "darkgray")
+lines(npden, lwd = 2)
+lines(npden$x, npden$y - bias)
+```
+
+
+
+\begin{center}\includegraphics[width=0.7\linewidth]{06-npden_files/figure-latex/unnamed-chunk-7-1} \end{center}
+
+Pero la recomendación es emplear bootstrap básico (o percentil-*t*) en lugar
+de bootstrap percentil (directo) en la presencia de sesgo:
+
+
+```r
+matplot(npden$x, 2*npden$y - t(res.boot$t), type = "l", col = "darkgray")
+lines(npden, lwd = 2)
+lines(npden$x, npden$y - bias)
+```
+
+
+
+\begin{center}\includegraphics[width=0.7\linewidth]{06-npden_files/figure-latex/unnamed-chunk-8-1} \end{center}
 

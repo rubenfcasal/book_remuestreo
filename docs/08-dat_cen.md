@@ -1,4 +1,4 @@
-# El Bootstrap con datos censurados {#cap8}
+# El Bootstrap con datos censurados {#bootcen}
 
 
 
@@ -211,7 +211,7 @@ Procede de la siguiente forma:
 
 Este método es de muy rápida implementación y ejecución.
 
-### El bootstrap obvio {#cap8-obvio}
+### El bootstrap obvio {#bootcen-obvio}
 
 Para detallar el método es necesario definir el estimador de
 Kaplan-Meier, $\hat{G}\left( t \right)$, de la variable censurante, a
@@ -296,7 +296,7 @@ ambos casos. Pero esto es inmediato ya que, en los dos remuestreos esa
 distribución condicionada es la degenerada en el valor
 $\delta _i$.
 
-### El bootstrap de Reid {#cap8-reid}
+### El bootstrap de Reid {#bootcen-reid}
 
 Es otro método alternativo propuesto por Reid (1981). Consta de los
 siguientes pasos:
@@ -343,7 +343,7 @@ es consistente y el de Reid es inconsistente.
 La función `censboot()` del paquete `boot` implementa distintos métodos 
 de remuestreo para datos censurados. Por defecto utiliza el bootstrap simple
 (`sim = "ordinary"`) y su uso es prácticamente igual al del bootstrap uniforme 
-con la función `boot()` (descrita en la Sección \@ref(cap1-pkgboot)), 
+con la función `boot()` (descrita en la Sección \@ref(intro-pkgboot)), 
 la única diferencia es que la función `statistic` solo tiene los datos 
 como único parámetro (aunque en este caso podríamos emplear también
 la función `boot()`). 
@@ -459,8 +459,8 @@ par(old.par)
 ```
 
 En el *boostrap condicional* (`sim = "cond"`) se condiciona el muestreo al 
-patrón de censura observado (en lugar de fijarlo a $\mathbf{1}$ como en el bootstrap de Reid; Sección \@ref(cap8-reid)). 
-El mecanismo es similar al del bootstrap obvio (Sección \@ref(cap8-obvio)):
+patrón de censura observado (en lugar de fijarlo a $\mathbf{1}$ como en el bootstrap de Reid; Sección \@ref(bootcen-reid)). 
+El mecanismo es similar al del bootstrap obvio (Sección \@ref(bootcen-obvio)):
 
 1.  Construir los estimadores de Kaplan-Meier de las distribuciones de
     la variable de interés, $\hat{F}\left( t \right)$, y de la variable
@@ -589,7 +589,7 @@ str(res)
 ```
 
 ```
-## List of 20
+## List of 19
 ##  $ n            : int [1:2] 365 97
 ##  $ time         : num [1:146] 67 68.5 69.2 70 70.4 ...
 ##  $ n.risk       : num [1:146] 364 359 355 353 352 346 344 340 335 334 ...
@@ -599,7 +599,6 @@ str(res)
 ##  $ std.err      : num [1:146] 0.00274 0.0039 0.00479 0.00554 0.00619 ...
 ##  $ cumhaz       : num [1:146] 0.00275 0.00553 0.00835 0.01118 0.01402 ...
 ##  $ std.chaz     : num [1:146] 0.00275 0.00391 0.00482 0.00559 0.00627 ...
-##  $ start.time   : num 0
 ##  $ strata       : Factor w/ 2 levels "sex=Female","sex=Male": 1 1 1 1 1 1 1 1 1 1 ...
 ##  $ type         : chr "right"
 ##  $ logse        : logi TRUE
