@@ -24,7 +24,7 @@
 <meta name="author" content="Ricardo Cao Abad (rcao@udc.es) y Rubén Fernández Casal (rfcasal@udc.es)" />
 
 
-<meta name="date" content="2020-10-06" />
+<meta name="date" content="2020-10-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -324,7 +324,7 @@ ncores</code></pre></div>
 
 <span class="kw">system.time</span>(res.boot &lt;-<span class="st"> </span><span class="kw">mclapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">100</span>, func)) <span class="co"># En Windows llama a lapply() (mc.cores = 1)</span></code></pre></div>
 <pre><code>##    user  system elapsed 
-##    0.07    0.00    0.06</code></pre>
+##    0.08    0.00    0.08</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># res.boot &lt;- mclapply(1:100, func, mc.cores = ncores - 1) # En Windows genera un error si mc.cores &gt; 1</span></code></pre></div>
 <p>En Windows habría que crear previamente un cluster, llamar a una de las funciones <code>par*apply()</code> y finalizar el cluster:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cl &lt;-<span class="st"> </span><span class="kw">makeCluster</span>(ncores <span class="op">-</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">type =</span> <span class="st">&quot;PSOCK&quot;</span>)
@@ -332,7 +332,7 @@ ncores</code></pre></div>
 
 <span class="kw">system.time</span>(res.boot &lt;-<span class="st"> </span><span class="kw">parSapply</span>(cl, <span class="dv">1</span><span class="op">:</span><span class="dv">100</span>, func))</code></pre></div>
 <pre><code>##    user  system elapsed 
-##    0.00    0.00    0.08</code></pre>
+##    0.02    0.00    0.06</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># stopCluster(cl)</span>
 
 <span class="kw">str</span>(res.boot)</code></pre></div>
@@ -347,7 +347,7 @@ ncores</code></pre></div>
 ctime &lt;-<span class="st"> </span>snow<span class="op">::</span><span class="kw">snow.time</span>(snow<span class="op">::</span><span class="kw">parSapply</span>(cl, <span class="dv">1</span><span class="op">:</span><span class="dv">100</span>, func))
 ctime</code></pre></div>
 <pre><code>## elapsed    send receive  node 1  node 2  node 3 
-##    0.03    0.00   -0.01    0.04    0.03    0.02</code></pre>
+##    0.04    0.00    0.00    0.04    0.04    0.04</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(ctime)</code></pre></div>
 <p><img src="25-Intro_HPC_files/figure-html/unnamed-chunk-4-1.png" width="70%" style="display: block; margin: auto;" /></p>
 <p>Hay que tener en cuenta la sobrecarga adicional debida a la comunicación entre nodos al paralelizar (especialmente con el enfoque de socket).</p>
@@ -372,11 +372,11 @@ B &lt;-<span class="st"> </span><span class="dv">2000</span>
 
 <span class="kw">system.time</span>(res.boot &lt;-<span class="st"> </span><span class="kw">boot</span>(muestra, statistic, <span class="dt">R =</span> B))</code></pre></div>
 <pre><code>##    user  system elapsed 
-##    0.03    0.03    0.07</code></pre>
+##    0.08    0.00    0.08</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># system.time(res.boot &lt;- boot(muestra, statistic, R = B, parallel = &quot;snow&quot;))</span>
 <span class="kw">system.time</span>(res.boot &lt;-<span class="st"> </span><span class="kw">boot</span>(muestra, statistic, <span class="dt">R =</span> B, <span class="dt">parallel =</span> <span class="st">&quot;snow&quot;</span>, <span class="dt">cl =</span> cl))</code></pre></div>
 <pre><code>##    user  system elapsed 
-##    0.05    0.01    0.06</code></pre>
+##    0.06    0.00    0.06</code></pre>
 </div>
 <div id="estudio-sim-boot" class="section level3">
 <h3><span class="header-section-number">B.3.2</span> Estudio de simulación</h3>
@@ -427,7 +427,7 @@ result &lt;-<span class="st"> </span><span class="kw">parLapply</span>(cl, <span
 t.fin &lt;-<span class="st"> </span><span class="kw">proc.time</span>() <span class="op">-</span><span class="st"> </span>t.ini
 <span class="kw">print</span>(t.fin)</code></pre></div>
 <pre><code>##    user  system elapsed 
-##    0.01    0.00   12.85</code></pre>
+##    0.00    0.00   15.84</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">resnames &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Cobertura&quot;</span>, <span class="st">&quot;Longitud&quot;</span>)
 intervals &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Normal&quot;</span>, <span class="st">&quot;Basic&quot;</span>, <span class="st">&quot;Studentized&quot;</span>, <span class="st">&quot;Percentil&quot;</span>, <span class="st">&quot;BCa&quot;</span>)
 <span class="kw">names</span>(intervals) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;normal&quot;</span>,<span class="st">&quot;basic&quot;</span>, <span class="st">&quot;student&quot;</span>, <span class="st">&quot;percent&quot;</span>, <span class="st">&quot;bca&quot;</span>)

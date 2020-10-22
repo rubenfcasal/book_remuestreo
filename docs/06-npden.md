@@ -419,9 +419,7 @@ lines(npden, lwd = 2)
 rug(x, col = "darkgray")
 ```
 
-
-
-\begin{center}\includegraphics[width=0.7\linewidth]{06-npden_files/figure-latex/unnamed-chunk-2-1} \end{center}
+<img src="06-npden_files/figure-html/unnamed-chunk-2-1.png" width="70%" style="display: block; margin: auto;" />
 
 Alternativamente podríamos emplear implementaciones en otros paquetes de `R`.
 Uno de los más empleados es `ks` (Duong, 2019), que admite estimación 
@@ -477,9 +475,7 @@ plot(npden, type="l", ylim = c(0, 0.05), lwd = 2)
 lines(npden$x, npden$y - bias)
 ```
 
-
-
-\begin{center}\includegraphics[width=0.7\linewidth]{06-npden_files/figure-latex/unnamed-chunk-3-1} \end{center}
+<img src="06-npden_files/figure-html/unnamed-chunk-3-1.png" width="70%" style="display: block; margin: auto;" />
 
 ```r
 # lines(npden$x, pmax(0, npden$y - bias))
@@ -506,9 +502,7 @@ lines(npden$x, ic_inf_boot, lty = 2)
 lines(npden$x, ic_sup_boot, lty = 2)
 ```
 
-
-
-\begin{center}\includegraphics[width=0.7\linewidth]{06-npden_files/figure-latex/unnamed-chunk-4-1} \end{center}
+<img src="06-npden_files/figure-html/unnamed-chunk-4-1.png" width="70%" style="display: block; margin: auto;" />
 
 
 ### Implementación con el paquete `boot`
@@ -568,9 +562,7 @@ lines(npden$x, ic_inf_boot, lty = 2)
 lines(npden$x, ic_sup_boot, lty = 2)
 ```
 
-
-
-\begin{center}\includegraphics[width=0.7\linewidth]{06-npden_files/figure-latex/unnamed-chunk-6-1} \end{center}
+<img src="06-npden_files/figure-html/unnamed-chunk-6-1.png" width="70%" style="display: block; margin: auto;" />
 
 En la práctica, en muchas ocasiones se trabaja directamente con
 las réplicas bootstrap del estimador. Por ejemplo, es habitual
@@ -584,9 +576,7 @@ lines(npden, lwd = 2)
 lines(npden$x, npden$y - bias)
 ```
 
-
-
-\begin{center}\includegraphics[width=0.7\linewidth]{06-npden_files/figure-latex/unnamed-chunk-7-1} \end{center}
+<img src="06-npden_files/figure-html/unnamed-chunk-7-1.png" width="70%" style="display: block; margin: auto;" />
 
 Pero la recomendación es emplear bootstrap básico (o percentil-*t*) en lugar
 de bootstrap percentil (directo) en la presencia de sesgo:
@@ -598,7 +588,5 @@ lines(npden, lwd = 2)
 lines(npden$x, npden$y - bias)
 ```
 
-
-
-\begin{center}\includegraphics[width=0.7\linewidth]{06-npden_files/figure-latex/unnamed-chunk-8-1} \end{center}
+<img src="06-npden_files/figure-html/unnamed-chunk-8-1.png" width="70%" style="display: block; margin: auto;" />
 

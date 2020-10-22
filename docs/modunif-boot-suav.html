@@ -24,7 +24,7 @@
 <meta name="author" content="Ricardo Cao Abad (rcao@udc.es) y Rubén Fernández Casal (rfcasal@udc.es)" />
 
 
-<meta name="date" content="2020-10-06" />
+<meta name="date" content="2020-10-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -381,7 +381,7 @@ Figura 3.4: Estimación empírica y tipo núcleo de la función de distribución
 <li><p>Calcular <span class="math inline">\(R^{\ast}=R\left( \mathbf{X}^{\ast},\hat{F}_{h} \right)\)</span></p></li>
 <li><p>Repetir <span class="math inline">\(B\)</span> veces los pasos 2-3 para obtener las réplicas bootstrap <span class="math inline">\(R^{\ast (1)}\)</span>, <span class="math inline">\(\ldots\)</span>, <span class="math inline">\(R^{\ast (B)}\)</span></p></li>
 </ol>
-<p>Para llevar a cabo un bootstrap que remuestree a partir del estimador <span class="math inline">\(\hat{f}_{h}\left( x \right)\)</span> es útil pensar en dicho estimador como una combinación lineal convexa de funciones de densidad, <span class="math inline">\(K_{h}\left( x-X_i \right)\)</span>, cada una con coeficiente <span class="math inline">\(\frac{1}{n}\)</span> en dicha combinación lineal. Gracias a esa representación podemos simular valores, <span class="math inline">\(X^{\ast}\)</span>, procedentes de <span class="math inline">\(\hat{f}_{h}\left( x \right)\)</span> en dos pasos.</p>
+<p>Para llevar a cabo un bootstrap que remuestree a partir del estimador <span class="math inline">\(\hat{f}_{h}\left( x \right)\)</span> es útil pensar en dicho estimador como una combinación lineal convexa de funciones de densidad, <span class="math inline">\(K_{h}\left( x-X_i \right)\)</span>, cada una con coeficiente <span class="math inline">\(\frac{1}{n}\)</span> en dicha combinación lineal. Gracias a esa representación podemos simular valores, <span class="math inline">\(X^{\ast}\)</span>, procedentes de <span class="math inline">\(\hat{f}_{h}\left( x \right)\)</span> en dos pasos (empleando el denominado método de composición; ver p.e. Fernández-Casal y Cao, 2020, <a href="https://rubenfcasal.github.io/simbook/m%C3%A9todo-de-composici%C3%B3n.html">Sección 5.4</a>).</p>
 <p>En un primer paso elegiremos (aleatoriamente y con equiprobabilidad) cuál de los índices <span class="math inline">\(i\in \left\{ 1,\ldots ,n\right\}\)</span> vamos a considerar y en un segundo paso simularemos <span class="math inline">\(X^{\ast}\)</span> a partir de la densidad <span class="math inline">\(K_{h}\left( \cdot -X_i \right)\)</span>. Esta última fase puede relacionarse fácilmente con la simulación de un valor, <span class="math inline">\(V\)</span>, con densidad <span class="math inline">\(K\)</span>, sin más que hacer <span class="math inline">\(X_i+hV\)</span>. Así, el paso 2 del algoritmo previo puede llevarse a cabo mediante el siguiente procedimiento:</p>
 <ol start="2" style="list-style-type: decimal">
 <li>Para cada <span class="math inline">\(i=1,\ldots ,n\)</span> arrojar <span class="math inline">\(U_i\sim \mathcal{U}\left( 0,1 \right)\)</span> y <span class="math inline">\(V_i\)</span> con densidad <span class="math inline">\(K\)</span> y hacer <span class="math inline">\(X_i^{\ast}=X_{\left\lfloor nU_i\right\rfloor +1}+hV_i\)</span></li>

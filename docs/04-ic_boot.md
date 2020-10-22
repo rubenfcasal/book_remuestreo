@@ -672,7 +672,7 @@ t.fin
 
 ```
 ##    user  system elapsed 
-##   21.03    2.86   24.50
+##   16.05    2.50   19.19
 ```
 
 ```r
@@ -830,9 +830,7 @@ hist(ht, freq = FALSE, breaks = "FD",
 curve(dnorm(x, mean=mean(ht), sd=sd(ht)), lty = 2, add = TRUE)
 ```
 
-
-
-\begin{center}\includegraphics[width=0.7\linewidth]{04-ic_boot_files/figure-latex/unnamed-chunk-10-1} \end{center}
+<img src="04-ic_boot_files/figure-html/unnamed-chunk-10-1.png" width="70%" style="display: block; margin: auto;" />
 
 
 

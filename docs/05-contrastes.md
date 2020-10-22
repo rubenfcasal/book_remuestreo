@@ -216,9 +216,7 @@ curve(ecdf(pvalor.lil)(x), type = "s", lwd = 2,
 abline(a=0, b=1, lty=2)   # curve(punif(x, 0, 1), add = TRUE)
 ```
 
-
-
-\begin{center}\includegraphics[width=0.7\linewidth]{05-contrastes_files/figure-latex/unnamed-chunk-4-1} \end{center}
+<img src="05-contrastes_files/figure-html/unnamed-chunk-4-1.png" width="70%" style="display: block; margin: auto;" />
 
 ```r
 par(old.par)
@@ -307,9 +305,7 @@ curve(ecdf(pvalor.ks.boot)(x), type = "s", lwd = 2,
 abline(a=0, b=1, lty=2)   # curve(punif(x, 0, 1), add = TRUE)
 ```
 
-
-
-\begin{center}\includegraphics[width=0.7\linewidth]{05-contrastes_files/figure-latex/unnamed-chunk-6-1} \end{center}
+<img src="05-contrastes_files/figure-html/unnamed-chunk-6-1.png" width="70%" style="display: block; margin: auto;" />
 
 ```r
 par(old.par)
@@ -451,9 +447,7 @@ hist(res.boot$t, freq = FALSE)
 abline(v = res.boot$t0, lty = 2)
 ```
 
-
-
-\begin{center}\includegraphics[width=0.7\linewidth]{05-contrastes_files/figure-latex/unnamed-chunk-12-1} \end{center}
+<img src="05-contrastes_files/figure-html/unnamed-chunk-12-1.png" width="70%" style="display: block; margin: auto;" />
 
 Por ejemplo, para el contraste unilateral $H_0: \rho \leq 0$ 
 (`alternative = "greater"`), obtendríamos:
@@ -658,9 +652,7 @@ hist(boot.mod$t, breaks = "FD", freq = FALSE)
 curve(pf(x, df, dfr, lower.tail = FALSE), lty = 2, add = TRUE)
 ```
 
-
-
-\begin{center}\includegraphics[width=0.7\linewidth]{05-contrastes_files/figure-latex/unnamed-chunk-21-1} \end{center}
+<img src="05-contrastes_files/figure-html/unnamed-chunk-21-1.png" width="70%" style="display: block; margin: auto;" />
 
 ```r
 # pval <- mean(boot.mod$t >= boot.mod$t0)
@@ -689,9 +681,7 @@ hist(residuals(modelo), xlim = c(-50, 50),
      main = 'Variabilidad residual\n con el modelo completo')
 ```
 
-
-
-\begin{center}\includegraphics[width=0.7\linewidth]{05-contrastes_files/figure-latex/unnamed-chunk-22-1} \end{center}
+<img src="05-contrastes_files/figure-html/unnamed-chunk-22-1.png" width="70%" style="display: block; margin: auto;" />
 
 ```r
 par(old.par)
@@ -748,9 +738,7 @@ hist(boot.mod$t, breaks = "FD", freq = FALSE)
 curve(pf(x, df, dfr, lower.tail = FALSE), lty = 2, add = TRUE)
 ```
 
-
-
-\begin{center}\includegraphics[width=0.7\linewidth]{05-contrastes_files/figure-latex/unnamed-chunk-24-1} \end{center}
+<img src="05-contrastes_files/figure-html/unnamed-chunk-24-1.png" width="70%" style="display: block; margin: auto;" />
 
 ```r
 pval <- mean(boot.mod$t >= stat)
@@ -785,9 +773,7 @@ parciales de residuos obtendríamos:
 crPlots(modelo)
 ```
 
-
-
-\begin{center}\includegraphics[width=0.7\linewidth]{05-contrastes_files/figure-latex/unnamed-chunk-25-1} \end{center}
+<img src="05-contrastes_files/figure-html/unnamed-chunk-25-1.png" width="70%" style="display: block; margin: auto;" />
 
 En este caso podría ser razonable considerar un efecto cuadrático
 de la variable `income`^[Para ajustar un modelo polinómico

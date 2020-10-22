@@ -24,7 +24,7 @@
 <meta name="author" content="Ricardo Cao Abad (rcao@udc.es) y Rubén Fernández Casal (rfcasal@udc.es)" />
 
 
-<meta name="date" content="2020-10-06" />
+<meta name="date" content="2020-10-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -336,7 +336,7 @@ X_i &amp; \text{si } i=1,\ldots ,n \\
 <ol style="list-style-type: decimal">
 <li>Para cada <span class="math inline">\(i=1,\ldots ,n\)</span> arrojar <span class="math inline">\(U_i\sim \mathcal{U}\left( 0,1 \right)\)</span> y hacer <span class="math inline">\(X_i^{\ast}=Y_{\left\lfloor 2nU_i\right\rfloor +1}\)</span></li>
 </ol>
-<p>Alternativamente podemos proceder con el paso 1 utilizando el hecho de que la función de distribución <span class="math inline">\(F_n^{sim}\left( x \right)\)</span> resultar ser la distribución de una variable aleatoria obtenida en dos etapas: en la primera etapa se genera un valor según la empírica, <span class="math inline">\(F_n\left( x \right)\)</span>, y en la segunda se decide (con equiprobabilidad) si el valor obtenido no se altera o bien si se refleja alrededor de la media muestral, <span class="math inline">\(\bar{X}\)</span>. Así el paso 1 resulta:</p>
+<p>Alternativamente podemos proceder con el paso 1 utilizando el hecho de que la función de distribución <span class="math inline">\(F_n^{sim}\left( x \right)\)</span> resultar ser la distribución de una variable aleatoria obtenida en dos etapas: en la primera etapa se genera un valor según la empírica, <span class="math inline">\(F_n\left( x \right)\)</span>, y en la segunda se decide (con equiprobabilidad) si el valor obtenido no se altera o bien si se refleja alrededor de la media muestral, <span class="math inline">\(\bar{X}\)</span> (equivalentemente, la distribución simetrizada es una mixtura de la distribución empírica <span class="math inline">\(F_n\left( x \right)\)</span> y de su versión “reflejada” <span class="math inline">\(1-F_n\left( 2\bar{X}-x \right)\)</span> y se puede simular mediante el método de composición; ver p.e. Fernández-Casal y Cao, 2020, <a href="https://rubenfcasal.github.io/simbook/m%C3%A9todo-de-composici%C3%B3n.html">Sección 5.4</a>). Así el paso 1 resulta:</p>
 <ol style="list-style-type: decimal">
 <li>Para cada <span class="math inline">\(i=1,\ldots ,n\)</span> arrojar <span class="math inline">\(U_i,V_i\sim \mathcal{U}\left( 0,1 \right)\)</span>. Si <span class="math inline">\(V_i\leq \frac{1}{2}\)</span> entonces hacer <span class="math inline">\(X_i^{\ast}=X_{\left\lfloor nU_i\right\rfloor +1}\)</span> y en caso contrario hacer <span class="math inline">\(X_i^{\ast}=2\overline{X }-X_{\left\lfloor nU_i\right\rfloor +1}\)</span></li>
 </ol>

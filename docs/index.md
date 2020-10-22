@@ -5,7 +5,7 @@ institute:
    - "Departamento de Matemáticas"
    - "Grupo de investigación de Modelización, Optimización e Inferencia Estadística (MODES)"
    - "Centro de Investigación en Tecnologías de la Información y las Comunicaciones (CITIC)"
-date: "2020-10-06"
+date: "2020-10-22"
 site: bookdown::bookdown_site
 output: bookdown::gitbook
 documentclass: book
@@ -47,8 +47,7 @@ para lo que se recomendaría consultar el libro de ["Escritura de libros con boo
 Este obra está bajo una licencia de [Creative Commons Reconocimiento-NoComercial-SinObraDerivada 4.0 Internacional ](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.es_ES) 
 (esperamos poder liberarlo bajo una licencia menos restrictiva más adelante...).
 
-
-\includegraphics[width=1.22in]{by-nc-nd-88x31} 
+<img src="by-nc-nd-88x31.png" width="44" />
 
 
 

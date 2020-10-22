@@ -291,13 +291,9 @@ quedaría de la siguiente forma:
 1. Para cada $i=1,\ldots ,n$ arrojar $U_i\sim \mathcal{U}\left( 0,1 \right)$ y
 hacer $X_i^{\ast}=Y_{\left\lfloor 2nU_i\right\rfloor +1}$
 
-Alternativamente podemos proceder con el paso 1 utilizando el hecho de
-que la función de distribución $F_n^{sim}\left( x \right)$ resultar
-ser la distribución de una variable aleatoria obtenida en dos etapas: en
-la primera etapa se genera un valor según la empírica,
-$F_n\left( x \right)$, y en la segunda se decide (con equiprobabilidad)
-si el valor obtenido no se altera o bien si se refleja alrededor de la
-media muestral, $\bar{X}$. Así el paso 1 resulta:
+Alternativamente podemos proceder con el paso 1 utilizando el hecho de que la función de distribución $F_n^{sim}\left( x \right)$ resultar ser la distribución de una variable aleatoria obtenida en dos etapas: 
+en la primera etapa se genera un valor según la empírica, $F_n\left( x \right)$, y en la segunda se decide (con equiprobabilidad) si el valor obtenido no se altera o bien si se refleja alrededor de la media muestral, $\bar{X}$ 
+(equivalentemente, la distribución simetrizada es una mixtura de la distribución empírica $F_n\left( x \right)$ y de su versión "reflejada" $1-F_n\left( 2\bar{X}-x \right)$ y se puede simular mediante el método de composición; ver p.e. Fernández-Casal y Cao, 2020, [Sección 5.4](https://rubenfcasal.github.io/simbook/m%C3%A9todo-de-composici%C3%B3n.html)). Así el paso 1 resulta:
 
 1. Para cada $i=1,\ldots ,n$ arrojar
 $U_i,V_i\sim \mathcal{U}\left( 0,1 \right)$. Si $V_i\leq \frac{1}{2}$
@@ -508,7 +504,7 @@ combinación lineal convexa de funciones de densidad, $K_{h}\left(
 x-X_i \right)$, cada una con coeficiente $\frac{1}{n}$ en dicha
 combinación lineal. Gracias a esa representación podemos simular
 valores,
-$X^{\ast}$, procedentes de $\hat{f}_{h}\left( x \right)$ en dos pasos.
+$X^{\ast}$, procedentes de $\hat{f}_{h}\left( x \right)$ en dos pasos (empleando el denominado método de composición; ver p.e. Fernández-Casal y Cao, 2020, [Sección 5.4](https://rubenfcasal.github.io/simbook/m%C3%A9todo-de-composici%C3%B3n.html)).
 
 En un primer paso elegiremos (aleatoriamente y con equiprobabilidad)
 cuál de los índices $i\in \left\{ 1,\ldots ,n\right\}$ vamos a
@@ -747,7 +743,7 @@ $$\lim_{n\rightarrow \infty }P^{\ast}\left( R^{\ast}=0 \right) =1-\frac{1}{e},$$
 cosa que no ocurre con la distribución en el muestreo de $R$, que es continua
 con densidad:
 $$g_R\left( x \right) =\frac{n}{\theta }\left( \frac{x + \theta}{\theta } \right)^{n-1},
-\text{ si }x\in \left[ -\theta, 0\right].$$. 
+\text{ si }x\in \left[ -\theta, 0\right].$$ 
 De esta forma vemos que el bootstrap uniforme (no paramétrico) es inconsistente.
 
 ```{example, label="boot-maximo-uniforme", name="Inferencia sobre el máximo de una distribución uniforme"}
@@ -1018,7 +1014,7 @@ $\left.Y \right\vert_{\mathbf{X}=\mathbf{x}}$.
 
 El modelo \@ref(eq:modelogeneral) se corresponde con el denominado *diseño aleatorio*, mas general.
 Alternativamente se podría asumir que los valores de las variables explicativas no son aleatorios (por ejemplo han sido fijados por el experimentador), hablaríamos entonces de *diseño fijo*.
-Para realizar inferencias sobre modelos de regresión con errores homocedásticos se podrían emplear dos algoritmos bootstrap (e.g. Canty, 2002, y subsecciones siguientes).
+Para realizar inferencias sobre modelos de regresión con errores homocedásticos se podrían emplear dos algoritmos bootstrap (e.g. [Canty, 2002](http://cran.fhcrc.org/doc/Rnews/Rnews_2002-3.pdf), y subsecciones siguientes).
 El primero consistiría en utilizar directamente bootstrap uniforme, remuestreando las observaciones, y sería adecuado para el caso de diseño aleatorio.
 La otra alternativa, que podría ser más adecuada para el caso de diseño fijo, sería lo que se conoce como *remuestreo residual*, *remuestreo basado en modelos* o *bootstrap semiparamétrico*.
 En esta aproximación se mantienen fijos los valores de las variables explicativas y se remuestrean los residuos.
@@ -1026,7 +1022,7 @@ Una de las aplicaciones del bootstrap semiparamétrico es el contraste de hipót
 
 Se puede generalizar el modelo \@ref(eq:modelogeneral) de diversas formas, por ejemplo asumiendo que la distribución del error depende de $X$ únicamente a través de la varianza (error heterocedástico independiente).
 En este caso se suele reescribir como:
-$$Y = m(\mathbf{X}) + \sigma(\mathbf{x}) \varepsilon,$$
+$$Y = m(\mathbf{X}) + \sigma(\mathbf{X}) \varepsilon,$$
 siendo $\sigma^2(\mathbf{x}) = Var\left( \left. Y\right\vert_{\mathbf{X}=\mathbf{x}} \right)$ la varianza condicional y suponiendo adicionalmente que $\varepsilon$ tiene varianza uno.
 Se podría modificar el bootstrap residual para este caso pero habría que modelizar y estimar la varianza condicional.
 Alternativamente se podría emplear el denominado  *Wild Bootstrap* que se describirá en la Sección \@ref(wild-bootstrap) para el caso de modelos de regresión no paramétricos.

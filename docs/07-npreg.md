@@ -437,9 +437,7 @@ plot(x, y)
 lines(fit)
 ```
 
-
-
-\begin{center}\includegraphics[width=0.7\linewidth]{07-npreg_files/figure-latex/unnamed-chunk-2-1} \end{center}
+<img src="07-npreg_files/figure-html/unnamed-chunk-2-1.png" width="70%" style="display: block; margin: auto;" />
 
 Hay que tener en cuenta que el paquete `KernSmooth` no implementa los métodos
 `predict()` y `residuals()`:
@@ -489,9 +487,7 @@ hcv <- hcv(x, y) # Método de validación cruzada
 fit.sm <- sm.regression(x, y, h = hcv, display = "se")
 ```
 
-
-
-\begin{center}\includegraphics[width=0.7\linewidth]{07-npreg_files/figure-latex/unnamed-chunk-5-1} \end{center}
+<img src="07-npreg_files/figure-html/unnamed-chunk-5-1.png" width="70%" style="display: block; margin: auto;" />
 
 ```r
 fit.sm$sigma
@@ -549,9 +545,7 @@ lines(fit, lwd = 2)
 lines(fit$x, fit$y - bias)
 ```
 
-
-
-\begin{center}\includegraphics[width=0.7\linewidth]{07-npreg_files/figure-latex/unnamed-chunk-6-1} \end{center}
+<img src="07-npreg_files/figure-html/unnamed-chunk-6-1.png" width="70%" style="display: block; margin: auto;" />
 
 NOTA: De forma análoga al caso lineal (Sección \@ref(boot-residual)), se podrían reescalar los residuos a partir de la matriz de suavizado (empleando los paquetes `sm` o `npsp`).
 
@@ -574,9 +568,7 @@ lines(fit$x, ic_inf_boot, lty = 2)
 lines(fit$x, ic_sup_boot, lty = 2)
 ```
 
-
-
-\begin{center}\includegraphics[width=0.7\linewidth]{07-npreg_files/figure-latex/unnamed-chunk-7-1} \end{center}
+<img src="07-npreg_files/figure-html/unnamed-chunk-7-1.png" width="70%" style="display: block; margin: auto;" />
 
 
 El modelo ajustado también es empleado para predecir una nueva respuesta individual $Y(x_0)$ para un valor concreto $x_0$ de la variable explicativa. 
@@ -616,9 +608,7 @@ lines(fit$x, ip_inf_boot, lty = 3)
 lines(fit$x, ip_sup_boot, lty = 3)
 ```
 
-
-
-\begin{center}\includegraphics[width=0.7\linewidth]{07-npreg_files/figure-latex/unnamed-chunk-8-1} \end{center}
+<img src="07-npreg_files/figure-html/unnamed-chunk-8-1.png" width="70%" style="display: block; margin: auto;" />
 
 En este caso puede no ser recomendable considerar errores i.i.d., sería de esperar heterocedásticidad (e incluso dependencia temporal).
 El bootstrap residual se puede extender al caso heterocedástico y/o dependencia (e.g. Castillo-Páez *et al.*, 2019, 2020).
@@ -653,9 +643,7 @@ lines(fit, lwd = 2)
 lines(fit$x, fit$y - bias)
 ```
 
-
-
-\begin{center}\includegraphics[width=0.7\linewidth]{07-npreg_files/figure-latex/unnamed-chunk-9-1} \end{center}
+<img src="07-npreg_files/figure-html/unnamed-chunk-9-1.png" width="70%" style="display: block; margin: auto;" />
 
 
 ### Ejercicio
