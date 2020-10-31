@@ -100,7 +100,7 @@ estimación, $\hat{F}$, de la misma. Por ejemplo, podríamos considerar la
 distribución empírica $\hat{F}=F_n$ (bootstrap uniforme; Sección \@ref(intro-unif)), 
 o una aproximación paramétrica $\hat{F}=F_{\hat \theta}$ (bootstrap paramétrico; Sección \@ref(modunif-boot-par)).
 
-Como ejemplo ilustrativo consideramos los datos simulados :
+Como ejemplo ilustrativo consideramos los datos simulados [Figura \@ref(fig:muestra-sim)]:
 
 ```r
 set.seed(1)
@@ -110,14 +110,18 @@ hist(muestra, freq = FALSE, xlim = c(-3, 3),
 curve(dnorm, lty = 2, add = TRUE)
 ```
 
-<div class="figure" style="text-align: center">
-<img src="01-intro_files/figure-html/muestra-sim-1.png" alt="Distribución de la muestra simulada." width="70%" />
-<p class="caption">(\#fig:muestra-sim)Distribución de la muestra simulada.</p>
-</div>
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{01-intro_files/figure-latex/muestra-sim-1} 
+
+}
+
+\caption{Distribución de la muestra simulada.}(\#fig:muestra-sim)
+\end{figure}
 Como aproximación de la distribución poblacional, desconocida en la práctica,
 siempre podemos considerar la distribución empírica 
 (o una versión suavizada: bootstrap suavizado; Sección \@ref(modunif-boot-suav)). 
-Alternativamente podríamos asumir un modelo paramétrico y estimar los parámetros a partir de la muestra .
+Alternativamente podríamos asumir un modelo paramétrico y estimar los parámetros a partir de la muestra [Figura \@ref(fig:muestra-sim-aprox)].
 
 ```r
 # Distribución bootstrap uniforme
@@ -129,10 +133,14 @@ curve(pnorm, lty = 3, add = TRUE)
 legend("bottomright", legend = c("Empírica", "Aprox. paramétrica", "Teórica"), lty = 1:3)
 ```
 
-<div class="figure" style="text-align: center">
-<img src="01-intro_files/figure-html/muestra-sim-aprox-1.png" alt="Distribución teórica de la muestra simulada y distintas aproximaciones." width="70%" />
-<p class="caption">(\#fig:muestra-sim-aprox)Distribución teórica de la muestra simulada y distintas aproximaciones.</p>
-</div>
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{01-intro_files/figure-latex/muestra-sim-aprox-1} 
+
+}
+
+\caption{Distribución teórica de la muestra simulada y distintas aproximaciones.}(\#fig:muestra-sim-aprox)
+\end{figure}
 
 
 A partir de la aproximación $\hat{F}$ podríamos generar, condicionalmente a la muestra observada, 
@@ -291,11 +299,15 @@ hist(muestra)
 rug(muestra)
 ```
 
-<div class="figure" style="text-align: center">
-<img src="01-intro_files/figure-html/microorganismos-1.png" alt="Distribución del tiempo de vida de microorganismos." width="70%" />
-<p class="caption">(\#fig:microorganismos)Distribución del tiempo de vida de microorganismos.</p>
-</div>
+\begin{figure}[!htb]
 
+{\centering \includegraphics[width=0.7\linewidth]{01-intro_files/figure-latex/microorganismos-1} 
+
+}
+
+\caption{Distribución del tiempo de vida de microorganismos.}(\#fig:microorganismos)
+\end{figure}
+[Figura \@ref(fig:microorganismos)]
 
 ***Contexto clásico***
 
@@ -431,10 +443,14 @@ curve(dnorm, lty = 2, add = TRUE)
 abline(v = c(-z, z), lty = 2)
 ```
 
-<div class="figure" style="text-align: center">
-<img src="01-intro_files/figure-html/estad-boot-1.png" alt="Distribución del estadístico boostrap y aproximaciones de los cuantiles. Con línea discontinua se muestra la distribución normal asintótica." width="70%" />
-<p class="caption">(\#fig:estad-boot)Distribución del estadístico boostrap y aproximaciones de los cuantiles. Con línea discontinua se muestra la distribución normal asintótica.</p>
-</div>
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{01-intro_files/figure-latex/estad-boot-1} 
+
+}
+
+\caption{Distribución del estadístico boostrap y aproximaciones de los cuantiles. Con línea discontinua se muestra la distribución normal asintótica.}(\#fig:estad-boot)
+\end{figure}
 
 
 ## El Bootstrap uniforme {#intro-unif}
@@ -1042,6 +1058,36 @@ IC_boot
 Este procedimiento para la construcción de intervalos de confianza
 se denomina *método percentil-t* y se tratará en la Sección \@ref(icboot-perc-t).
 
+Como ejemplo adicional podemos comparar la aproximación de la distribución bootstrap del estadístico con la aproximación $t_{n-1}$ basada en normalidad.
+
+
+```r
+hist(estadistico_boot, freq = FALSE, ylim = c(0, 0.4))
+abline(v = pto_crit)
+curve(dt(x, n-1), add=TRUE, lty = 2)
+pto_crit_t <- qt(1 - alfa/2, n-1)
+abline(v = c(-pto_crit_t, pto_crit_t), lty = 2)
+```
+
+
+
+\begin{center}\includegraphics[width=0.7\linewidth]{01-intro_files/figure-latex/unnamed-chunk-11-1} \end{center}
+
+En este caso la distribución bootstrap del estadístico es más asimétrica, lo que se traducirá en diferencias entre las estimaciones por intervalos de confianza.
+Por ejemplo, podemos obtener la estimación basada en normalidad mediante la función `t.test()`:
+
+
+```r
+t.test(muestra)$conf.int
+```
+
+```
+## [1] 0.4599374 1.1507292
+## attr(,"conf.level")
+## [1] 0.95
+```
+
+
 ### Elección del número de réplicas Monte Carlo
 
 Normalmente el valor de $B$ se toma del orden de varias centenas o
@@ -1261,17 +1307,21 @@ res.boot
 ## t1*    0.611 0.058523   0.2526519
 ```
 y el método `plot()` que genera gráficas básicas de diagnosis
-de los resultados (correspondientes al estadístico determinado por el parámetro `index`, por defecto `= 1`): 
+de los resultados (correspondientes al estadístico determinado por el parámetro `index`, por defecto `= 1`): [Figura \@ref(fig:plot-res-boot)]
 
 
 ```r
 plot(res.boot)
 ```
 
-<div class="figure" style="text-align: center">
-<img src="01-intro_files/figure-html/plot-res-boot-1.png" alt="Gráficos de diagnóstico de los resultados bootstrap de la mediana de los tiempos de vida de microorganismos." width="70%" />
-<p class="caption">(\#fig:plot-res-boot)Gráficos de diagnóstico de los resultados bootstrap de la mediana de los tiempos de vida de microorganismos.</p>
-</div>
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{01-intro_files/figure-latex/plot-res-boot-1} 
+
+}
+
+\caption{Gráficos de diagnóstico de los resultados bootstrap de la mediana de los tiempos de vida de microorganismos.}(\#fig:plot-res-boot)
+\end{figure}
 
 Es recomendable examinar la distribución bootstrap del estimador (o estadístico) para detectar posibles problemas.
 Como en este caso puede ocurrir que el estadístico bootstrap tome pocos valores distintos, lo que indicaría que el número de réplicas bootstrap es insuficiente o que hay algún problema con método de remuestreo empleado (en este caso la distribución objetivo es continua). 
@@ -1485,7 +1535,9 @@ res.boot
 plot(res.boot)
 ```
 
-<img src="01-intro_files/figure-html/unnamed-chunk-20-1.png" width="70%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.7\linewidth]{01-intro_files/figure-latex/unnamed-chunk-22-1} \end{center}
 
 En este caso podemos observar que la distribución bootstrap del estimador es asimétrica, por lo que asumir que su distribución es normal podría no ser adecuado (por ejemplo para la construcción de intervalos de confianza, que se tratarán en la Sección \@ref(icboot-trans)).
 
@@ -1499,7 +1551,9 @@ estadistico_boot <- res.boot$t - res.boot$t0
 hist(estadistico_boot)
 ```
 
-<img src="01-intro_files/figure-html/unnamed-chunk-21-1.png" width="70%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.7\linewidth]{01-intro_files/figure-latex/unnamed-chunk-23-1} \end{center}
 
 A partir de la distribución empírica del estadístico bootstrap $R^{\ast} = \hat \theta^{\ast} - \hat \theta$ aproximaríamos la característica de interés de la distribución en el muestreo de $R = \hat \theta - \theta$.
 Por ejemplo, para aproximar $\psi \left( u \right) =P\left( R\leq u \right)$ emplearíamos la frecuencia relativa: 

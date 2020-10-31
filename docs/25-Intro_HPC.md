@@ -96,7 +96,7 @@ system.time(res.boot <- mclapply(1:100, func)) # En Windows llama a lapply() (mc
 
 ```
 ##    user  system elapsed 
-##    0.08    0.00    0.08
+##    0.13    0.03    0.15
 ```
 
 ```r
@@ -116,7 +116,7 @@ system.time(res.boot <- parSapply(cl, 1:100, func))
 
 ```
 ##    user  system elapsed 
-##    0.02    0.00    0.06
+##    0.00    0.00    0.07
 ```
 
 ```r
@@ -150,14 +150,16 @@ ctime
 
 ```
 ## elapsed    send receive  node 1  node 2  node 3 
-##    0.04    0.00    0.00    0.04    0.04    0.04
+##    0.05    0.00    0.01    0.04    0.04    0.04
 ```
 
 ```r
 plot(ctime)
 ```
 
-<img src="25-Intro_HPC_files/figure-html/unnamed-chunk-4-1.png" width="70%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.7\linewidth]{25-Intro_HPC_files/figure-latex/unnamed-chunk-4-1} \end{center}
 
 Hay que tener en cuenta la sobrecarga adicional debida a la comunicación entre nodos
 al paralelizar (especialmente con el enfoque de socket).
@@ -193,7 +195,7 @@ system.time(res.boot <- boot(muestra, statistic, R = B))
 
 ```
 ##    user  system elapsed 
-##    0.08    0.00    0.08
+##    0.16    0.01    0.17
 ```
 
 ```r
@@ -203,7 +205,7 @@ system.time(res.boot <- boot(muestra, statistic, R = B, parallel = "snow", cl = 
 
 ```
 ##    user  system elapsed 
-##    0.06    0.00    0.06
+##    0.19    0.02    0.21
 ```
 
 ### Estudio de simulación {#estudio-sim-boot}
@@ -267,7 +269,7 @@ print(t.fin)
 
 ```
 ##    user  system elapsed 
-##    0.00    0.00   15.84
+##    0.01    0.02   32.31
 ```
 
 ```r
@@ -295,12 +297,20 @@ res
 knitr::kable(res, digits = 3)
 ```
 
-               Cobertura   Longitud
-------------  ----------  ---------
-Normal             0.872     56.762
-Basic              0.862     56.687
-Studentized        0.894     65.019
-Percentil          0.866     56.687
+
+\begin{tabular}{l|r|r}
+\hline
+  & Cobertura & Longitud\\
+\hline
+Normal & 0.872 & 56.762\\
+\hline
+Basic & 0.862 & 56.687\\
+\hline
+Studentized & 0.894 & 65.019\\
+\hline
+Percentil & 0.866 & 56.687\\
+\hline
+\end{tabular}
 
 
 El último paso es finalizar el cluster:

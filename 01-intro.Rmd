@@ -945,6 +945,24 @@ IC_boot
 Este procedimiento para la construcción de intervalos de confianza
 se denomina *método percentil-t* y se tratará en la Sección \@ref(icboot-perc-t).
 
+Como ejemplo adicional podemos comparar la aproximación de la distribución bootstrap del estadístico con la aproximación $t_{n-1}$ basada en normalidad.
+
+```{r}
+hist(estadistico_boot, freq = FALSE, ylim = c(0, 0.4))
+abline(v = pto_crit)
+curve(dt(x, n-1), add=TRUE, lty = 2)
+pto_crit_t <- qt(1 - alfa/2, n-1)
+abline(v = c(-pto_crit_t, pto_crit_t), lty = 2)
+```
+
+En este caso la distribución bootstrap del estadístico es más asimétrica, lo que se traducirá en diferencias entre las estimaciones por intervalos de confianza.
+Por ejemplo, podemos obtener la estimación basada en normalidad mediante la función `t.test()`:
+
+```{r}
+t.test(muestra)$conf.int
+```
+
+
 ### Elección del número de réplicas Monte Carlo
 
 Normalmente el valor de $B$ se toma del orden de varias centenas o

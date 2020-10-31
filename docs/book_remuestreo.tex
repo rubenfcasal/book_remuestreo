@@ -149,7 +149,7 @@ Rubén Fernández Casal
 \institute{Departamento de Matemáticas \and Grupo de investigación de Modelización, Optimización e Inferencia
 Estadística (MODES) \and Centro de Investigación en Tecnologías de la Información y las
 Comunicaciones (CITIC)}
-\date{2020-10-06}
+\date{2020-11-01}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Teorema}[chapter]
@@ -1463,6 +1463,39 @@ Este procedimiento para la construcción de intervalos de confianza se
 denomina \emph{método percentil-t} y se tratará en la Sección
 \ref{icboot-perc-t}.
 
+Como ejemplo adicional podemos comparar la aproximación de la
+distribución bootstrap del estadístico con la aproximación \(t_{n-1}\)
+basada en normalidad.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{hist}\NormalTok{(estadistico_boot, }\DataTypeTok{freq =} \OtherTok{FALSE}\NormalTok{, }\DataTypeTok{ylim =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\FloatTok{0.4}\NormalTok{))}
+\KeywordTok{abline}\NormalTok{(}\DataTypeTok{v =}\NormalTok{ pto_crit)}
+\KeywordTok{curve}\NormalTok{(}\KeywordTok{dt}\NormalTok{(x, n}\OperatorTok{-}\DecValTok{1}\NormalTok{), }\DataTypeTok{add=}\OtherTok{TRUE}\NormalTok{, }\DataTypeTok{lty =} \DecValTok{2}\NormalTok{)}
+\NormalTok{pto_crit_t <-}\StringTok{ }\KeywordTok{qt}\NormalTok{(}\DecValTok{1} \OperatorTok{-}\StringTok{ }\NormalTok{alfa}\OperatorTok{/}\DecValTok{2}\NormalTok{, n}\OperatorTok{-}\DecValTok{1}\NormalTok{)}
+\KeywordTok{abline}\NormalTok{(}\DataTypeTok{v =} \KeywordTok{c}\NormalTok{(}\OperatorTok{-}\NormalTok{pto_crit_t, pto_crit_t), }\DataTypeTok{lty =} \DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=0.7\linewidth]{01-intro_files/figure-latex/unnamed-chunk-11-1} \end{center}
+
+En este caso la distribución bootstrap del estadístico es más
+asimétrica, lo que se traducirá en diferencias entre las estimaciones
+por intervalos de confianza. Por ejemplo, podemos obtener la estimación
+basada en normalidad mediante la función \texttt{t.test()}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{t.test}\NormalTok{(muestra)}\OperatorTok{$}\NormalTok{conf.int}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.4599374 1.1507292
+## attr(,"conf.level")
+## [1] 0.95
+\end{verbatim}
+
 \subsection{Elección del número de réplicas Monte
 Carlo}\label{elecciuxf3n-del-nuxfamero-de-ruxe9plicas-monte-carlo}
 
@@ -1505,7 +1538,10 @@ u \right) \right] = \\
 
 Así, el error de la aproximación de Monte Carlo al bootstrap exacto
 (raíz cuadrada de la varianza del Monte Carlo), puede acotarse por
-\(\frac{1}{2\sqrt{B}}\).
+\(\frac{1}{2\sqrt{B}}\) (para más detalles sobre la convergencia de una
+aproximación Monte Carlo ver p.e. el
+\href{https://rubenfcasal.github.io/simbook/cap4.html}{Capítulo 4} de
+Fernández-Casal y Cao, 2020).
 
 \section{Herramientas disponibles en R sobre
 bootstrap}\label{intro-paquetes}
@@ -1534,11 +1570,12 @@ empleadas:
   en el libro ``Bootstrap Methods and Their Applications'' de A. C.
   Davison y D. V. Hinkley, 1997, Cambridge University Press. Esta
   librería fue desarrollada originalmente en \texttt{S} por Angelo J.
-  Canty y posteriormente exportada a \texttt{R} (ver Canty, 2002),
-  actualmente . Este paquete es mucho más completo que el paquete
-  \texttt{bootstrap}, forma parte de la distribución estándar de
-  \texttt{R} y es el que emplearemos como referencia en este libro (ver
-  Sección \ref{intro-pkgboot}).
+  Canty y posteriormente exportada a \texttt{R} (ver
+  \href{http://cran.fhcrc.org/doc/Rnews/Rnews_2002-3.pdf}{Canty, 2002}).
+  Este paquete es mucho más completo que el paquete \texttt{bootstrap},
+  forma parte de la distribución estándar de \texttt{R} y es el que
+  emplearemos como referencia en este libro (ver Sección
+  \ref{intro-pkgboot}).
 \end{itemize}
 
 Por otra parte existen numerosas rutinas (scripts) realizadas en
@@ -1996,7 +2033,7 @@ bootstrap uniforme multidimensional sobre este estadístico:
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.7\linewidth]{01-intro_files/figure-latex/unnamed-chunk-20-1} \end{center}
+\begin{center}\includegraphics[width=0.7\linewidth]{01-intro_files/figure-latex/unnamed-chunk-22-1} \end{center}
 
 En este caso podemos observar que la distribución bootstrap del
 estimador es asimétrica, por lo que asumir que su distribución es normal
@@ -2019,7 +2056,7 @@ por Monte Carlo) con el siguiente código:
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.7\linewidth]{01-intro_files/figure-latex/unnamed-chunk-21-1} \end{center}
+\begin{center}\includegraphics[width=0.7\linewidth]{01-intro_files/figure-latex/unnamed-chunk-23-1} \end{center}
 
 A partir de la distribución empírica del estadístico bootstrap
 \(R^{\ast} = \hat \theta^{\ast} - \hat \theta\) aproximaríamos la
@@ -2350,7 +2387,7 @@ llevar a cabo mediante el siguiente código:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.1531771
+## [1] 0.1555166
 \end{verbatim}
 
 \begin{Shaded}
@@ -2360,7 +2397,7 @@ llevar a cabo mediante el siguiente código:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.2478441
+## [1] 0.2532474
 \end{verbatim}
 
 \begin{Shaded}
@@ -2373,7 +2410,7 @@ llevar a cabo mediante el siguiente código:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.00216924
+## [1] 0.0009909867
 \end{verbatim}
 
 \begin{Shaded}
@@ -2383,7 +2420,7 @@ llevar a cabo mediante el siguiente código:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.0476472
+## [1] 0.0484925
 \end{verbatim}
 
 Empleando el paquete \texttt{boot} el código sería más simple:
@@ -3290,7 +3327,13 @@ ser la distribución de una variable aleatoria obtenida en dos etapas: en
 la primera etapa se genera un valor según la empírica,
 \(F_n\left( x \right)\), y en la segunda se decide (con
 equiprobabilidad) si el valor obtenido no se altera o bien si se refleja
-alrededor de la media muestral, \(\bar{X}\). Así el paso 1 resulta:
+alrededor de la media muestral, \(\bar{X}\) (equivalentemente, la
+distribución simetrizada es una mixtura de la distribución empírica
+\(F_n\left( x \right)\) y de su versión ``reflejada''
+\(1-F_n\left( 2\bar{X}-x \right)\) y se puede simular mediante el método
+de composición; ver p.e. Fernández-Casal y Cao, 2020,
+\href{https://rubenfcasal.github.io/simbook/m\%C3\%A9todo-de-composici\%C3\%B3n.html}{Sección
+5.4}). Así el paso 1 resulta:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -3526,7 +3569,10 @@ una combinación lineal convexa de funciones de densidad,
 \(K_{h}\left( x-X_i \right)\), cada una con coeficiente \(\frac{1}{n}\)
 en dicha combinación lineal. Gracias a esa representación podemos
 simular valores, \(X^{\ast}\), procedentes de
-\(\hat{f}_{h}\left( x \right)\) en dos pasos.
+\(\hat{f}_{h}\left( x \right)\) en dos pasos (empleando el denominado
+método de composición; ver p.e. Fernández-Casal y Cao, 2020,
+\href{https://rubenfcasal.github.io/simbook/m\%C3\%A9todo-de-composici\%C3\%B3n.html}{Sección
+5.4}).
 
 En un primer paso elegiremos (aleatoriamente y con equiprobabilidad)
 cuál de los índices \(i\in \left\{ 1,\ldots ,n\right\}\) vamos a
@@ -3814,7 +3860,7 @@ es decir
 cosa que no ocurre con la distribución en el muestreo de \(R\), que es
 continua con densidad:
 \[g_R\left( x \right) =\frac{n}{\theta }\left( \frac{x + \theta}{\theta } \right)^{n-1},
-\text{ si }x\in \left[ -\theta, 0\right].\]. De esta forma vemos que el
+\text{ si }x\in \left[ -\theta, 0\right].\] De esta forma vemos que el
 bootstrap uniforme (no paramétrico) es inconsistente.
 
 \BeginKnitrBlock{example}[Inferencia sobre el máximo de una distribución uniforme]
@@ -4133,22 +4179,23 @@ que los valores de las variables explicativas no son aleatorios (por
 ejemplo han sido fijados por el experimentador), hablaríamos entonces de
 \emph{diseño fijo}. Para realizar inferencias sobre modelos de regresión
 con errores homocedásticos se podrían emplear dos algoritmos bootstrap
-(e.g.~Canty, 2002, y subsecciones siguientes). El primero consistiría en
-utilizar directamente bootstrap uniforme, remuestreando las
-observaciones, y sería adecuado para el caso de diseño aleatorio. La
-otra alternativa, que podría ser más adecuada para el caso de diseño
-fijo, sería lo que se conoce como \emph{remuestreo residual},
-\emph{remuestreo basado en modelos} o \emph{bootstrap semiparamétrico}.
-En esta aproximación se mantienen fijos los valores de las variables
-explicativas y se remuestrean los residuos. Una de las aplicaciones del
-bootstrap semiparamétrico es el contraste de hipótesis en regresión, que
-se tratará en la Sección \ref{contrastes-semiparametricos}.
+(e.g. \href{http://cran.fhcrc.org/doc/Rnews/Rnews_2002-3.pdf}{Canty,
+2002}, y subsecciones siguientes). El primero consistiría en utilizar
+directamente bootstrap uniforme, remuestreando las observaciones, y
+sería adecuado para el caso de diseño aleatorio. La otra alternativa,
+que podría ser más adecuada para el caso de diseño fijo, sería lo que se
+conoce como \emph{remuestreo residual}, \emph{remuestreo basado en
+modelos} o \emph{bootstrap semiparamétrico}. En esta aproximación se
+mantienen fijos los valores de las variables explicativas y se
+remuestrean los residuos. Una de las aplicaciones del bootstrap
+semiparamétrico es el contraste de hipótesis en regresión, que se
+tratará en la Sección \ref{contrastes-semiparametricos}.
 
 Se puede generalizar el modelo \eqref{eq:modelogeneral} de diversas
 formas, por ejemplo asumiendo que la distribución del error depende de
 \(X\) únicamente a través de la varianza (error heterocedástico
 independiente). En este caso se suele reescribir como:
-\[Y = m(\mathbf{X}) + \sigma(\mathbf{x}) \varepsilon,\] siendo
+\[Y = m(\mathbf{X}) + \sigma(\mathbf{X}) \varepsilon,\] siendo
 \(\sigma^2(\mathbf{x}) = Var\left( \left. Y\right\vert_{\mathbf{X}=\mathbf{x}} \right)\)
 la varianza condicional y suponiendo adicionalmente que \(\varepsilon\)
 tiene varianza uno. Se podría modificar el bootstrap residual para este
@@ -5102,7 +5149,7 @@ bootstrap para un nivel de confianza nominal del 90\%
 
 \begin{verbatim}
 ##    user  system elapsed 
-##   21.03    2.86   24.50
+##   38.76    4.97   53.27
 \end{verbatim}
 
 \begin{Shaded}
@@ -9694,6 +9741,9 @@ Faraway, J.J. and Jhun, M. (1990). Bootstrap choice of bandwidth for
 density estimation. \emph{Jr. Amer. Statist. Assoc.} \textbf{85},
 1119--1122.
 
+Fernández-Casal, R. y Cao, R. (2020). \emph{Simulación Estadística}.
+\url{https://rubenfcasal.github.io/simbook}.
+
 Ferretti, N. and Romo, J. (1996). Unit root bootstrap test for AR(1)
 models. \emph{Biometrika} \textbf{83}, 849-860.
 
@@ -10318,7 +10368,7 @@ el argumento \texttt{mc.cores}.
 
 \begin{verbatim}
 ##    user  system elapsed 
-##    0.10    0.00    0.09
+##    0.13    0.03    0.15
 \end{verbatim}
 
 \begin{Shaded}
@@ -10380,7 +10430,7 @@ representar el uso del cluster (\emph{experimental} en Windows):
 
 \begin{verbatim}
 ## elapsed    send receive  node 1  node 2  node 3 
-##    0.05    0.00    0.00    0.03    0.05    0.03
+##    0.05    0.00    0.01    0.04    0.04    0.04
 \end{verbatim}
 
 \begin{Shaded}
@@ -10429,7 +10479,7 @@ Veamos un ejemplo empleando una muestra simulada:
 
 \begin{verbatim}
 ##    user  system elapsed 
-##    0.06    0.00    0.07
+##    0.16    0.01    0.17
 \end{verbatim}
 
 \begin{Shaded}
@@ -10441,7 +10491,7 @@ Veamos un ejemplo empleando una muestra simulada:
 
 \begin{verbatim}
 ##    user  system elapsed 
-##    0.05    0.00    0.04
+##    0.19    0.02    0.21
 \end{verbatim}
 
 \subsection{Estudio de simulación}\label{estudio-sim-boot}
@@ -10507,7 +10557,7 @@ en la función \texttt{boot.ci()}.
 
 \begin{verbatim}
 ##    user  system elapsed 
-##    0.02    0.00   19.39
+##    0.01    0.02   32.31
 \end{verbatim}
 
 \begin{Shaded}

@@ -85,7 +85,7 @@ En `R` se recomienda emplear el paquete `survival` para el análisis de
 datos censurados. Podemos utilizar la función `survfit()` para obtener 
 la estimación Kaplan-Meier de la función de supervivencia 
 (y a partir de ella la de la distribución).
-En este caso podríamos utilizar el siguiente código :
+En este caso podríamos utilizar el siguiente código [Figura \@ref(fig:survival)]:
 
 ```r
 datcen <- data.frame(t = c(2.1, 3.2, 1.2, 4.3, 1.8, 3.9, 2.7, 2.5), 
@@ -121,10 +121,14 @@ with(fit, {
 })
 ```
 
-<div class="figure" style="text-align: center">
-<img src="08-dat_cen_files/figure-html/survival-1.png" alt="Estimaciones Kaplan-Meier de la función de supervivencia y de la función de distribución." width="70%" />
-<p class="caption">(\#fig:survival)Estimaciones Kaplan-Meier de la función de supervivencia y de la función de distribución.</p>
-</div>
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{08-dat_cen_files/figure-latex/survival-1} 
+
+}
+
+\caption{Estimaciones Kaplan-Meier de la función de supervivencia y de la función de distribución.}(\#fig:survival)
+\end{figure}
 
 ```r
 par(old.par)
@@ -441,10 +445,14 @@ plot(chan.G, main = "Supervivencia variable censurante (partida)",
      mark.time = TRUE, xlim = c(60, 100))
 ```
 
-<div class="figure" style="text-align: center">
-<img src="08-dat_cen_files/figure-html/survfit-f-g-1.png" alt="Estimaciones de la supervivencia (izquierda; indicando los tiempos de las observaciones censuradas) y de la variable censurante (derecha; indicando los de las no censuradas)." width="70%" />
-<p class="caption">(\#fig:survfit-f-g)Estimaciones de la supervivencia (izquierda; indicando los tiempos de las observaciones censuradas) y de la variable censurante (derecha; indicando los de las no censuradas).</p>
-</div>
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{08-dat_cen_files/figure-latex/survfit-f-g-1} 
+
+}
+
+\caption{Estimaciones de la supervivencia (izquierda; indicando los tiempos de las observaciones censuradas) y de la variable censurante (derecha; indicando los de las no censuradas).}(\#fig:survfit-f-g)
+\end{figure}
 
 ```r
 par(old.par)
@@ -565,10 +573,14 @@ chan.F
 plot(chan.F, lty = 1:2, xlim = c(60, 100))
 ```
 
-<div class="figure" style="text-align: center">
-<img src="08-dat_cen_files/figure-html/surv-strata-1.png" alt="Estimaciones de la supervivencia." width="70%" />
-<p class="caption">(\#fig:surv-strata)Estimaciones de la supervivencia.</p>
-</div>
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{08-dat_cen_files/figure-latex/surv-strata-1} 
+
+}
+
+\caption{Estimaciones de la supervivencia.}(\#fig:surv-strata)
+\end{figure}
 
 ```r
 res <- summary(chan.F)

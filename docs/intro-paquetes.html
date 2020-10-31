@@ -24,7 +24,7 @@
 <meta name="author" content="Ricardo Cao Abad (rcao@udc.es) y Rubén Fernández Casal (rfcasal@udc.es)" />
 
 
-<meta name="date" content="2020-10-22" />
+<meta name="date" content="2020-11-01" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -519,12 +519,12 @@ res.boot</code></pre></div>
 ##      original      bias    std. error
 ## t1* 0.7149057 0.006306905  0.04406473</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(res.boot)</code></pre></div>
-<p><img src="01-intro_files/figure-html/unnamed-chunk-20-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p><img src="01-intro_files/figure-html/unnamed-chunk-22-1.png" width="70%" style="display: block; margin: auto;" /></p>
 <p>En este caso podemos observar que la distribución bootstrap del estimador es asimétrica, por lo que asumir que su distribución es normal podría no ser adecuado (por ejemplo para la construcción de intervalos de confianza, que se tratarán en la Sección <a href="icboot-ejem.html#icboot-trans">4.6.3</a>).</p>
 <p>Como comentario final, nótese que en principio el paquete boot está diseñado para obtener réplicas bootstrap de un estimador, por lo que si lo que nos interesa es emplear otro estadístico habría que construirlo a partir de ellas (como hacen otras funciones secundarias como <code>boot.ci()</code>). Por ejemplo, si queremos emplear el estadístico <span class="math inline">\(R = \hat \theta - \theta\)</span> (bootstrap percentil básico o natural), podemos obtener la correspondiente distribución bootstrap (aproximada por Monte Carlo) con el siguiente código:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">estadistico_boot &lt;-<span class="st"> </span>res.boot<span class="op">$</span>t <span class="op">-</span><span class="st"> </span>res.boot<span class="op">$</span>t0 
 <span class="kw">hist</span>(estadistico_boot)</code></pre></div>
-<p><img src="01-intro_files/figure-html/unnamed-chunk-21-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p><img src="01-intro_files/figure-html/unnamed-chunk-23-1.png" width="70%" style="display: block; margin: auto;" /></p>
 <p>A partir de la distribución empírica del estadístico bootstrap <span class="math inline">\(R^{\ast} = \hat \theta^{\ast} - \hat \theta\)</span> aproximaríamos la característica de interés de la distribución en el muestreo de <span class="math inline">\(R = \hat \theta - \theta\)</span>. Por ejemplo, para aproximar <span class="math inline">\(\psi \left( u \right) =P\left( R\leq u \right)\)</span> emplearíamos la frecuencia relativa: <span class="math display">\[\hat{\psi}_{B}\left( u \right) =
 \frac{1}{B}\sum_{i=1}^{B}\mathbf{1}\left\{ R^{\ast (i)}\leq u\right\}.\]</span></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">u &lt;-<span class="st"> </span><span class="dv">0</span>
