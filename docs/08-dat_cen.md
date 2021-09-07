@@ -61,7 +61,8 @@ n \right)} \right)$ la muestra de estadísticos ordenados de los tiempos
 de vida observados y $\left( \delta _{(1)},\delta _{\left(2 \right)},
 \ldots ,\delta _{(n)} \right)$ los correspondientes concomitantes.
 
-\BeginKnitrBlock{example}\iffalse{-91-69-115-116-105-109-97-99-105-243-110-32-100-101-32-75-97-112-108-97-110-45-77-101-105-101-114-93-}\fi{}<div class="example"><span class="example" id="exm:kaplan-meier"><strong>(\#exm:kaplan-meier)  \iffalse (Estimación de Kaplan-Meier) \fi{} </strong></span>
+\BeginKnitrBlock{example}\iffalse{-91-69-115-116-105-109-97-99-105-243-110-32-100-101-32-75-97-112-108-97-110-45-77-101-105-101-114-93-}\fi{}
+<span class="example" id="exm:kaplan-meier"><strong>(\#exm:kaplan-meier)  \iffalse (Estimación de Kaplan-Meier) \fi{} </strong></span>
 <br> \vspace{0.5cm}
 
 Se observan los datos censurados: $\left( 2.1,0 \right)$,
@@ -78,7 +79,8 @@ $$\hat{F}\left( t \right) =\left\{
 0.6& \text{si } 3.2\leq t<3.9 \\ 
 0.8& \text{si } 3.9\leq t
 \end{array}
-\right.$$</div>\EndKnitrBlock{example}
+\right.$$
+\EndKnitrBlock{example}
 
 
 En `R` se recomienda emplear el paquete `survival` para el análisis de
@@ -376,8 +378,8 @@ chan.F
 ```
 ## Call: survfit(formula = Surv(age, cens) ~ 1, data = chan)
 ## 
-##       n  events  median 0.95LCL 0.95UCL 
-##    97.0    46.0    87.0    85.8    90.4
+##       n events median 0.95LCL 0.95UCL
+## [1,] 97     46     87    85.8    90.4
 ```
 
 ```r
@@ -541,10 +543,12 @@ chan.boot3
 
 ## Ejercicios
 
-\BeginKnitrBlock{exercise}\iffalse{-91-66-111-111-116-115-116-114-97-112-32-99-101-110-115-117-114-97-100-111-32-112-111-114-32-101-115-116-114-97-116-111-115-93-}\fi{}<div class="exercise"><span class="exercise" id="exr:censboot-strata-ej"><strong>(\#exr:censboot-strata-ej)  \iffalse (Bootstrap censurado por estratos) \fi{} </strong></span>
+\BeginKnitrBlock{exercise}\iffalse{-91-66-111-111-116-115-116-114-97-112-32-99-101-110-115-117-114-97-100-111-32-112-111-114-32-101-115-116-114-97-116-111-115-93-}\fi{}
+<span class="exercise" id="exr:censboot-strata-ej"><strong>(\#exr:censboot-strata-ej)  \iffalse (Bootstrap censurado por estratos) \fi{} </strong></span>
 Analizar el conjunto de datos `channing` completo, teniendo en cuenta el sexo como estrato
 (i.e. `Surv(age, cens) ~ sex` y `strata = chan$sex`)
-</div>\EndKnitrBlock{exercise}
+
+\EndKnitrBlock{exercise}
 
 
 ```r
@@ -611,33 +615,35 @@ str(res)
 ##   ..- attr(*, "dimnames")=List of 2
 ##   .. ..$ : chr [1:2] "sex=Female" "sex=Male"
 ##   .. ..$ : chr [1:9] "records" "n.max" "n.start" "events" ...
-##  $ rmean.endtime: num [1:2] 98.3 98.3
+##  $ rmean.endtime: num [1:2] 101 101
 ##  - attr(*, "class")= chr "summary.survfit"
 ```
 
 ```r
 # Estimaciones de interés
-res$table[, c("*rmean", "median")]
+res$table[, c("rmean", "median")]
 ```
 
 ```
-##              *rmean median
-## sex=Female 88.21716     88
-## sex=Male   86.71872     87
+##               rmean median
+## sex=Female 88.46153     88
+## sex=Male   86.89935     87
 ```
 
 ```r
-as.numeric(res$table[, c("*rmean", "median")])
+as.numeric(res$table[, c("rmean", "median")])
 ```
 
 ```
-## [1] 88.21716 86.71872 88.00000 87.00000
+## [1] 88.46153 86.89935 88.00000 87.00000
 ```
 
 
-\BeginKnitrBlock{exercise}\iffalse{-91-66-111-111-116-115-116-114-97-112-32-99-101-110-115-117-114-97-100-111-32-99-111-110-32-114-105-101-115-103-111-32-112-114-111-112-111-114-99-105-111-110-97-108-32-100-101-32-67-111-120-93-}\fi{}<div class="exercise"><span class="exercise" id="exr:censboot-cox-ej"><strong>(\#exr:censboot-cox-ej)  \iffalse (Bootstrap censurado con riesgo proporcional de Cox) \fi{} </strong></span>
+\BeginKnitrBlock{exercise}\iffalse{-91-66-111-111-116-115-116-114-97-112-32-99-101-110-115-117-114-97-100-111-32-99-111-110-32-114-105-101-115-103-111-32-112-114-111-112-111-114-99-105-111-110-97-108-32-100-101-32-67-111-120-93-}\fi{}
+<span class="exercise" id="exr:censboot-cox-ej"><strong>(\#exr:censboot-cox-ej)  \iffalse (Bootstrap censurado con riesgo proporcional de Cox) \fi{} </strong></span>
 Reproducir el ejemplo en Canty (2002, [Rnews_2002-3](http://cran.fhcrc.org/doc/Rnews/Rnews_2002-3.pdf)) del modelo de riesgo proporcional de Cox (Cox, 1972):
-</div>\EndKnitrBlock{exercise}
+
+\EndKnitrBlock{exercise}
 
 
 ```r

@@ -5,7 +5,7 @@ institute:
    - "Departamento de Matemáticas"
    - "Grupo de investigación de Modelización, Optimización e Inferencia Estadística (MODES)"
    - "Centro de Investigación en Tecnologías de la Información y las Comunicaciones (CITIC)"
-date: "2020-11-01"
+date: "2021-09-07"
 site: bookdown::bookdown_site
 output: bookdown::gitbook
 documentclass: book
@@ -15,6 +15,7 @@ link-citations: yes
 github-repo: rubenfcasal/book_remuestreo
 description: "Apuntes de la asignatura de Técnicas de Remuestreo del Máster en Técnicas Estadísticas."
 ---
+
 
 
 # Prólogo {-}
@@ -33,11 +34,11 @@ Se puede acceder a la versión en línea a través del siguiente enlace:
 donde puede descargarse en formato [pdf](https://rubenfcasal.github.io/book_remuestreo/book_remuestreo.pdf).
 
 Para ejecutar los ejemplos mostrados en el libro será necesario tener instalados los siguientes paquetes:
-[`boot`](https://cran.r-project.org/web/packages/boot/index.html), [`bootstrap`](https://cran.r-project.org/web/packages/bootstrap/index.html), [`survival`](https://cran.r-project.org/web/packages/survival/index.html), [`forecast`](https://cran.r-project.org/web/packages/forecast/index.html), [`MASS`](https://cran.r-project.org/web/packages/MASS/index.html).
+[`boot`](https://CRAN.R-project.org/package=boot), [`bootstrap`](https://CRAN.R-project.org/package=bootstrap), [`survival`](https://CRAN.R-project.org/package=survival), [`forecast`](https://CRAN.R-project.org/package=forecast), [`MASS`](https://CRAN.R-project.org/package=MASS), [`sm`](https://CRAN.R-project.org/package=sm), [`snow`](https://CRAN.R-project.org/package=snow).
 Por ejemplo mediante el comando:
 
 ```r
-install.packages(c("boot", "bootstrap", "survival", "forecast", "MASS"))
+install.packages(c("boot", "bootstrap", "survival", "forecast", "MASS", "sm", "snow"))
 ```
 
 Para generar el libro (compilar) serán necesarios paquetes adicionales, 

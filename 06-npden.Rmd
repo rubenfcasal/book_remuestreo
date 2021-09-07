@@ -133,15 +133,12 @@ resultados en Cao (1990).
 ### Distribución asintótica del estimador de Parzen-Rosenblatt
 
 Las condiciones mínimas necesarias para que el sesgo y la varianza del
-estimador tiendan a cero cuando el tamaño muestral tiende a infinito son
-$h\rightarrow 0$, $nh\rightarrow \infty$. En tales circunstancias se
-tiene
-$$\sqrt{nh}\left( \hat{f}_{h}\left( x \right) -f\left( x \right) \right) \overset
-{d}{\rightarrow }\mathcal{N}\left( B,V \right) \text{.}$$Además, puede probarse que
-el valor asintóticamente óptimo de $h$, en el sentido del $MSE$, es
-$h=c_{0}n^{-1/5}$, con
-$$c_{0}=\left( \frac{c_{K}f\left( x \right)}{d_{K}^2f^{\prime \prime }\left(
-x \right)^2} \right)^{1/5}.$$
+estimador tiendan a cero cuando el tamaño muestral tiende a infinito son $h\rightarrow 0$, $nh\rightarrow \infty$. 
+En tales circunstancias se tiene
+$$\sqrt{nh}\left( \hat{f}_{h}\left( x \right) -f\left( x \right) \right) \overset{d}{\rightarrow} \mathcal{N}\left( B,V \right).$$
+Además, puede probarse que el valor asintóticamente óptimo de $h$, 
+en el sentido del $MSE$, es $h=c_{0}n^{-1/5}$, con
+$$c_{0}=\left( \frac{c_{K}f\left( x \right)}{d_{K}^2f^{\prime \prime }\left(x \right)^2} \right)^{1/5}.$$
 
 Con esa elección de $h$ los valores de media y varianza de la
 distribución normal límite son$$\begin{aligned}

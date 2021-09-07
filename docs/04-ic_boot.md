@@ -185,13 +185,15 @@ método percentil es peor que el de los basados en la normal asintótica,
 que es del orden $O\left( n^{-1} \right)$.
 
 
-\BeginKnitrBlock{example}\iffalse{-91-73-110-102-101-114-101-110-99-105-97-32-115-111-98-114-101-32-108-97-32-109-101-100-105-97-32-99-111-110-32-118-97-114-105-97-110-122-97-32-100-101-115-99-111-110-111-99-105-100-97-44-32-99-111-110-116-105-110-117-97-99-105-243-110-93-}\fi{}<div class="example"><span class="example" id="exm:media-dt-desconocida-perc"><strong>(\#exm:media-dt-desconocida-perc)  \iffalse (Inferencia sobre la media con varianza desconocida, continuación) \fi{} </strong></span><br> \vspace{0.5cm}
+\BeginKnitrBlock{example}\iffalse{-91-73-110-102-101-114-101-110-99-105-97-32-115-111-98-114-101-32-108-97-32-109-101-100-105-97-32-99-111-110-32-118-97-114-105-97-110-122-97-32-100-101-115-99-111-110-111-99-105-100-97-44-32-99-111-110-116-105-110-117-97-99-105-243-110-93-}\fi{}
+<span class="example" id="exm:media-dt-desconocida-perc"><strong>(\#exm:media-dt-desconocida-perc)  \iffalse (Inferencia sobre la media con varianza desconocida, continuación) \fi{} </strong></span><br> \vspace{0.5cm}
 
 Continuando con el ejemplo de los tiempos de vida de microorganismos
 (sin asumir varianza conocida),
 supongamos que queremos obtener una estimación por intervalo de confianza 
 de su vida media empleando este método. 
-El código necesario sería muy similar al del Ejemplo \@ref(exm:media-dt-desconocida):</div>\EndKnitrBlock{example}
+El código necesario sería muy similar al del Ejemplo \@ref(exm:media-dt-desconocida):
+\EndKnitrBlock{example}
 
 
 ```r
@@ -672,7 +674,7 @@ t.fin
 
 ```
 ##    user  system elapsed 
-##   38.76    4.97   53.27
+##   13.67    0.97   14.97
 ```
 
 ```r

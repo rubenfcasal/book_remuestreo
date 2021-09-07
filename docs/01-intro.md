@@ -263,7 +263,8 @@ str(data_boot)
 Esta forma de proceder es la que emplea por defecto el paquete `boot` que 
 describiremos más adelante (Sección \@ref(intro-pkgboot)).
 
-\BeginKnitrBlock{example}\iffalse{-91-73-110-102-101-114-101-110-99-105-97-32-115-111-98-114-101-32-108-97-32-109-101-100-105-97-32-99-111-110-32-118-97-114-105-97-110-122-97-32-99-111-110-111-99-105-100-97-93-}\fi{}<div class="example"><span class="example" id="exm:media-dt-conocida"><strong>(\#exm:media-dt-conocida)  \iffalse (Inferencia sobre la media con varianza conocida) \fi{} </strong></span>
+\BeginKnitrBlock{example}\iffalse{-91-73-110-102-101-114-101-110-99-105-97-32-115-111-98-114-101-32-108-97-32-109-101-100-105-97-32-99-111-110-32-118-97-114-105-97-110-122-97-32-99-111-110-111-99-105-100-97-93-}\fi{}
+<span class="example" id="exm:media-dt-conocida"><strong>(\#exm:media-dt-conocida)  \iffalse (Inferencia sobre la media con varianza conocida) \fi{} </strong></span>
 <br> \vspace{0.5cm}
 
 Hemos observado 15 tiempos de vida de microorganismos: 
@@ -272,7 +273,8 @@ Hemos observado 15 tiempos de vida de microorganismos:
 A partir de los cuales queremos 
 obtener una estimación por intervalo de confianza de su vida media,
 suponiendo que la desviación típica es conocida e igual a 0.6
-(en el Capítulo \@ref(icboot) se tratará con más detalle la construcción de intervalos de confianza).</div>\EndKnitrBlock{example}
+(en el Capítulo \@ref(icboot) se tratará con más detalle la construcción de intervalos de confianza).
+\EndKnitrBlock{example}
 
 ```r
 muestra <- c(0.143, 0.182, 0.256, 0.26, 0.27, 0.437, 0.509, 
@@ -509,7 +511,9 @@ muestreo de $R$
 
 ### Ejemplos
 
-\BeginKnitrBlock{example}\iffalse{-91-73-110-102-101-114-101-110-99-105-97-32-115-111-98-114-101-32-108-97-32-109-101-100-105-97-32-99-111-110-32-118-97-114-105-97-110-122-97-32-99-111-110-111-99-105-100-97-44-32-99-111-110-116-105-110-117-97-99-105-243-110-93-}\fi{}<div class="example"><span class="example" id="exm:media-dt-conocida-perturbando"><strong>(\#exm:media-dt-conocida-perturbando)  \iffalse (Inferencia sobre la media con varianza conocida, continuación) \fi{} </strong></span></div>\EndKnitrBlock{example}
+\BeginKnitrBlock{example}\iffalse{-91-73-110-102-101-114-101-110-99-105-97-32-115-111-98-114-101-32-108-97-32-109-101-100-105-97-32-99-111-110-32-118-97-114-105-97-110-122-97-32-99-111-110-111-99-105-100-97-44-32-99-111-110-116-105-110-117-97-99-105-243-110-93-}\fi{}
+<span class="example" id="exm:media-dt-conocida-perturbando"><strong>(\#exm:media-dt-conocida-perturbando)  \iffalse (Inferencia sobre la media con varianza conocida, continuación) \fi{} </strong></span>
+\EndKnitrBlock{example}
 
 En el Ejemplo \@ref(exm:media-dt-conocida) anteriormente visto de inferencia para la media con
 varianza conocida, el algoritmo bootstrap (basado en Monte Carlo) para
@@ -663,11 +667,13 @@ IC_boot
 
 
 
-\BeginKnitrBlock{example}\iffalse{-91-73-110-102-101-114-101-110-99-105-97-32-115-111-98-114-101-32-108-97-32-109-101-100-105-97-110-97-93-}\fi{}<div class="example"><span class="example" id="exm:mediana"><strong>(\#exm:mediana)  \iffalse (Inferencia sobre la mediana) \fi{} </strong></span><br> \vspace{0.5cm}
+\BeginKnitrBlock{example}\iffalse{-91-73-110-102-101-114-101-110-99-105-97-32-115-111-98-114-101-32-108-97-32-109-101-100-105-97-110-97-93-}\fi{}
+<span class="example" id="exm:mediana"><strong>(\#exm:mediana)  \iffalse (Inferencia sobre la mediana) \fi{} </strong></span><br> \vspace{0.5cm}
 
 Continuando con el ejemplo de los tiempos de vida de microorganismos,
 supongamos que queremos obtener una estimación por intervalo de confianza 
-de su vida mediana a partir de los 15 valores observados.</div>\EndKnitrBlock{example}
+de su vida mediana a partir de los 15 valores observados.
+\EndKnitrBlock{example}
 
 Consideramos la mediana poblacional como parámetro de interés:
 $$\theta = \theta \left( F \right) = F^{-1}\left( \frac{1}{2} \right) 
@@ -841,7 +847,8 @@ los átomos de probabilidad de la distribución bootstrap. Un ejemplo es
 la media muestral con, por ejemplo, $n=3$.
 
 
-\BeginKnitrBlock{example}\iffalse{-91-77-101-100-105-97-32-109-117-101-115-116-114-97-108-32-112-97-114-97-32-117-110-97-32-109-117-101-115-116-114-97-32-100-101-32-116-97-109-97-241-111-32-51-93-}\fi{}<div class="example"><span class="example" id="exm:media3"><strong>(\#exm:media3)  \iffalse (Media muestral para una muestra de tamaño 3) \fi{} </strong></span><br> \vspace{0.5cm}
+\BeginKnitrBlock{example}\iffalse{-91-77-101-100-105-97-32-109-117-101-115-116-114-97-108-32-112-97-114-97-32-117-110-97-32-109-117-101-115-116-114-97-32-100-101-32-116-97-109-97-241-111-32-51-93-}\fi{}
+<span class="example" id="exm:media3"><strong>(\#exm:media3)  \iffalse (Media muestral para una muestra de tamaño 3) \fi{} </strong></span><br> \vspace{0.5cm}
 
 Consideremos una muestra aleatoria simple de tamaño $n=3$ de una
 población con distribución $F$ y tomemos como parámetro de interés la
@@ -870,7 +877,8 @@ siguiente tabla.
 | $\left( X_1,X_3,X_3 \right)$   |    $\left( 1,0,2 \right)$   |    $\left( \frac{1}{3},0,\frac{2}{3} \right)$   |    $\frac{1}{9}$   |    $\frac{X_1+2X_3}{3}$    | 
 | $\left( X_2,X_3,X_3 \right)$   |    $\left( 0,1,2 \right)$   |    $\left( 0,\frac{1}{3},\frac{2}{3} \right)$   |    $\frac{1}{9}$   |    $\frac{X_2+2X_3}{3}$    | 
 | $\left( X_1,X_2,X_3 \right)$   |    $\left( 1,1,1 \right)$   |    $\left( \frac{1}{3},\frac{1}{3},\frac{1}{3} \right)$   |    $\frac{2}{9}$   |    $\frac{X_1+X_2+X_3}{3}$    | 
-</div>\EndKnitrBlock{example}
+
+\EndKnitrBlock{example}
 
 En algunas ocasiones es factible encontrar expresiones cerradas
 para la distribución de $R^{\ast}$, más allá de las obvias que
@@ -960,12 +968,14 @@ hacer $X_i^{\ast}=X_{\left\lfloor nU_i\right\rfloor +1}$
 
 Aunque en `R` se recomienda emplear la función `sample`.
 
-\BeginKnitrBlock{example}\iffalse{-91-73-110-102-101-114-101-110-99-105-97-32-115-111-98-114-101-32-108-97-32-109-101-100-105-97-32-99-111-110-32-118-97-114-105-97-110-122-97-32-100-101-115-99-111-110-111-99-105-100-97-93-}\fi{}<div class="example"><span class="example" id="exm:media-dt-desconocida"><strong>(\#exm:media-dt-desconocida)  \iffalse (Inferencia sobre la media con varianza desconocida) \fi{} </strong></span><br> \vspace{0.5cm}
+\BeginKnitrBlock{example}\iffalse{-91-73-110-102-101-114-101-110-99-105-97-32-115-111-98-114-101-32-108-97-32-109-101-100-105-97-32-99-111-110-32-118-97-114-105-97-110-122-97-32-100-101-115-99-111-110-111-99-105-100-97-93-}\fi{}
+<span class="example" id="exm:media-dt-desconocida"><strong>(\#exm:media-dt-desconocida)  \iffalse (Inferencia sobre la media con varianza desconocida) \fi{} </strong></span><br> \vspace{0.5cm}
 
 Continuando con el ejemplo de los tiempos de vida de microorganismos,
 supongamos que queremos obtener una estimación por intervalo de confianza 
 de su vida media a partir de los 15 valores observados pero en la
-situación mucho más realista de que la varianza sea desconocida.</div>\EndKnitrBlock{example}
+situación mucho más realista de que la varianza sea desconocida.
+\EndKnitrBlock{example}
 
 Tenemos pues
 $\mathbf{X}=\left( X_1,\ldots ,X_n \right) \sim F\,$, con
@@ -1369,13 +1379,15 @@ estudentizados con la función `boot.ci()`) se supone, por defecto, que el segun
 componente del vector de estadísticos contiene estimaciones de la varianza del
 estadístico para cada réplica boostrap.
 
-\BeginKnitrBlock{example}\iffalse{-91-73-110-102-101-114-101-110-99-105-97-32-115-111-98-114-101-32-108-97-32-109-101-100-105-97-32-99-111-110-32-118-97-114-105-97-110-122-97-32-100-101-115-99-111-110-111-99-105-100-97-44-32-99-111-110-116-105-110-117-97-99-105-243-110-93-}\fi{}<div class="example"><span class="example" id="exm:media-dt-desconocida-boot"><strong>(\#exm:media-dt-desconocida-boot)  \iffalse (Inferencia sobre la media con varianza desconocida, continuación) \fi{} </strong></span><br> \vspace{0.5cm}
+\BeginKnitrBlock{example}\iffalse{-91-73-110-102-101-114-101-110-99-105-97-32-115-111-98-114-101-32-108-97-32-109-101-100-105-97-32-99-111-110-32-118-97-114-105-97-110-122-97-32-100-101-115-99-111-110-111-99-105-100-97-44-32-99-111-110-116-105-110-117-97-99-105-243-110-93-}\fi{}
+<span class="example" id="exm:media-dt-desconocida-boot"><strong>(\#exm:media-dt-desconocida-boot)  \iffalse (Inferencia sobre la media con varianza desconocida, continuación) \fi{} </strong></span><br> \vspace{0.5cm}
 
 Continuando con el Ejemplo \@ref(exm:media-dt-desconocida) de
 inferencia sobre la media con varianza desconocida. 
 Para obtener la estimación por intervalo de confianza del tiempo de vida medio 
 de los microorganismos con el paquete `boot`, podríamos emplear
-el siguiente código:</div>\EndKnitrBlock{example}
+el siguiente código:
+\EndKnitrBlock{example}
 
 ```r
 library(boot)

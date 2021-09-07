@@ -1,5 +1,7 @@
 # Introducción al procesamiento en paralelo en R {#intro-hpc}
 
+<!-- bookdown::preview_chapter("25-Intro_HPC.Rmd") -->
+
 ```{r , child = '_global_options.Rmd'}
 ```
 
@@ -111,7 +113,7 @@ números pseudo-aleatorios (los resultados no serían reproducibles).
 
 Además, empleando las herramientas del paquete `snow` se puede representar el uso
 del cluster (*experimental* en Windows):
-```{r}
+```{r eval=FALSE}
 # library(snow)
 ctime <- snow::snow.time(snow::parSapply(cl, 1:100, func))
 ctime
@@ -201,7 +203,7 @@ getSimulation <- function(isim, B = 2000, n = 30, alfa = 0.1, mu = 100) {
     resultados
 }
 
-clusterSetRNGStream(cl)
+parallel::clusterSetRNGStream(cl)
 result <- parLapply(cl, 1:nsim, getSimulation)
 # stopCluster(cl)
 

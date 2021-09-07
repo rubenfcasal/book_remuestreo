@@ -41,7 +41,7 @@ resultando así el estimador tipo núcleo de Nadaraya-Watson
 $$\hat{m}_{h}\left( x \right) =\frac{\hat{\Psi}_{h}\left( x \right)}{\hat{f}
 _{1,h}\left( x \right)}=\frac{\frac{1}{n}\sum_{i=1}^{n}K_{h}\left(
 x-X_i \right) Y_i}{\frac{1}{n}\sum_{i=1}^{n}K_{h}\left( x-X_i \right)},$$
-donde $K_{h}\left( x-X_i \right) = K\left( x-X_i \right)/h$.
+donde $K_{h}\left( x-X_i \right) =\frac{1}{h}K\left( \frac{x-X_i}{h} \right)$.
 
 Para este estimador se pueden probar propiedades semejantes a las
 mencionadas para el estimador de Parzen-Rosenblatt de la función de
@@ -379,7 +379,7 @@ $w_{i} = \frac{1}{h}K\left(\frac{x-x_0}{h}\right)$.
     un desarrollo de Taylor de $m(x_0)$.]: 
     $\widehat{m_{h}^{(r)}}(x_0) = r!\hat{\beta}_{r}$.
 
-Por tanto, la estimación lineal local $\hat{m}_{h}(x)=\hat{\beta}_0$ se obtiene al minimizar:
+Por tanto, la estimación polinómica local de grado $p$, $\hat{m}_{h}(x)=\hat{\beta}_0$, se obtiene al minimizar:
 $$\begin{aligned}
     \min_{\beta_0 ,\beta_1, \ldots, \beta_p}
     \sum_{i=1}^{n}\left\{ Y_{i} - \beta_0 
@@ -459,7 +459,7 @@ r.squared
 ```
 
 ```
-## [1] 0.8015429
+## [1] 0.8023864
 ```
 
 

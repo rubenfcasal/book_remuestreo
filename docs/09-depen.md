@@ -203,7 +203,7 @@ procede del siguiente modo:
     bloques: $\{B_1,B_2,\ldots ,B_{q}\}$. Cada $\xi _i$ es un
     vector $b$-dimensional $(\xi _{i,1},\xi _{i,2},\ldots ,\xi _{i,b})$.
 
-4.  Definir $\vec{X}^{\ast}$ como el vector formado por las $n$
+4.  Definir $\mathbf{X}^{\ast}$ como el vector formado por las $n$
     primeras componentes de
     $$(\xi _{1,1},\xi _{1,2},\ldots ,\xi _{1,b},\xi _{2,1},\xi _{2,2},\ldots ,\xi
     _{2,b},\ldots ,\xi _{k,1},\xi _{k,2},\ldots ,\xi _{k,b}).$$
@@ -413,13 +413,11 @@ define:
 
 Este método propone usar la función de distribución empírica de los
 valores $\tau _{b}(S_{n,i}-T_n)$,
-$$L_n(x)=\frac{1}{N}\sum_{i=1}^{N}1_{\{\tau _{b}(S_{n,i}-T_n)\leq x\}}$$como
-aproximación de la distribución en el muestreo de $\tau
-_n(T_n-\theta )$. El resultado demostrado por Politis y Romano
-(1994b) afirma que siempre que $\tau _{b}/\tau _n\rightarrow 0$,
-$b\rightarrow
-\infty$ y $b/n\rightarrow 0$, la condición $\tau _n(T_n-\theta ){
-\rightarrow }^{\mathrm{d}}J(\cdot ,F)$ implica que $L_n(x)\rightarrow
+$$L_n(x)=\frac{1}{N}\sum_{i=1}^{N}1_{\{\tau _{b}(S_{n,i}-T_n)\leq x\}}$$
+como aproximación de la distribución en el muestreo de $\tau_n(T_n-\theta )$. 
+El resultado demostrado por Politis y Romano (1994b) afirma que siempre que 
+$\tau _{b}/\tau _n\rightarrow 0$, $b \rightarrow \infty$ y 
+$b/n\rightarrow 0$, la condición $\tau _n(T_n-\theta )\overset{d}{\rightarrow}J(\cdot ,F)$ implica que $L_n(x)\rightarrow
 J(x,F)$ para cada $x$, punto de continuidad de $J(\cdot ,F)$ y
 $\left\Vert
 L_n(\cdot )-J_n(\cdot ,F)\right\Vert _{\infty }\rightarrow 0$ en
@@ -571,35 +569,36 @@ sin hacer ninguna suposición sobre el tipo de dependencia. Sin embargo
 se puede llevar a cabo una estimación cuando se supone que el proceso
 estocástico es markoviano de orden $p$, porque entonces,
 $$X_{n+k}|_{X_1,X_2,\ldots ,X_n}{=}^{\mathrm{d}
-}X_{n+k}|_{X_{n-p+1},X_{n-p+2},\ldots ,X_n}$$y, por tanto,
-$$F_{k}(y|_{\vec{x}})=F_{k}(y|_{x_1,x_2,\ldots ,x_{p}})=P\left(
-X_{n+k}\leq y|_{X_{n-p+1}=x_1,X_{n-p+2}=x_2,\ldots ,X_n=x_{p}} \right)$$puede
-estimarse por medio de un estimador no paramétrico de la distribución
+}X_{n+k}|_{X_{n-p+1},X_{n-p+2},\ldots ,X_n}$$
+y, por tanto,
+$$F_{k}(y|_{\mathbf{x}})=F_{k}(y|_{x_1,x_2,\ldots ,x_{p}})=P\left(
+X_{n+k}\leq y|_{X_{n-p+1}=x_1,X_{n-p+2}=x_2,\ldots ,X_n=x_{p}} \right)$$
+puede estimarse por medio de un estimador no paramétrico de la distribución
 condicional, basado en estimadores no paramétricos de la regresión,
 como, por ejemplo, mediante el estimador tipo núcleo:
 
-$$\widehat{F}_{k,H}(y|_{\vec{x}})=\frac{\sum_{i=1}^{q-k}K_{H}(\vec{x}
--B_{i,p})\cdot 1_{\{X_{i+p+k-1}\leq y\}}}{\sum_{i=1}^{q-k}K_{H}(\vec{x}
+$$\widehat{F}_{k,H}(y|_{\mathbf{x}})=\frac{\sum_{i=1}^{q-k}K_{H}(\mathbf{x}
+-B_{i,p})\cdot 1_{\{X_{i+p+k-1}\leq y\}}}{\sum_{i=1}^{q-k}K_{H}(\mathbf{x}
 -B_{i,p})},$$
 
-donde $q=n-p+1,$ $K_{H}(\vec{u})=\det (H)^{-1}K(H^{-1}\vec{z})$, $K$ es
+donde $q=n-p+1,$ $K_{H}(\mathbf{u})=\det (H)^{-1}K(H^{-1}\mathbf{z})$, $K$ es
 una función núcleo, $H$ es una matriz ventana diagonal definida positiva
 y $B_{i,p},$ $i=1,2,\ldots ,q$ son los bloques muestrales de tamaño $p$.
 Este estimador podría usarse para calcular intervalos predicción
-aproximados para $X_{n+k}$ dasos los valores observados del proceso
+aproximados para $X_{n+k}$ dados los valores observados del proceso
 hasta el instante $n$.
 
 En el caso $p=1$ ($\{X_{t}\}$ es un proceso de Markov) el estimador
-núcleo puede escribirse
-como$$\widehat{F}_{k,h}(y|_{\vec{x}})=\frac{\sum_{i=1}^{n-k}K_{h}(x-X_i)\cdot
+núcleo puede escribirse como
+$$\widehat{F}_{k,h}(y|_{\mathbf{x}})=\frac{\sum_{i=1}^{n-k}K_{h}(x-X_i)\cdot
 1_{\{X_{i+k}\leq y\}}}{\sum_{i=1}^{n-k}K_{h}(x-X_i)},$$
 
 donde $K_{h}(u)=h^{-1}K(u/h)$ y $h>0$. Usar este estimador para calcular
-el intervalo de predicción de nivel $\alpha$: $\left( \widehat{F}
-_{k,h}^{-1}(\alpha /2|_{\vec{x}}),\widehat{F}_{k,h}^{-1}(1-\alpha /2|_{\vec{x
-}}) \right)$, es equivalente a llevar a cabo un método bootstrap de
-forma
-que$$P\left( X_{n+k}^{\ast}=X_{i+k} \right) =\widehat{p}_i=\frac{
+el intervalo de predicción de nivel $\alpha$: 
+$$\left( \widehat{F}
+_{k,h}^{-1}(\alpha /2|_{\mathbf{x}}),\widehat{F}_{k,h}^{-1}(1-\alpha /2|_{\mathbf{x}}) \right),$$
+es equivalente a llevar a cabo un método bootstrap de forma que
+$$P\left( X_{n+k}^{\ast}=X_{i+k} \right) =\widehat{p}_i=\frac{
 K_{h}(X_n-X_i)}{\sum_{j=1}^{n-k}K_{h}(X_n-X_j)}\mathrm{,}
 i=1,2,\ldots ,n-k.$$
 
@@ -636,11 +635,11 @@ $p>1$.
 
 Para simular una serie de tiempo en `R`
 se puede emplear la función `arima.sim()` del paquete base `stats`.
-Por ejemplo, podemos generar una serie autoregressiva con:
+Por ejemplo, podemos generar una serie autoregresiva con:
 [Figura \@ref(fig:arima-sim)]  
 
 ```r
-# Parametros
+# Parámetros
 nsim <- 200   # Numero de simulaciones
 xvar <- 1     # Varianza
 xmed <- 0     # Media
@@ -841,10 +840,12 @@ tsboot(lynx.res, lynx.fun, R = 199, l = 20,
 
 ## Ejercicios
 
-\BeginKnitrBlock{exercise}\iffalse{-91-80-114-97-99-116-105-99-97-108-32-56-46-49-44-32-76-121-110-120-32-100-97-116-97-58-32-68-97-118-105-115-111-110-32-121-32-72-105-110-107-108-101-121-44-32-49-57-57-55-93-}\fi{}<div class="exercise"><span class="exercise" id="exr:tsboot-lynx"><strong>(\#exr:tsboot-lynx)  \iffalse (Practical 8.1, Lynx data: Davison y Hinkley, 1997) \fi{} </strong></span>
+\BeginKnitrBlock{exercise}\iffalse{-91-80-114-97-99-116-105-99-97-108-32-56-46-49-44-32-76-121-110-120-32-100-97-116-97-58-32-68-97-118-105-115-111-110-32-121-32-72-105-110-107-108-101-121-44-32-49-57-57-55-93-}\fi{}
+<span class="exercise" id="exr:tsboot-lynx"><strong>(\#exr:tsboot-lynx)  \iffalse (Practical 8.1, Lynx data: Davison y Hinkley, 1997) \fi{} </strong></span>
 Reproducir el "Practical 8.1 (Lynx data)" en Davison, A. C., y Hinkley, D. V. (1997). Bootstrap methods and their application. Cambridge university press, <http://statwww.epfl.ch/davison/BMA>
 ([caché](http://webcache.googleusercontent.com/search?q=cache:a4nFL5ymMMoJ:statwww.epfl.ch/davison/BMA/+&cd=1&hl=gl&ct=clnk&gl=es)):
-</div>\EndKnitrBlock{exercise}
+
+\EndKnitrBlock{exercise}
 
 
 > "Dataframe lynx contains the Canadian lynx data, 
@@ -929,10 +930,12 @@ lynx.2 <- tsboot(log(lynx), lynx.fun, ...
 > (Sections 8.2.2, 8.2.3)''.
 
 
-\BeginKnitrBlock{exercise}\iffalse{-91-80-114-97-99-116-105-99-97-108-32-56-46-50-44-32-66-101-97-118-101-114-32-100-97-116-97-58-32-68-97-118-105-115-111-110-32-121-32-72-105-110-107-108-101-121-44-32-49-57-57-55-93-}\fi{}<div class="exercise"><span class="exercise" id="exr:tsboot-beaver"><strong>(\#exr:tsboot-beaver)  \iffalse (Practical 8.2, Beaver data: Davison y Hinkley, 1997) \fi{} </strong></span>
+\BeginKnitrBlock{exercise}\iffalse{-91-80-114-97-99-116-105-99-97-108-32-56-46-50-44-32-66-101-97-118-101-114-32-100-97-116-97-58-32-68-97-118-105-115-111-110-32-121-32-72-105-110-107-108-101-121-44-32-49-57-57-55-93-}\fi{}
+<span class="exercise" id="exr:tsboot-beaver"><strong>(\#exr:tsboot-beaver)  \iffalse (Practical 8.2, Beaver data: Davison y Hinkley, 1997) \fi{} </strong></span>
 Reproducir el "Practical 8.2  (Beaver data)" en Davison, A. C., y Hinkley, D. V. (1997). Bootstrap methods and their application. Cambridge university press, <http://statwww.epfl.ch/davison/BMA>
 ([caché](http://webcache.googleusercontent.com/search?q=cache:a4nFL5ymMMoJ:statwww.epfl.ch/davison/BMA/+&cd=1&hl=gl&ct=clnk&gl=es)):
-</div>\EndKnitrBlock{exercise}
+
+\EndKnitrBlock{exercise}
 
 > "The data in beaver consist of a time series of $n = 100$
 > observations on the body temperature $y_1, \ldots, y_n$ 
@@ -1043,10 +1046,12 @@ data <- beaver
 > (Section 8.2; Reynolds, 1994)''.
 
 
-\BeginKnitrBlock{exercise}\iffalse{-91-80-114-97-99-116-105-99-97-108-32-56-46-51-44-32-83-117-110-115-112-111-116-32-100-97-116-97-58-32-68-97-118-105-115-111-110-32-121-32-72-105-110-107-108-101-121-44-32-49-57-57-55-93-}\fi{}<div class="exercise"><span class="exercise" id="exr:tsboot-sunspot"><strong>(\#exr:tsboot-sunspot)  \iffalse (Practical 8.3, Sunspot data: Davison y Hinkley, 1997) \fi{} </strong></span>
+\BeginKnitrBlock{exercise}\iffalse{-91-80-114-97-99-116-105-99-97-108-32-56-46-51-44-32-83-117-110-115-112-111-116-32-100-97-116-97-58-32-68-97-118-105-115-111-110-32-121-32-72-105-110-107-108-101-121-44-32-49-57-57-55-93-}\fi{}
+<span class="exercise" id="exr:tsboot-sunspot"><strong>(\#exr:tsboot-sunspot)  \iffalse (Practical 8.3, Sunspot data: Davison y Hinkley, 1997) \fi{} </strong></span>
 Reproducir el "Practical 8.3  (Sunspot data)" en Davison, A. C., y Hinkley, D. V. (1997). Bootstrap methods and their application. Cambridge university press, <http://statwww.epfl.ch/davison/BMA>
 ([caché](http://webcache.googleusercontent.com/search?q=cache:a4nFL5ymMMoJ:statwww.epfl.ch/davison/BMA/+&cd=1&hl=gl&ct=clnk&gl=es)):
-</div>\EndKnitrBlock{exercise}
+
+\EndKnitrBlock{exercise}
 
 > "Consider scrambling the phases of the sunspot data. 
 > To see the original data, 

@@ -1,5 +1,7 @@
 # Introducción al procesamiento en paralelo en R {#intro-hpc}
 
+<!-- bookdown::preview_chapter("25-Intro_HPC.Rmd") -->
+
 
 
 
@@ -96,7 +98,7 @@ system.time(res.boot <- mclapply(1:100, func)) # En Windows llama a lapply() (mc
 
 ```
 ##    user  system elapsed 
-##    0.13    0.03    0.15
+##    0.05    0.02    0.06
 ```
 
 ```r
@@ -116,7 +118,7 @@ system.time(res.boot <- parSapply(cl, 1:100, func))
 
 ```
 ##    user  system elapsed 
-##    0.00    0.00    0.07
+##    0.00    0.00    0.06
 ```
 
 ```r
@@ -146,20 +148,8 @@ del cluster (*experimental* en Windows):
 # library(snow)
 ctime <- snow::snow.time(snow::parSapply(cl, 1:100, func))
 ctime
-```
-
-```
-## elapsed    send receive  node 1  node 2  node 3 
-##    0.05    0.00    0.01    0.04    0.04    0.04
-```
-
-```r
 plot(ctime)
 ```
-
-
-
-\begin{center}\includegraphics[width=0.7\linewidth]{25-Intro_HPC_files/figure-latex/unnamed-chunk-4-1} \end{center}
 
 Hay que tener en cuenta la sobrecarga adicional debida a la comunicación entre nodos
 al paralelizar (especialmente con el enfoque de socket).
@@ -195,7 +185,7 @@ system.time(res.boot <- boot(muestra, statistic, R = B))
 
 ```
 ##    user  system elapsed 
-##    0.16    0.01    0.17
+##    0.04    0.00    0.05
 ```
 
 ```r
@@ -205,7 +195,7 @@ system.time(res.boot <- boot(muestra, statistic, R = B, parallel = "snow", cl = 
 
 ```
 ##    user  system elapsed 
-##    0.19    0.02    0.21
+##    0.05    0.02    0.06
 ```
 
 ### Estudio de simulación {#estudio-sim-boot}
@@ -258,7 +248,7 @@ getSimulation <- function(isim, B = 2000, n = 30, alfa = 0.1, mu = 100) {
     resultados
 }
 
-clusterSetRNGStream(cl)
+parallel::clusterSetRNGStream(cl)
 result <- parLapply(cl, 1:nsim, getSimulation)
 # stopCluster(cl)
 
@@ -269,7 +259,7 @@ print(t.fin)
 
 ```
 ##    user  system elapsed 
-##    0.01    0.02   32.31
+##    0.02    0.00   13.04
 ```
 
 ```r

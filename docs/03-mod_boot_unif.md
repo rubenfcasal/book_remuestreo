@@ -88,7 +88,9 @@ de programación y software estadístico (como `R`) que permiten simular
 directamente la mayoría de las distribuciones paramétricas habituales.
 
 
-\BeginKnitrBlock{example}\iffalse{-91-73-110-102-101-114-101-110-99-105-97-32-115-111-98-114-101-32-108-97-32-109-101-100-105-97-32-99-111-110-32-118-97-114-105-97-110-122-97-32-99-111-110-111-99-105-100-97-44-32-99-111-110-116-105-110-117-97-99-105-243-110-93-}\fi{}<div class="example"><span class="example" id="exm:media-dt-conocida-par"><strong>(\#exm:media-dt-conocida-par)  \iffalse (Inferencia sobre la media con varianza conocida, continuación) \fi{} </strong></span></div>\EndKnitrBlock{example}
+\BeginKnitrBlock{example}\iffalse{-91-73-110-102-101-114-101-110-99-105-97-32-115-111-98-114-101-32-108-97-32-109-101-100-105-97-32-99-111-110-32-118-97-114-105-97-110-122-97-32-99-111-110-111-99-105-100-97-44-32-99-111-110-116-105-110-117-97-99-105-243-110-93-}\fi{}
+<span class="example" id="exm:media-dt-conocida-par"><strong>(\#exm:media-dt-conocida-par)  \iffalse (Inferencia sobre la media con varianza conocida, continuación) \fi{} </strong></span>
+\EndKnitrBlock{example}
 Continuando con el ejemplo de tiempo de vida de microorganismos,
 podemos modificar fácilmente el código mostrado en el Ejemplo \@ref(exm:media-dt-conocida), de forma que se emplee bootstrap
 paramétrico (normal), con desviación típica conocida, para
@@ -386,13 +388,15 @@ estadísticos (como los asociados a inferencia sobre la varianza) con
 distribución más alejada de la simetría.
 
 
-\BeginKnitrBlock{exercise}\iffalse{-91-73-110-102-101-114-101-110-99-105-97-32-115-111-98-114-101-32-108-97-32-109-101-100-105-97-32-99-111-110-32-118-97-114-105-97-110-122-97-32-99-111-110-111-99-105-100-97-32-101-109-112-108-101-97-110-100-111-32-98-111-111-116-115-116-114-97-112-32-115-105-109-101-116-114-105-122-97-100-111-93-}\fi{}<div class="exercise"><span class="exercise" id="exr:media-dt-conocida-sim"><strong>(\#exr:media-dt-conocida-sim)  \iffalse (Inferencia sobre la media con varianza conocida empleando bootstrap simetrizado) \fi{} </strong></span>
+\BeginKnitrBlock{exercise}\iffalse{-91-73-110-102-101-114-101-110-99-105-97-32-115-111-98-114-101-32-108-97-32-109-101-100-105-97-32-99-111-110-32-118-97-114-105-97-110-122-97-32-99-111-110-111-99-105-100-97-32-101-109-112-108-101-97-110-100-111-32-98-111-111-116-115-116-114-97-112-32-115-105-109-101-116-114-105-122-97-100-111-93-}\fi{}
+<span class="exercise" id="exr:media-dt-conocida-sim"><strong>(\#exr:media-dt-conocida-sim)  \iffalse (Inferencia sobre la media con varianza conocida empleando bootstrap simetrizado) \fi{} </strong></span>
 Modificar adecuadamente el código del Ejemplo \@ref(exm:media-dt-conocida), para
 implementar un método bootstrap simetrizado, con el objeto de calcular
 un intervalo de confianza para la media con desviación típica conocida.
 Qué diferencias se observan entre los intervalos obtenidos por el
 bootstrap uniforme y por el simetrizado?
-</div>\EndKnitrBlock{exercise}
+
+\EndKnitrBlock{exercise}
 
 
 ## Bootstrap suavizado {#modunif-boot-suav}
@@ -640,12 +644,14 @@ fácil observar que en el caso extremo $h=0$ este método de remuestreo se
 reduce al bootstrap uniforme.
 
 
-\BeginKnitrBlock{example}\iffalse{-91-73-110-102-101-114-101-110-99-105-97-32-115-111-98-114-101-32-108-97-32-109-101-100-105-97-32-99-111-110-32-118-97-114-105-97-110-122-97-32-99-111-110-111-99-105-100-97-44-32-99-111-110-116-105-110-117-97-99-105-243-110-93-}\fi{}<div class="example"><span class="example" id="exm:media-dt-conocida-suav"><strong>(\#exm:media-dt-conocida-suav)  \iffalse (Inferencia sobre la media con varianza conocida, continuación) \fi{} </strong></span>
+\BeginKnitrBlock{example}\iffalse{-91-73-110-102-101-114-101-110-99-105-97-32-115-111-98-114-101-32-108-97-32-109-101-100-105-97-32-99-111-110-32-118-97-114-105-97-110-122-97-32-99-111-110-111-99-105-100-97-44-32-99-111-110-116-105-110-117-97-99-105-243-110-93-}\fi{}
+<span class="example" id="exm:media-dt-conocida-suav"><strong>(\#exm:media-dt-conocida-suav)  \iffalse (Inferencia sobre la media con varianza conocida, continuación) \fi{} </strong></span>
 Continuando con el ejemplo de tiempo de vida de microorganismos,
 podemos modificar fácilmente el código mostrado en el Ejemplo \@ref(exm:media-dt-conocida), para implementar bootstrap suavizado 
 con función núcleo gaussiana, para calcular un intervalo de confianza 
 para la media poblacional con desviación típica conocida:
-</div>\EndKnitrBlock{example}
+
+\EndKnitrBlock{example}
 
 
 
@@ -840,7 +846,9 @@ $$g_R\left( x \right) =\frac{n}{\theta }\left( \frac{x + \theta}{\theta } \right
 \text{ si }x\in \left[ -\theta, 0\right].$$ 
 De esta forma vemos que el bootstrap uniforme (no paramétrico) es inconsistente.
 
-\BeginKnitrBlock{example}\iffalse{-91-73-110-102-101-114-101-110-99-105-97-32-115-111-98-114-101-32-101-108-32-109-225-120-105-109-111-32-100-101-32-117-110-97-32-100-105-115-116-114-105-98-117-99-105-243-110-32-117-110-105-102-111-114-109-101-93-}\fi{}<div class="example"><span class="example" id="exm:boot-maximo-uniforme"><strong>(\#exm:boot-maximo-uniforme)  \iffalse (Inferencia sobre el máximo de una distribución uniforme) \fi{} </strong></span></div>\EndKnitrBlock{example}
+\BeginKnitrBlock{example}\iffalse{-91-73-110-102-101-114-101-110-99-105-97-32-115-111-98-114-101-32-101-108-32-109-225-120-105-109-111-32-100-101-32-117-110-97-32-100-105-115-116-114-105-98-117-99-105-243-110-32-117-110-105-102-111-114-109-101-93-}\fi{}
+<span class="example" id="exm:boot-maximo-uniforme"><strong>(\#exm:boot-maximo-uniforme)  \iffalse (Inferencia sobre el máximo de una distribución uniforme) \fi{} </strong></span>
+\EndKnitrBlock{example}
 
 El siguiente código implementa el método
 bootstrap uniforme (también llamado naïve) para aproximar la
@@ -905,7 +913,9 @@ distribución en muestreo de
 $R=R\left( \mathbf{X},F \right) =\hat{\theta}-\theta$.
 
 
-\BeginKnitrBlock{example}\iffalse{-91-73-110-102-101-114-101-110-99-105-97-32-115-111-98-114-101-32-101-108-32-109-225-120-105-109-111-32-100-101-32-117-110-97-32-100-105-115-116-114-105-98-117-99-105-243-110-32-117-110-105-102-111-114-109-101-44-32-99-111-110-116-105-110-117-97-99-105-243-110-93-}\fi{}<div class="example"><span class="example" id="exm:boot-maximo-parametrico"><strong>(\#exm:boot-maximo-parametrico)  \iffalse (Inferencia sobre el máximo de una distribución uniforme, continuación) \fi{} </strong></span></div>\EndKnitrBlock{example}
+\BeginKnitrBlock{example}\iffalse{-91-73-110-102-101-114-101-110-99-105-97-32-115-111-98-114-101-32-101-108-32-109-225-120-105-109-111-32-100-101-32-117-110-97-32-100-105-115-116-114-105-98-117-99-105-243-110-32-117-110-105-102-111-114-109-101-44-32-99-111-110-116-105-110-117-97-99-105-243-110-93-}\fi{}
+<span class="example" id="exm:boot-maximo-parametrico"><strong>(\#exm:boot-maximo-parametrico)  \iffalse (Inferencia sobre el máximo de una distribución uniforme, continuación) \fi{} </strong></span>
+\EndKnitrBlock{example}
 
 Para emplear el bootstrap paramétrico (que remuestrea de una distribución
 uniforme con parámetro estimado) podríamos emplear un código muy similar al 
@@ -971,7 +981,8 @@ función de distribución normal estándar y los siguientes irán tendiendo
 a cero sucesivamente más rápido cuando el tamaño muestral tiende a
 infinito. Enunciemos ese resultado.
 
-\BeginKnitrBlock{theorem}\iffalse{-91-67-114-97-109-101-114-93-}\fi{}<div class="theorem"><span class="theorem" id="thm:aprox-cramer"><strong>(\#thm:aprox-cramer)  \iffalse (Cramer) \fi{} </strong></span><br> \vspace{0.5cm}
+\BeginKnitrBlock{theorem}\iffalse{-91-67-114-97-109-101-114-93-}\fi{}
+<span class="theorem" id="thm:aprox-cramer"><strong>(\#thm:aprox-cramer)  \iffalse (Cramer) \fi{} </strong></span><br> \vspace{0.5cm}
 
 Consideremos variables aleatorias
 $X_1,X_2,\ldots ,X_n,\ldots$ independientes e idénticamente
@@ -1011,7 +1022,8 @@ decir, $p_1$ es simétrico, $p_2$ es antisimétrico, $p_3$ es
 simétrico, y así sucesivamente:
 $$p_1\left( -u \right) = p_1\left( u \right),\quad p_2\left( -u \right)
 = -p_2\left( u \right),\quad p_3\left( -u \right) = p_3\left( u \right)
-,\cdots$$</div>\EndKnitrBlock{theorem}
+,\cdots$$
+\EndKnitrBlock{theorem}
 
 Existen ecuaciones que relacionan todos los cumulantes hasta cierto
 orden con todos los momentos poblacionales hasta ese mismo orden. Dichas
@@ -1074,7 +1086,8 @@ a otros estadísticos (estandarizados o studentizados) obtenidos para
 otros estimadores arbitrarios, $\hat{\theta}$, no necesariamente iguales
 a la media muestral.
 
-\BeginKnitrBlock{theorem}\iffalse{-91-66-104-97-116-116-97-99-104-97-114-121-97-45-71-104-111-115-104-93-}\fi{}<div class="theorem"><span class="theorem" id="thm:aprox-bhat-gho"><strong>(\#thm:aprox-bhat-gho)  \iffalse (Bhattacharya-Ghosh) \fi{} </strong></span><br> \vspace{0.5cm}
+\BeginKnitrBlock{theorem}\iffalse{-91-66-104-97-116-116-97-99-104-97-114-121-97-45-71-104-111-115-104-93-}\fi{}
+<span class="theorem" id="thm:aprox-bhat-gho"><strong>(\#thm:aprox-bhat-gho)  \iffalse (Bhattacharya-Ghosh) \fi{} </strong></span><br> \vspace{0.5cm}
 
 Consideremos variables aleatorias
 $X_1,X_2,\ldots ,X_n,\ldots$ independientes e idénticamente
@@ -1100,7 +1113,8 @@ n^{-\frac{j}{2}} \right),\end{aligned}$$
 siendo los $p_i\left( u \right)$ y $q_i\left( u \right)$ polinomios
 de grado $3i-1$ con paridad alternada, es decir, $p_1$ y $q_1$ son
 simétricos, $p_2$ y $q_2$ son antisimétricos, $p_3$ y $q_3$ son
-simétricos y así sucesivamente.</div>\EndKnitrBlock{theorem}
+simétricos y así sucesivamente.
+\EndKnitrBlock{theorem}
 
 
 ## Bootstrap semiparamétrico y bootstrap residual {#boot-reg}
@@ -1347,7 +1361,9 @@ donde:
   o de residuos (`"residual"`), empleando la modificación descrita anteriormente.
 
 
-\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:boot-car"><strong>(\#exr:boot-car) </strong></span></div>\EndKnitrBlock{exercise}
+\BeginKnitrBlock{exercise}
+<span class="exercise" id="exr:boot-car"><strong>(\#exr:boot-car) </strong></span>
+\EndKnitrBlock{exercise}
 Emplear la función `Boot()` del paquete `car` para hacer inferencia sobre 
 el coeficiente de determinación ajustado del modelo de regresión lineal 
 que explica `prestige` a partir de `income` y `education` 

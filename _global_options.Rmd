@@ -36,4 +36,9 @@ fig.path <- "images/"
     }  
     latexfig <- function(..., output = is_latex()) #  output = TRUE) 
       if (output) citefig2(...) else ""
+  # Citas Paquetes:
+    citepkg <- function(x, url = paste0("https://CRAN.R-project.org/package=", x))
+      paste0("[`", x, "`](", url, ")")
+      # paste0("[`", x, "`](https://cran.r-project.org/web/packages/", x, "/index.html)")
+    citepkgs <- function(pkgs) paste(sapply(pkgs, citepkg), collapse = ", ")    
 ```

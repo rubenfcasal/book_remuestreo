@@ -14,10 +14,12 @@ Se puede acceder a la versión en línea a través del siguiente enlace:
 donde puede descargarse en formato [pdf](https://rubenfcasal.github.io/book_remuestreo/book_remuestreo.pdf).
 
 Para ejecutar los ejemplos mostrados en el libro será necesario tener instalados los siguientes paquetes:
-[`boot`](https://cran.r-project.org/web/packages/boot/index.html), [`bootstrap`](https://cran.r-project.org/web/packages/bootstrap/index.html), [`survival`](https://cran.r-project.org/web/packages/survival/index.html), [`forecast`](https://cran.r-project.org/web/packages/forecast/index.html), [`MASS`](https://cran.r-project.org/web/packages/MASS/index.html)
+[`boot`](https://cran.r-project.org/web/packages/boot/index.html), [`bootstrap`](https://cran.r-project.org/web/packages/bootstrap/index.html), [`survival`](https://cran.r-project.org/web/packages/survival/index.html), [`forecast`](https://cran.r-project.org/web/packages/forecast/index.html), [`MASS`](https://cran.r-project.org/web/packages/MASS/index.html),
+[`sm`](https://cran.r-project.org/web/packages/sm/index.html),
+[`snow`](https://cran.r-project.org/web/packages/snow/index.html).
 Por ejemplo mediante el comando:
 ```{r eval=FALSE}
-install.packages(c("boot", "bootstrap", "survival", "forecast", "MASS"))
+install.packages(c("boot", "bootstrap", "survival", "forecast", "MASS", "sm", "snow"))
 ```
 
 Para generar el libro (compilar) serán necesarios paquetes adicionales, 

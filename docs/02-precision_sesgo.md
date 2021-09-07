@@ -148,13 +148,15 @@ que es precisamente el estimador
 plug-in de la varianza de la media muestral.
 
 
-\BeginKnitrBlock{example}\iffalse{-91-65-112-114-111-120-105-109-97-99-105-243-110-32-98-111-111-116-115-116-114-97-112-32-100-101-32-108-97-32-112-114-101-99-105-115-105-243-110-32-100-101-32-101-115-116-105-109-97-99-105-111-110-101-115-32-100-101-108-32-116-105-101-109-112-111-32-100-101-32-118-105-100-97-32-109-101-100-105-111-32-100-101-32-109-105-99-114-111-111-114-103-97-110-105-115-109-111-115-93-}\fi{}<div class="example"><span class="example" id="exm:estimacion-boot-precision"><strong>(\#exm:estimacion-boot-precision)  \iffalse (Aproximación bootstrap de la precisión de estimaciones del tiempo de vida medio de microorganismos) \fi{} </strong></span><br> \vspace{0.5cm}
+\BeginKnitrBlock{example}\iffalse{-91-65-112-114-111-120-105-109-97-99-105-243-110-32-98-111-111-116-115-116-114-97-112-32-100-101-32-108-97-32-112-114-101-99-105-115-105-243-110-32-100-101-32-101-115-116-105-109-97-99-105-111-110-101-115-32-100-101-108-32-116-105-101-109-112-111-32-100-101-32-118-105-100-97-32-109-101-100-105-111-32-100-101-32-109-105-99-114-111-111-114-103-97-110-105-115-109-111-115-93-}\fi{}
+<span class="example" id="exm:estimacion-boot-precision"><strong>(\#exm:estimacion-boot-precision)  \iffalse (Aproximación bootstrap de la precisión de estimaciones del tiempo de vida medio de microorganismos) \fi{} </strong></span><br> \vspace{0.5cm}
 
 Continuando con el ejemplo de los tiempos de vida de microorganismos,
 supongamos que queremos estimar
 la precisión de dos estimadores de su vida media: media muestral y
 mediana muestral, a partir de los datos observados: 0.143, 0.182, 0.256, 0.260, 0.270,
-0.437, 0.509, 0.611, 0.712, 1.04, 1.09, 1.15, 1.46, 1.88, 2.08.</div>\EndKnitrBlock{example}
+0.437, 0.509, 0.611, 0.712, 1.04, 1.09, 1.15, 1.46, 1.88, 2.08.
+\EndKnitrBlock{example}
 
 La estimación media muestral resulta $\bar{X}=0.8053333$. Por su
 parte la estimación mediana muestral es $x_{\left( 8 \right)}=0.611$.
@@ -281,7 +283,7 @@ desvmediaboot
 ```
 
 ```
-## [1] 0.1555166
+## [1] 0.1544907
 ```
 
 ```r
@@ -289,7 +291,7 @@ desvmedianaboot
 ```
 
 ```
-## [1] 0.2532474
+## [1] 0.2475729
 ```
 
 ```r
@@ -300,7 +302,7 @@ sesgomediaboot
 ```
 
 ```
-## [1] 0.0009909867
+## [1] 0.0009302
 ```
 
 ```r
@@ -308,7 +310,7 @@ sesgomedianaboot
 ```
 
 ```
-## [1] 0.0484925
+## [1] 0.045781
 ```
 
 Empleando el paquete `boot` el código sería más simple:
@@ -672,18 +674,22 @@ jackknife de cualquier estimador cuadrático y la varianza bootstrap y la
 varianza jackknife de cualquier estimador lineal.
 
 
-\BeginKnitrBlock{theorem}<div class="theorem"><span class="theorem" id="thm:jack-boot-sesgo"><strong>(\#thm:jack-boot-sesgo) </strong></span><br> \vspace{0.5cm}
+\BeginKnitrBlock{theorem}
+<span class="theorem" id="thm:jack-boot-sesgo"><strong>(\#thm:jack-boot-sesgo) </strong></span><br> \vspace{0.5cm}
 
 Si $\hat{\theta}$ es un estimador cuadrático, entonces
 $$Sesgo_{jackk}\left( \hat{\theta} \right) =\frac{n}{n-1}Sesgo_{boot}\left( 
 \hat{\theta} \right)$$
-</div>\EndKnitrBlock{theorem}
 
-\BeginKnitrBlock{theorem}<div class="theorem"><span class="theorem" id="thm:jack-boot-precision"><strong>(\#thm:jack-boot-precision) </strong></span><br> \vspace{0.5cm}
+\EndKnitrBlock{theorem}
+
+\BeginKnitrBlock{theorem}
+<span class="theorem" id="thm:jack-boot-precision"><strong>(\#thm:jack-boot-precision) </strong></span><br> \vspace{0.5cm}
 
 Si $\hat{\theta}$ es un estimador lineal, entonces
 $$Var_{jackk}\left( \hat{\theta} \right) =\frac{n}{n-1}Var_{boot}\left( \hat{
-\theta} \right)$$</div>\EndKnitrBlock{theorem}
+\theta} \right)$$
+\EndKnitrBlock{theorem}
 
 
 Dicho en otras palabras, para cualquier estimador cuadrático, el sesgo
@@ -692,12 +698,14 @@ varianza jackknife es mayor que la varianza bootstrap. En ambos casos,
 el factor multiplicador es $n/(n-1)$.
 
 
-\BeginKnitrBlock{example}\iffalse{-91-65-112-114-111-120-105-109-97-99-105-243-110-32-106-97-99-107-107-110-105-102-101-32-100-101-32-108-97-32-112-114-101-99-105-115-105-243-110-32-100-101-32-101-115-116-105-109-97-99-105-111-110-101-115-32-100-101-108-32-116-105-101-109-112-111-32-100-101-32-118-105-100-97-32-109-101-100-105-111-32-100-101-32-109-105-99-114-111-111-114-103-97-110-105-115-109-111-115-93-}\fi{}<div class="example"><span class="example" id="exm:estimacion-jack-precision"><strong>(\#exm:estimacion-jack-precision)  \iffalse (Aproximación jackknife de la precisión de estimaciones del tiempo de vida medio de microorganismos) \fi{} </strong></span><br> \vspace{0.5cm}
+\BeginKnitrBlock{example}\iffalse{-91-65-112-114-111-120-105-109-97-99-105-243-110-32-106-97-99-107-107-110-105-102-101-32-100-101-32-108-97-32-112-114-101-99-105-115-105-243-110-32-100-101-32-101-115-116-105-109-97-99-105-111-110-101-115-32-100-101-108-32-116-105-101-109-112-111-32-100-101-32-118-105-100-97-32-109-101-100-105-111-32-100-101-32-109-105-99-114-111-111-114-103-97-110-105-115-109-111-115-93-}\fi{}
+<span class="example" id="exm:estimacion-jack-precision"><strong>(\#exm:estimacion-jack-precision)  \iffalse (Aproximación jackknife de la precisión de estimaciones del tiempo de vida medio de microorganismos) \fi{} </strong></span><br> \vspace{0.5cm}
 
 Consideremos la muestra de tiempos de vida de microorganismos ya
 tratada. El siguiente código permite calcular los
 estimadores jackknife del sesgo y de la precisión tanto de la media como
-de la mediana muestral.</div>\EndKnitrBlock{example}
+de la mediana muestral.
+\EndKnitrBlock{example}
 
 
 ```r
