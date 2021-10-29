@@ -459,7 +459,7 @@ r.squared
 ```
 
 ```
-## [1] 0.8023864
+## [1] 0.8015429
 ```
 
 
@@ -515,28 +515,33 @@ En esta sección nos centraremos en el bootstrap en la estimación tipo núcleo 
 
 El modelo ajustado de regresión se puede emplear para estimar la respuesta media $m(x_0)$ cuando la variable explicativa toma un valor concreto $x_0$.
 En este caso también podemos emplear el bootstrap residual (Sección \@ref(boot-residual)) para realizar inferencias acerca de la media.
-La idea sería aproximar la distribución del error de estimación $\hat{m}(x_0) - m(x_0)$ por la distribución bootstrap de $\hat{m}^{\ast}(x_0) - \hat{m}(x_0)$.
+La idea sería aproximar la distribución del error de estimación $\hat{m}_h(x_0) - m(x_0)$ por la distribución bootstrap de $\hat{m}^{\ast}_h(x_0) - \hat{m}_g(x_0)$.
 
-Para reproducir adecuadamente el sesgo del estimador, la ventana $g$ ha de ser asintóticamente mayor que $h$ (de orden $n^{-1/5}$).
-Análogamente al caso de la densidad, la recomendación es emplear la ventana óptima para la estimación de $m^{\prime \prime }\left( x_0 \right)$, de orden $n^{-1/9}$ (Sección \@ref(wild-bootstrap)). 
+Para reproducir adecuadamente el sesgo del estimador, la ventana $g$ debería ser asintóticamente mayor que $h$ (de orden $n^{-1/5}$).
+Análogamente al caso de la densidad, la recomendación sería emplear la ventana óptima para la estimación de $m^{\prime \prime }\left( x_0 \right)$, de orden $n^{-1/9}$ (Sección \@ref(wild-bootstrap)). 
+Sin embargo, en la práctica es habitual emplear $g=h$ para evitar la selección de esta ventana (lo que además facilita emplear herramientas como el paquete `boot`). 
+Otra alternativa podría ser asumir que $g \simeq n^{1/5}h/n^{1/9}$ como se hace a continuación.
 
 
 ```r
 n <- length(x)
 g <- h * n^(4/45) # h*n^(-1/9)/n^(-1/5)
-fit2 <- locpoly(x, y, bandwidth = g)
-est2 <- approx(fit2, xout = x)$y # est2 <- predict(fit2)
-# resid2 <- y - est2 # resid2 <- residuals(fit2)
+# g <- h
+fitg <- locpoly(x, y, bandwidth = g) # puntos de estimación/predicción
+# fitg$y <- predict(fitg, newdata = fitg$x) 
+estg <- approx(fitg, xout = x)$y # puntos observaciones
+# estg <- predict(fitg)
+# resid2 <- y - estg # resid2 <- residuals(fitg)
 
 # Remuestreo
 set.seed(1)
-B <- 1000
+B <- 2000
 stat_fit_boot <- matrix(nrow = length(fit$x), ncol = B)
 resid0 <- resid - mean(resid)
 for (k in 1:B) {
-    y_boot <- est2 + sample(resid0, replace = TRUE)
+    y_boot <- estg + sample(resid0, replace = TRUE)
     fit_boot <- locpoly(x, y_boot, bandwidth = h)$y
-    stat_fit_boot[ , k] <- fit_boot - fit$y
+    stat_fit_boot[ , k] <- fit_boot - fitg$y
 }
 
 # Calculo del sesgo y error estándar 
@@ -579,13 +584,14 @@ lines(fit$x, ic_sup_boot, lty = 2)
 \begin{center}\includegraphics[width=0.7\linewidth]{07-npreg_files/figure-latex/unnamed-chunk-7-1} \end{center}
 
 
-El modelo ajustado también es empleado para predecir una nueva respuesta individual $Y(x_0)$ para un valor concreto $x_0$ de la variable explicativa. 
-En el caso de errores independientes $\hat{Y}(x_0) = \hat{m}(x_0)$, pero si estamos interesados en realizar inferencias sobre el error de predicción $r(x_0) = Y(x_0) - \hat{Y}(x_0)$, a la variabilidad de $\hat{m}(x_0)$ debida a la muestra, se añade la variabilidad del error $\varepsilon(x_0)$.
+
+El modelo ajustado también es empleado para predecir una nueva respuesta individual $Y(x_0)$ para un valor concreto $x_0$ de la variable explicativa.  
+En el caso de errores independientes $\hat{Y}(x_0) = \hat{m}_h(x_0)$, pero si estamos interesados en realizar inferencias sobre el error de predicción $r(x_0) = Y(x_0) - \hat{Y}(x_0)$, a la variabilidad de $\hat{m}_h(x_0)$ debida a la muestra, se añade la variabilidad del error $\varepsilon(x_0)$.
 
 La idea sería aproximar la distribución del error de predicción:
-$$r(x_0) = Y(x_0) - \hat{Y}(x_0) = m(x_0) + \varepsilon(x_0) - \hat{m}(x_0)$$
+$$r(x_0) = Y(x_0) - \hat{Y}(x_0) = m(x_0) + \varepsilon(x_0) - \hat{m}_h(x_0)$$
 por la distribución bootstrap de:
-$$r^{\ast}(x_0) = Y^{\ast}(x_0) - \hat{Y}^{\ast}(x_0) = \hat{m}(x_0) + \varepsilon^{\ast}(x_0) - \hat{m}^{\ast}(x_0)$$
+$$r^{\ast}(x_0) = Y^{\ast}(x_0) - \hat{Y}^{\ast}(x_0) = \hat{m}_g(x_0) + \varepsilon^{\ast}(x_0) - \hat{m}^{\ast}_h(x_0)$$
 
 
 ```r
@@ -594,9 +600,9 @@ set.seed(1)
 n_pre <- length(fit$x)
 stat_pred_boot <- matrix(nrow = n_pre, ncol = B)
 for (k in 1:B) {
-    y_boot <- est2 + sample(resid0, replace = TRUE)
+    y_boot <- estg + sample(resid0, replace = TRUE)
     fit_boot <- locpoly(x, y_boot, bandwidth = h)$y
-    pred_boot <- fit_boot + sample(resid0, n_pre, replace = TRUE)
+    pred_boot <- fitg$y + sample(resid0, n_pre, replace = TRUE)
     stat_pred_boot[ , k] <- pred_boot - fit_boot
 }
 
@@ -620,6 +626,7 @@ lines(fit$x, ip_sup_boot, lty = 3)
 
 \begin{center}\includegraphics[width=0.7\linewidth]{07-npreg_files/figure-latex/unnamed-chunk-8-1} \end{center}
 
+
 En este caso puede no ser recomendable considerar errores i.i.d., sería de esperar heterocedásticidad (e incluso dependencia temporal).
 El bootstrap residual se puede extender al caso heterocedástico y/o dependencia (e.g. Castillo-Páez *et al.*, 2019, 2020).
 
@@ -637,14 +644,14 @@ fit_boot <- matrix(nrow = n_pre, ncol = B)
 for (k in 1:B) {
 		rwild <- sample(c((1 - sqrt(5))/2, (1 + sqrt(5))/2), n, replace = TRUE, 
 		                prob = c((5 + sqrt(5))/10, 1 - (5 + sqrt(5))/10))
-    y_boot <- est2 + resid*rwild
+    y_boot <- estg + resid*rwild
     fit_boot[ , k] <- locpoly(x, y_boot, bandwidth = h)$y
     # OJO: bootstrap percetil directo
 }
 		
 
 # Calculo del sesgo y error estándar
-bias <- apply(fit_boot, 1, mean, na.rm = TRUE) -  fit$y
+bias <- apply(fit_boot, 1, mean, na.rm = TRUE) - fitg$y
 std.err <- apply(fit_boot, 1, sd, na.rm = TRUE)
 
 # Representar estimación y corrección de sesgo bootstrap

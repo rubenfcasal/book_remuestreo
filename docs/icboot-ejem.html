@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>4.6 Ejemplos | Técnicas de Remuestreo</title>
   <meta name="description" content="Apuntes de la asignatura de Técnicas de Remuestreo del Máster en Técnicas Estadísticas." />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
   <meta property="og:title" content="4.6 Ejemplos | Técnicas de Remuestreo" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Ricardo Cao Abad (rcao@udc.es) y Rubén Fernández Casal (rfcasal@udc.es)" />
 
 
-<meta name="date" content="2021-09-07" />
+<meta name="date" content="2021-10-29" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,9 +33,7 @@
   
 <link rel="prev" href="cap-err-cober.html"/>
 <link rel="next" href="contrastes.html"/>
-<script src="libs/header-attrs-2.10/header-attrs.js"></script>
-<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -51,23 +49,23 @@
 
 
 
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 
 
 <style type="text/css">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -87,7 +85,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {   }
 @media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -120,7 +118,6 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
-
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 
@@ -138,184 +135,150 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Prólogo</a></li>
-<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Motivación del principio Bootstrap</a>
-<ul>
-<li class="chapter" data-level="1.1" data-path="introducción.html"><a href="introducción.html"><i class="fa fa-check"></i><b>1.1</b> Introducción</a>
-<ul>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Motivación del principio Bootstrap</a><ul>
+<li class="chapter" data-level="1.1" data-path="introducción.html"><a href="introducción.html"><i class="fa fa-check"></i><b>1.1</b> Introducción</a><ul>
 <li class="chapter" data-level="1.1.1" data-path="introducción.html"><a href="introducción.html#breve-nota-histórica"><i class="fa fa-check"></i><b>1.1.1</b> Breve nota histórica</a></li>
 <li class="chapter" data-level="1.1.2" data-path="introducción.html"><a href="introducción.html#paradigma-inferencial-y-análogo-bootstrap"><i class="fa fa-check"></i><b>1.1.2</b> Paradigma inferencial y análogo bootstrap</a></li>
 <li class="chapter" data-level="1.1.3" data-path="introducción.html"><a href="introducción.html#intro-implementacion"><i class="fa fa-check"></i><b>1.1.3</b> Implementación en la práctica</a></li>
 </ul></li>
-<li class="chapter" data-level="1.2" data-path="intro-unif.html"><a href="intro-unif.html"><i class="fa fa-check"></i><b>1.2</b> El Bootstrap uniforme</a>
-<ul>
+<li class="chapter" data-level="1.2" data-path="intro-unif.html"><a href="intro-unif.html"><i class="fa fa-check"></i><b>1.2</b> El Bootstrap uniforme</a><ul>
 <li class="chapter" data-level="1.2.1" data-path="intro-unif.html"><a href="intro-unif.html#ejemplos"><i class="fa fa-check"></i><b>1.2.1</b> Ejemplos</a></li>
 </ul></li>
-<li class="chapter" data-level="1.3" data-path="cálculo-de-la-distribución-bootstrap-exacta-y-aproximada.html"><a href="cálculo-de-la-distribución-bootstrap-exacta-y-aproximada.html"><i class="fa fa-check"></i><b>1.3</b> Cálculo de la distribución Bootstrap: exacta y aproximada</a>
-<ul>
+<li class="chapter" data-level="1.3" data-path="cálculo-de-la-distribución-bootstrap-exacta-y-aproximada.html"><a href="cálculo-de-la-distribución-bootstrap-exacta-y-aproximada.html"><i class="fa fa-check"></i><b>1.3</b> Cálculo de la distribución Bootstrap: exacta y aproximada</a><ul>
 <li class="chapter" data-level="1.3.1" data-path="cálculo-de-la-distribución-bootstrap-exacta-y-aproximada.html"><a href="cálculo-de-la-distribución-bootstrap-exacta-y-aproximada.html#distribución-bootstrap-exacta"><i class="fa fa-check"></i><b>1.3.1</b> Distribución bootstrap exacta</a></li>
 <li class="chapter" data-level="1.3.2" data-path="cálculo-de-la-distribución-bootstrap-exacta-y-aproximada.html"><a href="cálculo-de-la-distribución-bootstrap-exacta-y-aproximada.html#vectores-de-remuestreo"><i class="fa fa-check"></i><b>1.3.2</b> Vectores de remuestreo</a></li>
 <li class="chapter" data-level="1.3.3" data-path="cálculo-de-la-distribución-bootstrap-exacta-y-aproximada.html"><a href="cálculo-de-la-distribución-bootstrap-exacta-y-aproximada.html#inferencia-sobre-la-mediana"><i class="fa fa-check"></i><b>1.3.3</b> Inferencia sobre la mediana</a></li>
 <li class="chapter" data-level="1.3.4" data-path="cálculo-de-la-distribución-bootstrap-exacta-y-aproximada.html"><a href="cálculo-de-la-distribución-bootstrap-exacta-y-aproximada.html#distribución-bootstrap-aproximada-por-monte-carlo"><i class="fa fa-check"></i><b>1.3.4</b> Distribución Bootstrap aproximada por Monte Carlo</a></li>
 <li class="chapter" data-level="1.3.5" data-path="cálculo-de-la-distribución-bootstrap-exacta-y-aproximada.html"><a href="cálculo-de-la-distribución-bootstrap-exacta-y-aproximada.html#elección-del-número-de-réplicas-monte-carlo"><i class="fa fa-check"></i><b>1.3.5</b> Elección del número de réplicas Monte Carlo</a></li>
 </ul></li>
-<li class="chapter" data-level="1.4" data-path="intro-paquetes.html"><a href="intro-paquetes.html"><i class="fa fa-check"></i><b>1.4</b> Herramientas disponibles en R sobre bootstrap</a>
-<ul>
+<li class="chapter" data-level="1.4" data-path="intro-paquetes.html"><a href="intro-paquetes.html"><i class="fa fa-check"></i><b>1.4</b> Herramientas disponibles en R sobre bootstrap</a><ul>
 <li class="chapter" data-level="1.4.1" data-path="intro-paquetes.html"><a href="intro-paquetes.html#intro-pkgboot"><i class="fa fa-check"></i><b>1.4.1</b> El paquete <code>boot</code></a></li>
 <li class="chapter" data-level="1.4.2" data-path="intro-paquetes.html"><a href="intro-paquetes.html#boot-unif-multi"><i class="fa fa-check"></i><b>1.4.2</b> Ejemplo: Bootstrap uniforme multidimensional</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="prec-sesgo.html"><a href="prec-sesgo.html"><i class="fa fa-check"></i><b>2</b> Estimación de la precisión y el sesgo de un estimador</a>
-<ul>
-<li class="chapter" data-level="2.1" data-path="prec-sesgo-boot.html"><a href="prec-sesgo-boot.html"><i class="fa fa-check"></i><b>2.1</b> Estimación bootstrap de la precisión y el sesgo de un estimador</a>
-<ul>
+<li class="chapter" data-level="2" data-path="prec-sesgo.html"><a href="prec-sesgo.html"><i class="fa fa-check"></i><b>2</b> Estimación de la precisión y el sesgo de un estimador</a><ul>
+<li class="chapter" data-level="2.1" data-path="prec-sesgo-boot.html"><a href="prec-sesgo-boot.html"><i class="fa fa-check"></i><b>2.1</b> Estimación bootstrap de la precisión y el sesgo de un estimador</a><ul>
 <li class="chapter" data-level="2.1.1" data-path="prec-sesgo-boot.html"><a href="prec-sesgo-boot.html#ejemplo-la-media-muestral"><i class="fa fa-check"></i><b>2.1.1</b> Ejemplo: la media muestral</a></li>
 </ul></li>
 <li class="chapter" data-level="2.2" data-path="jackknife.html"><a href="jackknife.html"><i class="fa fa-check"></i><b>2.2</b> Motivación del método Jackknife</a></li>
 <li class="chapter" data-level="2.3" data-path="estimación-jackknife-de-la-precisión-y-el-sesgo-de-un-estimador.html"><a href="estimación-jackknife-de-la-precisión-y-el-sesgo-de-un-estimador.html"><i class="fa fa-check"></i><b>2.3</b> Estimación Jackknife de la precisión y el sesgo de un estimador</a></li>
 <li class="chapter" data-level="2.4" data-path="relación-bootstrapjackknife-en-dicha-estimación.html"><a href="relación-bootstrapjackknife-en-dicha-estimación.html"><i class="fa fa-check"></i><b>2.4</b> Relación Bootstrap/Jackknife en dicha estimación</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="modunif.html"><a href="modunif.html"><i class="fa fa-check"></i><b>3</b> Modificaciones del Bootstrap uniforme</a>
-<ul>
+<li class="chapter" data-level="3" data-path="modunif.html"><a href="modunif.html"><i class="fa fa-check"></i><b>3</b> Modificaciones del Bootstrap uniforme</a><ul>
 <li class="chapter" data-level="3.1" data-path="modunif-boot-par.html"><a href="modunif-boot-par.html"><i class="fa fa-check"></i><b>3.1</b> Bootstrap paramétrico</a></li>
 <li class="chapter" data-level="3.2" data-path="bootstrap-simetrizado.html"><a href="bootstrap-simetrizado.html"><i class="fa fa-check"></i><b>3.2</b> Bootstrap simetrizado</a></li>
 <li class="chapter" data-level="3.3" data-path="modunif-boot-suav.html"><a href="modunif-boot-suav.html"><i class="fa fa-check"></i><b>3.3</b> Bootstrap suavizado</a></li>
 <li class="chapter" data-level="3.4" data-path="bootstrap-ponderado-y-bootstrap-sesgado.html"><a href="bootstrap-ponderado-y-bootstrap-sesgado.html"><i class="fa fa-check"></i><b>3.4</b> Bootstrap ponderado y bootstrap sesgado</a></li>
-<li class="chapter" data-level="3.5" data-path="deficien-unif.html"><a href="deficien-unif.html"><i class="fa fa-check"></i><b>3.5</b> Deficiencias del bootstrap uniforme</a>
-<ul>
+<li class="chapter" data-level="3.5" data-path="deficien-unif.html"><a href="deficien-unif.html"><i class="fa fa-check"></i><b>3.5</b> Deficiencias del bootstrap uniforme</a><ul>
 <li class="chapter" data-level="3.5.1" data-path="deficien-unif.html"><a href="deficien-unif.html#ejemplo-método-alternativo"><i class="fa fa-check"></i><b>3.5.1</b> Ejemplo (método alternativo)</a></li>
 </ul></li>
 <li class="chapter" data-level="3.6" data-path="validez-de-la-aproximación-bootstrap.html"><a href="validez-de-la-aproximación-bootstrap.html"><i class="fa fa-check"></i><b>3.6</b> Validez de la aproximación Bootstrap</a></li>
-<li class="chapter" data-level="3.7" data-path="boot-reg.html"><a href="boot-reg.html"><i class="fa fa-check"></i><b>3.7</b> Bootstrap semiparamétrico y bootstrap residual</a>
-<ul>
+<li class="chapter" data-level="3.7" data-path="boot-reg.html"><a href="boot-reg.html"><i class="fa fa-check"></i><b>3.7</b> Bootstrap semiparamétrico y bootstrap residual</a><ul>
 <li class="chapter" data-level="3.7.1" data-path="boot-reg.html"><a href="boot-reg.html#boot-unif-reg"><i class="fa fa-check"></i><b>3.7.1</b> Remuestreo de las observaciones</a></li>
 <li class="chapter" data-level="3.7.2" data-path="boot-reg.html"><a href="boot-reg.html#boot-residual"><i class="fa fa-check"></i><b>3.7.2</b> Bootstrap residual</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="icboot.html"><a href="icboot.html"><i class="fa fa-check"></i><b>4</b> Intervalos de confianza bootstrap</a>
-<ul>
+<li class="chapter" data-level="4" data-path="icboot.html"><a href="icboot.html"><i class="fa fa-check"></i><b>4</b> Intervalos de confianza bootstrap</a><ul>
 <li class="chapter" data-level="4.1" data-path="icboot-norm.html"><a href="icboot-norm.html"><i class="fa fa-check"></i><b>4.1</b> Intervalos basados en la distribución normal asintótica</a></li>
 <li class="chapter" data-level="4.2" data-path="icboot-basic.html"><a href="icboot-basic.html"><i class="fa fa-check"></i><b>4.2</b> Método percentil (básico)</a></li>
 <li class="chapter" data-level="4.3" data-path="icboot-perc-t.html"><a href="icboot-perc-t.html"><i class="fa fa-check"></i><b>4.3</b> Método percentil-<em>t</em></a></li>
 <li class="chapter" data-level="4.4" data-path="icboot-perc-t-sim.html"><a href="icboot-perc-t-sim.html"><i class="fa fa-check"></i><b>4.4</b> Método percentil-<em>t</em> simetrizado</a></li>
 <li class="chapter" data-level="4.5" data-path="cap-err-cober.html"><a href="cap-err-cober.html"><i class="fa fa-check"></i><b>4.5</b> Tabla resumen de los errores de cobertura</a></li>
-<li class="chapter" data-level="4.6" data-path="icboot-ejem.html"><a href="icboot-ejem.html"><i class="fa fa-check"></i><b>4.6</b> Ejemplos</a>
-<ul>
+<li class="chapter" data-level="4.6" data-path="icboot-ejem.html"><a href="icboot-ejem.html"><i class="fa fa-check"></i><b>4.6</b> Ejemplos</a><ul>
 <li class="chapter" data-level="4.6.1" data-path="icboot-ejem.html"><a href="icboot-ejem.html#media-dt-desconocida-persim"><i class="fa fa-check"></i><b>4.6.1</b> IC bootstrap para la media mediante el método percentil-<em>t</em> simetrizado</a></li>
 <li class="chapter" data-level="4.6.2" data-path="icboot-ejem.html"><a href="icboot-ejem.html#estudio-sim-exp"><i class="fa fa-check"></i><b>4.6.2</b> Estudio de simulación</a></li>
 <li class="chapter" data-level="4.6.3" data-path="icboot-ejem.html"><a href="icboot-ejem.html#icboot-trans"><i class="fa fa-check"></i><b>4.6.3</b> IC bootstrap para el coeficiente de correlación</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="contrastes.html"><a href="contrastes.html"><i class="fa fa-check"></i><b>5</b> Aplicaciones del Bootstrap en contrastes de hipótesis</a>
-<ul>
+<li class="chapter" data-level="5" data-path="contrastes.html"><a href="contrastes.html"><i class="fa fa-check"></i><b>5</b> Aplicaciones del Bootstrap en contrastes de hipótesis</a><ul>
 <li class="chapter" data-level="5.1" data-path="aproximación-del-p-valor-mediante-remuestreo.html"><a href="aproximación-del-p-valor-mediante-remuestreo.html"><i class="fa fa-check"></i><b>5.1</b> Aproximación del p-valor mediante remuestreo</a></li>
-<li class="chapter" data-level="5.2" data-path="contrastes-parametricos.html"><a href="contrastes-parametricos.html"><i class="fa fa-check"></i><b>5.2</b> Contrastes bootstrap paramétricos</a>
-<ul>
+<li class="chapter" data-level="5.2" data-path="contrastes-parametricos.html"><a href="contrastes-parametricos.html"><i class="fa fa-check"></i><b>5.2</b> Contrastes bootstrap paramétricos</a><ul>
 <li class="chapter" data-level="5.2.1" data-path="contrastes-parametricos.html"><a href="contrastes-parametricos.html#ejemplo-contraste-de-kolmogorov-smirnov"><i class="fa fa-check"></i><b>5.2.1</b> Ejemplo: contraste de Kolmogorov-Smirnov</a></li>
 </ul></li>
-<li class="chapter" data-level="5.3" data-path="contrastes-de-permutaciones.html"><a href="contrastes-de-permutaciones.html"><i class="fa fa-check"></i><b>5.3</b> Contrastes de permutaciones</a>
-<ul>
+<li class="chapter" data-level="5.3" data-path="contrastes-de-permutaciones.html"><a href="contrastes-de-permutaciones.html"><i class="fa fa-check"></i><b>5.3</b> Contrastes de permutaciones</a><ul>
 <li class="chapter" data-level="5.3.1" data-path="contrastes-de-permutaciones.html"><a href="contrastes-de-permutaciones.html#ejemplo-inferencia-sobre-el-coeficiente-de-correlación-lineal"><i class="fa fa-check"></i><b>5.3.1</b> Ejemplo: Inferencia sobre el coeficiente de correlación lineal</a></li>
 </ul></li>
-<li class="chapter" data-level="5.4" data-path="contrastes-semiparametricos.html"><a href="contrastes-semiparametricos.html"><i class="fa fa-check"></i><b>5.4</b> Contrastes bootstrap semiparamétricos</a>
-<ul>
+<li class="chapter" data-level="5.4" data-path="contrastes-semiparametricos.html"><a href="contrastes-semiparametricos.html"><i class="fa fa-check"></i><b>5.4</b> Contrastes bootstrap semiparamétricos</a><ul>
 <li class="chapter" data-level="5.4.1" data-path="contrastes-semiparametricos.html"><a href="contrastes-semiparametricos.html#ejemplo-inferencia-sobre-modelos-de-regresión"><i class="fa fa-check"></i><b>5.4.1</b> Ejemplo: Inferencia sobre modelos de regresión</a></li>
 <li class="chapter" data-level="5.4.2" data-path="contrastes-semiparametricos.html"><a href="contrastes-semiparametricos.html#ejercicio"><i class="fa fa-check"></i><b>5.4.2</b> Ejercicio</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="npden.html"><a href="npden.html"><i class="fa fa-check"></i><b>6</b> Bootstrap y estimación no paramétrica de la densidad</a>
-<ul>
+<li class="chapter" data-level="6" data-path="npden.html"><a href="npden.html"><i class="fa fa-check"></i><b>6</b> Bootstrap y estimación no paramétrica de la densidad</a><ul>
 <li class="chapter" data-level="6.1" data-path="estimación-no-paramétrica-de-la-función-de-densidad.html"><a href="estimación-no-paramétrica-de-la-función-de-densidad.html"><i class="fa fa-check"></i><b>6.1</b> Estimación no paramétrica de la función de densidad</a></li>
-<li class="chapter" data-level="6.2" data-path="sesgo-varianza-y-error-cuadrático-medio.html"><a href="sesgo-varianza-y-error-cuadrático-medio.html"><i class="fa fa-check"></i><b>6.2</b> Sesgo, varianza y error cuadrático medio</a>
-<ul>
+<li class="chapter" data-level="6.2" data-path="sesgo-varianza-y-error-cuadrático-medio.html"><a href="sesgo-varianza-y-error-cuadrático-medio.html"><i class="fa fa-check"></i><b>6.2</b> Sesgo, varianza y error cuadrático medio</a><ul>
 <li class="chapter" data-level="6.2.1" data-path="sesgo-varianza-y-error-cuadrático-medio.html"><a href="sesgo-varianza-y-error-cuadrático-medio.html#sesgo"><i class="fa fa-check"></i><b>6.2.1</b> Sesgo</a></li>
 <li class="chapter" data-level="6.2.2" data-path="sesgo-varianza-y-error-cuadrático-medio.html"><a href="sesgo-varianza-y-error-cuadrático-medio.html#varianza"><i class="fa fa-check"></i><b>6.2.2</b> Varianza</a></li>
 <li class="chapter" data-level="6.2.3" data-path="sesgo-varianza-y-error-cuadrático-medio.html"><a href="sesgo-varianza-y-error-cuadrático-medio.html#error-cuadrático-medio"><i class="fa fa-check"></i><b>6.2.3</b> Error cuadrático medio</a></li>
 <li class="chapter" data-level="6.2.4" data-path="sesgo-varianza-y-error-cuadrático-medio.html"><a href="sesgo-varianza-y-error-cuadrático-medio.html#error-cuadrático-medio-integrado-mise"><i class="fa fa-check"></i><b>6.2.4</b> Error cuadrático medio integrado (MISE)</a></li>
 </ul></li>
-<li class="chapter" data-level="6.3" data-path="aproximacion-bootstrap.html"><a href="aproximacion-bootstrap.html"><i class="fa fa-check"></i><b>6.3</b> Aproximación Bootstrap de la distribución del estimador de Parzen-Rosenblatt</a>
-<ul>
+<li class="chapter" data-level="6.3" data-path="aproximacion-bootstrap.html"><a href="aproximacion-bootstrap.html"><i class="fa fa-check"></i><b>6.3</b> Aproximación Bootstrap de la distribución del estimador de Parzen-Rosenblatt</a><ul>
 <li class="chapter" data-level="6.3.1" data-path="aproximacion-bootstrap.html"><a href="aproximacion-bootstrap.html#distribución-asintótica-del-estimador-de-parzen-rosenblatt"><i class="fa fa-check"></i><b>6.3.1</b> Distribución asintótica del estimador de Parzen-Rosenblatt</a></li>
 <li class="chapter" data-level="6.3.2" data-path="aproximacion-bootstrap.html"><a href="aproximacion-bootstrap.html#aproximación-plug-in"><i class="fa fa-check"></i><b>6.3.2</b> Aproximación plug-in</a></li>
 <li class="chapter" data-level="6.3.3" data-path="aproximacion-bootstrap.html"><a href="aproximacion-bootstrap.html#aproximación-bootstrap"><i class="fa fa-check"></i><b>6.3.3</b> Aproximación bootstrap</a></li>
 </ul></li>
-<li class="chapter" data-level="6.4" data-path="el-bootstrap-en-la-selección-del-parámetro-de-suavizado..html"><a href="el-bootstrap-en-la-selección-del-parámetro-de-suavizado..html"><i class="fa fa-check"></i><b>6.4</b> El Bootstrap en la selección del parámetro de suavizado.</a>
-<ul>
-<li class="chapter" data-level="6.4.1" data-path="el-bootstrap-en-la-selección-del-parámetro-de-suavizado..html"><a href="el-bootstrap-en-la-selección-del-parámetro-de-suavizado..html#expresión-asintótica-de-la-ventana-óptima"><i class="fa fa-check"></i><b>6.4.1</b> Expresión asintótica de la ventana óptima</a></li>
-<li class="chapter" data-level="6.4.2" data-path="el-bootstrap-en-la-selección-del-parámetro-de-suavizado..html"><a href="el-bootstrap-en-la-selección-del-parámetro-de-suavizado..html#análogo-bootstrap-del-mise"><i class="fa fa-check"></i><b>6.4.2</b> Análogo bootstrap del <span class="math inline">\(MISE\)</span></a></li>
-<li class="chapter" data-level="6.4.3" data-path="el-bootstrap-en-la-selección-del-parámetro-de-suavizado..html"><a href="el-bootstrap-en-la-selección-del-parámetro-de-suavizado..html#expresión-cerrada-para-miseast"><i class="fa fa-check"></i><b>6.4.3</b> Expresión cerrada para <span class="math inline">\(MISE^{\ast}\)</span></a></li>
-<li class="chapter" data-level="6.4.4" data-path="el-bootstrap-en-la-selección-del-parámetro-de-suavizado..html"><a href="el-bootstrap-en-la-selección-del-parámetro-de-suavizado..html#elección-de-la-ventana-piloto"><i class="fa fa-check"></i><b>6.4.4</b> Elección de la ventana piloto</a></li>
-<li class="chapter" data-level="6.4.5" data-path="el-bootstrap-en-la-selección-del-parámetro-de-suavizado..html"><a href="el-bootstrap-en-la-selección-del-parámetro-de-suavizado..html#resultados-teóricos"><i class="fa fa-check"></i><b>6.4.5</b> Resultados teóricos</a></li>
-<li class="chapter" data-level="6.4.6" data-path="el-bootstrap-en-la-selección-del-parámetro-de-suavizado..html"><a href="el-bootstrap-en-la-selección-del-parámetro-de-suavizado..html#caso-particular-de-núcleo-gaussiano"><i class="fa fa-check"></i><b>6.4.6</b> Caso particular de núcleo gaussiano</a></li>
-<li class="chapter" data-level="6.4.7" data-path="el-bootstrap-en-la-selección-del-parámetro-de-suavizado..html"><a href="el-bootstrap-en-la-selección-del-parámetro-de-suavizado..html#comparación-con-otros-selectores"><i class="fa fa-check"></i><b>6.4.7</b> Comparación con otros selectores</a></li>
+<li class="chapter" data-level="6.4" data-path="el-bootstrap-en-la-selección-del-parámetro-de-suavizado-.html"><a href="el-bootstrap-en-la-selección-del-parámetro-de-suavizado-.html"><i class="fa fa-check"></i><b>6.4</b> El Bootstrap en la selección del parámetro de suavizado.</a><ul>
+<li class="chapter" data-level="6.4.1" data-path="el-bootstrap-en-la-selección-del-parámetro-de-suavizado-.html"><a href="el-bootstrap-en-la-selección-del-parámetro-de-suavizado-.html#expresión-asintótica-de-la-ventana-óptima"><i class="fa fa-check"></i><b>6.4.1</b> Expresión asintótica de la ventana óptima</a></li>
+<li class="chapter" data-level="6.4.2" data-path="el-bootstrap-en-la-selección-del-parámetro-de-suavizado-.html"><a href="el-bootstrap-en-la-selección-del-parámetro-de-suavizado-.html#análogo-bootstrap-del-mise"><i class="fa fa-check"></i><b>6.4.2</b> Análogo bootstrap del <span class="math inline">\(MISE\)</span></a></li>
+<li class="chapter" data-level="6.4.3" data-path="el-bootstrap-en-la-selección-del-parámetro-de-suavizado-.html"><a href="el-bootstrap-en-la-selección-del-parámetro-de-suavizado-.html#expresión-cerrada-para-miseast"><i class="fa fa-check"></i><b>6.4.3</b> Expresión cerrada para <span class="math inline">\(MISE^{\ast}\)</span></a></li>
+<li class="chapter" data-level="6.4.4" data-path="el-bootstrap-en-la-selección-del-parámetro-de-suavizado-.html"><a href="el-bootstrap-en-la-selección-del-parámetro-de-suavizado-.html#elección-de-la-ventana-piloto"><i class="fa fa-check"></i><b>6.4.4</b> Elección de la ventana piloto</a></li>
+<li class="chapter" data-level="6.4.5" data-path="el-bootstrap-en-la-selección-del-parámetro-de-suavizado-.html"><a href="el-bootstrap-en-la-selección-del-parámetro-de-suavizado-.html#resultados-teóricos"><i class="fa fa-check"></i><b>6.4.5</b> Resultados teóricos</a></li>
+<li class="chapter" data-level="6.4.6" data-path="el-bootstrap-en-la-selección-del-parámetro-de-suavizado-.html"><a href="el-bootstrap-en-la-selección-del-parámetro-de-suavizado-.html#caso-particular-de-núcleo-gaussiano"><i class="fa fa-check"></i><b>6.4.6</b> Caso particular de núcleo gaussiano</a></li>
+<li class="chapter" data-level="6.4.7" data-path="el-bootstrap-en-la-selección-del-parámetro-de-suavizado-.html"><a href="el-bootstrap-en-la-selección-del-parámetro-de-suavizado-.html#comparación-con-otros-selectores"><i class="fa fa-check"></i><b>6.4.7</b> Comparación con otros selectores</a></li>
 </ul></li>
 <li class="chapter" data-level="6.5" data-path="npden-r.html"><a href="npden-r.html"><i class="fa fa-check"></i><b>6.5</b> Estimación no paramétrica de la densidad en R</a></li>
-<li class="chapter" data-level="6.6" data-path="ejemplos-1.html"><a href="ejemplos-1.html"><i class="fa fa-check"></i><b>6.6</b> Ejemplos</a>
-<ul>
+<li class="chapter" data-level="6.6" data-path="ejemplos-1.html"><a href="ejemplos-1.html"><i class="fa fa-check"></i><b>6.6</b> Ejemplos</a><ul>
 <li class="chapter" data-level="6.6.1" data-path="ejemplos-1.html"><a href="ejemplos-1.html#bootstrap-y-estimación-del-sesgo"><i class="fa fa-check"></i><b>6.6.1</b> Bootstrap y estimación del sesgo</a></li>
 <li class="chapter" data-level="6.6.2" data-path="ejemplos-1.html"><a href="ejemplos-1.html#npden-r-ic"><i class="fa fa-check"></i><b>6.6.2</b> Estimación por intervalos de confianza</a></li>
-<li class="chapter" data-level="6.6.3" data-path="ejemplos-1.html"><a href="ejemplos-1.html#implementación-con-el-paquete-boot"><i class="fa fa-check"></i><b>6.6.3</b> Implementación con el paquete <code>boot</code></a></li>
+<li class="chapter" data-level="6.6.3" data-path="ejemplos-1.html"><a href="ejemplos-1.html#npden-r-boot"><i class="fa fa-check"></i><b>6.6.3</b> Implementación con el paquete <code>boot</code></a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="npreg.html"><a href="npreg.html"><i class="fa fa-check"></i><b>7</b> Bootstrap y regresión no paramétrica</a>
-<ul>
-<li class="chapter" data-level="7.1" data-path="nadaraya-watson.html"><a href="nadaraya-watson.html"><i class="fa fa-check"></i><b>7.1</b> Estimador de Nadaraya-Watson</a>
-<ul>
+<li class="chapter" data-level="7" data-path="npreg.html"><a href="npreg.html"><i class="fa fa-check"></i><b>7</b> Bootstrap y regresión no paramétrica</a><ul>
+<li class="chapter" data-level="7.1" data-path="nadaraya-watson.html"><a href="nadaraya-watson.html"><i class="fa fa-check"></i><b>7.1</b> Estimador de Nadaraya-Watson</a><ul>
 <li class="chapter" data-level="7.1.1" data-path="nadaraya-watson.html"><a href="nadaraya-watson.html#distribución-asintótica-del-estimador-de-nadaraya-watson"><i class="fa fa-check"></i><b>7.1.1</b> Distribución asintótica del estimador de Nadaraya-Watson</a></li>
 <li class="chapter" data-level="7.1.2" data-path="nadaraya-watson.html"><a href="nadaraya-watson.html#órdenes-de-convergencia-de-la-distribución-del-estimador-de-nadaraya-watson-a-su-distribución-asintótica"><i class="fa fa-check"></i><b>7.1.2</b> Órdenes de convergencia de la distribución del estimador de Nadaraya-Watson a su distribución asintótica</a></li>
 <li class="chapter" data-level="7.1.3" data-path="nadaraya-watson.html"><a href="nadaraya-watson.html#aproximación-plug-in-1"><i class="fa fa-check"></i><b>7.1.3</b> Aproximación plug-in</a></li>
 </ul></li>
-<li class="chapter" data-level="7.2" data-path="métodos-de-remuestreo-en-regresión-no-paramétrica.html"><a href="métodos-de-remuestreo-en-regresión-no-paramétrica.html"><i class="fa fa-check"></i><b>7.2</b> Métodos de remuestreo en regresión no paramétrica</a>
-<ul>
+<li class="chapter" data-level="7.2" data-path="métodos-de-remuestreo-en-regresión-no-paramétrica.html"><a href="métodos-de-remuestreo-en-regresión-no-paramétrica.html"><i class="fa fa-check"></i><b>7.2</b> Métodos de remuestreo en regresión no paramétrica</a><ul>
 <li class="chapter" data-level="7.2.1" data-path="métodos-de-remuestreo-en-regresión-no-paramétrica.html"><a href="métodos-de-remuestreo-en-regresión-no-paramétrica.html#wild-bootstrap"><i class="fa fa-check"></i><b>7.2.1</b> Wild bootstrap</a></li>
 <li class="chapter" data-level="7.2.2" data-path="métodos-de-remuestreo-en-regresión-no-paramétrica.html"><a href="métodos-de-remuestreo-en-regresión-no-paramétrica.html#bootstrap-suavizado-en-la-variable-explicativa"><i class="fa fa-check"></i><b>7.2.2</b> Bootstrap suavizado en la variable explicativa</a></li>
 <li class="chapter" data-level="7.2.3" data-path="métodos-de-remuestreo-en-regresión-no-paramétrica.html"><a href="métodos-de-remuestreo-en-regresión-no-paramétrica.html#resumen-comparativo"><i class="fa fa-check"></i><b>7.2.3</b> Resumen comparativo</a></li>
 </ul></li>
-<li class="chapter" data-level="7.3" data-path="locpol-r.html"><a href="locpol-r.html"><i class="fa fa-check"></i><b>7.3</b> Regresión polinómica local en R</a>
-<ul>
+<li class="chapter" data-level="7.3" data-path="locpol-r.html"><a href="locpol-r.html"><i class="fa fa-check"></i><b>7.3</b> Regresión polinómica local en R</a><ul>
 <li class="chapter" data-level="7.3.1" data-path="locpol-r.html"><a href="locpol-r.html#estimación-de-la-varianza"><i class="fa fa-check"></i><b>7.3.1</b> Estimación de la varianza</a></li>
 </ul></li>
-<li class="chapter" data-level="7.4" data-path="ejemplos-2.html"><a href="ejemplos-2.html"><i class="fa fa-check"></i><b>7.4</b> Ejemplos</a>
-<ul>
+<li class="chapter" data-level="7.4" data-path="ejemplos-2.html"><a href="ejemplos-2.html"><i class="fa fa-check"></i><b>7.4</b> Ejemplos</a><ul>
 <li class="chapter" data-level="7.4.1" data-path="ejemplos-2.html"><a href="ejemplos-2.html#bootstrap-residual"><i class="fa fa-check"></i><b>7.4.1</b> Bootstrap residual</a></li>
 <li class="chapter" data-level="7.4.2" data-path="ejemplos-2.html"><a href="ejemplos-2.html#intervalos-de-confianza-y-predicción"><i class="fa fa-check"></i><b>7.4.2</b> Intervalos de confianza y predicción</a></li>
 <li class="chapter" data-level="7.4.3" data-path="ejemplos-2.html"><a href="ejemplos-2.html#r-wild-bootstrap"><i class="fa fa-check"></i><b>7.4.3</b> Wild bootstrap</a></li>
 <li class="chapter" data-level="7.4.4" data-path="ejemplos-2.html"><a href="ejemplos-2.html#ejercicio-1"><i class="fa fa-check"></i><b>7.4.4</b> Ejercicio</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="bootcen.html"><a href="bootcen.html"><i class="fa fa-check"></i><b>8</b> El Bootstrap con datos censurados</a>
-<ul>
-<li class="chapter" data-level="8.1" data-path="introducción-a-los-datos-censurados.html"><a href="introducción-a-los-datos-censurados.html"><i class="fa fa-check"></i><b>8.1</b> Introducción a los datos censurados</a>
-<ul>
+<li class="chapter" data-level="8" data-path="bootcen.html"><a href="bootcen.html"><i class="fa fa-check"></i><b>8</b> El Bootstrap con datos censurados</a><ul>
+<li class="chapter" data-level="8.1" data-path="introducción-a-los-datos-censurados.html"><a href="introducción-a-los-datos-censurados.html"><i class="fa fa-check"></i><b>8.1</b> Introducción a los datos censurados</a><ul>
 <li class="chapter" data-level="8.1.1" data-path="introducción-a-los-datos-censurados.html"><a href="introducción-a-los-datos-censurados.html#estimador-de-kaplan-meier"><i class="fa fa-check"></i><b>8.1.1</b> Estimador de Kaplan-Meier</a></li>
 <li class="chapter" data-level="8.1.2" data-path="introducción-a-los-datos-censurados.html"><a href="introducción-a-los-datos-censurados.html#distribución-asintótica-del-estimador-de-kaplan-meier"><i class="fa fa-check"></i><b>8.1.2</b> Distribución asintótica del estimador de Kaplan-Meier</a></li>
 </ul></li>
-<li class="chapter" data-level="8.2" data-path="remuestreos-bootstrap-en-presencia-de-censura.html"><a href="remuestreos-bootstrap-en-presencia-de-censura.html"><i class="fa fa-check"></i><b>8.2</b> Remuestreos Bootstrap en presencia de censura</a>
-<ul>
+<li class="chapter" data-level="8.2" data-path="remuestreos-bootstrap-en-presencia-de-censura.html"><a href="remuestreos-bootstrap-en-presencia-de-censura.html"><i class="fa fa-check"></i><b>8.2</b> Remuestreos Bootstrap en presencia de censura</a><ul>
 <li class="chapter" data-level="8.2.1" data-path="remuestreos-bootstrap-en-presencia-de-censura.html"><a href="remuestreos-bootstrap-en-presencia-de-censura.html#el-bootstrap-simple"><i class="fa fa-check"></i><b>8.2.1</b> El bootstrap simple</a></li>
 <li class="chapter" data-level="8.2.2" data-path="remuestreos-bootstrap-en-presencia-de-censura.html"><a href="remuestreos-bootstrap-en-presencia-de-censura.html#bootcen-obvio"><i class="fa fa-check"></i><b>8.2.2</b> El bootstrap obvio</a></li>
 </ul></li>
-<li class="chapter" data-level="8.3" data-path="relaciones-entre-los-métodos-de-remuestreo-bajo-censura.html"><a href="relaciones-entre-los-métodos-de-remuestreo-bajo-censura.html"><i class="fa fa-check"></i><b>8.3</b> Relaciones entre los métodos de remuestreo bajo censura</a>
-<ul>
+<li class="chapter" data-level="8.3" data-path="relaciones-entre-los-métodos-de-remuestreo-bajo-censura.html"><a href="relaciones-entre-los-métodos-de-remuestreo-bajo-censura.html"><i class="fa fa-check"></i><b>8.3</b> Relaciones entre los métodos de remuestreo bajo censura</a><ul>
 <li class="chapter" data-level="8.3.1" data-path="relaciones-entre-los-métodos-de-remuestreo-bajo-censura.html"><a href="relaciones-entre-los-métodos-de-remuestreo-bajo-censura.html#equivalencia-entre-el-bootstrap-simple-y-el-obvio"><i class="fa fa-check"></i><b>8.3.1</b> Equivalencia entre el bootstrap simple y el obvio</a></li>
 <li class="chapter" data-level="8.3.2" data-path="relaciones-entre-los-métodos-de-remuestreo-bajo-censura.html"><a href="relaciones-entre-los-métodos-de-remuestreo-bajo-censura.html#bootcen-reid"><i class="fa fa-check"></i><b>8.3.2</b> El bootstrap de Reid</a></li>
 <li class="chapter" data-level="8.3.3" data-path="relaciones-entre-los-métodos-de-remuestreo-bajo-censura.html"><a href="relaciones-entre-los-métodos-de-remuestreo-bajo-censura.html#validez-de-los-planes-de-remuestreo"><i class="fa fa-check"></i><b>8.3.3</b> Validez de los planes de remuestreo</a></li>
 </ul></li>
-<li class="chapter" data-level="8.4" data-path="implementación-en-r-con-los-paquetes-boot-y-survival.html"><a href="implementación-en-r-con-los-paquetes-boot-y-survival.html"><i class="fa fa-check"></i><b>8.4</b> Implementación en <code>R</code> (con los paquetes <code>boot</code> y <code>survival</code>)</a>
-<ul>
+<li class="chapter" data-level="8.4" data-path="implementación-en-r-con-los-paquetes-boot-y-survival.html"><a href="implementación-en-r-con-los-paquetes-boot-y-survival.html"><i class="fa fa-check"></i><b>8.4</b> Implementación en <code>R</code> (con los paquetes <code>boot</code> y <code>survival</code>)</a><ul>
 <li class="chapter" data-level="8.4.1" data-path="implementación-en-r-con-los-paquetes-boot-y-survival.html"><a href="implementación-en-r-con-los-paquetes-boot-y-survival.html#bootstrap-simple"><i class="fa fa-check"></i><b>8.4.1</b> Bootstrap simple</a></li>
 <li class="chapter" data-level="8.4.2" data-path="implementación-en-r-con-los-paquetes-boot-y-survival.html"><a href="implementación-en-r-con-los-paquetes-boot-y-survival.html#otros-métodos-de-remuestreo"><i class="fa fa-check"></i><b>8.4.2</b> Otros métodos de remuestreo</a></li>
 </ul></li>
 <li class="chapter" data-level="8.5" data-path="ejercicios.html"><a href="ejercicios.html"><i class="fa fa-check"></i><b>8.5</b> Ejercicios</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="bootdep.html"><a href="bootdep.html"><i class="fa fa-check"></i><b>9</b> El Bootstrap con datos dependientes</a>
-<ul>
-<li class="chapter" data-level="9.1" data-path="introducción-a-las-condiciones-de-dependencia-y-modelos-habituales-de-datos-dependientes.html"><a href="introducción-a-las-condiciones-de-dependencia-y-modelos-habituales-de-datos-dependientes.html"><i class="fa fa-check"></i><b>9.1</b> Introducción a las condiciones de dependencia y modelos habituales de datos dependientes</a>
-<ul>
+<li class="chapter" data-level="9" data-path="bootdep.html"><a href="bootdep.html"><i class="fa fa-check"></i><b>9</b> El Bootstrap con datos dependientes</a><ul>
+<li class="chapter" data-level="9.1" data-path="introducción-a-las-condiciones-de-dependencia-y-modelos-habituales-de-datos-dependientes.html"><a href="introducción-a-las-condiciones-de-dependencia-y-modelos-habituales-de-datos-dependientes.html"><i class="fa fa-check"></i><b>9.1</b> Introducción a las condiciones de dependencia y modelos habituales de datos dependientes</a><ul>
 <li class="chapter" data-level="9.1.1" data-path="introducción-a-las-condiciones-de-dependencia-y-modelos-habituales-de-datos-dependientes.html"><a href="introducción-a-las-condiciones-de-dependencia-y-modelos-habituales-de-datos-dependientes.html#situaciones-de-dependencia-general"><i class="fa fa-check"></i><b>9.1.1</b> Situaciones de dependencia general</a></li>
 <li class="chapter" data-level="9.1.2" data-path="introducción-a-las-condiciones-de-dependencia-y-modelos-habituales-de-datos-dependientes.html"><a href="introducción-a-las-condiciones-de-dependencia-y-modelos-habituales-de-datos-dependientes.html#modelos-paramétricos-de-dependencia"><i class="fa fa-check"></i><b>9.1.2</b> Modelos paramétricos de dependencia</a></li>
 </ul></li>
-<li class="chapter" data-level="9.2" data-path="el-bootstrap-en-la-estimación-con-datos-dependientes.html"><a href="el-bootstrap-en-la-estimación-con-datos-dependientes.html"><i class="fa fa-check"></i><b>9.2</b> El bootstrap en la estimación con datos dependientes</a>
-<ul>
+<li class="chapter" data-level="9.2" data-path="el-bootstrap-en-la-estimación-con-datos-dependientes.html"><a href="el-bootstrap-en-la-estimación-con-datos-dependientes.html"><i class="fa fa-check"></i><b>9.2</b> El bootstrap en la estimación con datos dependientes</a><ul>
 <li class="chapter" data-level="9.2.1" data-path="el-bootstrap-en-la-estimación-con-datos-dependientes.html"><a href="el-bootstrap-en-la-estimación-con-datos-dependientes.html#modelos-paramétricos-de-dependencia-1"><i class="fa fa-check"></i><b>9.2.1</b> Modelos paramétricos de dependencia</a></li>
 <li class="chapter" data-level="9.2.2" data-path="el-bootstrap-en-la-estimación-con-datos-dependientes.html"><a href="el-bootstrap-en-la-estimación-con-datos-dependientes.html#situaciones-de-dependencia-general-1"><i class="fa fa-check"></i><b>9.2.2</b> Situaciones de dependencia general</a></li>
 <li class="chapter" data-level="9.2.3" data-path="el-bootstrap-en-la-estimación-con-datos-dependientes.html"><a href="el-bootstrap-en-la-estimación-con-datos-dependientes.html#el-bootstrap-por-bloques"><i class="fa fa-check"></i><b>9.2.3</b> El bootstrap por bloques</a></li>
@@ -323,37 +286,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.2.5" data-path="el-bootstrap-en-la-estimación-con-datos-dependientes.html"><a href="el-bootstrap-en-la-estimación-con-datos-dependientes.html#el-bootstrap-estacionario"><i class="fa fa-check"></i><b>9.2.5</b> El bootstrap estacionario</a></li>
 <li class="chapter" data-level="9.2.6" data-path="el-bootstrap-en-la-estimación-con-datos-dependientes.html"><a href="el-bootstrap-en-la-estimación-con-datos-dependientes.html#el-método-del-submuestreo"><i class="fa fa-check"></i><b>9.2.6</b> El método del submuestreo</a></li>
 </ul></li>
-<li class="chapter" data-level="9.3" data-path="el-bootstrap-para-la-predicción-con-datos-dependientes.html"><a href="el-bootstrap-para-la-predicción-con-datos-dependientes.html"><i class="fa fa-check"></i><b>9.3</b> El bootstrap para la predicción con datos dependientes</a>
-<ul>
+<li class="chapter" data-level="9.3" data-path="el-bootstrap-para-la-predicción-con-datos-dependientes.html"><a href="el-bootstrap-para-la-predicción-con-datos-dependientes.html"><i class="fa fa-check"></i><b>9.3</b> El bootstrap para la predicción con datos dependientes</a><ul>
 <li class="chapter" data-level="9.3.1" data-path="el-bootstrap-para-la-predicción-con-datos-dependientes.html"><a href="el-bootstrap-para-la-predicción-con-datos-dependientes.html#modelos-de-dependencia-paramétrica"><i class="fa fa-check"></i><b>9.3.1</b> Modelos de dependencia paramétrica</a></li>
 <li class="chapter" data-level="9.3.2" data-path="el-bootstrap-para-la-predicción-con-datos-dependientes.html"><a href="el-bootstrap-para-la-predicción-con-datos-dependientes.html#situaciones-de-dependencia-general-2"><i class="fa fa-check"></i><b>9.3.2</b> Situaciones de dependencia general</a></li>
 </ul></li>
 <li class="chapter" data-level="9.4" data-path="implementación-en-r.html"><a href="implementación-en-r.html"><i class="fa fa-check"></i><b>9.4</b> Implementación en <code>R</code></a></li>
-<li class="chapter" data-level="9.5" data-path="implementación-en-r-con-el-paquete-boot.html"><a href="implementación-en-r-con-el-paquete-boot.html"><i class="fa fa-check"></i><b>9.5</b> Implementación en <code>R</code> con el paquete <code>boot</code></a>
-<ul>
+<li class="chapter" data-level="9.5" data-path="implementación-en-r-con-el-paquete-boot.html"><a href="implementación-en-r-con-el-paquete-boot.html"><i class="fa fa-check"></i><b>9.5</b> Implementación en <code>R</code> con el paquete <code>boot</code></a><ul>
 <li class="chapter" data-level="9.5.1" data-path="implementación-en-r-con-el-paquete-boot.html"><a href="implementación-en-r-con-el-paquete-boot.html#rnews-1"><i class="fa fa-check"></i><b>9.5.1</b> Rnews 1</a></li>
 <li class="chapter" data-level="9.5.2" data-path="implementación-en-r-con-el-paquete-boot.html"><a href="implementación-en-r-con-el-paquete-boot.html#rnews-2"><i class="fa fa-check"></i><b>9.5.2</b> Rnews 2</a></li>
 </ul></li>
 <li class="chapter" data-level="9.6" data-path="ejercicios-1.html"><a href="ejercicios-1.html"><i class="fa fa-check"></i><b>9.6</b> Ejercicios</a></li>
-<li class="chapter" data-level="9.7" data-path="implementación-en-r-con-el-paquete-forecast.html"><a href="implementación-en-r-con-el-paquete-forecast.html"><i class="fa fa-check"></i><b>9.7</b> Implementación en <code>R</code> con el paquete <code>forecast</code></a>
-<ul>
+<li class="chapter" data-level="9.7" data-path="implementación-en-r-con-el-paquete-forecast.html"><a href="implementación-en-r-con-el-paquete-forecast.html"><i class="fa fa-check"></i><b>9.7</b> Implementación en <code>R</code> con el paquete <code>forecast</code></a><ul>
 <li class="chapter" data-level="9.7.1" data-path="implementación-en-r-con-el-paquete-forecast.html"><a href="implementación-en-r-con-el-paquete-forecast.html#bootstrap-condicional-a-partir-de-un-modelo-ajustado"><i class="fa fa-check"></i><b>9.7.1</b> Bootstrap condicional (a partir de un modelo ajustado)</a></li>
 </ul></li>
 <li class="chapter" data-level="9.8" data-path="spatial-data.html"><a href="spatial-data.html"><i class="fa fa-check"></i><b>9.8</b> Spatial data</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="referencias.html"><a href="referencias.html"><i class="fa fa-check"></i>Referencias</a></li>
 <li class="appendix"><span><b>Apendices</b></span></li>
-<li class="chapter" data-level="A" data-path="links.html"><a href="links.html"><i class="fa fa-check"></i><b>A</b> Enlaces</a>
-<ul>
+<li class="chapter" data-level="A" data-path="links.html"><a href="links.html"><i class="fa fa-check"></i><b>A</b> Enlaces</a><ul>
 <li class="chapter" data-level="A.1" data-path="forecast-links.html"><a href="forecast-links.html"><i class="fa fa-check"></i><b>A.1</b> Forecasting: Principles and Practice</a></li>
 <li class="chapter" data-level="A.2" data-path="spatial-links.html"><a href="spatial-links.html"><i class="fa fa-check"></i><b>A.2</b> Spatial data</a></li>
 </ul></li>
-<li class="chapter" data-level="B" data-path="intro-hpc.html"><a href="intro-hpc.html"><i class="fa fa-check"></i><b>B</b> Introducción al procesamiento en paralelo en R</a>
-<ul>
+<li class="chapter" data-level="B" data-path="intro-hpc.html"><a href="intro-hpc.html"><i class="fa fa-check"></i><b>B</b> Introducción al procesamiento en paralelo en R</a><ul>
 <li class="chapter" data-level="B.1" data-path="introducción-1.html"><a href="introducción-1.html"><i class="fa fa-check"></i><b>B.1</b> Introducción</a></li>
 <li class="chapter" data-level="B.2" data-path="paquetes-en-r.html"><a href="paquetes-en-r.html"><i class="fa fa-check"></i><b>B.2</b> Paquetes en R</a></li>
-<li class="chapter" data-level="B.3" data-path="ejemplos-3.html"><a href="ejemplos-3.html"><i class="fa fa-check"></i><b>B.3</b> Ejemplos</a>
-<ul>
+<li class="chapter" data-level="B.3" data-path="ejemplos-3.html"><a href="ejemplos-3.html"><i class="fa fa-check"></i><b>B.3</b> Ejemplos</a><ul>
 <li class="chapter" data-level="B.3.1" data-path="ejemplos-3.html"><a href="ejemplos-3.html#procesamiento-en-paralelo-con-la-función-boot"><i class="fa fa-check"></i><b>B.3.1</b> Procesamiento en paralelo con la función <code>boot()</code></a></li>
 <li class="chapter" data-level="B.3.2" data-path="ejemplos-3.html"><a href="ejemplos-3.html#estudio-sim-boot"><i class="fa fa-check"></i><b>B.3.2</b> Estudio de simulación</a></li>
 </ul></li>
@@ -378,50 +335,50 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="icboot-ejem" class="section level2" number="4.6">
+<div id="icboot-ejem" class="section level2">
 <h2><span class="header-section-number">4.6</span> Ejemplos</h2>
-<div id="media-dt-desconocida-persim" class="section level3" number="4.6.1">
+<div id="media-dt-desconocida-persim" class="section level3">
 <h3><span class="header-section-number">4.6.1</span> IC bootstrap para la media mediante el método percentil-<em>t</em> simetrizado</h3>
 <p>Continuando con el ejemplo de los tiempos de vida de microorganismos
 (sin asumir varianza conocida),
 para obtener una estimación por intervalo de confianza
 de su vida media empleando el método bootstrap percentil-<em>t</em> simetrizado
 se podría utilizar (ver Ejemplo <a href="cálculo-de-la-distribución-bootstrap-exacta-y-aproximada.html#exm:media-dt-desconocida">1.5</a>):</p>
-<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="icboot-ejem.html#cb138-1" aria-hidden="true" tabindex="-1"></a>muestra <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.143</span>, <span class="fl">0.182</span>, <span class="fl">0.256</span>, <span class="fl">0.26</span>, <span class="fl">0.27</span>, <span class="fl">0.437</span>, <span class="fl">0.509</span>, </span>
-<span id="cb138-2"><a href="icboot-ejem.html#cb138-2" aria-hidden="true" tabindex="-1"></a>             <span class="fl">0.611</span>, <span class="fl">0.712</span>, <span class="fl">1.04</span>, <span class="fl">1.09</span>, <span class="fl">1.15</span>, <span class="fl">1.46</span>, <span class="fl">1.88</span>, <span class="fl">2.08</span>)</span>
-<span id="cb138-3"><a href="icboot-ejem.html#cb138-3" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">length</span>(muestra)</span>
-<span id="cb138-4"><a href="icboot-ejem.html#cb138-4" aria-hidden="true" tabindex="-1"></a>alfa <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
-<span id="cb138-5"><a href="icboot-ejem.html#cb138-5" aria-hidden="true" tabindex="-1"></a>x_barra <span class="ot">&lt;-</span> <span class="fu">mean</span>(muestra)</span>
-<span id="cb138-6"><a href="icboot-ejem.html#cb138-6" aria-hidden="true" tabindex="-1"></a>cuasi_dt <span class="ot">&lt;-</span> <span class="fu">sd</span>(muestra)</span>
-<span id="cb138-7"><a href="icboot-ejem.html#cb138-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb138-8"><a href="icboot-ejem.html#cb138-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Remuestreo</span></span>
-<span id="cb138-9"><a href="icboot-ejem.html#cb138-9" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb138-10"><a href="icboot-ejem.html#cb138-10" aria-hidden="true" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
-<span id="cb138-11"><a href="icboot-ejem.html#cb138-11" aria-hidden="true" tabindex="-1"></a>remuestra <span class="ot">&lt;-</span> <span class="fu">numeric</span>(n)</span>
-<span id="cb138-12"><a href="icboot-ejem.html#cb138-12" aria-hidden="true" tabindex="-1"></a>estadistico_boot <span class="ot">&lt;-</span> <span class="fu">numeric</span>(B)</span>
-<span id="cb138-13"><a href="icboot-ejem.html#cb138-13" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (k <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>B) {</span>
-<span id="cb138-14"><a href="icboot-ejem.html#cb138-14" aria-hidden="true" tabindex="-1"></a>  remuestra <span class="ot">&lt;-</span> <span class="fu">sample</span>(muestra, n, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb138-15"><a href="icboot-ejem.html#cb138-15" aria-hidden="true" tabindex="-1"></a>  x_barra_boot <span class="ot">&lt;-</span> <span class="fu">mean</span>(remuestra)</span>
-<span id="cb138-16"><a href="icboot-ejem.html#cb138-16" aria-hidden="true" tabindex="-1"></a>  cuasi_dt_boot <span class="ot">&lt;-</span> <span class="fu">sd</span>(remuestra)</span>
-<span id="cb138-17"><a href="icboot-ejem.html#cb138-17" aria-hidden="true" tabindex="-1"></a>  estadistico_boot[k] <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(n) <span class="sc">*</span> <span class="fu">abs</span>(x_barra_boot <span class="sc">-</span> x_barra)<span class="sc">/</span>cuasi_dt_boot</span>
-<span id="cb138-18"><a href="icboot-ejem.html#cb138-18" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb138-19"><a href="icboot-ejem.html#cb138-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb138-20"><a href="icboot-ejem.html#cb138-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Aproximación bootstrap del pto crítico</span></span>
-<span id="cb138-21"><a href="icboot-ejem.html#cb138-21" aria-hidden="true" tabindex="-1"></a>pto_crit <span class="ot">&lt;-</span> <span class="fu">quantile</span>(estadistico_boot, <span class="dv">1</span> <span class="sc">-</span> alfa)</span>
-<span id="cb138-22"><a href="icboot-ejem.html#cb138-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb138-23"><a href="icboot-ejem.html#cb138-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Construcción del IC</span></span>
-<span id="cb138-24"><a href="icboot-ejem.html#cb138-24" aria-hidden="true" tabindex="-1"></a>ic_inf_boot <span class="ot">&lt;-</span> x_barra <span class="sc">-</span> pto_crit <span class="sc">*</span> cuasi_dt<span class="sc">/</span><span class="fu">sqrt</span>(n)</span>
-<span id="cb138-25"><a href="icboot-ejem.html#cb138-25" aria-hidden="true" tabindex="-1"></a>ic_sup_boot <span class="ot">&lt;-</span> x_barra <span class="sc">+</span> pto_crit <span class="sc">*</span> cuasi_dt<span class="sc">/</span><span class="fu">sqrt</span>(n)</span>
-<span id="cb138-26"><a href="icboot-ejem.html#cb138-26" aria-hidden="true" tabindex="-1"></a>IC_boot <span class="ot">&lt;-</span> <span class="fu">c</span>(ic_inf_boot, ic_sup_boot)</span>
-<span id="cb138-27"><a href="icboot-ejem.html#cb138-27" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(IC_boot) <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="dv">100</span><span class="sc">*</span><span class="fu">c</span>(alfa<span class="sc">/</span><span class="dv">2</span>, <span class="dv">1</span><span class="sc">-</span>alfa<span class="sc">/</span><span class="dv">2</span>), <span class="st">&quot;%&quot;</span>)</span>
-<span id="cb138-28"><a href="icboot-ejem.html#cb138-28" aria-hidden="true" tabindex="-1"></a>IC_boot</span></code></pre></div>
+<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="icboot-ejem.html#cb138-1"></a>muestra &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.143</span>, <span class="fl">0.182</span>, <span class="fl">0.256</span>, <span class="fl">0.26</span>, <span class="fl">0.27</span>, <span class="fl">0.437</span>, <span class="fl">0.509</span>, </span>
+<span id="cb138-2"><a href="icboot-ejem.html#cb138-2"></a>             <span class="fl">0.611</span>, <span class="fl">0.712</span>, <span class="fl">1.04</span>, <span class="fl">1.09</span>, <span class="fl">1.15</span>, <span class="fl">1.46</span>, <span class="fl">1.88</span>, <span class="fl">2.08</span>)</span>
+<span id="cb138-3"><a href="icboot-ejem.html#cb138-3"></a>n &lt;-<span class="st"> </span><span class="kw">length</span>(muestra)</span>
+<span id="cb138-4"><a href="icboot-ejem.html#cb138-4"></a>alfa &lt;-<span class="st"> </span><span class="fl">0.05</span></span>
+<span id="cb138-5"><a href="icboot-ejem.html#cb138-5"></a>x_barra &lt;-<span class="st"> </span><span class="kw">mean</span>(muestra)</span>
+<span id="cb138-6"><a href="icboot-ejem.html#cb138-6"></a>cuasi_dt &lt;-<span class="st"> </span><span class="kw">sd</span>(muestra)</span>
+<span id="cb138-7"><a href="icboot-ejem.html#cb138-7"></a></span>
+<span id="cb138-8"><a href="icboot-ejem.html#cb138-8"></a><span class="co"># Remuestreo</span></span>
+<span id="cb138-9"><a href="icboot-ejem.html#cb138-9"></a><span class="kw">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb138-10"><a href="icboot-ejem.html#cb138-10"></a>B &lt;-<span class="st"> </span><span class="dv">1000</span></span>
+<span id="cb138-11"><a href="icboot-ejem.html#cb138-11"></a>remuestra &lt;-<span class="st"> </span><span class="kw">numeric</span>(n)</span>
+<span id="cb138-12"><a href="icboot-ejem.html#cb138-12"></a>estadistico_boot &lt;-<span class="st"> </span><span class="kw">numeric</span>(B)</span>
+<span id="cb138-13"><a href="icboot-ejem.html#cb138-13"></a><span class="cf">for</span> (k <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>B) {</span>
+<span id="cb138-14"><a href="icboot-ejem.html#cb138-14"></a>  remuestra &lt;-<span class="st"> </span><span class="kw">sample</span>(muestra, n, <span class="dt">replace =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb138-15"><a href="icboot-ejem.html#cb138-15"></a>  x_barra_boot &lt;-<span class="st"> </span><span class="kw">mean</span>(remuestra)</span>
+<span id="cb138-16"><a href="icboot-ejem.html#cb138-16"></a>  cuasi_dt_boot &lt;-<span class="st"> </span><span class="kw">sd</span>(remuestra)</span>
+<span id="cb138-17"><a href="icboot-ejem.html#cb138-17"></a>  estadistico_boot[k] &lt;-<span class="st"> </span><span class="kw">sqrt</span>(n) <span class="op">*</span><span class="st"> </span><span class="kw">abs</span>(x_barra_boot <span class="op">-</span><span class="st"> </span>x_barra)<span class="op">/</span>cuasi_dt_boot</span>
+<span id="cb138-18"><a href="icboot-ejem.html#cb138-18"></a>}</span>
+<span id="cb138-19"><a href="icboot-ejem.html#cb138-19"></a></span>
+<span id="cb138-20"><a href="icboot-ejem.html#cb138-20"></a><span class="co"># Aproximación bootstrap del pto crítico</span></span>
+<span id="cb138-21"><a href="icboot-ejem.html#cb138-21"></a>pto_crit &lt;-<span class="st"> </span><span class="kw">quantile</span>(estadistico_boot, <span class="dv">1</span> <span class="op">-</span><span class="st"> </span>alfa)</span>
+<span id="cb138-22"><a href="icboot-ejem.html#cb138-22"></a></span>
+<span id="cb138-23"><a href="icboot-ejem.html#cb138-23"></a><span class="co"># Construcción del IC</span></span>
+<span id="cb138-24"><a href="icboot-ejem.html#cb138-24"></a>ic_inf_boot &lt;-<span class="st"> </span>x_barra <span class="op">-</span><span class="st"> </span>pto_crit <span class="op">*</span><span class="st"> </span>cuasi_dt<span class="op">/</span><span class="kw">sqrt</span>(n)</span>
+<span id="cb138-25"><a href="icboot-ejem.html#cb138-25"></a>ic_sup_boot &lt;-<span class="st"> </span>x_barra <span class="op">+</span><span class="st"> </span>pto_crit <span class="op">*</span><span class="st"> </span>cuasi_dt<span class="op">/</span><span class="kw">sqrt</span>(n)</span>
+<span id="cb138-26"><a href="icboot-ejem.html#cb138-26"></a>IC_boot &lt;-<span class="st"> </span><span class="kw">c</span>(ic_inf_boot, ic_sup_boot)</span>
+<span id="cb138-27"><a href="icboot-ejem.html#cb138-27"></a><span class="kw">names</span>(IC_boot) &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="dv">100</span><span class="op">*</span><span class="kw">c</span>(alfa<span class="op">/</span><span class="dv">2</span>, <span class="dv">1</span><span class="op">-</span>alfa<span class="op">/</span><span class="dv">2</span>), <span class="st">&quot;%&quot;</span>)</span>
+<span id="cb138-28"><a href="icboot-ejem.html#cb138-28"></a>IC_boot</span></code></pre></div>
 <pre><code>##      2.5%     97.5% 
 ## 0.4334742 1.1771924</code></pre>
 <!-- 
 Tabla resumen de los ics del tiempo de vida medio de microorganismos 
 -->
 </div>
-<div id="estudio-sim-exp" class="section level3" number="4.6.2">
+<div id="estudio-sim-exp" class="section level3">
 <h3><span class="header-section-number">4.6.2</span> Estudio de simulación</h3>
 <p>El siguiente código permite realizar estudios de
 simulación comparando las probabilidades de cobertura y las longitudes
@@ -432,86 +389,86 @@ distribución <span class="math inline">\(\exp \left( \lambda \right)\)</span>.
 En este caso se obtienen las estimaciones Monte Carlo a partir de 500
 simulaciones con <span class="math inline">\(\lambda = 0.01\)</span>, tamaño muestral <span class="math inline">\(n=100\)</span> y <span class="math inline">\(B=1000\)</span> réplicas
 bootstrap para un nivel de confianza nominal del 90% (<span class="math inline">\(\alpha =0.10\)</span>).</p>
-<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="icboot-ejem.html#cb140-1" aria-hidden="true" tabindex="-1"></a>t.ini <span class="ot">&lt;-</span> <span class="fu">proc.time</span>()</span>
-<span id="cb140-2"><a href="icboot-ejem.html#cb140-2" aria-hidden="true" tabindex="-1"></a>rate <span class="ot">&lt;-</span> <span class="fl">0.01</span></span>
-<span id="cb140-3"><a href="icboot-ejem.html#cb140-3" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">/</span>rate</span>
-<span id="cb140-4"><a href="icboot-ejem.html#cb140-4" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">100</span></span>
-<span id="cb140-5"><a href="icboot-ejem.html#cb140-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb140-6"><a href="icboot-ejem.html#cb140-6" aria-hidden="true" tabindex="-1"></a>alfa <span class="ot">&lt;-</span> <span class="fl">0.1</span></span>
-<span id="cb140-7"><a href="icboot-ejem.html#cb140-7" aria-hidden="true" tabindex="-1"></a>namesI <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="dv">100</span><span class="sc">*</span><span class="fu">c</span>(alfa<span class="sc">/</span><span class="dv">2</span>, <span class="dv">1</span><span class="sc">-</span>alfa<span class="sc">/</span><span class="dv">2</span>), <span class="st">&quot;%&quot;</span>)</span>
-<span id="cb140-8"><a href="icboot-ejem.html#cb140-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb140-9"><a href="icboot-ejem.html#cb140-9" aria-hidden="true" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
-<span id="cb140-10"><a href="icboot-ejem.html#cb140-10" aria-hidden="true" tabindex="-1"></a>percentil <span class="ot">&lt;-</span> <span class="fu">numeric</span>(B)</span>
-<span id="cb140-11"><a href="icboot-ejem.html#cb140-11" aria-hidden="true" tabindex="-1"></a>percentilt <span class="ot">&lt;-</span> <span class="fu">numeric</span>(B)</span>
-<span id="cb140-12"><a href="icboot-ejem.html#cb140-12" aria-hidden="true" tabindex="-1"></a>percentilts <span class="ot">&lt;-</span> <span class="fu">numeric</span>(B)</span>
-<span id="cb140-13"><a href="icboot-ejem.html#cb140-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb140-14"><a href="icboot-ejem.html#cb140-14" aria-hidden="true" tabindex="-1"></a>nsim <span class="ot">&lt;-</span> <span class="dv">500</span></span>
-<span id="cb140-15"><a href="icboot-ejem.html#cb140-15" aria-hidden="true" tabindex="-1"></a>resultados <span class="ot">&lt;-</span> <span class="fu">array</span>(<span class="at">dim =</span> <span class="fu">c</span>(nsim, <span class="dv">2</span>, <span class="dv">4</span>))</span>
-<span id="cb140-16"><a href="icboot-ejem.html#cb140-16" aria-hidden="true" tabindex="-1"></a><span class="fu">dimnames</span>(resultados) <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="cn">NULL</span>, <span class="fu">c</span>(<span class="st">&quot;Cobertura&quot;</span>, <span class="st">&quot;Longitud&quot;</span>),</span>
-<span id="cb140-17"><a href="icboot-ejem.html#cb140-17" aria-hidden="true" tabindex="-1"></a>        <span class="fu">c</span>(<span class="st">&quot;Normal&quot;</span>, <span class="st">&quot;Percentil&quot;</span>, <span class="st">&quot;Percentil-t&quot;</span>, <span class="st">&quot;Percentil-t simetrizado&quot;</span>))</span>
-<span id="cb140-18"><a href="icboot-ejem.html#cb140-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Bucle simulación</span></span>
-<span id="cb140-19"><a href="icboot-ejem.html#cb140-19" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb140-20"><a href="icboot-ejem.html#cb140-20" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (isim <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nsim) {</span>
-<span id="cb140-21"><a href="icboot-ejem.html#cb140-21" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Aproximación clásica</span></span>
-<span id="cb140-22"><a href="icboot-ejem.html#cb140-22" aria-hidden="true" tabindex="-1"></a>    muestra <span class="ot">&lt;-</span> <span class="fu">rexp</span>(n, <span class="at">rate =</span> <span class="fl">0.01</span>)</span>
-<span id="cb140-23"><a href="icboot-ejem.html#cb140-23" aria-hidden="true" tabindex="-1"></a>    media <span class="ot">&lt;-</span> <span class="fu">mean</span>(muestra)</span>
-<span id="cb140-24"><a href="icboot-ejem.html#cb140-24" aria-hidden="true" tabindex="-1"></a>    desv <span class="ot">&lt;-</span> <span class="fu">sd</span>(muestra)</span>
-<span id="cb140-25"><a href="icboot-ejem.html#cb140-25" aria-hidden="true" tabindex="-1"></a>    z <span class="ot">&lt;-</span> <span class="fu">qnorm</span>(<span class="dv">1</span> <span class="sc">-</span> alfa<span class="sc">/</span><span class="dv">2</span>)</span>
-<span id="cb140-26"><a href="icboot-ejem.html#cb140-26" aria-hidden="true" tabindex="-1"></a>    ic_inf <span class="ot">&lt;-</span> media <span class="sc">-</span> z<span class="sc">*</span>desv<span class="sc">/</span><span class="fu">sqrt</span>(n)</span>
-<span id="cb140-27"><a href="icboot-ejem.html#cb140-27" aria-hidden="true" tabindex="-1"></a>    ic_sup <span class="ot">&lt;-</span> media <span class="sc">+</span> z<span class="sc">*</span>desv<span class="sc">/</span><span class="fu">sqrt</span>(n)</span>
-<span id="cb140-28"><a href="icboot-ejem.html#cb140-28" aria-hidden="true" tabindex="-1"></a>    I0 <span class="ot">&lt;-</span> <span class="fu">c</span>(ic_inf, ic_sup)</span>
-<span id="cb140-29"><a href="icboot-ejem.html#cb140-29" aria-hidden="true" tabindex="-1"></a>    <span class="co"># names(I0) &lt;- namesI</span></span>
-<span id="cb140-30"><a href="icboot-ejem.html#cb140-30" aria-hidden="true" tabindex="-1"></a>    resultados[isim, <span class="dv">1</span>, <span class="dv">1</span>] <span class="ot">&lt;-</span> (I0[<span class="dv">1</span>] <span class="sc">&lt;</span> mu) <span class="sc">&amp;&amp;</span> (mu <span class="sc">&lt;</span> I0[<span class="dv">2</span>])</span>
-<span id="cb140-31"><a href="icboot-ejem.html#cb140-31" aria-hidden="true" tabindex="-1"></a>    resultados[isim, <span class="dv">2</span>, <span class="dv">1</span>] <span class="ot">&lt;-</span> I0[<span class="dv">2</span>] <span class="sc">-</span> I0[<span class="dv">1</span>]</span>
-<span id="cb140-32"><a href="icboot-ejem.html#cb140-32" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb140-33"><a href="icboot-ejem.html#cb140-33" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Remuestreo bootstrap</span></span>
-<span id="cb140-34"><a href="icboot-ejem.html#cb140-34" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (k <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>B) {</span>
-<span id="cb140-35"><a href="icboot-ejem.html#cb140-35" aria-hidden="true" tabindex="-1"></a>        remuestra <span class="ot">&lt;-</span> <span class="fu">sample</span>(muestra, n, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb140-36"><a href="icboot-ejem.html#cb140-36" aria-hidden="true" tabindex="-1"></a>        percentil[k] <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(n) <span class="sc">*</span> (<span class="fu">mean</span>(remuestra) <span class="sc">-</span> media)</span>
-<span id="cb140-37"><a href="icboot-ejem.html#cb140-37" aria-hidden="true" tabindex="-1"></a>        percentilt[k] <span class="ot">&lt;-</span> percentil[k]<span class="sc">/</span><span class="fu">sd</span>(remuestra)</span>
-<span id="cb140-38"><a href="icboot-ejem.html#cb140-38" aria-hidden="true" tabindex="-1"></a>        percentilts[k] <span class="ot">&lt;-</span> <span class="fu">abs</span>(percentilt[k])</span>
-<span id="cb140-39"><a href="icboot-ejem.html#cb140-39" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb140-40"><a href="icboot-ejem.html#cb140-40" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb140-41"><a href="icboot-ejem.html#cb140-41" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Aproximación bootstrap percentil</span></span>
-<span id="cb140-42"><a href="icboot-ejem.html#cb140-42" aria-hidden="true" tabindex="-1"></a>    pto_crit <span class="ot">&lt;-</span> <span class="fu">quantile</span>(percentil, <span class="fu">c</span>(alfa<span class="sc">/</span><span class="dv">2</span>, <span class="dv">1</span> <span class="sc">-</span> alfa<span class="sc">/</span><span class="dv">2</span>))</span>
-<span id="cb140-43"><a href="icboot-ejem.html#cb140-43" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Construcción del IC</span></span>
-<span id="cb140-44"><a href="icboot-ejem.html#cb140-44" aria-hidden="true" tabindex="-1"></a>    ic_inf_boot <span class="ot">&lt;-</span> media <span class="sc">-</span> pto_crit[<span class="dv">2</span>]<span class="sc">/</span><span class="fu">sqrt</span>(n)</span>
-<span id="cb140-45"><a href="icboot-ejem.html#cb140-45" aria-hidden="true" tabindex="-1"></a>    ic_sup_boot <span class="ot">&lt;-</span> media <span class="sc">-</span> pto_crit[<span class="dv">1</span>]<span class="sc">/</span><span class="fu">sqrt</span>(n)</span>
-<span id="cb140-46"><a href="icboot-ejem.html#cb140-46" aria-hidden="true" tabindex="-1"></a>    I1 <span class="ot">&lt;-</span> <span class="fu">c</span>(ic_inf_boot, ic_sup_boot)</span>
-<span id="cb140-47"><a href="icboot-ejem.html#cb140-47" aria-hidden="true" tabindex="-1"></a>    <span class="co"># names(I1) &lt;- namesI</span></span>
-<span id="cb140-48"><a href="icboot-ejem.html#cb140-48" aria-hidden="true" tabindex="-1"></a>    resultados[isim, <span class="dv">1</span>, <span class="dv">2</span>] <span class="ot">&lt;-</span> (I1[<span class="dv">1</span>] <span class="sc">&lt;</span> mu) <span class="sc">&amp;&amp;</span> (mu <span class="sc">&lt;</span> I1[<span class="dv">2</span>])</span>
-<span id="cb140-49"><a href="icboot-ejem.html#cb140-49" aria-hidden="true" tabindex="-1"></a>    resultados[isim, <span class="dv">2</span>, <span class="dv">2</span>] <span class="ot">&lt;-</span> I1[<span class="dv">2</span>] <span class="sc">-</span> I1[<span class="dv">1</span>]</span>
-<span id="cb140-50"><a href="icboot-ejem.html#cb140-50" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb140-51"><a href="icboot-ejem.html#cb140-51" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Aproximación bootstrap percentil-t</span></span>
-<span id="cb140-52"><a href="icboot-ejem.html#cb140-52" aria-hidden="true" tabindex="-1"></a>    pto_crit <span class="ot">&lt;-</span> <span class="fu">quantile</span>(percentilt, <span class="fu">c</span>(alfa<span class="sc">/</span><span class="dv">2</span>, <span class="dv">1</span> <span class="sc">-</span> alfa<span class="sc">/</span><span class="dv">2</span>))</span>
-<span id="cb140-53"><a href="icboot-ejem.html#cb140-53" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Construcción del IC</span></span>
-<span id="cb140-54"><a href="icboot-ejem.html#cb140-54" aria-hidden="true" tabindex="-1"></a>    ic_inf_boot <span class="ot">&lt;-</span> media <span class="sc">-</span> pto_crit[<span class="dv">2</span>] <span class="sc">*</span> desv<span class="sc">/</span><span class="fu">sqrt</span>(n)</span>
-<span id="cb140-55"><a href="icboot-ejem.html#cb140-55" aria-hidden="true" tabindex="-1"></a>    ic_sup_boot <span class="ot">&lt;-</span> media <span class="sc">-</span> pto_crit[<span class="dv">1</span>] <span class="sc">*</span> desv<span class="sc">/</span><span class="fu">sqrt</span>(n)</span>
-<span id="cb140-56"><a href="icboot-ejem.html#cb140-56" aria-hidden="true" tabindex="-1"></a>    I2 <span class="ot">&lt;-</span> <span class="fu">c</span>(ic_inf_boot, ic_sup_boot)</span>
-<span id="cb140-57"><a href="icboot-ejem.html#cb140-57" aria-hidden="true" tabindex="-1"></a>    <span class="co"># names(I2) &lt;- namesI</span></span>
-<span id="cb140-58"><a href="icboot-ejem.html#cb140-58" aria-hidden="true" tabindex="-1"></a>    resultados[isim, <span class="dv">1</span>, <span class="dv">3</span>] <span class="ot">&lt;-</span> (I2[<span class="dv">1</span>] <span class="sc">&lt;</span> mu) <span class="sc">&amp;&amp;</span> (mu <span class="sc">&lt;</span> I2[<span class="dv">2</span>])</span>
-<span id="cb140-59"><a href="icboot-ejem.html#cb140-59" aria-hidden="true" tabindex="-1"></a>    resultados[isim, <span class="dv">2</span>, <span class="dv">3</span>] <span class="ot">&lt;-</span> I2[<span class="dv">2</span>] <span class="sc">-</span> I2[<span class="dv">1</span>]</span>
-<span id="cb140-60"><a href="icboot-ejem.html#cb140-60" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb140-61"><a href="icboot-ejem.html#cb140-61" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Aproximación bootstrap percentil-t simetrizado</span></span>
-<span id="cb140-62"><a href="icboot-ejem.html#cb140-62" aria-hidden="true" tabindex="-1"></a>    pto_crit <span class="ot">&lt;-</span> <span class="fu">quantile</span>(percentilts, <span class="dv">1</span> <span class="sc">-</span> alfa)</span>
-<span id="cb140-63"><a href="icboot-ejem.html#cb140-63" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Construcción del IC</span></span>
-<span id="cb140-64"><a href="icboot-ejem.html#cb140-64" aria-hidden="true" tabindex="-1"></a>    ic_inf_boot <span class="ot">&lt;-</span> media <span class="sc">-</span> pto_crit <span class="sc">*</span> desv<span class="sc">/</span><span class="fu">sqrt</span>(n)</span>
-<span id="cb140-65"><a href="icboot-ejem.html#cb140-65" aria-hidden="true" tabindex="-1"></a>    ic_sup_boot <span class="ot">&lt;-</span> media <span class="sc">+</span> pto_crit <span class="sc">*</span> desv<span class="sc">/</span><span class="fu">sqrt</span>(n)</span>
-<span id="cb140-66"><a href="icboot-ejem.html#cb140-66" aria-hidden="true" tabindex="-1"></a>    I3 <span class="ot">&lt;-</span> <span class="fu">c</span>(ic_inf_boot, ic_sup_boot)</span>
-<span id="cb140-67"><a href="icboot-ejem.html#cb140-67" aria-hidden="true" tabindex="-1"></a>    <span class="co"># names(I3) &lt;- namesI</span></span>
-<span id="cb140-68"><a href="icboot-ejem.html#cb140-68" aria-hidden="true" tabindex="-1"></a>    resultados[isim, <span class="dv">1</span>, <span class="dv">4</span>] <span class="ot">&lt;-</span> (I3[<span class="dv">1</span>] <span class="sc">&lt;</span> mu) <span class="sc">&amp;&amp;</span> (mu <span class="sc">&lt;</span> I3[<span class="dv">2</span>])</span>
-<span id="cb140-69"><a href="icboot-ejem.html#cb140-69" aria-hidden="true" tabindex="-1"></a>    resultados[isim, <span class="dv">2</span>, <span class="dv">4</span>] <span class="ot">&lt;-</span> I3[<span class="dv">2</span>] <span class="sc">-</span> I3[<span class="dv">1</span>]</span>
-<span id="cb140-70"><a href="icboot-ejem.html#cb140-70" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb140-71"><a href="icboot-ejem.html#cb140-71" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb140-72"><a href="icboot-ejem.html#cb140-72" aria-hidden="true" tabindex="-1"></a>t.fin <span class="ot">&lt;-</span> <span class="fu">proc.time</span>() <span class="sc">-</span> t.ini</span>
-<span id="cb140-73"><a href="icboot-ejem.html#cb140-73" aria-hidden="true" tabindex="-1"></a>t.fin</span></code></pre></div>
+<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="icboot-ejem.html#cb140-1"></a>t.ini &lt;-<span class="st"> </span><span class="kw">proc.time</span>()</span>
+<span id="cb140-2"><a href="icboot-ejem.html#cb140-2"></a>rate &lt;-<span class="st"> </span><span class="fl">0.01</span></span>
+<span id="cb140-3"><a href="icboot-ejem.html#cb140-3"></a>mu &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">/</span>rate</span>
+<span id="cb140-4"><a href="icboot-ejem.html#cb140-4"></a>n &lt;-<span class="st"> </span><span class="dv">100</span></span>
+<span id="cb140-5"><a href="icboot-ejem.html#cb140-5"></a></span>
+<span id="cb140-6"><a href="icboot-ejem.html#cb140-6"></a>alfa &lt;-<span class="st"> </span><span class="fl">0.1</span></span>
+<span id="cb140-7"><a href="icboot-ejem.html#cb140-7"></a>namesI &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="dv">100</span><span class="op">*</span><span class="kw">c</span>(alfa<span class="op">/</span><span class="dv">2</span>, <span class="dv">1</span><span class="op">-</span>alfa<span class="op">/</span><span class="dv">2</span>), <span class="st">&quot;%&quot;</span>)</span>
+<span id="cb140-8"><a href="icboot-ejem.html#cb140-8"></a></span>
+<span id="cb140-9"><a href="icboot-ejem.html#cb140-9"></a>B &lt;-<span class="st"> </span><span class="dv">1000</span></span>
+<span id="cb140-10"><a href="icboot-ejem.html#cb140-10"></a>percentil &lt;-<span class="st"> </span><span class="kw">numeric</span>(B)</span>
+<span id="cb140-11"><a href="icboot-ejem.html#cb140-11"></a>percentilt &lt;-<span class="st"> </span><span class="kw">numeric</span>(B)</span>
+<span id="cb140-12"><a href="icboot-ejem.html#cb140-12"></a>percentilts &lt;-<span class="st"> </span><span class="kw">numeric</span>(B)</span>
+<span id="cb140-13"><a href="icboot-ejem.html#cb140-13"></a></span>
+<span id="cb140-14"><a href="icboot-ejem.html#cb140-14"></a>nsim &lt;-<span class="st"> </span><span class="dv">500</span></span>
+<span id="cb140-15"><a href="icboot-ejem.html#cb140-15"></a>resultados &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="dt">dim =</span> <span class="kw">c</span>(nsim, <span class="dv">2</span>, <span class="dv">4</span>))</span>
+<span id="cb140-16"><a href="icboot-ejem.html#cb140-16"></a><span class="kw">dimnames</span>(resultados) &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="ot">NULL</span>, <span class="kw">c</span>(<span class="st">&quot;Cobertura&quot;</span>, <span class="st">&quot;Longitud&quot;</span>),</span>
+<span id="cb140-17"><a href="icboot-ejem.html#cb140-17"></a>        <span class="kw">c</span>(<span class="st">&quot;Normal&quot;</span>, <span class="st">&quot;Percentil&quot;</span>, <span class="st">&quot;Percentil-t&quot;</span>, <span class="st">&quot;Percentil-t simetrizado&quot;</span>))</span>
+<span id="cb140-18"><a href="icboot-ejem.html#cb140-18"></a><span class="co"># Bucle simulación</span></span>
+<span id="cb140-19"><a href="icboot-ejem.html#cb140-19"></a><span class="kw">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb140-20"><a href="icboot-ejem.html#cb140-20"></a><span class="cf">for</span> (isim <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>nsim) {</span>
+<span id="cb140-21"><a href="icboot-ejem.html#cb140-21"></a>    <span class="co"># Aproximación clásica</span></span>
+<span id="cb140-22"><a href="icboot-ejem.html#cb140-22"></a>    muestra &lt;-<span class="st"> </span><span class="kw">rexp</span>(n, <span class="dt">rate =</span> <span class="fl">0.01</span>)</span>
+<span id="cb140-23"><a href="icboot-ejem.html#cb140-23"></a>    media &lt;-<span class="st"> </span><span class="kw">mean</span>(muestra)</span>
+<span id="cb140-24"><a href="icboot-ejem.html#cb140-24"></a>    desv &lt;-<span class="st"> </span><span class="kw">sd</span>(muestra)</span>
+<span id="cb140-25"><a href="icboot-ejem.html#cb140-25"></a>    z &lt;-<span class="st"> </span><span class="kw">qnorm</span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>alfa<span class="op">/</span><span class="dv">2</span>)</span>
+<span id="cb140-26"><a href="icboot-ejem.html#cb140-26"></a>    ic_inf &lt;-<span class="st"> </span>media <span class="op">-</span><span class="st"> </span>z<span class="op">*</span>desv<span class="op">/</span><span class="kw">sqrt</span>(n)</span>
+<span id="cb140-27"><a href="icboot-ejem.html#cb140-27"></a>    ic_sup &lt;-<span class="st"> </span>media <span class="op">+</span><span class="st"> </span>z<span class="op">*</span>desv<span class="op">/</span><span class="kw">sqrt</span>(n)</span>
+<span id="cb140-28"><a href="icboot-ejem.html#cb140-28"></a>    I0 &lt;-<span class="st"> </span><span class="kw">c</span>(ic_inf, ic_sup)</span>
+<span id="cb140-29"><a href="icboot-ejem.html#cb140-29"></a>    <span class="co"># names(I0) &lt;- namesI</span></span>
+<span id="cb140-30"><a href="icboot-ejem.html#cb140-30"></a>    resultados[isim, <span class="dv">1</span>, <span class="dv">1</span>] &lt;-<span class="st"> </span>(I0[<span class="dv">1</span>] <span class="op">&lt;</span><span class="st"> </span>mu) <span class="op">&amp;&amp;</span><span class="st"> </span>(mu <span class="op">&lt;</span><span class="st"> </span>I0[<span class="dv">2</span>])</span>
+<span id="cb140-31"><a href="icboot-ejem.html#cb140-31"></a>    resultados[isim, <span class="dv">2</span>, <span class="dv">1</span>] &lt;-<span class="st"> </span>I0[<span class="dv">2</span>] <span class="op">-</span><span class="st"> </span>I0[<span class="dv">1</span>]</span>
+<span id="cb140-32"><a href="icboot-ejem.html#cb140-32"></a>    </span>
+<span id="cb140-33"><a href="icboot-ejem.html#cb140-33"></a>    <span class="co"># Remuestreo bootstrap</span></span>
+<span id="cb140-34"><a href="icboot-ejem.html#cb140-34"></a>    <span class="cf">for</span> (k <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>B) {</span>
+<span id="cb140-35"><a href="icboot-ejem.html#cb140-35"></a>        remuestra &lt;-<span class="st"> </span><span class="kw">sample</span>(muestra, n, <span class="dt">replace =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb140-36"><a href="icboot-ejem.html#cb140-36"></a>        percentil[k] &lt;-<span class="st"> </span><span class="kw">sqrt</span>(n) <span class="op">*</span><span class="st"> </span>(<span class="kw">mean</span>(remuestra) <span class="op">-</span><span class="st"> </span>media)</span>
+<span id="cb140-37"><a href="icboot-ejem.html#cb140-37"></a>        percentilt[k] &lt;-<span class="st"> </span>percentil[k]<span class="op">/</span><span class="kw">sd</span>(remuestra)</span>
+<span id="cb140-38"><a href="icboot-ejem.html#cb140-38"></a>        percentilts[k] &lt;-<span class="st"> </span><span class="kw">abs</span>(percentilt[k])</span>
+<span id="cb140-39"><a href="icboot-ejem.html#cb140-39"></a>    }</span>
+<span id="cb140-40"><a href="icboot-ejem.html#cb140-40"></a>    </span>
+<span id="cb140-41"><a href="icboot-ejem.html#cb140-41"></a>    <span class="co"># Aproximación bootstrap percentil</span></span>
+<span id="cb140-42"><a href="icboot-ejem.html#cb140-42"></a>    pto_crit &lt;-<span class="st"> </span><span class="kw">quantile</span>(percentil, <span class="kw">c</span>(alfa<span class="op">/</span><span class="dv">2</span>, <span class="dv">1</span> <span class="op">-</span><span class="st"> </span>alfa<span class="op">/</span><span class="dv">2</span>))</span>
+<span id="cb140-43"><a href="icboot-ejem.html#cb140-43"></a>    <span class="co"># Construcción del IC</span></span>
+<span id="cb140-44"><a href="icboot-ejem.html#cb140-44"></a>    ic_inf_boot &lt;-<span class="st"> </span>media <span class="op">-</span><span class="st"> </span>pto_crit[<span class="dv">2</span>]<span class="op">/</span><span class="kw">sqrt</span>(n)</span>
+<span id="cb140-45"><a href="icboot-ejem.html#cb140-45"></a>    ic_sup_boot &lt;-<span class="st"> </span>media <span class="op">-</span><span class="st"> </span>pto_crit[<span class="dv">1</span>]<span class="op">/</span><span class="kw">sqrt</span>(n)</span>
+<span id="cb140-46"><a href="icboot-ejem.html#cb140-46"></a>    I1 &lt;-<span class="st"> </span><span class="kw">c</span>(ic_inf_boot, ic_sup_boot)</span>
+<span id="cb140-47"><a href="icboot-ejem.html#cb140-47"></a>    <span class="co"># names(I1) &lt;- namesI</span></span>
+<span id="cb140-48"><a href="icboot-ejem.html#cb140-48"></a>    resultados[isim, <span class="dv">1</span>, <span class="dv">2</span>] &lt;-<span class="st"> </span>(I1[<span class="dv">1</span>] <span class="op">&lt;</span><span class="st"> </span>mu) <span class="op">&amp;&amp;</span><span class="st"> </span>(mu <span class="op">&lt;</span><span class="st"> </span>I1[<span class="dv">2</span>])</span>
+<span id="cb140-49"><a href="icboot-ejem.html#cb140-49"></a>    resultados[isim, <span class="dv">2</span>, <span class="dv">2</span>] &lt;-<span class="st"> </span>I1[<span class="dv">2</span>] <span class="op">-</span><span class="st"> </span>I1[<span class="dv">1</span>]</span>
+<span id="cb140-50"><a href="icboot-ejem.html#cb140-50"></a>    </span>
+<span id="cb140-51"><a href="icboot-ejem.html#cb140-51"></a>    <span class="co"># Aproximación bootstrap percentil-t</span></span>
+<span id="cb140-52"><a href="icboot-ejem.html#cb140-52"></a>    pto_crit &lt;-<span class="st"> </span><span class="kw">quantile</span>(percentilt, <span class="kw">c</span>(alfa<span class="op">/</span><span class="dv">2</span>, <span class="dv">1</span> <span class="op">-</span><span class="st"> </span>alfa<span class="op">/</span><span class="dv">2</span>))</span>
+<span id="cb140-53"><a href="icboot-ejem.html#cb140-53"></a>    <span class="co"># Construcción del IC</span></span>
+<span id="cb140-54"><a href="icboot-ejem.html#cb140-54"></a>    ic_inf_boot &lt;-<span class="st"> </span>media <span class="op">-</span><span class="st"> </span>pto_crit[<span class="dv">2</span>] <span class="op">*</span><span class="st"> </span>desv<span class="op">/</span><span class="kw">sqrt</span>(n)</span>
+<span id="cb140-55"><a href="icboot-ejem.html#cb140-55"></a>    ic_sup_boot &lt;-<span class="st"> </span>media <span class="op">-</span><span class="st"> </span>pto_crit[<span class="dv">1</span>] <span class="op">*</span><span class="st"> </span>desv<span class="op">/</span><span class="kw">sqrt</span>(n)</span>
+<span id="cb140-56"><a href="icboot-ejem.html#cb140-56"></a>    I2 &lt;-<span class="st"> </span><span class="kw">c</span>(ic_inf_boot, ic_sup_boot)</span>
+<span id="cb140-57"><a href="icboot-ejem.html#cb140-57"></a>    <span class="co"># names(I2) &lt;- namesI</span></span>
+<span id="cb140-58"><a href="icboot-ejem.html#cb140-58"></a>    resultados[isim, <span class="dv">1</span>, <span class="dv">3</span>] &lt;-<span class="st"> </span>(I2[<span class="dv">1</span>] <span class="op">&lt;</span><span class="st"> </span>mu) <span class="op">&amp;&amp;</span><span class="st"> </span>(mu <span class="op">&lt;</span><span class="st"> </span>I2[<span class="dv">2</span>])</span>
+<span id="cb140-59"><a href="icboot-ejem.html#cb140-59"></a>    resultados[isim, <span class="dv">2</span>, <span class="dv">3</span>] &lt;-<span class="st"> </span>I2[<span class="dv">2</span>] <span class="op">-</span><span class="st"> </span>I2[<span class="dv">1</span>]</span>
+<span id="cb140-60"><a href="icboot-ejem.html#cb140-60"></a>    </span>
+<span id="cb140-61"><a href="icboot-ejem.html#cb140-61"></a>    <span class="co"># Aproximación bootstrap percentil-t simetrizado</span></span>
+<span id="cb140-62"><a href="icboot-ejem.html#cb140-62"></a>    pto_crit &lt;-<span class="st"> </span><span class="kw">quantile</span>(percentilts, <span class="dv">1</span> <span class="op">-</span><span class="st"> </span>alfa)</span>
+<span id="cb140-63"><a href="icboot-ejem.html#cb140-63"></a>    <span class="co"># Construcción del IC</span></span>
+<span id="cb140-64"><a href="icboot-ejem.html#cb140-64"></a>    ic_inf_boot &lt;-<span class="st"> </span>media <span class="op">-</span><span class="st"> </span>pto_crit <span class="op">*</span><span class="st"> </span>desv<span class="op">/</span><span class="kw">sqrt</span>(n)</span>
+<span id="cb140-65"><a href="icboot-ejem.html#cb140-65"></a>    ic_sup_boot &lt;-<span class="st"> </span>media <span class="op">+</span><span class="st"> </span>pto_crit <span class="op">*</span><span class="st"> </span>desv<span class="op">/</span><span class="kw">sqrt</span>(n)</span>
+<span id="cb140-66"><a href="icboot-ejem.html#cb140-66"></a>    I3 &lt;-<span class="st"> </span><span class="kw">c</span>(ic_inf_boot, ic_sup_boot)</span>
+<span id="cb140-67"><a href="icboot-ejem.html#cb140-67"></a>    <span class="co"># names(I3) &lt;- namesI</span></span>
+<span id="cb140-68"><a href="icboot-ejem.html#cb140-68"></a>    resultados[isim, <span class="dv">1</span>, <span class="dv">4</span>] &lt;-<span class="st"> </span>(I3[<span class="dv">1</span>] <span class="op">&lt;</span><span class="st"> </span>mu) <span class="op">&amp;&amp;</span><span class="st"> </span>(mu <span class="op">&lt;</span><span class="st"> </span>I3[<span class="dv">2</span>])</span>
+<span id="cb140-69"><a href="icboot-ejem.html#cb140-69"></a>    resultados[isim, <span class="dv">2</span>, <span class="dv">4</span>] &lt;-<span class="st"> </span>I3[<span class="dv">2</span>] <span class="op">-</span><span class="st"> </span>I3[<span class="dv">1</span>]</span>
+<span id="cb140-70"><a href="icboot-ejem.html#cb140-70"></a>}</span>
+<span id="cb140-71"><a href="icboot-ejem.html#cb140-71"></a></span>
+<span id="cb140-72"><a href="icboot-ejem.html#cb140-72"></a>t.fin &lt;-<span class="st"> </span><span class="kw">proc.time</span>() <span class="op">-</span><span class="st"> </span>t.ini</span>
+<span id="cb140-73"><a href="icboot-ejem.html#cb140-73"></a>t.fin</span></code></pre></div>
 <pre><code>##    user  system elapsed 
-##   14.32    1.36   15.84</code></pre>
-<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="icboot-ejem.html#cb142-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(resultados, <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>), mean)</span></code></pre></div>
+##   16.04    1.10   17.41</code></pre>
+<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="icboot-ejem.html#cb142-1"></a><span class="kw">apply</span>(resultados, <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">3</span>), mean)</span></code></pre></div>
 <pre><code>##            Normal Percentil Percentil-t Percentil-t simetrizado
 ## Cobertura  0.8800   0.86600      0.8880                 0.88800
 ## Longitud  32.5022  32.13928     33.5653                33.49959</code></pre>
-<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="icboot-ejem.html#cb144-1" aria-hidden="true" tabindex="-1"></a><span class="co"># knitr::kable(t(apply(resultados, c(2, 3), mean)), digits = 3)</span></span></code></pre></div>
+<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="icboot-ejem.html#cb144-1"></a><span class="co"># knitr::kable(t(apply(resultados, c(2, 3), mean)), digits = 3)</span></span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -579,7 +536,7 @@ Example 5.12 (Exponential mean)
 -->
 <p>En la Sección <a href="ejemplos-3.html#estudio-sim-boot">B.3.2</a> del Apéndice <a href="intro-hpc.html#intro-hpc">B</a> se incluye un estudio similar, empleando computación en paralelo para comparar las probabilidades de cobertura y las longitudes de los intervalos de confianza implementados en la función <code>boot.ci()</code>.</p>
 </div>
-<div id="icboot-trans" class="section level3" number="4.6.3">
+<div id="icboot-trans" class="section level3">
 <h3><span class="header-section-number">4.6.3</span> IC bootstrap para el coeficiente de correlación</h3>
 <p>Supongamos que queremos estudiar la correlación entre dos variables <span class="math inline">\(X\)</span> e <span class="math inline">\(Y\)</span> a partir del coeficiente de correlación lineal de Pearson:
 <span class="math display">\[\rho =\frac{ Cov \left( X, Y \right) }
@@ -606,9 +563,9 @@ El intervalo de confianza asintótico se obtiene empleando la aproximación norm
 <span class="math display">\[r = \frac{\exp(2Z)-1}{\exp(2Z)+1} = \operatorname{tanh}(Z).\]</span></p>
 <p>Esta aproximación está implementada en la función <code>cor.test()</code> del paquete base <code>stat</code> de R<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>, además de que también realiza el contraste <span class="math inline">\(H_0: \rho = 0\)</span> empleando el estadístico <a href="icboot-ejem.html#eq:cor-t">(4.1)</a>.</p>
 <p>Continuando con el ejemplo de la Sección <a href="intro-paquetes.html#boot-unif-multi">1.4.2</a>, para obtener un intervalo de confianza para el coeficiente de correlación lineal entre las variables <code>income</code> y <code>prestige</code> del conjunto de datos <code>Prestige</code>, podríamos emplear el siguiente código:</p>
-<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="icboot-ejem.html#cb145-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(Prestige, <span class="at">package=</span><span class="st">&quot;carData&quot;</span>)</span>
-<span id="cb145-2"><a href="icboot-ejem.html#cb145-2" aria-hidden="true" tabindex="-1"></a><span class="co"># with(Prestige, cor.test(income, prestige))</span></span>
-<span id="cb145-3"><a href="icboot-ejem.html#cb145-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cor.test</span>(Prestige<span class="sc">$</span>income, Prestige<span class="sc">$</span>prestige)</span></code></pre></div>
+<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="icboot-ejem.html#cb145-1"></a><span class="kw">data</span>(Prestige, <span class="dt">package=</span><span class="st">&quot;carData&quot;</span>)</span>
+<span id="cb145-2"><a href="icboot-ejem.html#cb145-2"></a><span class="co"># with(Prestige, cor.test(income, prestige))</span></span>
+<span id="cb145-3"><a href="icboot-ejem.html#cb145-3"></a><span class="kw">cor.test</span>(Prestige<span class="op">$</span>income, Prestige<span class="op">$</span>prestige)</span></code></pre></div>
 <pre><code>## 
 ##  Pearson&#39;s product-moment correlation
 ## 
@@ -631,23 +588,23 @@ Los intervalos se calculan en la escala de <span class="math inline">\(h(t)\)</s
 (empleada por algunos métodos para aproximar la varianza en la escala transformada mediante el método delta).</p></li>
 </ul>
 <p>Por ejemplo, para considerar la transformación <span class="math inline">\(Z\)</span> de Fisher en este caso, se podría emplear el siguiente código:</p>
-<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="icboot-ejem.html#cb147-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(boot)</span>
-<span id="cb147-2"><a href="icboot-ejem.html#cb147-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb147-3"><a href="icboot-ejem.html#cb147-3" aria-hidden="true" tabindex="-1"></a>statistic <span class="ot">&lt;-</span> <span class="cf">function</span>(data, i){</span>
-<span id="cb147-4"><a href="icboot-ejem.html#cb147-4" aria-hidden="true" tabindex="-1"></a>  remuestra <span class="ot">&lt;-</span> data[i, ]</span>
-<span id="cb147-5"><a href="icboot-ejem.html#cb147-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cor</span>(remuestra<span class="sc">$</span>income, remuestra<span class="sc">$</span>prestige)</span>
-<span id="cb147-6"><a href="icboot-ejem.html#cb147-6" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb147-7"><a href="icboot-ejem.html#cb147-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb147-8"><a href="icboot-ejem.html#cb147-8" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb147-9"><a href="icboot-ejem.html#cb147-9" aria-hidden="true" tabindex="-1"></a>res.boot <span class="ot">&lt;-</span> <span class="fu">boot</span>(Prestige, statistic, <span class="at">R =</span> <span class="dv">1000</span>)</span>
-<span id="cb147-10"><a href="icboot-ejem.html#cb147-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb147-11"><a href="icboot-ejem.html#cb147-11" aria-hidden="true" tabindex="-1"></a>h <span class="ot">&lt;-</span> <span class="cf">function</span>(t) <span class="fu">atanh</span>(t)</span>
-<span id="cb147-12"><a href="icboot-ejem.html#cb147-12" aria-hidden="true" tabindex="-1"></a>hdot <span class="ot">&lt;-</span> <span class="cf">function</span>(t) <span class="dv">1</span><span class="sc">/</span>(<span class="dv">1</span> <span class="sc">-</span> t<span class="sc">^</span><span class="dv">2</span>)</span>
-<span id="cb147-13"><a href="icboot-ejem.html#cb147-13" aria-hidden="true" tabindex="-1"></a>hinv <span class="ot">&lt;-</span> <span class="cf">function</span>(t) <span class="fu">tanh</span>(t)</span>
-<span id="cb147-14"><a href="icboot-ejem.html#cb147-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb147-15"><a href="icboot-ejem.html#cb147-15" aria-hidden="true" tabindex="-1"></a><span class="co"># boot.ci(res.boot, type = &quot;norm&quot;, h = h)</span></span>
-<span id="cb147-16"><a href="icboot-ejem.html#cb147-16" aria-hidden="true" tabindex="-1"></a><span class="co"># boot.ci(res.boot, type = &quot;norm&quot;, h = h, hinv = hinv)</span></span>
-<span id="cb147-17"><a href="icboot-ejem.html#cb147-17" aria-hidden="true" tabindex="-1"></a><span class="fu">boot.ci</span>(res.boot, <span class="at">type =</span> <span class="st">&quot;norm&quot;</span>, <span class="at">h =</span> h, <span class="at">hdot =</span> hdot, <span class="at">hinv =</span> hinv)</span></code></pre></div>
+<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="icboot-ejem.html#cb147-1"></a><span class="kw">library</span>(boot)</span>
+<span id="cb147-2"><a href="icboot-ejem.html#cb147-2"></a></span>
+<span id="cb147-3"><a href="icboot-ejem.html#cb147-3"></a>statistic &lt;-<span class="st"> </span><span class="cf">function</span>(data, i){</span>
+<span id="cb147-4"><a href="icboot-ejem.html#cb147-4"></a>  remuestra &lt;-<span class="st"> </span>data[i, ]</span>
+<span id="cb147-5"><a href="icboot-ejem.html#cb147-5"></a>  <span class="kw">cor</span>(remuestra<span class="op">$</span>income, remuestra<span class="op">$</span>prestige)</span>
+<span id="cb147-6"><a href="icboot-ejem.html#cb147-6"></a>}</span>
+<span id="cb147-7"><a href="icboot-ejem.html#cb147-7"></a></span>
+<span id="cb147-8"><a href="icboot-ejem.html#cb147-8"></a><span class="kw">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb147-9"><a href="icboot-ejem.html#cb147-9"></a>res.boot &lt;-<span class="st"> </span><span class="kw">boot</span>(Prestige, statistic, <span class="dt">R =</span> <span class="dv">1000</span>)</span>
+<span id="cb147-10"><a href="icboot-ejem.html#cb147-10"></a></span>
+<span id="cb147-11"><a href="icboot-ejem.html#cb147-11"></a>h &lt;-<span class="st"> </span><span class="cf">function</span>(t) <span class="kw">atanh</span>(t)</span>
+<span id="cb147-12"><a href="icboot-ejem.html#cb147-12"></a>hdot &lt;-<span class="st"> </span><span class="cf">function</span>(t) <span class="dv">1</span><span class="op">/</span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>t<span class="op">^</span><span class="dv">2</span>)</span>
+<span id="cb147-13"><a href="icboot-ejem.html#cb147-13"></a>hinv &lt;-<span class="st"> </span><span class="cf">function</span>(t) <span class="kw">tanh</span>(t)</span>
+<span id="cb147-14"><a href="icboot-ejem.html#cb147-14"></a></span>
+<span id="cb147-15"><a href="icboot-ejem.html#cb147-15"></a><span class="co"># boot.ci(res.boot, type = &quot;norm&quot;, h = h)</span></span>
+<span id="cb147-16"><a href="icboot-ejem.html#cb147-16"></a><span class="co"># boot.ci(res.boot, type = &quot;norm&quot;, h = h, hinv = hinv)</span></span>
+<span id="cb147-17"><a href="icboot-ejem.html#cb147-17"></a><span class="kw">boot.ci</span>(res.boot, <span class="dt">type =</span> <span class="st">&quot;norm&quot;</span>, <span class="dt">h =</span> h, <span class="dt">hdot =</span> hdot, <span class="dt">hinv =</span> hinv)</span></code></pre></div>
 <pre><code>## BOOTSTRAP CONFIDENCE INTERVAL CALCULATIONS
 ## Based on 1000 bootstrap replicates
 ## 
@@ -660,10 +617,10 @@ Los intervalos se calculan en la escala de <span class="math inline">\(h(t)\)</s
 ## 95%   ( 0.6016,  0.7858 )  
 ## Calculations on Transformed Scale;  Intervals on Original Scale</code></pre>
 <p>Esto sería en principo preferible a trabajar en la escala original, ya que la distribución bootstrap en la escala transformada se aproximaría más a la normalidad:</p>
-<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="icboot-ejem.html#cb149-1" aria-hidden="true" tabindex="-1"></a>ht <span class="ot">&lt;-</span> <span class="fu">h</span>(res.boot<span class="sc">$</span>t)</span>
-<span id="cb149-2"><a href="icboot-ejem.html#cb149-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(ht, <span class="at">freq =</span> <span class="cn">FALSE</span>, <span class="at">breaks =</span> <span class="st">&quot;FD&quot;</span>,</span>
-<span id="cb149-3"><a href="icboot-ejem.html#cb149-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;Distribución bootstrap en la escala transformada&quot;</span>)</span>
-<span id="cb149-4"><a href="icboot-ejem.html#cb149-4" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(<span class="fu">dnorm</span>(x, <span class="at">mean=</span><span class="fu">mean</span>(ht), <span class="at">sd=</span><span class="fu">sd</span>(ht)), <span class="at">lty =</span> <span class="dv">2</span>, <span class="at">add =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="icboot-ejem.html#cb149-1"></a>ht &lt;-<span class="st"> </span><span class="kw">h</span>(res.boot<span class="op">$</span>t)</span>
+<span id="cb149-2"><a href="icboot-ejem.html#cb149-2"></a><span class="kw">hist</span>(ht, <span class="dt">freq =</span> <span class="ot">FALSE</span>, <span class="dt">breaks =</span> <span class="st">&quot;FD&quot;</span>,</span>
+<span id="cb149-3"><a href="icboot-ejem.html#cb149-3"></a>     <span class="dt">main =</span> <span class="st">&quot;Distribución bootstrap en la escala transformada&quot;</span>)</span>
+<span id="cb149-4"><a href="icboot-ejem.html#cb149-4"></a><span class="kw">curve</span>(<span class="kw">dnorm</span>(x, <span class="dt">mean=</span><span class="kw">mean</span>(ht), <span class="dt">sd=</span><span class="kw">sd</span>(ht)), <span class="dt">lty =</span> <span class="dv">2</span>, <span class="dt">add =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
 <p><img src="04-ic_boot_files/figure-html/unnamed-chunk-10-1.png" width="70%" style="display: block; margin: auto;" /></p>
 
 </div>
@@ -685,6 +642,7 @@ Los intervalos se calculan en la escala de <span class="math inline">\(h(t)\)</s
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -703,7 +661,6 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
-"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
@@ -724,10 +681,6 @@ gitbook.start({
 "text": null
 },
 "download": ["book_remuestreo.pdf"],
-"search": {
-"engine": "fuse",
-"options": null
-},
 "toc": {
 "collapse": "subsection"
 }

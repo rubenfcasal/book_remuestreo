@@ -378,8 +378,8 @@ chan.F
 ```
 ## Call: survfit(formula = Surv(age, cens) ~ 1, data = chan)
 ## 
-##       n events median 0.95LCL 0.95UCL
-## [1,] 97     46     87    85.8    90.4
+##       n  events  median 0.95LCL 0.95UCL 
+##    97.0    46.0    87.0    85.8    90.4
 ```
 
 ```r
@@ -621,17 +621,17 @@ str(res)
 
 ```r
 # Estimaciones de interés
-res$table[, c("rmean", "median")]
+res$table[, c("*rmean", "median")]
 ```
 
 ```
-##               rmean median
+##              *rmean median
 ## sex=Female 88.46153     88
 ## sex=Male   86.89935     87
 ```
 
 ```r
-as.numeric(res$table[, c("rmean", "median")])
+as.numeric(res$table[, c("*rmean", "median")])
 ```
 
 ```

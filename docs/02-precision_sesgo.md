@@ -46,7 +46,7 @@ $\mathbf{X}^{\ast}=\left( X_1^{\ast}, \ldots ,X_n^{\ast} \right)$
 
 3. Calcular $R^{\ast}=R\left( \mathbf{X}^{\ast},\hat{F} \right)
 =T\left( \mathbf{X}^{\ast} \right) -\theta \left( \hat{F} \right) =
-\hat{\theta}^{\ast}- \hat \theta$
+\hat{\theta}^{\ast}- \theta \left( \hat{F} \right)$
 
 4. Repetir $B$ veces los pasos 2-3 para obtener las réplicas bootstrap
 $R^{\ast (1)}, \ldots, R^{\ast (B)}$
@@ -100,6 +100,7 @@ En general, el estimador, $\hat{F}$, de $F$ a utilizar en los pasos 1-2
 de estos algoritmos se elije según proceda al caso. En el caso del
 bootstrap uniforme sería $\hat{F}=F_n$ y se puede proceder
 como se  mostró en la Sección \@ref(intro-implementacion).
+
 
 ### Ejemplo: la media muestral
 
@@ -283,7 +284,7 @@ desvmediaboot
 ```
 
 ```
-## [1] 0.1544907
+## [1] 0.1562318
 ```
 
 ```r
@@ -291,7 +292,7 @@ desvmedianaboot
 ```
 
 ```
-## [1] 0.2475729
+## [1] 0.2523715
 ```
 
 ```r
@@ -302,7 +303,7 @@ sesgomediaboot
 ```
 
 ```
-## [1] 0.0009302
+## [1] 0.002176733
 ```
 
 ```r
@@ -310,7 +311,7 @@ sesgomedianaboot
 ```
 
 ```
-## [1] 0.045781
+## [1] 0.0513192
 ```
 
 Empleando el paquete `boot` el código sería más simple:
@@ -364,6 +365,22 @@ op
 ## t2* 0.6110000 4.529410e-02   0.2511022
 ```
 
+
+Como comentario adicional, si se emplea $\hat F$ como aproximación de la distribución poblacional, lo habitual es que $\hat\theta = T\left( \mathbf{X} \right) = \theta ( \hat{F} )$ sea el estimador de $\theta(F)$ (por ejemplo $\hat\theta = \theta(F_n)$ en el caso del bootstrap uniforme). 
+De esta forma, en el universo bootstrap el parámetro teórico se sustituye por el estimador y, por ejemplo, $R = \hat \theta - \theta$ se traduce en $R^{\ast} = \hat{\theta}^{\ast}- \hat \theta$. 
+Este es el principal motivo por el que la mayoría de las herramientas utilizadas en la práctica siempre asumen que ocurre esto, como es el caso de los métodos implementados en el paquete `boot` (y derivados).
+
+En el caso general $\hat\theta = T\left( \mathbf{X} \right)$ puede ser distinto de $\theta ( \hat{F} )$ (por ejemplo, en el caso del bootstrap uniforme puede haber estimadores mejores que  $\theta( F_n)$ y típicamente se suele considerar el mejor estimador disponible). 
+Como se mostró al principio de la Sección  \@ref(prec-sesgo-boot), en ese caso se debería sustituir en el universo bootstrap el parámetro teórico por  $\theta ( \hat{F} )$ y, por ejemplo,  $R = \hat \theta - \theta$ se traduciría en  $R^{\ast} = \hat \theta^{\ast} - \theta ( \hat{F} )$ (esto puede ser especialmente importante en la aproximación del sesgo). 
+Suponiendo que podemos obtener $\theta ( \hat{F} )$, podemos desarrollar un código que implemente este algoritmo sin mucha dificultad (se podría tomar como base la primera aproximación en el ejemplo anterior), pero no se puede hacer de forma directa con el paquete `boot` (que asume siempre que $\hat\theta = \theta ( \hat{F} ))$.
+Habría que rehacer los cálculos que implementan las herramientas de este paquete (empleando directamente `res.boot$t` y, por ejemplo, cambiando `t0` en la aproximación del sesgo en el código anterior o procediendo de forma similar a como se hace en la Sección \@ref(npden-r-boot), donde la estimación del sesgo se podría considerar importante). 
+
+Finalmente, especialmente en el caso de métodos bootstrap más avanzados, puede resultar difícil obtener $\theta ( \hat{F} )$ y la aproximación habitual es reemplazarlo directamente por $\hat \theta$. 
+Esta es una justificación más de la implementación que se suele hacer en la práctica.
+
+<!-- 
+De hecho, en general se trata de buscar $\hat{F}$ de forma que $\theta ( \hat{F} )$ se aproxime a la mejor estimación disponible de $\theta(F)$ y ese estimador es el que se suele ser estudiado. 
+-->
 ## Motivación del método Jackknife {#jackknife}
 
 El jackknife es probablemente el método de remuestreo, propiamente

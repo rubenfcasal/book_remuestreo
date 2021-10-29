@@ -425,48 +425,45 @@ entre otros.
 
 ## Ejemplos
 
-En esta sección nos centraremos en el bootstrap
-en la estimación tipo núcleo de la densidad 
-para la aproximación de la precisión y el sesgo,
-y también para el cálculo de intervalos de confianza.
+En esta sección nos centraremos en el bootstrap en la estimación tipo núcleo de la densidad para la aproximación de la precisión y el sesgo, y también para el cálculo de intervalos de confianza.
 
 
 ### Bootstrap y estimación del sesgo
 
-La idea sería aproximar la distribución del error de estimación 
-$\hat f(x) - f(x)$ por la distribución bootstrap de
-$\hat f^{\ast}(x) - \hat f(x)$ (bootstrap percentil básico).
+La idea sería aproximar la distribución del error de estimación $\hat f_h(x) - f(x)$ por la distribución bootstrap de $\hat f^{\ast}_h(x) - \hat f_g(x)$ (bootstrap percentil básico).
 
-Como se comentó en la Sección \@ref(aproximacion-bootstrap) 
-la ventana $g$ ha de ser asintóticamente mayor que $h$ (de orden $n^{-1/5}$) 
-y la recomendación sería emplear la ventana óptima para la estimación de 
-$f^{\prime \prime }\left( x \right)$, de orden $n^{-1/9}$. 
+Como se comentó en la Sección \@ref(aproximacion-bootstrap) la ventana $g$ debería ser asintóticamente mayor que $h$ (de orden $n^{-1/5}$) y la recomendación sería emplear la ventana óptima para la estimación de $f^{\prime \prime }\left( x \right)$, de orden $n^{-1/9}$. 
+Sin embargo, en la práctica es habitual emplear $g=h$ para evitar la selección de esta ventana (lo que además facilita emplear herramientas como el paquete `boot`). 
+Otra alternativa podría ser asumir que $g \simeq n^{1/5}h/n^{1/9}$ como se hace a continuación.
 
 ```{r}
 # Remuestreo
 set.seed(1)
 n <- length(x)
 g <- h * n^(4/45) # h*n^(-1/9)/n^(-1/5)
-range.x <- range(npden$x) # Para fijar las posiciones de estimación
+# g <- h
+range_x <- range(npden$x) # Para fijar las posiciones de estimación
 B <- 1000
 stat_den_boot <- matrix(nrow = length(npden$x), ncol = B)
+npdeng <- density(x, bw = g, from = range_x[1], to = range_x[2])
+
 for (k in 1:B) {
     # x_boot <- sample(x, n, replace = TRUE) + rnorm(n, 0, g)
     x_boot <- rnorm(n, sample(x, n, replace = TRUE), g)
-    den_boot <- density(x_boot, bw = h, from = range.x[1], to = range.x[2])$y
+    den_boot <- density(x_boot, bw = h, from = range_x[1], to = range_x[2])$y
     # Si se quiere tener en cuenta la variabilidad debida a la selección de
     # la ventana habría que emplear el mismo criterio en la función `density`.
-    stat_den_boot[, k] <- den_boot - npden$y
+    stat_den_boot[, k] <- den_boot - npdeng$y
 }
 
 # Calculo del sesgo y error estándar 
 bias <- apply(stat_den_boot, 1, mean)
-std.err <- apply(stat_den_boot, 1, sd)
+std_err <- apply(stat_den_boot, 1, sd)
 
 # Representar estimación y corrección de sesgo bootstrap
 plot(npden, type="l", ylim = c(0, 0.05), lwd = 2)
+# lines(npden$x, pmax(npden$y - bias, 0))
 lines(npden$x, npden$y - bias)
-# lines(npden$x, pmax(0, npden$y - bias))
 ```
 
 
@@ -480,17 +477,17 @@ por el método percentil (básico).
 alfa <- 0.05
 pto_crit <- apply(stat_den_boot, 1, quantile, probs = c(alfa/2, 1 - alfa/2))
 # ic_inf_boot <- npden$y - pto_crit[2, ]
-ic_inf_boot <- pmax(0, npden$y - pto_crit[2, ])
+ic_inf_boot <- pmax(npden$y - pto_crit[2, ], 0)
 ic_sup_boot <- npden$y - pto_crit[1, ]
 
 plot(npden, type="l", ylim = c(0, 0.05), lwd = 2)
-lines(npden$x, pmax(0, npden$y - bias))
+lines(npden$x, pmax(npden$y - bias, 0)) # Ojo: no es una densidad
 lines(npden$x, ic_inf_boot, lty = 2)
 lines(npden$x, ic_sup_boot, lty = 2)
 ```
 
 
-### Implementación con el paquete `boot`
+### Implementación con el paquete `boot` {#npden-r-boot}
 
 Como también se comentó en la Sección \@ref(modunif-boot-suav), 
 la recomendación es implementar el bootstrap suavizado como un bootstrap paramétrico:
@@ -500,8 +497,8 @@ library(boot)
 
 # Los objetos necesarios para el cálculo del estadístico
 # hay que pasarlos a traves del argumento `data` de `boot`.
-range.x <- range(npden$x)
-data.precip <- list(x = x, h = h, range.x = range.x)
+# range_x <- range(npden$x)
+data.precip <- list(x = x, h = h, range_x = range_x)
 
 ran.gen.smooth <- function(data, mle) {
     # Función para generar muestras aleatorias mediante
@@ -510,19 +507,20 @@ ran.gen.smooth <- function(data, mle) {
     n <- length(data$x)
     g <- mle
     xboot <- rnorm(n, sample(data$x, n, replace = TRUE), g)
-    out <- list(x = xboot, h = data$h, range.x = data$range.x)
+    out <- list(x = xboot, h = data$h, range_x = data$range_x)
 }
 
 statistic <- function(data) 
-                density(data$x, bw = data$h, from = range.x[1], to = range.x[2])$y
+                density(data$x, bw = data$h, from = range_x[1], to = range_x[2])$y
 
 set.seed(1)
 res.boot <- boot(data.precip, statistic, R = B, sim = "parametric",
                  ran.gen = ran.gen.smooth, mle = g)
 
 # Calculo del sesgo y error estándar
-bias <- with(res.boot, apply(t, 2, mean, na.rm = TRUE) -  t0)
-std.err <- apply(res.boot$t, 2, sd, na.rm = TRUE)
+# Empleamos npdeng$y en lugar de resboot$t0
+bias <- apply(res.boot$t, 2, mean, na.rm = TRUE) -  npdeng$y
+std_err <- apply(res.boot$t, 2, sd, na.rm = TRUE)
 ```
 
 Además, la función `boot.ci()` solo permite el cálculo del intervalo de 
@@ -535,11 +533,11 @@ bootstrap del estimador:
 # a partir de las réplicas bootstrap del estimador
 alfa <- 0.05
 pto_crit <- apply(res.boot$t, 2, quantile, probs = c(alfa/2, 1 - alfa/2))
-ic_inf_boot <- pmax(0, 2*npden$y - pto_crit[2, ])
-ic_sup_boot <- 2*npden$y - pto_crit[1, ]
+ic_inf_boot <- pmax(npden$y + npdeng$y - pto_crit[2, ], 0)
+ic_sup_boot <- npden$y + npdeng$y - pto_crit[1, ]
 
 plot(npden, ylim = c(0, 0.05), lwd = 2)
-lines(npden$x, pmax(0, npden$y - bias))
+lines(npden$x, pmax(npden$y - bias, 0))
 
 lines(npden$x, ic_inf_boot, lty = 2)
 lines(npden$x, ic_sup_boot, lty = 2)
@@ -560,7 +558,8 @@ Pero la recomendación es emplear bootstrap básico (o percentil-*t*) en lugar
 de bootstrap percentil (directo) en la presencia de sesgo:
 
 ```{r}
-matplot(npden$x, 2*npden$y - t(res.boot$t), type = "l", col = "darkgray")
+# matplot(npden$x, npden$y + npdeng$y - t(res.boot$t), type = "l", col = "darkgray")
+matplot(npden$x, pmax(npden$y + npdeng$y - t(res.boot$t), 0), type = "l", col = "darkgray")
 lines(npden, lwd = 2)
 lines(npden$x, npden$y - bias)
 ```
