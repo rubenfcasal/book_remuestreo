@@ -454,8 +454,8 @@ res <- summary(chan.F)
 # res
 str(res)
 # Estimaciones de interés
-res$table[, c("rmean", "median")]
-as.numeric(res$table[, c("rmean", "median")])
+res$table[, c("*rmean", "median")]
+as.numeric(res$table[, c("*rmean", "median")])
 ```
 
 
