@@ -459,7 +459,7 @@ r.squared
 ```
 
 ```
-## [1] 0.8015429
+## [1] 0.8023864
 ```
 
 
@@ -563,7 +563,7 @@ NOTA: De forma análoga al caso lineal (Sección \@ref(boot-residual)), se podr�
 
 ### Intervalos de confianza y predicción
 
-De forma análoga al caso de la estimación de la densidad mostrado en la Sección \@ref(npden-r-ic), podemos cálcular de estimaciones por intervalo de confianza (puntuales) por el método percentil (básico):
+De forma análoga al caso de la estimación de la densidad mostrado en la Sección \@ref(npden-r-ic), podemos calcular estimaciones por intervalo de confianza (puntuales) por el método percentil (básico):
 
 
 ```r
@@ -582,7 +582,6 @@ lines(fit$x, ic_sup_boot, lty = 2)
 
 
 \begin{center}\includegraphics[width=0.7\linewidth]{07-npreg_files/figure-latex/unnamed-chunk-7-1} \end{center}
-
 
 
 El modelo ajustado también es empleado para predecir una nueva respuesta individual $Y(x_0)$ para un valor concreto $x_0$ de la variable explicativa.  
