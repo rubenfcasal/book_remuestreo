@@ -398,10 +398,10 @@ El mecanismo es similar al del bootstrap obvio (Sección \@ref(bootcen-obvio)):
     con distribución $\hat{F}$. 
     
 3.  Si la $i$-ésima observación está censurada ($\delta_i=0$) se toma 
-    $C_i^{\ast}=X_i$ y si no ($\delta_i=1$) se genera un valor de la estimación
-    de la distribución de la variable censurante condicionada a $C > X_i$:
-    $$\hat G \left(\left. t \ \right\vert_{\ t > X_i} \right) 
-    = \frac{\hat G(t) - \hat G(X_i)}{1- \hat G(X_i)}.$$
+    $C_i^{\ast}=T_i$ y si no ($\delta_i=1$) se genera un valor de la estimación
+    de la distribución de la variable censurante condicionada a $C > T_i$:
+    $$\hat G \left(\left. t \ \right\vert_{\ t > T_i} \right) 
+    = \frac{\hat G(t) - \hat G(T_i)}{1- \hat G(T_i)}.$$
 
 3.  Definir $T_i^{\ast}=\min \left\{ X_i^{\ast},C_i^{\ast}\right\}$ y
     $\delta_i^{\ast}=\mathbf{1}_{\left\{ X_i^{\ast}\leq
