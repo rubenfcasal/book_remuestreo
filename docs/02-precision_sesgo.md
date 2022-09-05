@@ -284,7 +284,7 @@ desvmediaboot
 ```
 
 ```
-## [1] 0.1572797
+## [1] 0.1577093
 ```
 
 ```r
@@ -292,7 +292,7 @@ desvmedianaboot
 ```
 
 ```
-## [1] 0.2518982
+## [1] 0.2524409
 ```
 
 ```r
@@ -303,7 +303,7 @@ sesgomediaboot
 ```
 
 ```
-## [1] -0.001110327
+## [1] -9.529333e-05
 ```
 
 ```r
@@ -311,7 +311,7 @@ sesgomedianaboot
 ```
 
 ```
-## [1] 0.0449271
+## [1] 0.0467194
 ```
 
 Empleando el paquete `boot` el código sería más simple:
@@ -381,6 +381,8 @@ Esta es una justificación más de la implementación que se suele hacer en la p
 <!-- 
 De hecho, en general se trata de buscar $\hat{F}$ de forma que $\theta ( \hat{F} )$ se aproxime a la mejor estimación disponible de $\theta(F)$ y ese estimador es el que se suele ser estudiado. 
 -->
+
+
 ## Motivación del método Jackknife {#jackknife}
 
 El jackknife es probablemente el método de remuestreo, propiamente
@@ -412,11 +414,7 @@ del estadístico de interés en todas las posibles remuestras jackknife.
 
 ## Estimación Jackknife de la precisión y el sesgo de un estimador
 
-Cuando estamos interesados en el sesgo o la varianza de un estimador
-$\hat{\theta}=\theta \left( \mathbf{X} \right)$ de un parámetro 
-$\theta =\theta \left( F \right)$, el estadístico de interés suele
-definirse como
-$R=R\left( \mathbf{X},F \right) =\hat{\theta}-\theta$. 
+Cuando estamos interesados en el sesgo o la varianza de un estimador $\hat{\theta}=T \left( \mathbf{X} \right)$ de un parámetro $\theta =\theta \left( F \right)$, el estadístico de interés suele definirse como $R=R\left( \mathbf{X},F \right) =\hat{\theta}-\theta$. 
 En este caso
 $$\begin{aligned}
 Sesgo\left( \hat{\theta} \right) &= E\left( \hat{\theta} \right) -\theta
@@ -424,94 +422,70 @@ Sesgo\left( \hat{\theta} \right) &= E\left( \hat{\theta} \right) -\theta
 Var\left( \hat{\theta} \right) &= Var\left( \hat{\theta}-\theta \right)
 =Var\left( R \right).
 \end{aligned}$$
-Así pues trataremos de usar el
-jackknife para aproximar la esperanza y varianza de $R$, o,
-equivalentemente, el sesgo y la varianza de $\hat{\theta}$.
+Así pues trataremos de usar el jackknife para aproximar la esperanza y varianza de $R$, o, equivalentemente, el sesgo y la varianza de $\hat{\theta}$.
 
 El conjunto de remuestras jackknife es
 $$\mathcal{X}_{jackk}=\left\{ \mathbf{X}^{\ast}=
 \mathbf{X}_{(i)}=\left( X_1,\ldots ,X_{i-1},X_{i+1},\ldots
 ,X_n \right) : i=1,\ldots ,n\right\}$$
-y todas ellas se consideran con
-equiprobabilidad en el universo jackknife. Como primera tentativa
-estimaríamos el sesgo y la varianza jackknife mediante:
+y todas ellas se consideran con equiprobabilidad en el universo jackknife. 
+Como primera tentativa estimaríamos el sesgo y la varianza jackknife mediante:
 $$\begin{aligned}
-E^{\ast}\left( R^{\ast} \right) &= E_{jackk}^{\ast}\left( \hat{\theta}
-^{\ast} \right) -\theta \left( \mathbf{X} \right) =\frac{1}{n}
-\sum_{i=1}^{n}\theta \left( \mathbf{X}_{(i)} \right) -
-\hat{\theta}=\overline{\theta \left( \mathbf{X}_{(\cdot)} \right)}-\hat{\theta}, \\
-Var^{\ast}\left( R^{\ast} \right) &= Var_{jackk}^{\ast}\left( \hat{\theta}
-^{\ast} \right) =\frac{1}{n}\sum_{i=1}^{n}\left[ \theta \left( 
-\mathbf{X}_{(i)} \right) -\overline{\theta \left( 
-\mathbf{X}_{(\cdot)} \right)}\right]^2,
+E^{\ast}\left( R^{\ast} \right) 
+&= E_{jackk}^{\ast}\left( \hat{\theta}^{\ast} \right) - T \left( \mathbf{X} \right) 
+= \frac{1}{n}\sum_{i=1}^{n}T \left( \mathbf{X}_{(i)} \right) - \hat{\theta} \\
+&= \frac{1}{n}\sum_{i=1}^{n}\hat \theta_{(i)} - \hat{\theta} 
+= \overline{\theta_{(\cdot)}}-\hat{\theta}, \\
+Var^{\ast}\left( R^{\ast} \right) 
+&= Var_{jackk}^{\ast}\left( \hat{\theta}^{\ast} \right) 
+= \frac{1}{n}\sum_{i=1}^{n}\left[ \hat \theta_{(i)} 
+- \overline{\theta_{(\cdot)}}\right]^2,
 \end{aligned}$$
-con $\overline{\theta \left( \mathbf{X}_{(\cdot)} \right)}
-= \frac{1}{n}\sum_{j=1}^{n}\theta \left( \mathbf{X}_{(j)} \right)$.
+donde $\hat \theta_{(i)} = T \left( \mathbf{X}_{(i)} \right)$ y $\overline{\theta_{(\cdot)}} = \frac{1}{n}\sum_{j=1}^{n}\hat \theta_{(j)}$.
 
-Sin embargo es evidente que las réplicas jackknife son mucho más
-parecidas a la muestra original de lo que lo son las remuestras
-bootstrap, en general. De hecho se puede demostrar que el valor absoluto
-de ese estimador jackknife del sesgo es siempre menor que el valor
-absoluto del sesgo bootstrap y que la estimación jackknife de la
-varianza que se acaba de proponer también es menor que la varianza
-bootstrap. En resumen, el método jackknife necesita de un **factor de
-elevación** para que las estimaciones que proporciona sean consistentes.
-La idea es elegir dicho factor de elevación como aquel que provoca que,
-al multiplicar los estadísticos anteriores por él, y considerando como
-parámetro a estimar la media o la varianza poblacional, el estimador
-jackknife finalmente resultante sea insesgado. Así, el factor de
-elevación resulta ser $n-1$ y las estimaciones jackknife finales son
-
+Sin embargo es evidente que las réplicas jackknife son mucho más parecidas a la muestra original de lo que lo son las remuestras bootstrap, en general. 
+De hecho se puede demostrar que el valor absoluto de ese estimador jackknife del sesgo es siempre menor que el valor absoluto del sesgo bootstrap y que la estimación jackknife de la varianza que se acaba de proponer también es menor que la varianza bootstrap. 
+En resumen, el método jackknife necesita de un **factor de elevación** para que las estimaciones que proporciona sean consistentes.
+La idea es elegir dicho factor de elevación como aquel que provoca que, al multiplicar los estadísticos anteriores por él, y considerando como parámetro a estimar la media o la varianza poblacional, el estimador jackknife finalmente resultante sea insesgado. 
+Así, el factor de elevación resulta ser $n-1$ y las estimaciones jackknife finales son
 $$\begin{aligned}
-Sesgo_{jackk}^{\ast}\left( \hat{\theta}^{\ast} \right) &= \left( n-1 \right)
-\left( \overline{\theta \left( \mathbf{X}_{(\cdot)}
- \right)}-\hat{\theta} \right) =\frac{n-1}{n}\sum_{i=1}^{n}\left( \theta
-\left( \mathbf{X}_{(i)} \right) -\hat{\theta} \right), \\
-Var_{jackk}^{\ast}\left( \hat{\theta}^{\ast} \right) &= \frac{n-1}{n}
-\sum_{i=1}^{n}\left[ \theta \left( \mathbf{X}_{(i)}
- \right) -\overline{\theta \left( \mathbf{X}_{(\cdot)}
- \right)}\right]^2.
+Sesgo_{jackk}^{\ast}\left( \hat{\theta}^{\ast} \right) 
+&= \left( n-1 \right)\left( \overline{\theta_{(\cdot)}}-\hat{\theta} \right) 
+= \frac{n-1}{n}\sum_{i=1}^{n}\left( \hat \theta_{(i)} - \hat{\theta} \right), \\
+Var_{jackk}^{\ast}\left( \hat{\theta}^{\ast} \right) 
+&= \frac{n-1}{n} \sum_{i=1}^{n}\left[ \hat \theta_{(i)} 
+- \overline{\theta_{(\cdot)}}\right]^2.
 \end{aligned}$$
 
 Tomando como parámetro de interés la media, $\theta =\mu$, tenemos que
 $$\begin{aligned}
-\overline{\theta \left( \mathbf{X}_{(\cdot)} \right)}-
-\hat{\theta} &= \frac{1}{n}\sum_{i=1}^{n}\theta \left( 
-\mathbf{X}_{(i)} \right) -\hat{\theta}=\frac{1}{n}\sum_{i=1}^{n}
-\overline{X_{(i)}}-\bar{X}= \\
-&= \frac{1}{n}\sum_{i=1}^{n}\frac{1}{n-1}\sum_{j=1,j\neq i}^{n}X_j-
-\bar{X}=\frac{1}{n\left( n-1 \right)}\sum_{i,j=1,i\neq j}^{n}X_j-
-\bar{X} \\
-&= \frac{1}{n\left( n-1 \right)}\sum_{j=1}^{n}\left( n-1 \right) X_j-
-\bar{X}=\frac{1}{n}\sum_{j=1}^{n}X_j-\bar{X}=0,\end{aligned}$$
+\overline{\theta_{(\cdot)}} - \hat{\theta} 
+&= \frac{1}{n}\sum_{i=1}^{n}\hat \theta_{(i)} - \hat{\theta}
+= \frac{1}{n}\sum_{i=1}^{n} \overline{X_{(i)}}-\bar{X} \\
+&= \frac{1}{n}\sum_{i=1}^{n}\frac{1}{n-1}\sum_{j=1,j\neq i}^{n}X_j - \bar{X}
+= \frac{1}{n\left( n-1 \right)}\sum_{i,j=1,i\neq j}^{n}X_j - \bar{X} \\
+&= \frac{1}{n\left( n-1 \right)}\sum_{j=1}^{n}\left( n-1 \right) X_j- \bar{X}
+= \frac{1}{n}\sum_{j=1}^{n}X_j-\bar{X}=0,
+\end{aligned}$$
+así que $\overline{\theta_{(\cdot)}}-\hat{\theta}$ es un estimador insesgado del sesgo de $\bar{X}$ (que es cero). 
+De esta forma, utilizando un factor de elevación arbitrario, $c$, se tiene igualmente que
+$$c\left( \overline{\theta_{(\cdot)}} - \hat{\theta} \right) = 0,$$
+así que es también un estimador insesgado de $Sesgo\left( \bar{X} \right) =0$.
 
-así que $\overline{\theta \left( \mathbf{X}_{(\cdot)}
-\right)}-\hat{\theta}$ es un estimador insesgado del sesgo de
-$\bar{X}$ (que es cero). De esta forma, utilizando un factor de
-elevación arbitrario, $c$, se tiene igualmente que
-$$c\left( \overline{\theta \left( \mathbf{X}_{(\cdot)} \right)}
-- \hat{\theta} \right) = 0,$$
-así que es también un estimador insesgado de 
-$Sesgo\left( \bar{X} \right) =0.$$
-Determinaremos el valor de $c$
-imponiendo que el estimador jackknife de la varianza de dicho estimador
-($\hat{\theta}=\bar{X}$) es una estimador insesgado de la varianza de
-dicho estimador. Por una parte, es bien conocido que la varianza de
-$\hat{\theta}$ es $Var\left( \bar{X} \right) = \sigma^2 /n$. 
-Por otra parte, la estimación jackknife de la varianza de $\hat{\theta}$,
-con factor de elevación $c$ es
-
+Determinaremos el valor de $c$ imponiendo que el estimador jackknife de la varianza de dicho estimador ($\hat{\theta}=\bar{X}$) es una estimador insesgado de la varianza de dicho estimador. 
+Por una parte, es bien conocido que la varianza de $\hat{\theta}$ es $Var\left( \bar{X} \right) = \sigma^2 /n$. 
+Por otra parte, la estimación jackknife de la varianza de $\hat{\theta}$, con factor de elevación $c$ es
 $$\begin{aligned}
-Var_{jackk}^{\ast}\left( \bar{X} \right) &= \frac{c}{n}\sum_{i=1}^{n}
-\left[ \overline{X_{(i)}}-\overline{\overline{X_{\left( \cdot
- \right)}}}\right]^2 \\
-&= \frac{c}{n}\sum_{i=1}^{n}\left[ \frac{1}{n-1}\sum_{j=1,j\neq i}^{n}X_j-
-\frac{1}{n}\sum_{k=1}^{n}\frac{1}{n-1}\sum_{j=1,j\neq k}^{n}X_j\right]^2
-\\
-&= \frac{c}{n}\sum_{i=1}^{n}\left[ \frac{1}{n-1}\sum_{j=1,j\neq i}^{n}X_j-
-\frac{1}{n\left( n-1 \right)}\sum_{k,j=1,j\neq k}^{n}X_j\right]^2 \\
+Var_{jackk}^{\ast}\left( \bar{X} \right) 
+&= \frac{c}{n}\sum_{i=1}^{n}\left[ \overline{X_{(i)}}
+-\overline{\overline{X_{\left( \cdot \right)}}}\right]^2 \\
+&= \frac{c}{n}\sum_{i=1}^{n}\left[ \frac{1}{n-1}\sum_{j=1,j\neq i}^{n}X_j
+- \frac{1}{n}\sum_{k=1}^{n}\frac{1}{n-1}\sum_{j=1,j\neq k}^{n}X_j\right]^2 \\
+&= \frac{c}{n}\sum_{i=1}^{n}\left[ \frac{1}{n-1}\sum_{j=1,j\neq i}^{n}X_j
+- \frac{1}{n\left( n-1 \right)}\sum_{k,j=1,j\neq k}^{n}X_j\right]^2 \\
 &= \frac{c}{n}\sum_{i=1}^{n}\left[ \frac{1}{n\left( n-1 \right)}
-\sum_{j=1,j\neq i}^{n}X_j-\frac{1}{n}X_i\right]^2.\end{aligned}$$
+\sum_{j=1,j\neq i}^{n}X_j-\frac{1}{n}X_i\right]^2.
+\end{aligned}$$
 
 La esperanza de esta cantidad resulta:
 $$\begin{aligned}
@@ -533,9 +507,9 @@ $$\begin{aligned}
 
 Así pues, el sesgo del estimador jackknife de la varianza de la media
 muestral es
-$$E\left[ Var_{jackk}^{\ast}\left( \bar{X} \right) \right] -\frac{\sigma
-^2}{n}=\frac{c\sigma^2}{n\left( n-1 \right)}-\frac{\sigma^2}{n}=
-\frac{\sigma^2}{n}\left( \frac{c}{n-1}-1 \right),$$
+$$E\left[ Var_{jackk}^{\ast}\left( \bar{X} \right) \right] -\frac{\sigma^2}{n}
+= \frac{c\sigma^2}{n\left( n-1 \right)} - \frac{\sigma^2}{n}
+= \frac{\sigma^2}{n}\left( \frac{c}{n-1} - 1 \right),$$
 que vale cero si y solamente si $c=n-1$. 
 Dicho en otras palabras, tomando como factor de
 elevación $c=n-1$, entonces, tanto el estimador jackknife del sesgo de
@@ -543,12 +517,14 @@ $\bar{X}$ como el estimador jackknife de la varianza de
 $\bar{X}$ son estimadores insesgados, respectivamente, del sesgo y
 la varianza de $\bar{X}$.
 
-Dichos estimadores resultan$$\begin{aligned}
-Sesgo_{jackk}^{\ast}\left( \bar{X} \right) &= \left( n-1 \right) \left( 
-\overline{\overline{X_{(\cdot)}}}-\bar{X} \right), \\
-Var_{jackk}^{\ast}\left( \bar{X} \right) &= \frac{n-1}{n}\sum_{i=1}^{n}
-\left[ \overline{X_{(i)}}-\overline{\overline{X_{\left( \cdot
- \right)}}}\right]^2.\end{aligned}$$
+Dichos estimadores resultan
+$$\begin{aligned}
+Sesgo_{jackk}^{\ast}\left( \bar{X} \right) 
+&= \left( n-1 \right) \left( \overline{\overline{X_{(\cdot)}}}-\bar{X} \right), \\
+Var_{jackk}^{\ast}\left( \bar{X} \right) 
+&= \frac{n-1}{n}\sum_{i=1}^{n}\left[ \overline{X_{(i)}}
+- \overline{\overline{X_{\left( \cdot \right)}}}\right]^2.
+\end{aligned}$$
 
 Podemos realizar un razonamiento análogo cuando el parámetro de interés
 es la varianza poblacional, $\theta =\sigma^2$. En ese caso,
@@ -556,40 +532,37 @@ considerando el estimador varianza muestral: $\hat{\theta}=S_n^2$,
 se tiene que su esperanza viene dada por
 
 $$\begin{aligned}
-E\left( S_n^2 \right) &= E\left[ \frac{1}{n}\sum_{i=1}^{n}\left( X_i-
-\bar{X} \right)^2\right] =\frac{1}{n}\sum_{i=1}^{n}E\left[ \left(
-X_i-\bar{X} \right)^2\right] \\
-&= E\left[ \left( X_1-\frac{1}{n}\sum_{j=1}^{n}X_j \right)^2\right] =E
-\left[ \left( \left( X_1-\mu \right) -\frac{1}{n}\sum_{j=1}^{n}\left(
-X_j-\mu \right) \right)^2\right] \\
-&= Var\left[ \left( X_1-\mu \right) -\frac{1}{n}\sum_{j=1}^{n}\left(
-X_j-\mu \right) \right] \\
-&= Var\left[ \frac{n-1}{n}\left( X_1-\mu \right) -\frac{1}{n}
-\sum_{j=1,j\neq 1}^{n}\left( X_j-\mu \right) \right] \\
-&= \left( \frac{n-1}{n} \right)^2\sigma^2+\frac{1}{n^2}
-\sum_{j=2}^{n}\sigma^2 \\
-&= \frac{\left( n-1 \right)}{n^2}^2\sigma^2+\frac{n-1}{n^2}\sigma
-^2=\frac{n\left( n-1 \right)}{n^2}\sigma^2=\frac{n-1}{n}\sigma^2,\end{aligned}$$
+E\left( S_n^2 \right) 
+&= E\left[ \frac{1}{n}\sum_{i=1}^{n}\left( X_i- \bar{X} \right)^2\right] 
+= \frac{1}{n}\sum_{i=1}^{n}E\left[ \left(X_i-\bar{X} \right)^2\right] \\
+&= E\left[ \left( X_1-\frac{1}{n}\sum_{j=1}^{n}X_j \right)^2\right] 
+= E \left[ \left( \left( X_1-\mu \right) 
+- \frac{1}{n}\sum_{j=1}^{n}\left( X_j-\mu \right) \right)^2\right] \\
+&= Var\left[ \left( X_1-\mu \right) 
+- \frac{1}{n}\sum_{j=1}^{n}\left(X_j-\mu \right) \right] \\
+&= Var\left[ \frac{n-1}{n}\left( X_1-\mu \right) 
+- \frac{1}{n}\sum_{j=1,j\neq 1}^{n}\left( X_j-\mu \right) \right] \\
+&= \left( \frac{n-1}{n} \right)^2\sigma^2+\frac{1}{n^2}\sum_{j=2}^{n}\sigma^2 \\
+&= \frac{\left( n-1 \right)}{n^2}^2\sigma^2+\frac{n-1}{n^2}\sigma^2
+=\frac{n\left( n-1 \right)}{n^2}\sigma^2=\frac{n-1}{n}\sigma^2,
+\end{aligned}$$
 
 así que su sesgo es
-$$Sesgo\left( S_n^2 \right) =E\left( S_n^2 \right) -\sigma^2=-\frac{1
-}{n}\sigma^2.$$Para un factor de elevación, $c$, el estimador
-jackknife del sesgo de este estimador
-es$$Sesgo_{jackk}^{\ast}\left( S_n^2 \right) =c\left( \overline{\theta
-\left( \mathbf{X}_{(\cdot)} \right)}-\hat{\theta}
- \right) =c\left( \overline{S_{n,(\cdot)}^2}-S_n^2 \right)
-.$$Con lo cual la esperanza de este estimador resulta
-$$E\left( c\left( \overline{S_{n,(\cdot)}^2}-S_n^2 \right)
- \right) =c\left[ E\left( \overline{S_{n,(\cdot)}^2} \right)
--E\left( S_n^2 \right) \right]$$
+$$Sesgo\left( S_n^2 \right) =E\left( S_n^2 \right) -\sigma^2=-\frac{1}{n}\sigma^2.$$
+Para un factor de elevación, $c$, el estimador jackknife del sesgo de este estimador es
+$$Sesgo_{jackk}^{\ast}\left( S_n^2 \right) 
+= c\left( \overline{\theta_{(\cdot)}}-\hat{\theta} \right) 
+= c\left( \overline{S_{n,(\cdot)}^2}-S_n^2 \right).$$
+Con lo cual la esperanza de este estimador resulta
+$$E\left( c\left( \overline{S_{n,(\cdot)}^2}-S_n^2 \right) \right) 
+= c\left[ E\left( \overline{S_{n,(\cdot)}^2} \right) - E\left( S_n^2 \right) \right]$$
 
 Estudiemos por separado cada término:
 $$\begin{aligned}
-\overline{S_{n,(\cdot)}^2} &= \frac{1}{n}\sum_{i=1}^{n}S_{n,
-(i)}^2=\frac{1}{n}\sum_{i=1}^{n}\frac{1}{n-1}\sum_{j=1,j\neq
-i}^{n}\left( X_j-\overline{X_{(i)}} \right)^2 \\
-&= \frac{1}{n}\sum_{i=1}^{n}\frac{1}{n-1}\sum_{j=1,j\neq i}^{n}\left( X_j-
-\frac{1}{n-1}\sum_{k=1,k\neq i}^{n}X_{k} \right)^2 \\
+\overline{S_{n,(\cdot)}^2} &= \frac{1}{n}\sum_{i=1}^{n}S_{n,(i)}^2
+= \frac{1}{n}\sum_{i=1}^{n}\frac{1}{n-1}\sum_{j=1,j\neq i}^{n}\left( X_j-\overline{X_{(i)}} \right)^2 \\
+&= \frac{1}{n}\sum_{i=1}^{n}\frac{1}{n-1}\sum_{j=1,j\neq i}^{n}\left( X_j 
+- \frac{1}{n-1}\sum_{k=1,k\neq i}^{n}X_{k} \right)^2 \\
 &= \frac{1}{n\left( n-1 \right)}\sum_{i=1}^{n}\sum_{j=1,j\neq i}^{n}\left( 
 \frac{n-2}{n-1}X_j-\frac{1}{n-1}\sum_{k=1,k\neq i,k\neq j}^{n}X_{k} \right)^2,
 \end{aligned}$$
@@ -614,9 +587,7 @@ i,k\neq j}^{n}\left( X_{k}-\mu \right) \right] \\
 ^2\right] =\frac{n-2}{n-1}\sigma^2
 \end{aligned}$$
 
-Además, ya hemos visto anteriormente que $E\left( S_n^2 \right) =
-(n-1)\sigma^2/n$, con o cual la esperanza del estimador
-jackknife del sesgo es
+Además, ya hemos visto anteriormente que $E\left( S_n^2 \right) = (n-1)\sigma^2/n$, con o cual la esperanza del estimador jackknife del sesgo es
 $$\begin{aligned}
 c\left( \frac{n-2}{n-1}\sigma^2-\frac{n-1}{n}\sigma^2 \right)
 &= c\sigma^2\left( \frac{n-2}{n-1}-\frac{n-1}{n} \right) \\

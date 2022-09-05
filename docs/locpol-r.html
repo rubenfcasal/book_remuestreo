@@ -24,7 +24,7 @@
 <meta name="author" content="Ricardo Cao Abad (rcao@udc.es) y Rubén Fernández Casal (rfcasal@udc.es)" />
 
 
-<meta name="date" content="2021-11-25" />
+<meta name="date" content="2022-09-05" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -390,7 +390,7 @@ por mínimos cuadrados ponderados, con pesos
 <span class="math inline">\(w_{i} = \frac{1}{h}K\left(\frac{x-x_0}{h}\right)\)</span>.</p>
 <ul>
 <li><p>La estimación en <span class="math inline">\(x_0\)</span> es <span class="math inline">\(\hat{m}_{h}(x_0)=\hat{\beta}_0\)</span>.</p></li>
-<li><p>Adicionalmente<a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a>:
+<li><p>Adicionalmente<a href="#fn9" class="footnote-ref" id="fnref9"><sup>9</sup></a>:
 <span class="math inline">\(\widehat{m_{h}^{(r)}}(x_0) = r!\hat{\beta}_{r}\)</span>.</p></li>
 </ul>
 <p>Por tanto, la estimación polinómica local de grado <span class="math inline">\(p\)</span>, <span class="math inline">\(\hat{m}_{h}(x)=\hat{\beta}_0\)</span>, se obtiene al minimizar:
@@ -462,7 +462,7 @@ y <span class="math inline">\(df_e = tr(I - S)\)</span> (de forma análoga al ca
 <p>Adicionalmente:
 <span class="math display">\[\widehat{Var}\left(\hat{m}_{h}(x_i)\right) = \hat\sigma^2\sum_{j=1}^n s^2_{ij}\]</span></p>
 <p>Uno de los pocos paquetes de <code>R</code> que implementan la estimación de la varianza
-y el cálculo de intervalos de confianza es el paquete<a href="#fn9" class="footnote-ref" id="fnref9"><sup>9</sup></a> <code>sm</code> (Bowman y Azzalini, 2019).</p>
+y el cálculo de intervalos de confianza es el paquete<a href="#fn10" class="footnote-ref" id="fnref10"><sup>10</sup></a> <code>sm</code> (Bowman y Azzalini, 2019).</p>
 <div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb212-1"><a href="locpol-r.html#cb212-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sm)</span>
 <span id="cb212-2"><a href="locpol-r.html#cb212-2" aria-hidden="true" tabindex="-1"></a>hcv <span class="ot">&lt;-</span> <span class="fu">hcv</span>(x, y) <span class="co"># Método de validación cruzada</span></span>
 <span id="cb212-3"><a href="locpol-r.html#cb212-3" aria-hidden="true" tabindex="-1"></a>fit.sm <span class="ot">&lt;-</span> <span class="fu">sm.regression</span>(x, y, <span class="at">h =</span> hcv, <span class="at">display =</span> <span class="st">&quot;se&quot;</span>)</span></code></pre></div>
@@ -474,12 +474,12 @@ y el cálculo de intervalos de confianza es el paquete<a href="#fn9" class="foot
 </div>
 <div class="footnotes">
 <hr />
-<ol start="8">
-<li id="fn8"><p>Se puede pensar que se están estimando los coeficientes de
-un desarrollo de Taylor de <span class="math inline">\(m(x_0)\)</span>.<a href="locpol-r.html#fnref8" class="footnote-back">↩︎</a></p></li>
-<li id="fn9"><p>El paquete <code>np</code> calcula
+<ol start="9">
+<li id="fn9"><p>Se puede pensar que se están estimando los coeficientes de
+un desarrollo de Taylor de <span class="math inline">\(m(x_0)\)</span>.<a href="locpol-r.html#fnref9" class="footnote-back">↩︎</a></p></li>
+<li id="fn10"><p>El paquete <code>np</code> calcula
 estimaciones similares aunque no documenta la aproximación que emplea. También
-implementa bootstrap uniforme y bootstrap por bloques.<a href="locpol-r.html#fnref9" class="footnote-back">↩︎</a></p></li>
+implementa bootstrap uniforme y bootstrap por bloques.<a href="locpol-r.html#fnref10" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>

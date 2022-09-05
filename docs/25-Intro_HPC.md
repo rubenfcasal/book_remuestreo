@@ -118,7 +118,7 @@ system.time(res.boot <- parSapply(cl, 1:100, func))
 
 ```
 ##    user  system elapsed 
-##    0.01    0.00    0.06
+##    0.00    0.02    0.03
 ```
 
 ```r
@@ -185,7 +185,7 @@ system.time(res.boot <- boot(muestra, statistic, R = B))
 
 ```
 ##    user  system elapsed 
-##    0.07    0.00    0.08
+##    0.05    0.00    0.05
 ```
 
 ```r
@@ -195,7 +195,7 @@ system.time(res.boot <- boot(muestra, statistic, R = B, parallel = "snow", cl = 
 
 ```
 ##    user  system elapsed 
-##    0.05    0.00    0.04
+##    0.03    0.00    0.03
 ```
 
 ### Estudio de simulación {#estudio-sim-boot}
@@ -259,7 +259,7 @@ print(t.fin)
 
 ```
 ##    user  system elapsed 
-##    0.03    0.00    9.80
+##    0.03    0.00    6.97
 ```
 
 ```r

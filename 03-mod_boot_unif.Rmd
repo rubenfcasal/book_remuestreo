@@ -1112,7 +1112,9 @@ La idea es remuestrear los residuos reescalados (de forma que su varianza sea co
 $$e_i = \frac{r_i}{\sqrt{1 - h_{ii}}},$$
 donde $h_{ii}$ es el valor de influencia o leverage, el elemento $i$-ésimo de la diagonal de $H$.
 
-En `R` podríamos obtener estos residuos mediante los comandos:
+En `R` podríamos obtener estos residuos mediante los comandos^[Para reescalar los 
+residuos de un modelo `gam` del paquete `mgcv`, como no implementa un método `hatvalues()`, 
+habrá que emplear `influence.gam()` (o directamente `modelo.gam$hat`).]:
 
 ```{r}
 pres.dat$sres <- residuals(modelo)/sqrt(1 - hatvalues(modelo))

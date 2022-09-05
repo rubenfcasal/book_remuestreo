@@ -24,7 +24,7 @@
 <meta name="author" content="Ricardo Cao Abad (rcao@udc.es) y Rubén Fernández Casal (rfcasal@udc.es)" />
 
 
-<meta name="date" content="2021-11-25" />
+<meta name="date" content="2022-09-05" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -398,7 +398,7 @@ mediante el argumento <code>mc.cores</code>.</p>
 <span id="cb273-8"><a href="ejemplos-3.html#cb273-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb273-9"><a href="ejemplos-3.html#cb273-9" aria-hidden="true" tabindex="-1"></a><span class="fu">system.time</span>(res.boot <span class="ot">&lt;-</span> <span class="fu">mclapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>, func)) <span class="co"># En Windows llama a lapply() (mc.cores = 1)</span></span></code></pre></div>
 <pre><code>##    user  system elapsed 
-##    0.11    0.00    0.11</code></pre>
+##    0.07    0.00    0.08</code></pre>
 <div class="sourceCode" id="cb275"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb275-1"><a href="ejemplos-3.html#cb275-1" aria-hidden="true" tabindex="-1"></a><span class="co"># res.boot &lt;- mclapply(1:100, func, mc.cores = ncores - 1) # En Windows genera un error si mc.cores &gt; 1</span></span></code></pre></div>
 <p>En Windows habría que crear previamente un cluster, llamar a una de las funciones
 <code>par*apply()</code> y finalizar el cluster:</p>
@@ -407,7 +407,7 @@ mediante el argumento <code>mc.cores</code>.</p>
 <span id="cb276-3"><a href="ejemplos-3.html#cb276-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb276-4"><a href="ejemplos-3.html#cb276-4" aria-hidden="true" tabindex="-1"></a><span class="fu">system.time</span>(res.boot <span class="ot">&lt;-</span> <span class="fu">parSapply</span>(cl, <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>, func))</span></code></pre></div>
 <pre><code>##    user  system elapsed 
-##    0.02    0.00    0.05</code></pre>
+##    0.00    0.00    0.03</code></pre>
 <div class="sourceCode" id="cb278"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb278-1"><a href="ejemplos-3.html#cb278-1" aria-hidden="true" tabindex="-1"></a><span class="co"># stopCluster(cl)</span></span>
 <span id="cb278-2"><a href="ejemplos-3.html#cb278-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb278-3"><a href="ejemplos-3.html#cb278-3" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(res.boot)</span></code></pre></div>
@@ -452,11 +452,11 @@ salvo que se establezca con el parámetro <code>cl</code>.</p>
 <span id="cb281-15"><a href="ejemplos-3.html#cb281-15" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb281-16"><a href="ejemplos-3.html#cb281-16" aria-hidden="true" tabindex="-1"></a><span class="fu">system.time</span>(res.boot <span class="ot">&lt;-</span> <span class="fu">boot</span>(muestra, statistic, <span class="at">R =</span> B))</span></code></pre></div>
 <pre><code>##    user  system elapsed 
-##    0.07    0.00    0.06</code></pre>
+##    0.05    0.00    0.05</code></pre>
 <div class="sourceCode" id="cb283"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb283-1"><a href="ejemplos-3.html#cb283-1" aria-hidden="true" tabindex="-1"></a><span class="co"># system.time(res.boot &lt;- boot(muestra, statistic, R = B, parallel = &quot;snow&quot;))</span></span>
 <span id="cb283-2"><a href="ejemplos-3.html#cb283-2" aria-hidden="true" tabindex="-1"></a><span class="fu">system.time</span>(res.boot <span class="ot">&lt;-</span> <span class="fu">boot</span>(muestra, statistic, <span class="at">R =</span> B, <span class="at">parallel =</span> <span class="st">&quot;snow&quot;</span>, <span class="at">cl =</span> cl))</span></code></pre></div>
 <pre><code>##    user  system elapsed 
-##    0.05    0.00    0.05</code></pre>
+##    0.04    0.00    0.04</code></pre>
 </div>
 <div id="estudio-sim-boot" class="section level3" number="11.3.2">
 <h3><span class="header-section-number">B.3.2</span> Estudio de simulación</h3>
@@ -512,7 +512,7 @@ intervalos de confianza implementados en la función <code>boot.ci()</code>.</p>
 <span id="cb285-43"><a href="ejemplos-3.html#cb285-43" aria-hidden="true" tabindex="-1"></a>t.fin <span class="ot">&lt;-</span> <span class="fu">proc.time</span>() <span class="sc">-</span> t.ini</span>
 <span id="cb285-44"><a href="ejemplos-3.html#cb285-44" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(t.fin)</span></code></pre></div>
 <pre><code>##    user  system elapsed 
-##    0.00    0.00    9.14</code></pre>
+##    0.00    0.01    7.64</code></pre>
 <div class="sourceCode" id="cb287"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb287-1"><a href="ejemplos-3.html#cb287-1" aria-hidden="true" tabindex="-1"></a>resnames <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Cobertura&quot;</span>, <span class="st">&quot;Longitud&quot;</span>)</span>
 <span id="cb287-2"><a href="ejemplos-3.html#cb287-2" aria-hidden="true" tabindex="-1"></a>intervals <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Normal&quot;</span>, <span class="st">&quot;Basic&quot;</span>, <span class="st">&quot;Studentized&quot;</span>, <span class="st">&quot;Percentil&quot;</span>, <span class="st">&quot;BCa&quot;</span>)</span>
 <span id="cb287-3"><a href="ejemplos-3.html#cb287-3" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(intervals) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;normal&quot;</span>,<span class="st">&quot;basic&quot;</span>, <span class="st">&quot;student&quot;</span>, <span class="st">&quot;percent&quot;</span>, <span class="st">&quot;bca&quot;</span>)</span>
@@ -566,6 +566,9 @@ intervalos de confianza implementados en la función <code>boot.ci()</code>.</p>
 </div>
 </div>
 <!-- </div> -->
+
+
+
 
 
 

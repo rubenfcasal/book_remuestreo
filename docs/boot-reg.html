@@ -24,7 +24,7 @@
 <meta name="author" content="Ricardo Cao Abad (rcao@udc.es) y Rubén Fernández Casal (rfcasal@udc.es)" />
 
 
-<meta name="date" content="2021-11-25" />
+<meta name="date" content="2022-09-05" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -535,7 +535,7 @@ siendo <span class="math inline">\(H = X\left( X^{T}X\right)^{-1}X^{T}\)</span> 
 La idea es remuestrear los residuos reescalados (de forma que su varianza sea constante) y centrados <span class="math inline">\(e_i - \bar{e}\)</span>, siendo:
 <span class="math display">\[e_i = \frac{r_i}{\sqrt{1 - h_{ii}}},\]</span>
 donde <span class="math inline">\(h_{ii}\)</span> es el valor de influencia o leverage, el elemento <span class="math inline">\(i\)</span>-ésimo de la diagonal de <span class="math inline">\(H\)</span>.</p>
-<p>En <code>R</code> podríamos obtener estos residuos mediante los comandos:</p>
+<p>En <code>R</code> podríamos obtener estos residuos mediante los comandos<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>:</p>
 <div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="boot-reg.html#cb123-1" aria-hidden="true" tabindex="-1"></a>pres.dat<span class="sc">$</span>sres <span class="ot">&lt;-</span> <span class="fu">residuals</span>(modelo)<span class="sc">/</span><span class="fu">sqrt</span>(<span class="dv">1</span> <span class="sc">-</span> <span class="fu">hatvalues</span>(modelo))</span>
 <span id="cb123-2"><a href="boot-reg.html#cb123-2" aria-hidden="true" tabindex="-1"></a>pres.dat<span class="sc">$</span>sres <span class="ot">&lt;-</span> pres.dat<span class="sc">$</span>sres <span class="sc">-</span> <span class="fu">mean</span>(pres.dat<span class="sc">$</span>sres)</span></code></pre></div>
 <p>Sin embargo puede ser más cómodo emplear la función <code>Boot()</code> del paquete <code>car</code> (que internamente llama a la función <code>boot()</code>),
@@ -567,6 +567,14 @@ y una estimación por intervalo de confianza de este estadístico).</p>
 </div>
 </div>
 <!-- </div> -->
+<div class="footnotes">
+<hr />
+<ol start="3">
+<li id="fn3"><p>Para reescalar los
+residuos de un modelo <code>gam</code> del paquete <code>mgcv</code>, como no implementa un método <code>hatvalues()</code>,
+habrá que emplear <code>influence.gam()</code> (o directamente <code>modelo.gam$hat</code>).<a href="boot-reg.html#fnref3" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
             </section>
 
           </div>
