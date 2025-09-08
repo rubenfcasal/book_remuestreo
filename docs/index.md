@@ -5,7 +5,7 @@ institute:
    - "Departamento de Matemáticas"
    - "Grupo de investigación de Modelización, Optimización e Inferencia Estadística (MODES)"
    - "Centro de Investigación en Tecnologías de la Información y las Comunicaciones (CITIC)"
-date: "2022-09-05"
+date: "Edición: Septiembre de 2022. Impresión: 2025-09-08"
 site: bookdown::bookdown_site
 output: bookdown::gitbook
 documentclass: book
@@ -37,7 +37,7 @@ Para ejecutar los ejemplos mostrados en el libro será necesario tener instalado
 [`boot`](https://CRAN.R-project.org/package=boot), [`bootstrap`](https://CRAN.R-project.org/package=bootstrap), [`survival`](https://CRAN.R-project.org/package=survival), [`forecast`](https://CRAN.R-project.org/package=forecast), [`MASS`](https://CRAN.R-project.org/package=MASS), [`sm`](https://CRAN.R-project.org/package=sm), [`snow`](https://CRAN.R-project.org/package=snow).
 Por ejemplo mediante el comando:
 
-```r
+``` r
 install.packages(c("boot", "bootstrap", "survival", "forecast", "MASS", "sm", "snow"))
 ```
 

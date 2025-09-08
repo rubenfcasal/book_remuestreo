@@ -229,7 +229,7 @@ stochastic regression. *Biometrika*, **85**, 645–660.
 Faraway, J.J. and Jhun, M. (1990). Bootstrap choice of bandwidth for
 density estimation. *Jr. Amer. Statist. Assoc.* **85**, 1119–1122.
 
-Fernández-Casal, R. y Cao, R. (2020). *Simulación Estadística*. <https://rubenfcasal.github.io/simbook>.
+Fernández-Casal R., Cao R. y Costa J. (2023). *Técnicas de Simulación y Remuestreo*. <https://rubenfcasal.github.io/simbook>.
 
 Ferretti, N. and Romo, J. (1996). Unit root bootstrap test for AR(1)
 models. *Biometrika* **83**, 849-860.

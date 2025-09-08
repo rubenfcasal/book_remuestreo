@@ -638,7 +638,7 @@ se puede emplear la función `arima.sim()` del paquete base `stats`.
 Por ejemplo, podemos generar una serie autoregresiva con:
 [Figura \@ref(fig:arima-sim)]  
 
-```r
+``` r
 # Parámetros
 nsim <- 200   # Numero de simulaciones
 xvar <- 1     # Varianza
@@ -679,7 +679,7 @@ Otras opciones:
 Ejemplo (`?arima.sim`):
 [Figura \@ref(fig:arima-sim2)]  
 
-```r
+``` r
 ry2 <- arima.sim(n = 63, list(ar = c(0.8897, -0.4858), 
           ma = c(-0.2279, 0.2488)),
           rand.gen = function(n, ...) sqrt(0.1796) * rt(n, df = 5))
@@ -703,7 +703,7 @@ La función `tsboot()` del paquete `boot` implementa distintos métodos
 de remuestreo para series de tiempo.
 
 
-```r
+``` r
 library(boot)
 # ?tsboot
 ```
@@ -722,7 +722,7 @@ Canty, A. J. (2002). [Resampling methods in R: the boot package ](http://cran.fh
 > the (mean) block length''.
 
 
-```r
+``` r
 # Datos
 data(lynx)
 # ?lynx
@@ -795,7 +795,7 @@ Canty, A. J. (2002). [Resampling methods in R: the boot package ](http://cran.fh
 
 
 
-```r
+``` r
 # Datos
 lynx1 <- log(lynx)
 # Modelo
@@ -840,12 +840,10 @@ tsboot(lynx.res, lynx.fun, R = 199, l = 20,
 
 ## Ejercicios
 
-\BeginKnitrBlock{exercise}\iffalse{-91-80-114-97-99-116-105-99-97-108-32-56-46-49-44-32-76-121-110-120-32-100-97-116-97-58-32-68-97-118-105-115-111-110-32-121-32-72-105-110-107-108-101-121-44-32-49-57-57-55-93-}\fi{}
-<span class="exercise" id="exr:tsboot-lynx"><strong>(\#exr:tsboot-lynx)  \iffalse (Practical 8.1, Lynx data: Davison y Hinkley, 1997) \fi{} </strong></span>
+::: {.exercise #tsboot-lynx name="Practical 8.1, Lynx data: Davison y Hinkley, 1997"}
+
 Reproducir el "Practical 8.1 (Lynx data)" en Davison, A. C., y Hinkley, D. V. (1997). Bootstrap methods and their application. Cambridge university press, <http://statwww.epfl.ch/davison/BMA>
 ([caché](http://webcache.googleusercontent.com/search?q=cache:a4nFL5ymMMoJ:statwww.epfl.ch/davison/BMA/+&cd=1&hl=gl&ct=clnk&gl=es)):
-
-\EndKnitrBlock{exercise}
 
 
 > "Dataframe lynx contains the Canadian lynx data, 
@@ -855,7 +853,7 @@ Reproducir el "Practical 8.1 (Lynx data)" en Davison, A. C., y Hinkley, D. V. (1
 [Figura \@ref(fig:lynx-data)]  
 
 
-```r
+``` r
 ts.plot(log(lynx))
 ```
 
@@ -868,7 +866,7 @@ ts.plot(log(lynx))
 \caption{Lynx data (logarithmic scale).}(\#fig:lynx-data)
 \end{figure}
 
-```r
+``` r
 lynx.ar <- ar(log(lynx))
 lynx.ar$order
 ```
@@ -887,7 +885,7 @@ lynx.ar$order
 > with block length $l = 20$:
 
 
-```r
+``` r
 set.seed(DNI)
 lynx.fun <- function(tsb) { 
   ar.fit <- ar(tsb, order.max=25)
@@ -908,7 +906,7 @@ abline(mean(lynx.1$t[,2]),sqrt(var(lynx.1$t[,2])),lty=2)
 > bootstrap with mean block length $l = 20$:
 
 
-```r
+``` r
 .Random.seed <- lynx.1$seed
 lynx.2 <- tsboot(log(lynx), lynx.fun, ...
 # lynx.2
@@ -929,13 +927,12 @@ lynx.2 <- tsboot(log(lynx), lynx.fun, ...
 > Compare these results with those above, and try the post-blackened bootstrap with `sim="geom"`.
 > (Sections 8.2.2, 8.2.3)''.
 
+:::
 
-\BeginKnitrBlock{exercise}\iffalse{-91-80-114-97-99-116-105-99-97-108-32-56-46-50-44-32-66-101-97-118-101-114-32-100-97-116-97-58-32-68-97-118-105-115-111-110-32-121-32-72-105-110-107-108-101-121-44-32-49-57-57-55-93-}\fi{}
-<span class="exercise" id="exr:tsboot-beaver"><strong>(\#exr:tsboot-beaver)  \iffalse (Practical 8.2, Beaver data: Davison y Hinkley, 1997) \fi{} </strong></span>
+::: {.exercise #tsboot-beaver name="Practical 8.2, Beaver data: Davison y Hinkley, 1997"}
+
 Reproducir el "Practical 8.2  (Beaver data)" en Davison, A. C., y Hinkley, D. V. (1997). Bootstrap methods and their application. Cambridge university press, <http://statwww.epfl.ch/davison/BMA>
 ([caché](http://webcache.googleusercontent.com/search?q=cache:a4nFL5ymMMoJ:statwww.epfl.ch/davison/BMA/+&cd=1&hl=gl&ct=clnk&gl=es)):
-
-\EndKnitrBlock{exercise}
 
 > "The data in beaver consist of a time series of $n = 100$
 > observations on the body temperature $y_1, \ldots, y_n$ 
@@ -945,7 +942,7 @@ Reproducir el "Practical 8.2  (Beaver data)" en Davison, A. C., y Hinkley, D. V.
 [Figura \@ref(fig:beaver-data)]  
 
 
-```r
+``` r
 # ?beaver
 plot(beaver)
 ```
@@ -959,7 +956,7 @@ plot(beaver)
 \caption{Beaver data}(\#fig:beaver-data)
 \end{figure}
 
-```r
+``` r
 class(beaver)
 ```
 
@@ -967,7 +964,7 @@ class(beaver)
 ## [1] "mts" "ts"
 ```
 
-```r
+``` r
 str(beaver) 
 ```
 
@@ -986,7 +983,7 @@ str(beaver)
 > To fit the original model and to generate a new series:
 
 
-```r
+``` r
 data <- beaver
 # fit <- function( data ){ 
 #   #  X <- cbind(rep(1,100),data$activ) # ErrorR
@@ -1025,7 +1022,7 @@ data <- beaver
 > we can bootstrap and see the results of `beaver.boot` as follows:
 
 
-```r
+``` r
 # beaver.fun <- function(ts) fit(ts)$paras
 # beaver.boot <- tsboot( beaver, beaver.fun, R=99,sim="model", 
 #         n.sim=100,ran.gen=beaver.gen,ran.args=beaver.args) 
@@ -1045,13 +1042,13 @@ data <- beaver
 > How would you proceed if it were not?
 > (Section 8.2; Reynolds, 1994)''.
 
+:::
 
-\BeginKnitrBlock{exercise}\iffalse{-91-80-114-97-99-116-105-99-97-108-32-56-46-51-44-32-83-117-110-115-112-111-116-32-100-97-116-97-58-32-68-97-118-105-115-111-110-32-121-32-72-105-110-107-108-101-121-44-32-49-57-57-55-93-}\fi{}
-<span class="exercise" id="exr:tsboot-sunspot"><strong>(\#exr:tsboot-sunspot)  \iffalse (Practical 8.3, Sunspot data: Davison y Hinkley, 1997) \fi{} </strong></span>
+
+::: {.exercise #tsboot-sunspot name="Practical 8.3, Sunspot data: Davison y Hinkley, 1997"}
+
 Reproducir el "Practical 8.3  (Sunspot data)" en Davison, A. C., y Hinkley, D. V. (1997). Bootstrap methods and their application. Cambridge university press, <http://statwww.epfl.ch/davison/BMA>
 ([caché](http://webcache.googleusercontent.com/search?q=cache:a4nFL5ymMMoJ:statwww.epfl.ch/davison/BMA/+&cd=1&hl=gl&ct=clnk&gl=es)):
-
-\EndKnitrBlock{exercise}
 
 > "Consider scrambling the phases of the sunspot data. 
 > To see the original data, 
@@ -1059,7 +1056,7 @@ Reproducir el "Practical 8.3  (Sunspot data)" en Davison, A. C., y Hinkley, D. V
 [Figura \@ref(fig:sunspot)]  
 
 
-```r
+``` r
 data(sunspot.year)  # WarningR: data set 'sunspot' not found
 # ?sunspot.year
 yl <- c(-50, 200)
@@ -1080,7 +1077,7 @@ abline(h = 0, lty = 2)
 > and two phase scrambled series whose marginal distribution is the same as that of the original data:
     
 
-```r
+``` r
 set.seed(DNI)
 sunspot.1 <- tsboot(sunspot.year, ...
 .Random.seed <- sunspot.1$seed # set.seed(DNI)
@@ -1093,6 +1090,7 @@ sunspot.2 <- tsboot(sunspot.year, ...
 > different shapes for the figures.)
 > (Section 8.2.4; Problem 8.4; Theiler et al, 1992)''.
 
+:::
 
 ## Implementación en `R` con el paquete `forecast`
 
@@ -1106,7 +1104,7 @@ Por ejemplo, en el caso de series de tiempo, se puede emplear la función `simul
 del paquete `forecast`: [Figura \@ref(fig:co2)]
 
 
-```r
+``` r
 library(forecast)
 # ?co2
 data <- window(co2, 1990) # datos de co2 desde 1990 (hasta 1997)
@@ -1131,7 +1129,7 @@ lines(ry, col="red")
 
 
 
-```r
+``` r
 plot(forecast(fit, h=12*4), col="blue")
 lines(ry, col="red")
 ```

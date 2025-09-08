@@ -185,7 +185,7 @@ método percentil es peor que el de los basados en la normal asintótica,
 que es del orden $O\left( n^{-1} \right)$.
 
 
-```{example, label="media-dt-desconocida-perc", name="Inferencia sobre la media con varianza desconocida, continuación"}
+::: {.example #media-dt-desconocida-perc name="Inferencia sobre la media con varianza desconocida, continuación"}
 <br> \vspace{0.5cm}
 
 Continuando con el ejemplo de los tiempos de vida de microorganismos
@@ -193,7 +193,6 @@ Continuando con el ejemplo de los tiempos de vida de microorganismos
 supongamos que queremos obtener una estimación por intervalo de confianza 
 de su vida media empleando este método. 
 El código necesario sería muy similar al del Ejemplo \@ref(exm:media-dt-desconocida):
-```
 
 ```{r}
 muestra <- c(0.143, 0.182, 0.256, 0.26, 0.27, 0.437, 0.509, 
@@ -251,6 +250,8 @@ IC_boot <- res$basic[4:5]
 IC_boot
 ```
 
+:::
+
 Además del paquete `boot`, otros autores también denominan a este método
 *bootstrap básico* (*bootstrap percentil básico* o incluso *bootstrap natural*), 
 y utilizan la terminología *bootstrap percentil* cuando se emplea 
@@ -274,8 +275,7 @@ Asintóticamente ambos métodos son equivalentes, aunque en general
 es preferible (evita sesgos) el bootstrap percentil básico.
 
 <!-- 
-ejercicio 
-Obtener los ICs mediante los método básico y percentil
+Ejercicio: obtener los ICs mediante los método básico y percentil
 de la varianza y cuasivarianza muestrales.
 
 Recorrido intercuartílico?
@@ -558,7 +558,7 @@ dimnames(resultados) <- list(NULL, c("Cobertura", "Longitud"),
 set.seed(1)
 for (isim in 1:nsim) {
     # Aproximación clásica
-    muestra <- rexp(n, rate = 0.01)
+    muestra <- rexp(n, rate = rate)
     media <- mean(muestra)
     desv <- sd(muestra)
     z <- qnorm(1 - alfa/2)

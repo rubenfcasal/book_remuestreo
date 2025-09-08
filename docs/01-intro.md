@@ -102,7 +102,7 @@ o una aproximación paramétrica $\hat{F}=F_{\hat \theta}$ (bootstrap paramétri
 
 Como ejemplo ilustrativo consideramos los datos simulados [Figura \@ref(fig:muestra-sim)]:
 
-```r
+``` r
 set.seed(1)
 muestra <- rnorm(100)
 hist(muestra, freq = FALSE, xlim = c(-3, 3),
@@ -123,7 +123,7 @@ siempre podemos considerar la distribución empírica
 (o una versión suavizada: bootstrap suavizado; Sección \@ref(modunif-boot-suav)). 
 Alternativamente podríamos asumir un modelo paramétrico y estimar los parámetros a partir de la muestra [Figura \@ref(fig:muestra-sim-aprox)].
 
-```r
+``` r
 # Distribución bootstrap uniforme
 curve(ecdf(muestra)(x), xlim = c(-3, 3), ylab = "F(x)", type = "s")
 # Distribución bootstrap paramétrico (asumiendo normalidad)
@@ -195,7 +195,7 @@ Empleando ese método, el procedimiento para generar la muestra bootstrap sería
   hacer $X_i^{\ast}=X_{\left\lfloor nU_i\right\rfloor +1}$.
   
 
-```r
+``` r
 set.seed(1)
 n <- length(muestra)
 u <- runif(n)
@@ -214,7 +214,7 @@ al emplear el método de la transformación cuantil cuando $n$ es extremadamente
 emplear la función `sample` para generar muestras aleatorias con reemplazamiento 
 del conjunto de datos original:
 
-```r
+``` r
 muestra_boot <- sample(muestra, replace = TRUE)
 head(muestra_boot)
 ```
@@ -228,7 +228,7 @@ con múltiples variables,
 podríamos emplear un procedimiento análogo, a partir de remuestras del
 vector de índices. Por ejemplo:
 
-```r
+``` r
 data(iris)
 str(iris)
 ```
@@ -242,7 +242,7 @@ str(iris)
 ##  $ Species     : Factor w/ 3 levels "setosa","versicolor",..: 1 1 1 1 1 1 1 1 1 1 ...
 ```
 
-```r
+``` r
 n <- nrow(iris)
 # i_boot <- floor(n*runif(n)) + 1
 # i_boot <- sample.int(n, replace = TRUE)
@@ -263,8 +263,8 @@ str(data_boot)
 Esta forma de proceder es la que emplea por defecto el paquete `boot` que 
 describiremos más adelante (Sección \@ref(intro-pkgboot)).
 
-\BeginKnitrBlock{example}\iffalse{-91-73-110-102-101-114-101-110-99-105-97-32-115-111-98-114-101-32-108-97-32-109-101-100-105-97-32-99-111-110-32-118-97-114-105-97-110-122-97-32-99-111-110-111-99-105-100-97-93-}\fi{}
-<span class="example" id="exm:media-dt-conocida"><strong>(\#exm:media-dt-conocida)  \iffalse (Inferencia sobre la media con varianza conocida) \fi{} </strong></span>
+::: {.example #media-dt-conocida  name="Inferencia sobre la media con varianza conocida"}
+
 <br> \vspace{0.5cm}
 
 Hemos observado 15 tiempos de vida de microorganismos: 
@@ -274,9 +274,9 @@ A partir de los cuales queremos
 obtener una estimación por intervalo de confianza de su vida media,
 suponiendo que la desviación típica es conocida e igual a 0.6
 (en el Capítulo \@ref(icboot) se tratará con más detalle la construcción de intervalos de confianza).
-\EndKnitrBlock{example}
 
-```r
+
+``` r
 muestra <- c(0.143, 0.182, 0.256, 0.26, 0.27, 0.437, 0.509, 
     0.611, 0.712, 1.04, 1.09, 1.15, 1.46, 1.88, 2.08)
 sigma <- 0.6
@@ -288,7 +288,7 @@ summary(muestra)
 ##  0.1430  0.2650  0.6110  0.8053  1.1200  2.0800
 ```
 
-```r
+``` r
 sd(muestra)
 ```
 
@@ -296,7 +296,7 @@ sd(muestra)
 ## [1] 0.6237042
 ```
 
-```r
+``` r
 hist(muestra)
 rug(muestra)
 ```
@@ -333,7 +333,7 @@ $$\hat{IC}_{1-\alpha}\left(  \mu\right)  =
 + z_{1-\alpha/2}\dfrac{\sigma}{\sqrt{n}} \right).$$
 
 
-```r
+``` r
 alfa <- 0.05
 x_barra <- mean(muestra)
 z <- qnorm(1 - alfa/2)
@@ -364,7 +364,7 @@ $$R^{\ast (b)}=R\left( \mathbf{X}^{\ast (b)},\hat{F} \right) =\sqrt{n}\frac{
 con $\bar{X}^{\ast (b)} = \frac{1}{n}\sum X_i^{\ast (b)}$.
 
 
-```r
+``` r
 set.seed(1)
 B <- 1000
 estadistico_boot <- numeric(B)
@@ -394,7 +394,7 @@ consideren habitualmente 99, 199 ó 999 réplicas bootstrap).]:
 
 
 
-```r
+``` r
 # Empleando la distribución empírica del estadístico bootstrap: 
 estadistico_boot_ordenado <- sort(estadistico_boot)
 indice_inf <- floor(B * alfa/2)
@@ -417,7 +417,7 @@ $$\hat{IC}^{boot}_{1-\alpha}\left(  \mu\right)  =
 - x_{\alpha/2}\dfrac{\sigma}{\sqrt{n}} \right).$$
 
 
-```r
+``` r
 # Construcción del IC
 ic_inf_boot <- x_barra - pto_crit[2] * sigma/sqrt(n)
 ic_sup_boot <- x_barra - pto_crit[1] * sigma/sqrt(n)
@@ -437,7 +437,7 @@ la distribución bootstrap obtenida es muy similar a la aproximación normal
 (ver Figura \@ref(fig:estad-boot)).
 
 
-```r
+``` r
 hist(estadistico_boot, freq = FALSE)
 lines(density(estadistico_boot))
 abline(v = pto_crit)
@@ -454,6 +454,7 @@ abline(v = c(-z, z), lty = 2)
 \caption{Distribución del estadístico boostrap y aproximaciones de los cuantiles. Con línea discontinua se muestra la distribución normal asintótica.}(\#fig:estad-boot)
 \end{figure}
 
+:::
 
 ## El Bootstrap uniforme {#intro-unif}
 
@@ -511,9 +512,7 @@ muestreo de $R$
 
 ### Ejemplos
 
-\BeginKnitrBlock{example}\iffalse{-91-73-110-102-101-114-101-110-99-105-97-32-115-111-98-114-101-32-108-97-32-109-101-100-105-97-32-99-111-110-32-118-97-114-105-97-110-122-97-32-99-111-110-111-99-105-100-97-44-32-99-111-110-116-105-110-117-97-99-105-243-110-93-}\fi{}
-<span class="example" id="exm:media-dt-conocida-perturbando"><strong>(\#exm:media-dt-conocida-perturbando)  \iffalse (Inferencia sobre la media con varianza conocida, continuación) \fi{} </strong></span>
-\EndKnitrBlock{example}
+::: {.example #media-dt-conocida-perturbando name="Inferencia sobre la media con varianza conocida, continuación"}
 
 En el Ejemplo \@ref(exm:media-dt-conocida) anteriormente visto de inferencia para la media con
 varianza conocida, el algoritmo bootstrap (basado en Monte Carlo) para
@@ -638,7 +637,7 @@ original**.
 El código para realizar remuestreo bootstrap uniforme sobre la empírica de la
 muestra perturbando es análogo:
 
-```r
+``` r
 # Remuestreo
 B <- 1000
 estadistico_boot <- numeric(B)
@@ -664,16 +663,14 @@ IC_boot
 ##      2.5%     97.5% 
 ## 0.5024398 1.0827052
 ```
+:::
 
-
-
-\BeginKnitrBlock{example}\iffalse{-91-73-110-102-101-114-101-110-99-105-97-32-115-111-98-114-101-32-108-97-32-109-101-100-105-97-110-97-93-}\fi{}
-<span class="example" id="exm:mediana"><strong>(\#exm:mediana)  \iffalse (Inferencia sobre la mediana) \fi{} </strong></span><br> \vspace{0.5cm}
+::: {.example #mediana name="Inferencia sobre la mediana"}
+<br> \vspace{0.5cm}
 
 Continuando con el ejemplo de los tiempos de vida de microorganismos,
 supongamos que queremos obtener una estimación por intervalo de confianza 
 de su vida mediana a partir de los 15 valores observados.
-\EndKnitrBlock{example}
 
 Consideramos la mediana poblacional como parámetro de interés:
 $$\theta = \theta \left( F \right) = F^{-1}\left( \frac{1}{2} \right) 
@@ -732,7 +729,7 @@ de $R^{\ast (1)}, \ldots, R^{\ast (B)}$
 
 El código implementando este algoritmo sería muy similar al de los casos anteriores:
 
-```r
+``` r
 x_mediana<- median(muestra)
 
 # Remuestreo
@@ -764,6 +761,8 @@ Sin embargo, como veremos más adelante, este caso de inferencia de la
 mediana es uno de los pocos casos en los que la distribución bootstrap
 se puede calcular de forma exacta, siendo dicha expresión utilizable en
 la práctica.
+
+:::
 
 ## Cálculo de la distribución Bootstrap: exacta y aproximada 
 
@@ -847,8 +846,8 @@ los átomos de probabilidad de la distribución bootstrap. Un ejemplo es
 la media muestral con, por ejemplo, $n=3$.
 
 
-\BeginKnitrBlock{example}\iffalse{-91-77-101-100-105-97-32-109-117-101-115-116-114-97-108-32-112-97-114-97-32-117-110-97-32-109-117-101-115-116-114-97-32-100-101-32-116-97-109-97-241-111-32-51-93-}\fi{}
-<span class="example" id="exm:media3"><strong>(\#exm:media3)  \iffalse (Media muestral para una muestra de tamaño 3) \fi{} </strong></span><br> \vspace{0.5cm}
+::: {.example #media3 name="Media muestral para una muestra de tamaño 3"}
+<br> \vspace{0.5cm}
 
 Consideremos una muestra aleatoria simple de tamaño $n=3$ de una
 población con distribución $F$ y tomemos como parámetro de interés la
@@ -878,7 +877,7 @@ siguiente tabla.
 | $\left( X_2,X_3,X_3 \right)$   |    $\left( 0,1,2 \right)$   |    $\left( 0,\frac{1}{3},\frac{2}{3} \right)$   |    $\frac{1}{9}$   |    $\frac{X_2+2X_3}{3}$    | 
 | $\left( X_1,X_2,X_3 \right)$   |    $\left( 1,1,1 \right)$   |    $\left( \frac{1}{3},\frac{1}{3},\frac{1}{3} \right)$   |    $\frac{2}{9}$   |    $\frac{X_1+X_2+X_3}{3}$    | 
 
-\EndKnitrBlock{example}
+:::
 
 En algunas ocasiones es factible encontrar expresiones cerradas
 para la distribución de $R^{\ast}$, más allá de las obvias que
@@ -968,14 +967,13 @@ hacer $X_i^{\ast}=X_{\left\lfloor nU_i\right\rfloor +1}$
 
 Aunque en `R` se recomienda emplear la función `sample`.
 
-\BeginKnitrBlock{example}\iffalse{-91-73-110-102-101-114-101-110-99-105-97-32-115-111-98-114-101-32-108-97-32-109-101-100-105-97-32-99-111-110-32-118-97-114-105-97-110-122-97-32-100-101-115-99-111-110-111-99-105-100-97-93-}\fi{}
-<span class="example" id="exm:media-dt-desconocida"><strong>(\#exm:media-dt-desconocida)  \iffalse (Inferencia sobre la media con varianza desconocida) \fi{} </strong></span><br> \vspace{0.5cm}
+::: {.example #media-dt-desconocida name="Inferencia sobre la media con varianza desconocida"}
+<br> \vspace{0.5cm}
 
 Continuando con el ejemplo de los tiempos de vida de microorganismos,
 supongamos que queremos obtener una estimación por intervalo de confianza 
 de su vida media a partir de los 15 valores observados pero en la
 situación mucho más realista de que la varianza sea desconocida.
-\EndKnitrBlock{example}
 
 Tenemos pues
 $\mathbf{X}=\left( X_1,\ldots ,X_n \right) \sim F\,$, con
@@ -1029,7 +1027,7 @@ distribución empírica de $R^{\ast (1)}, \ldots, R^{\ast (B)}$
 El código para implementar este método es similar al del caso de varianza conocida
 del Ejemplo \@ref(exm:media-dt-conocida):
 
-```r
+``` r
 muestra <- c(0.143, 0.182, 0.256, 0.26, 0.27, 0.437, 0.509, 
              0.611, 0.712, 1.04, 1.09, 1.15, 1.46, 1.88, 2.08)
 n <- length(muestra)
@@ -1040,7 +1038,6 @@ cuasi_dt <- sd(muestra)
 # Remuestreo
 set.seed(1)
 B <- 1000
-remuestra <- numeric(n)
 estadistico_boot <- numeric(B)
 for (k in 1:B) {
   remuestra <- sample(muestra, n, replace = TRUE)
@@ -1071,7 +1068,7 @@ se denomina *método percentil-t* y se tratará en la Sección \@ref(icboot-perc
 Como ejemplo adicional podemos comparar la aproximación de la distribución bootstrap del estadístico con la aproximación $t_{n-1}$ basada en normalidad.
 
 
-```r
+``` r
 hist(estadistico_boot, freq = FALSE, ylim = c(0, 0.4))
 abline(v = pto_crit)
 curve(dt(x, n-1), add=TRUE, lty = 2)
@@ -1087,7 +1084,7 @@ En este caso la distribución bootstrap del estadístico es más asimétrica, lo
 Por ejemplo, podemos obtener la estimación basada en normalidad mediante la función `t.test()`:
 
 
-```r
+``` r
 t.test(muestra)$conf.int
 ```
 
@@ -1096,6 +1093,8 @@ t.test(muestra)$conf.int
 ## attr(,"conf.level")
 ## [1] 0.95
 ```
+
+:::
 
 
 ### Elección del número de réplicas Monte Carlo
@@ -1146,7 +1145,7 @@ u \right) \right] = \\
 Así, el error de la aproximación de Monte Carlo al bootstrap exacto
 (raíz cuadrada de la varianza del Monte Carlo), puede acotarse por
 $\frac{1}{2\sqrt{B}}$
-(para más detalles sobre la convergencia de una aproximación Monte Carlo ver p.e. el [Capítulo 4](https://rubenfcasal.github.io/simbook/cap4.html) de Fernández-Casal y Cao, 2020).
+(para más detalles sobre la convergencia de una aproximación Monte Carlo ver p.e. la [Sección 3.1](https://rubenfcasal.github.io/simbook/convergencia.html) de Fernández-Casal et al., 2023).
 
 ## Herramientas disponibles en R sobre bootstrap  {#intro-paquetes}
 
@@ -1181,14 +1180,14 @@ El bootstrap uniforme se puede implementar fácilmente. Por ejemplo,
 una rutina general para el caso univariante sería la siguiente:
 
 
-```r
+``` r
 #' @param x vector que contiene la muestra.
 #' @param B número de réplicas bootstrap.
 #' @param statistic función que calcula el estadístico.
-boot.strap0 <- function(x, B=1000, statistic=mean){
+boot.strap0 <- function(x, B = 1000, statistic = mean){
   ndat <- length(x)
-  x.boot <- sample(x, ndat*B, replace=TRUE)
-  x.boot <- matrix(x.boot, ncol=B, nrow=ndat)
+  x.boot <- sample(x, ndat*B, replace = TRUE)
+  x.boot <- matrix(x.boot, ncol = B, nrow = ndat)
   stat.boot <- apply(x.boot, 2, statistic)
 }
 ```
@@ -1196,7 +1195,7 @@ boot.strap0 <- function(x, B=1000, statistic=mean){
 Podríamos aplicar esta función a la muestra de tiempos de vida de
 microorganismos con el siguiente código:
 
-```r
+``` r
 fstatistic <- function(x){
   #  mean(x)
   #  mean(x, trim=0.2)
@@ -1222,23 +1221,27 @@ res.boot
 La función `boot.strap0()` anterior no es adecuada para el caso multivariante
 (por ejemplo cuando estamos interesados en regresión).
 Como se mostró en la Sección \@ref(intro-implementacion)
-sería preferible emplear remuestras del vector de índices. Por ejemplo:
+sería preferible emplear remuestras del vector de índices. 
+Por ejemplo, la siguiente función permitiría aplicar bootstrap uniforme univariante y multivariante:
 
 
-```r
+``` r
 #' @param datos vector, matriz o data.frame que contiene los datos.
 #' @param B número de réplicas bootstrap.
 #' @param statistic función con al menos dos parámetros, 
 #' los datos y el vector de índices de remuestreo, 
 #' y que devuelve el vector de estadísticos.
 #' @param ... parámetros adicionales de la función statistic.
-boot.strap <- function(datos, B=1000, statistic, ...) {
+boot.strap <- function(datos, B = 1000, statistic, ...) {
   ndat <- NROW(datos)
-  i.boot <- sample(ndat, ndat*B, replace=TRUE)
-  i.boot <- matrix(i.boot, ncol=B, nrow=ndat)
-  stat.boot <- drop(apply(i.boot, 2, function(i) statistic(datos, i, ...)))
+  iboot <- sample(ndat, ndat*B, replace = TRUE)
+  iboot <- matrix(i.boot, ncol = B, nrow = ndat)
+  fstat.iboot <- function(i) statistic(datos, i, ...)
+  stat.boot <- drop(apply(iboot, 2, fstat.iboot))
 }
 ```
+
+Habría que construir la función `statistics(datos, i)`, de forma que la remuestra fuese `datos[i]` en el caso univariante y `datos[i, ]` en el caso multivariante. 
 
 El paquete `boot`, descrito a continuación, emplea una implementación similar.
 
@@ -1247,7 +1250,7 @@ El paquete `boot`, descrito a continuación, emplea una implementación similar.
 La función principal de este paquete es la función `boot()` que implementa distintos métodos de remuestreo para datos i.i.d..
 En su forma más simple permite realizar bootstrap uniforme (que en la práctica también se denomina habitualmente *bootstrap noparamétrico*):
 
-```r
+``` r
 boot(data, statistic, R)
 ```
 donde `data` es un vector, matriz o `data.frame` que contiene los datos, 
@@ -1259,7 +1262,7 @@ y que devuelve el vector de estadísticos.
 Por ejemplo, para hacer inferencia sobre la mediana del tiempo de microorganismos,
 podríamos emplear el siguiente código:
 
-```r
+``` r
 library(boot)
 muestra <- c(0.143, 0.182, 0.256, 0.26, 0.27, 0.437, 0.509, 
              0.611, 0.712, 1.04, 1.09, 1.15, 1.46, 1.88, 2.08)
@@ -1275,7 +1278,7 @@ res.boot <- boot(muestra, statistic, R = 1000)
 
 El resultado que devuelve esta función es un objeto de clase `boot`, una lista con los siguientes componentes:
 
-```r
+``` r
 names(res.boot)
 ```
 
@@ -1299,7 +1302,7 @@ el método `print()` que muestra un resumen de los resultados
 (incluyendo  aproximaciones bootstrap del sesgo y del error
 estándar de los estadísticos; ver Capítulo \@ref(prec-sesgo)):
 
-```r
+``` r
 res.boot
 ```
 
@@ -1320,7 +1323,7 @@ y el método `plot()` que genera gráficas básicas de diagnosis
 de los resultados (correspondientes al estadístico determinado por el parámetro `index`, por defecto `= 1`): [Figura \@ref(fig:plot-res-boot)]
 
 
-```r
+``` r
 plot(res.boot)
 ```
 
@@ -1379,17 +1382,17 @@ estudentizados con la función `boot.ci()`) se supone, por defecto, que el segun
 componente del vector de estadísticos contiene estimaciones de la varianza del
 estadístico para cada réplica boostrap.
 
-\BeginKnitrBlock{example}\iffalse{-91-73-110-102-101-114-101-110-99-105-97-32-115-111-98-114-101-32-108-97-32-109-101-100-105-97-32-99-111-110-32-118-97-114-105-97-110-122-97-32-100-101-115-99-111-110-111-99-105-100-97-44-32-99-111-110-116-105-110-117-97-99-105-243-110-93-}\fi{}
-<span class="example" id="exm:media-dt-desconocida-boot"><strong>(\#exm:media-dt-desconocida-boot)  \iffalse (Inferencia sobre la media con varianza desconocida, continuación) \fi{} </strong></span><br> \vspace{0.5cm}
+::: {.example #media-dt-desconocida-boot name="Inferencia sobre la media con varianza desconocida, continuación"}
+<br> \vspace{0.5cm}
 
 Continuando con el Ejemplo \@ref(exm:media-dt-desconocida) de
 inferencia sobre la media con varianza desconocida. 
 Para obtener la estimación por intervalo de confianza del tiempo de vida medio 
 de los microorganismos con el paquete `boot`, podríamos emplear
 el siguiente código:
-\EndKnitrBlock{example}
 
-```r
+
+``` r
 library(boot)
 muestra <- c(0.143, 0.182, 0.256, 0.26, 0.27, 0.437, 0.509, 
              0.611, 0.712, 1.04, 1.09, 1.15, 1.46, 1.88, 2.08)
@@ -1419,7 +1422,7 @@ res.boot
 ## t2* 0.0259338 -0.002155755 0.007594682
 ```
 
-```r
+``` r
 boot.ci(res.boot)
 ```
 
@@ -1442,6 +1445,7 @@ boot.ci(res.boot)
 El intervalo marcado como `Studentized` se obtuvo empleando el mismo estadístico
 del Ejemplo \@ref(exm:media-dt-desconocida).
 
+:::
 
 ***Modificaciones del bootstrap uniforme*** 
 
@@ -1488,7 +1492,7 @@ Como ya se mostró en las Secciones \@ref(intro-implementacion) y \@ref(intro-pa
 Consideraremos como ejemplo el conjunto de datos `Prestige` del paquete `carData`, y supongamos que queremos realizar inferencias sobre el coeficiente de correlación entre `prestige` (puntuación de ocupaciones obtenidas a partir de una encuesta) e`income` (media de ingresos en la ocupación).
 
 
-```r
+``` r
 data(Prestige, package = "carData")
 str(Prestige)
 ```
@@ -1503,7 +1507,7 @@ str(Prestige)
 ##  $ type     : Factor w/ 3 levels "bc","prof","wc": 2 2 2 2 2 2 2 2 2 2 ...
 ```
 
-```r
+``` r
 # with(Prestige, cor(income, prestige))
 cor(Prestige$income, Prestige$prestige)
 ```
@@ -1515,7 +1519,7 @@ cor(Prestige$income, Prestige$prestige)
 En el siguiente código se emplea el paquete `boot` para realizar bootstrap uniforme multidimensional sobre este estadístico:
 
 
-```r
+``` r
 library(boot)
 
 statistic <- function(data, i){
@@ -1543,7 +1547,7 @@ res.boot
 ## t1* 0.7149057 0.006306905  0.04406473
 ```
 
-```r
+``` r
 plot(res.boot)
 ```
 
@@ -1558,7 +1562,7 @@ Por ejemplo, si queremos emplear el estadístico $R = \hat \theta - \theta$
 (bootstrap percentil básico o natural), podemos obtener la correspondiente distribución bootstrap (aproximada por Monte Carlo) con el siguiente código:
 
 
-```r
+``` r
 estadistico_boot <- res.boot$t - res.boot$t0 
 hist(estadistico_boot)
 ```
@@ -1573,7 +1577,7 @@ $$\hat{\psi}_{B}\left( u \right) =
 \frac{1}{B}\sum_{i=1}^{B}\mathbf{1}\left\{ R^{\ast (i)}\leq u\right\}.$$
 
 
-```r
+``` r
 u <- 0
 sum(estadistico_boot <= u)/B
 ```
@@ -1582,7 +1586,7 @@ sum(estadistico_boot <= u)/B
 ## [1] 0.427
 ```
 
-```r
+``` r
 # Equivalentemente:
 mean(estadistico_boot <= u)
 ```
@@ -1591,3 +1595,26 @@ mean(estadistico_boot <= u)
 ## [1] 0.427
 ```
 
+
+::: {.exercise #boot-multi}
+
+Emplear el paquete `boot` para aproximar mediante bootstrap uniforme
+la distribución de los estimadores de los coeficientes del ajuste
+lineal de `prestige` a partir de `income`.
+
+
+``` r
+fit <- lm(prestige ~ income, data = Prestige)
+coef(fit)
+```
+
+```
+##  (Intercept)       income 
+## 27.141176368  0.002896799
+```
+
+``` r
+# summary(fit) # Aproximación paramétrica
+```
+
+:::

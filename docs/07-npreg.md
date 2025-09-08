@@ -425,7 +425,7 @@ de la aceleración de la cabeza en una simulación de un accidente de motociclet
 utilizado para probar cascos protectores.
 
 
-```r
+``` r
 data(mcycle, package = "MASS")
 x <- mcycle$times
 y <- mcycle$accel  
@@ -445,7 +445,7 @@ Hay que tener en cuenta que el paquete `KernSmooth` no implementa los métodos
 `predict()` y `residuals()`:
 
 
-```r
+``` r
 est <- approx(fit, xout = x)$y # est <- predict(fit)
 resid <- y - est # resid <- residuals(fit)
 ```
@@ -453,7 +453,7 @@ resid <- y - est # resid <- residuals(fit)
 Tampoco calcula medidas de bondad de ajuste, aunque podríamos obtener fácilmente un (pseudo) R-cuadrado:
 
 
-```r
+``` r
 r.squared <- 1 - sum(resid^2)/sum((y - mean(y))^2)
 r.squared
 ```
@@ -483,7 +483,7 @@ estimaciones similares aunque no documenta la aproximación que emplea. También
 implementa bootstrap uniforme y bootstrap por bloques.] `sm` (Bowman y Azzalini, 2019).
 
 
-```r
+``` r
 library(sm)
 hcv <- hcv(x, y) # Método de validación cruzada
 fit.sm <- sm.regression(x, y, h = hcv, display = "se")
@@ -493,7 +493,7 @@ fit.sm <- sm.regression(x, y, h = hcv, display = "se")
 
 \begin{center}\includegraphics[width=0.7\linewidth]{07-npreg_files/figure-latex/unnamed-chunk-5-1} \end{center}
 
-```r
+``` r
 fit.sm$sigma
 ```
 
@@ -523,7 +523,7 @@ Sin embargo, en la práctica es habitual emplear $g=h$ para evitar la selección
 Otra alternativa podría ser asumir que $g \simeq n^{1/5}h/n^{1/9}$ como se hace a continuación.
 
 
-```r
+``` r
 n <- length(x)
 g <- h * n^(4/45) # h*n^(-1/9)/n^(-1/5)
 # g <- h
@@ -566,7 +566,7 @@ NOTA: De forma análoga al caso lineal (Sección \@ref(boot-residual)), se podr�
 De forma análoga al caso de la estimación de la densidad mostrado en la Sección \@ref(npden-r-ic), podemos calcular estimaciones por intervalo de confianza (puntuales) por el método percentil (básico):
 
 
-```r
+``` r
 alfa <- 0.05
 pto_crit <- apply(stat_fit_boot, 1, quantile, probs = c(alfa/2, 1 - alfa/2))
 ic_inf_boot <- fit$y - pto_crit[2, ]
@@ -593,7 +593,7 @@ por la distribución bootstrap de:
 $$r^{\ast}(x_0) = Y^{\ast}(x_0) - \hat{Y}^{\ast}(x_0) = \hat{m}_g(x_0) + \varepsilon^{\ast}(x_0) - \hat{m}^{\ast}_h(x_0)$$
 
 
-```r
+``` r
 # Remuestreo
 set.seed(1)
 n_pre <- length(fit$x)
@@ -635,7 +635,7 @@ El bootstrap residual se puede extender al caso heterocedástico y/o dependencia
 Como se describe en la Sección \@ref(wild-bootstrap) en el caso heterocedástico se puede emplear wild bootstrap.
 
 
-```r
+``` r
 # Remuestreo
 set.seed(1)
 B <- 1000

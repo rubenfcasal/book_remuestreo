@@ -402,7 +402,7 @@ Considerando el conjunto de datos `precip` (que contiene el promedio de precipit
 en pulgadas de lluvia, de 70 ciudades de Estados Unidos).
 
 
-```r
+``` r
 x <- precip
 h <- bw.SJ(x)
 npden <- density(x, bw = h)
@@ -442,7 +442,7 @@ Sin embargo, en la práctica es habitual emplear $g=h$ para evitar la selección
 Otra alternativa podría ser asumir que $g \simeq n^{1/5}h/n^{1/9}$ como se hace a continuación.
 
 
-```r
+``` r
 # Remuestreo
 set.seed(1)
 n <- length(x)
@@ -484,7 +484,7 @@ podemos cálcular de estimaciones por intervalo de confianza (puntuales)
 por el método percentil (básico).
 
 
-```r
+``` r
 alfa <- 0.05
 pto_crit <- apply(stat_den_boot, 1, quantile, probs = c(alfa/2, 1 - alfa/2))
 # ic_inf_boot <- npden$y - pto_crit[2, ]
@@ -508,7 +508,7 @@ Como también se comentó en la Sección \@ref(modunif-boot-suav),
 la recomendación es implementar el bootstrap suavizado como un bootstrap paramétrico:
 
 
-```r
+``` r
 library(boot)
 
 # Los objetos necesarios para el cálculo del estadístico
@@ -545,7 +545,7 @@ Por lo que podría ser recomendable obtenerlo a partir de las réplicas
 bootstrap del estimador:
 
 
-```r
+``` r
 # Método percentil básico calculado directamente 
 # a partir de las réplicas bootstrap del estimador
 alfa <- 0.05
@@ -570,7 +570,7 @@ generar envolventes como medida de la precisión de la estimación
 (que se interpretan de forma similar a una banda de confianza):
 
 
-```r
+``` r
 matplot(npden$x, t(res.boot$t), type = "l", col = "darkgray")
 lines(npden, lwd = 2)
 lines(npden$x, npden$y - bias)
@@ -584,7 +584,7 @@ Pero la recomendación es emplear bootstrap básico (o percentil-*t*) en lugar
 de bootstrap percentil (directo) en la presencia de sesgo:
 
 
-```r
+``` r
 # matplot(npden$x, npden$y + npdeng$y - t(res.boot$t), type = "l", col = "darkgray")
 matplot(npden$x, pmax(npden$y + npdeng$y - t(res.boot$t), 0), type = "l", col = "darkgray")
 lines(npden, lwd = 2)

@@ -185,18 +185,17 @@ método percentil es peor que el de los basados en la normal asintótica,
 que es del orden $O\left( n^{-1} \right)$.
 
 
-\BeginKnitrBlock{example}\iffalse{-91-73-110-102-101-114-101-110-99-105-97-32-115-111-98-114-101-32-108-97-32-109-101-100-105-97-32-99-111-110-32-118-97-114-105-97-110-122-97-32-100-101-115-99-111-110-111-99-105-100-97-44-32-99-111-110-116-105-110-117-97-99-105-243-110-93-}\fi{}
-<span class="example" id="exm:media-dt-desconocida-perc"><strong>(\#exm:media-dt-desconocida-perc)  \iffalse (Inferencia sobre la media con varianza desconocida, continuación) \fi{} </strong></span><br> \vspace{0.5cm}
+::: {.example #media-dt-desconocida-perc name="Inferencia sobre la media con varianza desconocida, continuación"}
+<br> \vspace{0.5cm}
 
 Continuando con el ejemplo de los tiempos de vida de microorganismos
 (sin asumir varianza conocida),
 supongamos que queremos obtener una estimación por intervalo de confianza 
 de su vida media empleando este método. 
 El código necesario sería muy similar al del Ejemplo \@ref(exm:media-dt-desconocida):
-\EndKnitrBlock{example}
 
 
-```r
+``` r
 muestra <- c(0.143, 0.182, 0.256, 0.26, 0.27, 0.437, 0.509, 
              0.611, 0.712, 1.04, 1.09, 1.15, 1.46, 1.88, 2.08)
 n <- length(muestra)
@@ -234,7 +233,7 @@ IC_boot
 Aunque en este caso también podemos obtener el intervalo a
 partir de las réplicas bootstrap del estimador:
 
-```r
+``` r
 pto_crit <- quantile(x_barra_boot, c(alfa/2, 1 - alfa/2))
 ic_inf_boot <- 2*x_barra - pto_crit[2]
 ic_sup_boot <- 2*x_barra - pto_crit[1]
@@ -252,7 +251,7 @@ Esta forma de proceder es la que emplea el paquete `boot` para obtener
 el que denomina intervalo de confianza *bootstrap básico*
 (estableciendo `type="basic"` en la llamada a la función `boot.ci()`):
 
-```r
+``` r
 library(boot)
 statistic <- function(data, i) mean(data[i])
 
@@ -275,7 +274,7 @@ res
 ## Calculations and Intervals on Original Scale
 ```
 
-```r
+``` r
 IC_boot <- res$basic[4:5]
 IC_boot
 ```
@@ -283,6 +282,8 @@ IC_boot
 ```
 ## [1] 0.4824717 1.0980120
 ```
+
+:::
 
 Además del paquete `boot`, otros autores también denominan a este método
 *bootstrap básico* (*bootstrap percentil básico* o incluso *bootstrap natural*), 
@@ -292,7 +293,7 @@ realizar inferencia. Con el paquete `boot` habrá que establecer `type="perc"`
 en la llamada a la función `boot.ci()` para obtener el intervalo
 correspondiente:
 
-```r
+``` r
 boot.ci(res.boot, type = "perc")
 ```
 
@@ -312,7 +313,7 @@ boot.ci(res.boot, type = "perc")
 En este método se emplean directamente los cuantiles de las
 réplicas bootstrap del estadístico:
 
-```r
+``` r
 # IC_boot <-  quantile(res.boot$t, c(alfa/2, 1 - alfa/2)) # type = 7
 IC_boot <-  quantile(res.boot$t, c(alfa/2, 1 - alfa/2), type = 6)
 IC_boot 
@@ -327,8 +328,7 @@ Asintóticamente ambos métodos son equivalentes, aunque en general
 es preferible (evita sesgos) el bootstrap percentil básico.
 
 <!-- 
-ejercicio 
-Obtener los ICs mediante los método básico y percentil
+Ejercicio: obtener los ICs mediante los método básico y percentil
 de la varianza y cuasivarianza muestrales.
 
 Recorrido intercuartílico?
@@ -542,7 +542,7 @@ de su vida media empleando el método bootstrap percentil-*t* simetrizado
 se podría utilizar (ver Ejemplo \@ref(exm:media-dt-desconocida)):
 
 
-```r
+``` r
 muestra <- c(0.143, 0.182, 0.256, 0.26, 0.27, 0.437, 0.509, 
              0.611, 0.712, 1.04, 1.09, 1.15, 1.46, 1.88, 2.08)
 n <- length(muestra)
@@ -596,7 +596,7 @@ bootstrap para un nivel de confianza nominal del 90\% ($\alpha =0.10$).
 
 
 
-```r
+``` r
 t.ini <- proc.time()
 rate <- 0.01
 mu <- 1/rate
@@ -618,7 +618,7 @@ dimnames(resultados) <- list(NULL, c("Cobertura", "Longitud"),
 set.seed(1)
 for (isim in 1:nsim) {
     # Aproximación clásica
-    muestra <- rexp(n, rate = 0.01)
+    muestra <- rexp(n, rate = rate)
     media <- mean(muestra)
     desv <- sd(muestra)
     z <- qnorm(1 - alfa/2)
@@ -674,10 +674,10 @@ t.fin
 
 ```
 ##    user  system elapsed 
-##   12.47    0.03   12.50
+##    7.50    0.12    7.66
 ```
 
-```r
+``` r
 apply(resultados, c(2, 3), mean)
 ```
 
@@ -687,7 +687,7 @@ apply(resultados, c(2, 3), mean)
 ## Longitud  32.5022  32.13928     33.5653                33.49959
 ```
 
-```r
+``` r
 # knitr::kable(t(apply(resultados, c(2, 3), mean)), digits = 3)
 ```
 
@@ -754,7 +754,7 @@ Esta aproximación está implementada en la función `cor.test()` del paquete ba
 Continuando con el ejemplo de la Sección \@ref(boot-unif-multi), para obtener un intervalo de confianza para el coeficiente de correlación lineal entre las variables `income` y `prestige` del conjunto de datos `Prestige`, podríamos emplear el siguiente código:
 
 
-```r
+``` r
 data(Prestige, package="carData")
 # with(Prestige, cor.test(income, prestige))
 cor.test(Prestige$income, Prestige$prestige)
@@ -788,7 +788,7 @@ mediante los parámetros:
 
 Por ejemplo, para considerar la transformación $Z$ de Fisher en este caso, se podría emplear el siguiente código:
 
-```r
+``` r
 library(boot)
 
 statistic <- function(data, i){
@@ -825,7 +825,7 @@ boot.ci(res.boot, type = "norm", h = h, hdot = hdot, hinv = hinv)
 Esto sería en principo preferible a trabajar en la escala original, ya que la distribución bootstrap en la escala transformada se aproximaría más a la normalidad:
 
 
-```r
+``` r
 ht <- h(res.boot$t)
 hist(ht, freq = FALSE, breaks = "FD",
      main = "Distribución bootstrap en la escala transformada")

@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>6.5 Estimación no paramétrica de la densidad en R | Técnicas de Remuestreo</title>
   <meta name="description" content="Apuntes de la asignatura de Técnicas de Remuestreo del Máster en Técnicas Estadísticas." />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.36 and GitBook 2.6.7" />
 
   <meta property="og:title" content="6.5 Estimación no paramétrica de la densidad en R | Técnicas de Remuestreo" />
   <meta property="og:type" content="book" />
-  
   
   <meta property="og:description" content="Apuntes de la asignatura de Técnicas de Remuestreo del Máster en Técnicas Estadísticas." />
   <meta name="github-repo" content="rubenfcasal/book_remuestreo" />
@@ -24,7 +23,6 @@
 <meta name="author" content="Ricardo Cao Abad (rcao@udc.es) y Rubén Fernández Casal (rfcasal@udc.es)" />
 
 
-<meta name="date" content="2022-09-05" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +31,6 @@
   
 <link rel="prev" href="el-bootstrap-en-la-selección-del-parámetro-de-suavizado..html"/>
 <link rel="next" href="ejemplos-1.html"/>
-<script src="libs/header-attrs-2.9/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -51,8 +48,9 @@
 
 
 
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -93,7 +91,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -106,7 +104,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -120,6 +118,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -378,8 +380,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="npden-r" class="section level2" number="6.5">
-<h2><span class="header-section-number">6.5</span> Estimación no paramétrica de la densidad en R</h2>
+<div id="npden-r" class="section level2 hasAnchor" number="6.5">
+<h2><span class="header-section-number">6.5</span> Estimación no paramétrica de la densidad en R<a href="npden-r.html#npden-r" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Como ya se comentó en la Sección <a href="modunif-boot-suav.html#modunif-boot-suav">3.3</a>,
 en <code>R</code> podemos emplear la función <code>density()</code> del paquete base para obtener
 una estimación tipo núcleo de la densidad.
@@ -396,7 +398,7 @@ no sea tan suave como la normal, estos criterios tenderán a seleccionar
 ventanas que producen un sobresuavizado de las observaciones.</p></li>
 <li><p><code>"ucv"</code>, <code>"bcv"</code>: Métodos de validación cruzada insesgada y sesgada, respectivamente.</p></li>
 <li><p><code>"sj"</code>, <code>"sj-ste"</code>, <code>"sj-dpi"</code>: Métodos de Sheather y Jones (1991),
-“solve-the-equation” y “direct plug-in,” respectivamente.</p></li>
+“solve-the-equation” y “direct plug-in”, respectivamente.</p></li>
 </ul></li>
 <li><p><code>adjust</code>: parameto para reescalado de la ventana, las estimaciones se calculan
 con la ventana <code>adjust*bw</code>.</p></li>
@@ -410,17 +412,17 @@ de las observaciones).</p></li>
 <p>Utilizaremos como punto de partida el código empleado en la Sección <a href="modunif-boot-suav.html#modunif-boot-suav">3.3</a>.
 Considerando el conjunto de datos <code>precip</code> (que contiene el promedio de precipitación,
 en pulgadas de lluvia, de 70 ciudades de Estados Unidos).</p>
-<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="npden-r.html#cb201-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> precip</span>
-<span id="cb201-2"><a href="npden-r.html#cb201-2" aria-hidden="true" tabindex="-1"></a>h <span class="ot">&lt;-</span> <span class="fu">bw.SJ</span>(x)</span>
-<span id="cb201-3"><a href="npden-r.html#cb201-3" aria-hidden="true" tabindex="-1"></a>npden <span class="ot">&lt;-</span> <span class="fu">density</span>(x, <span class="at">bw =</span> h)</span>
-<span id="cb201-4"><a href="npden-r.html#cb201-4" aria-hidden="true" tabindex="-1"></a><span class="co"># npden &lt;- density(x, bw = &quot;SJ&quot;)</span></span>
-<span id="cb201-5"><a href="npden-r.html#cb201-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb201-6"><a href="npden-r.html#cb201-6" aria-hidden="true" tabindex="-1"></a><span class="co"># plot(npden)</span></span>
-<span id="cb201-7"><a href="npden-r.html#cb201-7" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(x, <span class="at">freq =</span> <span class="cn">FALSE</span>, <span class="at">main =</span> <span class="st">&quot;Kernel density estimation&quot;</span>,</span>
-<span id="cb201-8"><a href="npden-r.html#cb201-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="fu">paste</span>(<span class="st">&quot;Bandwidth =&quot;</span>, <span class="fu">formatC</span>(h)), <span class="at">lty =</span> <span class="dv">2</span>,</span>
-<span id="cb201-9"><a href="npden-r.html#cb201-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">border =</span> <span class="st">&quot;darkgray&quot;</span>, <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">80</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.04</span>))</span>
-<span id="cb201-10"><a href="npden-r.html#cb201-10" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(npden, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
-<span id="cb201-11"><a href="npden-r.html#cb201-11" aria-hidden="true" tabindex="-1"></a><span class="fu">rug</span>(x, <span class="at">col =</span> <span class="st">&quot;darkgray&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="npden-r.html#cb204-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> precip</span>
+<span id="cb204-2"><a href="npden-r.html#cb204-2" aria-hidden="true" tabindex="-1"></a>h <span class="ot">&lt;-</span> <span class="fu">bw.SJ</span>(x)</span>
+<span id="cb204-3"><a href="npden-r.html#cb204-3" aria-hidden="true" tabindex="-1"></a>npden <span class="ot">&lt;-</span> <span class="fu">density</span>(x, <span class="at">bw =</span> h)</span>
+<span id="cb204-4"><a href="npden-r.html#cb204-4" aria-hidden="true" tabindex="-1"></a><span class="co"># npden &lt;- density(x, bw = &quot;SJ&quot;)</span></span>
+<span id="cb204-5"><a href="npden-r.html#cb204-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb204-6"><a href="npden-r.html#cb204-6" aria-hidden="true" tabindex="-1"></a><span class="co"># plot(npden)</span></span>
+<span id="cb204-7"><a href="npden-r.html#cb204-7" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(x, <span class="at">freq =</span> <span class="cn">FALSE</span>, <span class="at">main =</span> <span class="st">&quot;Kernel density estimation&quot;</span>,</span>
+<span id="cb204-8"><a href="npden-r.html#cb204-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="fu">paste</span>(<span class="st">&quot;Bandwidth =&quot;</span>, <span class="fu">formatC</span>(h)), <span class="at">lty =</span> <span class="dv">2</span>,</span>
+<span id="cb204-9"><a href="npden-r.html#cb204-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">border =</span> <span class="st">&quot;darkgray&quot;</span>, <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">80</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.04</span>))</span>
+<span id="cb204-10"><a href="npden-r.html#cb204-10" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(npden, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb204-11"><a href="npden-r.html#cb204-11" aria-hidden="true" tabindex="-1"></a><span class="fu">rug</span>(x, <span class="at">col =</span> <span class="st">&quot;darkgray&quot;</span>)</span></code></pre></div>
 <p><img src="06-npden_files/figure-html/unnamed-chunk-2-1.png" width="70%" style="display: block; margin: auto;" /></p>
 <p>Alternativamente podríamos emplear implementaciones en otros paquetes de <code>R</code>.
 Uno de los más empleados es <code>ks</code> (Duong, 2019), que admite estimación
@@ -450,42 +452,42 @@ entre otros.</p>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
-"sharing": {
-"github": true,
-"facebook": false,
-"twitter": false,
-"linkedin": false,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"whatsapp": false,
-"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
-},
-"fontsettings": {
-"theme": "white",
-"family": "sans",
-"size": 2
-},
-"edit": {
-"link": "https://github.com/rubenfcasal/book_remuestreo/edit/master/06-npden.Rmd",
-"text": "Edit"
-},
-"history": {
-"link": null,
-"text": null
-},
-"view": {
-"link": null,
-"text": null
-},
-"download": ["book_remuestreo.pdf"],
-"search": {
-"engine": "fuse",
-"options": null
-},
-"toc": {
-"collapse": "subsection"
-}
+  "sharing": {
+    "github": true,
+    "facebook": false,
+    "twitter": false,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": "https://github.com/rubenfcasal/book_remuestreo/edit/master/06-npden.Rmd",
+    "text": "Edit"
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": ["book_remuestreo.pdf"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  }
 });
 });
 </script>
@@ -496,7 +498,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

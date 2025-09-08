@@ -45,7 +45,7 @@ de significación para el que se rechaza $H_0$
 probabilidad de obtener una discrepancia mayor o igual que
 $\hat{d}$ cuando $H_0$ es cierta).
 
-El cálculo del $p$-valor dependerá por tanto de la hipótesis altervativa.
+El cálculo del $p$-valor dependerá por tanto de la hipótesis alternativa.
 Por ejemplo, si el estadístico del contraste tiende a tomar valores
 grandes cuando $H_0$ es falsa (contraste unilateral derecho):
 $$p = P\left( D \geq \hat{d} \middle| H_0\right).$$
@@ -65,7 +65,7 @@ en cuyo caso se dice que el contraste es estadísticamente significativo
 Por tanto, la correspondiente variable aleatoria $\mathcal{P}$ debería verificar:
 $$P\left( \mathcal{P} \leq \alpha \middle| H_0\right)= \alpha.$$
 Es decir, la distribución del $p$-valor bajo $H_0$ debería ser $\mathcal{U}(0,1)$
-(si la distribución del estadístico del constrate es continua).
+(si la distribución del estadístico del contraste es continua).
 
 
 ## Aproximación del p-valor mediante remuestreo
@@ -147,7 +147,7 @@ del estadístico es significativamente grande:
 $$p = P \left( D_n \geq d \right) \leq \alpha.$$
 Este método está implementado en la función `ks.test()` del paquete base de R:
 
-```r
+``` r
 ks.test(x, y, ...)
 ```
 donde `x` es un vector que contiene los datos, `y` es una función de distribución 
@@ -170,7 +170,7 @@ una $\mathcal{N}(0,1)$ (estudiaremos el *tamaño de los contrastes*).
 
 
 
-```r
+``` r
 # Valores iniciales
 library(nortest)
 set.seed(1)
@@ -196,7 +196,7 @@ para los distintos niveles de significación.
 
 
 
-```r
+``` r
 old.par <- par(mfrow=c(2, 2))
 # Histograma
 hist(pvalor.ks, freq=FALSE, main = "p-valor del test de KS")
@@ -220,7 +220,7 @@ abline(a=0, b=1, lty=2)   # curve(punif(x, 0, 1), add = TRUE)
 
 \begin{center}\includegraphics[width=0.7\linewidth]{05-contrastes_files/figure-latex/unnamed-chunk-4-1} \end{center}
 
-```r
+``` r
 par(old.par)
 ```
 
@@ -240,7 +240,7 @@ bondad de ajuste de una variable exponencial aproximando el
 $p$-valor mediante bootstrap paramétrico:
 
 
-```r
+``` r
 ks.exp.boot <- function(x, nboot = 10^3) {
   DNAME <- deparse(substitute(x))
   METHOD <- "Kolmogorov-Smirnov Test of pexp by bootstrap" 
@@ -273,7 +273,7 @@ considerando 500 pruebas con muestras de tamaño 30 de una $Exp(1)$
 y 200 réplicas bootstrap (para disminuir el tiempo de computación).
 
 
-```r
+``` r
 # Valores iniciales
 set.seed(1)
 nx <- 30
@@ -311,7 +311,7 @@ abline(a=0, b=1, lty=2)   # curve(punif(x, 0, 1), add = TRUE)
 
 \begin{center}\includegraphics[width=0.7\linewidth]{05-contrastes_files/figure-latex/unnamed-chunk-6-1} \end{center}
 
-```r
+``` r
 par(old.par)
 ```
 
@@ -351,7 +351,7 @@ oxígeno cardíaco (`mvo`) y la presión ventricular izquierda (`lvp`)
 de 7 perros domésticos.
 
 
-```r
+``` r
 library(boot)
 data('dogs', package = "boot")
 # plot(dogs)
@@ -368,7 +368,7 @@ $$r=\frac{\sum_{i=1}^{n}(x_i-\overline{x})(y_i-\overline{y})}
 \sqrt{\sum_{i=1}^{n}(y_i-\overline{y})^{2}}},$$
 que podemos calcular en `R` empleando la función `cor()`:
 
-```r
+``` r
 cor(dogs$mvo, dogs$lvp)
 ```
 
@@ -376,13 +376,13 @@ cor(dogs$mvo, dogs$lvp)
 ## [1] 0.8536946
 ```
 
-```r
+``` r
 # with(dogs, cor(mvo, lvp))
 ```
 Para realizar inferencias sobre $\rho$ podemos emplear la función
 `cor.test()`:
 
-```r
+``` r
 cor.test(dogs$mvo, dogs$lvp)
 ```
 
@@ -400,7 +400,7 @@ cor.test(dogs$mvo, dogs$lvp)
 ## 0.8536946
 ```
 
-```r
+``` r
 # with(dogs, cor.test(mvo, lvp))
 ```
 Esta función realiza el contraste $H_0: \rho = 0$ empleando el estadístico:
@@ -411,7 +411,7 @@ Alternativemente se pueden realizar contrastes unilaterales estableciendo
 el parámetro `alternative` igual a `"less"` o `"greater"`.
 Por ejemplo, para contrastar $H_0: \rho \leq 0$ podríamos emplear:
 
-```r
+``` r
 cor.test(dogs$mvo, dogs$lvp, alternative = "greater")
 ```
 
@@ -432,7 +432,7 @@ cor.test(dogs$mvo, dogs$lvp, alternative = "greater")
 Para realizar el contraste con la función `boot` podríamos
 emplear el siguiente código:
 
-```r
+``` r
 library(boot)
 
 statistic <- function(data, i) cor(data$mvo, data$lvp[i])
@@ -446,7 +446,7 @@ Posteriormente emplearíamos las réplicas (almacenadas en `res.boot$t`) y el va
 observado del estadístico del contraste (almacenado en `res.boot$t0`)
 para aproximar el $p$-valor:
 
-```r
+``` r
 hist(res.boot$t, freq = FALSE)
 abline(v = res.boot$t0, lty = 2)
 ```
@@ -458,7 +458,7 @@ abline(v = res.boot$t0, lty = 2)
 Por ejemplo, para el contraste unilateral $H_0: \rho \leq 0$ 
 (`alternative = "greater"`), obtendríamos:
 
-```r
+``` r
 pval.greater <- mean(res.boot$t >= res.boot$t0)
 pval.greater
 ```
@@ -471,7 +471,7 @@ Mientras que para realizar el contraste bilateral $H_0: \rho = 0$
 (`alternative = "two.sided"`), sin asumir que 
 la distribución del estadístico de contraste es simétrica:
 
-```r
+``` r
 pval.less <- mean(res.boot$t <= res.boot$t0)
 pval <- 2*min(pval.less, pval.greater)
 pval
@@ -498,7 +498,7 @@ y como variables explicativas: `income` (media de ingresos en la ocupación)
 y `education` (media de los años de educación).
 
 
-```r
+``` r
 data(Prestige, package = "carData")
 # ?Prestige
 ```
@@ -524,7 +524,7 @@ para contrastar si `income` y `education` influyen linealmente en `prestige`
 podemos emplear el siguiente código:
 
 
-```r
+``` r
 modelo <- lm(prestige ~ income + education, data = Prestige)
 summary(modelo)
 ```
@@ -555,7 +555,7 @@ También podemos obtener el valor observado del estadístico $F$
 a partir de los resultados del método `summary.lm()`:
 
 
-```r
+``` r
 res <- summary(modelo)
 # names(res)
 stat <- res$fstatistic[1]
@@ -572,7 +572,7 @@ res$fstatistic
 o haciendo los cálculos a mano:
 
 
-```r
+``` r
 n <- nrow(Prestige)
 q <- 3
 q0 <- 1
@@ -591,14 +591,14 @@ Desde el punto de vista de comparación de modelos, el modelo
 reducido bajo la hipótesis nula es:
 
 
-```r
+``` r
 modelo0 <- lm(prestige ~ 1, data = Prestige)
 ```
 
 y podemos realizar el contraste mediante la función `anova()`
 
 
-```r
+``` r
 anova(modelo0, modelo)
 ```
 
@@ -619,14 +619,14 @@ el bootstrap semiparamétrico^[En este caso también podríamos emplear un contr
 de permutaciones.] descrito en la Sección \@ref(boot-residual):
 
 
-```r
+``` r
 library(boot)
 
-pres.dat <- Prestige
-# pres.dat$fit0 <- mean(Prestige$prestige)
-# pres.dat$fit0 <- predict(modelo0)
-pres.dat$res0 <- with(Prestige, prestige - mean(prestige))
-# pres.dat$res0 <- residuals(modelo0)
+boot.dat <- Prestige
+# boot.dat$fit0 <- mean(Prestige$prestige)
+# boot.dat$fit0 <- predict(modelo0)
+boot.dat$res0 <- with(Prestige, prestige - mean(prestige))
+# boot.dat$res0 <- residuals(modelo0)
 
 mod.stat <- function(data, i) {
     data$prestige <- mean(data$prestige) + data$res0[i]
@@ -635,7 +635,7 @@ mod.stat <- function(data, i) {
 }
 
 set.seed(1)
-boot.mod <- boot(pres.dat, mod.stat, R = 1000)
+boot.mod <- boot(boot.dat, mod.stat, R = 1000)
 boot.mod
 ```
 
@@ -645,7 +645,7 @@ boot.mod
 ## 
 ## 
 ## Call:
-## boot(data = pres.dat, statistic = mod.stat, R = 1000)
+## boot(data = boot.dat, statistic = mod.stat, R = 1000)
 ## 
 ## 
 ## Bootstrap Statistics :
@@ -653,7 +653,7 @@ boot.mod
 ## t1* 195.5505 -194.4866    1.096335
 ```
 
-```r
+``` r
 hist(boot.mod$t, breaks = "FD", freq = FALSE)
 curve(pf(x, df, dfr, lower.tail = FALSE), lty = 2, add = TRUE)
 ```
@@ -662,7 +662,7 @@ curve(pf(x, df, dfr, lower.tail = FALSE), lty = 2, add = TRUE)
 
 \begin{center}\includegraphics[width=0.7\linewidth]{05-contrastes_files/figure-latex/unnamed-chunk-21-1} \end{center}
 
-```r
+``` r
 # pval <- mean(boot.mod$t >= boot.mod$t0)
 pval <- mean(boot.mod$t >= stat)
 pval
@@ -681,7 +681,7 @@ De esta forma reproduciríamos la variabilidad del error de forma consistente
 tanto bajo la hipótesis alternativa como bajo la nula.
 
 
-```r
+``` r
 old.par <- par(mfrow=c(1,2))
 hist(residuals(modelo0), xlim = c(-50, 50), 
      main = 'Variabilidad residual\n con el modelo reducido')
@@ -693,7 +693,7 @@ hist(residuals(modelo), xlim = c(-50, 50),
 
 \begin{center}\includegraphics[width=0.7\linewidth]{05-contrastes_files/figure-latex/unnamed-chunk-22-1} \end{center}
 
-```r
+``` r
 par(old.par)
 ```
 
@@ -702,13 +702,13 @@ la modificación propuesta en Davison y Hinkley (1997, Alg. 6.3, p. 271)
 y remuestrear los residuos reescalados y centrados.
 
 
-```r
-pres.dat <- Prestige
-# pres.dat$fit0 <- mean(Prestige$prestige)
-# pres.dat$fit0 <- predict(modelo0)
-# pres.dat$res <- residuals(modelo)
-pres.dat$sres <- residuals(modelo)/sqrt(1 - hatvalues(modelo))
-pres.dat$sres <- pres.dat$sres - mean(pres.dat$sres)
+``` r
+boot.dat <- Prestige
+# boot.dat$fit0 <- mean(Prestige$prestige)
+# boot.dat$fit0 <- predict(modelo0)
+# boot.dat$res <- residuals(modelo)
+boot.dat$sres <- residuals(modelo)/sqrt(1 - hatvalues(modelo))
+boot.dat$sres <- boot.dat$sres - mean(boot.dat$sres)
 
 mod.stat <- function(data, i) {
     # data$prestige <- mean(data$prestige) + data$res[i]
@@ -718,7 +718,7 @@ mod.stat <- function(data, i) {
 }
 
 set.seed(1)
-boot.mod <- boot(pres.dat, mod.stat, R = 1000)
+boot.mod <- boot(boot.dat, mod.stat, R = 1000)
 boot.mod
 ```
 
@@ -728,7 +728,7 @@ boot.mod
 ## 
 ## 
 ## Call:
-## boot(data = pres.dat, statistic = mod.stat, R = 1000)
+## boot(data = boot.dat, statistic = mod.stat, R = 1000)
 ## 
 ## 
 ## Bootstrap Statistics :
@@ -743,7 +743,7 @@ en `Bootstrap Statistics`;
 la función `Boot()` del paquete `car` corrige este problema).
 
 
-```r
+``` r
 hist(boot.mod$t, breaks = "FD", freq = FALSE)
 curve(pf(x, df, dfr, lower.tail = FALSE), lty = 2, add = TRUE)
 ```
@@ -752,7 +752,7 @@ curve(pf(x, df, dfr, lower.tail = FALSE), lty = 2, add = TRUE)
 
 \begin{center}\includegraphics[width=0.7\linewidth]{05-contrastes_files/figure-latex/unnamed-chunk-24-1} \end{center}
 
-```r
+``` r
 pval <- mean(boot.mod$t >= stat)
 pval
 ```
@@ -780,7 +780,7 @@ de alguna de las variables explicativas. Por ejemplo, si generamos los gráficos
 parciales de residuos obtendríamos:
 
 
-```r
+``` r
 # library(car)
 crPlots(modelo)
 ```
@@ -800,7 +800,7 @@ En este caso concreto, obtendríamos una parametrización equivalente
 empleando `modelo <- lm(prestige ~ poly(income, 2) + education, data = Prestige)`.]
 
 
-```r
+``` r
 modelo <- lm(prestige ~ income + I(income^2) + education, data = Prestige)
 summary(modelo)
 ```
@@ -832,7 +832,7 @@ Para comparar el ajuste de este modelo respecto al del anterior, podemos
 realizar un contraste empleando la función `anova()`:
 
 
-```r
+``` r
 modelo0 <- lm(prestige ~ income + education, data = Prestige)
 anova(modelo0, modelo)
 ```
@@ -856,7 +856,7 @@ Aproximar el nivel crítico del contraste y el valor que tendría que superar el
 estadístico para rechazar $H_0$ con un nivel de significación $\alpha = 0.05$.
 
 
-```r
+``` r
 library(boot)
 
 # set.seed(DNI)

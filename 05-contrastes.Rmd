@@ -45,7 +45,7 @@ de significación para el que se rechaza $H_0$
 probabilidad de obtener una discrepancia mayor o igual que
 $\hat{d}$ cuando $H_0$ es cierta).
 
-El cálculo del $p$-valor dependerá por tanto de la hipótesis altervativa.
+El cálculo del $p$-valor dependerá por tanto de la hipótesis alternativa.
 Por ejemplo, si el estadístico del contraste tiende a tomar valores
 grandes cuando $H_0$ es falsa (contraste unilateral derecho):
 $$p = P\left( D \geq \hat{d} \middle| H_0\right).$$
@@ -65,7 +65,7 @@ en cuyo caso se dice que el contraste es estadísticamente significativo
 Por tanto, la correspondiente variable aleatoria $\mathcal{P}$ debería verificar:
 $$P\left( \mathcal{P} \leq \alpha \middle| H_0\right)= \alpha.$$
 Es decir, la distribución del $p$-valor bajo $H_0$ debería ser $\mathcal{U}(0,1)$
-(si la distribución del estadístico del constrate es continua).
+(si la distribución del estadístico del contraste es continua).
 
 
 ## Aproximación del p-valor mediante remuestreo
@@ -495,11 +495,11 @@ de permutaciones.] descrito en la Sección \@ref(boot-residual):
 ```{r }
 library(boot)
 
-pres.dat <- Prestige
-# pres.dat$fit0 <- mean(Prestige$prestige)
-# pres.dat$fit0 <- predict(modelo0)
-pres.dat$res0 <- with(Prestige, prestige - mean(prestige))
-# pres.dat$res0 <- residuals(modelo0)
+boot.dat <- Prestige
+# boot.dat$fit0 <- mean(Prestige$prestige)
+# boot.dat$fit0 <- predict(modelo0)
+boot.dat$res0 <- with(Prestige, prestige - mean(prestige))
+# boot.dat$res0 <- residuals(modelo0)
 
 mod.stat <- function(data, i) {
     data$prestige <- mean(data$prestige) + data$res0[i]
@@ -508,7 +508,7 @@ mod.stat <- function(data, i) {
 }
 
 set.seed(1)
-boot.mod <- boot(pres.dat, mod.stat, R = 1000)
+boot.mod <- boot(boot.dat, mod.stat, R = 1000)
 boot.mod
 
 hist(boot.mod$t, breaks = "FD", freq = FALSE)
@@ -541,12 +541,12 @@ la modificación propuesta en Davison y Hinkley (1997, Alg. 6.3, p. 271)
 y remuestrear los residuos reescalados y centrados.
 
 ```{r}
-pres.dat <- Prestige
-# pres.dat$fit0 <- mean(Prestige$prestige)
-# pres.dat$fit0 <- predict(modelo0)
-# pres.dat$res <- residuals(modelo)
-pres.dat$sres <- residuals(modelo)/sqrt(1 - hatvalues(modelo))
-pres.dat$sres <- pres.dat$sres - mean(pres.dat$sres)
+boot.dat <- Prestige
+# boot.dat$fit0 <- mean(Prestige$prestige)
+# boot.dat$fit0 <- predict(modelo0)
+# boot.dat$res <- residuals(modelo)
+boot.dat$sres <- residuals(modelo)/sqrt(1 - hatvalues(modelo))
+boot.dat$sres <- boot.dat$sres - mean(boot.dat$sres)
 
 mod.stat <- function(data, i) {
     # data$prestige <- mean(data$prestige) + data$res[i]
@@ -556,7 +556,7 @@ mod.stat <- function(data, i) {
 }
 
 set.seed(1)
-boot.mod <- boot(pres.dat, mod.stat, R = 1000)
+boot.mod <- boot(boot.dat, mod.stat, R = 1000)
 boot.mod
 ```
 

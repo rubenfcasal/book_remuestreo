@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>7.4 Ejemplos | Técnicas de Remuestreo</title>
   <meta name="description" content="Apuntes de la asignatura de Técnicas de Remuestreo del Máster en Técnicas Estadísticas." />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.36 and GitBook 2.6.7" />
 
   <meta property="og:title" content="7.4 Ejemplos | Técnicas de Remuestreo" />
   <meta property="og:type" content="book" />
-  
   
   <meta property="og:description" content="Apuntes de la asignatura de Técnicas de Remuestreo del Máster en Técnicas Estadísticas." />
   <meta name="github-repo" content="rubenfcasal/book_remuestreo" />
@@ -24,7 +23,6 @@
 <meta name="author" content="Ricardo Cao Abad (rcao@udc.es) y Rubén Fernández Casal (rfcasal@udc.es)" />
 
 
-<meta name="date" content="2022-09-05" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +31,6 @@
   
 <link rel="prev" href="locpol-r.html"/>
 <link rel="next" href="bootcen.html"/>
-<script src="libs/header-attrs-2.9/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -51,8 +48,9 @@
 
 
 
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -93,7 +91,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -106,7 +104,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -120,6 +118,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -378,12 +380,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="ejemplos-2" class="section level2" number="7.4">
-<h2><span class="header-section-number">7.4</span> Ejemplos</h2>
+<div id="ejemplos-2" class="section level2 hasAnchor" number="7.4">
+<h2><span class="header-section-number">7.4</span> Ejemplos<a href="ejemplos-2.html#ejemplos-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>En esta sección nos centraremos en el bootstrap en la estimación tipo núcleo de la función de regresión, para la aproximación de la precisión y el sesgo, y también para el cálculo de intervalos de confianza y de predicción.</p>
 <!-- (en futuras versiones de los apuntes se incluirá también detalles sobre la construcción de bandas de confianza). -->
-<div id="bootstrap-residual" class="section level3" number="7.4.1">
-<h3><span class="header-section-number">7.4.1</span> Bootstrap residual</h3>
+<div id="bootstrap-residual" class="section level3 hasAnchor" number="7.4.1">
+<h3><span class="header-section-number">7.4.1</span> Bootstrap residual<a href="ejemplos-2.html#bootstrap-residual" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>El modelo ajustado de regresión se puede emplear para estimar la respuesta media <span class="math inline">\(m(x_0)\)</span> cuando la variable explicativa toma un valor concreto <span class="math inline">\(x_0\)</span>.
 En este caso también podemos emplear el bootstrap residual (Sección <a href="boot-reg.html#boot-residual">3.7.2</a>) para realizar inferencias acerca de la media.
 La idea sería aproximar la distribución del error de estimación <span class="math inline">\(\hat{m}_h(x_0) - m(x_0)\)</span> por la distribución bootstrap de <span class="math inline">\(\hat{m}^{\ast}_h(x_0) - \hat{m}_g(x_0)\)</span>.</p>
@@ -391,50 +393,50 @@ La idea sería aproximar la distribución del error de estimación <span class="
 Análogamente al caso de la densidad, la recomendación sería emplear la ventana óptima para la estimación de <span class="math inline">\(m^{\prime \prime }\left( x_0 \right)\)</span>, de orden <span class="math inline">\(n^{-1/9}\)</span> (Sección <a href="métodos-de-remuestreo-en-regresión-no-paramétrica.html#wild-bootstrap">7.2.1</a>).
 Sin embargo, en la práctica es habitual emplear <span class="math inline">\(g=h\)</span> para evitar la selección de esta ventana (lo que además facilita emplear herramientas como el paquete <code>boot</code>).
 Otra alternativa podría ser asumir que <span class="math inline">\(g \simeq n^{1/5}h/n^{1/9}\)</span> como se hace a continuación.</p>
-<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb215-1"><a href="ejemplos-2.html#cb215-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">length</span>(x)</span>
-<span id="cb215-2"><a href="ejemplos-2.html#cb215-2" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> h <span class="sc">*</span> n<span class="sc">^</span>(<span class="dv">4</span><span class="sc">/</span><span class="dv">45</span>) <span class="co"># h*n^(-1/9)/n^(-1/5)</span></span>
-<span id="cb215-3"><a href="ejemplos-2.html#cb215-3" aria-hidden="true" tabindex="-1"></a><span class="co"># g &lt;- h</span></span>
-<span id="cb215-4"><a href="ejemplos-2.html#cb215-4" aria-hidden="true" tabindex="-1"></a>fitg <span class="ot">&lt;-</span> <span class="fu">locpoly</span>(x, y, <span class="at">bandwidth =</span> g) <span class="co"># puntos de estimación/predicción</span></span>
-<span id="cb215-5"><a href="ejemplos-2.html#cb215-5" aria-hidden="true" tabindex="-1"></a><span class="co"># fitg$y &lt;- predict(fitg, newdata = fitg$x) </span></span>
-<span id="cb215-6"><a href="ejemplos-2.html#cb215-6" aria-hidden="true" tabindex="-1"></a>estg <span class="ot">&lt;-</span> <span class="fu">approx</span>(fitg, <span class="at">xout =</span> x)<span class="sc">$</span>y <span class="co"># puntos observaciones</span></span>
-<span id="cb215-7"><a href="ejemplos-2.html#cb215-7" aria-hidden="true" tabindex="-1"></a><span class="co"># estg &lt;- predict(fitg)</span></span>
-<span id="cb215-8"><a href="ejemplos-2.html#cb215-8" aria-hidden="true" tabindex="-1"></a><span class="co"># resid2 &lt;- y - estg # resid2 &lt;- residuals(fitg)</span></span>
-<span id="cb215-9"><a href="ejemplos-2.html#cb215-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb215-10"><a href="ejemplos-2.html#cb215-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Remuestreo</span></span>
-<span id="cb215-11"><a href="ejemplos-2.html#cb215-11" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb215-12"><a href="ejemplos-2.html#cb215-12" aria-hidden="true" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="dv">2000</span></span>
-<span id="cb215-13"><a href="ejemplos-2.html#cb215-13" aria-hidden="true" tabindex="-1"></a>stat_fit_boot <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="at">nrow =</span> <span class="fu">length</span>(fit<span class="sc">$</span>x), <span class="at">ncol =</span> B)</span>
-<span id="cb215-14"><a href="ejemplos-2.html#cb215-14" aria-hidden="true" tabindex="-1"></a>resid0 <span class="ot">&lt;-</span> resid <span class="sc">-</span> <span class="fu">mean</span>(resid)</span>
-<span id="cb215-15"><a href="ejemplos-2.html#cb215-15" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (k <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>B) {</span>
-<span id="cb215-16"><a href="ejemplos-2.html#cb215-16" aria-hidden="true" tabindex="-1"></a>    y_boot <span class="ot">&lt;-</span> estg <span class="sc">+</span> <span class="fu">sample</span>(resid0, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb215-17"><a href="ejemplos-2.html#cb215-17" aria-hidden="true" tabindex="-1"></a>    fit_boot <span class="ot">&lt;-</span> <span class="fu">locpoly</span>(x, y_boot, <span class="at">bandwidth =</span> h)<span class="sc">$</span>y</span>
-<span id="cb215-18"><a href="ejemplos-2.html#cb215-18" aria-hidden="true" tabindex="-1"></a>    stat_fit_boot[ , k] <span class="ot">&lt;-</span> fit_boot <span class="sc">-</span> fitg<span class="sc">$</span>y</span>
-<span id="cb215-19"><a href="ejemplos-2.html#cb215-19" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb215-20"><a href="ejemplos-2.html#cb215-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb215-21"><a href="ejemplos-2.html#cb215-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculo del sesgo y error estándar </span></span>
-<span id="cb215-22"><a href="ejemplos-2.html#cb215-22" aria-hidden="true" tabindex="-1"></a>bias <span class="ot">&lt;-</span> <span class="fu">apply</span>(stat_fit_boot, <span class="dv">1</span>, mean)</span>
-<span id="cb215-23"><a href="ejemplos-2.html#cb215-23" aria-hidden="true" tabindex="-1"></a>std.err <span class="ot">&lt;-</span> <span class="fu">apply</span>(stat_fit_boot, <span class="dv">1</span>, sd)</span>
-<span id="cb215-24"><a href="ejemplos-2.html#cb215-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb215-25"><a href="ejemplos-2.html#cb215-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Representar estimación y corrección de sesgo bootstrap</span></span>
-<span id="cb215-26"><a href="ejemplos-2.html#cb215-26" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x, y)</span>
-<span id="cb215-27"><a href="ejemplos-2.html#cb215-27" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(fit, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
-<span id="cb215-28"><a href="ejemplos-2.html#cb215-28" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(fit<span class="sc">$</span>x, fit<span class="sc">$</span>y <span class="sc">-</span> bias)</span></code></pre></div>
+<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb218-1"><a href="ejemplos-2.html#cb218-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">length</span>(x)</span>
+<span id="cb218-2"><a href="ejemplos-2.html#cb218-2" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> h <span class="sc">*</span> n<span class="sc">^</span>(<span class="dv">4</span><span class="sc">/</span><span class="dv">45</span>) <span class="co"># h*n^(-1/9)/n^(-1/5)</span></span>
+<span id="cb218-3"><a href="ejemplos-2.html#cb218-3" aria-hidden="true" tabindex="-1"></a><span class="co"># g &lt;- h</span></span>
+<span id="cb218-4"><a href="ejemplos-2.html#cb218-4" aria-hidden="true" tabindex="-1"></a>fitg <span class="ot">&lt;-</span> <span class="fu">locpoly</span>(x, y, <span class="at">bandwidth =</span> g) <span class="co"># puntos de estimación/predicción</span></span>
+<span id="cb218-5"><a href="ejemplos-2.html#cb218-5" aria-hidden="true" tabindex="-1"></a><span class="co"># fitg$y &lt;- predict(fitg, newdata = fitg$x) </span></span>
+<span id="cb218-6"><a href="ejemplos-2.html#cb218-6" aria-hidden="true" tabindex="-1"></a>estg <span class="ot">&lt;-</span> <span class="fu">approx</span>(fitg, <span class="at">xout =</span> x)<span class="sc">$</span>y <span class="co"># puntos observaciones</span></span>
+<span id="cb218-7"><a href="ejemplos-2.html#cb218-7" aria-hidden="true" tabindex="-1"></a><span class="co"># estg &lt;- predict(fitg)</span></span>
+<span id="cb218-8"><a href="ejemplos-2.html#cb218-8" aria-hidden="true" tabindex="-1"></a><span class="co"># resid2 &lt;- y - estg # resid2 &lt;- residuals(fitg)</span></span>
+<span id="cb218-9"><a href="ejemplos-2.html#cb218-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb218-10"><a href="ejemplos-2.html#cb218-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Remuestreo</span></span>
+<span id="cb218-11"><a href="ejemplos-2.html#cb218-11" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb218-12"><a href="ejemplos-2.html#cb218-12" aria-hidden="true" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="dv">2000</span></span>
+<span id="cb218-13"><a href="ejemplos-2.html#cb218-13" aria-hidden="true" tabindex="-1"></a>stat_fit_boot <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="at">nrow =</span> <span class="fu">length</span>(fit<span class="sc">$</span>x), <span class="at">ncol =</span> B)</span>
+<span id="cb218-14"><a href="ejemplos-2.html#cb218-14" aria-hidden="true" tabindex="-1"></a>resid0 <span class="ot">&lt;-</span> resid <span class="sc">-</span> <span class="fu">mean</span>(resid)</span>
+<span id="cb218-15"><a href="ejemplos-2.html#cb218-15" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (k <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>B) {</span>
+<span id="cb218-16"><a href="ejemplos-2.html#cb218-16" aria-hidden="true" tabindex="-1"></a>    y_boot <span class="ot">&lt;-</span> estg <span class="sc">+</span> <span class="fu">sample</span>(resid0, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb218-17"><a href="ejemplos-2.html#cb218-17" aria-hidden="true" tabindex="-1"></a>    fit_boot <span class="ot">&lt;-</span> <span class="fu">locpoly</span>(x, y_boot, <span class="at">bandwidth =</span> h)<span class="sc">$</span>y</span>
+<span id="cb218-18"><a href="ejemplos-2.html#cb218-18" aria-hidden="true" tabindex="-1"></a>    stat_fit_boot[ , k] <span class="ot">&lt;-</span> fit_boot <span class="sc">-</span> fitg<span class="sc">$</span>y</span>
+<span id="cb218-19"><a href="ejemplos-2.html#cb218-19" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb218-20"><a href="ejemplos-2.html#cb218-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb218-21"><a href="ejemplos-2.html#cb218-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculo del sesgo y error estándar </span></span>
+<span id="cb218-22"><a href="ejemplos-2.html#cb218-22" aria-hidden="true" tabindex="-1"></a>bias <span class="ot">&lt;-</span> <span class="fu">apply</span>(stat_fit_boot, <span class="dv">1</span>, mean)</span>
+<span id="cb218-23"><a href="ejemplos-2.html#cb218-23" aria-hidden="true" tabindex="-1"></a>std.err <span class="ot">&lt;-</span> <span class="fu">apply</span>(stat_fit_boot, <span class="dv">1</span>, sd)</span>
+<span id="cb218-24"><a href="ejemplos-2.html#cb218-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb218-25"><a href="ejemplos-2.html#cb218-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Representar estimación y corrección de sesgo bootstrap</span></span>
+<span id="cb218-26"><a href="ejemplos-2.html#cb218-26" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x, y)</span>
+<span id="cb218-27"><a href="ejemplos-2.html#cb218-27" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(fit, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb218-28"><a href="ejemplos-2.html#cb218-28" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(fit<span class="sc">$</span>x, fit<span class="sc">$</span>y <span class="sc">-</span> bias)</span></code></pre></div>
 <p><img src="07-npreg_files/figure-html/unnamed-chunk-6-1.png" width="70%" style="display: block; margin: auto;" /></p>
 <p>NOTA: De forma análoga al caso lineal (Sección <a href="boot-reg.html#boot-residual">3.7.2</a>), se podrían reescalar los residuos a partir de la matriz de suavizado (empleando los paquetes <code>sm</code> o <code>npsp</code>).</p>
 </div>
-<div id="intervalos-de-confianza-y-predicción" class="section level3" number="7.4.2">
-<h3><span class="header-section-number">7.4.2</span> Intervalos de confianza y predicción</h3>
+<div id="intervalos-de-confianza-y-predicción" class="section level3 hasAnchor" number="7.4.2">
+<h3><span class="header-section-number">7.4.2</span> Intervalos de confianza y predicción<a href="ejemplos-2.html#intervalos-de-confianza-y-predicción" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>De forma análoga al caso de la estimación de la densidad mostrado en la Sección <a href="ejemplos-1.html#npden-r-ic">6.6.2</a>, podemos calcular estimaciones por intervalo de confianza (puntuales) por el método percentil (básico):</p>
-<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb216-1"><a href="ejemplos-2.html#cb216-1" aria-hidden="true" tabindex="-1"></a>alfa <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
-<span id="cb216-2"><a href="ejemplos-2.html#cb216-2" aria-hidden="true" tabindex="-1"></a>pto_crit <span class="ot">&lt;-</span> <span class="fu">apply</span>(stat_fit_boot, <span class="dv">1</span>, quantile, <span class="at">probs =</span> <span class="fu">c</span>(alfa<span class="sc">/</span><span class="dv">2</span>, <span class="dv">1</span> <span class="sc">-</span> alfa<span class="sc">/</span><span class="dv">2</span>))</span>
-<span id="cb216-3"><a href="ejemplos-2.html#cb216-3" aria-hidden="true" tabindex="-1"></a>ic_inf_boot <span class="ot">&lt;-</span> fit<span class="sc">$</span>y <span class="sc">-</span> pto_crit[<span class="dv">2</span>, ]</span>
-<span id="cb216-4"><a href="ejemplos-2.html#cb216-4" aria-hidden="true" tabindex="-1"></a>ic_sup_boot <span class="ot">&lt;-</span> fit<span class="sc">$</span>y <span class="sc">-</span> pto_crit[<span class="dv">1</span>, ]</span>
-<span id="cb216-5"><a href="ejemplos-2.html#cb216-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb216-6"><a href="ejemplos-2.html#cb216-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x, y)</span>
-<span id="cb216-7"><a href="ejemplos-2.html#cb216-7" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(fit, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
-<span id="cb216-8"><a href="ejemplos-2.html#cb216-8" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(fit<span class="sc">$</span>x, fit<span class="sc">$</span>y <span class="sc">-</span> bias)</span>
-<span id="cb216-9"><a href="ejemplos-2.html#cb216-9" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(fit<span class="sc">$</span>x, ic_inf_boot, <span class="at">lty =</span> <span class="dv">2</span>)</span>
-<span id="cb216-10"><a href="ejemplos-2.html#cb216-10" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(fit<span class="sc">$</span>x, ic_sup_boot, <span class="at">lty =</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb219-1"><a href="ejemplos-2.html#cb219-1" aria-hidden="true" tabindex="-1"></a>alfa <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
+<span id="cb219-2"><a href="ejemplos-2.html#cb219-2" aria-hidden="true" tabindex="-1"></a>pto_crit <span class="ot">&lt;-</span> <span class="fu">apply</span>(stat_fit_boot, <span class="dv">1</span>, quantile, <span class="at">probs =</span> <span class="fu">c</span>(alfa<span class="sc">/</span><span class="dv">2</span>, <span class="dv">1</span> <span class="sc">-</span> alfa<span class="sc">/</span><span class="dv">2</span>))</span>
+<span id="cb219-3"><a href="ejemplos-2.html#cb219-3" aria-hidden="true" tabindex="-1"></a>ic_inf_boot <span class="ot">&lt;-</span> fit<span class="sc">$</span>y <span class="sc">-</span> pto_crit[<span class="dv">2</span>, ]</span>
+<span id="cb219-4"><a href="ejemplos-2.html#cb219-4" aria-hidden="true" tabindex="-1"></a>ic_sup_boot <span class="ot">&lt;-</span> fit<span class="sc">$</span>y <span class="sc">-</span> pto_crit[<span class="dv">1</span>, ]</span>
+<span id="cb219-5"><a href="ejemplos-2.html#cb219-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb219-6"><a href="ejemplos-2.html#cb219-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x, y)</span>
+<span id="cb219-7"><a href="ejemplos-2.html#cb219-7" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(fit, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb219-8"><a href="ejemplos-2.html#cb219-8" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(fit<span class="sc">$</span>x, fit<span class="sc">$</span>y <span class="sc">-</span> bias)</span>
+<span id="cb219-9"><a href="ejemplos-2.html#cb219-9" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(fit<span class="sc">$</span>x, ic_inf_boot, <span class="at">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb219-10"><a href="ejemplos-2.html#cb219-10" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(fit<span class="sc">$</span>x, ic_sup_boot, <span class="at">lty =</span> <span class="dv">2</span>)</span></code></pre></div>
 <p><img src="07-npreg_files/figure-html/unnamed-chunk-7-1.png" width="70%" style="display: block; margin: auto;" /></p>
 <p>El modelo ajustado también es empleado para predecir una nueva respuesta individual <span class="math inline">\(Y(x_0)\)</span> para un valor concreto <span class="math inline">\(x_0\)</span> de la variable explicativa.<br />
 En el caso de errores independientes <span class="math inline">\(\hat{Y}(x_0) = \hat{m}_h(x_0)\)</span>, pero si estamos interesados en realizar inferencias sobre el error de predicción <span class="math inline">\(r(x_0) = Y(x_0) - \hat{Y}(x_0)\)</span>, a la variabilidad de <span class="math inline">\(\hat{m}_h(x_0)\)</span> debida a la muestra, se añade la variabilidad del error <span class="math inline">\(\varepsilon(x_0)\)</span>.</p>
@@ -442,63 +444,63 @@ En el caso de errores independientes <span class="math inline">\(\hat{Y}(x_0) = 
 <span class="math display">\[r(x_0) = Y(x_0) - \hat{Y}(x_0) = m(x_0) + \varepsilon(x_0) - \hat{m}_h(x_0)\]</span>
 por la distribución bootstrap de:
 <span class="math display">\[r^{\ast}(x_0) = Y^{\ast}(x_0) - \hat{Y}^{\ast}(x_0) = \hat{m}_g(x_0) + \varepsilon^{\ast}(x_0) - \hat{m}^{\ast}_h(x_0)\]</span></p>
-<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb217-1"><a href="ejemplos-2.html#cb217-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Remuestreo</span></span>
-<span id="cb217-2"><a href="ejemplos-2.html#cb217-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb217-3"><a href="ejemplos-2.html#cb217-3" aria-hidden="true" tabindex="-1"></a>n_pre <span class="ot">&lt;-</span> <span class="fu">length</span>(fit<span class="sc">$</span>x)</span>
-<span id="cb217-4"><a href="ejemplos-2.html#cb217-4" aria-hidden="true" tabindex="-1"></a>stat_pred_boot <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="at">nrow =</span> n_pre, <span class="at">ncol =</span> B)</span>
-<span id="cb217-5"><a href="ejemplos-2.html#cb217-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (k <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>B) {</span>
-<span id="cb217-6"><a href="ejemplos-2.html#cb217-6" aria-hidden="true" tabindex="-1"></a>    y_boot <span class="ot">&lt;-</span> estg <span class="sc">+</span> <span class="fu">sample</span>(resid0, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb217-7"><a href="ejemplos-2.html#cb217-7" aria-hidden="true" tabindex="-1"></a>    fit_boot <span class="ot">&lt;-</span> <span class="fu">locpoly</span>(x, y_boot, <span class="at">bandwidth =</span> h)<span class="sc">$</span>y</span>
-<span id="cb217-8"><a href="ejemplos-2.html#cb217-8" aria-hidden="true" tabindex="-1"></a>    pred_boot <span class="ot">&lt;-</span> fitg<span class="sc">$</span>y <span class="sc">+</span> <span class="fu">sample</span>(resid0, n_pre, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb217-9"><a href="ejemplos-2.html#cb217-9" aria-hidden="true" tabindex="-1"></a>    stat_pred_boot[ , k] <span class="ot">&lt;-</span> pred_boot <span class="sc">-</span> fit_boot</span>
-<span id="cb217-10"><a href="ejemplos-2.html#cb217-10" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb217-11"><a href="ejemplos-2.html#cb217-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb217-12"><a href="ejemplos-2.html#cb217-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Cálculo de intervalos de predicción</span></span>
-<span id="cb217-13"><a href="ejemplos-2.html#cb217-13" aria-hidden="true" tabindex="-1"></a><span class="co"># por el método percentil (básico)</span></span>
-<span id="cb217-14"><a href="ejemplos-2.html#cb217-14" aria-hidden="true" tabindex="-1"></a>alfa <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
-<span id="cb217-15"><a href="ejemplos-2.html#cb217-15" aria-hidden="true" tabindex="-1"></a>pto_crit_pred <span class="ot">&lt;-</span> <span class="fu">apply</span>(stat_pred_boot, <span class="dv">1</span>, quantile, <span class="at">probs =</span> <span class="fu">c</span>(alfa<span class="sc">/</span><span class="dv">2</span>, <span class="dv">1</span> <span class="sc">-</span> alfa<span class="sc">/</span><span class="dv">2</span>))</span>
-<span id="cb217-16"><a href="ejemplos-2.html#cb217-16" aria-hidden="true" tabindex="-1"></a>ip_inf_boot <span class="ot">&lt;-</span> fit<span class="sc">$</span>y <span class="sc">+</span> pto_crit_pred[<span class="dv">1</span>, ]</span>
-<span id="cb217-17"><a href="ejemplos-2.html#cb217-17" aria-hidden="true" tabindex="-1"></a>ip_sup_boot <span class="ot">&lt;-</span> fit<span class="sc">$</span>y <span class="sc">+</span> pto_crit_pred[<span class="dv">2</span>, ]</span>
-<span id="cb217-18"><a href="ejemplos-2.html#cb217-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb217-19"><a href="ejemplos-2.html#cb217-19" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x, y, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">150</span>, <span class="dv">75</span>))</span>
-<span id="cb217-20"><a href="ejemplos-2.html#cb217-20" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(fit, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
-<span id="cb217-21"><a href="ejemplos-2.html#cb217-21" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(fit<span class="sc">$</span>x, fit<span class="sc">$</span>y <span class="sc">-</span> bias)</span>
-<span id="cb217-22"><a href="ejemplos-2.html#cb217-22" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(fit<span class="sc">$</span>x, ic_inf_boot, <span class="at">lty =</span> <span class="dv">2</span>)</span>
-<span id="cb217-23"><a href="ejemplos-2.html#cb217-23" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(fit<span class="sc">$</span>x, ic_sup_boot, <span class="at">lty =</span> <span class="dv">2</span>)</span>
-<span id="cb217-24"><a href="ejemplos-2.html#cb217-24" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(fit<span class="sc">$</span>x, ip_inf_boot, <span class="at">lty =</span> <span class="dv">3</span>)</span>
-<span id="cb217-25"><a href="ejemplos-2.html#cb217-25" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(fit<span class="sc">$</span>x, ip_sup_boot, <span class="at">lty =</span> <span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb220-1"><a href="ejemplos-2.html#cb220-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Remuestreo</span></span>
+<span id="cb220-2"><a href="ejemplos-2.html#cb220-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb220-3"><a href="ejemplos-2.html#cb220-3" aria-hidden="true" tabindex="-1"></a>n_pre <span class="ot">&lt;-</span> <span class="fu">length</span>(fit<span class="sc">$</span>x)</span>
+<span id="cb220-4"><a href="ejemplos-2.html#cb220-4" aria-hidden="true" tabindex="-1"></a>stat_pred_boot <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="at">nrow =</span> n_pre, <span class="at">ncol =</span> B)</span>
+<span id="cb220-5"><a href="ejemplos-2.html#cb220-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (k <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>B) {</span>
+<span id="cb220-6"><a href="ejemplos-2.html#cb220-6" aria-hidden="true" tabindex="-1"></a>    y_boot <span class="ot">&lt;-</span> estg <span class="sc">+</span> <span class="fu">sample</span>(resid0, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb220-7"><a href="ejemplos-2.html#cb220-7" aria-hidden="true" tabindex="-1"></a>    fit_boot <span class="ot">&lt;-</span> <span class="fu">locpoly</span>(x, y_boot, <span class="at">bandwidth =</span> h)<span class="sc">$</span>y</span>
+<span id="cb220-8"><a href="ejemplos-2.html#cb220-8" aria-hidden="true" tabindex="-1"></a>    pred_boot <span class="ot">&lt;-</span> fitg<span class="sc">$</span>y <span class="sc">+</span> <span class="fu">sample</span>(resid0, n_pre, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb220-9"><a href="ejemplos-2.html#cb220-9" aria-hidden="true" tabindex="-1"></a>    stat_pred_boot[ , k] <span class="ot">&lt;-</span> pred_boot <span class="sc">-</span> fit_boot</span>
+<span id="cb220-10"><a href="ejemplos-2.html#cb220-10" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb220-11"><a href="ejemplos-2.html#cb220-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb220-12"><a href="ejemplos-2.html#cb220-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Cálculo de intervalos de predicción</span></span>
+<span id="cb220-13"><a href="ejemplos-2.html#cb220-13" aria-hidden="true" tabindex="-1"></a><span class="co"># por el método percentil (básico)</span></span>
+<span id="cb220-14"><a href="ejemplos-2.html#cb220-14" aria-hidden="true" tabindex="-1"></a>alfa <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
+<span id="cb220-15"><a href="ejemplos-2.html#cb220-15" aria-hidden="true" tabindex="-1"></a>pto_crit_pred <span class="ot">&lt;-</span> <span class="fu">apply</span>(stat_pred_boot, <span class="dv">1</span>, quantile, <span class="at">probs =</span> <span class="fu">c</span>(alfa<span class="sc">/</span><span class="dv">2</span>, <span class="dv">1</span> <span class="sc">-</span> alfa<span class="sc">/</span><span class="dv">2</span>))</span>
+<span id="cb220-16"><a href="ejemplos-2.html#cb220-16" aria-hidden="true" tabindex="-1"></a>ip_inf_boot <span class="ot">&lt;-</span> fit<span class="sc">$</span>y <span class="sc">+</span> pto_crit_pred[<span class="dv">1</span>, ]</span>
+<span id="cb220-17"><a href="ejemplos-2.html#cb220-17" aria-hidden="true" tabindex="-1"></a>ip_sup_boot <span class="ot">&lt;-</span> fit<span class="sc">$</span>y <span class="sc">+</span> pto_crit_pred[<span class="dv">2</span>, ]</span>
+<span id="cb220-18"><a href="ejemplos-2.html#cb220-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb220-19"><a href="ejemplos-2.html#cb220-19" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x, y, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">150</span>, <span class="dv">75</span>))</span>
+<span id="cb220-20"><a href="ejemplos-2.html#cb220-20" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(fit, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb220-21"><a href="ejemplos-2.html#cb220-21" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(fit<span class="sc">$</span>x, fit<span class="sc">$</span>y <span class="sc">-</span> bias)</span>
+<span id="cb220-22"><a href="ejemplos-2.html#cb220-22" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(fit<span class="sc">$</span>x, ic_inf_boot, <span class="at">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb220-23"><a href="ejemplos-2.html#cb220-23" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(fit<span class="sc">$</span>x, ic_sup_boot, <span class="at">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb220-24"><a href="ejemplos-2.html#cb220-24" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(fit<span class="sc">$</span>x, ip_inf_boot, <span class="at">lty =</span> <span class="dv">3</span>)</span>
+<span id="cb220-25"><a href="ejemplos-2.html#cb220-25" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(fit<span class="sc">$</span>x, ip_sup_boot, <span class="at">lty =</span> <span class="dv">3</span>)</span></code></pre></div>
 <p><img src="07-npreg_files/figure-html/unnamed-chunk-8-1.png" width="70%" style="display: block; margin: auto;" /></p>
 <p>En este caso puede no ser recomendable considerar errores i.i.d., sería de esperar heterocedásticidad (e incluso dependencia temporal).
 El bootstrap residual se puede extender al caso heterocedástico y/o dependencia (e.g. Castillo-Páez <em>et al.</em>, 2019, 2020).</p>
 </div>
-<div id="r-wild-bootstrap" class="section level3" number="7.4.3">
-<h3><span class="header-section-number">7.4.3</span> Wild bootstrap</h3>
+<div id="r-wild-bootstrap" class="section level3 hasAnchor" number="7.4.3">
+<h3><span class="header-section-number">7.4.3</span> Wild bootstrap<a href="ejemplos-2.html#r-wild-bootstrap" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Como se describe en la Sección <a href="métodos-de-remuestreo-en-regresión-no-paramétrica.html#wild-bootstrap">7.2.1</a> en el caso heterocedástico se puede emplear wild bootstrap.</p>
-<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb218-1"><a href="ejemplos-2.html#cb218-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Remuestreo</span></span>
-<span id="cb218-2"><a href="ejemplos-2.html#cb218-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb218-3"><a href="ejemplos-2.html#cb218-3" aria-hidden="true" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
-<span id="cb218-4"><a href="ejemplos-2.html#cb218-4" aria-hidden="true" tabindex="-1"></a>fit_boot <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="at">nrow =</span> n_pre, <span class="at">ncol =</span> B)</span>
-<span id="cb218-5"><a href="ejemplos-2.html#cb218-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (k <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>B) {</span>
-<span id="cb218-6"><a href="ejemplos-2.html#cb218-6" aria-hidden="true" tabindex="-1"></a>        rwild <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">c</span>((<span class="dv">1</span> <span class="sc">-</span> <span class="fu">sqrt</span>(<span class="dv">5</span>))<span class="sc">/</span><span class="dv">2</span>, (<span class="dv">1</span> <span class="sc">+</span> <span class="fu">sqrt</span>(<span class="dv">5</span>))<span class="sc">/</span><span class="dv">2</span>), n, <span class="at">replace =</span> <span class="cn">TRUE</span>, </span>
-<span id="cb218-7"><a href="ejemplos-2.html#cb218-7" aria-hidden="true" tabindex="-1"></a>                        <span class="at">prob =</span> <span class="fu">c</span>((<span class="dv">5</span> <span class="sc">+</span> <span class="fu">sqrt</span>(<span class="dv">5</span>))<span class="sc">/</span><span class="dv">10</span>, <span class="dv">1</span> <span class="sc">-</span> (<span class="dv">5</span> <span class="sc">+</span> <span class="fu">sqrt</span>(<span class="dv">5</span>))<span class="sc">/</span><span class="dv">10</span>))</span>
-<span id="cb218-8"><a href="ejemplos-2.html#cb218-8" aria-hidden="true" tabindex="-1"></a>    y_boot <span class="ot">&lt;-</span> estg <span class="sc">+</span> resid<span class="sc">*</span>rwild</span>
-<span id="cb218-9"><a href="ejemplos-2.html#cb218-9" aria-hidden="true" tabindex="-1"></a>    fit_boot[ , k] <span class="ot">&lt;-</span> <span class="fu">locpoly</span>(x, y_boot, <span class="at">bandwidth =</span> h)<span class="sc">$</span>y</span>
-<span id="cb218-10"><a href="ejemplos-2.html#cb218-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># OJO: bootstrap percetil directo</span></span>
-<span id="cb218-11"><a href="ejemplos-2.html#cb218-11" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb218-12"><a href="ejemplos-2.html#cb218-12" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb218-13"><a href="ejemplos-2.html#cb218-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb218-14"><a href="ejemplos-2.html#cb218-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculo del sesgo y error estándar</span></span>
-<span id="cb218-15"><a href="ejemplos-2.html#cb218-15" aria-hidden="true" tabindex="-1"></a>bias <span class="ot">&lt;-</span> <span class="fu">apply</span>(fit_boot, <span class="dv">1</span>, mean, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">-</span> fitg<span class="sc">$</span>y</span>
-<span id="cb218-16"><a href="ejemplos-2.html#cb218-16" aria-hidden="true" tabindex="-1"></a>std.err <span class="ot">&lt;-</span> <span class="fu">apply</span>(fit_boot, <span class="dv">1</span>, sd, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb218-17"><a href="ejemplos-2.html#cb218-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb218-18"><a href="ejemplos-2.html#cb218-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Representar estimación y corrección de sesgo bootstrap</span></span>
-<span id="cb218-19"><a href="ejemplos-2.html#cb218-19" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x, y)</span>
-<span id="cb218-20"><a href="ejemplos-2.html#cb218-20" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(fit, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
-<span id="cb218-21"><a href="ejemplos-2.html#cb218-21" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(fit<span class="sc">$</span>x, fit<span class="sc">$</span>y <span class="sc">-</span> bias)</span></code></pre></div>
+<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb221-1"><a href="ejemplos-2.html#cb221-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Remuestreo</span></span>
+<span id="cb221-2"><a href="ejemplos-2.html#cb221-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb221-3"><a href="ejemplos-2.html#cb221-3" aria-hidden="true" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
+<span id="cb221-4"><a href="ejemplos-2.html#cb221-4" aria-hidden="true" tabindex="-1"></a>fit_boot <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="at">nrow =</span> n_pre, <span class="at">ncol =</span> B)</span>
+<span id="cb221-5"><a href="ejemplos-2.html#cb221-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (k <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>B) {</span>
+<span id="cb221-6"><a href="ejemplos-2.html#cb221-6" aria-hidden="true" tabindex="-1"></a>        rwild <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">c</span>((<span class="dv">1</span> <span class="sc">-</span> <span class="fu">sqrt</span>(<span class="dv">5</span>))<span class="sc">/</span><span class="dv">2</span>, (<span class="dv">1</span> <span class="sc">+</span> <span class="fu">sqrt</span>(<span class="dv">5</span>))<span class="sc">/</span><span class="dv">2</span>), n, <span class="at">replace =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb221-7"><a href="ejemplos-2.html#cb221-7" aria-hidden="true" tabindex="-1"></a>                        <span class="at">prob =</span> <span class="fu">c</span>((<span class="dv">5</span> <span class="sc">+</span> <span class="fu">sqrt</span>(<span class="dv">5</span>))<span class="sc">/</span><span class="dv">10</span>, <span class="dv">1</span> <span class="sc">-</span> (<span class="dv">5</span> <span class="sc">+</span> <span class="fu">sqrt</span>(<span class="dv">5</span>))<span class="sc">/</span><span class="dv">10</span>))</span>
+<span id="cb221-8"><a href="ejemplos-2.html#cb221-8" aria-hidden="true" tabindex="-1"></a>    y_boot <span class="ot">&lt;-</span> estg <span class="sc">+</span> resid<span class="sc">*</span>rwild</span>
+<span id="cb221-9"><a href="ejemplos-2.html#cb221-9" aria-hidden="true" tabindex="-1"></a>    fit_boot[ , k] <span class="ot">&lt;-</span> <span class="fu">locpoly</span>(x, y_boot, <span class="at">bandwidth =</span> h)<span class="sc">$</span>y</span>
+<span id="cb221-10"><a href="ejemplos-2.html#cb221-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># OJO: bootstrap percetil directo</span></span>
+<span id="cb221-11"><a href="ejemplos-2.html#cb221-11" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb221-12"><a href="ejemplos-2.html#cb221-12" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb221-13"><a href="ejemplos-2.html#cb221-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb221-14"><a href="ejemplos-2.html#cb221-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculo del sesgo y error estándar</span></span>
+<span id="cb221-15"><a href="ejemplos-2.html#cb221-15" aria-hidden="true" tabindex="-1"></a>bias <span class="ot">&lt;-</span> <span class="fu">apply</span>(fit_boot, <span class="dv">1</span>, mean, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">-</span> fitg<span class="sc">$</span>y</span>
+<span id="cb221-16"><a href="ejemplos-2.html#cb221-16" aria-hidden="true" tabindex="-1"></a>std.err <span class="ot">&lt;-</span> <span class="fu">apply</span>(fit_boot, <span class="dv">1</span>, sd, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb221-17"><a href="ejemplos-2.html#cb221-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb221-18"><a href="ejemplos-2.html#cb221-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Representar estimación y corrección de sesgo bootstrap</span></span>
+<span id="cb221-19"><a href="ejemplos-2.html#cb221-19" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x, y)</span>
+<span id="cb221-20"><a href="ejemplos-2.html#cb221-20" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(fit, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb221-21"><a href="ejemplos-2.html#cb221-21" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(fit<span class="sc">$</span>x, fit<span class="sc">$</span>y <span class="sc">-</span> bias)</span></code></pre></div>
 <p><img src="07-npreg_files/figure-html/unnamed-chunk-9-1.png" width="70%" style="display: block; margin: auto;" /></p>
 </div>
-<div id="ejercicio-1" class="section level3" number="7.4.4">
-<h3><span class="header-section-number">7.4.4</span> Ejercicio</h3>
+<div id="ejercicio-1" class="section level3 hasAnchor" number="7.4.4">
+<h3><span class="header-section-number">7.4.4</span> Ejercicio<a href="ejemplos-2.html#ejercicio-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Siguiendo con el conjunto de datos <code>MASS::mcycle</code>, emplear wild bootstrap para
 obtener estimaciones por intervalo de confianza de la función de regresión
 de <code>accel</code> a partir de <code>times</code> mediante bootstrap percentil básico.
@@ -527,42 +529,42 @@ Comparar los resultados con los obtenidos mediante bootstrap residual (comentar 
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
-"sharing": {
-"github": true,
-"facebook": false,
-"twitter": false,
-"linkedin": false,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"whatsapp": false,
-"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
-},
-"fontsettings": {
-"theme": "white",
-"family": "sans",
-"size": 2
-},
-"edit": {
-"link": "https://github.com/rubenfcasal/book_remuestreo/edit/master/07-npreg.Rmd",
-"text": "Edit"
-},
-"history": {
-"link": null,
-"text": null
-},
-"view": {
-"link": null,
-"text": null
-},
-"download": ["book_remuestreo.pdf"],
-"search": {
-"engine": "fuse",
-"options": null
-},
-"toc": {
-"collapse": "subsection"
-}
+  "sharing": {
+    "github": true,
+    "facebook": false,
+    "twitter": false,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": "https://github.com/rubenfcasal/book_remuestreo/edit/master/07-npreg.Rmd",
+    "text": "Edit"
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": ["book_remuestreo.pdf"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  }
 });
 });
 </script>
@@ -573,7 +575,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

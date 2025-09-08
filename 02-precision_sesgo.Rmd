@@ -149,7 +149,7 @@ que es precisamente el estimador
 plug-in de la varianza de la media muestral.
 
 
-```{example, label="estimacion-boot-precision", name="Aproximación bootstrap de la precisión de estimaciones del tiempo de vida medio de microorganismos"}
+::: {.example #estimacion-boot-precision name="Aproximación bootstrap de la precisión de estimaciones del tiempo de vida medio de microorganismos"}
 <br> \vspace{0.5cm}
 
 Continuando con el ejemplo de los tiempos de vida de microorganismos,
@@ -157,7 +157,6 @@ supongamos que queremos estimar
 la precisión de dos estimadores de su vida media: media muestral y
 mediana muestral, a partir de los datos observados: 0.143, 0.182, 0.256, 0.260, 0.270,
 0.437, 0.509, 0.611, 0.712, 1.04, 1.09, 1.15, 1.46, 1.88, 2.08.
-```
 
 La estimación media muestral resulta $\bar{X}=0.8053333$. Por su
 parte la estimación mediana muestral es $x_{\left( 8 \right)}=0.611$.
@@ -258,6 +257,7 @@ desvmedia <- sqrt(varmedia)
 B <- 1e+04
 media <- numeric(B)
 mediana <- numeric(B)
+set.seed(1)
 for (k in 1:B) {
     remuestra <- sample(muestra, n, replace = TRUE)
     media[k] <- mean(remuestra)
@@ -310,6 +310,7 @@ colnames(op) <- c("original", "bias  ", " std. error")
 op
 ```
 
+:::
 
 Como comentario adicional, si se emplea $\hat F$ como aproximación de la distribución poblacional, lo habitual es que $\hat\theta = T\left( \mathbf{X} \right) = \theta ( \hat{F} )$ sea el estimador de $\theta(F)$ (por ejemplo $\hat\theta = \theta(F_n)$ en el caso del bootstrap uniforme). 
 De esta forma, en el universo bootstrap el parámetro teórico se sustituye por el estimador y, por ejemplo, $R = \hat \theta - \theta$ se traduce en $R^{\ast} = \hat{\theta}^{\ast}- \hat \theta$. 
@@ -607,22 +608,23 @@ jackknife de cualquier estimador cuadrático y la varianza bootstrap y la
 varianza jackknife de cualquier estimador lineal.
 
 
-```{theorem, label="jack-boot-sesgo"}
+::: {.theorem #jack-boot-sesgo}
 <br> \vspace{0.5cm}
 
 Si $\hat{\theta}$ es un estimador cuadrático, entonces
 $$Sesgo_{jackk}\left( \hat{\theta} \right) =\frac{n}{n-1}Sesgo_{boot}\left( 
 \hat{\theta} \right)$$
 
-```
+:::
 
-```{theorem, label="jack-boot-precision"}
+::: {.theorem #jack-boot-precision}
 <br> \vspace{0.5cm}
 
 Si $\hat{\theta}$ es un estimador lineal, entonces
 $$Var_{jackk}\left( \hat{\theta} \right) =\frac{n}{n-1}Var_{boot}\left( \hat{
 \theta} \right)$$
-```
+
+:::
 
 
 Dicho en otras palabras, para cualquier estimador cuadrático, el sesgo
@@ -631,14 +633,13 @@ varianza jackknife es mayor que la varianza bootstrap. En ambos casos,
 el factor multiplicador es $n/(n-1)$.
 
 
-```{example, label="estimacion-jack-precision", name="Aproximación jackknife de la precisión de estimaciones del tiempo de vida medio de microorganismos"}
+::: {.example #estimacion-jack-precision name="Aproximación jackknife de la precisión de estimaciones del tiempo de vida medio de microorganismos"}
 <br> \vspace{0.5cm}
 
 Consideremos la muestra de tiempos de vida de microorganismos ya
 tratada. El siguiente código permite calcular los
 estimadores jackknife del sesgo y de la precisión tanto de la media como
 de la mediana muestral.
-```
 
 ```{r jack-precision-media-mediana}
 # Para la muestra de TIEMPOS DE VIDA, estima (plug-in) la precisión 
@@ -697,6 +698,7 @@ En general las aproximaciones jackknife son adecuadas para el caso de estadísti
 "suaves", como la media, pero pueden ser inconsistentes cuando no lo son,
 como es el caso de la mediana.
 
+:::
 
 <!-- 
 | Estimación | $\bar{X}=0.804$   |    $x_{\left( 8 \right)}=0.611$    | 

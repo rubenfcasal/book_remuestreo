@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>6.6 Ejemplos | Técnicas de Remuestreo</title>
   <meta name="description" content="Apuntes de la asignatura de Técnicas de Remuestreo del Máster en Técnicas Estadísticas." />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.36 and GitBook 2.6.7" />
 
   <meta property="og:title" content="6.6 Ejemplos | Técnicas de Remuestreo" />
   <meta property="og:type" content="book" />
-  
   
   <meta property="og:description" content="Apuntes de la asignatura de Técnicas de Remuestreo del Máster en Técnicas Estadísticas." />
   <meta name="github-repo" content="rubenfcasal/book_remuestreo" />
@@ -24,7 +23,6 @@
 <meta name="author" content="Ricardo Cao Abad (rcao@udc.es) y Rubén Fernández Casal (rfcasal@udc.es)" />
 
 
-<meta name="date" content="2022-09-05" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +31,6 @@
   
 <link rel="prev" href="npden-r.html"/>
 <link rel="next" href="npreg.html"/>
-<script src="libs/header-attrs-2.9/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -51,8 +48,9 @@
 
 
 
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -93,7 +91,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -106,7 +104,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -120,6 +118,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -378,124 +380,124 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="ejemplos-1" class="section level2" number="6.6">
-<h2><span class="header-section-number">6.6</span> Ejemplos</h2>
+<div id="ejemplos-1" class="section level2 hasAnchor" number="6.6">
+<h2><span class="header-section-number">6.6</span> Ejemplos<a href="ejemplos-1.html#ejemplos-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>En esta sección nos centraremos en el bootstrap en la estimación tipo núcleo de la densidad para la aproximación de la precisión y el sesgo, y también para el cálculo de intervalos de confianza.</p>
-<div id="bootstrap-y-estimación-del-sesgo" class="section level3" number="6.6.1">
-<h3><span class="header-section-number">6.6.1</span> Bootstrap y estimación del sesgo</h3>
+<div id="bootstrap-y-estimación-del-sesgo" class="section level3 hasAnchor" number="6.6.1">
+<h3><span class="header-section-number">6.6.1</span> Bootstrap y estimación del sesgo<a href="ejemplos-1.html#bootstrap-y-estimación-del-sesgo" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>La idea sería aproximar la distribución del error de estimación <span class="math inline">\(\hat f_h(x) - f(x)\)</span> por la distribución bootstrap de <span class="math inline">\(\hat f^{\ast}_h(x) - \hat f_g(x)\)</span> (bootstrap percentil básico).</p>
 <p>Como se comentó en la Sección <a href="aproximacion-bootstrap.html#aproximacion-bootstrap">6.3</a> la ventana <span class="math inline">\(g\)</span> debería ser asintóticamente mayor que <span class="math inline">\(h\)</span> (de orden <span class="math inline">\(n^{-1/5}\)</span>) y la recomendación sería emplear la ventana óptima para la estimación de <span class="math inline">\(f^{\prime \prime }\left( x \right)\)</span>, de orden <span class="math inline">\(n^{-1/9}\)</span>.
 Sin embargo, en la práctica es habitual emplear <span class="math inline">\(g=h\)</span> para evitar la selección de esta ventana (lo que además facilita emplear herramientas como el paquete <code>boot</code>).
 Otra alternativa podría ser asumir que <span class="math inline">\(g \simeq n^{1/5}h/n^{1/9}\)</span> como se hace a continuación.</p>
-<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="ejemplos-1.html#cb202-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Remuestreo</span></span>
-<span id="cb202-2"><a href="ejemplos-1.html#cb202-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb202-3"><a href="ejemplos-1.html#cb202-3" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">length</span>(x)</span>
-<span id="cb202-4"><a href="ejemplos-1.html#cb202-4" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> h <span class="sc">*</span> n<span class="sc">^</span>(<span class="dv">4</span><span class="sc">/</span><span class="dv">45</span>) <span class="co"># h*n^(-1/9)/n^(-1/5)</span></span>
-<span id="cb202-5"><a href="ejemplos-1.html#cb202-5" aria-hidden="true" tabindex="-1"></a><span class="co"># g &lt;- h</span></span>
-<span id="cb202-6"><a href="ejemplos-1.html#cb202-6" aria-hidden="true" tabindex="-1"></a>range_x <span class="ot">&lt;-</span> <span class="fu">range</span>(npden<span class="sc">$</span>x) <span class="co"># Para fijar las posiciones de estimación</span></span>
-<span id="cb202-7"><a href="ejemplos-1.html#cb202-7" aria-hidden="true" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
-<span id="cb202-8"><a href="ejemplos-1.html#cb202-8" aria-hidden="true" tabindex="-1"></a>stat_den_boot <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="at">nrow =</span> <span class="fu">length</span>(npden<span class="sc">$</span>x), <span class="at">ncol =</span> B)</span>
-<span id="cb202-9"><a href="ejemplos-1.html#cb202-9" aria-hidden="true" tabindex="-1"></a>npdeng <span class="ot">&lt;-</span> <span class="fu">density</span>(x, <span class="at">bw =</span> g, <span class="at">from =</span> range_x[<span class="dv">1</span>], <span class="at">to =</span> range_x[<span class="dv">2</span>])</span>
-<span id="cb202-10"><a href="ejemplos-1.html#cb202-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb202-11"><a href="ejemplos-1.html#cb202-11" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (k <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>B) {</span>
-<span id="cb202-12"><a href="ejemplos-1.html#cb202-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># x_boot &lt;- sample(x, n, replace = TRUE) + rnorm(n, 0, g)</span></span>
-<span id="cb202-13"><a href="ejemplos-1.html#cb202-13" aria-hidden="true" tabindex="-1"></a>    x_boot <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="fu">sample</span>(x, n, <span class="at">replace =</span> <span class="cn">TRUE</span>), g)</span>
-<span id="cb202-14"><a href="ejemplos-1.html#cb202-14" aria-hidden="true" tabindex="-1"></a>    den_boot <span class="ot">&lt;-</span> <span class="fu">density</span>(x_boot, <span class="at">bw =</span> h, <span class="at">from =</span> range_x[<span class="dv">1</span>], <span class="at">to =</span> range_x[<span class="dv">2</span>])<span class="sc">$</span>y</span>
-<span id="cb202-15"><a href="ejemplos-1.html#cb202-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Si se quiere tener en cuenta la variabilidad debida a la selección de</span></span>
-<span id="cb202-16"><a href="ejemplos-1.html#cb202-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># la ventana habría que emplear el mismo criterio en la función `density`.</span></span>
-<span id="cb202-17"><a href="ejemplos-1.html#cb202-17" aria-hidden="true" tabindex="-1"></a>    stat_den_boot[, k] <span class="ot">&lt;-</span> den_boot <span class="sc">-</span> npdeng<span class="sc">$</span>y</span>
-<span id="cb202-18"><a href="ejemplos-1.html#cb202-18" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb202-19"><a href="ejemplos-1.html#cb202-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb202-20"><a href="ejemplos-1.html#cb202-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculo del sesgo y error estándar </span></span>
-<span id="cb202-21"><a href="ejemplos-1.html#cb202-21" aria-hidden="true" tabindex="-1"></a>bias <span class="ot">&lt;-</span> <span class="fu">apply</span>(stat_den_boot, <span class="dv">1</span>, mean)</span>
-<span id="cb202-22"><a href="ejemplos-1.html#cb202-22" aria-hidden="true" tabindex="-1"></a>std_err <span class="ot">&lt;-</span> <span class="fu">apply</span>(stat_den_boot, <span class="dv">1</span>, sd)</span>
-<span id="cb202-23"><a href="ejemplos-1.html#cb202-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb202-24"><a href="ejemplos-1.html#cb202-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Representar estimación y corrección de sesgo bootstrap</span></span>
-<span id="cb202-25"><a href="ejemplos-1.html#cb202-25" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(npden, <span class="at">type=</span><span class="st">&quot;l&quot;</span>, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.05</span>), <span class="at">lwd =</span> <span class="dv">2</span>)</span>
-<span id="cb202-26"><a href="ejemplos-1.html#cb202-26" aria-hidden="true" tabindex="-1"></a><span class="co"># lines(npden$x, pmax(npden$y - bias, 0))</span></span>
-<span id="cb202-27"><a href="ejemplos-1.html#cb202-27" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(npden<span class="sc">$</span>x, npden<span class="sc">$</span>y <span class="sc">-</span> bias)</span></code></pre></div>
+<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb205-1"><a href="ejemplos-1.html#cb205-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Remuestreo</span></span>
+<span id="cb205-2"><a href="ejemplos-1.html#cb205-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb205-3"><a href="ejemplos-1.html#cb205-3" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">length</span>(x)</span>
+<span id="cb205-4"><a href="ejemplos-1.html#cb205-4" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> h <span class="sc">*</span> n<span class="sc">^</span>(<span class="dv">4</span><span class="sc">/</span><span class="dv">45</span>) <span class="co"># h*n^(-1/9)/n^(-1/5)</span></span>
+<span id="cb205-5"><a href="ejemplos-1.html#cb205-5" aria-hidden="true" tabindex="-1"></a><span class="co"># g &lt;- h</span></span>
+<span id="cb205-6"><a href="ejemplos-1.html#cb205-6" aria-hidden="true" tabindex="-1"></a>range_x <span class="ot">&lt;-</span> <span class="fu">range</span>(npden<span class="sc">$</span>x) <span class="co"># Para fijar las posiciones de estimación</span></span>
+<span id="cb205-7"><a href="ejemplos-1.html#cb205-7" aria-hidden="true" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
+<span id="cb205-8"><a href="ejemplos-1.html#cb205-8" aria-hidden="true" tabindex="-1"></a>stat_den_boot <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="at">nrow =</span> <span class="fu">length</span>(npden<span class="sc">$</span>x), <span class="at">ncol =</span> B)</span>
+<span id="cb205-9"><a href="ejemplos-1.html#cb205-9" aria-hidden="true" tabindex="-1"></a>npdeng <span class="ot">&lt;-</span> <span class="fu">density</span>(x, <span class="at">bw =</span> g, <span class="at">from =</span> range_x[<span class="dv">1</span>], <span class="at">to =</span> range_x[<span class="dv">2</span>])</span>
+<span id="cb205-10"><a href="ejemplos-1.html#cb205-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb205-11"><a href="ejemplos-1.html#cb205-11" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (k <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>B) {</span>
+<span id="cb205-12"><a href="ejemplos-1.html#cb205-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># x_boot &lt;- sample(x, n, replace = TRUE) + rnorm(n, 0, g)</span></span>
+<span id="cb205-13"><a href="ejemplos-1.html#cb205-13" aria-hidden="true" tabindex="-1"></a>    x_boot <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="fu">sample</span>(x, n, <span class="at">replace =</span> <span class="cn">TRUE</span>), g)</span>
+<span id="cb205-14"><a href="ejemplos-1.html#cb205-14" aria-hidden="true" tabindex="-1"></a>    den_boot <span class="ot">&lt;-</span> <span class="fu">density</span>(x_boot, <span class="at">bw =</span> h, <span class="at">from =</span> range_x[<span class="dv">1</span>], <span class="at">to =</span> range_x[<span class="dv">2</span>])<span class="sc">$</span>y</span>
+<span id="cb205-15"><a href="ejemplos-1.html#cb205-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Si se quiere tener en cuenta la variabilidad debida a la selección de</span></span>
+<span id="cb205-16"><a href="ejemplos-1.html#cb205-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># la ventana habría que emplear el mismo criterio en la función `density`.</span></span>
+<span id="cb205-17"><a href="ejemplos-1.html#cb205-17" aria-hidden="true" tabindex="-1"></a>    stat_den_boot[, k] <span class="ot">&lt;-</span> den_boot <span class="sc">-</span> npdeng<span class="sc">$</span>y</span>
+<span id="cb205-18"><a href="ejemplos-1.html#cb205-18" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb205-19"><a href="ejemplos-1.html#cb205-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb205-20"><a href="ejemplos-1.html#cb205-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculo del sesgo y error estándar </span></span>
+<span id="cb205-21"><a href="ejemplos-1.html#cb205-21" aria-hidden="true" tabindex="-1"></a>bias <span class="ot">&lt;-</span> <span class="fu">apply</span>(stat_den_boot, <span class="dv">1</span>, mean)</span>
+<span id="cb205-22"><a href="ejemplos-1.html#cb205-22" aria-hidden="true" tabindex="-1"></a>std_err <span class="ot">&lt;-</span> <span class="fu">apply</span>(stat_den_boot, <span class="dv">1</span>, sd)</span>
+<span id="cb205-23"><a href="ejemplos-1.html#cb205-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb205-24"><a href="ejemplos-1.html#cb205-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Representar estimación y corrección de sesgo bootstrap</span></span>
+<span id="cb205-25"><a href="ejemplos-1.html#cb205-25" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(npden, <span class="at">type=</span><span class="st">&quot;l&quot;</span>, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.05</span>), <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb205-26"><a href="ejemplos-1.html#cb205-26" aria-hidden="true" tabindex="-1"></a><span class="co"># lines(npden$x, pmax(npden$y - bias, 0))</span></span>
+<span id="cb205-27"><a href="ejemplos-1.html#cb205-27" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(npden<span class="sc">$</span>x, npden<span class="sc">$</span>y <span class="sc">-</span> bias)</span></code></pre></div>
 <p><img src="06-npden_files/figure-html/unnamed-chunk-3-1.png" width="70%" style="display: block; margin: auto;" /></p>
 </div>
-<div id="npden-r-ic" class="section level3" number="6.6.2">
-<h3><span class="header-section-number">6.6.2</span> Estimación por intervalos de confianza</h3>
+<div id="npden-r-ic" class="section level3 hasAnchor" number="6.6.2">
+<h3><span class="header-section-number">6.6.2</span> Estimación por intervalos de confianza<a href="ejemplos-1.html#npden-r-ic" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Empleando la aproximación descrita en la Sección <a href="icboot-basic.html#icboot-basic">4.2</a>
 podemos cálcular de estimaciones por intervalo de confianza (puntuales)
 por el método percentil (básico).</p>
-<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="ejemplos-1.html#cb203-1" aria-hidden="true" tabindex="-1"></a>alfa <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
-<span id="cb203-2"><a href="ejemplos-1.html#cb203-2" aria-hidden="true" tabindex="-1"></a>pto_crit <span class="ot">&lt;-</span> <span class="fu">apply</span>(stat_den_boot, <span class="dv">1</span>, quantile, <span class="at">probs =</span> <span class="fu">c</span>(alfa<span class="sc">/</span><span class="dv">2</span>, <span class="dv">1</span> <span class="sc">-</span> alfa<span class="sc">/</span><span class="dv">2</span>))</span>
-<span id="cb203-3"><a href="ejemplos-1.html#cb203-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ic_inf_boot &lt;- npden$y - pto_crit[2, ]</span></span>
-<span id="cb203-4"><a href="ejemplos-1.html#cb203-4" aria-hidden="true" tabindex="-1"></a>ic_inf_boot <span class="ot">&lt;-</span> <span class="fu">pmax</span>(npden<span class="sc">$</span>y <span class="sc">-</span> pto_crit[<span class="dv">2</span>, ], <span class="dv">0</span>)</span>
-<span id="cb203-5"><a href="ejemplos-1.html#cb203-5" aria-hidden="true" tabindex="-1"></a>ic_sup_boot <span class="ot">&lt;-</span> npden<span class="sc">$</span>y <span class="sc">-</span> pto_crit[<span class="dv">1</span>, ]</span>
-<span id="cb203-6"><a href="ejemplos-1.html#cb203-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb203-7"><a href="ejemplos-1.html#cb203-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(npden, <span class="at">type=</span><span class="st">&quot;l&quot;</span>, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.05</span>), <span class="at">lwd =</span> <span class="dv">2</span>)</span>
-<span id="cb203-8"><a href="ejemplos-1.html#cb203-8" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(npden<span class="sc">$</span>x, <span class="fu">pmax</span>(npden<span class="sc">$</span>y <span class="sc">-</span> bias, <span class="dv">0</span>)) <span class="co"># Ojo: no es una densidad</span></span>
-<span id="cb203-9"><a href="ejemplos-1.html#cb203-9" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(npden<span class="sc">$</span>x, ic_inf_boot, <span class="at">lty =</span> <span class="dv">2</span>)</span>
-<span id="cb203-10"><a href="ejemplos-1.html#cb203-10" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(npden<span class="sc">$</span>x, ic_sup_boot, <span class="at">lty =</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="ejemplos-1.html#cb206-1" aria-hidden="true" tabindex="-1"></a>alfa <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
+<span id="cb206-2"><a href="ejemplos-1.html#cb206-2" aria-hidden="true" tabindex="-1"></a>pto_crit <span class="ot">&lt;-</span> <span class="fu">apply</span>(stat_den_boot, <span class="dv">1</span>, quantile, <span class="at">probs =</span> <span class="fu">c</span>(alfa<span class="sc">/</span><span class="dv">2</span>, <span class="dv">1</span> <span class="sc">-</span> alfa<span class="sc">/</span><span class="dv">2</span>))</span>
+<span id="cb206-3"><a href="ejemplos-1.html#cb206-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ic_inf_boot &lt;- npden$y - pto_crit[2, ]</span></span>
+<span id="cb206-4"><a href="ejemplos-1.html#cb206-4" aria-hidden="true" tabindex="-1"></a>ic_inf_boot <span class="ot">&lt;-</span> <span class="fu">pmax</span>(npden<span class="sc">$</span>y <span class="sc">-</span> pto_crit[<span class="dv">2</span>, ], <span class="dv">0</span>)</span>
+<span id="cb206-5"><a href="ejemplos-1.html#cb206-5" aria-hidden="true" tabindex="-1"></a>ic_sup_boot <span class="ot">&lt;-</span> npden<span class="sc">$</span>y <span class="sc">-</span> pto_crit[<span class="dv">1</span>, ]</span>
+<span id="cb206-6"><a href="ejemplos-1.html#cb206-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb206-7"><a href="ejemplos-1.html#cb206-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(npden, <span class="at">type=</span><span class="st">&quot;l&quot;</span>, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.05</span>), <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb206-8"><a href="ejemplos-1.html#cb206-8" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(npden<span class="sc">$</span>x, <span class="fu">pmax</span>(npden<span class="sc">$</span>y <span class="sc">-</span> bias, <span class="dv">0</span>)) <span class="co"># Ojo: no es una densidad</span></span>
+<span id="cb206-9"><a href="ejemplos-1.html#cb206-9" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(npden<span class="sc">$</span>x, ic_inf_boot, <span class="at">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb206-10"><a href="ejemplos-1.html#cb206-10" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(npden<span class="sc">$</span>x, ic_sup_boot, <span class="at">lty =</span> <span class="dv">2</span>)</span></code></pre></div>
 <p><img src="06-npden_files/figure-html/unnamed-chunk-4-1.png" width="70%" style="display: block; margin: auto;" /></p>
 </div>
-<div id="npden-r-boot" class="section level3" number="6.6.3">
-<h3><span class="header-section-number">6.6.3</span> Implementación con el paquete <code>boot</code></h3>
+<div id="npden-r-boot" class="section level3 hasAnchor" number="6.6.3">
+<h3><span class="header-section-number">6.6.3</span> Implementación con el paquete <code>boot</code><a href="ejemplos-1.html#npden-r-boot" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Como también se comentó en la Sección <a href="modunif-boot-suav.html#modunif-boot-suav">3.3</a>,
 la recomendación es implementar el bootstrap suavizado como un bootstrap paramétrico:</p>
-<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="ejemplos-1.html#cb204-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(boot)</span>
-<span id="cb204-2"><a href="ejemplos-1.html#cb204-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb204-3"><a href="ejemplos-1.html#cb204-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Los objetos necesarios para el cálculo del estadístico</span></span>
-<span id="cb204-4"><a href="ejemplos-1.html#cb204-4" aria-hidden="true" tabindex="-1"></a><span class="co"># hay que pasarlos a traves del argumento `data` de `boot`.</span></span>
-<span id="cb204-5"><a href="ejemplos-1.html#cb204-5" aria-hidden="true" tabindex="-1"></a><span class="co"># range_x &lt;- range(npden$x)</span></span>
-<span id="cb204-6"><a href="ejemplos-1.html#cb204-6" aria-hidden="true" tabindex="-1"></a>data.precip <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">x =</span> x, <span class="at">h =</span> h, <span class="at">range_x =</span> range_x)</span>
-<span id="cb204-7"><a href="ejemplos-1.html#cb204-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb204-8"><a href="ejemplos-1.html#cb204-8" aria-hidden="true" tabindex="-1"></a>ran.gen.smooth <span class="ot">&lt;-</span> <span class="cf">function</span>(data, mle) {</span>
-<span id="cb204-9"><a href="ejemplos-1.html#cb204-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Función para generar muestras aleatorias mediante</span></span>
-<span id="cb204-10"><a href="ejemplos-1.html#cb204-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># bootstrap suavizado con función núcleo gaussiana,</span></span>
-<span id="cb204-11"><a href="ejemplos-1.html#cb204-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># mle contendrá la ventana</span></span>
-<span id="cb204-12"><a href="ejemplos-1.html#cb204-12" aria-hidden="true" tabindex="-1"></a>    n <span class="ot">&lt;-</span> <span class="fu">length</span>(data<span class="sc">$</span>x)</span>
-<span id="cb204-13"><a href="ejemplos-1.html#cb204-13" aria-hidden="true" tabindex="-1"></a>    g <span class="ot">&lt;-</span> mle</span>
-<span id="cb204-14"><a href="ejemplos-1.html#cb204-14" aria-hidden="true" tabindex="-1"></a>    xboot <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="fu">sample</span>(data<span class="sc">$</span>x, n, <span class="at">replace =</span> <span class="cn">TRUE</span>), g)</span>
-<span id="cb204-15"><a href="ejemplos-1.html#cb204-15" aria-hidden="true" tabindex="-1"></a>    out <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">x =</span> xboot, <span class="at">h =</span> data<span class="sc">$</span>h, <span class="at">range_x =</span> data<span class="sc">$</span>range_x)</span>
-<span id="cb204-16"><a href="ejemplos-1.html#cb204-16" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb204-17"><a href="ejemplos-1.html#cb204-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb204-18"><a href="ejemplos-1.html#cb204-18" aria-hidden="true" tabindex="-1"></a>statistic <span class="ot">&lt;-</span> <span class="cf">function</span>(data) </span>
-<span id="cb204-19"><a href="ejemplos-1.html#cb204-19" aria-hidden="true" tabindex="-1"></a>                <span class="fu">density</span>(data<span class="sc">$</span>x, <span class="at">bw =</span> data<span class="sc">$</span>h, <span class="at">from =</span> range_x[<span class="dv">1</span>], <span class="at">to =</span> range_x[<span class="dv">2</span>])<span class="sc">$</span>y</span>
-<span id="cb204-20"><a href="ejemplos-1.html#cb204-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb204-21"><a href="ejemplos-1.html#cb204-21" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb204-22"><a href="ejemplos-1.html#cb204-22" aria-hidden="true" tabindex="-1"></a>res.boot <span class="ot">&lt;-</span> <span class="fu">boot</span>(data.precip, statistic, <span class="at">R =</span> B, <span class="at">sim =</span> <span class="st">&quot;parametric&quot;</span>,</span>
-<span id="cb204-23"><a href="ejemplos-1.html#cb204-23" aria-hidden="true" tabindex="-1"></a>                 <span class="at">ran.gen =</span> ran.gen.smooth, <span class="at">mle =</span> g)</span>
-<span id="cb204-24"><a href="ejemplos-1.html#cb204-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb204-25"><a href="ejemplos-1.html#cb204-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculo del sesgo y error estándar</span></span>
-<span id="cb204-26"><a href="ejemplos-1.html#cb204-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Empleamos npdeng$y en lugar de resboot$t0</span></span>
-<span id="cb204-27"><a href="ejemplos-1.html#cb204-27" aria-hidden="true" tabindex="-1"></a>bias <span class="ot">&lt;-</span> <span class="fu">apply</span>(res.boot<span class="sc">$</span>t, <span class="dv">2</span>, mean, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">-</span>  npdeng<span class="sc">$</span>y</span>
-<span id="cb204-28"><a href="ejemplos-1.html#cb204-28" aria-hidden="true" tabindex="-1"></a>std_err <span class="ot">&lt;-</span> <span class="fu">apply</span>(res.boot<span class="sc">$</span>t, <span class="dv">2</span>, sd, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="ejemplos-1.html#cb207-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(boot)</span>
+<span id="cb207-2"><a href="ejemplos-1.html#cb207-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb207-3"><a href="ejemplos-1.html#cb207-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Los objetos necesarios para el cálculo del estadístico</span></span>
+<span id="cb207-4"><a href="ejemplos-1.html#cb207-4" aria-hidden="true" tabindex="-1"></a><span class="co"># hay que pasarlos a traves del argumento `data` de `boot`.</span></span>
+<span id="cb207-5"><a href="ejemplos-1.html#cb207-5" aria-hidden="true" tabindex="-1"></a><span class="co"># range_x &lt;- range(npden$x)</span></span>
+<span id="cb207-6"><a href="ejemplos-1.html#cb207-6" aria-hidden="true" tabindex="-1"></a>data.precip <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">x =</span> x, <span class="at">h =</span> h, <span class="at">range_x =</span> range_x)</span>
+<span id="cb207-7"><a href="ejemplos-1.html#cb207-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb207-8"><a href="ejemplos-1.html#cb207-8" aria-hidden="true" tabindex="-1"></a>ran.gen.smooth <span class="ot">&lt;-</span> <span class="cf">function</span>(data, mle) {</span>
+<span id="cb207-9"><a href="ejemplos-1.html#cb207-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Función para generar muestras aleatorias mediante</span></span>
+<span id="cb207-10"><a href="ejemplos-1.html#cb207-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># bootstrap suavizado con función núcleo gaussiana,</span></span>
+<span id="cb207-11"><a href="ejemplos-1.html#cb207-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># mle contendrá la ventana</span></span>
+<span id="cb207-12"><a href="ejemplos-1.html#cb207-12" aria-hidden="true" tabindex="-1"></a>    n <span class="ot">&lt;-</span> <span class="fu">length</span>(data<span class="sc">$</span>x)</span>
+<span id="cb207-13"><a href="ejemplos-1.html#cb207-13" aria-hidden="true" tabindex="-1"></a>    g <span class="ot">&lt;-</span> mle</span>
+<span id="cb207-14"><a href="ejemplos-1.html#cb207-14" aria-hidden="true" tabindex="-1"></a>    xboot <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="fu">sample</span>(data<span class="sc">$</span>x, n, <span class="at">replace =</span> <span class="cn">TRUE</span>), g)</span>
+<span id="cb207-15"><a href="ejemplos-1.html#cb207-15" aria-hidden="true" tabindex="-1"></a>    out <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">x =</span> xboot, <span class="at">h =</span> data<span class="sc">$</span>h, <span class="at">range_x =</span> data<span class="sc">$</span>range_x)</span>
+<span id="cb207-16"><a href="ejemplos-1.html#cb207-16" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb207-17"><a href="ejemplos-1.html#cb207-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb207-18"><a href="ejemplos-1.html#cb207-18" aria-hidden="true" tabindex="-1"></a>statistic <span class="ot">&lt;-</span> <span class="cf">function</span>(data) </span>
+<span id="cb207-19"><a href="ejemplos-1.html#cb207-19" aria-hidden="true" tabindex="-1"></a>                <span class="fu">density</span>(data<span class="sc">$</span>x, <span class="at">bw =</span> data<span class="sc">$</span>h, <span class="at">from =</span> range_x[<span class="dv">1</span>], <span class="at">to =</span> range_x[<span class="dv">2</span>])<span class="sc">$</span>y</span>
+<span id="cb207-20"><a href="ejemplos-1.html#cb207-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb207-21"><a href="ejemplos-1.html#cb207-21" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb207-22"><a href="ejemplos-1.html#cb207-22" aria-hidden="true" tabindex="-1"></a>res.boot <span class="ot">&lt;-</span> <span class="fu">boot</span>(data.precip, statistic, <span class="at">R =</span> B, <span class="at">sim =</span> <span class="st">&quot;parametric&quot;</span>,</span>
+<span id="cb207-23"><a href="ejemplos-1.html#cb207-23" aria-hidden="true" tabindex="-1"></a>                 <span class="at">ran.gen =</span> ran.gen.smooth, <span class="at">mle =</span> g)</span>
+<span id="cb207-24"><a href="ejemplos-1.html#cb207-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb207-25"><a href="ejemplos-1.html#cb207-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculo del sesgo y error estándar</span></span>
+<span id="cb207-26"><a href="ejemplos-1.html#cb207-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Empleamos npdeng$y en lugar de resboot$t0</span></span>
+<span id="cb207-27"><a href="ejemplos-1.html#cb207-27" aria-hidden="true" tabindex="-1"></a>bias <span class="ot">&lt;-</span> <span class="fu">apply</span>(res.boot<span class="sc">$</span>t, <span class="dv">2</span>, mean, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">-</span>  npdeng<span class="sc">$</span>y</span>
+<span id="cb207-28"><a href="ejemplos-1.html#cb207-28" aria-hidden="true" tabindex="-1"></a>std_err <span class="ot">&lt;-</span> <span class="fu">apply</span>(res.boot<span class="sc">$</span>t, <span class="dv">2</span>, sd, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <p>Además, la función <code>boot.ci()</code> solo permite el cálculo del intervalo de
 confianza para cada valor de <span class="math inline">\(x\)</span> de forma independiente (parámetro <code>index</code>).
 Por lo que podría ser recomendable obtenerlo a partir de las réplicas
 bootstrap del estimador:</p>
-<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb205-1"><a href="ejemplos-1.html#cb205-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Método percentil básico calculado directamente </span></span>
-<span id="cb205-2"><a href="ejemplos-1.html#cb205-2" aria-hidden="true" tabindex="-1"></a><span class="co"># a partir de las réplicas bootstrap del estimador</span></span>
-<span id="cb205-3"><a href="ejemplos-1.html#cb205-3" aria-hidden="true" tabindex="-1"></a>alfa <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
-<span id="cb205-4"><a href="ejemplos-1.html#cb205-4" aria-hidden="true" tabindex="-1"></a>pto_crit <span class="ot">&lt;-</span> <span class="fu">apply</span>(res.boot<span class="sc">$</span>t, <span class="dv">2</span>, quantile, <span class="at">probs =</span> <span class="fu">c</span>(alfa<span class="sc">/</span><span class="dv">2</span>, <span class="dv">1</span> <span class="sc">-</span> alfa<span class="sc">/</span><span class="dv">2</span>))</span>
-<span id="cb205-5"><a href="ejemplos-1.html#cb205-5" aria-hidden="true" tabindex="-1"></a>ic_inf_boot <span class="ot">&lt;-</span> <span class="fu">pmax</span>(npden<span class="sc">$</span>y <span class="sc">+</span> npdeng<span class="sc">$</span>y <span class="sc">-</span> pto_crit[<span class="dv">2</span>, ], <span class="dv">0</span>)</span>
-<span id="cb205-6"><a href="ejemplos-1.html#cb205-6" aria-hidden="true" tabindex="-1"></a>ic_sup_boot <span class="ot">&lt;-</span> npden<span class="sc">$</span>y <span class="sc">+</span> npdeng<span class="sc">$</span>y <span class="sc">-</span> pto_crit[<span class="dv">1</span>, ]</span>
-<span id="cb205-7"><a href="ejemplos-1.html#cb205-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb205-8"><a href="ejemplos-1.html#cb205-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(npden, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.05</span>), <span class="at">lwd =</span> <span class="dv">2</span>)</span>
-<span id="cb205-9"><a href="ejemplos-1.html#cb205-9" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(npden<span class="sc">$</span>x, <span class="fu">pmax</span>(npden<span class="sc">$</span>y <span class="sc">-</span> bias, <span class="dv">0</span>))</span>
-<span id="cb205-10"><a href="ejemplos-1.html#cb205-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb205-11"><a href="ejemplos-1.html#cb205-11" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(npden<span class="sc">$</span>x, ic_inf_boot, <span class="at">lty =</span> <span class="dv">2</span>)</span>
-<span id="cb205-12"><a href="ejemplos-1.html#cb205-12" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(npden<span class="sc">$</span>x, ic_sup_boot, <span class="at">lty =</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="ejemplos-1.html#cb208-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Método percentil básico calculado directamente </span></span>
+<span id="cb208-2"><a href="ejemplos-1.html#cb208-2" aria-hidden="true" tabindex="-1"></a><span class="co"># a partir de las réplicas bootstrap del estimador</span></span>
+<span id="cb208-3"><a href="ejemplos-1.html#cb208-3" aria-hidden="true" tabindex="-1"></a>alfa <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
+<span id="cb208-4"><a href="ejemplos-1.html#cb208-4" aria-hidden="true" tabindex="-1"></a>pto_crit <span class="ot">&lt;-</span> <span class="fu">apply</span>(res.boot<span class="sc">$</span>t, <span class="dv">2</span>, quantile, <span class="at">probs =</span> <span class="fu">c</span>(alfa<span class="sc">/</span><span class="dv">2</span>, <span class="dv">1</span> <span class="sc">-</span> alfa<span class="sc">/</span><span class="dv">2</span>))</span>
+<span id="cb208-5"><a href="ejemplos-1.html#cb208-5" aria-hidden="true" tabindex="-1"></a>ic_inf_boot <span class="ot">&lt;-</span> <span class="fu">pmax</span>(npden<span class="sc">$</span>y <span class="sc">+</span> npdeng<span class="sc">$</span>y <span class="sc">-</span> pto_crit[<span class="dv">2</span>, ], <span class="dv">0</span>)</span>
+<span id="cb208-6"><a href="ejemplos-1.html#cb208-6" aria-hidden="true" tabindex="-1"></a>ic_sup_boot <span class="ot">&lt;-</span> npden<span class="sc">$</span>y <span class="sc">+</span> npdeng<span class="sc">$</span>y <span class="sc">-</span> pto_crit[<span class="dv">1</span>, ]</span>
+<span id="cb208-7"><a href="ejemplos-1.html#cb208-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb208-8"><a href="ejemplos-1.html#cb208-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(npden, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.05</span>), <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb208-9"><a href="ejemplos-1.html#cb208-9" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(npden<span class="sc">$</span>x, <span class="fu">pmax</span>(npden<span class="sc">$</span>y <span class="sc">-</span> bias, <span class="dv">0</span>))</span>
+<span id="cb208-10"><a href="ejemplos-1.html#cb208-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb208-11"><a href="ejemplos-1.html#cb208-11" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(npden<span class="sc">$</span>x, ic_inf_boot, <span class="at">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb208-12"><a href="ejemplos-1.html#cb208-12" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(npden<span class="sc">$</span>x, ic_sup_boot, <span class="at">lty =</span> <span class="dv">2</span>)</span></code></pre></div>
 <p><img src="06-npden_files/figure-html/unnamed-chunk-6-1.png" width="70%" style="display: block; margin: auto;" /></p>
 <p>En la práctica, en muchas ocasiones se trabaja directamente con
 las réplicas bootstrap del estimador. Por ejemplo, es habitual
 generar envolventes como medida de la precisión de la estimación
 (que se interpretan de forma similar a una banda de confianza):</p>
-<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="ejemplos-1.html#cb206-1" aria-hidden="true" tabindex="-1"></a><span class="fu">matplot</span>(npden<span class="sc">$</span>x, <span class="fu">t</span>(res.boot<span class="sc">$</span>t), <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">col =</span> <span class="st">&quot;darkgray&quot;</span>)</span>
-<span id="cb206-2"><a href="ejemplos-1.html#cb206-2" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(npden, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
-<span id="cb206-3"><a href="ejemplos-1.html#cb206-3" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(npden<span class="sc">$</span>x, npden<span class="sc">$</span>y <span class="sc">-</span> bias)</span></code></pre></div>
+<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="ejemplos-1.html#cb209-1" aria-hidden="true" tabindex="-1"></a><span class="fu">matplot</span>(npden<span class="sc">$</span>x, <span class="fu">t</span>(res.boot<span class="sc">$</span>t), <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">col =</span> <span class="st">&quot;darkgray&quot;</span>)</span>
+<span id="cb209-2"><a href="ejemplos-1.html#cb209-2" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(npden, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb209-3"><a href="ejemplos-1.html#cb209-3" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(npden<span class="sc">$</span>x, npden<span class="sc">$</span>y <span class="sc">-</span> bias)</span></code></pre></div>
 <p><img src="06-npden_files/figure-html/unnamed-chunk-7-1.png" width="70%" style="display: block; margin: auto;" /></p>
 <p>Pero la recomendación es emplear bootstrap básico (o percentil-<em>t</em>) en lugar
 de bootstrap percentil (directo) en la presencia de sesgo:</p>
-<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="ejemplos-1.html#cb207-1" aria-hidden="true" tabindex="-1"></a><span class="co"># matplot(npden$x, npden$y + npdeng$y - t(res.boot$t), type = &quot;l&quot;, col = &quot;darkgray&quot;)</span></span>
-<span id="cb207-2"><a href="ejemplos-1.html#cb207-2" aria-hidden="true" tabindex="-1"></a><span class="fu">matplot</span>(npden<span class="sc">$</span>x, <span class="fu">pmax</span>(npden<span class="sc">$</span>y <span class="sc">+</span> npdeng<span class="sc">$</span>y <span class="sc">-</span> <span class="fu">t</span>(res.boot<span class="sc">$</span>t), <span class="dv">0</span>), <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">col =</span> <span class="st">&quot;darkgray&quot;</span>)</span>
-<span id="cb207-3"><a href="ejemplos-1.html#cb207-3" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(npden, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
-<span id="cb207-4"><a href="ejemplos-1.html#cb207-4" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(npden<span class="sc">$</span>x, npden<span class="sc">$</span>y <span class="sc">-</span> bias)</span></code></pre></div>
+<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb210-1"><a href="ejemplos-1.html#cb210-1" aria-hidden="true" tabindex="-1"></a><span class="co"># matplot(npden$x, npden$y + npdeng$y - t(res.boot$t), type = &quot;l&quot;, col = &quot;darkgray&quot;)</span></span>
+<span id="cb210-2"><a href="ejemplos-1.html#cb210-2" aria-hidden="true" tabindex="-1"></a><span class="fu">matplot</span>(npden<span class="sc">$</span>x, <span class="fu">pmax</span>(npden<span class="sc">$</span>y <span class="sc">+</span> npdeng<span class="sc">$</span>y <span class="sc">-</span> <span class="fu">t</span>(res.boot<span class="sc">$</span>t), <span class="dv">0</span>), <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">col =</span> <span class="st">&quot;darkgray&quot;</span>)</span>
+<span id="cb210-3"><a href="ejemplos-1.html#cb210-3" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(npden, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb210-4"><a href="ejemplos-1.html#cb210-4" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(npden<span class="sc">$</span>x, npden<span class="sc">$</span>y <span class="sc">-</span> bias)</span></code></pre></div>
 <p><img src="06-npden_files/figure-html/unnamed-chunk-8-1.png" width="70%" style="display: block; margin: auto;" /></p>
 
 </div>
@@ -521,42 +523,42 @@ de bootstrap percentil (directo) en la presencia de sesgo:</p>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
-"sharing": {
-"github": true,
-"facebook": false,
-"twitter": false,
-"linkedin": false,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"whatsapp": false,
-"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
-},
-"fontsettings": {
-"theme": "white",
-"family": "sans",
-"size": 2
-},
-"edit": {
-"link": "https://github.com/rubenfcasal/book_remuestreo/edit/master/06-npden.Rmd",
-"text": "Edit"
-},
-"history": {
-"link": null,
-"text": null
-},
-"view": {
-"link": null,
-"text": null
-},
-"download": ["book_remuestreo.pdf"],
-"search": {
-"engine": "fuse",
-"options": null
-},
-"toc": {
-"collapse": "subsection"
-}
+  "sharing": {
+    "github": true,
+    "facebook": false,
+    "twitter": false,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": "https://github.com/rubenfcasal/book_remuestreo/edit/master/06-npden.Rmd",
+    "text": "Edit"
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": ["book_remuestreo.pdf"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  }
 });
 });
 </script>
@@ -567,7 +569,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

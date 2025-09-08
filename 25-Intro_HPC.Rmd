@@ -203,7 +203,7 @@ getSimulation <- function(isim, B = 2000, n = 30, alfa = 0.1, mu = 100) {
     resultados
 }
 
-parallel::clusterSetRNGStream(cl)
+parallel::clusterSetRNGStream(cl, 1)
 result <- parLapply(cl, 1:nsim, getSimulation)
 # stopCluster(cl)
 

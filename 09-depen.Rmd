@@ -783,12 +783,10 @@ tsboot(lynx.res, lynx.fun, R = 199, l = 20,
 
 ## Ejercicios
 
-```{exercise, label="tsboot-lynx", name="Practical 8.1, Lynx data: Davison y Hinkley, 1997"}
+::: {.exercise #tsboot-lynx name="Practical 8.1, Lynx data: Davison y Hinkley, 1997"}
 
 Reproducir el "Practical 8.1 (Lynx data)" en Davison, A. C., y Hinkley, D. V. (1997). Bootstrap methods and their application. Cambridge university press, <http://statwww.epfl.ch/davison/BMA>
 ([caché](http://webcache.googleusercontent.com/search?q=cache:a4nFL5ymMMoJ:statwww.epfl.ch/davison/BMA/+&cd=1&hl=gl&ct=clnk&gl=es)):
-
-```
 
 
 > "Dataframe lynx contains the Canadian lynx data, 
@@ -853,13 +851,12 @@ lynx.2 <- tsboot(log(lynx), lynx.fun, ...
 > Compare these results with those above, and try the post-blackened bootstrap with `sim="geom"`.
 > (Sections 8.2.2, 8.2.3)''.
 
+:::
 
-```{exercise, label="tsboot-beaver", name="Practical 8.2, Beaver data: Davison y Hinkley, 1997"}
+::: {.exercise #tsboot-beaver name="Practical 8.2, Beaver data: Davison y Hinkley, 1997"}
 
 Reproducir el "Practical 8.2  (Beaver data)" en Davison, A. C., y Hinkley, D. V. (1997). Bootstrap methods and their application. Cambridge university press, <http://statwww.epfl.ch/davison/BMA>
 ([caché](http://webcache.googleusercontent.com/search?q=cache:a4nFL5ymMMoJ:statwww.epfl.ch/davison/BMA/+&cd=1&hl=gl&ct=clnk&gl=es)):
-
-```
 
 > "The data in beaver consist of a time series of $n = 100$
 > observations on the body temperature $y_1, \ldots, y_n$ 
@@ -940,13 +937,13 @@ data <- beaver
 > How would you proceed if it were not?
 > (Section 8.2; Reynolds, 1994)''.
 
+:::
 
-```{exercise, label="tsboot-sunspot", name="Practical 8.3, Sunspot data: Davison y Hinkley, 1997"}
+
+::: {.exercise #tsboot-sunspot name="Practical 8.3, Sunspot data: Davison y Hinkley, 1997"}
 
 Reproducir el "Practical 8.3  (Sunspot data)" en Davison, A. C., y Hinkley, D. V. (1997). Bootstrap methods and their application. Cambridge university press, <http://statwww.epfl.ch/davison/BMA>
 ([caché](http://webcache.googleusercontent.com/search?q=cache:a4nFL5ymMMoJ:statwww.epfl.ch/davison/BMA/+&cd=1&hl=gl&ct=clnk&gl=es)):
-
-```
 
 > "Consider scrambling the phases of the sunspot data. 
 > To see the original data, 
@@ -977,6 +974,7 @@ sunspot.2 <- tsboot(sunspot.year, ...
 > different shapes for the figures.)
 > (Section 8.2.4; Problem 8.4; Theiler et al, 1992)''.
 
+:::
 
 ## Implementación en `R` con el paquete `forecast`
 

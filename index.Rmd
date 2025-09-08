@@ -5,7 +5,7 @@ institute:
    - "Departamento de Matemáticas"
    - "Grupo de investigación de Modelización, Optimización e Inferencia Estadística (MODES)"
    - "Centro de Investigación en Tecnologías de la Información y las Comunicaciones (CITIC)"
-date: "`r Sys.Date()`"
+date: "Edición: Septiembre de 2022. Impresión: `r Sys.Date()`"
 site: bookdown::bookdown_site
 output: bookdown::gitbook
 documentclass: book
@@ -62,4 +62,6 @@ knitr::include_graphics("by-nc-nd-88x31.png")
 knitr::write_bib(c(.packages(), 
       "bookdown", "knitr", "rmarkdown", "boot", "bootstrap", "survival", "forecast"
       ), "packages.bib")
+# Create .nojekyll file in the /docs folder
+file.create('docs/.nojekyll')
 ```

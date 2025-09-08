@@ -149,15 +149,14 @@ que es precisamente el estimador
 plug-in de la varianza de la media muestral.
 
 
-\BeginKnitrBlock{example}\iffalse{-91-65-112-114-111-120-105-109-97-99-105-243-110-32-98-111-111-116-115-116-114-97-112-32-100-101-32-108-97-32-112-114-101-99-105-115-105-243-110-32-100-101-32-101-115-116-105-109-97-99-105-111-110-101-115-32-100-101-108-32-116-105-101-109-112-111-32-100-101-32-118-105-100-97-32-109-101-100-105-111-32-100-101-32-109-105-99-114-111-111-114-103-97-110-105-115-109-111-115-93-}\fi{}
-<span class="example" id="exm:estimacion-boot-precision"><strong>(\#exm:estimacion-boot-precision)  \iffalse (Aproximación bootstrap de la precisión de estimaciones del tiempo de vida medio de microorganismos) \fi{} </strong></span><br> \vspace{0.5cm}
+::: {.example #estimacion-boot-precision name="Aproximación bootstrap de la precisión de estimaciones del tiempo de vida medio de microorganismos"}
+<br> \vspace{0.5cm}
 
 Continuando con el ejemplo de los tiempos de vida de microorganismos,
 supongamos que queremos estimar
 la precisión de dos estimadores de su vida media: media muestral y
 mediana muestral, a partir de los datos observados: 0.143, 0.182, 0.256, 0.260, 0.270,
 0.437, 0.509, 0.611, 0.712, 1.04, 1.09, 1.15, 1.46, 1.88, 2.08.
-\EndKnitrBlock{example}
 
 La estimación media muestral resulta $\bar{X}=0.8053333$. Por su
 parte la estimación mediana muestral es $x_{\left( 8 \right)}=0.611$.
@@ -239,7 +238,7 @@ Una aproximación de Monte Carlo de estas varianzas bootstrap se puede
 llevar a cabo mediante el siguiente código:
 
 
-```r
+``` r
 # Para la muestra de TIEMPOS DE VIDA, estima (plug-in) la precisión 
 # de la media muestral (desvmedia) y también aproxima por Monte Carlo
 # la estimación bootstrap de dicha precisión (desvmediaboot) y
@@ -259,6 +258,7 @@ desvmedia <- sqrt(varmedia)
 B <- 1e+04
 media <- numeric(B)
 mediana <- numeric(B)
+set.seed(1)
 for (k in 1:B) {
     remuestra <- sample(muestra, n, replace = TRUE)
     media[k] <- mean(remuestra)
@@ -279,23 +279,23 @@ desvmedia
 ## [1] 0.1555792
 ```
 
-```r
+``` r
 desvmediaboot
 ```
 
 ```
-## [1] 0.1577093
+## [1] 0.1548697
 ```
 
-```r
+``` r
 desvmedianaboot
 ```
 
 ```
-## [1] 0.2524409
+## [1] 0.2498461
 ```
 
-```r
+``` r
 # Aproximaciones sesgo
 sesgomediaboot <- mean(media) - mean(muestra)
 sesgomedianaboot <- mean(mediana) - muestra[8]
@@ -303,21 +303,21 @@ sesgomediaboot
 ```
 
 ```
-## [1] -9.529333e-05
+## [1] 7.115333e-05
 ```
 
-```r
+``` r
 sesgomedianaboot
 ```
 
 ```
-## [1] 0.0467194
+## [1] 0.0439615
 ```
 
 Empleando el paquete `boot` el código sería más simple:
 
 
-```r
+``` r
 library(boot)
 statistic <- function(data, i){
   remuestra <- data[i]
@@ -349,7 +349,7 @@ bootstrap del sesgo y de la precisión pero no las almacena.
 En el caso más simple podríamos obtenerlas con el siguiente código:
 
 
-```r
+``` r
 op <- with(res.boot, cbind(
   t0, apply(t, 2, mean, na.rm = TRUE) -  t0,
   apply(t, 2, sd, na.rm = TRUE)
@@ -365,6 +365,7 @@ op
 ## t2* 0.6110000 4.529410e-02   0.2511022
 ```
 
+:::
 
 Como comentario adicional, si se emplea $\hat F$ como aproximación de la distribución poblacional, lo habitual es que $\hat\theta = T\left( \mathbf{X} \right) = \theta ( \hat{F} )$ sea el estimador de $\theta(F)$ (por ejemplo $\hat\theta = \theta(F_n)$ en el caso del bootstrap uniforme). 
 De esta forma, en el universo bootstrap el parámetro teórico se sustituye por el estimador y, por ejemplo, $R = \hat \theta - \theta$ se traduce en $R^{\ast} = \hat{\theta}^{\ast}- \hat \theta$. 
@@ -662,22 +663,23 @@ jackknife de cualquier estimador cuadrático y la varianza bootstrap y la
 varianza jackknife de cualquier estimador lineal.
 
 
-\BeginKnitrBlock{theorem}
-<span class="theorem" id="thm:jack-boot-sesgo"><strong>(\#thm:jack-boot-sesgo) </strong></span><br> \vspace{0.5cm}
+::: {.theorem #jack-boot-sesgo}
+<br> \vspace{0.5cm}
 
 Si $\hat{\theta}$ es un estimador cuadrático, entonces
 $$Sesgo_{jackk}\left( \hat{\theta} \right) =\frac{n}{n-1}Sesgo_{boot}\left( 
 \hat{\theta} \right)$$
 
-\EndKnitrBlock{theorem}
+:::
 
-\BeginKnitrBlock{theorem}
-<span class="theorem" id="thm:jack-boot-precision"><strong>(\#thm:jack-boot-precision) </strong></span><br> \vspace{0.5cm}
+::: {.theorem #jack-boot-precision}
+<br> \vspace{0.5cm}
 
 Si $\hat{\theta}$ es un estimador lineal, entonces
 $$Var_{jackk}\left( \hat{\theta} \right) =\frac{n}{n-1}Var_{boot}\left( \hat{
 \theta} \right)$$
-\EndKnitrBlock{theorem}
+
+:::
 
 
 Dicho en otras palabras, para cualquier estimador cuadrático, el sesgo
@@ -686,17 +688,16 @@ varianza jackknife es mayor que la varianza bootstrap. En ambos casos,
 el factor multiplicador es $n/(n-1)$.
 
 
-\BeginKnitrBlock{example}\iffalse{-91-65-112-114-111-120-105-109-97-99-105-243-110-32-106-97-99-107-107-110-105-102-101-32-100-101-32-108-97-32-112-114-101-99-105-115-105-243-110-32-100-101-32-101-115-116-105-109-97-99-105-111-110-101-115-32-100-101-108-32-116-105-101-109-112-111-32-100-101-32-118-105-100-97-32-109-101-100-105-111-32-100-101-32-109-105-99-114-111-111-114-103-97-110-105-115-109-111-115-93-}\fi{}
-<span class="example" id="exm:estimacion-jack-precision"><strong>(\#exm:estimacion-jack-precision)  \iffalse (Aproximación jackknife de la precisión de estimaciones del tiempo de vida medio de microorganismos) \fi{} </strong></span><br> \vspace{0.5cm}
+::: {.example #estimacion-jack-precision name="Aproximación jackknife de la precisión de estimaciones del tiempo de vida medio de microorganismos"}
+<br> \vspace{0.5cm}
 
 Consideremos la muestra de tiempos de vida de microorganismos ya
 tratada. El siguiente código permite calcular los
 estimadores jackknife del sesgo y de la precisión tanto de la media como
 de la mediana muestral.
-\EndKnitrBlock{example}
 
 
-```r
+``` r
 # Para la muestra de TIEMPOS DE VIDA, estima (plug-in) la precisión 
 # de la media muestral (desvmedia) y también estima mediante el jackknife 
 # dicha precisión (desvmediajackk) y también la precisión de la mediana 
@@ -733,7 +734,7 @@ desvmedia
 ## [1] 0.1555792
 ```
 
-```r
+``` r
 desvmediajackk
 ```
 
@@ -741,7 +742,7 @@ desvmediajackk
 ## [1] 0.1610397
 ```
 
-```r
+``` r
 desvmedianajackk
 ```
 
@@ -749,7 +750,7 @@ desvmedianajackk
 ## [1] 0.1834505
 ```
 
-```r
+``` r
 # Aproximaciones sesgo
 sesgomediajackk <- (n - 1) * (mean(media) - mean(muestra))
 # sesgomedianajackk <- (n - 1) * (mean(mediana) - muestra[8])
@@ -761,7 +762,7 @@ sesgomediajackk
 ## [1] 0
 ```
 
-```r
+``` r
 sesgomedianajackk
 ```
 
@@ -772,7 +773,7 @@ sesgomedianajackk
 También podríamos emplear la la función `jackknife` del paquete `bootstrap`:
 
 
-```r
+``` r
 library(bootstrap)
 resmedia <- jackknife(muestra, mean)
 resmedia
@@ -794,7 +795,7 @@ resmedia
 ## jackknife(x = muestra, theta = mean)
 ```
 
-```r
+``` r
 resmediana <- jackknife(muestra, median)
 resmediana
 ```
@@ -819,6 +820,7 @@ En general las aproximaciones jackknife son adecuadas para el caso de estadísti
 "suaves", como la media, pero pueden ser inconsistentes cuando no lo son,
 como es el caso de la mediana.
 
+:::
 
 <!-- 
 | Estimación | $\bar{X}=0.804$   |    $x_{\left( 8 \right)}=0.611$    | 

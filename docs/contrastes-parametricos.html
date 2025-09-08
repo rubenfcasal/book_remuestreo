@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>5.2 Contrastes bootstrap paramétricos | Técnicas de Remuestreo</title>
   <meta name="description" content="Apuntes de la asignatura de Técnicas de Remuestreo del Máster en Técnicas Estadísticas." />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.36 and GitBook 2.6.7" />
 
   <meta property="og:title" content="5.2 Contrastes bootstrap paramétricos | Técnicas de Remuestreo" />
   <meta property="og:type" content="book" />
-  
   
   <meta property="og:description" content="Apuntes de la asignatura de Técnicas de Remuestreo del Máster en Técnicas Estadísticas." />
   <meta name="github-repo" content="rubenfcasal/book_remuestreo" />
@@ -24,7 +23,6 @@
 <meta name="author" content="Ricardo Cao Abad (rcao@udc.es) y Rubén Fernández Casal (rfcasal@udc.es)" />
 
 
-<meta name="date" content="2022-09-05" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +31,6 @@
   
 <link rel="prev" href="aproximación-del-p-valor-mediante-remuestreo.html"/>
 <link rel="next" href="contrastes-de-permutaciones.html"/>
-<script src="libs/header-attrs-2.9/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -51,8 +48,9 @@
 
 
 
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -93,7 +91,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -106,7 +104,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -120,6 +118,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -378,8 +380,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="contrastes-parametricos" class="section level2" number="5.2">
-<h2><span class="header-section-number">5.2</span> Contrastes bootstrap paramétricos</h2>
+<div id="contrastes-parametricos" class="section level2 hasAnchor" number="5.2">
+<h2><span class="header-section-number">5.2</span> Contrastes bootstrap paramétricos<a href="contrastes-parametricos.html#contrastes-parametricos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>En los casos en los que la hipótesis nula especifica por completo la distribución
 (hipótesis nula simple) o solo desconocemos los valores de algunos parámetros
 (hipótesis nula paramétrica compuesta) podemos emplear
@@ -388,17 +390,17 @@ bootstrap paramétrico para obtener las remuestras bootstrap de los datos
 Siempre hay que tener en cuenta que las réplicas bootstrap del estadístico se
 deberían obtener empleando el mismo procedimiento utilizado en la muestra
 (p.e. reestimando los parámetros si es el caso).</p>
-<div id="ejemplo-contraste-de-kolmogorov-smirnov" class="section level3" number="5.2.1">
-<h3><span class="header-section-number">5.2.1</span> Ejemplo: contraste de Kolmogorov-Smirnov</h3>
+<div id="ejemplo-contraste-de-kolmogorov-smirnov" class="section level3 hasAnchor" number="5.2.1">
+<h3><span class="header-section-number">5.2.1</span> Ejemplo: contraste de Kolmogorov-Smirnov<a href="contrastes-parametricos.html#ejemplo-contraste-de-kolmogorov-smirnov" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Se trata de un contraste de bondad de ajuste (similar a la prueba de
 Cramer-von Mises o a la de Anderson-Darling, implementadas en el paquete
 <code>goftest</code> de R, que son en principio mejores).
 A partir de <span class="math inline">\(X_1,\ldots ,X_n\)</span> m.a.s. de <span class="math inline">\(X\)</span> con función de distribución <span class="math inline">\(F\)</span>,
 se pretende contrastar:
-<span class="math display">\[\left \{ 
+<span class="math display">\[\left \{
 \begin{array}{l}
-H_0 : F = F_0 \\ 
-H_1 : F \neq F_0 
+H_0 : F = F_0 \\
+H_1 : F \neq F_0
 \end{array}
 \right. \]</span>
 siendo <span class="math inline">\(F_0\)</span> una función de distribución continua.
@@ -418,7 +420,7 @@ la aproximación asintótica) y se rechaza <span class="math inline">\(H_0\)</sp
 del estadístico es significativamente grande:
 <span class="math display">\[p = P \left( D_n \geq d \right) \leq \alpha.\]</span>
 Este método está implementado en la función <code>ks.test()</code> del paquete base de R:</p>
-<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="contrastes-parametricos.html#cb150-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ks.test</span>(x, y, ...)</span></code></pre></div>
+<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="contrastes-parametricos.html#cb153-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ks.test</span>(x, y, ...)</span></code></pre></div>
 <p>donde <code>x</code> es un vector que contiene los datos, <code>y</code> es una función de distribución
 (o una cadena de texto que la especifica; también puede ser otro vector de datos
 para el contraste de dos muestras) y <code>...</code> representa los parámetros de la distribución.</p>
@@ -434,45 +436,45 @@ de Lilliefors, implementado en la función <code>lillie.test()</code> del paquet
 Anderson-Darling). Como ejemplo analizaremos el comportamiento de ambos métodos
 para contrastar normalidad considerando 1000 pruebas con muestras de tamaño 30 de
 una <span class="math inline">\(\mathcal{N}(0,1)\)</span> (estudiaremos el <em>tamaño de los contrastes</em>).</p>
-<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="contrastes-parametricos.html#cb151-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Valores iniciales</span></span>
-<span id="cb151-2"><a href="contrastes-parametricos.html#cb151-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(nortest)</span>
-<span id="cb151-3"><a href="contrastes-parametricos.html#cb151-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb151-4"><a href="contrastes-parametricos.html#cb151-4" aria-hidden="true" tabindex="-1"></a>nx <span class="ot">&lt;-</span> <span class="dv">30</span></span>
-<span id="cb151-5"><a href="contrastes-parametricos.html#cb151-5" aria-hidden="true" tabindex="-1"></a>mx <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb151-6"><a href="contrastes-parametricos.html#cb151-6" aria-hidden="true" tabindex="-1"></a>sx <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb151-7"><a href="contrastes-parametricos.html#cb151-7" aria-hidden="true" tabindex="-1"></a>nsim <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
-<span id="cb151-8"><a href="contrastes-parametricos.html#cb151-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Realizar contrastes</span></span>
-<span id="cb151-9"><a href="contrastes-parametricos.html#cb151-9" aria-hidden="true" tabindex="-1"></a>pvalor.ks <span class="ot">&lt;-</span> <span class="fu">numeric</span>(nsim)</span>
-<span id="cb151-10"><a href="contrastes-parametricos.html#cb151-10" aria-hidden="true" tabindex="-1"></a>pvalor.lil <span class="ot">&lt;-</span> <span class="fu">numeric</span>(nsim)</span>
-<span id="cb151-11"><a href="contrastes-parametricos.html#cb151-11" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(isim <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nsim) {</span>
-<span id="cb151-12"><a href="contrastes-parametricos.html#cb151-12" aria-hidden="true" tabindex="-1"></a>  rx <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(nx, mx, sx)</span>
-<span id="cb151-13"><a href="contrastes-parametricos.html#cb151-13" aria-hidden="true" tabindex="-1"></a>  pvalor.ks[isim] <span class="ot">&lt;-</span> <span class="fu">ks.test</span>(rx, <span class="st">&quot;pnorm&quot;</span>, <span class="fu">mean</span>(rx), <span class="fu">sd</span>(rx))<span class="sc">$</span>p.value</span>
-<span id="cb151-14"><a href="contrastes-parametricos.html#cb151-14" aria-hidden="true" tabindex="-1"></a>  pvalor.lil[isim] <span class="ot">&lt;-</span> <span class="fu">lillie.test</span>(rx)<span class="sc">$</span>p.value</span>
-<span id="cb151-15"><a href="contrastes-parametricos.html#cb151-15" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="contrastes-parametricos.html#cb154-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Valores iniciales</span></span>
+<span id="cb154-2"><a href="contrastes-parametricos.html#cb154-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(nortest)</span>
+<span id="cb154-3"><a href="contrastes-parametricos.html#cb154-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb154-4"><a href="contrastes-parametricos.html#cb154-4" aria-hidden="true" tabindex="-1"></a>nx <span class="ot">&lt;-</span> <span class="dv">30</span></span>
+<span id="cb154-5"><a href="contrastes-parametricos.html#cb154-5" aria-hidden="true" tabindex="-1"></a>mx <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb154-6"><a href="contrastes-parametricos.html#cb154-6" aria-hidden="true" tabindex="-1"></a>sx <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb154-7"><a href="contrastes-parametricos.html#cb154-7" aria-hidden="true" tabindex="-1"></a>nsim <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
+<span id="cb154-8"><a href="contrastes-parametricos.html#cb154-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Realizar contrastes</span></span>
+<span id="cb154-9"><a href="contrastes-parametricos.html#cb154-9" aria-hidden="true" tabindex="-1"></a>pvalor.ks <span class="ot">&lt;-</span> <span class="fu">numeric</span>(nsim)</span>
+<span id="cb154-10"><a href="contrastes-parametricos.html#cb154-10" aria-hidden="true" tabindex="-1"></a>pvalor.lil <span class="ot">&lt;-</span> <span class="fu">numeric</span>(nsim)</span>
+<span id="cb154-11"><a href="contrastes-parametricos.html#cb154-11" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(isim <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nsim) {</span>
+<span id="cb154-12"><a href="contrastes-parametricos.html#cb154-12" aria-hidden="true" tabindex="-1"></a>  rx <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(nx, mx, sx)</span>
+<span id="cb154-13"><a href="contrastes-parametricos.html#cb154-13" aria-hidden="true" tabindex="-1"></a>  pvalor.ks[isim] <span class="ot">&lt;-</span> <span class="fu">ks.test</span>(rx, <span class="st">&quot;pnorm&quot;</span>, <span class="fu">mean</span>(rx), <span class="fu">sd</span>(rx))<span class="sc">$</span>p.value</span>
+<span id="cb154-14"><a href="contrastes-parametricos.html#cb154-14" aria-hidden="true" tabindex="-1"></a>  pvalor.lil[isim] <span class="ot">&lt;-</span> <span class="fu">lillie.test</span>(rx)<span class="sc">$</span>p.value</span>
+<span id="cb154-15"><a href="contrastes-parametricos.html#cb154-15" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <p>Bajo la hipótesis nula el <span class="math inline">\(p\)</span>-valor debería de seguir una distribución uniforme,
 por lo que podríamos generar el correspondiente histograma para estudiar el
 tamaño del contraste. Alternativamente podríamos representar su función de
 distribución empírica, que se correspondería con la proporción de rechazos
 para los distintos niveles de significación.</p>
-<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="contrastes-parametricos.html#cb152-1" aria-hidden="true" tabindex="-1"></a>old.par <span class="ot">&lt;-</span> <span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
-<span id="cb152-2"><a href="contrastes-parametricos.html#cb152-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Histograma</span></span>
-<span id="cb152-3"><a href="contrastes-parametricos.html#cb152-3" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(pvalor.ks, <span class="at">freq=</span><span class="cn">FALSE</span>, <span class="at">main =</span> <span class="st">&quot;p-valor del test de KS&quot;</span>)</span>
-<span id="cb152-4"><a href="contrastes-parametricos.html#cb152-4" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h=</span><span class="dv">1</span>, <span class="at">lty=</span><span class="dv">2</span>)   <span class="co"># curve(dunif(x,0,1), add=TRUE)</span></span>
-<span id="cb152-5"><a href="contrastes-parametricos.html#cb152-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Distribución empírica</span></span>
-<span id="cb152-6"><a href="contrastes-parametricos.html#cb152-6" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(<span class="fu">ecdf</span>(pvalor.ks)(x), <span class="at">type =</span> <span class="st">&quot;s&quot;</span>, <span class="at">lwd =</span> <span class="dv">2</span>, </span>
-<span id="cb152-7"><a href="contrastes-parametricos.html#cb152-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">main =</span> <span class="st">&#39;Tamaño del contraste KS&#39;</span>, <span class="at">ylab =</span> <span class="st">&#39;Proporción de rechazos&#39;</span>, </span>
-<span id="cb152-8"><a href="contrastes-parametricos.html#cb152-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">xlab =</span> <span class="st">&#39;Nivel de significación&#39;</span>)</span>
-<span id="cb152-9"><a href="contrastes-parametricos.html#cb152-9" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">a=</span><span class="dv">0</span>, <span class="at">b=</span><span class="dv">1</span>, <span class="at">lty=</span><span class="dv">2</span>)   <span class="co"># curve(punif(x, 0, 1), add = TRUE)</span></span>
-<span id="cb152-10"><a href="contrastes-parametricos.html#cb152-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Histograma</span></span>
-<span id="cb152-11"><a href="contrastes-parametricos.html#cb152-11" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(pvalor.lil, <span class="at">freq=</span><span class="cn">FALSE</span>, <span class="at">main =</span> <span class="st">&quot;p-valor del test de Lilliefors&quot;</span>)</span>
-<span id="cb152-12"><a href="contrastes-parametricos.html#cb152-12" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h=</span><span class="dv">1</span>, <span class="at">lty=</span><span class="dv">2</span>)   <span class="co"># curve(dunif(x,0,1), add=TRUE)</span></span>
-<span id="cb152-13"><a href="contrastes-parametricos.html#cb152-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Distribución empírica</span></span>
-<span id="cb152-14"><a href="contrastes-parametricos.html#cb152-14" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(<span class="fu">ecdf</span>(pvalor.lil)(x), <span class="at">type =</span> <span class="st">&quot;s&quot;</span>, <span class="at">lwd =</span> <span class="dv">2</span>, </span>
-<span id="cb152-15"><a href="contrastes-parametricos.html#cb152-15" aria-hidden="true" tabindex="-1"></a>      <span class="at">main =</span> <span class="st">&#39;Tamaño del contraste de Lilliefors&#39;</span>, <span class="at">ylab =</span> <span class="st">&#39;Proporción de rechazos&#39;</span>, </span>
-<span id="cb152-16"><a href="contrastes-parametricos.html#cb152-16" aria-hidden="true" tabindex="-1"></a>      <span class="at">xlab =</span> <span class="st">&#39;Nivel de significación&#39;</span>)</span>
-<span id="cb152-17"><a href="contrastes-parametricos.html#cb152-17" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">a=</span><span class="dv">0</span>, <span class="at">b=</span><span class="dv">1</span>, <span class="at">lty=</span><span class="dv">2</span>)   <span class="co"># curve(punif(x, 0, 1), add = TRUE)</span></span></code></pre></div>
+<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="contrastes-parametricos.html#cb155-1" aria-hidden="true" tabindex="-1"></a>old.par <span class="ot">&lt;-</span> <span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
+<span id="cb155-2"><a href="contrastes-parametricos.html#cb155-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Histograma</span></span>
+<span id="cb155-3"><a href="contrastes-parametricos.html#cb155-3" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(pvalor.ks, <span class="at">freq=</span><span class="cn">FALSE</span>, <span class="at">main =</span> <span class="st">&quot;p-valor del test de KS&quot;</span>)</span>
+<span id="cb155-4"><a href="contrastes-parametricos.html#cb155-4" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h=</span><span class="dv">1</span>, <span class="at">lty=</span><span class="dv">2</span>)   <span class="co"># curve(dunif(x,0,1), add=TRUE)</span></span>
+<span id="cb155-5"><a href="contrastes-parametricos.html#cb155-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Distribución empírica</span></span>
+<span id="cb155-6"><a href="contrastes-parametricos.html#cb155-6" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(<span class="fu">ecdf</span>(pvalor.ks)(x), <span class="at">type =</span> <span class="st">&quot;s&quot;</span>, <span class="at">lwd =</span> <span class="dv">2</span>, </span>
+<span id="cb155-7"><a href="contrastes-parametricos.html#cb155-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">main =</span> <span class="st">&#39;Tamaño del contraste KS&#39;</span>, <span class="at">ylab =</span> <span class="st">&#39;Proporción de rechazos&#39;</span>, </span>
+<span id="cb155-8"><a href="contrastes-parametricos.html#cb155-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">xlab =</span> <span class="st">&#39;Nivel de significación&#39;</span>)</span>
+<span id="cb155-9"><a href="contrastes-parametricos.html#cb155-9" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">a=</span><span class="dv">0</span>, <span class="at">b=</span><span class="dv">1</span>, <span class="at">lty=</span><span class="dv">2</span>)   <span class="co"># curve(punif(x, 0, 1), add = TRUE)</span></span>
+<span id="cb155-10"><a href="contrastes-parametricos.html#cb155-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Histograma</span></span>
+<span id="cb155-11"><a href="contrastes-parametricos.html#cb155-11" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(pvalor.lil, <span class="at">freq=</span><span class="cn">FALSE</span>, <span class="at">main =</span> <span class="st">&quot;p-valor del test de Lilliefors&quot;</span>)</span>
+<span id="cb155-12"><a href="contrastes-parametricos.html#cb155-12" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h=</span><span class="dv">1</span>, <span class="at">lty=</span><span class="dv">2</span>)   <span class="co"># curve(dunif(x,0,1), add=TRUE)</span></span>
+<span id="cb155-13"><a href="contrastes-parametricos.html#cb155-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Distribución empírica</span></span>
+<span id="cb155-14"><a href="contrastes-parametricos.html#cb155-14" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(<span class="fu">ecdf</span>(pvalor.lil)(x), <span class="at">type =</span> <span class="st">&quot;s&quot;</span>, <span class="at">lwd =</span> <span class="dv">2</span>, </span>
+<span id="cb155-15"><a href="contrastes-parametricos.html#cb155-15" aria-hidden="true" tabindex="-1"></a>      <span class="at">main =</span> <span class="st">&#39;Tamaño del contraste de Lilliefors&#39;</span>, <span class="at">ylab =</span> <span class="st">&#39;Proporción de rechazos&#39;</span>, </span>
+<span id="cb155-16"><a href="contrastes-parametricos.html#cb155-16" aria-hidden="true" tabindex="-1"></a>      <span class="at">xlab =</span> <span class="st">&#39;Nivel de significación&#39;</span>)</span>
+<span id="cb155-17"><a href="contrastes-parametricos.html#cb155-17" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">a=</span><span class="dv">0</span>, <span class="at">b=</span><span class="dv">1</span>, <span class="at">lty=</span><span class="dv">2</span>)   <span class="co"># curve(punif(x, 0, 1), add = TRUE)</span></span></code></pre></div>
 <p><img src="05-contrastes_files/figure-html/unnamed-chunk-4-1.png" width="70%" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="contrastes-parametricos.html#cb153-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(old.par)</span></code></pre></div>
+<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="contrastes-parametricos.html#cb156-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(old.par)</span></code></pre></div>
 <p>En el caso del contraste de Kolmogorov-Smirnov (KS) se observa que el <span class="math inline">\(p\)</span>-valor
 tiende a tomar valores grandes y por tanto se rechaza la hipótesis nula
 muchas menos veces de las que se debería.</p>
@@ -485,67 +487,67 @@ los parámetros en cada remuestra
 <p>Por ejemplo, la siguiente función implementaría el contraste KS de
 bondad de ajuste de una variable exponencial aproximando el
 <span class="math inline">\(p\)</span>-valor mediante bootstrap paramétrico:</p>
-<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="contrastes-parametricos.html#cb154-1" aria-hidden="true" tabindex="-1"></a>ks.exp.boot <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">nboot =</span> <span class="dv">10</span><span class="sc">^</span><span class="dv">3</span>) {</span>
-<span id="cb154-2"><a href="contrastes-parametricos.html#cb154-2" aria-hidden="true" tabindex="-1"></a>  DNAME <span class="ot">&lt;-</span> <span class="fu">deparse</span>(<span class="fu">substitute</span>(x))</span>
-<span id="cb154-3"><a href="contrastes-parametricos.html#cb154-3" aria-hidden="true" tabindex="-1"></a>  METHOD <span class="ot">&lt;-</span> <span class="st">&quot;Kolmogorov-Smirnov Test of pexp by bootstrap&quot;</span> </span>
-<span id="cb154-4"><a href="contrastes-parametricos.html#cb154-4" aria-hidden="true" tabindex="-1"></a>  n <span class="ot">&lt;-</span> <span class="fu">length</span>(x)</span>
-<span id="cb154-5"><a href="contrastes-parametricos.html#cb154-5" aria-hidden="true" tabindex="-1"></a>  RATE <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">/</span><span class="fu">mean</span>(x)</span>
-<span id="cb154-6"><a href="contrastes-parametricos.html#cb154-6" aria-hidden="true" tabindex="-1"></a>  ks.exp.stat <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">rate =</span> <span class="dv">1</span><span class="sc">/</span><span class="fu">mean</span>(x)) { <span class="co"># se estima el parámetro</span></span>
-<span id="cb154-7"><a href="contrastes-parametricos.html#cb154-7" aria-hidden="true" tabindex="-1"></a>    DMinus <span class="ot">&lt;-</span> <span class="fu">pexp</span>(<span class="fu">sort</span>(x), <span class="at">rate=</span>rate) <span class="sc">-</span> (<span class="dv">0</span><span class="sc">:</span>(n <span class="sc">-</span> <span class="dv">1</span>))<span class="sc">/</span>n</span>
-<span id="cb154-8"><a href="contrastes-parametricos.html#cb154-8" aria-hidden="true" tabindex="-1"></a>    DPlus <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">/</span>n <span class="sc">-</span> DMinus</span>
-<span id="cb154-9"><a href="contrastes-parametricos.html#cb154-9" aria-hidden="true" tabindex="-1"></a>    Dn <span class="ot">=</span> <span class="fu">max</span>(<span class="fu">c</span>(DMinus, DPlus))</span>
-<span id="cb154-10"><a href="contrastes-parametricos.html#cb154-10" aria-hidden="true" tabindex="-1"></a>  }  </span>
-<span id="cb154-11"><a href="contrastes-parametricos.html#cb154-11" aria-hidden="true" tabindex="-1"></a>  STATISTIC <span class="ot">&lt;-</span> <span class="fu">ks.exp.stat</span>(x, <span class="at">rate =</span> RATE) </span>
-<span id="cb154-12"><a href="contrastes-parametricos.html#cb154-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">names</span>(STATISTIC) <span class="ot">&lt;-</span> <span class="st">&quot;Dn&quot;</span></span>
-<span id="cb154-13"><a href="contrastes-parametricos.html#cb154-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># PVAL &lt;- 0</span></span>
-<span id="cb154-14"><a href="contrastes-parametricos.html#cb154-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># for(i in 1:nboot) {</span></span>
-<span id="cb154-15"><a href="contrastes-parametricos.html#cb154-15" aria-hidden="true" tabindex="-1"></a>  <span class="co">#   rx &lt;- rexp(n, rate = RATE)</span></span>
-<span id="cb154-16"><a href="contrastes-parametricos.html#cb154-16" aria-hidden="true" tabindex="-1"></a>  <span class="co">#   if (STATISTIC &lt;= ks.exp.stat(rx)) PVAL &lt;- PVAL + 1</span></span>
-<span id="cb154-17"><a href="contrastes-parametricos.html#cb154-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># }</span></span>
-<span id="cb154-18"><a href="contrastes-parametricos.html#cb154-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># PVAL &lt;- PVAL/nboot</span></span>
-<span id="cb154-19"><a href="contrastes-parametricos.html#cb154-19" aria-hidden="true" tabindex="-1"></a>  <span class="co"># PVAL &lt;- (PVAL + 1)/(nboot + 1) # Alternativa para aproximar el p-valor</span></span>
-<span id="cb154-20"><a href="contrastes-parametricos.html#cb154-20" aria-hidden="true" tabindex="-1"></a>  rx <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rexp</span>(n<span class="sc">*</span>nboot, <span class="at">rate =</span> RATE), <span class="at">ncol=</span>n)</span>
-<span id="cb154-21"><a href="contrastes-parametricos.html#cb154-21" aria-hidden="true" tabindex="-1"></a>  PVAL <span class="ot">&lt;-</span> <span class="fu">mean</span>(STATISTIC <span class="sc">&lt;=</span> <span class="fu">apply</span>(rx, <span class="dv">1</span>, ks.exp.stat))</span>
-<span id="cb154-22"><a href="contrastes-parametricos.html#cb154-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">structure</span>(<span class="fu">list</span>(<span class="at">statistic =</span> STATISTIC, <span class="at">alternative =</span> <span class="st">&quot;two.sided&quot;</span>, </span>
-<span id="cb154-23"><a href="contrastes-parametricos.html#cb154-23" aria-hidden="true" tabindex="-1"></a>                   <span class="at">p.value =</span> PVAL, <span class="at">method =</span> METHOD, <span class="at">data.name =</span> DNAME), </span>
-<span id="cb154-24"><a href="contrastes-parametricos.html#cb154-24" aria-hidden="true" tabindex="-1"></a>                   <span class="at">class =</span> <span class="st">&quot;htest&quot;</span>))</span>
-<span id="cb154-25"><a href="contrastes-parametricos.html#cb154-25" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="contrastes-parametricos.html#cb157-1" aria-hidden="true" tabindex="-1"></a>ks.exp.boot <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">nboot =</span> <span class="dv">10</span><span class="sc">^</span><span class="dv">3</span>) {</span>
+<span id="cb157-2"><a href="contrastes-parametricos.html#cb157-2" aria-hidden="true" tabindex="-1"></a>  DNAME <span class="ot">&lt;-</span> <span class="fu">deparse</span>(<span class="fu">substitute</span>(x))</span>
+<span id="cb157-3"><a href="contrastes-parametricos.html#cb157-3" aria-hidden="true" tabindex="-1"></a>  METHOD <span class="ot">&lt;-</span> <span class="st">&quot;Kolmogorov-Smirnov Test of pexp by bootstrap&quot;</span> </span>
+<span id="cb157-4"><a href="contrastes-parametricos.html#cb157-4" aria-hidden="true" tabindex="-1"></a>  n <span class="ot">&lt;-</span> <span class="fu">length</span>(x)</span>
+<span id="cb157-5"><a href="contrastes-parametricos.html#cb157-5" aria-hidden="true" tabindex="-1"></a>  RATE <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">/</span><span class="fu">mean</span>(x)</span>
+<span id="cb157-6"><a href="contrastes-parametricos.html#cb157-6" aria-hidden="true" tabindex="-1"></a>  ks.exp.stat <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">rate =</span> <span class="dv">1</span><span class="sc">/</span><span class="fu">mean</span>(x)) { <span class="co"># se estima el parámetro</span></span>
+<span id="cb157-7"><a href="contrastes-parametricos.html#cb157-7" aria-hidden="true" tabindex="-1"></a>    DMinus <span class="ot">&lt;-</span> <span class="fu">pexp</span>(<span class="fu">sort</span>(x), <span class="at">rate=</span>rate) <span class="sc">-</span> (<span class="dv">0</span><span class="sc">:</span>(n <span class="sc">-</span> <span class="dv">1</span>))<span class="sc">/</span>n</span>
+<span id="cb157-8"><a href="contrastes-parametricos.html#cb157-8" aria-hidden="true" tabindex="-1"></a>    DPlus <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">/</span>n <span class="sc">-</span> DMinus</span>
+<span id="cb157-9"><a href="contrastes-parametricos.html#cb157-9" aria-hidden="true" tabindex="-1"></a>    Dn <span class="ot">=</span> <span class="fu">max</span>(<span class="fu">c</span>(DMinus, DPlus))</span>
+<span id="cb157-10"><a href="contrastes-parametricos.html#cb157-10" aria-hidden="true" tabindex="-1"></a>  }  </span>
+<span id="cb157-11"><a href="contrastes-parametricos.html#cb157-11" aria-hidden="true" tabindex="-1"></a>  STATISTIC <span class="ot">&lt;-</span> <span class="fu">ks.exp.stat</span>(x, <span class="at">rate =</span> RATE) </span>
+<span id="cb157-12"><a href="contrastes-parametricos.html#cb157-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">names</span>(STATISTIC) <span class="ot">&lt;-</span> <span class="st">&quot;Dn&quot;</span></span>
+<span id="cb157-13"><a href="contrastes-parametricos.html#cb157-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># PVAL &lt;- 0</span></span>
+<span id="cb157-14"><a href="contrastes-parametricos.html#cb157-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># for(i in 1:nboot) {</span></span>
+<span id="cb157-15"><a href="contrastes-parametricos.html#cb157-15" aria-hidden="true" tabindex="-1"></a>  <span class="co">#   rx &lt;- rexp(n, rate = RATE)</span></span>
+<span id="cb157-16"><a href="contrastes-parametricos.html#cb157-16" aria-hidden="true" tabindex="-1"></a>  <span class="co">#   if (STATISTIC &lt;= ks.exp.stat(rx)) PVAL &lt;- PVAL + 1</span></span>
+<span id="cb157-17"><a href="contrastes-parametricos.html#cb157-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># }</span></span>
+<span id="cb157-18"><a href="contrastes-parametricos.html#cb157-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># PVAL &lt;- PVAL/nboot</span></span>
+<span id="cb157-19"><a href="contrastes-parametricos.html#cb157-19" aria-hidden="true" tabindex="-1"></a>  <span class="co"># PVAL &lt;- (PVAL + 1)/(nboot + 1) # Alternativa para aproximar el p-valor</span></span>
+<span id="cb157-20"><a href="contrastes-parametricos.html#cb157-20" aria-hidden="true" tabindex="-1"></a>  rx <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rexp</span>(n<span class="sc">*</span>nboot, <span class="at">rate =</span> RATE), <span class="at">ncol=</span>n)</span>
+<span id="cb157-21"><a href="contrastes-parametricos.html#cb157-21" aria-hidden="true" tabindex="-1"></a>  PVAL <span class="ot">&lt;-</span> <span class="fu">mean</span>(STATISTIC <span class="sc">&lt;=</span> <span class="fu">apply</span>(rx, <span class="dv">1</span>, ks.exp.stat))</span>
+<span id="cb157-22"><a href="contrastes-parametricos.html#cb157-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">structure</span>(<span class="fu">list</span>(<span class="at">statistic =</span> STATISTIC, <span class="at">alternative =</span> <span class="st">&quot;two.sided&quot;</span>, </span>
+<span id="cb157-23"><a href="contrastes-parametricos.html#cb157-23" aria-hidden="true" tabindex="-1"></a>                   <span class="at">p.value =</span> PVAL, <span class="at">method =</span> METHOD, <span class="at">data.name =</span> DNAME), </span>
+<span id="cb157-24"><a href="contrastes-parametricos.html#cb157-24" aria-hidden="true" tabindex="-1"></a>                   <span class="at">class =</span> <span class="st">&quot;htest&quot;</span>))</span>
+<span id="cb157-25"><a href="contrastes-parametricos.html#cb157-25" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <p>Como ejemplo estudiaremos el caso de contrastar una distribución exponencial
 considerando 500 pruebas con muestras de tamaño 30 de una <span class="math inline">\(Exp(1)\)</span>
 y 200 réplicas bootstrap (para disminuir el tiempo de computación).</p>
-<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="contrastes-parametricos.html#cb155-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Valores iniciales</span></span>
-<span id="cb155-2"><a href="contrastes-parametricos.html#cb155-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb155-3"><a href="contrastes-parametricos.html#cb155-3" aria-hidden="true" tabindex="-1"></a>nx <span class="ot">&lt;-</span> <span class="dv">30</span></span>
-<span id="cb155-4"><a href="contrastes-parametricos.html#cb155-4" aria-hidden="true" tabindex="-1"></a>ratex <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb155-5"><a href="contrastes-parametricos.html#cb155-5" aria-hidden="true" tabindex="-1"></a>nsim <span class="ot">&lt;-</span> <span class="dv">500</span></span>
-<span id="cb155-6"><a href="contrastes-parametricos.html#cb155-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Realizar contrastes</span></span>
-<span id="cb155-7"><a href="contrastes-parametricos.html#cb155-7" aria-hidden="true" tabindex="-1"></a>pvalor.ks <span class="ot">&lt;-</span> <span class="fu">numeric</span>(nsim)</span>
-<span id="cb155-8"><a href="contrastes-parametricos.html#cb155-8" aria-hidden="true" tabindex="-1"></a>pvalor.ks.boot <span class="ot">&lt;-</span> <span class="fu">numeric</span>(nsim)</span>
-<span id="cb155-9"><a href="contrastes-parametricos.html#cb155-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(isim <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nsim) {</span>
-<span id="cb155-10"><a href="contrastes-parametricos.html#cb155-10" aria-hidden="true" tabindex="-1"></a>  rx <span class="ot">&lt;-</span> <span class="fu">rexp</span>(nx, ratex)</span>
-<span id="cb155-11"><a href="contrastes-parametricos.html#cb155-11" aria-hidden="true" tabindex="-1"></a>  pvalor.ks[isim] <span class="ot">&lt;-</span> <span class="fu">ks.test</span>(rx, <span class="st">&quot;pexp&quot;</span>, <span class="dv">1</span><span class="sc">/</span><span class="fu">mean</span>(rx))<span class="sc">$</span>p.value</span>
-<span id="cb155-12"><a href="contrastes-parametricos.html#cb155-12" aria-hidden="true" tabindex="-1"></a>  pvalor.ks.boot[isim] <span class="ot">&lt;-</span> <span class="fu">ks.exp.boot</span>(rx, <span class="at">nboot =</span> <span class="dv">200</span>)<span class="sc">$</span>p.value</span>
-<span id="cb155-13"><a href="contrastes-parametricos.html#cb155-13" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb155-14"><a href="contrastes-parametricos.html#cb155-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Generar gráficos</span></span>
-<span id="cb155-15"><a href="contrastes-parametricos.html#cb155-15" aria-hidden="true" tabindex="-1"></a>old.par <span class="ot">&lt;-</span> <span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
-<span id="cb155-16"><a href="contrastes-parametricos.html#cb155-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Histograma</span></span>
-<span id="cb155-17"><a href="contrastes-parametricos.html#cb155-17" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(pvalor.ks, <span class="at">freq=</span><span class="cn">FALSE</span>, <span class="at">main =</span> <span class="st">&quot;p-valor del test KS&quot;</span>)</span>
-<span id="cb155-18"><a href="contrastes-parametricos.html#cb155-18" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h=</span><span class="dv">1</span>, <span class="at">lty=</span><span class="dv">2</span>)   <span class="co"># curve(dunif(x,0,1), add=TRUE)</span></span>
-<span id="cb155-19"><a href="contrastes-parametricos.html#cb155-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Distribución empírica</span></span>
-<span id="cb155-20"><a href="contrastes-parametricos.html#cb155-20" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(<span class="fu">ecdf</span>(pvalor.ks)(x), <span class="at">type =</span> <span class="st">&quot;s&quot;</span>, <span class="at">lwd =</span> <span class="dv">2</span>, </span>
-<span id="cb155-21"><a href="contrastes-parametricos.html#cb155-21" aria-hidden="true" tabindex="-1"></a>      <span class="at">main =</span> <span class="st">&#39;Tamaño del contraste KS&#39;</span>, <span class="at">ylab =</span> <span class="st">&#39;Proporción de rechazos&#39;</span>, </span>
-<span id="cb155-22"><a href="contrastes-parametricos.html#cb155-22" aria-hidden="true" tabindex="-1"></a>      <span class="at">xlab =</span> <span class="st">&#39;Nivel de significación&#39;</span>)</span>
-<span id="cb155-23"><a href="contrastes-parametricos.html#cb155-23" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">a=</span><span class="dv">0</span>, <span class="at">b=</span><span class="dv">1</span>, <span class="at">lty=</span><span class="dv">2</span>)   <span class="co"># curve(punif(x, 0, 1), add = TRUE)</span></span>
-<span id="cb155-24"><a href="contrastes-parametricos.html#cb155-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Histograma</span></span>
-<span id="cb155-25"><a href="contrastes-parametricos.html#cb155-25" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(pvalor.ks.boot, <span class="at">freq=</span><span class="cn">FALSE</span>, <span class="at">main =</span> <span class="st">&quot;p-valor del test KS-boot&quot;</span>)</span>
-<span id="cb155-26"><a href="contrastes-parametricos.html#cb155-26" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h=</span><span class="dv">1</span>, <span class="at">lty=</span><span class="dv">2</span>)   <span class="co"># curve(dunif(x,0,1), add=TRUE)</span></span>
-<span id="cb155-27"><a href="contrastes-parametricos.html#cb155-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Distribución empírica</span></span>
-<span id="cb155-28"><a href="contrastes-parametricos.html#cb155-28" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(<span class="fu">ecdf</span>(pvalor.ks.boot)(x), <span class="at">type =</span> <span class="st">&quot;s&quot;</span>, <span class="at">lwd =</span> <span class="dv">2</span>, </span>
-<span id="cb155-29"><a href="contrastes-parametricos.html#cb155-29" aria-hidden="true" tabindex="-1"></a>      <span class="at">main =</span> <span class="st">&#39;Tamaño del contraste KS-boot&#39;</span>, <span class="at">ylab =</span> <span class="st">&#39;Proporción de rechazos&#39;</span>, </span>
-<span id="cb155-30"><a href="contrastes-parametricos.html#cb155-30" aria-hidden="true" tabindex="-1"></a>      <span class="at">xlab =</span> <span class="st">&#39;Nivel de significación&#39;</span>)</span>
-<span id="cb155-31"><a href="contrastes-parametricos.html#cb155-31" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">a=</span><span class="dv">0</span>, <span class="at">b=</span><span class="dv">1</span>, <span class="at">lty=</span><span class="dv">2</span>)   <span class="co"># curve(punif(x, 0, 1), add = TRUE)</span></span></code></pre></div>
+<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="contrastes-parametricos.html#cb158-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Valores iniciales</span></span>
+<span id="cb158-2"><a href="contrastes-parametricos.html#cb158-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb158-3"><a href="contrastes-parametricos.html#cb158-3" aria-hidden="true" tabindex="-1"></a>nx <span class="ot">&lt;-</span> <span class="dv">30</span></span>
+<span id="cb158-4"><a href="contrastes-parametricos.html#cb158-4" aria-hidden="true" tabindex="-1"></a>ratex <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb158-5"><a href="contrastes-parametricos.html#cb158-5" aria-hidden="true" tabindex="-1"></a>nsim <span class="ot">&lt;-</span> <span class="dv">500</span></span>
+<span id="cb158-6"><a href="contrastes-parametricos.html#cb158-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Realizar contrastes</span></span>
+<span id="cb158-7"><a href="contrastes-parametricos.html#cb158-7" aria-hidden="true" tabindex="-1"></a>pvalor.ks <span class="ot">&lt;-</span> <span class="fu">numeric</span>(nsim)</span>
+<span id="cb158-8"><a href="contrastes-parametricos.html#cb158-8" aria-hidden="true" tabindex="-1"></a>pvalor.ks.boot <span class="ot">&lt;-</span> <span class="fu">numeric</span>(nsim)</span>
+<span id="cb158-9"><a href="contrastes-parametricos.html#cb158-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(isim <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nsim) {</span>
+<span id="cb158-10"><a href="contrastes-parametricos.html#cb158-10" aria-hidden="true" tabindex="-1"></a>  rx <span class="ot">&lt;-</span> <span class="fu">rexp</span>(nx, ratex)</span>
+<span id="cb158-11"><a href="contrastes-parametricos.html#cb158-11" aria-hidden="true" tabindex="-1"></a>  pvalor.ks[isim] <span class="ot">&lt;-</span> <span class="fu">ks.test</span>(rx, <span class="st">&quot;pexp&quot;</span>, <span class="dv">1</span><span class="sc">/</span><span class="fu">mean</span>(rx))<span class="sc">$</span>p.value</span>
+<span id="cb158-12"><a href="contrastes-parametricos.html#cb158-12" aria-hidden="true" tabindex="-1"></a>  pvalor.ks.boot[isim] <span class="ot">&lt;-</span> <span class="fu">ks.exp.boot</span>(rx, <span class="at">nboot =</span> <span class="dv">200</span>)<span class="sc">$</span>p.value</span>
+<span id="cb158-13"><a href="contrastes-parametricos.html#cb158-13" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb158-14"><a href="contrastes-parametricos.html#cb158-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Generar gráficos</span></span>
+<span id="cb158-15"><a href="contrastes-parametricos.html#cb158-15" aria-hidden="true" tabindex="-1"></a>old.par <span class="ot">&lt;-</span> <span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
+<span id="cb158-16"><a href="contrastes-parametricos.html#cb158-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Histograma</span></span>
+<span id="cb158-17"><a href="contrastes-parametricos.html#cb158-17" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(pvalor.ks, <span class="at">freq=</span><span class="cn">FALSE</span>, <span class="at">main =</span> <span class="st">&quot;p-valor del test KS&quot;</span>)</span>
+<span id="cb158-18"><a href="contrastes-parametricos.html#cb158-18" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h=</span><span class="dv">1</span>, <span class="at">lty=</span><span class="dv">2</span>)   <span class="co"># curve(dunif(x,0,1), add=TRUE)</span></span>
+<span id="cb158-19"><a href="contrastes-parametricos.html#cb158-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Distribución empírica</span></span>
+<span id="cb158-20"><a href="contrastes-parametricos.html#cb158-20" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(<span class="fu">ecdf</span>(pvalor.ks)(x), <span class="at">type =</span> <span class="st">&quot;s&quot;</span>, <span class="at">lwd =</span> <span class="dv">2</span>, </span>
+<span id="cb158-21"><a href="contrastes-parametricos.html#cb158-21" aria-hidden="true" tabindex="-1"></a>      <span class="at">main =</span> <span class="st">&#39;Tamaño del contraste KS&#39;</span>, <span class="at">ylab =</span> <span class="st">&#39;Proporción de rechazos&#39;</span>, </span>
+<span id="cb158-22"><a href="contrastes-parametricos.html#cb158-22" aria-hidden="true" tabindex="-1"></a>      <span class="at">xlab =</span> <span class="st">&#39;Nivel de significación&#39;</span>)</span>
+<span id="cb158-23"><a href="contrastes-parametricos.html#cb158-23" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">a=</span><span class="dv">0</span>, <span class="at">b=</span><span class="dv">1</span>, <span class="at">lty=</span><span class="dv">2</span>)   <span class="co"># curve(punif(x, 0, 1), add = TRUE)</span></span>
+<span id="cb158-24"><a href="contrastes-parametricos.html#cb158-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Histograma</span></span>
+<span id="cb158-25"><a href="contrastes-parametricos.html#cb158-25" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(pvalor.ks.boot, <span class="at">freq=</span><span class="cn">FALSE</span>, <span class="at">main =</span> <span class="st">&quot;p-valor del test KS-boot&quot;</span>)</span>
+<span id="cb158-26"><a href="contrastes-parametricos.html#cb158-26" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h=</span><span class="dv">1</span>, <span class="at">lty=</span><span class="dv">2</span>)   <span class="co"># curve(dunif(x,0,1), add=TRUE)</span></span>
+<span id="cb158-27"><a href="contrastes-parametricos.html#cb158-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Distribución empírica</span></span>
+<span id="cb158-28"><a href="contrastes-parametricos.html#cb158-28" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(<span class="fu">ecdf</span>(pvalor.ks.boot)(x), <span class="at">type =</span> <span class="st">&quot;s&quot;</span>, <span class="at">lwd =</span> <span class="dv">2</span>, </span>
+<span id="cb158-29"><a href="contrastes-parametricos.html#cb158-29" aria-hidden="true" tabindex="-1"></a>      <span class="at">main =</span> <span class="st">&#39;Tamaño del contraste KS-boot&#39;</span>, <span class="at">ylab =</span> <span class="st">&#39;Proporción de rechazos&#39;</span>, </span>
+<span id="cb158-30"><a href="contrastes-parametricos.html#cb158-30" aria-hidden="true" tabindex="-1"></a>      <span class="at">xlab =</span> <span class="st">&#39;Nivel de significación&#39;</span>)</span>
+<span id="cb158-31"><a href="contrastes-parametricos.html#cb158-31" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">a=</span><span class="dv">0</span>, <span class="at">b=</span><span class="dv">1</span>, <span class="at">lty=</span><span class="dv">2</span>)   <span class="co"># curve(punif(x, 0, 1), add = TRUE)</span></span></code></pre></div>
 <p><img src="05-contrastes_files/figure-html/unnamed-chunk-6-1.png" width="70%" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="contrastes-parametricos.html#cb156-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(old.par)</span></code></pre></div>
+<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="contrastes-parametricos.html#cb159-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(old.par)</span></code></pre></div>
 </div>
 </div>
             </section>
@@ -568,42 +570,42 @@ y 200 réplicas bootstrap (para disminuir el tiempo de computación).</p>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
-"sharing": {
-"github": true,
-"facebook": false,
-"twitter": false,
-"linkedin": false,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"whatsapp": false,
-"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
-},
-"fontsettings": {
-"theme": "white",
-"family": "sans",
-"size": 2
-},
-"edit": {
-"link": "https://github.com/rubenfcasal/book_remuestreo/edit/master/05-contrastes.Rmd",
-"text": "Edit"
-},
-"history": {
-"link": null,
-"text": null
-},
-"view": {
-"link": null,
-"text": null
-},
-"download": ["book_remuestreo.pdf"],
-"search": {
-"engine": "fuse",
-"options": null
-},
-"toc": {
-"collapse": "subsection"
-}
+  "sharing": {
+    "github": true,
+    "facebook": false,
+    "twitter": false,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": "https://github.com/rubenfcasal/book_remuestreo/edit/master/05-contrastes.Rmd",
+    "text": "Edit"
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": ["book_remuestreo.pdf"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  }
 });
 });
 </script>
@@ -614,7 +616,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

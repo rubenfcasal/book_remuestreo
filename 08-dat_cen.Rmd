@@ -61,7 +61,7 @@ n \right)} \right)$ la muestra de estadísticos ordenados de los tiempos
 de vida observados y $\left( \delta _{(1)},\delta _{\left(2 \right)},
 \ldots ,\delta _{(n)} \right)$ los correspondientes concomitantes.
 
-```{example, label="kaplan-meier", name="Estimación de Kaplan-Meier"}
+::: {.example #kaplan-meier name="Estimación de Kaplan-Meier"}
 
 <br> \vspace{0.5cm}
 
@@ -80,7 +80,6 @@ $$\hat{F}\left( t \right) =\left\{
 0.8& \text{si } 3.9\leq t
 \end{array}
 \right.$$
-```
 
 
 En `R` se recomienda emplear el paquete `survival` para el análisis de
@@ -109,6 +108,8 @@ with(fit, {
 })
 par(old.par)
 ```
+
+:::
 
 
 ### Distribución asintótica del estimador de Kaplan-Meier
@@ -174,11 +175,9 @@ Procede de la siguiente forma:
 3.  Evaluar el estadístico de interés en el vector que contiene la
     remuestra bootstrap: $R^{\ast}=R\left( \mathbf{T}^{\ast},
     \boldsymbol{\delta}^{\ast} \right)$, con
-    $\mathbf{T}^{\ast}
-    =\left( T_1^{\ast},T_2^{\ast},\ldots ,T_n^{\ast} \right)$ y
-   
-    $\boldsymbol{\delta}^{\ast}=\left( \delta _1^{\ast},\delta
-    _2^{\ast},\ldots ,\delta _n^{\ast} \right)$.
+    $\mathbf{T}^{\ast} = \left( T_1^{\ast},T_2^{\ast},\ldots ,T_n^{\ast} \right)$ 
+    y $\boldsymbol{\delta}^{\ast} = \left( \delta_1^{\ast},\delta_2^{\ast}, 
+    \ldots, \delta_n^{\ast} \right)$.
 
 4.  Aproximar la distribución en el muestreo del estadístico
     $R\left( \mathbf{T}, \boldsymbol{\delta} \right)$ por la
@@ -429,12 +428,11 @@ chan.boot3
 
 ## Ejercicios
 
-```{exercise, label="censboot-strata-ej", name="Bootstrap censurado por estratos"}
+::: {.exercise #censboot-strata-ej name="Bootstrap censurado por estratos"}
 
 Analizar el conjunto de datos `channing` completo, teniendo en cuenta el sexo como estrato
 (i.e. `Surv(age, cens) ~ sex` y `strata = chan$sex`)
 
-```
 
 ```{r surv-strata, fig.cap='Estimaciones de la supervivencia.'}
 # Datos
@@ -454,16 +452,15 @@ res <- summary(chan.F)
 # res
 str(res)
 # Estimaciones de interés
-res$table[, c("*rmean", "median")]
-as.numeric(res$table[, c("*rmean", "median")])
+res$table[, c("rmean", "median")]
+as.numeric(res$table[, c("rmean", "median")])
 ```
 
+:::
 
-```{exercise, label="censboot-cox-ej", name="Bootstrap censurado con riesgo proporcional de Cox"}
+::: {.exercise #censboot-cox-ej name="Bootstrap censurado con riesgo proporcional de Cox"}
 
 Reproducir el ejemplo en Canty (2002, [Rnews_2002-3](http://cran.fhcrc.org/doc/Rnews/Rnews_2002-3.pdf)) del modelo de riesgo proporcional de Cox (Cox, 1972):
-
-```
 
 ```{r surv-cox}
 # Datos
@@ -479,3 +476,5 @@ mel.cox
 # Estadísticos de interés
 mel.cox$coefficients
 ```
+
+:::

@@ -88,8 +88,8 @@ de programación y software estadístico (como `R`) que permiten simular
 directamente la mayoría de las distribuciones paramétricas habituales.
 
 
-```{example, label="media-dt-conocida-par", name="Inferencia sobre la media con varianza conocida, continuación"}
-```
+::: {.example #media-dt-conocida-par name="Inferencia sobre la media con varianza conocida, continuación"}
+
 Continuando con el ejemplo de tiempo de vida de microorganismos,
 podemos modificar fácilmente el código mostrado en el Ejemplo \@ref(exm:media-dt-conocida), de forma que se emplee bootstrap
 paramétrico (normal), con desviación típica conocida, para
@@ -207,6 +207,8 @@ ran.gen.exp <- function(data, mle) {
 }
 ```
 
+:::
+
 Una de las principales aplicaciones del bootstrap paramétrico 
 es el contraste de hipótesis que se tratará en la Sección \@ref(contrastes-parametricos).
 
@@ -293,7 +295,7 @@ hacer $X_i^{\ast}=Y_{\left\lfloor 2nU_i\right\rfloor +1}$
 
 Alternativamente podemos proceder con el paso 1 utilizando el hecho de que la función de distribución $F_n^{sim}\left( x \right)$ resultar ser la distribución de una variable aleatoria obtenida en dos etapas: 
 en la primera etapa se genera un valor según la empírica, $F_n\left( x \right)$, y en la segunda se decide (con equiprobabilidad) si el valor obtenido no se altera o bien si se refleja alrededor de la media muestral, $\bar{X}$ 
-(equivalentemente, la distribución simetrizada es una mixtura de la distribución empírica $F_n\left( x \right)$ y de su versión "reflejada" $1-F_n\left( 2\bar{X}-x \right)$ y se puede simular mediante el método de composición; ver p.e. Fernández-Casal y Cao, 2020, [Sección 5.4](https://rubenfcasal.github.io/simbook/m%C3%A9todo-de-composici%C3%B3n.html)). Así el paso 1 resulta:
+(equivalentemente, la distribución simetrizada es una mixtura de la distribución empírica $F_n\left( x \right)$ y de su versión "reflejada" $1-F_n\left( 2\bar{X}-x \right)$ y se puede simular mediante el método de composición; ver p.e. Fernández-Casal et al., 2023, [Sección 4.4](https://rubenfcasal.github.io/simbook/composicion.html)). Así el paso 1 resulta:
 
 1. Para cada $i=1,\ldots ,n$ arrojar
 $U_i,V_i\sim \mathcal{U}\left( 0,1 \right)$. Si $V_i\leq \frac{1}{2}$
@@ -343,7 +345,7 @@ estadísticos (como los asociados a inferencia sobre la varianza) con
 distribución más alejada de la simetría.
 
 
-```{exercise, label="media-dt-conocida-sim", name="Inferencia sobre la media con varianza conocida empleando bootstrap simetrizado"}
+::: {.exercise #media-dt-conocida-sim  name="Inferencia sobre la media con varianza conocida empleando bootstrap simetrizado"}
 
 Modificar adecuadamente el código del Ejemplo \@ref(exm:media-dt-conocida), para
 implementar un método bootstrap simetrizado, con el objeto de calcular
@@ -351,7 +353,7 @@ un intervalo de confianza para la media con desviación típica conocida.
 Qué diferencias se observan entre los intervalos obtenidos por el
 bootstrap uniforme y por el simetrizado?
 
-```
+:::
 
 
 ## Bootstrap suavizado {#modunif-boot-suav}
@@ -504,7 +506,7 @@ combinación lineal convexa de funciones de densidad, $K_{h}\left(
 x-X_i \right)$, cada una con coeficiente $\frac{1}{n}$ en dicha
 combinación lineal. Gracias a esa representación podemos simular
 valores,
-$X^{\ast}$, procedentes de $\hat{f}_{h}\left( x \right)$ en dos pasos (empleando el denominado método de composición; ver p.e. Fernández-Casal y Cao, 2020, [Sección 5.4](https://rubenfcasal.github.io/simbook/m%C3%A9todo-de-composici%C3%B3n.html)).
+$X^{\ast}$, procedentes de $\hat{f}_{h}\left( x \right)$ en dos pasos (empleando el denominado método de composición; ver p.e. Fernández-Casal et al., 2023, [Sección 4.4](https://rubenfcasal.github.io/simbook/composicion.html)).
 
 En un primer paso elegiremos (aleatoriamente y con equiprobabilidad)
 cuál de los índices $i\in \left\{ 1,\ldots ,n\right\}$ vamos a
@@ -574,14 +576,12 @@ fácil observar que en el caso extremo $h=0$ este método de remuestreo se
 reduce al bootstrap uniforme.
 
 
-```{example, label="media-dt-conocida-suav", name="Inferencia sobre la media con varianza conocida, continuación"}
+::: {.example #media-dt-conocida-suav name="Inferencia sobre la media con varianza conocida, continuación"}
 
 Continuando con el ejemplo de tiempo de vida de microorganismos,
 podemos modificar fácilmente el código mostrado en el Ejemplo \@ref(exm:media-dt-conocida), para implementar bootstrap suavizado 
 con función núcleo gaussiana, para calcular un intervalo de confianza 
 para la media poblacional con desviación típica conocida:
-
-```
 
 
 ```{r media-dt-conocida-suavizado}
@@ -642,6 +642,9 @@ res.boot <- boot(muestra, statistic, R = B, sim = "parametric",
 
 boot.ci(res.boot, type = "stud")
 ```
+
+:::
+
 
 ## Bootstrap ponderado y bootstrap sesgado
 
@@ -746,8 +749,7 @@ $$g_R\left( x \right) =\frac{n}{\theta }\left( \frac{x + \theta}{\theta } \right
 \text{ si }x\in \left[ -\theta, 0\right].$$ 
 De esta forma vemos que el bootstrap uniforme (no paramétrico) es inconsistente.
 
-```{example, label="boot-maximo-uniforme", name="Inferencia sobre el máximo de una distribución uniforme"}
-```
+::: {.example #boot-maximo-uniforme name="Inferencia sobre el máximo de una distribución uniforme"}
 
 El siguiente código implementa el método
 bootstrap uniforme (también llamado naïve) para aproximar la
@@ -779,6 +781,8 @@ rug(estadistico, col = "darkgray")
 curve(n/theta * ((x + theta)/theta)^(n - 1), col = "blue", lty = 2, lwd = 2, add = TRUE)
 ```
 
+:::
+
 ### Ejemplo (método alternativo)
 
 En este contexto, al conocer la familia paramétrica ($\mathcal{U}\left( 0,\theta 
@@ -802,8 +806,7 @@ distribución en muestreo de
 $R=R\left( \mathbf{X},F \right) =\hat{\theta}-\theta$.
 
 
-```{example, label="boot-maximo-parametrico", name="Inferencia sobre el máximo de una distribución uniforme, continuación"}
-```
+::: {.example #boot-maximo-parametrico name="Inferencia sobre el máximo de una distribución uniforme, continuación"}
 
 Para emplear el bootstrap paramétrico (que remuestrea de una distribución
 uniforme con parámetro estimado) podríamos emplear un código muy similar al 
@@ -827,6 +830,8 @@ lines(density(estadistico))
 rug(estadistico, col = "darkgray")
 curve(n/theta * ((x + theta)/theta)^(n - 1), col = "blue", lty = 2, lwd = 2, add = TRUE)
 ```
+
+:::
 
 <!-- 
 Ejercicio con el máximo de otra distribución?
@@ -859,7 +864,7 @@ función de distribución normal estándar y los siguientes irán tendiendo
 a cero sucesivamente más rápido cuando el tamaño muestral tiende a
 infinito. Enunciemos ese resultado.
 
-```{theorem, label="aprox-cramer", name="Cramer"}
+::: {.theorem #aprox-cramer name="Cramer"}
 <br> \vspace{0.5cm}
 
 Consideremos variables aleatorias
@@ -901,7 +906,8 @@ simétrico, y así sucesivamente:
 $$p_1\left( -u \right) = p_1\left( u \right),\quad p_2\left( -u \right)
 = -p_2\left( u \right),\quad p_3\left( -u \right) = p_3\left( u \right)
 ,\cdots$$
-```
+
+:::
 
 Existen ecuaciones que relacionan todos los cumulantes hasta cierto
 orden con todos los momentos poblacionales hasta ese mismo orden. Dichas
@@ -964,7 +970,7 @@ a otros estadísticos (estandarizados o studentizados) obtenidos para
 otros estimadores arbitrarios, $\hat{\theta}$, no necesariamente iguales
 a la media muestral.
 
-```{theorem, label="aprox-bhat-gho", name="Bhattacharya-Ghosh"}
+::: {.theorem #aprox-bhat-gho name="Bhattacharya-Ghosh"}
 <br> \vspace{0.5cm}
 
 Consideremos variables aleatorias
@@ -992,7 +998,8 @@ siendo los $p_i\left( u \right)$ y $q_i\left( u \right)$ polinomios
 de grado $3i-1$ con paridad alternada, es decir, $p_1$ y $q_1$ son
 simétricos, $p_2$ y $q_2$ son antisimétricos, $p_3$ y $q_3$ son
 simétricos y así sucesivamente.
-```
+
+:::
 
 
 ## Bootstrap semiparamétrico y bootstrap residual {#boot-reg}
@@ -1087,9 +1094,9 @@ $$\mathbf{Y}^{\ast} = \hat{\mathbf{Y}} + \mathbf{r}^{\ast}.$$
 Por ejemplo, adaptando el código en Canty (2002) para este conjunto de datos, podríamos emplear:
 
 ```{r}
-pres.dat <- Prestige
-pres.dat$fit <- fitted(modelo)
-pres.dat$res <- residuals(modelo)
+boot.dat <- Prestige
+boot.dat$fit <- fitted(modelo)
+boot.dat$res <- residuals(modelo)
 
 mod.stat <- function(data, i) {
     data$prestige <- data$fit + data$res[i]
@@ -1098,27 +1105,26 @@ mod.stat <- function(data, i) {
 }
 
 set.seed(1)
-boot.mod <- boot(pres.dat, mod.stat, R = 1000)
+boot.mod <- boot(boot.dat, mod.stat, R = 1000)
 boot.mod
 # plot(boot.mod)
 boot.ci(boot.mod, type = c("basic", "perc", "bca"))
 ```
 
-Sin embargo, la variabilidad de los residuos no reproduce la de los verdaderos errores, por lo que podría ser preferible (especialmente si el tamaño muestral es pequeño) emplear la modificación descrita en Davison y Hinkley (1997, Alg. 6.3, p. 271).
+Sin embargo, la variabilidad de los residuos no reproduce la de los verdaderos errores, por lo que podría ser preferible (especialmente si el tamaño muestral es pequeño) emplear la modificación descrita en Davison y Hinkley (1997, Alg. 6.1, p. 262).
 Teniendo en cuenta que:
 $$\mathbf{r} = \left( I - H \right)\mathbf{Y},$$
-siendo $H = X\left( X^{T}X\right)^{-1}X^{T}$ la matriz de proyección.
+siendo $H = X\left( X^{T}X\right)^{-1}X^{T}$ la matriz de proyección, se deduce que $Var(r_i) = (1 - h_{ii})\sigma^2$, donde $h_{ii}$ es el valor de influencia o leverage, el elemento $i$-ésimo de la diagonal de $H$.
 La idea es remuestrear los residuos reescalados (de forma que su varianza sea constante) y centrados $e_i - \bar{e}$, siendo:
-$$e_i = \frac{r_i}{\sqrt{1 - h_{ii}}},$$
-donde $h_{ii}$ es el valor de influencia o leverage, el elemento $i$-ésimo de la diagonal de $H$.
+$$e_i = \frac{r_i}{\sqrt{1 - h_{ii}}}.$$
 
 En `R` podríamos obtener estos residuos mediante los comandos^[Para reescalar los 
 residuos de un modelo `gam` del paquete `mgcv`, como no implementa un método `hatvalues()`, 
 habrá que emplear `influence.gam()` (o directamente `modelo.gam$hat`).]:
 
 ```{r}
-pres.dat$sres <- residuals(modelo)/sqrt(1 - hatvalues(modelo))
-pres.dat$sres <- pres.dat$sres - mean(pres.dat$sres)
+boot.dat$sres <- residuals(modelo)/sqrt(1 - hatvalues(modelo))
+boot.dat$sres <- boot.dat$sres - mean(boot.dat$sres)
 ```
 
 Sin embargo puede ser más cómodo emplear la función `Boot()` del paquete `car` (que internamente llama a la función `boot()`), 
@@ -1135,16 +1141,16 @@ donde:
 
 - `f`: es la función de estadísticos (utilizando el ajuste como argumento).
 
-- `method`: especifíca el tipo de remuestreo: remuestreo de observaciones (`"case"`)
+- `method`: especifica el tipo de remuestreo: remuestreo de observaciones (`"case"`)
   o de residuos (`"residual"`), empleando la modificación descrita anteriormente.
 
 
-```{exercise, label="boot-car"}
-```
+::: {.exercise #boot-car}
+
 Emplear la función `Boot()` del paquete `car` para hacer inferencia sobre 
 el coeficiente de determinación ajustado del modelo de regresión lineal 
 que explica `prestige` a partir de `income` y `education` 
-(obtener una estimación del sesgo y de la predicción,
+(obtener una estimación del sesgo y de la precisión,
 y una estimación por intervalo de confianza de este estadístico).
 
 ```{r}
@@ -1154,3 +1160,4 @@ library(car)
 # ...
 ```  
 
+:::

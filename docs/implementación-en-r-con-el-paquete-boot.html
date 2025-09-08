@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>9.5 Implementación en R con el paquete boot | Técnicas de Remuestreo</title>
   <meta name="description" content="Apuntes de la asignatura de Técnicas de Remuestreo del Máster en Técnicas Estadísticas." />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.36 and GitBook 2.6.7" />
 
   <meta property="og:title" content="9.5 Implementación en R con el paquete boot | Técnicas de Remuestreo" />
   <meta property="og:type" content="book" />
-  
   
   <meta property="og:description" content="Apuntes de la asignatura de Técnicas de Remuestreo del Máster en Técnicas Estadísticas." />
   <meta name="github-repo" content="rubenfcasal/book_remuestreo" />
@@ -24,7 +23,6 @@
 <meta name="author" content="Ricardo Cao Abad (rcao@udc.es) y Rubén Fernández Casal (rfcasal@udc.es)" />
 
 
-<meta name="date" content="2022-09-05" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +31,6 @@
   
 <link rel="prev" href="implementación-en-r.html"/>
 <link rel="next" href="ejercicios-1.html"/>
-<script src="libs/header-attrs-2.9/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -51,8 +48,9 @@
 
 
 
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -93,7 +91,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -106,7 +104,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -120,6 +118,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -378,17 +380,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="implementación-en-r-con-el-paquete-boot" class="section level2" number="9.5">
-<h2><span class="header-section-number">9.5</span> Implementación en <code>R</code> con el paquete <code>boot</code></h2>
+<div id="implementación-en-r-con-el-paquete-boot" class="section level2 hasAnchor" number="9.5">
+<h2><span class="header-section-number">9.5</span> Implementación en <code>R</code> con el paquete <code>boot</code><a href="implementación-en-r-con-el-paquete-boot.html#implementación-en-r-con-el-paquete-boot" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>La función <code>tsboot()</code> del paquete <code>boot</code> implementa distintos métodos
 de remuestreo para series de tiempo.</p>
-<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="implementación-en-r-con-el-paquete-boot.html#cb250-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(boot)</span>
-<span id="cb250-2"><a href="implementación-en-r-con-el-paquete-boot.html#cb250-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ?tsboot</span></span></code></pre></div>
-<div id="rnews-1" class="section level3" number="9.5.1">
-<h3><span class="header-section-number">9.5.1</span> Rnews 1</h3>
+<div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb253-1"><a href="implementación-en-r-con-el-paquete-boot.html#cb253-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(boot)</span>
+<span id="cb253-2"><a href="implementación-en-r-con-el-paquete-boot.html#cb253-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ?tsboot</span></span></code></pre></div>
+<div id="rnews-1" class="section level3 hasAnchor" number="9.5.1">
+<h3><span class="header-section-number">9.5.1</span> Rnews 1<a href="implementación-en-r-con-el-paquete-boot.html#rnews-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Canty, A. J. (2002). <a href="http://cran.fhcrc.org/doc/Rnews/Rnews_2002-3.pdf">Resampling methods in R: the boot package</a>. Rnews: The Newsletter of the R Project, 2 (3), pp. 2-7.</p>
 <blockquote>
-<p>"<code>tsboot()</code> can do either of these methods
+<p>“<code>tsboot()</code> can do either of these methods
 by specifying <code>sim="fixed"</code> or <code>sim="geom"</code> respectively.
 A simple call to tsboot includes the time
 series, a function for the <code>statistic</code> (the first argument
@@ -396,18 +398,18 @@ of this function being the time series itself), the number
 of bootstrap replicates, the simulation type and
 the (mean) block length’’.</p>
 </blockquote>
-<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb251-1"><a href="implementación-en-r-con-el-paquete-boot.html#cb251-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Datos</span></span>
-<span id="cb251-2"><a href="implementación-en-r-con-el-paquete-boot.html#cb251-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(lynx)</span>
-<span id="cb251-3"><a href="implementación-en-r-con-el-paquete-boot.html#cb251-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ?lynx</span></span>
-<span id="cb251-4"><a href="implementación-en-r-con-el-paquete-boot.html#cb251-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Boot</span></span>
-<span id="cb251-5"><a href="implementación-en-r-con-el-paquete-boot.html#cb251-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(boot)</span>
-<span id="cb251-6"><a href="implementación-en-r-con-el-paquete-boot.html#cb251-6" aria-hidden="true" tabindex="-1"></a>lynx.fun <span class="ot">&lt;-</span> <span class="cf">function</span>(tsb) {</span>
-<span id="cb251-7"><a href="implementación-en-r-con-el-paquete-boot.html#cb251-7" aria-hidden="true" tabindex="-1"></a>  fit <span class="ot">&lt;-</span> <span class="fu">ar</span>(tsb, <span class="at">order.max =</span> <span class="dv">25</span>)</span>
-<span id="cb251-8"><a href="implementación-en-r-con-el-paquete-boot.html#cb251-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(fit<span class="sc">$</span>order, <span class="fu">mean</span>(tsb)) </span>
-<span id="cb251-9"><a href="implementación-en-r-con-el-paquete-boot.html#cb251-9" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb251-10"><a href="implementación-en-r-con-el-paquete-boot.html#cb251-10" aria-hidden="true" tabindex="-1"></a><span class="co"># tsboot</span></span>
-<span id="cb251-11"><a href="implementación-en-r-con-el-paquete-boot.html#cb251-11" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb251-12"><a href="implementación-en-r-con-el-paquete-boot.html#cb251-12" aria-hidden="true" tabindex="-1"></a><span class="fu">tsboot</span>(<span class="fu">log</span>(lynx), lynx.fun, <span class="at">R =</span> <span class="dv">199</span>, <span class="at">sim =</span> <span class="st">&quot;geom&quot;</span>, <span class="at">l =</span> <span class="dv">20</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="implementación-en-r-con-el-paquete-boot.html#cb254-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Datos</span></span>
+<span id="cb254-2"><a href="implementación-en-r-con-el-paquete-boot.html#cb254-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(lynx)</span>
+<span id="cb254-3"><a href="implementación-en-r-con-el-paquete-boot.html#cb254-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ?lynx</span></span>
+<span id="cb254-4"><a href="implementación-en-r-con-el-paquete-boot.html#cb254-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Boot</span></span>
+<span id="cb254-5"><a href="implementación-en-r-con-el-paquete-boot.html#cb254-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(boot)</span>
+<span id="cb254-6"><a href="implementación-en-r-con-el-paquete-boot.html#cb254-6" aria-hidden="true" tabindex="-1"></a>lynx.fun <span class="ot">&lt;-</span> <span class="cf">function</span>(tsb) {</span>
+<span id="cb254-7"><a href="implementación-en-r-con-el-paquete-boot.html#cb254-7" aria-hidden="true" tabindex="-1"></a>  fit <span class="ot">&lt;-</span> <span class="fu">ar</span>(tsb, <span class="at">order.max =</span> <span class="dv">25</span>)</span>
+<span id="cb254-8"><a href="implementación-en-r-con-el-paquete-boot.html#cb254-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(fit<span class="sc">$</span>order, <span class="fu">mean</span>(tsb)) </span>
+<span id="cb254-9"><a href="implementación-en-r-con-el-paquete-boot.html#cb254-9" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb254-10"><a href="implementación-en-r-con-el-paquete-boot.html#cb254-10" aria-hidden="true" tabindex="-1"></a><span class="co"># tsboot</span></span>
+<span id="cb254-11"><a href="implementación-en-r-con-el-paquete-boot.html#cb254-11" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb254-12"><a href="implementación-en-r-con-el-paquete-boot.html#cb254-12" aria-hidden="true" tabindex="-1"></a><span class="fu">tsboot</span>(<span class="fu">log</span>(lynx), lynx.fun, <span class="at">R =</span> <span class="dv">199</span>, <span class="at">sim =</span> <span class="st">&quot;geom&quot;</span>, <span class="at">l =</span> <span class="dv">20</span>)</span></code></pre></div>
 <pre><code>## 
 ## STATIONARY BOOTSTRAP FOR TIME SERIES
 ## 
@@ -423,11 +425,11 @@ the (mean) block length’’.</p>
 ## t1* 11.000000 -6.46733668   2.4675036
 ## t2*  6.685933 -0.01494926   0.1163515</code></pre>
 </div>
-<div id="rnews-2" class="section level3" number="9.5.2">
-<h3><span class="header-section-number">9.5.2</span> Rnews 2</h3>
+<div id="rnews-2" class="section level3 hasAnchor" number="9.5.2">
+<h3><span class="header-section-number">9.5.2</span> Rnews 2<a href="implementación-en-r-con-el-paquete-boot.html#rnews-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Canty, A. J. (2002). <a href="http://cran.fhcrc.org/doc/Rnews/Rnews_2002-3.pdf">Resampling methods in R: the boot package</a>. Rnews: The Newsletter of the R Project, 2 (3), pp. 2-7.</p>
 <blockquote>
-<p>"An alternative to the block bootstrap is to use
+<p>“An alternative to the block bootstrap is to use
 model based resampling. In this case a model is fitted
 to the time series so that the errors are i.i.d. The
 observed residuals are sampled as an i.i.d. series and
@@ -460,28 +462,28 @@ the resampled residuals should be put back through
 the fitted model filter. The function <code>ran.gen</code> can be
 used to do this’’.</p>
 </blockquote>
-<div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb253-1"><a href="implementación-en-r-con-el-paquete-boot.html#cb253-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Datos</span></span>
-<span id="cb253-2"><a href="implementación-en-r-con-el-paquete-boot.html#cb253-2" aria-hidden="true" tabindex="-1"></a>lynx1 <span class="ot">&lt;-</span> <span class="fu">log</span>(lynx)</span>
-<span id="cb253-3"><a href="implementación-en-r-con-el-paquete-boot.html#cb253-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Modelo</span></span>
-<span id="cb253-4"><a href="implementación-en-r-con-el-paquete-boot.html#cb253-4" aria-hidden="true" tabindex="-1"></a>lynx.ar <span class="ot">&lt;-</span> <span class="fu">ar</span>(lynx1)</span>
-<span id="cb253-5"><a href="implementación-en-r-con-el-paquete-boot.html#cb253-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Residuos</span></span>
-<span id="cb253-6"><a href="implementación-en-r-con-el-paquete-boot.html#cb253-6" aria-hidden="true" tabindex="-1"></a>lynx.res <span class="ot">&lt;-</span> <span class="fu">with</span>(lynx.ar, resid[<span class="sc">!</span><span class="fu">is.na</span>(resid)])</span>
-<span id="cb253-7"><a href="implementación-en-r-con-el-paquete-boot.html#cb253-7" aria-hidden="true" tabindex="-1"></a>lynx.res <span class="ot">&lt;-</span> lynx.res <span class="sc">-</span> <span class="fu">mean</span>(lynx.res)</span>
-<span id="cb253-8"><a href="implementación-en-r-con-el-paquete-boot.html#cb253-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Boot</span></span>
-<span id="cb253-9"><a href="implementación-en-r-con-el-paquete-boot.html#cb253-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(boot)</span>
-<span id="cb253-10"><a href="implementación-en-r-con-el-paquete-boot.html#cb253-10" aria-hidden="true" tabindex="-1"></a>lynx.ord <span class="ot">&lt;-</span> <span class="fu">c</span>(lynx.ar<span class="sc">$</span>order, <span class="dv">0</span>, <span class="dv">0</span>)</span>
-<span id="cb253-11"><a href="implementación-en-r-con-el-paquete-boot.html#cb253-11" aria-hidden="true" tabindex="-1"></a>lynx.mod <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">order =</span> lynx.ord, <span class="at">ar =</span> lynx.ar<span class="sc">$</span>ar)</span>
-<span id="cb253-12"><a href="implementación-en-r-con-el-paquete-boot.html#cb253-12" aria-hidden="true" tabindex="-1"></a>lynx.args <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">mean =</span> <span class="fu">mean</span>(lynx1), <span class="at">model =</span> lynx.mod)</span>
-<span id="cb253-13"><a href="implementación-en-r-con-el-paquete-boot.html#cb253-13" aria-hidden="true" tabindex="-1"></a>lynx.black <span class="ot">&lt;-</span> <span class="cf">function</span>(res, n.sim, ran.args) {</span>
-<span id="cb253-14"><a href="implementación-en-r-con-el-paquete-boot.html#cb253-14" aria-hidden="true" tabindex="-1"></a>    m <span class="ot">&lt;-</span> ran.args<span class="sc">$</span>mean</span>
-<span id="cb253-15"><a href="implementación-en-r-con-el-paquete-boot.html#cb253-15" aria-hidden="true" tabindex="-1"></a>    ts.mod <span class="ot">&lt;-</span> ran.args<span class="sc">$</span>model</span>
-<span id="cb253-16"><a href="implementación-en-r-con-el-paquete-boot.html#cb253-16" aria-hidden="true" tabindex="-1"></a>    m <span class="sc">+</span> <span class="fu">filter</span>(res, ts.mod<span class="sc">$</span>ar, <span class="at">method =</span> <span class="st">&quot;recursive&quot;</span>) </span>
-<span id="cb253-17"><a href="implementación-en-r-con-el-paquete-boot.html#cb253-17" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb253-18"><a href="implementación-en-r-con-el-paquete-boot.html#cb253-18" aria-hidden="true" tabindex="-1"></a><span class="co"># tsboot</span></span>
-<span id="cb253-19"><a href="implementación-en-r-con-el-paquete-boot.html#cb253-19" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb253-20"><a href="implementación-en-r-con-el-paquete-boot.html#cb253-20" aria-hidden="true" tabindex="-1"></a><span class="fu">tsboot</span>(lynx.res, lynx.fun, <span class="at">R =</span> <span class="dv">199</span>, <span class="at">l =</span> <span class="dv">20</span>, </span>
-<span id="cb253-21"><a href="implementación-en-r-con-el-paquete-boot.html#cb253-21" aria-hidden="true" tabindex="-1"></a>        <span class="at">sim =</span> <span class="st">&quot;fixed&quot;</span>, <span class="at">n.sim =</span> <span class="dv">114</span>,</span>
-<span id="cb253-22"><a href="implementación-en-r-con-el-paquete-boot.html#cb253-22" aria-hidden="true" tabindex="-1"></a>        <span class="at">ran.gen =</span> lynx.black, <span class="at">ran.args =</span> lynx.args)</span></code></pre></div>
+<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="implementación-en-r-con-el-paquete-boot.html#cb256-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Datos</span></span>
+<span id="cb256-2"><a href="implementación-en-r-con-el-paquete-boot.html#cb256-2" aria-hidden="true" tabindex="-1"></a>lynx1 <span class="ot">&lt;-</span> <span class="fu">log</span>(lynx)</span>
+<span id="cb256-3"><a href="implementación-en-r-con-el-paquete-boot.html#cb256-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Modelo</span></span>
+<span id="cb256-4"><a href="implementación-en-r-con-el-paquete-boot.html#cb256-4" aria-hidden="true" tabindex="-1"></a>lynx.ar <span class="ot">&lt;-</span> <span class="fu">ar</span>(lynx1)</span>
+<span id="cb256-5"><a href="implementación-en-r-con-el-paquete-boot.html#cb256-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Residuos</span></span>
+<span id="cb256-6"><a href="implementación-en-r-con-el-paquete-boot.html#cb256-6" aria-hidden="true" tabindex="-1"></a>lynx.res <span class="ot">&lt;-</span> <span class="fu">with</span>(lynx.ar, resid[<span class="sc">!</span><span class="fu">is.na</span>(resid)])</span>
+<span id="cb256-7"><a href="implementación-en-r-con-el-paquete-boot.html#cb256-7" aria-hidden="true" tabindex="-1"></a>lynx.res <span class="ot">&lt;-</span> lynx.res <span class="sc">-</span> <span class="fu">mean</span>(lynx.res)</span>
+<span id="cb256-8"><a href="implementación-en-r-con-el-paquete-boot.html#cb256-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Boot</span></span>
+<span id="cb256-9"><a href="implementación-en-r-con-el-paquete-boot.html#cb256-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(boot)</span>
+<span id="cb256-10"><a href="implementación-en-r-con-el-paquete-boot.html#cb256-10" aria-hidden="true" tabindex="-1"></a>lynx.ord <span class="ot">&lt;-</span> <span class="fu">c</span>(lynx.ar<span class="sc">$</span>order, <span class="dv">0</span>, <span class="dv">0</span>)</span>
+<span id="cb256-11"><a href="implementación-en-r-con-el-paquete-boot.html#cb256-11" aria-hidden="true" tabindex="-1"></a>lynx.mod <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">order =</span> lynx.ord, <span class="at">ar =</span> lynx.ar<span class="sc">$</span>ar)</span>
+<span id="cb256-12"><a href="implementación-en-r-con-el-paquete-boot.html#cb256-12" aria-hidden="true" tabindex="-1"></a>lynx.args <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">mean =</span> <span class="fu">mean</span>(lynx1), <span class="at">model =</span> lynx.mod)</span>
+<span id="cb256-13"><a href="implementación-en-r-con-el-paquete-boot.html#cb256-13" aria-hidden="true" tabindex="-1"></a>lynx.black <span class="ot">&lt;-</span> <span class="cf">function</span>(res, n.sim, ran.args) {</span>
+<span id="cb256-14"><a href="implementación-en-r-con-el-paquete-boot.html#cb256-14" aria-hidden="true" tabindex="-1"></a>    m <span class="ot">&lt;-</span> ran.args<span class="sc">$</span>mean</span>
+<span id="cb256-15"><a href="implementación-en-r-con-el-paquete-boot.html#cb256-15" aria-hidden="true" tabindex="-1"></a>    ts.mod <span class="ot">&lt;-</span> ran.args<span class="sc">$</span>model</span>
+<span id="cb256-16"><a href="implementación-en-r-con-el-paquete-boot.html#cb256-16" aria-hidden="true" tabindex="-1"></a>    m <span class="sc">+</span> <span class="fu">filter</span>(res, ts.mod<span class="sc">$</span>ar, <span class="at">method =</span> <span class="st">&quot;recursive&quot;</span>) </span>
+<span id="cb256-17"><a href="implementación-en-r-con-el-paquete-boot.html#cb256-17" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb256-18"><a href="implementación-en-r-con-el-paquete-boot.html#cb256-18" aria-hidden="true" tabindex="-1"></a><span class="co"># tsboot</span></span>
+<span id="cb256-19"><a href="implementación-en-r-con-el-paquete-boot.html#cb256-19" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb256-20"><a href="implementación-en-r-con-el-paquete-boot.html#cb256-20" aria-hidden="true" tabindex="-1"></a><span class="fu">tsboot</span>(lynx.res, lynx.fun, <span class="at">R =</span> <span class="dv">199</span>, <span class="at">l =</span> <span class="dv">20</span>, </span>
+<span id="cb256-21"><a href="implementación-en-r-con-el-paquete-boot.html#cb256-21" aria-hidden="true" tabindex="-1"></a>        <span class="at">sim =</span> <span class="st">&quot;fixed&quot;</span>, <span class="at">n.sim =</span> <span class="dv">114</span>,</span>
+<span id="cb256-22"><a href="implementación-en-r-con-el-paquete-boot.html#cb256-22" aria-hidden="true" tabindex="-1"></a>        <span class="at">ran.gen =</span> lynx.black, <span class="at">ran.args =</span> lynx.args)</span></code></pre></div>
 <pre><code>## 
 ## POST-BLACKENED BLOCK BOOTSTRAP FOR TIME SERIES
 ## 
@@ -518,42 +520,42 @@ used to do this’’.</p>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
-"sharing": {
-"github": true,
-"facebook": false,
-"twitter": false,
-"linkedin": false,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"whatsapp": false,
-"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
-},
-"fontsettings": {
-"theme": "white",
-"family": "sans",
-"size": 2
-},
-"edit": {
-"link": "https://github.com/rubenfcasal/book_remuestreo/edit/master/09-depen.Rmd",
-"text": "Edit"
-},
-"history": {
-"link": null,
-"text": null
-},
-"view": {
-"link": null,
-"text": null
-},
-"download": ["book_remuestreo.pdf"],
-"search": {
-"engine": "fuse",
-"options": null
-},
-"toc": {
-"collapse": "subsection"
-}
+  "sharing": {
+    "github": true,
+    "facebook": false,
+    "twitter": false,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": "https://github.com/rubenfcasal/book_remuestreo/edit/master/09-depen.Rmd",
+    "text": "Edit"
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": ["book_remuestreo.pdf"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  }
 });
 });
 </script>
@@ -564,7 +566,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

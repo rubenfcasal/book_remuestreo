@@ -61,8 +61,8 @@ n \right)} \right)$ la muestra de estadísticos ordenados de los tiempos
 de vida observados y $\left( \delta _{(1)},\delta _{\left(2 \right)},
 \ldots ,\delta _{(n)} \right)$ los correspondientes concomitantes.
 
-\BeginKnitrBlock{example}\iffalse{-91-69-115-116-105-109-97-99-105-243-110-32-100-101-32-75-97-112-108-97-110-45-77-101-105-101-114-93-}\fi{}
-<span class="example" id="exm:kaplan-meier"><strong>(\#exm:kaplan-meier)  \iffalse (Estimación de Kaplan-Meier) \fi{} </strong></span>
+::: {.example #kaplan-meier name="Estimación de Kaplan-Meier"}
+
 <br> \vspace{0.5cm}
 
 Se observan los datos censurados: $\left( 2.1,0 \right)$,
@@ -80,7 +80,6 @@ $$\hat{F}\left( t \right) =\left\{
 0.8& \text{si } 3.9\leq t
 \end{array}
 \right.$$
-\EndKnitrBlock{example}
 
 
 En `R` se recomienda emplear el paquete `survival` para el análisis de
@@ -89,7 +88,7 @@ la estimación Kaplan-Meier de la función de supervivencia
 (y a partir de ella la de la distribución).
 En este caso podríamos utilizar el siguiente código [Figura \@ref(fig:survival)]:
 
-```r
+``` r
 datcen <- data.frame(t = c(2.1, 3.2, 1.2, 4.3, 1.8, 3.9, 2.7, 2.5), 
                  cen = c(0, 1, 1, 0, 1, 1, 0, 1))
 
@@ -109,7 +108,7 @@ summary(fit)
 ##   3.9      2       1    0.200   0.174       0.0363            1
 ```
 
-```r
+``` r
 old.par <- par(mfrow = c(1, 2))
 plot(fit, main = "Método plot de un objeto 'survfit'")
 legend("bottomleft",  c("supervivencia", "conf.int"), lty = 1:2)
@@ -132,9 +131,11 @@ with(fit, {
 \caption{Estimaciones Kaplan-Meier de la función de supervivencia y de la función de distribución.}(\#fig:survival)
 \end{figure}
 
-```r
+``` r
 par(old.par)
 ```
+
+:::
 
 
 ### Distribución asintótica del estimador de Kaplan-Meier
@@ -200,11 +201,9 @@ Procede de la siguiente forma:
 3.  Evaluar el estadístico de interés en el vector que contiene la
     remuestra bootstrap: $R^{\ast}=R\left( \mathbf{T}^{\ast},
     \boldsymbol{\delta}^{\ast} \right)$, con
-    $\mathbf{T}^{\ast}
-    =\left( T_1^{\ast},T_2^{\ast},\ldots ,T_n^{\ast} \right)$ y
-   
-    $\boldsymbol{\delta}^{\ast}=\left( \delta _1^{\ast},\delta
-    _2^{\ast},\ldots ,\delta _n^{\ast} \right)$.
+    $\mathbf{T}^{\ast} = \left( T_1^{\ast},T_2^{\ast},\ldots ,T_n^{\ast} \right)$ 
+    y $\boldsymbol{\delta}^{\ast} = \left( \delta_1^{\ast},\delta_2^{\ast}, 
+    \ldots, \delta_n^{\ast} \right)$.
 
 4.  Aproximar la distribución en el muestreo del estadístico
     $R\left( \mathbf{T}, \boldsymbol{\delta} \right)$ por la
@@ -360,7 +359,7 @@ desde su apertura en 1964 hasta el 1 de julio de 1975
 En primer lugar consideraremos únicamente la muestra de hombres:
 
 
-```r
+``` r
 # Datos
 library(boot)
 data(channing)
@@ -378,11 +377,11 @@ chan.F
 ```
 ## Call: survfit(formula = Surv(age, cens) ~ 1, data = chan)
 ## 
-##       n  events  median 0.95LCL 0.95UCL 
-##    97.0    46.0    87.0    85.8    90.4
+##       n events median 0.95LCL 0.95UCL
+## [1,] 97     46     87    85.8    90.4
 ```
 
-```r
+``` r
 # plot(chan.F)
 # Estimaciones de interés
 with(chan.F, 
@@ -396,7 +395,7 @@ with(chan.F,
 ##  0.9160745  0.6347541 82.4166667 87.0000000
 ```
 
-```r
+``` r
 # Bootstrap
 # library(boot)
 chan.stat <- function(data) {
@@ -436,7 +435,7 @@ Se recomienda estimarlas con la función `survfit()` del paquete `survival`
 (ver Figura \@ref(fig:survfit-f-g)):
 
 
-```r
+``` r
 # Estimación supervivencia variable censurante
 chan.G <- survfit(Surv(age, 1-cens)~1, data = chan)
 # Representación
@@ -456,7 +455,7 @@ plot(chan.G, main = "Supervivencia variable censurante (partida)",
 \caption{Estimaciones de la supervivencia (izquierda; indicando los tiempos de las observaciones censuradas) y de la variable censurante (derecha; indicando los de las no censuradas).}(\#fig:survfit-f-g)
 \end{figure}
 
-```r
+``` r
 par(old.par)
 ```
 
@@ -493,7 +492,7 @@ función de riesgo acumulada para generar los valores
 
 El siguiente código muestra un ejemplo de la aplicación de ambos métodos:
 
-```r
+``` r
 chan.boot2 <- censboot(chan, chan.stat, R = 199, F.surv = chan.F, 
                   G.surv = chan.G, sim = "cond")
 chan.boot2
@@ -517,7 +516,7 @@ chan.boot2
 ## t4* 87.0000000  0.286013400  0.95041994
 ```
 
-```r
+``` r
 chan.boot3 <- censboot(chan, chan.stat, R = 199, F.surv = chan.F, 
                   sim = "weird")
 chan.boot3
@@ -543,15 +542,14 @@ chan.boot3
 
 ## Ejercicios
 
-\BeginKnitrBlock{exercise}\iffalse{-91-66-111-111-116-115-116-114-97-112-32-99-101-110-115-117-114-97-100-111-32-112-111-114-32-101-115-116-114-97-116-111-115-93-}\fi{}
-<span class="exercise" id="exr:censboot-strata-ej"><strong>(\#exr:censboot-strata-ej)  \iffalse (Bootstrap censurado por estratos) \fi{} </strong></span>
+::: {.exercise #censboot-strata-ej name="Bootstrap censurado por estratos"}
+
 Analizar el conjunto de datos `channing` completo, teniendo en cuenta el sexo como estrato
 (i.e. `Surv(age, cens) ~ sex` y `strata = chan$sex`)
 
-\EndKnitrBlock{exercise}
 
 
-```r
+``` r
 # Datos
 data(channing)
 # Calcular edad (de partida o muerte) en años
@@ -573,7 +571,7 @@ chan.F
 ## sex=Male    97     46     87    85.8    90.4
 ```
 
-```r
+``` r
 plot(chan.F, lty = 1:2, xlim = c(60, 100))
 ```
 
@@ -586,7 +584,7 @@ plot(chan.F, lty = 1:2, xlim = c(60, 100))
 \caption{Estimaciones de la supervivencia.}(\#fig:surv-strata)
 \end{figure}
 
-```r
+``` r
 res <- summary(chan.F)
 # res
 str(res)
@@ -619,34 +617,33 @@ str(res)
 ##  - attr(*, "class")= chr "summary.survfit"
 ```
 
-```r
+``` r
 # Estimaciones de interés
-res$table[, c("*rmean", "median")]
+res$table[, c("rmean", "median")]
 ```
 
 ```
-##              *rmean median
+##               rmean median
 ## sex=Female 88.46153     88
 ## sex=Male   86.89935     87
 ```
 
-```r
-as.numeric(res$table[, c("*rmean", "median")])
+``` r
+as.numeric(res$table[, c("rmean", "median")])
 ```
 
 ```
 ## [1] 88.46153 86.89935 88.00000 87.00000
 ```
 
+:::
 
-\BeginKnitrBlock{exercise}\iffalse{-91-66-111-111-116-115-116-114-97-112-32-99-101-110-115-117-114-97-100-111-32-99-111-110-32-114-105-101-115-103-111-32-112-114-111-112-111-114-99-105-111-110-97-108-32-100-101-32-67-111-120-93-}\fi{}
-<span class="exercise" id="exr:censboot-cox-ej"><strong>(\#exr:censboot-cox-ej)  \iffalse (Bootstrap censurado con riesgo proporcional de Cox) \fi{} </strong></span>
+::: {.exercise #censboot-cox-ej name="Bootstrap censurado con riesgo proporcional de Cox"}
+
 Reproducir el ejemplo en Canty (2002, [Rnews_2002-3](http://cran.fhcrc.org/doc/Rnews/Rnews_2002-3.pdf)) del modelo de riesgo proporcional de Cox (Cox, 1972):
 
-\EndKnitrBlock{exercise}
 
-
-```r
+``` r
 # Datos
 data(melanoma)
 mel <- melanoma[melanoma$ulcer == 1, ]
@@ -669,7 +666,7 @@ mel.cox
 ## n= 90, number of events= 41
 ```
 
-```r
+``` r
 # summary(mel.cox)
 # Estadísticos de interés
 mel.cox$coefficients
@@ -679,3 +676,5 @@ mel.cox$coefficients
 ##  thickness 
 ## 0.09967665
 ```
+
+:::

@@ -74,17 +74,17 @@ Por defecto empleará todos los núcleos disponibles, pero se puede especificar 
 mediante el argumento `mc.cores`. 
 
 
-```r
+``` r
 library(parallel)
 ncores <- detectCores()
 ncores
 ```
 
 ```
-## [1] 8
+## [1] 20
 ```
 
-```r
+``` r
 func <- function(k) {
   i_boot <- sample(nrow(iris), replace = TRUE)
   lm(Petal.Width ~ Petal.Length, data = iris[i_boot, ])$coefficients
@@ -98,10 +98,10 @@ system.time(res.boot <- mclapply(1:100, func)) # En Windows llama a lapply() (mc
 
 ```
 ##    user  system elapsed 
-##    0.06    0.00    0.06
+##    0.03    0.00    0.03
 ```
 
-```r
+``` r
 # res.boot <- mclapply(1:100, func, mc.cores = ncores - 1) # En Windows genera un error si mc.cores > 1
 ```
 
@@ -109,7 +109,7 @@ En Windows habría que crear previamente un cluster, llamar a una de las funcion
 `par*apply()` y finalizar el cluster:
 
 
-```r
+``` r
 cl <- makeCluster(ncores - 1, type = "PSOCK")
 clusterSetRNGStream(cl, 1) # Establecemos Pierre L'Ecuyer's RngStreams con semilla 1...
 
@@ -118,10 +118,10 @@ system.time(res.boot <- parSapply(cl, 1:100, func))
 
 ```
 ##    user  system elapsed 
-##    0.00    0.02    0.03
+##    0.00    0.00    0.05
 ```
 
-```r
+``` r
 # stopCluster(cl)
 
 str(res.boot)
@@ -144,7 +144,7 @@ números pseudo-aleatorios (los resultados no serían reproducibles).
 Además, empleando las herramientas del paquete `snow` se puede representar el uso
 del cluster (*experimental* en Windows):
 
-```r
+``` r
 # library(snow)
 ctime <- snow::snow.time(snow::parSapply(cl, 1:100, func))
 ctime
@@ -164,7 +164,7 @@ salvo que se establezca con el parámetro `cl`.
 
 Veamos un ejemplo empleando una muestra simulada:
 
-```r
+``` r
 n <- 100
 rate <- 0.01
 mu <- 1/rate
@@ -185,17 +185,17 @@ system.time(res.boot <- boot(muestra, statistic, R = B))
 
 ```
 ##    user  system elapsed 
-##    0.05    0.00    0.05
+##    0.04    0.00    0.03
 ```
 
-```r
+``` r
 # system.time(res.boot <- boot(muestra, statistic, R = B, parallel = "snow"))
 system.time(res.boot <- boot(muestra, statistic, R = B, parallel = "snow", cl = cl))
 ```
 
 ```
 ##    user  system elapsed 
-##    0.03    0.00    0.03
+##    0.01    0.00    0.01
 ```
 
 ### Estudio de simulación {#estudio-sim-boot}
@@ -210,7 +210,7 @@ pero comparando las probabilidades de cobertura y las longitudes de los
 intervalos de confianza implementados en la función `boot.ci()`.
 
 
-```r
+``` r
 t.ini <- proc.time()
 
 nsim <- 500
@@ -248,7 +248,7 @@ getSimulation <- function(isim, B = 2000, n = 30, alfa = 0.1, mu = 100) {
     resultados
 }
 
-parallel::clusterSetRNGStream(cl)
+parallel::clusterSetRNGStream(cl, 1)
 result <- parLapply(cl, 1:nsim, getSimulation)
 # stopCluster(cl)
 
@@ -259,10 +259,10 @@ print(t.fin)
 
 ```
 ##    user  system elapsed 
-##    0.03    0.00    6.97
+##    0.00    0.00    1.86
 ```
 
-```r
+``` r
 resnames <- c("Cobertura", "Longitud")
 intervals <- c("Normal", "Basic", "Studentized", "Percentil", "BCa")
 names(intervals) <- c("normal","basic", "student", "percent", "bca")
@@ -277,13 +277,13 @@ res
 
 ```
 ##             Cobertura Longitud
-## Normal          0.866 57.05639
-## Basic           0.860 56.97389
-## Studentized     0.900 65.72609
-## Percentil       0.868 56.97389
+## Normal          0.870 57.55112
+## Basic           0.862 57.49063
+## Studentized     0.898 66.17858
+## Percentil       0.870 57.49063
 ```
 
-```r
+``` r
 knitr::kable(res, digits = 3)
 ```
 
@@ -292,20 +292,20 @@ knitr::kable(res, digits = 3)
 \hline
   & Cobertura & Longitud\\
 \hline
-Normal & 0.866 & 57.056\\
+Normal & 0.870 & 57.551\\
 \hline
-Basic & 0.860 & 56.974\\
+Basic & 0.862 & 57.491\\
 \hline
-Studentized & 0.900 & 65.726\\
+Studentized & 0.898 & 66.179\\
 \hline
-Percentil & 0.868 & 56.974\\
+Percentil & 0.870 & 57.491\\
 \hline
 \end{tabular}
 
 
 El último paso es finalizar el cluster:
 
-```r
+``` r
 stopCluster(cl)
 ```
 
