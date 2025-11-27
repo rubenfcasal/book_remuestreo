@@ -232,7 +232,7 @@
 
 \title{Técnicas de Remuestreo}
 \author{Ricardo Cao Abad (\href{mailto:rcao@udc.es}{\nolinkurl{rcao@udc.es}}) y Rubén Fernández Casal (\href{mailto:rfcasal@udc.es}{\nolinkurl{rfcasal@udc.es}})}
-\date{Edición: Septiembre de 2022. Impresión: 2025-09-08}
+\date{Edición: Septiembre de 2022. Impresión: 2025-11-27}
 
 \begin{document}
 \maketitle
@@ -1827,7 +1827,7 @@ del Ejemplo \ref{exm:media-dt-desconocida}.
 
 \textbf{\emph{Modificaciones del bootstrap uniforme}}
 
-Establecenciendo parámetros adicionales de la función \texttt{boot} se pueden llevar
+Estableciendo parámetros adicionales de la función \texttt{boot} se pueden llevar
 a cabo modificaciones del bootstrap uniforme.
 Algunos de estos parámetros son los siguientes:
 
@@ -4955,7 +4955,7 @@ bootstrap para un nivel de confianza nominal del 90\% (\(\alpha =0.10\)).
 
 \begin{verbatim}
 ##    user  system elapsed 
-##    7.50    0.12    7.66
+##    7.36    0.15    7.54
 \end{verbatim}
 
 \begin{Shaded}
@@ -7012,7 +7012,7 @@ Exceptuando las tasas de convergencia de la normal teórica (aproximación
 inutilizable en la práctica) se observa que el método bootstrap
 suavizado en la variable explicativa presenta órdenes que igualan o
 mejoran al resto de los métodos, tanto en un aspecto condicional como
-condicionalmente. Así, condicionalmente los dos remuestreos bootstrap
+incondicionalmente. Así, condicionalmente los dos remuestreos bootstrap
 son los que ofrecen una mejor tasa de convergencia (\(n^{-2/9}\),
 frente a \(n^{-1/5}\) de la aproximación plug-in). En el
 sentido incondicional el bootstrap suavizado en la variable explicativa
@@ -8706,10 +8706,51 @@ puede extenderse fácilmente para procesos de Markov de orden
 \hypertarget{implementaciuxf3n-en-r}{%
 \section{\texorpdfstring{Implementación en \texttt{R}}{Implementación en R}}\label{implementaciuxf3n-en-r}}
 
-Para simular una serie de tiempo en \texttt{R}
-se puede emplear la función \texttt{arima.sim()} del paquete base \texttt{stats}.
-Por ejemplo, podemos generar una serie autoregresiva con:
-{[}Figura \ref{fig:arima-sim}{]}
+\hypertarget{bootstrap-paramuxe9trico}{%
+\subsection{Bootstrap paramétrico}\label{bootstrap-paramuxe9trico}}
+
+Para simular una serie de tiempo en \texttt{R} se puede emplear la función
+\texttt{arima.sim()} del paquete base \texttt{stats}.
+Los principales parámetros de esta función son:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{arima.sim}\NormalTok{(model, n, }\AttributeTok{rand.gen =}\NormalTok{ rnorm, }\AttributeTok{n.start =} \ConstantTok{NA}\NormalTok{, ...)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\item
+  \texttt{model}: lista que define el modelo, con componentes \texttt{ar} y/o \texttt{ma} que
+  contienen los coeficientes AR y MA respectivamente, y opcionalmente un
+  componente \texttt{order} con el orden de los componentes ARIMA.
+\item
+  \texttt{n}: longitud de la serie generada.
+\item
+  \texttt{rand.gen}: función para generar las innovaciones (los errores). Por defecto
+  \texttt{rnorm()}.
+\item
+  \texttt{n.start}: periodo de calentamiento. Con el valor por defecto (\texttt{NA}) se
+  fija automáticamente a un valor adecuado.
+\item
+  \texttt{...}: argumentos adicionales para \texttt{rand.gen()}. Con la opción por defecto
+  (\texttt{rnorm()}) se suele establecer la desviación típica de los errores con \texttt{sd}.
+\end{itemize}
+
+La recomendación es fijar la varianza de las series simuladas si se quieren
+comparar resultados considerando distintos parámetros de dependencia.
+
+Otras opciones son:
+
+\begin{itemize}
+\item
+  \texttt{innov\ =\ rand.gen(n,\ ...)}: vector con las innovaciones (errores).
+\item
+  \texttt{start.innov\ =\ rand.gen(n.start,\ ...)}: vector de innovaciones empleado en
+  el periodo de calentamiento.
+\end{itemize}
+
+Por ejemplo, podemos generar una serie autoregresiva AR(1) con:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -8720,65 +8761,147 @@ Por ejemplo, podemos generar una serie autoregresiva con:
 \NormalTok{rho }\OtherTok{\textless{}{-}} \FloatTok{0.5}    \CommentTok{\# Coeficiente AR}
 \NormalTok{nburn }\OtherTok{\textless{}{-}} \DecValTok{10}   \CommentTok{\# Periodo de calentamiento (burn{-}in)}
 \NormalTok{evar }\OtherTok{\textless{}{-}}\NormalTok{ xvar}\SpecialCharTok{*}\NormalTok{(}\DecValTok{1} \SpecialCharTok{{-}}\NormalTok{ rho}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{) }\CommentTok{\# Varianza del error}
+
 \CommentTok{\# Simulación}
 \FunctionTok{set.seed}\NormalTok{(}\DecValTok{1}\NormalTok{)}
-\NormalTok{ry }\OtherTok{\textless{}{-}} \FunctionTok{arima.sim}\NormalTok{(}\FunctionTok{list}\NormalTok{(}\AttributeTok{order =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{), }\AttributeTok{ar =}\NormalTok{ rho), }
+\NormalTok{ry }\OtherTok{\textless{}{-}}\NormalTok{ xmed }\SpecialCharTok{+} \FunctionTok{arima.sim}\NormalTok{(}\AttributeTok{model =} \FunctionTok{list}\NormalTok{(}\AttributeTok{order =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{), }\AttributeTok{ar =}\NormalTok{ rho), }
             \AttributeTok{n =}\NormalTok{ nsim, }\AttributeTok{sd =} \FunctionTok{sqrt}\NormalTok{(evar)) }\CommentTok{\# n.start = nburn}
 \FunctionTok{plot}\NormalTok{(ry)}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{figure}[!htb]
+\begin{center}\includegraphics[width=0.7\linewidth]{09-depen_files/figure-latex/unnamed-chunk-3-1} \end{center}
 
-{\centering \includegraphics[width=0.7\linewidth]{09-depen_files/figure-latex/arima-sim-1} 
-
-}
-
-\caption{Simulación de un modelo autoregresivo.}\label{fig:arima-sim}
-\end{figure}
-
-En este caso el periodo de calentamiento se establece mediante el
-parámetro \texttt{n.start} (que se fija automáticamente a un valor adecuado).
-La recomendación es fijar la varianza de las series simuladas si se quieren
-comparar resultados considerando distintos parámetros de dependencia.
-
-Otras opciones:
-
-\begin{itemize}
-\item
-  \texttt{rand.gen\ =\ rnorm}
-\item
-  \texttt{innov\ =\ rand.gen(n,\ ...)}
-\item
-  \texttt{n.start\ =\ NA}
-\item
-  \texttt{start.innov\ =\ rand.gen(n.start,\ ...)}
-\end{itemize}
-
-Ejemplo (\texttt{?arima.sim}):
-{[}Figura \ref{fig:arima-sim2}{]}
+Como ejemplo adicional utilizamos una distribución t con 5 grados de libertad
+para generar los errores:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{ry2 }\OtherTok{\textless{}{-}} \FunctionTok{arima.sim}\NormalTok{(}\AttributeTok{n =} \DecValTok{63}\NormalTok{, }\FunctionTok{list}\NormalTok{(}\AttributeTok{ar =} \FunctionTok{c}\NormalTok{(}\FloatTok{0.8897}\NormalTok{, }\SpecialCharTok{{-}}\FloatTok{0.4858}\NormalTok{), }
-          \AttributeTok{ma =} \FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\FloatTok{0.2279}\NormalTok{, }\FloatTok{0.2488}\NormalTok{)),}
-          \AttributeTok{rand.gen =} \ControlFlowTok{function}\NormalTok{(n, ...) }\FunctionTok{sqrt}\NormalTok{(}\FloatTok{0.1796}\NormalTok{) }\SpecialCharTok{*} \FunctionTok{rt}\NormalTok{(n, }\AttributeTok{df =} \DecValTok{5}\NormalTok{))}
+\NormalTok{rand.gen.t }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(n, }\AttributeTok{df =} \DecValTok{5}\NormalTok{, }\AttributeTok{sd =} \DecValTok{1}\NormalTok{) \{}
+  \FunctionTok{sqrt}\NormalTok{(}\DecValTok{1} \SpecialCharTok{{-}} \DecValTok{2}\SpecialCharTok{/}\NormalTok{df) }\SpecialCharTok{*}\NormalTok{ sd }\SpecialCharTok{*} \FunctionTok{rt}\NormalTok{(n, }\AttributeTok{df =}\NormalTok{ df)}
+\NormalTok{\}}
 
+\NormalTok{ry2 }\OtherTok{\textless{}{-}}\NormalTok{ xmed }\SpecialCharTok{+} \FunctionTok{arima.sim}\NormalTok{(}\AttributeTok{model =} \FunctionTok{list}\NormalTok{(}\AttributeTok{order =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{), }\AttributeTok{ar =}\NormalTok{ rho), }
+                \AttributeTok{n =}\NormalTok{ nsim, }\AttributeTok{rand.gen =}\NormalTok{ rand.gen.t,}
+                \AttributeTok{sd =} \FunctionTok{sqrt}\NormalTok{(evar)) }\CommentTok{\# n.start = nburn}
 \FunctionTok{plot}\NormalTok{(ry2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=0.7\linewidth]{09-depen_files/figure-latex/unnamed-chunk-4-1} \end{center}
+
+En el bootstrap paramétrico se emplearía el modelo ajustado.
+Como ejemplo consideraremos los datos de linces capturados al año en Canadá entre 1821 y 1934:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# ?lynx}
+\CommentTok{\#plot(lynx)}
+\FunctionTok{plot}\NormalTok{(}\FunctionTok{log}\NormalTok{(lynx))}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{figure}[!htb]
 
-{\centering \includegraphics[width=0.7\linewidth]{09-depen_files/figure-latex/arima-sim2-1} 
+{\centering \includegraphics[width=0.7\linewidth]{09-depen_files/figure-latex/loglynx-1} 
 
 }
 
-\caption{Simulación de un modelo autoregresivo con errores con distribución *t* de Student.}\label{fig:arima-sim2}
+\caption{Logaritmo del número de capturas anuales de linces en Canadá entre 1821 y 1934.}\label{fig:loglynx}
 \end{figure}
 
+En \texttt{R} podemos emplear las funciones \texttt{ar()} o \texttt{arima()} para ajustar un modelo,
+pero puede resultar más cómodo emplear las herramientas del paquete
+\href{https://pkg.robjhyndman.com/forecast/}{forecast} (o de la nueva alternativa \href{http://fable.tidyverts.org/}{fable})
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{fit.arima }\OtherTok{\textless{}{-}}\NormalTok{ forecast}\SpecialCharTok{::}\FunctionTok{auto.arima}\NormalTok{(}\FunctionTok{log}\NormalTok{(lynx), }\AttributeTok{stepwise=}\ConstantTok{FALSE}\NormalTok{, }\AttributeTok{approximation=}\ConstantTok{FALSE}\NormalTok{)}
+\FunctionTok{str}\NormalTok{(fit.arima}\SpecialCharTok{$}\NormalTok{coef)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  Named num [1:6] 1.555 -0.953 -0.453 -0.149 0.563 ...
+##  - attr(*, "names")= chr [1:6] "ar1" "ar2" "ma1" "ma2" ...
+\end{verbatim}
+
+Este paquete implementa métodos \texttt{simulate()} para los distintos modelos que permite ajustar.
+Por defecto hace simulación condicional (\texttt{future\ =\ TRUE}), simulando nuevos valores condicionados a los ya observados:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# methods(simulate)}
+\CommentTok{\# ?simulate.Arima}
+\CommentTok{\# View(forecast:::simulate.Arima)}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{1}\NormalTok{)}
+\NormalTok{ry }\OtherTok{\textless{}{-}} \FunctionTok{simulate}\NormalTok{(fit.arima, }\AttributeTok{nsim =} \DecValTok{12}\NormalTok{)}
+\FunctionTok{plot}\NormalTok{(}\FunctionTok{log}\NormalTok{(lynx), }\AttributeTok{xlim =} \FunctionTok{c}\NormalTok{(}\DecValTok{1820}\NormalTok{, }\DecValTok{1946}\NormalTok{))}
+\FunctionTok{lines}\NormalTok{(ry, }\AttributeTok{col =} \StringTok{"red"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=0.7\linewidth]{09-depen_files/figure-latex/unnamed-chunk-6-1} \end{center}
+
+Para hacer simulación incondicional hay que establecer \texttt{future\ =\ FALSE}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{1}\NormalTok{)}
+\NormalTok{ry }\OtherTok{\textless{}{-}} \FunctionTok{simulate}\NormalTok{(fit.arima, }\AttributeTok{future =} \ConstantTok{FALSE}\NormalTok{)}
+\FunctionTok{plot}\NormalTok{(}\FunctionTok{log}\NormalTok{(lynx))}
+\FunctionTok{lines}\NormalTok{(ry, }\AttributeTok{lty =} \DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=0.7\linewidth]{09-depen_files/figure-latex/unnamed-chunk-7-1} \end{center}
+
+\hypertarget{bootstrap-residual-semiparamuxe9trico}{%
+\subsection{Bootstrap residual (semiparamétrico)}\label{bootstrap-residual-semiparamuxe9trico}}
+
+En lugar de generar errores siguiendo una distribución paramétrica, se pueden remuestrear los residuos:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{fit.ar }\OtherTok{\textless{}{-}} \FunctionTok{ar}\NormalTok{(}\FunctionTok{log}\NormalTok{(lynx)) }\CommentTok{\# Cuidado con el modelo!}
+\NormalTok{n }\OtherTok{\textless{}{-}}\NormalTok{ fit.ar}\SpecialCharTok{$}\NormalTok{n.obs}
+\NormalTok{xmed }\OtherTok{\textless{}{-}}\NormalTok{ fit.ar}\SpecialCharTok{$}\NormalTok{x.mean }\CommentTok{\# mean(log(lynx))}
+\NormalTok{model }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{(}\AttributeTok{order =} \FunctionTok{c}\NormalTok{(fit.ar}\SpecialCharTok{$}\NormalTok{order, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{), }\AttributeTok{ar =}\NormalTok{ fit.ar}\SpecialCharTok{$}\NormalTok{ar)}
+\NormalTok{res }\OtherTok{\textless{}{-}}\NormalTok{ fit.ar}\SpecialCharTok{$}\NormalTok{resid[}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(fit.ar}\SpecialCharTok{$}\NormalTok{resid)]}
+\NormalTok{res }\OtherTok{\textless{}{-}}\NormalTok{ res }\SpecialCharTok{{-}} \FunctionTok{mean}\NormalTok{(res)}
+
+\NormalTok{rand.gen.res }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(n, res) \{}
+  \FunctionTok{sample}\NormalTok{(res, n, }\AttributeTok{replace =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{\}}
+
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{1}\NormalTok{)}
+\NormalTok{ry.boot }\OtherTok{\textless{}{-}}\NormalTok{ xmed }\SpecialCharTok{+} \FunctionTok{arima.sim}\NormalTok{(}\AttributeTok{model =}\NormalTok{ model, }\AttributeTok{n =}\NormalTok{ n, }\AttributeTok{rand.gen =}\NormalTok{ rand.gen.res,}
+                            \AttributeTok{res =}\NormalTok{ res) }\CommentTok{\# n.start = nburn}
+\FunctionTok{plot}\NormalTok{(ry.boot)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=0.7\linewidth]{09-depen_files/figure-latex/unnamed-chunk-8-1} \end{center}
+
+Con los métodos \texttt{simulate()} del paquete \texttt{forecast} bastaría con establecer \texttt{bootstrap\ =\ TRUE}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{1}\NormalTok{)}
+\CommentTok{\# ry.boot \textless{}{-} simulate(fit.ar, future = FALSE, bootstrap = TRUE)}
+\NormalTok{ry.boot.cond }\OtherTok{\textless{}{-}} \FunctionTok{simulate}\NormalTok{(fit.ar, }\AttributeTok{bootstrap =} \ConstantTok{TRUE}\NormalTok{)}
+\FunctionTok{plot}\NormalTok{(}\FunctionTok{log}\NormalTok{(lynx), }\AttributeTok{xlim =} \FunctionTok{c}\NormalTok{(}\DecValTok{1820}\NormalTok{, }\DecValTok{1946}\NormalTok{))}
+\CommentTok{\# lines(ry.boot, lty = 3)}
+\FunctionTok{lines}\NormalTok{(ry.boot.cond, }\AttributeTok{col =} \StringTok{"red"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=0.7\linewidth]{09-depen_files/figure-latex/unnamed-chunk-9-1} \end{center}
+
+Ver enlaces en apéndice \ref{forecast-links}.
+
 \hypertarget{implementaciuxf3n-en-r-con-el-paquete-boot}{%
-\section{\texorpdfstring{Implementación en \texttt{R} con el paquete \texttt{boot}}{Implementación en R con el paquete boot}}\label{implementaciuxf3n-en-r-con-el-paquete-boot}}
+\subsection{\texorpdfstring{Implementación en \texttt{R} con el paquete \texttt{boot}}{Implementación en R con el paquete boot}}\label{implementaciuxf3n-en-r-con-el-paquete-boot}}
 
 La función \texttt{tsboot()} del paquete \texttt{boot} implementa distintos métodos
 de remuestreo para series de tiempo.
@@ -8790,10 +8913,10 @@ de remuestreo para series de tiempo.
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{rnews-1}{%
-\subsection{Rnews 1}\label{rnews-1}}
+Utilizaremos los ejemplos en Canty, A. J. (2002). \href{http://cran.fhcrc.org/doc/Rnews/Rnews_2002-3.pdf}{Resampling methods in R: the boot package}. Rnews: The Newsletter of the R Project, 2 (3), pp.~2-7.
 
-Canty, A. J. (2002). \href{http://cran.fhcrc.org/doc/Rnews/Rnews_2002-3.pdf}{Resampling methods in R: the boot package}. Rnews: The Newsletter of the R Project, 2 (3), pp.~2-7.
+\hypertarget{rnews-1-boostrap-por-bloques}{%
+\subsubsection{Rnews 1: boostrap por bloques}\label{rnews-1-boostrap-por-bloques}}
 
 \begin{quote}
 ``\texttt{tsboot()} can do either of these methods
@@ -8839,10 +8962,8 @@ the (mean) block length'\,'.
 ## t2*  6.685933 -0.01494926   0.1163515
 \end{verbatim}
 
-\hypertarget{rnews-2}{%
-\subsection{Rnews 2}\label{rnews-2}}
-
-Canty, A. J. (2002). \href{http://cran.fhcrc.org/doc/Rnews/Rnews_2002-3.pdf}{Resampling methods in R: the boot package}. Rnews: The Newsletter of the R Project, 2 (3), pp.~2-7.
+\hypertarget{rnews-2-bootstrap-residual-con-post-blackening}{%
+\subsubsection{Rnews 2: bootstrap residual con ``post-blackening''}\label{rnews-2-bootstrap-residual-con-post-blackening}}
 
 \begin{quote}
 ``An alternative to the block bootstrap is to use
@@ -8924,370 +9045,8 @@ used to do this'\,'.
 ## t2* 6.1989e-18 6.683323  0.09551445
 \end{verbatim}
 
-\hypertarget{ejercicios-1}{%
-\section{Ejercicios}\label{ejercicios-1}}
-
-\begin{exercise}[Practical 8.1, Lynx data: Davison y Hinkley, 1997]
-\protect\hypertarget{exr:tsboot-lynx}{}\label{exr:tsboot-lynx}
-
-Reproducir el ``Practical 8.1 (Lynx data)'' en Davison, A. C., y Hinkley, D. V. (1997). Bootstrap methods and their application. Cambridge university press, \url{http://statwww.epfl.ch/davison/BMA}
-(\href{http://webcache.googleusercontent.com/search?q=cache:a4nFL5ymMMoJ:statwww.epfl.ch/davison/BMA/+\&cd=1\&hl=gl\&ct=clnk\&gl=es}{caché}):
-
-\begin{quote}
-``Dataframe lynx contains the Canadian lynx data,
-to the logarithm of which we fit the autoregressive
-model that minimizes AIC:
-\end{quote}
-
-{[}Figura \ref{fig:lynx-data}{]}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{ts.plot}\NormalTok{(}\FunctionTok{log}\NormalTok{(lynx))}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{figure}[!htb]
-
-{\centering \includegraphics[width=0.7\linewidth]{09-depen_files/figure-latex/lynx-data-1} 
-
-}
-
-\caption{Lynx data (logarithmic scale).}\label{fig:lynx-data}
-\end{figure}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{lynx.ar }\OtherTok{\textless{}{-}} \FunctionTok{ar}\NormalTok{(}\FunctionTok{log}\NormalTok{(lynx))}
-\NormalTok{lynx.ar}\SpecialCharTok{$}\NormalTok{order}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 11
-\end{verbatim}
-
-\begin{quote}
-The best model is AR(11). How well determined is this,
-and what is the variance of the series average?
-We bootstrap to see, using \texttt{lynx.fun} (given below),
-which calculates the order of the fitted autoregressive
-model, the series average, and saves the series itself.
-\end{quote}
-
-\begin{quote}
-Here are results for fixed-block bootstraps
-with block length \(l = 20\):
-\end{quote}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{set.seed}\NormalTok{(DNI)}
-\NormalTok{lynx.fun }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(tsb) \{ }
-\NormalTok{  ar.fit }\OtherTok{\textless{}{-}} \FunctionTok{ar}\NormalTok{(tsb, }\AttributeTok{order.max=}\DecValTok{25}\NormalTok{)}
-  \FunctionTok{c}\NormalTok{(ar.fit}\SpecialCharTok{$}\NormalTok{order, }\FunctionTok{mean}\NormalTok{(tsb), tsb) }
-\NormalTok{\}}
-\NormalTok{lynx}\FloatTok{.1} \OtherTok{\textless{}{-}} \FunctionTok{tsboot}\NormalTok{(}\FunctionTok{log}\NormalTok{(lynx), lynx.fun, }\AttributeTok{R=}\DecValTok{99}\NormalTok{, }\AttributeTok{l=}\DecValTok{20}\NormalTok{, }\AttributeTok{sim=}\StringTok{"fixed"}\NormalTok{)}
-\NormalTok{lynx}\FloatTok{.1}
-\FunctionTok{ts.plot}\NormalTok{(}\FunctionTok{ts}\NormalTok{(lynx}\FloatTok{.1}\SpecialCharTok{$}\NormalTok{t[}\DecValTok{1}\NormalTok{,}\DecValTok{3}\SpecialCharTok{:}\DecValTok{116}\NormalTok{],}\AttributeTok{start=}\FunctionTok{c}\NormalTok{(}\DecValTok{1821}\NormalTok{,}\DecValTok{1}\NormalTok{)),}
-        \AttributeTok{main=}\StringTok{"Block simulation, l=20"}\NormalTok{)}
-\FunctionTok{boot.array}\NormalTok{(lynx}\FloatTok{.1}\NormalTok{)[}\DecValTok{1}\NormalTok{,]}
-\FunctionTok{table}\NormalTok{(lynx}\FloatTok{.1}\SpecialCharTok{$}\NormalTok{t[,}\DecValTok{1}\NormalTok{])}
-\FunctionTok{var}\NormalTok{(lynx}\FloatTok{.1}\SpecialCharTok{$}\NormalTok{t[,}\DecValTok{2}\NormalTok{])}
-\FunctionTok{qqnorm}\NormalTok{(lynx}\FloatTok{.1}\SpecialCharTok{$}\NormalTok{t[,}\DecValTok{2}\NormalTok{]);}
-\FunctionTok{abline}\NormalTok{(}\FunctionTok{mean}\NormalTok{(lynx}\FloatTok{.1}\SpecialCharTok{$}\NormalTok{t[,}\DecValTok{2}\NormalTok{]),}\FunctionTok{sqrt}\NormalTok{(}\FunctionTok{var}\NormalTok{(lynx}\FloatTok{.1}\SpecialCharTok{$}\NormalTok{t[,}\DecValTok{2}\NormalTok{])),}\AttributeTok{lty=}\DecValTok{2}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{quote}
-To obtain similar results for the stationary
-bootstrap with mean block length \(l = 20\):
-\end{quote}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{.Random.seed }\OtherTok{\textless{}{-}}\NormalTok{ lynx}\FloatTok{.1}\SpecialCharTok{$}\NormalTok{seed}
-\NormalTok{lynx}\FloatTok{.2} \OtherTok{\textless{}{-}} \FunctionTok{tsboot}\NormalTok{(}\FunctionTok{log}\NormalTok{(lynx), lynx.fun, ...}
-\CommentTok{\# lynx.2}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{quote}
-See if the results look different from those above.
-Do the simulated series using blocks look like the original?
-Compare the estimated variances under the two resampling schemes.
-Try different block lengths, and see how
-the variances of the series average change.
-\end{quote}
-
-\begin{quote}
-For model-based resampling we need to store results from the original model:
-\end{quote}
-
-\begin{quote}
-Check the orders of the fitted models for this scheme.
-\end{quote}
-
-\begin{quote}
-For post-blackening we need to define yet another function:
-\end{quote}
-
-\begin{quote}
-Compare these results with those above, and try the post-blackened bootstrap with \texttt{sim="geom"}.
-(Sections 8.2.2, 8.2.3)'\,'.
-\end{quote}
-
-\end{exercise}
-
-\begin{exercise}[Practical 8.2, Beaver data: Davison y Hinkley, 1997]
-\protect\hypertarget{exr:tsboot-beaver}{}\label{exr:tsboot-beaver}
-
-Reproducir el ``Practical 8.2 (Beaver data)'' en Davison, A. C., y Hinkley, D. V. (1997). Bootstrap methods and their application. Cambridge university press, \url{http://statwww.epfl.ch/davison/BMA}
-(\href{http://webcache.googleusercontent.com/search?q=cache:a4nFL5ymMMoJ:statwww.epfl.ch/davison/BMA/+\&cd=1\&hl=gl\&ct=clnk\&gl=es}{caché}):
-
-\begin{quote}
-``The data in beaver consist of a time series of \(n = 100\)
-observations on the body temperature \(y_1, \ldots, y_n\)
-and an indicator \(x_1, \ldots, x_n\) of activity of
-a female beaver, Castor canadensis.
-\end{quote}
-
-{[}Figura \ref{fig:beaver-data}{]}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{\# ?beaver}
-\FunctionTok{plot}\NormalTok{(beaver)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{figure}[!htb]
-
-{\centering \includegraphics[width=0.7\linewidth]{09-depen_files/figure-latex/beaver-data-1} 
-
-}
-
-\caption{Beaver data}\label{fig:beaver-data}
-\end{figure}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{class}\NormalTok{(beaver)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] "mts" "ts"
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{str}\NormalTok{(beaver) }
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-##  Time-Series [1:100, 1:4] from 1 to 100: 307 307 307 307 307 307 307 307 307 307 ...
-##  - attr(*, "dimnames")=List of 2
-##   ..$ : NULL
-##   ..$ : chr [1:4] "day" "time" "temp" "activ"
-\end{verbatim}
-
-\begin{quote}
-We want to estimate and give an uncertainty measure
-for the body temperature of the beaver.
-The simplest model that allows for the clear
-autocorrelation of the series is \ldots{}
-\end{quote}
-
-\begin{quote}
-To fit the original model and to generate a new series:
-\end{quote}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{data }\OtherTok{\textless{}{-}}\NormalTok{ beaver}
-\CommentTok{\# fit \textless{}{-} function( data )\{ }
-\CommentTok{\#   \#  X \textless{}{-} cbind(rep(1,100),data$activ) \# ErrorR}
-\CommentTok{\#   X \textless{}{-} cbind(rep(1, 100), data[,"activ"])}
-\CommentTok{\#   para \textless{}{-} list(X = X, data = data)}
-\CommentTok{\#   \# assign("para",para, frame=1) \# ErrorR}
-\CommentTok{\#   \# assign("para", para, envir = .GlobalEnv)}
-\CommentTok{\#   para \textless{}\textless{}{-} para}
-\CommentTok{\#   \# arima.mle \# ErrorR}
-\CommentTok{\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
-\CommentTok{\#   d \textless{}{-} arima.mle(x = para$data$temp,}
-\CommentTok{\#               model = list(ar = c(0.8)), xreg = para$X)}
-\CommentTok{\#   res \textless{}{-} arima.diag(d, plot = F, std.resid = T)$std.resid}
-\CommentTok{\#   res \textless{}{-} res[!is.na(res)]}
-\CommentTok{\#   list(}
-\CommentTok{\#     paras = c(d$model$ar, d$reg.coef, sqrt(d$sigma2)),}
-\CommentTok{\#     res = res {-} mean(res),}
-\CommentTok{\#     fit = X \%*\% d$reg.coef)  }
-\CommentTok{\# \}}
-\CommentTok{\# }
-\CommentTok{\# beaver.args \textless{}{-} fit(beaver)}
-\CommentTok{\# white.noise \textless{}{-} function(n.sim, ts) }
-\CommentTok{\#     sample(ts, size = n.sim, replace = TRUE)}
-\CommentTok{\# beaver.gen \textless{}{-} function(ts, n.sim, ran.args)\{}
-\CommentTok{\#     tsb \textless{}{-} ran.args$res}
-\CommentTok{\#     fit \textless{}{-} ran.args$fit}
-\CommentTok{\#     coeff \textless{}{-} ran.args$paras}
-\CommentTok{\#     ts$temp \textless{}{-} fit + coeff[4] * arima.sim(model = list(ar = coeff[1]),}
-\CommentTok{\#         n = n.sim, rand.gen = white.noise, ts = tsb)}
-\CommentTok{\#     ts}
-\CommentTok{\# \}}
-\CommentTok{\# new.beaver \textless{}{-} beaver.gen( beaver, 100, beaver.args )}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{quote}
-Now we are able to generate data,
-we can bootstrap and see the results of \texttt{beaver.boot} as follows:
-\end{quote}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{\# beaver.fun \textless{}{-} function(ts) fit(ts)$paras}
-\CommentTok{\# beaver.boot \textless{}{-} tsboot( beaver, beaver.fun, R=99,sim="model", }
-\CommentTok{\#         n.sim=100,ran.gen=beaver.gen,ran.args=beaver.args) }
-\CommentTok{\# names(beaver.boot)}
-\CommentTok{\# beaver.boot$t0}
-\CommentTok{\# beaver.boot$t[1:10,]}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{quote}
-showing the original value of \texttt{beaver.fun}
-and its value for the first 10 replicate series.
-Are the estimated mean temperatures for the \texttt{R\ =\ 99}
-simulations normal?
-Use \texttt{boot.ci} to obtain normal and basic bootstrap
-confidence intervals for the resting and active temperatures.
-In this analysis we have assumed that
-the linear model with AR(1) errors is appropriate.
-How would you proceed if it were not?
-(Section 8.2; Reynolds, 1994)'\,'.
-\end{quote}
-
-\end{exercise}
-
-\begin{exercise}[Practical 8.3, Sunspot data: Davison y Hinkley, 1997]
-\protect\hypertarget{exr:tsboot-sunspot}{}\label{exr:tsboot-sunspot}
-
-Reproducir el ``Practical 8.3 (Sunspot data)'' en Davison, A. C., y Hinkley, D. V. (1997). Bootstrap methods and their application. Cambridge university press, \url{http://statwww.epfl.ch/davison/BMA}
-(\href{http://webcache.googleusercontent.com/search?q=cache:a4nFL5ymMMoJ:statwww.epfl.ch/davison/BMA/+\&cd=1\&hl=gl\&ct=clnk\&gl=es}{caché}):
-
-\begin{quote}
-``Consider scrambling the phases of the sunspot data.
-To see the original data,
-\end{quote}
-
-{[}Figura \ref{fig:sunspot}{]}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{data}\NormalTok{(sunspot.year)  }\CommentTok{\# WarningR: data set \textquotesingle{}sunspot\textquotesingle{} not found}
-\CommentTok{\# ?sunspot.year}
-\NormalTok{yl }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{50}\NormalTok{, }\DecValTok{200}\NormalTok{)}
-\FunctionTok{plot}\NormalTok{(sunspot.year, }\AttributeTok{ylim =}\NormalTok{ yl)}
-\FunctionTok{abline}\NormalTok{(}\AttributeTok{h =} \DecValTok{0}\NormalTok{, }\AttributeTok{lty =} \DecValTok{2}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{figure}[!htb]
-
-{\centering \includegraphics[width=0.7\linewidth]{09-depen_files/figure-latex/sunspot-1} 
-
-}
-
-\caption{Sunspot data (yearly numbers).}\label{fig:sunspot}
-\end{figure}
-
-\begin{quote}
-two replicates generated using ordinary phase scrambling,
-and two phase scrambled series whose marginal distribution is the same as that of the original data:
-\end{quote}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{set.seed}\NormalTok{(DNI)}
-\NormalTok{sunspot}\FloatTok{.1} \OtherTok{\textless{}{-}} \FunctionTok{tsboot}\NormalTok{(sunspot.year, ...}
-\NormalTok{.Random.seed }\OtherTok{\textless{}{-}}\NormalTok{ sunspot}\FloatTok{.1}\SpecialCharTok{$}\NormalTok{seed }\CommentTok{\# set.seed(DNI)}
-\NormalTok{sunspot}\FloatTok{.2} \OtherTok{\textless{}{-}} \FunctionTok{tsboot}\NormalTok{(sunspot.year, ...}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{quote}
-What features of the original data are preserved
-by the two algorithms?
-(You may find it helpful to experiment with
-different shapes for the figures.)
-(Section 8.2.4; Problem 8.4; Theiler et al, 1992)'\,'.
-\end{quote}
-
-\end{exercise}
-
-\hypertarget{implementaciuxf3n-en-r-con-el-paquete-forecast}{%
-\section{\texorpdfstring{Implementación en \texttt{R} con el paquete \texttt{forecast}}{Implementación en R con el paquete forecast}}\label{implementaciuxf3n-en-r-con-el-paquete-forecast}}
-
-\hypertarget{bootstrap-condicional-a-partir-de-un-modelo-ajustado}{%
-\subsection{Bootstrap condicional (a partir de un modelo ajustado)}\label{bootstrap-condicional-a-partir-de-un-modelo-ajustado}}
-
-En la práctica normalmente se ajusta un modelo a los datos observados y
-posteriormente se obtienen las simulaciones condicionadas empleando
-el modelo ajustado.
-
-Por ejemplo, en el caso de series de tiempo, se puede emplear la función \texttt{simulate}
-del paquete \texttt{forecast}: {[}Figura \ref{fig:co2}{]}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{library}\NormalTok{(forecast)}
-\CommentTok{\# ?co2}
-\NormalTok{data }\OtherTok{\textless{}{-}} \FunctionTok{window}\NormalTok{(co2, }\DecValTok{1990}\NormalTok{) }\CommentTok{\# datos de co2 desde 1990 (hasta 1997)}
-\FunctionTok{plot}\NormalTok{(data, }\AttributeTok{ylab =} \FunctionTok{expression}\NormalTok{(}\StringTok{"Atmospheric concentration of CO"}\NormalTok{[}\DecValTok{2}\NormalTok{]), }
-     \AttributeTok{xlim=}\FunctionTok{c}\NormalTok{(}\DecValTok{1990}\NormalTok{,}\DecValTok{2000}\NormalTok{), }\AttributeTok{ylim=}\FunctionTok{c}\NormalTok{(}\DecValTok{350}\NormalTok{, }\DecValTok{375}\NormalTok{))}
-\NormalTok{data2 }\OtherTok{\textless{}{-}} \FunctionTok{window}\NormalTok{(co2, }\DecValTok{1990}\NormalTok{, }\DecValTok{1996}\NormalTok{) }\CommentTok{\# datos de co2 desde 1990 hasta 1996}
-\NormalTok{fit }\OtherTok{\textless{}{-}} \FunctionTok{ets}\NormalTok{(data2)}
-\CommentTok{\# Simulación condicional}
-\FunctionTok{set.seed}\NormalTok{(}\DecValTok{1}\NormalTok{)}
-\NormalTok{ry }\OtherTok{\textless{}{-}} \FunctionTok{simulate}\NormalTok{(fit, }\DecValTok{12}\SpecialCharTok{*}\DecValTok{4}\NormalTok{)}
-\FunctionTok{lines}\NormalTok{(ry, }\AttributeTok{col=}\StringTok{"red"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{figure}[!htb]
-
-{\centering \includegraphics[width=0.7\linewidth]{09-depen_files/figure-latex/co2-1} 
-
-}
-
-\caption{Datos de co2 (1990-1997) y simulación condicional (a partir de las observaciones desde 1990 hasta 1996).}\label{fig:co2}
-\end{figure}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{plot}\NormalTok{(}\FunctionTok{forecast}\NormalTok{(fit, }\AttributeTok{h=}\DecValTok{12}\SpecialCharTok{*}\DecValTok{4}\NormalTok{), }\AttributeTok{col=}\StringTok{"blue"}\NormalTok{)}
-\FunctionTok{lines}\NormalTok{(ry, }\AttributeTok{col=}\StringTok{"red"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{figure}[!htb]
-
-{\centering \includegraphics[width=0.7\linewidth]{09-depen_files/figure-latex/co22-1} 
-
-}
-
-\caption{Predicción de los valores de co2 y simulación condicional (ambas a partir de las observaciones entre 1990 y 1996).}\label{fig:co22}
-\end{figure}
-
-{[}Figura \ref{fig:co22}{]}
-
-Ver enlaces en apéndice \ref{forecast-links}.
-
 \hypertarget{spatial-data}{%
-\section{Spatial data}\label{spatial-data}}
+\subsection{Spatial data}\label{spatial-data}}
 
 Ver enlaces en apéndice \ref{spatial-links}.
 
@@ -9367,8 +9126,8 @@ Castillo-Páez, S., Fernández-Casal, R. and García-Soidán, P. (2019).
 \emph{Computational Statistics and Data Analysis} \textbf{137}, 1-15.
 
 Castillo-Páez S., Fernández-Casal R. and García-Soidán P. (2020).
-\href{https://doi.org/10.1016/j.spasta.2019.100389}{Nonparametric bootstrap approach for unconditional risk mapping under heteroscedasticity}.
-\emph{Spatial Statistics}. In Press.
+\href{https://www.sciencedirect.com/science/article/pii/S221167531930140X}{Nonparametric bootstrap approach for unconditional risk mapping under heteroscedasticity}.
+\emph{Spatial Statistics} \textbf{40}, 100389.
 
 Carlstein, E., Do, K. A., Hall, P., Hesterberg, T., and Künsch, H. R. (1998). \href{https://projecteuclid.org/euclid.bj/1174324983}{Matched-block bootstrap for dependent data .}
 \emph{Bernoulli} \textbf{4} 3, 305-328.
@@ -9414,6 +9173,8 @@ Faraway, J.J. and Jhun, M. (1990). Bootstrap choice of bandwidth for
 density estimation. \emph{Jr.~Amer. Statist. Assoc.} \textbf{85}, 1119--1122.
 
 Fernández-Casal R., Cao R. y Costa J. (2023). \emph{Técnicas de Simulación y Remuestreo}. \url{https://rubenfcasal.github.io/simbook}.
+
+Fernández-Casal R., Castillo-Páez S., Flores M. (2024). \href{https://doi.org/10.1007/s13253-023-00561-2}{\emph{A Nonparametric Bootstrap Method for Heteroscedastic Functional Data}}. \emph{JABES} \textbf{29}, 169-184.
 
 Ferretti, N. and Romo, J. (1996). Unit root bootstrap test for AR(1)
 models. \emph{Biometrika} \textbf{83}, 849-860.
@@ -9989,7 +9750,7 @@ En Windows habría que crear previamente un cluster, llamar a una de las funcion
 
 \begin{verbatim}
 ##    user  system elapsed 
-##    0.00    0.00    0.05
+##    0.00    0.00    0.03
 \end{verbatim}
 
 \begin{Shaded}
@@ -10062,7 +9823,7 @@ Veamos un ejemplo empleando una muestra simulada:
 
 \begin{verbatim}
 ##    user  system elapsed 
-##    0.04    0.00    0.03
+##    0.03    0.00    0.03
 \end{verbatim}
 
 \begin{Shaded}
@@ -10074,7 +9835,7 @@ Veamos un ejemplo empleando una muestra simulada:
 
 \begin{verbatim}
 ##    user  system elapsed 
-##    0.01    0.00    0.01
+##    0.03    0.00    0.03
 \end{verbatim}
 
 \hypertarget{estudio-sim-boot}{%
@@ -10140,7 +9901,7 @@ intervalos de confianza implementados en la función \texttt{boot.ci()}.
 
 \begin{verbatim}
 ##    user  system elapsed 
-##    0.00    0.00    1.86
+##    0.02    0.00    2.05
 \end{verbatim}
 
 \begin{Shaded}

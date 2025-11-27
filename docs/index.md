@@ -5,7 +5,7 @@ institute:
    - "Departamento de Matemáticas"
    - "Grupo de investigación de Modelización, Optimización e Inferencia Estadística (MODES)"
    - "Centro de Investigación en Tecnologías de la Información y las Comunicaciones (CITIC)"
-date: "Edición: Septiembre de 2022. Impresión: 2025-09-08"
+date: "Edición: Septiembre de 2022. Impresión: 2025-11-27"
 site: bookdown::bookdown_site
 output: bookdown::gitbook
 documentclass: book

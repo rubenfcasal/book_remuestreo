@@ -1449,7 +1449,7 @@ del Ejemplo \@ref(exm:media-dt-desconocida).
 
 ***Modificaciones del bootstrap uniforme*** 
 
-Establecenciendo parámetros adicionales de la función `boot` se pueden llevar 
+Estableciendo parámetros adicionales de la función `boot` se pueden llevar 
 a cabo modificaciones del bootstrap uniforme. 
 Algunos de estos parámetros son los siguientes:
 

@@ -633,10 +633,45 @@ $p>1$.
 
 ## Implementación en `R` 
 
-Para simular una serie de tiempo en `R`
-se puede emplear la función `arima.sim()` del paquete base `stats`.
-Por ejemplo, podemos generar una serie autoregresiva con:
-[Figura \@ref(fig:arima-sim)]  
+### Bootstrap paramétrico
+
+Para simular una serie de tiempo en `R` se puede emplear la función 
+`arima.sim()` del paquete base `stats`.
+Los principales parámetros de esta función son:
+
+
+``` r
+arima.sim(model, n, rand.gen = rnorm, n.start = NA, ...)
+```
+
+
+* `model`: lista que define el modelo, con componentes `ar` y/o `ma` que 
+   contienen los coeficientes AR y MA respectivamente, y opcionalmente un 
+   componente `order` con el orden de los componentes ARIMA.
+   
+* `n`: longitud de la serie generada.    
+
+* `rand.gen`: función para generar las innovaciones (los errores). Por defecto
+  `rnorm()`.
+
+* `n.start`: periodo de calentamiento. Con el valor por defecto (`NA`) se 
+  fija automáticamente a un valor adecuado.
+
+* `...`: argumentos adicionales para `rand.gen()`. Con la opción por defecto
+   (`rnorm()`) se suele establecer la desviación típica de los errores con `sd`.
+   
+La recomendación es fijar la varianza de las series simuladas si se quieren
+comparar resultados considerando distintos parámetros de dependencia.
+
+Otras opciones son:
+
+* `innov = rand.gen(n, ...)`: vector con las innovaciones (errores).
+
+* `start.innov = rand.gen(n.start, ...)`: vector de innovaciones empleado en 
+   el periodo de calentamiento.
+
+Por ejemplo, podemos generar una serie autoregresiva AR(1) con:
+
 
 ``` r
 # Parámetros
@@ -646,58 +681,152 @@ xmed <- 0     # Media
 rho <- 0.5    # Coeficiente AR
 nburn <- 10   # Periodo de calentamiento (burn-in)
 evar <- xvar*(1 - rho^2) # Varianza del error
+
 # Simulación
 set.seed(1)
-ry <- arima.sim(list(order = c(1,0,0), ar = rho), 
+ry <- xmed + arima.sim(model = list(order = c(1,0,0), ar = rho), 
             n = nsim, sd = sqrt(evar)) # n.start = nburn
 plot(ry)
 ```
 
-\begin{figure}[!htb]
 
-{\centering \includegraphics[width=0.7\linewidth]{09-depen_files/figure-latex/arima-sim-1} 
 
-}
+\begin{center}\includegraphics[width=0.7\linewidth]{09-depen_files/figure-latex/unnamed-chunk-3-1} \end{center}
 
-\caption{Simulación de un modelo autoregresivo.}(\#fig:arima-sim)
-\end{figure}
-En este caso el periodo de calentamiento se establece mediante el
-parámetro `n.start` (que se fija automáticamente a un valor adecuado).
-La recomendación es fijar la varianza de las series simuladas si se quieren
-comparar resultados considerando distintos parámetros de dependencia.
+Como ejemplo adicional utilizamos una distribución t con 5 grados de libertad
+para generar los errores:
 
-Otras opciones:
-
-* `rand.gen = rnorm`
-
-* `innov = rand.gen(n, ...)`
-
-* `n.start = NA`
-
-* `start.innov = rand.gen(n.start, ...)`
-
-Ejemplo (`?arima.sim`):
-[Figura \@ref(fig:arima-sim2)]  
 
 ``` r
-ry2 <- arima.sim(n = 63, list(ar = c(0.8897, -0.4858), 
-          ma = c(-0.2279, 0.2488)),
-          rand.gen = function(n, ...) sqrt(0.1796) * rt(n, df = 5))
+rand.gen.t <- function(n, df = 5, sd = 1) {
+  sqrt(1 - 2/df) * sd * rt(n, df = df)
+}
 
+ry2 <- xmed + arima.sim(model = list(order = c(1,0,0), ar = rho), 
+                n = nsim, rand.gen = rand.gen.t,
+                sd = sqrt(evar)) # n.start = nburn
 plot(ry2)
+```
+
+
+
+\begin{center}\includegraphics[width=0.7\linewidth]{09-depen_files/figure-latex/unnamed-chunk-4-1} \end{center}
+
+En el bootstrap paramétrico se emplearía el modelo ajustado.
+Como ejemplo consideraremos los datos de linces capturados al año en Canadá entre 1821 y 1934:
+
+
+``` r
+# ?lynx
+#plot(lynx)
+plot(log(lynx))
 ```
 
 \begin{figure}[!htb]
 
-{\centering \includegraphics[width=0.7\linewidth]{09-depen_files/figure-latex/arima-sim2-1} 
+{\centering \includegraphics[width=0.7\linewidth]{09-depen_files/figure-latex/loglynx-1} 
 
 }
 
-\caption{Simulación de un modelo autoregresivo con errores con distribución *t* de Student.}(\#fig:arima-sim2)
+\caption{Logaritmo del número de capturas anuales de linces en Canadá entre 1821 y 1934.}(\#fig:loglynx)
 \end{figure}
 
 
-## Implementación en `R` con el paquete `boot`
+En `R` podemos emplear las funciones `ar()` o `arima()` para ajustar un modelo,
+pero puede resultar más cómodo emplear las herramientas del paquete
+[forecast](https://pkg.robjhyndman.com/forecast/) (o de la nueva alternativa [fable](http://fable.tidyverts.org/))
+
+
+``` r
+fit.arima <- forecast::auto.arima(log(lynx), stepwise=FALSE, approximation=FALSE)
+str(fit.arima$coef)
+```
+
+```
+##  Named num [1:6] 1.555 -0.953 -0.453 -0.149 0.563 ...
+##  - attr(*, "names")= chr [1:6] "ar1" "ar2" "ma1" "ma2" ...
+```
+
+Este paquete implementa métodos `simulate()` para los distintos modelos que permite ajustar.
+Por defecto hace simulación condicional (`future = TRUE`), simulando nuevos valores condicionados a los ya observados:
+
+
+``` r
+# methods(simulate)
+# ?simulate.Arima
+# View(forecast:::simulate.Arima)
+set.seed(1)
+ry <- simulate(fit.arima, nsim = 12)
+plot(log(lynx), xlim = c(1820, 1946))
+lines(ry, col = "red")
+```
+
+
+
+\begin{center}\includegraphics[width=0.7\linewidth]{09-depen_files/figure-latex/unnamed-chunk-6-1} \end{center}
+
+Para hacer simulación incondicional hay que establecer `future = FALSE`:
+
+
+``` r
+set.seed(1)
+ry <- simulate(fit.arima, future = FALSE)
+plot(log(lynx))
+lines(ry, lty = 3)
+```
+
+
+
+\begin{center}\includegraphics[width=0.7\linewidth]{09-depen_files/figure-latex/unnamed-chunk-7-1} \end{center}
+
+
+### Bootstrap residual (semiparamétrico)
+
+En lugar de generar errores siguiendo una distribución paramétrica, se pueden remuestrear los residuos:
+
+
+``` r
+fit.ar <- ar(log(lynx)) # Cuidado con el modelo!
+n <- fit.ar$n.obs
+xmed <- fit.ar$x.mean # mean(log(lynx))
+model <- list(order = c(fit.ar$order, 0, 0), ar = fit.ar$ar)
+res <- fit.ar$resid[!is.na(fit.ar$resid)]
+res <- res - mean(res)
+
+rand.gen.res <- function(n, res) {
+  sample(res, n, replace = TRUE)
+}
+
+set.seed(1)
+ry.boot <- xmed + arima.sim(model = model, n = n, rand.gen = rand.gen.res,
+                            res = res) # n.start = nburn
+plot(ry.boot)
+```
+
+
+
+\begin{center}\includegraphics[width=0.7\linewidth]{09-depen_files/figure-latex/unnamed-chunk-8-1} \end{center}
+
+Con los métodos `simulate()` del paquete `forecast` bastaría con establecer `bootstrap = TRUE`:
+
+
+``` r
+set.seed(1)
+# ry.boot <- simulate(fit.ar, future = FALSE, bootstrap = TRUE)
+ry.boot.cond <- simulate(fit.ar, bootstrap = TRUE)
+plot(log(lynx), xlim = c(1820, 1946))
+# lines(ry.boot, lty = 3)
+lines(ry.boot.cond, col = "red")
+```
+
+
+
+\begin{center}\includegraphics[width=0.7\linewidth]{09-depen_files/figure-latex/unnamed-chunk-9-1} \end{center}
+
+Ver enlaces en apéndice \@ref(forecast-links).
+
+
+### Implementación en `R` con el paquete `boot`
 
 La función `tsboot()` del paquete `boot` implementa distintos métodos 
 de remuestreo para series de tiempo.
@@ -708,10 +837,10 @@ library(boot)
 # ?tsboot
 ```
 
+Utilizaremos los ejemplos en Canty, A. J. (2002). [Resampling methods in R: the boot package ](http://cran.fhcrc.org/doc/Rnews/Rnews_2002-3.pdf). Rnews: The Newsletter of the R Project, 2 (3), pp. 2-7.
 
-### Rnews  1
+#### Rnews 1: boostrap por bloques
 
-Canty, A. J. (2002). [Resampling methods in R: the boot package ](http://cran.fhcrc.org/doc/Rnews/Rnews_2002-3.pdf). Rnews: The Newsletter of the R Project, 2 (3), pp. 2-7.
 
 > "`tsboot()` can do either of these methods
 > by specifying `sim="fixed"` or `sim="geom"` respectively.
@@ -755,9 +884,8 @@ tsboot(log(lynx), lynx.fun, R = 199, sim = "geom", l = 20)
 ```
 
 
-### Rnews 2
+#### Rnews 2: bootstrap residual con "post-blackening"
 
-Canty, A. J. (2002). [Resampling methods in R: the boot package ](http://cran.fhcrc.org/doc/Rnews/Rnews_2002-3.pdf). Rnews: The Newsletter of the R Project, 2 (3), pp. 2-7.
 
 > "An alternative to the block bootstrap is to use
 > model based resampling. In this case a model is fitted
@@ -837,317 +965,7 @@ tsboot(lynx.res, lynx.fun, R = 199, l = 20,
 ## t2* 6.1989e-18 6.683323  0.09551445
 ```
 
-
-## Ejercicios
-
-::: {.exercise #tsboot-lynx name="Practical 8.1, Lynx data: Davison y Hinkley, 1997"}
-
-Reproducir el "Practical 8.1 (Lynx data)" en Davison, A. C., y Hinkley, D. V. (1997). Bootstrap methods and their application. Cambridge university press, <http://statwww.epfl.ch/davison/BMA>
-([caché](http://webcache.googleusercontent.com/search?q=cache:a4nFL5ymMMoJ:statwww.epfl.ch/davison/BMA/+&cd=1&hl=gl&ct=clnk&gl=es)):
-
-
-> "Dataframe lynx contains the Canadian lynx data, 
-> to the logarithm of which we fit the autoregressive
-> model that minimizes AIC:
-
-[Figura \@ref(fig:lynx-data)]  
-
-
-``` r
-ts.plot(log(lynx))
-```
-
-\begin{figure}[!htb]
-
-{\centering \includegraphics[width=0.7\linewidth]{09-depen_files/figure-latex/lynx-data-1} 
-
-}
-
-\caption{Lynx data (logarithmic scale).}(\#fig:lynx-data)
-\end{figure}
-
-``` r
-lynx.ar <- ar(log(lynx))
-lynx.ar$order
-```
-
-```
-## [1] 11
-```
-
-> The best model is AR(11). How well determined is this,
-> and what is the variance of the series average? 
-> We bootstrap to see, using `lynx.fun` (given below),
-> which calculates the order of the fitted autoregressive
-> model, the series average, and saves the series itself.
-    
-> Here are results for fixed-block bootstraps 
-> with block length $l = 20$:
-
-
-``` r
-set.seed(DNI)
-lynx.fun <- function(tsb) { 
-  ar.fit <- ar(tsb, order.max=25)
-  c(ar.fit$order, mean(tsb), tsb) 
-}
-lynx.1 <- tsboot(log(lynx), lynx.fun, R=99, l=20, sim="fixed")
-lynx.1
-ts.plot(ts(lynx.1$t[1,3:116],start=c(1821,1)),
-        main="Block simulation, l=20")
-boot.array(lynx.1)[1,]
-table(lynx.1$t[,1])
-var(lynx.1$t[,2])
-qqnorm(lynx.1$t[,2]);
-abline(mean(lynx.1$t[,2]),sqrt(var(lynx.1$t[,2])),lty=2)
-```
-
-> To obtain similar results for the stationary 
-> bootstrap with mean block length $l = 20$:
-
-
-``` r
-.Random.seed <- lynx.1$seed
-lynx.2 <- tsboot(log(lynx), lynx.fun, ...
-# lynx.2
-```
-
-> See if the results look different from those above.
-> Do the simulated series using blocks look like the original? 
-> Compare the estimated variances under the two resampling schemes. 
-> Try different block lengths, and see how 
-> the variances of the series average change.
-
-> For model-based resampling we need to store results from the original model:
-    
-> Check the orders of the fitted models for this scheme.
- 
-> For post-blackening we need to define yet another function:
-
-> Compare these results with those above, and try the post-blackened bootstrap with `sim="geom"`.
-> (Sections 8.2.2, 8.2.3)''.
-
-:::
-
-::: {.exercise #tsboot-beaver name="Practical 8.2, Beaver data: Davison y Hinkley, 1997"}
-
-Reproducir el "Practical 8.2  (Beaver data)" en Davison, A. C., y Hinkley, D. V. (1997). Bootstrap methods and their application. Cambridge university press, <http://statwww.epfl.ch/davison/BMA>
-([caché](http://webcache.googleusercontent.com/search?q=cache:a4nFL5ymMMoJ:statwww.epfl.ch/davison/BMA/+&cd=1&hl=gl&ct=clnk&gl=es)):
-
-> "The data in beaver consist of a time series of $n = 100$
-> observations on the body temperature $y_1, \ldots, y_n$ 
-> and an indicator $x_1, \ldots, x_n$ of activity of 
-> a female beaver, Castor canadensis.
-
-[Figura \@ref(fig:beaver-data)]  
-
-
-``` r
-# ?beaver
-plot(beaver)
-```
-
-\begin{figure}[!htb]
-
-{\centering \includegraphics[width=0.7\linewidth]{09-depen_files/figure-latex/beaver-data-1} 
-
-}
-
-\caption{Beaver data}(\#fig:beaver-data)
-\end{figure}
-
-``` r
-class(beaver)
-```
-
-```
-## [1] "mts" "ts"
-```
-
-``` r
-str(beaver) 
-```
-
-```
-##  Time-Series [1:100, 1:4] from 1 to 100: 307 307 307 307 307 307 307 307 307 307 ...
-##  - attr(*, "dimnames")=List of 2
-##   ..$ : NULL
-##   ..$ : chr [1:4] "day" "time" "temp" "activ"
-```
-    
-> We want to estimate and give an uncertainty measure 
-> for the body temperature of the beaver. 
-> The simplest model that allows for the clear 
-> autocorrelation of the series is ...
-
-> To fit the original model and to generate a new series:
-
-
-``` r
-data <- beaver
-# fit <- function( data ){ 
-#   #  X <- cbind(rep(1,100),data$activ) # ErrorR
-#   X <- cbind(rep(1, 100), data[,"activ"])
-#   para <- list(X = X, data = data)
-#   # assign("para",para, frame=1) # ErrorR
-#   # assign("para", para, envir = .GlobalEnv)
-#   para <<- para
-#   # arima.mle # ErrorR
-# ----------------------------
-#   d <- arima.mle(x = para$data$temp,
-#               model = list(ar = c(0.8)), xreg = para$X)
-#   res <- arima.diag(d, plot = F, std.resid = T)$std.resid
-#   res <- res[!is.na(res)]
-#   list(
-#     paras = c(d$model$ar, d$reg.coef, sqrt(d$sigma2)),
-#     res = res - mean(res),
-#     fit = X %*% d$reg.coef)  
-# }
-# 
-# beaver.args <- fit(beaver)
-# white.noise <- function(n.sim, ts) 
-#     sample(ts, size = n.sim, replace = TRUE)
-# beaver.gen <- function(ts, n.sim, ran.args){
-#     tsb <- ran.args$res
-#     fit <- ran.args$fit
-#     coeff <- ran.args$paras
-#     ts$temp <- fit + coeff[4] * arima.sim(model = list(ar = coeff[1]),
-#         n = n.sim, rand.gen = white.noise, ts = tsb)
-#     ts
-# }
-# new.beaver <- beaver.gen( beaver, 100, beaver.args )
-```
-
-> Now we are able to generate data, 
-> we can bootstrap and see the results of `beaver.boot` as follows:
-
-
-``` r
-# beaver.fun <- function(ts) fit(ts)$paras
-# beaver.boot <- tsboot( beaver, beaver.fun, R=99,sim="model", 
-#         n.sim=100,ran.gen=beaver.gen,ran.args=beaver.args) 
-# names(beaver.boot)
-# beaver.boot$t0
-# beaver.boot$t[1:10,]
-```
-
-> showing the original value of `beaver.fun` 
-> and its value for the first 10 replicate series. 
-> Are the estimated mean temperatures for the `R = 99`
-> simulations normal? 
-> Use `boot.ci` to obtain normal and basic bootstrap 
-> confidence intervals for the resting and active temperatures.
-> In this analysis we have assumed that 
-> the linear model with AR(1) errors is appropriate. 
-> How would you proceed if it were not?
-> (Section 8.2; Reynolds, 1994)''.
-
-:::
-
-
-::: {.exercise #tsboot-sunspot name="Practical 8.3, Sunspot data: Davison y Hinkley, 1997"}
-
-Reproducir el "Practical 8.3  (Sunspot data)" en Davison, A. C., y Hinkley, D. V. (1997). Bootstrap methods and their application. Cambridge university press, <http://statwww.epfl.ch/davison/BMA>
-([caché](http://webcache.googleusercontent.com/search?q=cache:a4nFL5ymMMoJ:statwww.epfl.ch/davison/BMA/+&cd=1&hl=gl&ct=clnk&gl=es)):
-
-> "Consider scrambling the phases of the sunspot data. 
-> To see the original data, 
-
-[Figura \@ref(fig:sunspot)]  
-
-
-``` r
-data(sunspot.year)  # WarningR: data set 'sunspot' not found
-# ?sunspot.year
-yl <- c(-50, 200)
-plot(sunspot.year, ylim = yl)
-abline(h = 0, lty = 2)
-```
-
-\begin{figure}[!htb]
-
-{\centering \includegraphics[width=0.7\linewidth]{09-depen_files/figure-latex/sunspot-1} 
-
-}
-
-\caption{Sunspot data (yearly numbers).}(\#fig:sunspot)
-\end{figure}
-
-> two replicates generated using ordinary phase scrambling, 
-> and two phase scrambled series whose marginal distribution is the same as that of the original data:
-    
-
-``` r
-set.seed(DNI)
-sunspot.1 <- tsboot(sunspot.year, ...
-.Random.seed <- sunspot.1$seed # set.seed(DNI)
-sunspot.2 <- tsboot(sunspot.year, ...
-```
-    
-> What features of the original data are preserved
-> by the two algorithms?
-> (You may find it helpful to experiment with
-> different shapes for the figures.)
-> (Section 8.2.4; Problem 8.4; Theiler et al, 1992)''.
-
-:::
-
-## Implementación en `R` con el paquete `forecast`
-
-### Bootstrap condicional (a partir de un modelo ajustado)
-
-En la práctica normalmente se ajusta un modelo a los datos observados y
-posteriormente se obtienen las simulaciones condicionadas empleando 
-el modelo ajustado.
-
-Por ejemplo, en el caso de series de tiempo, se puede emplear la función `simulate`
-del paquete `forecast`: [Figura \@ref(fig:co2)]
-
-
-``` r
-library(forecast)
-# ?co2
-data <- window(co2, 1990) # datos de co2 desde 1990 (hasta 1997)
-plot(data, ylab = expression("Atmospheric concentration of CO"[2]), 
-     xlim=c(1990,2000), ylim=c(350, 375))
-data2 <- window(co2, 1990, 1996) # datos de co2 desde 1990 hasta 1996
-fit <- ets(data2)
-# Simulación condicional
-set.seed(1)
-ry <- simulate(fit, 12*4)
-lines(ry, col="red")
-```
-
-\begin{figure}[!htb]
-
-{\centering \includegraphics[width=0.7\linewidth]{09-depen_files/figure-latex/co2-1} 
-
-}
-
-\caption{Datos de co2 (1990-1997) y simulación condicional (a partir de las observaciones desde 1990 hasta 1996).}(\#fig:co2)
-\end{figure}
-
-
-
-``` r
-plot(forecast(fit, h=12*4), col="blue")
-lines(ry, col="red")
-```
-
-\begin{figure}[!htb]
-
-{\centering \includegraphics[width=0.7\linewidth]{09-depen_files/figure-latex/co22-1} 
-
-}
-
-\caption{Predicción de los valores de co2 y simulación condicional (ambas a partir de las observaciones entre 1990 y 1996).}(\#fig:co22)
-\end{figure}
-[Figura \@ref(fig:co22)]
-
-Ver enlaces en apéndice \@ref(forecast-links).
-
-
-## Spatial data
+### Spatial data
 
 Ver enlaces en apéndice \@ref(spatial-links).
 
