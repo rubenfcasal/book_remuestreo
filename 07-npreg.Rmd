@@ -352,7 +352,7 @@ Exceptuando las tasas de convergencia de la normal teórica (aproximación
 inutilizable en la práctica) se observa que el método bootstrap
 suavizado en la variable explicativa presenta órdenes que igualan o
 mejoran al resto de los métodos, tanto en un aspecto condicional como
-condicionalmente. Así, condicionalmente los dos remuestreos bootstrap
+incondicionalmente. Así, condicionalmente los dos remuestreos bootstrap
 son los que ofrecen una mejor tasa de convergencia ($n^{-2/9}$, 
 frente a $n^{-1/5}$ de la aproximación plug-in). En el
 sentido incondicional el bootstrap suavizado en la variable explicativa
