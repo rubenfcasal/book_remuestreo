@@ -3,6 +3,22 @@
 ```{r , child = '_global_options.Rmd'}
 ``` 
 
+<!-- 
+---
+title: "Modificaciones del Bootstrap uniforme"
+author: "Técnicas de Remuestreo (UDC)"
+date: "Máster en Técnicas Estadísticas"
+output: 
+  bookdown::html_document2:
+    pandoc_args: ["--number-offset", "2,0"]
+    toc: yes 
+    # mathjax: local            # copia local de MathJax, hay que establecer:
+    # self_contained: false     # las dependencias se guardan en ficheros externos 
+  bookdown::pdf_document2:
+    keep_tex: yes
+    toc: yes 
+---
+-->
 
 El bootstrap uniforme (o naïve) es aquel en el que remuestreamos a
 partir de la función de distribución empírica. Eso es muy razonable
@@ -973,15 +989,11 @@ a la media muestral.
 ::: {.theorem #aprox-bhat-gho name="Bhattacharya-Ghosh"}
 <br> \vspace{0.5cm}
 
-Consideremos variables aleatorias
-$X_1,X_2,\ldots ,X_n,\ldots$ independientes e idénticamente
-distribuidas procedentes de una distribución $F$. Sea $\theta =\theta
-\left( F \right)$ un parámetro de dicha distribución y $\hat{\theta}$ un
-estimador de dicho parámetro. Supongamos además
-que$$\sqrt{n}\left( \hat{\theta}-\theta \right) \rightarrow \mathcal{N}\left( 0,\sigma
-_{\theta }^2 \right),$$
-en distribución. Entonces, bajo ciertas condiciones de regularidad 
-(pueden verse en Bhattacharya y Ghosh, 1978) se tiene:
+Consideremos variables aleatorias $X_1,X_2,\ldots ,X_n,\ldots$ independientes e idénticamente distribuidas procedentes de una distribución $F$. Sea $\theta =\theta\left( F \right)$ un parámetro de dicha distribución y $\hat{\theta}$ un estimador de dicho parámetro. 
+Supongamos además que $\sigma_{\theta} / \sqrt{n}$ es el error estándar asintótico del estimador $\hat{\theta}$ y que
+$$\sqrt{n}\frac{\hat{\theta}-\theta }{\sigma_{\theta }} \rightarrow \mathcal{N}(0,1)$$
+en distribución. 
+Entonces, si $\hat{\sigma}_{\theta} / \sqrt{n}$ es una estimación del error estándar del estimador, bajo ciertas condiciones de regularidad (pueden verse en Bhattacharya y Ghosh, 1978) se tiene:
 $$\begin{aligned}
 P\left( \sqrt{n}\frac{\hat{\theta}-\theta }{\sigma _{\theta }}\leq u \right)
 = &\ \Phi \left( u \right) +n^{-\frac{1}{2}}p_1\left( u \right) \phi \left(
@@ -993,7 +1005,6 @@ u \right) = &\ \Phi \left( u \right) +n^{-\frac{1}{2}}q_1\left( u \right) \phi
 \left( u \right) +\cdots \\
 & +n^{-\frac{j-1}{2}}q_{j-1}\left( u \right) \phi \left( u \right) +O\left(
 n^{-\frac{j}{2}} \right),\end{aligned}$$
-
 siendo los $p_i\left( u \right)$ y $q_i\left( u \right)$ polinomios
 de grado $3i-1$ con paridad alternada, es decir, $p_1$ y $q_1$ son
 simétricos, $p_2$ y $q_2$ son antisimétricos, $p_3$ y $q_3$ son
