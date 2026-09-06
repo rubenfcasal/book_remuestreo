@@ -689,9 +689,7 @@ ry <- xmed + arima.sim(model = list(order = c(1,0,0), ar = rho),
 plot(ry)
 ```
 
-
-
-\begin{center}\includegraphics[width=0.7\linewidth]{09-depen_files/figure-latex/unnamed-chunk-3-1} \end{center}
+<img src="09-depen_files/figure-html/unnamed-chunk-3-1.png" alt="" width="70%" style="display: block; margin: auto;" />
 
 Como ejemplo adicional utilizamos una distribución t con 5 grados de libertad
 para generar los errores:
@@ -708,9 +706,7 @@ ry2 <- xmed + arima.sim(model = list(order = c(1,0,0), ar = rho),
 plot(ry2)
 ```
 
-
-
-\begin{center}\includegraphics[width=0.7\linewidth]{09-depen_files/figure-latex/unnamed-chunk-4-1} \end{center}
+<img src="09-depen_files/figure-html/unnamed-chunk-4-1.png" alt="" width="70%" style="display: block; margin: auto;" />
 
 En el bootstrap paramétrico se emplearía el modelo ajustado.
 Como ejemplo consideraremos los datos de linces capturados al año en Canadá entre 1821 y 1934:
@@ -722,14 +718,10 @@ Como ejemplo consideraremos los datos de linces capturados al año en Canadá en
 plot(log(lynx))
 ```
 
-\begin{figure}[!htb]
-
-{\centering \includegraphics[width=0.7\linewidth]{09-depen_files/figure-latex/loglynx-1} 
-
-}
-
-\caption{Logaritmo del número de capturas anuales de linces en Canadá entre 1821 y 1934.}(\#fig:loglynx)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="09-depen_files/figure-html/loglynx-1.png" alt="Logaritmo del número de capturas anuales de linces en Canadá entre 1821 y 1934." width="70%" />
+<p class="caption">(\#fig:loglynx)Logaritmo del número de capturas anuales de linces en Canadá entre 1821 y 1934.</p>
+</div>
 
 
 En `R` podemos emplear las funciones `ar()` o `arima()` para ajustar un modelo,
@@ -761,9 +753,7 @@ plot(log(lynx), xlim = c(1820, 1946))
 lines(ry, col = "red")
 ```
 
-
-
-\begin{center}\includegraphics[width=0.7\linewidth]{09-depen_files/figure-latex/unnamed-chunk-6-1} \end{center}
+<img src="09-depen_files/figure-html/unnamed-chunk-6-1.png" alt="" width="70%" style="display: block; margin: auto;" />
 
 Para hacer simulación incondicional hay que establecer `future = FALSE`:
 
@@ -775,9 +765,7 @@ plot(log(lynx))
 lines(ry, lty = 3)
 ```
 
-
-
-\begin{center}\includegraphics[width=0.7\linewidth]{09-depen_files/figure-latex/unnamed-chunk-7-1} \end{center}
+<img src="09-depen_files/figure-html/unnamed-chunk-7-1.png" alt="" width="70%" style="display: block; margin: auto;" />
 
 
 ### Bootstrap residual (semiparamétrico)
@@ -803,9 +791,7 @@ ry.boot <- xmed + arima.sim(model = model, n = n, rand.gen = rand.gen.res,
 plot(ry.boot)
 ```
 
-
-
-\begin{center}\includegraphics[width=0.7\linewidth]{09-depen_files/figure-latex/unnamed-chunk-8-1} \end{center}
+<img src="09-depen_files/figure-html/unnamed-chunk-8-1.png" alt="" width="70%" style="display: block; margin: auto;" />
 
 Con los métodos `simulate()` del paquete `forecast` bastaría con establecer `bootstrap = TRUE`:
 
@@ -819,9 +805,7 @@ plot(log(lynx), xlim = c(1820, 1946))
 lines(ry.boot.cond, col = "red")
 ```
 
-
-
-\begin{center}\includegraphics[width=0.7\linewidth]{09-depen_files/figure-latex/unnamed-chunk-9-1} \end{center}
+<img src="09-depen_files/figure-html/unnamed-chunk-9-1.png" alt="" width="70%" style="display: block; margin: auto;" />
 
 Ver enlaces en apéndice \@ref(forecast-links).
 

@@ -3,6 +3,23 @@
 ```{r , child = '_global_options.Rmd'}
 ```
 
+<!-- 
+---
+title: "Bootstrap y regresión no paramétrica"
+author: "Técnicas de Remuestreo (UDC)"
+date: "Máster en Técnicas Estadísticas"
+output: 
+  bookdown::html_document2:
+    pandoc_args: ["--number-offset", "6,0"]
+    toc: yes 
+    # mathjax: local            # copia local de MathJax, hay que establecer:
+    # self_contained: false     # las dependencias se guardan en ficheros externos 
+  bookdown::pdf_document2:
+    keep_tex: yes
+    toc: yes 
+---
+-->
+
 Por simplicidad nos centraremos en el caso bivariante, el caso multivariante sería análogo.
 Supongamos que $\left\{ \left( X_1,Y_1 \right),\left( X_2,Y_2 \right), \ldots, \left( X_n,Y_n \right) \right\}$ es una m.a.s. de una población bidimensional $\left( X,Y \right)$, con $E\left( \left\vert Y\right\vert \right) <\infty$, y que el objetivo es realizar inferencias sobre la distribución condicional $\left. Y \right\vert_{X=x}$, principalmente estimar la función de regresión de $Y$ dada $X$: 
 $$m\left( x \right) =E\left( \left. Y\right\vert_{X=x} \right).$$
@@ -594,7 +611,15 @@ El bootstrap residual se puede extender al caso heterocedástico y/o dependencia
 
 ### Wild bootstrap {#r-wild-bootstrap}
 
-Como se describe en la Sección \@ref(wild-bootstrap) en el caso heterocedástico se puede emplear wild bootstrap.
+En el caso heterocedástico se suele considerar como base el siguiente modelo general: 
+$$Y = m(\mathbf{X}) + \sigma(\mathbf{X}) \varepsilon,$$
+siendo $m(\mathbf{x}) = E\left( \left. Y\right\vert_{\mathbf{X}=\mathbf{x}} \right)$
+la media condicional (denominada función de regresión o tendencia), 
+$\sigma^2(\mathbf{x}) = Var\left( \left. Y\right\vert_{\mathbf{X}=\mathbf{x}} \right)$
+la varianza condicional y $\varepsilon$ es un error aleatorio de media cero 
+y varianza unidad.
+
+Como se describe en la Sección \@ref(wild-bootstrap) en este caso puede ser adecuado emplear wild bootstrap.
 
 ```{r}
 # Remuestreo
@@ -621,9 +646,178 @@ lines(fit$x, fit$y - bias)
 ```
 
 
-### Ejercicio
+::: {.exercise #wild-boot}
 
 Siguiendo con el conjunto de datos `MASS::mcycle`, emplear wild bootstrap para 
 obtener estimaciones por intervalo de confianza de la función de regresión
 de `accel` a partir de `times` mediante bootstrap percentil básico.
 Comparar los resultados con los obtenidos mediante bootstrap residual (comentar las diferencias y cuál de las aproximaciones sería más adecuada para este caso).
+
+:::
+
+### Bootstrap heterocedástico residual {#npreg-heter}
+
+En el caso heterocedástico, como alternativa al wild bootstrap, también podemos emplear bootstrap residual, aunque para ello será necesario modelar además la varianza condicional.
+
+En este apartado consideraremos la estimación no paramétrica de la tendencia y de la varianza, aunque el procedimiento bootstrap sería análogo en el caso de modelos paramétricos.
+La tendencia se puede estimar empleando el estimador polinómico local, aunque
+lo ideal sería utilizar una ventana local que tenga en cuenta la varianza condicional^[`KernSmooth` admite ventanas locales pero no implementa métodos para seleccionarlas.
+El paquete `np` dispone de más herramientas (ver e.g. [García-Portugués, 2025, Sección 4.5](https://bookdown.org/egarpor/NP-UC3M/kre-i-np.html)); 
+aunque tampoco implementa criterios óptimos para datos homocedásticos, que tengan en cuenta la varianza condicional.].
+La recomendación para estimar no paramétricamente la varianza condicional
+es suavizar los residuos al cuadrado (Fan y Yao, 1998).
+Para resolver este problema circular se podría seguir un procedimiento iterativo. 
+
+Continuaremos utilizando como ejemplo el conjunto de datos `MASS::mcycle` y 
+las herramientas del paquete `KernSmooth`.
+
+```{r}
+library(KernSmooth)
+data(mcycle, package = "MASS")
+x <- mcycle$times
+y <- mcycle$accel
+```
+
+Por comodidad utilizaremos la misma ventana global "óptima" del caso homocedástico (evitando el problema circular):
+
+```{r}
+h <- dpill(x, y) # Método plug-in de Ruppert, Sheather y Wand (1995)
+fit <- locpoly(x, y, bandwidth = h) # Estimación lineal local
+plot(x, y)
+lines(fit)
+```
+
+Obtenemos estimaciones de la tendencia y los residuos (heterocedásticos)
+
+```{r}
+trend.est <- approx(fit, xout = x)$y # trend.est <- predict(fit)
+resid <- y - trend.est # resid <- residuals(fit)
+```
+
+
+Obtenemos un estimador de la varianza condicional suavizando los residuos al cuadrado:
+
+```{r}
+r2 <- resid^2
+g <- dpill(x, r2) # No es la ventana óptima para estimar la varianza
+fit.var <- locpoly(x, r2, bandwidth = g)   
+# En este caso igual es preferible emplear Nadaraya-Watson (degree = 0)
+# var.est <- pmax(approx(fit.var, xout = x)$y, 0)
+plot(x, r2)
+lines(fit.var)
+```
+
+Otra alternativa sería hacer el suavizado en escala logarítmica (empleando `log(r2)`
+en lugar de `r2` y transformando el resultado a la escala original mediante `exp()`;
+aunque podría ser preferible emplear la raíz cuarta `sqrt(abs(resid))`).
+
+```{r}
+g <- dpill(x, log(r2)) 
+fit.var <- locpoly(x, log(r2), bandwidth = g)
+# La distribución de los residuos va a ser más simétrica
+# hist(approx(fit.var, xout = x)$y - log(r2))
+fit.var$y <- exp(fit.var$y)
+plot(x, r2)
+lines(fit.var)
+
+# g <- dpill(x, sqrt(abs(resid)))
+# fit.var <- locpoly(x, sqrt(abs(resid)), bandwidth = g)
+# # La distribución de los residuos va a ser mucho más simétrica
+# # hist(approx(fit.var, xout = x)$y - sqrt(abs(resid)))
+# fit.var$y <- fit.var$y^4
+# plot(x, r2)
+# lines(fit.var)
+```
+
+
+Normalmente emplearemos la desviación típica condicional:
+
+```{r}
+sd.est <- sqrt(approx(fit.var, xout = x)$y) 
+```
+
+La representamos junto con la media a título ilustrativo
+(no confundirla con el error estándar de la estimación de la tendencia):
+
+```{r}
+plot(x, y)
+lines(fit)
+lines(x, trend.est + sd.est, lty = 2)
+lines(x, trend.est - sd.est, lty = 2)
+```
+
+
+En el bootstrap heterocedástico residual los errores $\hat{\varepsilon}_i^{\ast}$ se generan mediante remuestreo de los residuos studentizados: 
+$$e_i = \frac{Y_i - \hat{m}_{h}( X_i )}{\hat{\sigma}_{g}(X_i)}$$
+(centrados y reescalados).
+
+A continuación, usando dos ventanas piloto $h_2$ y $g_2$, se generan las 
+réplicas bootstrap:
+
+$$Y_i^{\ast}=\hat{m}_{h_2}(X_i) + \hat{\sigma}_{g_2}(X_i)\hat{\varepsilon}_i^{\ast} \text{, } i=1, 2,\ldots ,n$$
+
+Para realizar inferencias acerca de la media, se aproximaría la distribución  $\hat{m}_h(x_0) - m(x_0)$ por la distribución bootstrap de $\hat{m}^{\ast}_h(x_0) - \hat{m}_{h_2}(x_0)$.
+De forma análoga, Para realizar inferencias acerca de la varianza, se aproximaría la distribución  $\hat{\sigma}^2_g(x_0) - \sigma^2(x_0)$ por la distribución bootstrap de $\hat{\sigma}^{2\ast}_g(x_0) - \hat{\sigma}^2_{g_2}(x_0)$.
+
+Por simplicidad, en lugar de considerar dos ventanas adicionales, emplearemos 
+la aproximación habitual en la práctica y consideraremos $h_2 = h$ y $g_2 = g$.
+
+```{r}
+# Remuestreo
+set.seed(1)
+B <- 2000
+stat_trend_boot <- matrix(nrow = length(fit$x), ncol = B)
+sresid <- resid/sd.est
+# mean(sresid); sd(sresid)
+sresid <- scale(sresid)
+
+for (k in 1:B) {
+    y_boot <- trend.est + sd.est*sample(sresid, replace = TRUE)
+    fit_boot <- locpoly(x, y_boot, bandwidth = h)$y
+    stat_trend_boot[ , k] <- fit_boot - fit$y
+}
+
+# Calculo del sesgo y error trend.estándar
+bias <- apply(stat_trend_boot, 1, mean)
+std.err <- apply(stat_trend_boot, 1, sd)
+
+# Representar estimación y corrección de sesgo bootstrap
+plot(x, y)
+lines(fit, lwd = 2)
+lines(fit$x, fit$y - bias)
+
+# A modo de ejemplo IC `type = "norm"`, con corrección de sesgo
+alfa <- 0.05
+z <- qnorm(1 - alfa/2)
+lines(fit$x, fit$y - bias - 2*std.err, lty = 2)
+lines(fit$x, fit$y - bias + 2*std.err, lty = 2)
+```
+
+De forma análoga al caso homocedástico, podemos calcular estimaciones por 
+intervalo de confianza (puntuales) por el método percentil (básico):
+
+```{r}
+alfa <- 0.05
+pto_crit <- apply(stat_trend_boot, 1, quantile, probs = c(alfa/2, 1 - alfa/2))
+ic_inf_boot <- fit$y - pto_crit[2, ]
+ic_sup_boot <- fit$y - pto_crit[1, ]
+
+plot(x, y)
+lines(fit, lwd = 2)
+lines(fit$x, fit$y - bias)
+lines(fit$x, ic_inf_boot, lty = 2)
+lines(fit$x, ic_sup_boot, lty = 2)
+```
+
+En este ejemplo concreto podría ser recomendable considerar también errores con dependencia temporal (ver e.g. material suplementario de Fernández-Casal et al., 2024). 
+
+
+::: {.exercise #heter-boot}
+
+Siguiendo con el ejemplo anterior, obtener intervalos de predicción mediante bootstrap heterocedástico residual.
+
+:::
+
+
+
+

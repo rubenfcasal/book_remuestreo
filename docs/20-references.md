@@ -1,6 +1,8 @@
 # Referencias {-}
 
 <!-- 
+ 
+# Referencias {-}
 
 
 
@@ -223,8 +225,9 @@ Chapman and Hall.
 Fan J. and Gijbels I. (1996). *Local Polynomial Modelling and Its Applications*.
 Chapman and Hall, London.
 
-Fan J. and Yao Q. (1998). Efficient estimation of conditional variance functions in 
-stochastic regression. *Biometrika*, **85**, 645–660.
+Fan, J. and Yao, Q. (1998). [Efficient estimation of conditional variance functions 
+in stochastic regression](https://doi.org/10.1093/biomet/85.3.645). 
+*Biometrika*, **85**, 645–660.
     
 Faraway, J.J. and Jhun, M. (1990). Bootstrap choice of bandwidth for
 density estimation. *Jr. Amer. Statist. Assoc.* **85**, 1119–1122.

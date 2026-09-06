@@ -3,6 +3,22 @@
 
 
 
+<!-- 
+---
+title: "Modificaciones del Bootstrap uniforme"
+author: "Técnicas de Remuestreo (UDC)"
+date: "Máster en Técnicas Estadísticas"
+output: 
+  bookdown::html_document2:
+    pandoc_args: ["--number-offset", "2,0"]
+    toc: yes 
+    # mathjax: local            # copia local de MathJax, hay que establecer:
+    # self_contained: false     # las dependencias se guardan en ficheros externos 
+  bookdown::pdf_document2:
+    keep_tex: yes
+    toc: yes 
+---
+-->
 
 El bootstrap uniforme (o naïve) es aquel en el que remuestreamos a
 partir de la función de distribución empírica. Eso es muy razonable
@@ -150,9 +166,7 @@ pto_crit_teor <- qnorm(1 - alfa/2)
 abline(v = c(-pto_crit_teor, pto_crit_teor), lty = 2)
 ```
 
-
-
-\begin{center}\includegraphics[width=0.7\linewidth]{03-mod_boot_unif_files/figure-latex/unnamed-chunk-2-1} \end{center}
+<img src="03-mod_boot_unif_files/figure-html/unnamed-chunk-2-1.png" alt="" width="70%" style="display: block; margin: auto;" />
 
 ``` r
 ic_inf_boot_teor <- x_barra - pto_crit_teor * sigma/sqrt(n)
@@ -217,7 +231,7 @@ boot.ci(res.boot, type = "stud")
 Aunque los resultados dependerán en gran medida de que el modelo paramétrico
 sea adecuado para describir la variabilidad de los datos 
 (en este caso no es muy razonable que el modelo admita tiempos de vida negativos).
-Si, por ejemplo, consideramos que un modelo exponencial es más adecuado: [Figura \@ref(fig:boot-par-aprox)]
+Si, por ejemplo, consideramos que un modelo exponencial es más adecuado: 
 
 
 ``` r
@@ -230,14 +244,10 @@ curve(pexp(x, 1/mean(muestra)), lty = 3, add = TRUE)
 legend("bottomright", legend = c("Empírica", "Aprox. normal", "Aprox. exponencial"), lty = 1:3)
 ```
 
-\begin{figure}[!htb]
-
-{\centering \includegraphics[width=0.7\linewidth]{03-mod_boot_unif_files/figure-latex/boot-par-aprox-1} 
-
-}
-
-\caption{Distribución empírica de la muestra de tiempos de vida de microorganismos y aproximaciones paramétricas.}(\#fig:boot-par-aprox)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="03-mod_boot_unif_files/figure-html/boot-par-aprox-1.png" alt="Distribución empírica de la muestra de tiempos de vida de microorganismos y aproximaciones paramétricas." width="70%" />
+<p class="caption">(\#fig:boot-par-aprox)Distribución empírica de la muestra de tiempos de vida de microorganismos y aproximaciones paramétricas.</p>
+</div>
 
 Solo tendríamos que cambiar la función que genera los datos:
 
@@ -457,7 +467,7 @@ En `R` podemos emplear la función `density()` del paquete base para obtener
 una estimación tipo núcleo de la densidad (con la ventana determinada
 por el parámetro `bw`), aunque podríamos emplear implementaciones de otros
 paquetes (en la Sección \@ref(npden-r) se incluyen más detalles).
-Por ejemplo, considerando el conjunto de datos `precip` (que contiene el promedio de precipitación, en pulgadas de lluvia, de 70 ciudades de Estados Unidos), podríamos utilizar el siguiente código [Figura \@ref(fig:density)]:
+Por ejemplo, considerando el conjunto de datos `precip` (que contiene el promedio de precipitación, en pulgadas de lluvia, de 70 ciudades de Estados Unidos), podríamos utilizar el siguiente código :
 
 
 ``` r
@@ -474,14 +484,10 @@ lines(npden, lwd = 2)
 rug(x, col = "darkgray")
 ```
 
-\begin{figure}[!htb]
-
-{\centering \includegraphics[width=0.7\linewidth]{03-mod_boot_unif_files/figure-latex/density-1} 
-
-}
-
-\caption{Estimación tipo núcleo de la densidad de `precip`. }(\#fig:density)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="03-mod_boot_unif_files/figure-html/density-1.png" alt="Estimación tipo núcleo de la densidad de `precip`. " width="70%" />
+<p class="caption">(\#fig:density)Estimación tipo núcleo de la densidad de `precip`. </p>
+</div>
 
 La sensibilidad del estimador tipo núcleo al parámetro de suavizado puede
 observarse ejecutando el siguiente código (ver Figura \@ref(fig:bandwidth-movie), [bandwidth-movie.gif](./bandwidth-movie.gif)):
@@ -496,14 +502,10 @@ for (bw in bws)
 ```
 
 
-\begin{figure}[!htb]
-
-{\centering \includegraphics[width=0.7\linewidth]{03-mod_boot_unif_files/figure-latex/bandwidth-movie-1} 
-
-}
-
-\caption{Efecto de cambio en la ventana en la estimación tipo núcleo de la densidad.}(\#fig:bandwidth-movie)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="bandwidth-movie.gif" alt="Efecto de cambio en la ventana en la estimación tipo núcleo de la densidad." width="70%" />
+<p class="caption">(\#fig:bandwidth-movie)Efecto de cambio en la ventana en la estimación tipo núcleo de la densidad.</p>
+</div>
 
 
 La función de distribución asociada al estimador tipo núcleo de la
@@ -522,7 +524,7 @@ asociada al núcleo $K$, es decir
 $$\mathbb{K}\left( t \right) =\int_{-\infty }^{t}K\left(
 u \right) du.$$
 
-Por ejemplo, en el caso de del conjunto de datos de precipitaciones, el siguiente código compara la estimación tipo núcleo de la distribución con la empírica [Figura \@ref(fig:pnp)]:
+Por ejemplo, en el caso de del conjunto de datos de precipitaciones, el siguiente código compara la estimación tipo núcleo de la distribución con la empírica :
 
 
 ``` r
@@ -533,14 +535,10 @@ curve(Fnp, lty = 2, add = TRUE)
 legend("bottomright", legend = c("Empírica", "Tipo núcleo"), lty = 1:2)
 ```
 
-\begin{figure}[!htb]
-
-{\centering \includegraphics[width=0.7\linewidth]{03-mod_boot_unif_files/figure-latex/pnp-1} 
-
-}
-
-\caption{Estimación empírica y tipo núcleo de la función de distribución de `precip`. }(\#fig:pnp)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="03-mod_boot_unif_files/figure-html/pnp-1.png" alt="Estimación empírica y tipo núcleo de la función de distribución de `precip`. " width="70%" />
+<p class="caption">(\#fig:pnp)Estimación empírica y tipo núcleo de la función de distribución de `precip`. </p>
+</div>
 
 
 El método bootstrap suavizado procede de la siguiente forma:
@@ -621,14 +619,10 @@ plot(npden, main = "")
 lines(density(x_boot), col = "blue", lwd = 2, lty = 2)
 ```
 
-\begin{figure}[!htb]
-
-{\centering \includegraphics[width=0.7\linewidth]{03-mod_boot_unif_files/figure-latex/density-sim-1} 
-
-}
-
-\caption{Estimaciónes tipo núcleo de las densidades de `precip` y de una simulación.}(\#fig:density-sim)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="03-mod_boot_unif_files/figure-html/density-sim-1.png" alt="Estimaciónes tipo núcleo de las densidades de `precip` y de una simulación." width="70%" />
+<p class="caption">(\#fig:density-sim)Estimaciónes tipo núcleo de las densidades de `precip` y de una simulación.</p>
+</div>
 
 Es fácil percatarse de que los posibles valores que puede tomar una
 observación $X_i^{\ast}$ de cada remuestra bootstrap son infinitos,
@@ -779,7 +773,7 @@ con lo cual su función de densidad viene dada por
 $$g\left( x \right) =\frac{n}{\theta }\left( \frac{x}{\theta } \right)^{n-1},
 \text{ si }x\in \left[ 0,\theta \right] .$$
 Tomando, por ejemplo, $\theta =1$ y $n=50$, esta función de densidad resulta
-[Figura \@ref(fig:den-max)]:
+:
 
 ``` r
 theta <- 1
@@ -787,14 +781,10 @@ n <- 50
 curve(n/theta * (x/theta)^(n - 1), 0, theta, ylab = "Density")
 ```
 
-\begin{figure}[!htb]
-
-{\centering \includegraphics[width=0.7\linewidth]{03-mod_boot_unif_files/figure-latex/den-max-1} 
-
-}
-
-\caption{Función de densidad del máximo de una muestra procedente de una uniforme.}(\#fig:den-max)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="03-mod_boot_unif_files/figure-html/den-max-1.png" alt="Función de densidad del máximo de una muestra procedente de una uniforme." width="70%" />
+<p class="caption">(\#fig:den-max)Función de densidad del máximo de una muestra procedente de una uniforme.</p>
+</div>
 
 Como consecuencia podemos hallar fácilmente el sesgo del estimador
 $\hat{\theta}$, ya que
@@ -854,7 +844,7 @@ El siguiente código implementa el método
 bootstrap uniforme (también llamado naïve) para aproximar la
 distribución del estadístico $R=\hat{\theta}-\theta$, para una muestra
 de tamaño $n=50$, proveniente de una población con distribución
-$\mathcal{U}\left( 0,1\right)$ [Figura \@ref(fig:boot-uniforme-maximo)]:
+$\mathcal{U}\left( 0,1\right)$ :
 
 
 ``` r
@@ -881,14 +871,10 @@ rug(estadistico, col = "darkgray")
 curve(n/theta * ((x + theta)/theta)^(n - 1), col = "blue", lty = 2, lwd = 2, add = TRUE)
 ```
 
-\begin{figure}[!htb]
-
-{\centering \includegraphics[width=0.7\linewidth]{03-mod_boot_unif_files/figure-latex/boot-uniforme-maximo-1} 
-
-}
-
-\caption{Distribución de las réplicas bootstrap (uniforme) del estadístico y distribución poblacional.}(\#fig:boot-uniforme-maximo)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="03-mod_boot_unif_files/figure-html/boot-uniforme-maximo-1.png" alt="Distribución de las réplicas bootstrap (uniforme) del estadístico y distribución poblacional." width="70%" />
+<p class="caption">(\#fig:boot-uniforme-maximo)Distribución de las réplicas bootstrap (uniforme) del estadístico y distribución poblacional.</p>
+</div>
 
 :::
 
@@ -919,7 +905,7 @@ $R=R\left( \mathbf{X},F \right) =\hat{\theta}-\theta$.
 
 Para emplear el bootstrap paramétrico (que remuestrea de una distribución
 uniforme con parámetro estimado) podríamos emplear un código muy similar al 
-del Ejemplo \@ref(exm:boot-maximo-uniforme) [Figura \@ref(fig:boot-parametrico-maximo)]:
+del Ejemplo \@ref(exm:boot-maximo-uniforme) :
 
 
 ``` r
@@ -941,14 +927,10 @@ rug(estadistico, col = "darkgray")
 curve(n/theta * ((x + theta)/theta)^(n - 1), col = "blue", lty = 2, lwd = 2, add = TRUE)
 ```
 
-\begin{figure}[!htb]
-
-{\centering \includegraphics[width=0.7\linewidth]{03-mod_boot_unif_files/figure-latex/boot-parametrico-maximo-1} 
-
-}
-
-\caption{Distribución bootstrap paramétrica y distribución poblacional.}(\#fig:boot-parametrico-maximo)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="03-mod_boot_unif_files/figure-html/boot-parametrico-maximo-1.png" alt="Distribución bootstrap paramétrica y distribución poblacional." width="70%" />
+<p class="caption">(\#fig:boot-parametrico-maximo)Distribución bootstrap paramétrica y distribución poblacional.</p>
+</div>
 
 :::
 
@@ -1092,15 +1074,11 @@ a la media muestral.
 ::: {.theorem #aprox-bhat-gho name="Bhattacharya-Ghosh"}
 <br> \vspace{0.5cm}
 
-Consideremos variables aleatorias
-$X_1,X_2,\ldots ,X_n,\ldots$ independientes e idénticamente
-distribuidas procedentes de una distribución $F$. Sea $\theta =\theta
-\left( F \right)$ un parámetro de dicha distribución y $\hat{\theta}$ un
-estimador de dicho parámetro. Supongamos además
-que$$\sqrt{n}\left( \hat{\theta}-\theta \right) \rightarrow \mathcal{N}\left( 0,\sigma
-_{\theta }^2 \right),$$
-en distribución. Entonces, bajo ciertas condiciones de regularidad 
-(pueden verse en Bhattacharya y Ghosh, 1978) se tiene:
+Consideremos variables aleatorias $X_1,X_2,\ldots ,X_n,\ldots$ independientes e idénticamente distribuidas procedentes de una distribución $F$. Sea $\theta =\theta\left( F \right)$ un parámetro de dicha distribución y $\hat{\theta}$ un estimador de dicho parámetro. 
+Supongamos además que $\sigma_{\theta} / \sqrt{n}$ es el error estándar asintótico del estimador $\hat{\theta}$ y que
+$$\sqrt{n}\frac{\hat{\theta}-\theta }{\sigma_{\theta }} \rightarrow \mathcal{N}(0,1)$$
+en distribución. 
+Entonces, si $\hat{\sigma}_{\theta} / \sqrt{n}$ es una estimación del error estándar del estimador, bajo ciertas condiciones de regularidad (pueden verse en Bhattacharya y Ghosh, 1978) se tiene:
 $$\begin{aligned}
 P\left( \sqrt{n}\frac{\hat{\theta}-\theta }{\sigma _{\theta }}\leq u \right)
 = &\ \Phi \left( u \right) +n^{-\frac{1}{2}}p_1\left( u \right) \phi \left(
@@ -1112,7 +1090,6 @@ u \right) = &\ \Phi \left( u \right) +n^{-\frac{1}{2}}q_1\left( u \right) \phi
 \left( u \right) +\cdots \\
 & +n^{-\frac{j-1}{2}}q_{j-1}\left( u \right) \phi \left( u \right) +O\left(
 n^{-\frac{j}{2}} \right),\end{aligned}$$
-
 siendo los $p_i\left( u \right)$ y $q_i\left( u \right)$ polinomios
 de grado $3i-1$ con paridad alternada, es decir, $p_1$ y $q_1$ son
 simétricos, $p_2$ y $q_2$ son antisimétricos, $p_3$ y $q_3$ son

@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>2.1 Estimación bootstrap de la precisión y el sesgo de un estimador | Técnicas de Remuestreo</title>
   <meta name="description" content="Apuntes de la asignatura de Técnicas de Remuestreo del Máster en Técnicas Estadísticas." />
-  <meta name="generator" content="bookdown 0.36 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.47 and GitBook 2.6.7" />
 
   <meta property="og:title" content="2.1 Estimación bootstrap de la precisión y el sesgo de un estimador | Técnicas de Remuestreo" />
   <meta property="og:type" content="book" />
@@ -54,6 +54,7 @@
 
 
 <style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -144,8 +145,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="1.1" data-path="introducción.html"><a href="introducción.html"><i class="fa fa-check"></i><b>1.1</b> Introducción</a>
 <ul>
-<li class="chapter" data-level="1.1.1" data-path="introducción.html"><a href="introducción.html#breve-nota-histórica"><i class="fa fa-check"></i><b>1.1.1</b> Breve nota histórica</a></li>
-<li class="chapter" data-level="1.1.2" data-path="introducción.html"><a href="introducción.html#paradigma-inferencial-y-análogo-bootstrap"><i class="fa fa-check"></i><b>1.1.2</b> Paradigma inferencial y análogo bootstrap</a></li>
+<li class="chapter" data-level="1.1.1" data-path="introducción.html"><a href="introducción.html#breve-nota-hist%C3%B3rica"><i class="fa fa-check"></i><b>1.1.1</b> Breve nota histórica</a></li>
+<li class="chapter" data-level="1.1.2" data-path="introducción.html"><a href="introducción.html#paradigma-inferencial-y-an%C3%A1logo-bootstrap"><i class="fa fa-check"></i><b>1.1.2</b> Paradigma inferencial y análogo bootstrap</a></li>
 <li class="chapter" data-level="1.1.3" data-path="introducción.html"><a href="introducción.html#intro-implementacion"><i class="fa fa-check"></i><b>1.1.3</b> Implementación en la práctica</a></li>
 </ul></li>
 <li class="chapter" data-level="1.2" data-path="intro-unif.html"><a href="intro-unif.html"><i class="fa fa-check"></i><b>1.2</b> El Bootstrap uniforme</a>
@@ -154,11 +155,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="1.3" data-path="cálculo-de-la-distribución-bootstrap-exacta-y-aproximada.html"><a href="cálculo-de-la-distribución-bootstrap-exacta-y-aproximada.html"><i class="fa fa-check"></i><b>1.3</b> Cálculo de la distribución Bootstrap: exacta y aproximada</a>
 <ul>
-<li class="chapter" data-level="1.3.1" data-path="cálculo-de-la-distribución-bootstrap-exacta-y-aproximada.html"><a href="cálculo-de-la-distribución-bootstrap-exacta-y-aproximada.html#distribución-bootstrap-exacta"><i class="fa fa-check"></i><b>1.3.1</b> Distribución bootstrap exacta</a></li>
+<li class="chapter" data-level="1.3.1" data-path="cálculo-de-la-distribución-bootstrap-exacta-y-aproximada.html"><a href="cálculo-de-la-distribución-bootstrap-exacta-y-aproximada.html#distribuci%C3%B3n-bootstrap-exacta"><i class="fa fa-check"></i><b>1.3.1</b> Distribución bootstrap exacta</a></li>
 <li class="chapter" data-level="1.3.2" data-path="cálculo-de-la-distribución-bootstrap-exacta-y-aproximada.html"><a href="cálculo-de-la-distribución-bootstrap-exacta-y-aproximada.html#vectores-de-remuestreo"><i class="fa fa-check"></i><b>1.3.2</b> Vectores de remuestreo</a></li>
 <li class="chapter" data-level="1.3.3" data-path="cálculo-de-la-distribución-bootstrap-exacta-y-aproximada.html"><a href="cálculo-de-la-distribución-bootstrap-exacta-y-aproximada.html#inferencia-sobre-la-mediana"><i class="fa fa-check"></i><b>1.3.3</b> Inferencia sobre la mediana</a></li>
-<li class="chapter" data-level="1.3.4" data-path="cálculo-de-la-distribución-bootstrap-exacta-y-aproximada.html"><a href="cálculo-de-la-distribución-bootstrap-exacta-y-aproximada.html#distribución-bootstrap-aproximada-por-monte-carlo"><i class="fa fa-check"></i><b>1.3.4</b> Distribución Bootstrap aproximada por Monte Carlo</a></li>
-<li class="chapter" data-level="1.3.5" data-path="cálculo-de-la-distribución-bootstrap-exacta-y-aproximada.html"><a href="cálculo-de-la-distribución-bootstrap-exacta-y-aproximada.html#elección-del-número-de-réplicas-monte-carlo"><i class="fa fa-check"></i><b>1.3.5</b> Elección del número de réplicas Monte Carlo</a></li>
+<li class="chapter" data-level="1.3.4" data-path="cálculo-de-la-distribución-bootstrap-exacta-y-aproximada.html"><a href="cálculo-de-la-distribución-bootstrap-exacta-y-aproximada.html#distribuci%C3%B3n-bootstrap-aproximada-por-monte-carlo"><i class="fa fa-check"></i><b>1.3.4</b> Distribución Bootstrap aproximada por Monte Carlo</a></li>
+<li class="chapter" data-level="1.3.5" data-path="cálculo-de-la-distribución-bootstrap-exacta-y-aproximada.html"><a href="cálculo-de-la-distribución-bootstrap-exacta-y-aproximada.html#elecci%C3%B3n-del-n%C3%BAmero-de-r%C3%A9plicas-monte-carlo"><i class="fa fa-check"></i><b>1.3.5</b> Elección del número de réplicas Monte Carlo</a></li>
 </ul></li>
 <li class="chapter" data-level="1.4" data-path="intro-paquetes.html"><a href="intro-paquetes.html"><i class="fa fa-check"></i><b>1.4</b> Herramientas disponibles en R sobre bootstrap</a>
 <ul>
@@ -184,7 +185,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.4" data-path="bootstrap-ponderado-y-bootstrap-sesgado.html"><a href="bootstrap-ponderado-y-bootstrap-sesgado.html"><i class="fa fa-check"></i><b>3.4</b> Bootstrap ponderado y bootstrap sesgado</a></li>
 <li class="chapter" data-level="3.5" data-path="deficien-unif.html"><a href="deficien-unif.html"><i class="fa fa-check"></i><b>3.5</b> Deficiencias del bootstrap uniforme</a>
 <ul>
-<li class="chapter" data-level="3.5.1" data-path="deficien-unif.html"><a href="deficien-unif.html#ejemplo-método-alternativo"><i class="fa fa-check"></i><b>3.5.1</b> Ejemplo (método alternativo)</a></li>
+<li class="chapter" data-level="3.5.1" data-path="deficien-unif.html"><a href="deficien-unif.html#ejemplo-m%C3%A9todo-alternativo"><i class="fa fa-check"></i><b>3.5.1</b> Ejemplo (método alternativo)</a></li>
 </ul></li>
 <li class="chapter" data-level="3.6" data-path="validez-de-la-aproximación-bootstrap.html"><a href="validez-de-la-aproximación-bootstrap.html"><i class="fa fa-check"></i><b>3.6</b> Validez de la aproximación Bootstrap</a></li>
 <li class="chapter" data-level="3.7" data-path="boot-reg.html"><a href="boot-reg.html"><i class="fa fa-check"></i><b>3.7</b> Bootstrap semiparamétrico y bootstrap residual</a>
@@ -216,11 +217,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="5.3" data-path="contrastes-de-permutaciones.html"><a href="contrastes-de-permutaciones.html"><i class="fa fa-check"></i><b>5.3</b> Contrastes de permutaciones</a>
 <ul>
-<li class="chapter" data-level="5.3.1" data-path="contrastes-de-permutaciones.html"><a href="contrastes-de-permutaciones.html#ejemplo-inferencia-sobre-el-coeficiente-de-correlación-lineal"><i class="fa fa-check"></i><b>5.3.1</b> Ejemplo: Inferencia sobre el coeficiente de correlación lineal</a></li>
+<li class="chapter" data-level="5.3.1" data-path="contrastes-de-permutaciones.html"><a href="contrastes-de-permutaciones.html#ejemplo-inferencia-sobre-el-coeficiente-de-correlaci%C3%B3n-lineal"><i class="fa fa-check"></i><b>5.3.1</b> Ejemplo: Inferencia sobre el coeficiente de correlación lineal</a></li>
 </ul></li>
 <li class="chapter" data-level="5.4" data-path="contrastes-semiparametricos.html"><a href="contrastes-semiparametricos.html"><i class="fa fa-check"></i><b>5.4</b> Contrastes bootstrap semiparamétricos</a>
 <ul>
-<li class="chapter" data-level="5.4.1" data-path="contrastes-semiparametricos.html"><a href="contrastes-semiparametricos.html#ejemplo-inferencia-sobre-modelos-de-regresión"><i class="fa fa-check"></i><b>5.4.1</b> Ejemplo: Inferencia sobre modelos de regresión</a></li>
+<li class="chapter" data-level="5.4.1" data-path="contrastes-semiparametricos.html"><a href="contrastes-semiparametricos.html#ejemplo-inferencia-sobre-modelos-de-regresi%C3%B3n"><i class="fa fa-check"></i><b>5.4.1</b> Ejemplo: Inferencia sobre modelos de regresión</a></li>
 <li class="chapter" data-level="5.4.2" data-path="contrastes-semiparametricos.html"><a href="contrastes-semiparametricos.html#ejercicio"><i class="fa fa-check"></i><b>5.4.2</b> Ejercicio</a></li>
 </ul></li>
 </ul></li>
@@ -231,29 +232,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="6.2.1" data-path="sesgo-varianza-y-error-cuadrático-medio.html"><a href="sesgo-varianza-y-error-cuadrático-medio.html#sesgo"><i class="fa fa-check"></i><b>6.2.1</b> Sesgo</a></li>
 <li class="chapter" data-level="6.2.2" data-path="sesgo-varianza-y-error-cuadrático-medio.html"><a href="sesgo-varianza-y-error-cuadrático-medio.html#varianza"><i class="fa fa-check"></i><b>6.2.2</b> Varianza</a></li>
-<li class="chapter" data-level="6.2.3" data-path="sesgo-varianza-y-error-cuadrático-medio.html"><a href="sesgo-varianza-y-error-cuadrático-medio.html#error-cuadrático-medio"><i class="fa fa-check"></i><b>6.2.3</b> Error cuadrático medio</a></li>
-<li class="chapter" data-level="6.2.4" data-path="sesgo-varianza-y-error-cuadrático-medio.html"><a href="sesgo-varianza-y-error-cuadrático-medio.html#error-cuadrático-medio-integrado-mise"><i class="fa fa-check"></i><b>6.2.4</b> Error cuadrático medio integrado (MISE)</a></li>
+<li class="chapter" data-level="6.2.3" data-path="sesgo-varianza-y-error-cuadrático-medio.html"><a href="sesgo-varianza-y-error-cuadrático-medio.html#error-cuadr%C3%A1tico-medio"><i class="fa fa-check"></i><b>6.2.3</b> Error cuadrático medio</a></li>
+<li class="chapter" data-level="6.2.4" data-path="sesgo-varianza-y-error-cuadrático-medio.html"><a href="sesgo-varianza-y-error-cuadrático-medio.html#error-cuadr%C3%A1tico-medio-integrado-mise"><i class="fa fa-check"></i><b>6.2.4</b> Error cuadrático medio integrado (MISE)</a></li>
 </ul></li>
 <li class="chapter" data-level="6.3" data-path="aproximacion-bootstrap.html"><a href="aproximacion-bootstrap.html"><i class="fa fa-check"></i><b>6.3</b> Aproximación Bootstrap de la distribución del estimador de Parzen-Rosenblatt</a>
 <ul>
-<li class="chapter" data-level="6.3.1" data-path="aproximacion-bootstrap.html"><a href="aproximacion-bootstrap.html#distribución-asintótica-del-estimador-de-parzen-rosenblatt"><i class="fa fa-check"></i><b>6.3.1</b> Distribución asintótica del estimador de Parzen-Rosenblatt</a></li>
-<li class="chapter" data-level="6.3.2" data-path="aproximacion-bootstrap.html"><a href="aproximacion-bootstrap.html#aproximación-plug-in"><i class="fa fa-check"></i><b>6.3.2</b> Aproximación plug-in</a></li>
-<li class="chapter" data-level="6.3.3" data-path="aproximacion-bootstrap.html"><a href="aproximacion-bootstrap.html#aproximación-bootstrap"><i class="fa fa-check"></i><b>6.3.3</b> Aproximación bootstrap</a></li>
+<li class="chapter" data-level="6.3.1" data-path="aproximacion-bootstrap.html"><a href="aproximacion-bootstrap.html#distribuci%C3%B3n-asint%C3%B3tica-del-estimador-de-parzen-rosenblatt"><i class="fa fa-check"></i><b>6.3.1</b> Distribución asintótica del estimador de Parzen-Rosenblatt</a></li>
+<li class="chapter" data-level="6.3.2" data-path="aproximacion-bootstrap.html"><a href="aproximacion-bootstrap.html#aproximaci%C3%B3n-plug-in"><i class="fa fa-check"></i><b>6.3.2</b> Aproximación plug-in</a></li>
+<li class="chapter" data-level="6.3.3" data-path="aproximacion-bootstrap.html"><a href="aproximacion-bootstrap.html#aproximaci%C3%B3n-bootstrap"><i class="fa fa-check"></i><b>6.3.3</b> Aproximación bootstrap</a></li>
 </ul></li>
 <li class="chapter" data-level="6.4" data-path="el-bootstrap-en-la-selección-del-parámetro-de-suavizado..html"><a href="el-bootstrap-en-la-selección-del-parámetro-de-suavizado..html"><i class="fa fa-check"></i><b>6.4</b> El Bootstrap en la selección del parámetro de suavizado.</a>
 <ul>
-<li class="chapter" data-level="6.4.1" data-path="el-bootstrap-en-la-selección-del-parámetro-de-suavizado..html"><a href="el-bootstrap-en-la-selección-del-parámetro-de-suavizado..html#expresión-asintótica-de-la-ventana-óptima"><i class="fa fa-check"></i><b>6.4.1</b> Expresión asintótica de la ventana óptima</a></li>
-<li class="chapter" data-level="6.4.2" data-path="el-bootstrap-en-la-selección-del-parámetro-de-suavizado..html"><a href="el-bootstrap-en-la-selección-del-parámetro-de-suavizado..html#análogo-bootstrap-del-mise"><i class="fa fa-check"></i><b>6.4.2</b> Análogo bootstrap del <span class="math inline">\(MISE\)</span></a></li>
-<li class="chapter" data-level="6.4.3" data-path="el-bootstrap-en-la-selección-del-parámetro-de-suavizado..html"><a href="el-bootstrap-en-la-selección-del-parámetro-de-suavizado..html#expresión-cerrada-para-miseast"><i class="fa fa-check"></i><b>6.4.3</b> Expresión cerrada para <span class="math inline">\(MISE^{\ast}\)</span></a></li>
-<li class="chapter" data-level="6.4.4" data-path="el-bootstrap-en-la-selección-del-parámetro-de-suavizado..html"><a href="el-bootstrap-en-la-selección-del-parámetro-de-suavizado..html#elección-de-la-ventana-piloto"><i class="fa fa-check"></i><b>6.4.4</b> Elección de la ventana piloto</a></li>
-<li class="chapter" data-level="6.4.5" data-path="el-bootstrap-en-la-selección-del-parámetro-de-suavizado..html"><a href="el-bootstrap-en-la-selección-del-parámetro-de-suavizado..html#resultados-teóricos"><i class="fa fa-check"></i><b>6.4.5</b> Resultados teóricos</a></li>
-<li class="chapter" data-level="6.4.6" data-path="el-bootstrap-en-la-selección-del-parámetro-de-suavizado..html"><a href="el-bootstrap-en-la-selección-del-parámetro-de-suavizado..html#caso-particular-de-núcleo-gaussiano"><i class="fa fa-check"></i><b>6.4.6</b> Caso particular de núcleo gaussiano</a></li>
-<li class="chapter" data-level="6.4.7" data-path="el-bootstrap-en-la-selección-del-parámetro-de-suavizado..html"><a href="el-bootstrap-en-la-selección-del-parámetro-de-suavizado..html#comparación-con-otros-selectores"><i class="fa fa-check"></i><b>6.4.7</b> Comparación con otros selectores</a></li>
+<li class="chapter" data-level="6.4.1" data-path="el-bootstrap-en-la-selección-del-parámetro-de-suavizado..html"><a href="el-bootstrap-en-la-selección-del-parámetro-de-suavizado..html#expresi%C3%B3n-asint%C3%B3tica-de-la-ventana-%C3%B3ptima"><i class="fa fa-check"></i><b>6.4.1</b> Expresión asintótica de la ventana óptima</a></li>
+<li class="chapter" data-level="6.4.2" data-path="el-bootstrap-en-la-selección-del-parámetro-de-suavizado..html"><a href="el-bootstrap-en-la-selección-del-parámetro-de-suavizado..html#an%C3%A1logo-bootstrap-del-mise"><i class="fa fa-check"></i><b>6.4.2</b> Análogo bootstrap del <span class="math inline">\(MISE\)</span></a></li>
+<li class="chapter" data-level="6.4.3" data-path="el-bootstrap-en-la-selección-del-parámetro-de-suavizado..html"><a href="el-bootstrap-en-la-selección-del-parámetro-de-suavizado..html#expresi%C3%B3n-cerrada-para-miseast"><i class="fa fa-check"></i><b>6.4.3</b> Expresión cerrada para <span class="math inline">\(MISE^{\ast}\)</span></a></li>
+<li class="chapter" data-level="6.4.4" data-path="el-bootstrap-en-la-selección-del-parámetro-de-suavizado..html"><a href="el-bootstrap-en-la-selección-del-parámetro-de-suavizado..html#elecci%C3%B3n-de-la-ventana-piloto"><i class="fa fa-check"></i><b>6.4.4</b> Elección de la ventana piloto</a></li>
+<li class="chapter" data-level="6.4.5" data-path="el-bootstrap-en-la-selección-del-parámetro-de-suavizado..html"><a href="el-bootstrap-en-la-selección-del-parámetro-de-suavizado..html#resultados-te%C3%B3ricos"><i class="fa fa-check"></i><b>6.4.5</b> Resultados teóricos</a></li>
+<li class="chapter" data-level="6.4.6" data-path="el-bootstrap-en-la-selección-del-parámetro-de-suavizado..html"><a href="el-bootstrap-en-la-selección-del-parámetro-de-suavizado..html#caso-particular-de-n%C3%BAcleo-gaussiano"><i class="fa fa-check"></i><b>6.4.6</b> Caso particular de núcleo gaussiano</a></li>
+<li class="chapter" data-level="6.4.7" data-path="el-bootstrap-en-la-selección-del-parámetro-de-suavizado..html"><a href="el-bootstrap-en-la-selección-del-parámetro-de-suavizado..html#comparaci%C3%B3n-con-otros-selectores"><i class="fa fa-check"></i><b>6.4.7</b> Comparación con otros selectores</a></li>
 </ul></li>
 <li class="chapter" data-level="6.5" data-path="npden-r.html"><a href="npden-r.html"><i class="fa fa-check"></i><b>6.5</b> Estimación no paramétrica de la densidad en R</a></li>
 <li class="chapter" data-level="6.6" data-path="ejemplos-1.html"><a href="ejemplos-1.html"><i class="fa fa-check"></i><b>6.6</b> Ejemplos</a>
 <ul>
-<li class="chapter" data-level="6.6.1" data-path="ejemplos-1.html"><a href="ejemplos-1.html#bootstrap-y-estimación-del-sesgo"><i class="fa fa-check"></i><b>6.6.1</b> Bootstrap y estimación del sesgo</a></li>
+<li class="chapter" data-level="6.6.1" data-path="ejemplos-1.html"><a href="ejemplos-1.html#bootstrap-y-estimaci%C3%B3n-del-sesgo"><i class="fa fa-check"></i><b>6.6.1</b> Bootstrap y estimación del sesgo</a></li>
 <li class="chapter" data-level="6.6.2" data-path="ejemplos-1.html"><a href="ejemplos-1.html#npden-r-ic"><i class="fa fa-check"></i><b>6.6.2</b> Estimación por intervalos de confianza</a></li>
 <li class="chapter" data-level="6.6.3" data-path="ejemplos-1.html"><a href="ejemplos-1.html#npden-r-boot"><i class="fa fa-check"></i><b>6.6.3</b> Implementación con el paquete <code>boot</code></a></li>
 </ul></li>
@@ -262,9 +263,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="7.1" data-path="nadaraya-watson.html"><a href="nadaraya-watson.html"><i class="fa fa-check"></i><b>7.1</b> Estimador de Nadaraya-Watson</a>
 <ul>
-<li class="chapter" data-level="7.1.1" data-path="nadaraya-watson.html"><a href="nadaraya-watson.html#distribución-asintótica-del-estimador-de-nadaraya-watson"><i class="fa fa-check"></i><b>7.1.1</b> Distribución asintótica del estimador de Nadaraya-Watson</a></li>
-<li class="chapter" data-level="7.1.2" data-path="nadaraya-watson.html"><a href="nadaraya-watson.html#órdenes-de-convergencia-de-la-distribución-del-estimador-de-nadaraya-watson-a-su-distribución-asintótica"><i class="fa fa-check"></i><b>7.1.2</b> Órdenes de convergencia de la distribución del estimador de Nadaraya-Watson a su distribución asintótica</a></li>
-<li class="chapter" data-level="7.1.3" data-path="nadaraya-watson.html"><a href="nadaraya-watson.html#aproximación-plug-in-1"><i class="fa fa-check"></i><b>7.1.3</b> Aproximación plug-in</a></li>
+<li class="chapter" data-level="7.1.1" data-path="nadaraya-watson.html"><a href="nadaraya-watson.html#distribuci%C3%B3n-asint%C3%B3tica-del-estimador-de-nadaraya-watson"><i class="fa fa-check"></i><b>7.1.1</b> Distribución asintótica del estimador de Nadaraya-Watson</a></li>
+<li class="chapter" data-level="7.1.2" data-path="nadaraya-watson.html"><a href="nadaraya-watson.html#%C3%B3rdenes-de-convergencia-de-la-distribuci%C3%B3n-del-estimador-de-nadaraya-watson-a-su-distribuci%C3%B3n-asint%C3%B3tica"><i class="fa fa-check"></i><b>7.1.2</b> Órdenes de convergencia de la distribución del estimador de Nadaraya-Watson a su distribución asintótica</a></li>
+<li class="chapter" data-level="7.1.3" data-path="nadaraya-watson.html"><a href="nadaraya-watson.html#aproximaci%C3%B3n-plug-in-1"><i class="fa fa-check"></i><b>7.1.3</b> Aproximación plug-in</a></li>
 </ul></li>
 <li class="chapter" data-level="7.2" data-path="métodos-de-remuestreo-en-regresión-no-paramétrica.html"><a href="métodos-de-remuestreo-en-regresión-no-paramétrica.html"><i class="fa fa-check"></i><b>7.2</b> Métodos de remuestreo en regresión no paramétrica</a>
 <ul>
@@ -274,14 +275,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="7.3" data-path="locpol-r.html"><a href="locpol-r.html"><i class="fa fa-check"></i><b>7.3</b> Regresión polinómica local en R</a>
 <ul>
-<li class="chapter" data-level="7.3.1" data-path="locpol-r.html"><a href="locpol-r.html#estimación-de-la-varianza"><i class="fa fa-check"></i><b>7.3.1</b> Estimación de la varianza</a></li>
+<li class="chapter" data-level="7.3.1" data-path="locpol-r.html"><a href="locpol-r.html#estimaci%C3%B3n-de-la-varianza"><i class="fa fa-check"></i><b>7.3.1</b> Estimación de la varianza</a></li>
 </ul></li>
 <li class="chapter" data-level="7.4" data-path="ejemplos-2.html"><a href="ejemplos-2.html"><i class="fa fa-check"></i><b>7.4</b> Ejemplos</a>
 <ul>
 <li class="chapter" data-level="7.4.1" data-path="ejemplos-2.html"><a href="ejemplos-2.html#bootstrap-residual"><i class="fa fa-check"></i><b>7.4.1</b> Bootstrap residual</a></li>
-<li class="chapter" data-level="7.4.2" data-path="ejemplos-2.html"><a href="ejemplos-2.html#intervalos-de-confianza-y-predicción"><i class="fa fa-check"></i><b>7.4.2</b> Intervalos de confianza y predicción</a></li>
+<li class="chapter" data-level="7.4.2" data-path="ejemplos-2.html"><a href="ejemplos-2.html#intervalos-de-confianza-y-predicci%C3%B3n"><i class="fa fa-check"></i><b>7.4.2</b> Intervalos de confianza y predicción</a></li>
 <li class="chapter" data-level="7.4.3" data-path="ejemplos-2.html"><a href="ejemplos-2.html#r-wild-bootstrap"><i class="fa fa-check"></i><b>7.4.3</b> Wild bootstrap</a></li>
-<li class="chapter" data-level="7.4.4" data-path="ejemplos-2.html"><a href="ejemplos-2.html#ejercicio-1"><i class="fa fa-check"></i><b>7.4.4</b> Ejercicio</a></li>
+<li class="chapter" data-level="7.4.4" data-path="ejemplos-2.html"><a href="ejemplos-2.html#npreg-heter"><i class="fa fa-check"></i><b>7.4.4</b> Bootstrap heterocedástico residual</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="bootcen.html"><a href="bootcen.html"><i class="fa fa-check"></i><b>8</b> El Bootstrap con datos censurados</a>
@@ -289,7 +290,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.1" data-path="introducción-a-los-datos-censurados.html"><a href="introducción-a-los-datos-censurados.html"><i class="fa fa-check"></i><b>8.1</b> Introducción a los datos censurados</a>
 <ul>
 <li class="chapter" data-level="8.1.1" data-path="introducción-a-los-datos-censurados.html"><a href="introducción-a-los-datos-censurados.html#estimador-de-kaplan-meier"><i class="fa fa-check"></i><b>8.1.1</b> Estimador de Kaplan-Meier</a></li>
-<li class="chapter" data-level="8.1.2" data-path="introducción-a-los-datos-censurados.html"><a href="introducción-a-los-datos-censurados.html#distribución-asintótica-del-estimador-de-kaplan-meier"><i class="fa fa-check"></i><b>8.1.2</b> Distribución asintótica del estimador de Kaplan-Meier</a></li>
+<li class="chapter" data-level="8.1.2" data-path="introducción-a-los-datos-censurados.html"><a href="introducción-a-los-datos-censurados.html#distribuci%C3%B3n-asint%C3%B3tica-del-estimador-de-kaplan-meier"><i class="fa fa-check"></i><b>8.1.2</b> Distribución asintótica del estimador de Kaplan-Meier</a></li>
 </ul></li>
 <li class="chapter" data-level="8.2" data-path="remuestreos-bootstrap-en-presencia-de-censura.html"><a href="remuestreos-bootstrap-en-presencia-de-censura.html"><i class="fa fa-check"></i><b>8.2</b> Remuestreos Bootstrap en presencia de censura</a>
 <ul>
@@ -305,7 +306,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.4" data-path="implementación-en-r-con-los-paquetes-boot-y-survival.html"><a href="implementación-en-r-con-los-paquetes-boot-y-survival.html"><i class="fa fa-check"></i><b>8.4</b> Implementación en <code>R</code> (con los paquetes <code>boot</code> y <code>survival</code>)</a>
 <ul>
 <li class="chapter" data-level="8.4.1" data-path="implementación-en-r-con-los-paquetes-boot-y-survival.html"><a href="implementación-en-r-con-los-paquetes-boot-y-survival.html#bootstrap-simple"><i class="fa fa-check"></i><b>8.4.1</b> Bootstrap simple</a></li>
-<li class="chapter" data-level="8.4.2" data-path="implementación-en-r-con-los-paquetes-boot-y-survival.html"><a href="implementación-en-r-con-los-paquetes-boot-y-survival.html#otros-métodos-de-remuestreo"><i class="fa fa-check"></i><b>8.4.2</b> Otros métodos de remuestreo</a></li>
+<li class="chapter" data-level="8.4.2" data-path="implementación-en-r-con-los-paquetes-boot-y-survival.html"><a href="implementación-en-r-con-los-paquetes-boot-y-survival.html#otros-m%C3%A9todos-de-remuestreo"><i class="fa fa-check"></i><b>8.4.2</b> Otros métodos de remuestreo</a></li>
 </ul></li>
 <li class="chapter" data-level="8.5" data-path="ejercicios.html"><a href="ejercicios.html"><i class="fa fa-check"></i><b>8.5</b> Ejercicios</a></li>
 </ul></li>
@@ -314,27 +315,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.1" data-path="introducción-a-las-condiciones-de-dependencia-y-modelos-habituales-de-datos-dependientes.html"><a href="introducción-a-las-condiciones-de-dependencia-y-modelos-habituales-de-datos-dependientes.html"><i class="fa fa-check"></i><b>9.1</b> Introducción a las condiciones de dependencia y modelos habituales de datos dependientes</a>
 <ul>
 <li class="chapter" data-level="9.1.1" data-path="introducción-a-las-condiciones-de-dependencia-y-modelos-habituales-de-datos-dependientes.html"><a href="introducción-a-las-condiciones-de-dependencia-y-modelos-habituales-de-datos-dependientes.html#situaciones-de-dependencia-general"><i class="fa fa-check"></i><b>9.1.1</b> Situaciones de dependencia general</a></li>
-<li class="chapter" data-level="9.1.2" data-path="introducción-a-las-condiciones-de-dependencia-y-modelos-habituales-de-datos-dependientes.html"><a href="introducción-a-las-condiciones-de-dependencia-y-modelos-habituales-de-datos-dependientes.html#modelos-paramétricos-de-dependencia"><i class="fa fa-check"></i><b>9.1.2</b> Modelos paramétricos de dependencia</a></li>
+<li class="chapter" data-level="9.1.2" data-path="introducción-a-las-condiciones-de-dependencia-y-modelos-habituales-de-datos-dependientes.html"><a href="introducción-a-las-condiciones-de-dependencia-y-modelos-habituales-de-datos-dependientes.html#modelos-param%C3%A9tricos-de-dependencia"><i class="fa fa-check"></i><b>9.1.2</b> Modelos paramétricos de dependencia</a></li>
 </ul></li>
 <li class="chapter" data-level="9.2" data-path="el-bootstrap-en-la-estimación-con-datos-dependientes.html"><a href="el-bootstrap-en-la-estimación-con-datos-dependientes.html"><i class="fa fa-check"></i><b>9.2</b> El bootstrap en la estimación con datos dependientes</a>
 <ul>
-<li class="chapter" data-level="9.2.1" data-path="el-bootstrap-en-la-estimación-con-datos-dependientes.html"><a href="el-bootstrap-en-la-estimación-con-datos-dependientes.html#modelos-paramétricos-de-dependencia-1"><i class="fa fa-check"></i><b>9.2.1</b> Modelos paramétricos de dependencia</a></li>
+<li class="chapter" data-level="9.2.1" data-path="el-bootstrap-en-la-estimación-con-datos-dependientes.html"><a href="el-bootstrap-en-la-estimación-con-datos-dependientes.html#modelos-param%C3%A9tricos-de-dependencia-1"><i class="fa fa-check"></i><b>9.2.1</b> Modelos paramétricos de dependencia</a></li>
 <li class="chapter" data-level="9.2.2" data-path="el-bootstrap-en-la-estimación-con-datos-dependientes.html"><a href="el-bootstrap-en-la-estimación-con-datos-dependientes.html#situaciones-de-dependencia-general-1"><i class="fa fa-check"></i><b>9.2.2</b> Situaciones de dependencia general</a></li>
 <li class="chapter" data-level="9.2.3" data-path="el-bootstrap-en-la-estimación-con-datos-dependientes.html"><a href="el-bootstrap-en-la-estimación-con-datos-dependientes.html#el-bootstrap-por-bloques"><i class="fa fa-check"></i><b>9.2.3</b> El bootstrap por bloques</a></li>
-<li class="chapter" data-level="9.2.4" data-path="el-bootstrap-en-la-estimación-con-datos-dependientes.html"><a href="el-bootstrap-en-la-estimación-con-datos-dependientes.html#elección-de-b"><i class="fa fa-check"></i><b>9.2.4</b> Elección de <span class="math inline">\(b\)</span></a></li>
+<li class="chapter" data-level="9.2.4" data-path="el-bootstrap-en-la-estimación-con-datos-dependientes.html"><a href="el-bootstrap-en-la-estimación-con-datos-dependientes.html#elecci%C3%B3n-de-b"><i class="fa fa-check"></i><b>9.2.4</b> Elección de <span class="math inline">\(b\)</span></a></li>
 <li class="chapter" data-level="9.2.5" data-path="el-bootstrap-en-la-estimación-con-datos-dependientes.html"><a href="el-bootstrap-en-la-estimación-con-datos-dependientes.html#el-bootstrap-estacionario"><i class="fa fa-check"></i><b>9.2.5</b> El bootstrap estacionario</a></li>
-<li class="chapter" data-level="9.2.6" data-path="el-bootstrap-en-la-estimación-con-datos-dependientes.html"><a href="el-bootstrap-en-la-estimación-con-datos-dependientes.html#el-método-del-submuestreo"><i class="fa fa-check"></i><b>9.2.6</b> El método del submuestreo</a></li>
+<li class="chapter" data-level="9.2.6" data-path="el-bootstrap-en-la-estimación-con-datos-dependientes.html"><a href="el-bootstrap-en-la-estimación-con-datos-dependientes.html#el-m%C3%A9todo-del-submuestreo"><i class="fa fa-check"></i><b>9.2.6</b> El método del submuestreo</a></li>
 </ul></li>
 <li class="chapter" data-level="9.3" data-path="el-bootstrap-para-la-predicción-con-datos-dependientes.html"><a href="el-bootstrap-para-la-predicción-con-datos-dependientes.html"><i class="fa fa-check"></i><b>9.3</b> El bootstrap para la predicción con datos dependientes</a>
 <ul>
-<li class="chapter" data-level="9.3.1" data-path="el-bootstrap-para-la-predicción-con-datos-dependientes.html"><a href="el-bootstrap-para-la-predicción-con-datos-dependientes.html#modelos-de-dependencia-paramétrica"><i class="fa fa-check"></i><b>9.3.1</b> Modelos de dependencia paramétrica</a></li>
+<li class="chapter" data-level="9.3.1" data-path="el-bootstrap-para-la-predicción-con-datos-dependientes.html"><a href="el-bootstrap-para-la-predicción-con-datos-dependientes.html#modelos-de-dependencia-param%C3%A9trica"><i class="fa fa-check"></i><b>9.3.1</b> Modelos de dependencia paramétrica</a></li>
 <li class="chapter" data-level="9.3.2" data-path="el-bootstrap-para-la-predicción-con-datos-dependientes.html"><a href="el-bootstrap-para-la-predicción-con-datos-dependientes.html#situaciones-de-dependencia-general-2"><i class="fa fa-check"></i><b>9.3.2</b> Situaciones de dependencia general</a></li>
 </ul></li>
 <li class="chapter" data-level="9.4" data-path="implementación-en-r.html"><a href="implementación-en-r.html"><i class="fa fa-check"></i><b>9.4</b> Implementación en <code>R</code></a>
 <ul>
-<li class="chapter" data-level="9.4.1" data-path="implementación-en-r.html"><a href="implementación-en-r.html#bootstrap-paramétrico"><i class="fa fa-check"></i><b>9.4.1</b> Bootstrap paramétrico</a></li>
-<li class="chapter" data-level="9.4.2" data-path="implementación-en-r.html"><a href="implementación-en-r.html#bootstrap-residual-semiparamétrico"><i class="fa fa-check"></i><b>9.4.2</b> Bootstrap residual (semiparamétrico)</a></li>
-<li class="chapter" data-level="9.4.3" data-path="implementación-en-r.html"><a href="implementación-en-r.html#implementación-en-r-con-el-paquete-boot"><i class="fa fa-check"></i><b>9.4.3</b> Implementación en <code>R</code> con el paquete <code>boot</code></a></li>
+<li class="chapter" data-level="9.4.1" data-path="implementación-en-r.html"><a href="implementación-en-r.html#bootstrap-param%C3%A9trico"><i class="fa fa-check"></i><b>9.4.1</b> Bootstrap paramétrico</a></li>
+<li class="chapter" data-level="9.4.2" data-path="implementación-en-r.html"><a href="implementación-en-r.html#bootstrap-residual-semiparam%C3%A9trico"><i class="fa fa-check"></i><b>9.4.2</b> Bootstrap residual (semiparamétrico)</a></li>
+<li class="chapter" data-level="9.4.3" data-path="implementación-en-r.html"><a href="implementación-en-r.html#implementaci%C3%B3n-en-r-con-el-paquete-boot"><i class="fa fa-check"></i><b>9.4.3</b> Implementación en <code>R</code> con el paquete <code>boot</code></a></li>
 <li class="chapter" data-level="9.4.4" data-path="implementación-en-r.html"><a href="implementación-en-r.html#spatial-data"><i class="fa fa-check"></i><b>9.4.4</b> Spatial data</a></li>
 </ul></li>
 </ul></li>
@@ -351,7 +352,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="B.2" data-path="paquetes-en-r.html"><a href="paquetes-en-r.html"><i class="fa fa-check"></i><b>B.2</b> Paquetes en R</a></li>
 <li class="chapter" data-level="B.3" data-path="ejemplos-3.html"><a href="ejemplos-3.html"><i class="fa fa-check"></i><b>B.3</b> Ejemplos</a>
 <ul>
-<li class="chapter" data-level="B.3.1" data-path="ejemplos-3.html"><a href="ejemplos-3.html#procesamiento-en-paralelo-con-la-función-boot"><i class="fa fa-check"></i><b>B.3.1</b> Procesamiento en paralelo con la función <code>boot()</code></a></li>
+<li class="chapter" data-level="B.3.1" data-path="ejemplos-3.html"><a href="ejemplos-3.html#procesamiento-en-paralelo-con-la-funci%C3%B3n-boot"><i class="fa fa-check"></i><b>B.3.1</b> Procesamiento en paralelo con la función <code>boot()</code></a></li>
 <li class="chapter" data-level="B.3.2" data-path="ejemplos-3.html"><a href="ejemplos-3.html#estudio-sim-boot"><i class="fa fa-check"></i><b>B.3.2</b> Estudio de simulación</a></li>
 </ul></li>
 </ul></li>
@@ -407,7 +408,9 @@ así proceder según sigue:</p>
 <li><p>Para cada <span class="math inline">\(i=1,\ldots ,n\)</span> arrojar <span class="math inline">\(X_i^{\ast}\)</span> a partir de
 <span class="math inline">\(\hat{F}\)</span> y obtener
 <span class="math inline">\(\mathbf{X}^{\ast}=\left( X_1^{\ast}, \ldots ,X_n^{\ast} \right)\)</span></p></li>
-<li><p>Calcular <span class="math inline">\(R^{\ast}=R\left( \mathbf{X}^{\ast},\hat{F} \right) =T\left( \mathbf{X}^{\ast} \right) -\theta \left( \hat{F} \right) = \hat{\theta}^{\ast}- \theta \left( \hat{F} \right)\)</span></p></li>
+<li><p>Calcular <span class="math inline">\(R^{\ast}=R\left( \mathbf{X}^{\ast},\hat{F} \right)
+=T\left( \mathbf{X}^{\ast} \right) -\theta \left( \hat{F} \right) =
+\hat{\theta}^{\ast}- \theta \left( \hat{F} \right)\)</span></p></li>
 <li><p>Repetir <span class="math inline">\(B\)</span> veces los pasos 2-3 para obtener las réplicas bootstrap
 <span class="math inline">\(R^{\ast (1)}, \ldots, R^{\ast (B)}\)</span></p></li>
 <li><p>Calcular el estimador bootstrap del sesgo:
@@ -430,10 +433,12 @@ paso 5 pasaría a ser:</p>
 <p>En el caso de la varianza podría ahorrarse algunos cálculos definiendo
 directamente <span class="math inline">\(R=T\left( \mathbf{X} \right) =\hat{\theta}\)</span> y,
 consecuentemente,
-<span class="math inline">\(R^{\ast}=T\left( \mathbf{X}^{\ast} \right) = \hat{\theta}^{\ast}\)</span>. Así otro algoritmo de cálculo algo menos
+<span class="math inline">\(R^{\ast}=T\left( \mathbf{X}^{\ast} \right) =
+\hat{\theta}^{\ast}\)</span>. Así otro algoritmo de cálculo algo menos
 intensivo sería:</p>
 <ol style="list-style-type: decimal">
-<li><p>Estimar la función de distribución de probabilidad mediante <span class="math inline">\(\hat{ F}\)</span></p></li>
+<li><p>Estimar la función de distribución de probabilidad mediante <span class="math inline">\(\hat{
+F}\)</span></p></li>
 <li><p>Para cada <span class="math inline">\(i=1,\ldots ,n\)</span> arrojar <span class="math inline">\(X_i^{\ast}\)</span> a partir de
 <span class="math inline">\(\hat{F}\)</span> y obtener
 <span class="math inline">\(\mathbf{X}^{\ast}=\left( X_1^{\ast}, \ldots, X_n^{\ast} \right)\)</span></p></li>
@@ -442,7 +447,8 @@ intensivo sería:</p>
 <li><p>Repetir <span class="math inline">\(B\)</span> veces los pasos 2-3 para obtener las réplicas bootstrap
 <span class="math inline">\(\hat{\theta}^{\ast (1)}, \ldots, \hat{\theta}^{\ast(B)}\)</span></p></li>
 <li><p>Calcular
-<span class="math inline">\(\overline{\hat{\theta}^{\ast}}=\frac{1}{B}\sum_{b=1}^{B}\hat{ \theta}^{\ast (b)}\)</span> y, con ello,
+<span class="math inline">\(\overline{\hat{\theta}^{\ast}}=\frac{1}{B}\sum_{b=1}^{B}\hat{
+\theta}^{\ast (b)}\)</span> y, con ello,
 <span class="math inline">\(Var^{\ast}\left( \hat{\theta}^{\ast} \right) =\frac{1}{B}\sum_{b=1}^{B}\left( \hat{\theta}^{\ast \left(b \right)}-\overline{\hat{\theta}^{\ast}} \right)^2\)</span></p></li>
 </ol>
 <p>Es interesante mencionar que esto permite aproximar por bootstrap
@@ -457,9 +463,11 @@ como se mostró en la Sección <a href="introducción.html#intro-implementacion"
 <p>Consideremos como parámetro de interés la media de la población,
 <span class="math inline">\(\theta =\theta \left( F \right) =\mu =\int xdF\left( x \right)\)</span>, y
 tomemos como estimador la media muestral:
-<span class="math inline">\(\hat{\theta}=\hat{\mu}=T\left( \mathbf{X} \right) =\bar{X}=\frac{1}{n}\sum_{j=1}^{n}X_j\)</span>.
+<span class="math inline">\(\hat{\theta}=\hat{\mu}=T\left(
+\mathbf{X} \right) =\bar{X}=\frac{1}{n}\sum_{j=1}^{n}X_j\)</span>.
 Supongamos que deseamos estudiar la varianza de este estimador:
-<span class="math inline">\(Var\left( \hat{\theta} \right) =Var\left( \bar{X} \right) =\frac{\sigma^2}{n}\)</span>.</p>
+<span class="math inline">\(Var\left(
+\hat{\theta} \right) =Var\left( \bar{X} \right) =\frac{\sigma^2}{n}\)</span>.</p>
 <p>A la hora de aproximar por bootstrap <span class="math inline">\(Var\left( \hat{\theta} \right)\)</span>,
 si no disponemos de ninguna otra información adicional (como que la
 distribución sea de cierta familia paramétrica o que sea continua),
@@ -470,9 +478,11 @@ forma:</p>
 <li><p>Para cada <span class="math inline">\(i=1,\ldots ,n\)</span> arrojar <span class="math inline">\(U_i\sim \mathcal{U}\left( 0,1 \right)\)</span> y
 hacer <span class="math inline">\(X_i^{\ast}=X_{\left\lfloor nU_i\right\rfloor +1}\)</span></p></li>
 <li><p>Calcular
-<span class="math inline">\(T\left( \mathbf{X}^{\ast} \right) =\bar{X}^{\ast}= \frac{1}{n}\sum_{i=1}^{n}X_i^{\ast}\)</span></p></li>
+<span class="math inline">\(T\left( \mathbf{X}^{\ast} \right) =\bar{X}^{\ast}=
+\frac{1}{n}\sum_{i=1}^{n}X_i^{\ast}\)</span></p></li>
 <li><p>Repetir <span class="math inline">\(B\)</span> veces los pasos 1-2 para obtener las réplicas bootstrap
-<span class="math inline">\(\bar{X}^{\ast (1)}, \ldots, \bar{X}^{\ast (B)}\)</span></p></li>
+<span class="math inline">\(\bar{X}^{\ast (1)}, \ldots, \bar{X}^{\ast
+(B)}\)</span></p></li>
 <li><p>Calcular <span class="math inline">\(\overline{\bar{X}^{\ast}}=\frac{1}{B}\sum_{b=1}^{B}\)</span>
 <span class="math inline">\(\bar{X}^{\ast (b)}\)</span> y
 <span class="math inline">\(Var^{\ast}\left( \bar{X}^{\ast} \right) =\frac{1}{B} \sum_{b=1}^{B}\left( \bar{X}^{\ast (b)}-\overline{\bar{X}^{\ast}} \right)^2\)</span></p></li>
@@ -498,13 +508,15 @@ mediana muestral, a partir de los datos observados: 0.143, 0.182, 0.256, 0.260, 
 0.437, 0.509, 0.611, 0.712, 1.04, 1.09, 1.15, 1.46, 1.88, 2.08.</p>
 <p>La estimación media muestral resulta <span class="math inline">\(\bar{X}=0.8053333\)</span>. Por su
 parte la estimación mediana muestral es <span class="math inline">\(x_{\left( 8 \right)}=0.611\)</span>.</p>
-<p>La varianza del estimador media muestral, <span class="math inline">\(\bar{X}\)</span> es <span class="math inline">\(Var\left( \bar{X} \right) =\frac{\sigma^2}{n}\)</span>, desconocida en este caso.
+<p>La varianza del estimador media muestral, <span class="math inline">\(\bar{X}\)</span> es <span class="math inline">\(Var\left(
+\bar{X} \right) =\frac{\sigma^2}{n}\)</span>, desconocida en este caso.
 Su estimación bootstrap (idéntica a la plug-in) mediante un remuestreo
 uniforme es calculable sin necesidad de realizar Monte Carlo y
 resulta:
 <span class="math display">\[Var^{\ast}\left( \bar{X}^{\ast} \right) =\frac{1}{n^2}
 \sum_{j=1}^{n}\left( x_j-\bar{X} \right)^2=0.024204877.\]</span>
-Con lo cual <span class="math inline">\(\sqrt{Var^{\ast}\left( \bar{X}^{\ast} \right)}=\sqrt{ 0.024204877}= 0.155\,58\)</span></p>
+Con lo cual <span class="math inline">\(\sqrt{Var^{\ast}\left( \bar{X}^{\ast} \right)}=\sqrt{
+0.024204877}= 0.155\,58\)</span></p>
 <p>Si consideramos ahora la mediana muestral (como estimador de la media),
 también sabemos que su distribución bootstrap puede calcularse de forma
 explícita, sin necesidad de realizar Monte Carlo. Su masa de
@@ -565,62 +577,62 @@ MSE^{\ast}\left( X_{\left( 8 \right)}^{\ast} \right) &amp;= \left( E^{\ast
 \end{aligned}\]</span></p>
 <p>Una aproximación de Monte Carlo de estas varianzas bootstrap se puede
 llevar a cabo mediante el siguiente código:</p>
-<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="prec-sesgo-boot.html#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Para la muestra de TIEMPOS DE VIDA, estima (plug-in) la precisión </span></span>
-<span id="cb64-2"><a href="prec-sesgo-boot.html#cb64-2" aria-hidden="true" tabindex="-1"></a><span class="co"># de la media muestral (desvmedia) y también aproxima por Monte Carlo</span></span>
-<span id="cb64-3"><a href="prec-sesgo-boot.html#cb64-3" aria-hidden="true" tabindex="-1"></a><span class="co"># la estimación bootstrap de dicha precisión (desvmediaboot) y</span></span>
-<span id="cb64-4"><a href="prec-sesgo-boot.html#cb64-4" aria-hidden="true" tabindex="-1"></a><span class="co"># también la precisión de la mediana muestral, de la cual no se</span></span>
-<span id="cb64-5"><a href="prec-sesgo-boot.html#cb64-5" aria-hidden="true" tabindex="-1"></a><span class="co"># conoce su expresión, (desvmedianaboot).</span></span>
-<span id="cb64-6"><a href="prec-sesgo-boot.html#cb64-6" aria-hidden="true" tabindex="-1"></a><span class="co"># También estima el sesgo bootstrap de esos dos estimadores </span></span>
-<span id="cb64-7"><a href="prec-sesgo-boot.html#cb64-7" aria-hidden="true" tabindex="-1"></a><span class="co"># (sesgomediaboot y sesgomedianaboot, respectivamente).</span></span>
-<span id="cb64-8"><a href="prec-sesgo-boot.html#cb64-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb64-9"><a href="prec-sesgo-boot.html#cb64-9" aria-hidden="true" tabindex="-1"></a>muestra <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.143</span>, <span class="fl">0.182</span>, <span class="fl">0.256</span>, <span class="fl">0.26</span>, <span class="fl">0.27</span>, <span class="fl">0.437</span>, <span class="fl">0.509</span>,</span>
-<span id="cb64-10"><a href="prec-sesgo-boot.html#cb64-10" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.611</span>, <span class="fl">0.712</span>, <span class="fl">1.04</span>, <span class="fl">1.09</span>, <span class="fl">1.15</span>, <span class="fl">1.46</span>, <span class="fl">1.88</span>, <span class="fl">2.08</span>)</span>
-<span id="cb64-11"><a href="prec-sesgo-boot.html#cb64-11" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">length</span>(muestra)</span>
-<span id="cb64-12"><a href="prec-sesgo-boot.html#cb64-12" aria-hidden="true" tabindex="-1"></a>varmedia <span class="ot">&lt;-</span> (<span class="dv">1</span><span class="sc">/</span>(n<span class="sc">^</span><span class="dv">2</span>)) <span class="sc">*</span> <span class="fu">sum</span>((muestra <span class="sc">-</span> <span class="fu">mean</span>(muestra))<span class="sc">^</span><span class="dv">2</span>)</span>
-<span id="cb64-13"><a href="prec-sesgo-boot.html#cb64-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Alternativamente: varmedia &lt;- var(muestra)/n</span></span>
-<span id="cb64-14"><a href="prec-sesgo-boot.html#cb64-14" aria-hidden="true" tabindex="-1"></a>desvmedia <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(varmedia)</span>
-<span id="cb64-15"><a href="prec-sesgo-boot.html#cb64-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb64-16"><a href="prec-sesgo-boot.html#cb64-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Remuestreo</span></span>
-<span id="cb64-17"><a href="prec-sesgo-boot.html#cb64-17" aria-hidden="true" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="fl">1e+04</span></span>
-<span id="cb64-18"><a href="prec-sesgo-boot.html#cb64-18" aria-hidden="true" tabindex="-1"></a>media <span class="ot">&lt;-</span> <span class="fu">numeric</span>(B)</span>
-<span id="cb64-19"><a href="prec-sesgo-boot.html#cb64-19" aria-hidden="true" tabindex="-1"></a>mediana <span class="ot">&lt;-</span> <span class="fu">numeric</span>(B)</span>
-<span id="cb64-20"><a href="prec-sesgo-boot.html#cb64-20" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb64-21"><a href="prec-sesgo-boot.html#cb64-21" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (k <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>B) {</span>
-<span id="cb64-22"><a href="prec-sesgo-boot.html#cb64-22" aria-hidden="true" tabindex="-1"></a>    remuestra <span class="ot">&lt;-</span> <span class="fu">sample</span>(muestra, n, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb64-23"><a href="prec-sesgo-boot.html#cb64-23" aria-hidden="true" tabindex="-1"></a>    media[k] <span class="ot">&lt;-</span> <span class="fu">mean</span>(remuestra)</span>
-<span id="cb64-24"><a href="prec-sesgo-boot.html#cb64-24" aria-hidden="true" tabindex="-1"></a>    <span class="co"># remordenada &lt;- sort(remuestra)</span></span>
-<span id="cb64-25"><a href="prec-sesgo-boot.html#cb64-25" aria-hidden="true" tabindex="-1"></a>    <span class="co"># mediana[k] &lt;- remordenada[8]</span></span>
-<span id="cb64-26"><a href="prec-sesgo-boot.html#cb64-26" aria-hidden="true" tabindex="-1"></a>    mediana[k] <span class="ot">&lt;-</span> <span class="fu">median</span>(remuestra)</span>
-<span id="cb64-27"><a href="prec-sesgo-boot.html#cb64-27" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb64-28"><a href="prec-sesgo-boot.html#cb64-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb64-29"><a href="prec-sesgo-boot.html#cb64-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Aproximaciones precisión</span></span>
-<span id="cb64-30"><a href="prec-sesgo-boot.html#cb64-30" aria-hidden="true" tabindex="-1"></a>varmediaboot <span class="ot">&lt;-</span> (<span class="dv">1</span><span class="sc">/</span>B) <span class="sc">*</span> <span class="fu">sum</span>((media <span class="sc">-</span> <span class="fu">mean</span>(media))<span class="sc">^</span><span class="dv">2</span>)</span>
-<span id="cb64-31"><a href="prec-sesgo-boot.html#cb64-31" aria-hidden="true" tabindex="-1"></a>desvmediaboot <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(varmediaboot)</span>
-<span id="cb64-32"><a href="prec-sesgo-boot.html#cb64-32" aria-hidden="true" tabindex="-1"></a>varmedianaboot <span class="ot">&lt;-</span> (<span class="dv">1</span><span class="sc">/</span>B) <span class="sc">*</span> <span class="fu">sum</span>((mediana <span class="sc">-</span> <span class="fu">mean</span>(mediana))<span class="sc">^</span><span class="dv">2</span>)</span>
-<span id="cb64-33"><a href="prec-sesgo-boot.html#cb64-33" aria-hidden="true" tabindex="-1"></a>desvmedianaboot <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(varmedianaboot)</span>
-<span id="cb64-34"><a href="prec-sesgo-boot.html#cb64-34" aria-hidden="true" tabindex="-1"></a>desvmedia</span></code></pre></div>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="prec-sesgo-boot.html#cb64-1" tabindex="-1"></a><span class="co"># Para la muestra de TIEMPOS DE VIDA, estima (plug-in) la precisión </span></span>
+<span id="cb64-2"><a href="prec-sesgo-boot.html#cb64-2" tabindex="-1"></a><span class="co"># de la media muestral (desvmedia) y también aproxima por Monte Carlo</span></span>
+<span id="cb64-3"><a href="prec-sesgo-boot.html#cb64-3" tabindex="-1"></a><span class="co"># la estimación bootstrap de dicha precisión (desvmediaboot) y</span></span>
+<span id="cb64-4"><a href="prec-sesgo-boot.html#cb64-4" tabindex="-1"></a><span class="co"># también la precisión de la mediana muestral, de la cual no se</span></span>
+<span id="cb64-5"><a href="prec-sesgo-boot.html#cb64-5" tabindex="-1"></a><span class="co"># conoce su expresión, (desvmedianaboot).</span></span>
+<span id="cb64-6"><a href="prec-sesgo-boot.html#cb64-6" tabindex="-1"></a><span class="co"># También estima el sesgo bootstrap de esos dos estimadores </span></span>
+<span id="cb64-7"><a href="prec-sesgo-boot.html#cb64-7" tabindex="-1"></a><span class="co"># (sesgomediaboot y sesgomedianaboot, respectivamente).</span></span>
+<span id="cb64-8"><a href="prec-sesgo-boot.html#cb64-8" tabindex="-1"></a></span>
+<span id="cb64-9"><a href="prec-sesgo-boot.html#cb64-9" tabindex="-1"></a>muestra <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.143</span>, <span class="fl">0.182</span>, <span class="fl">0.256</span>, <span class="fl">0.26</span>, <span class="fl">0.27</span>, <span class="fl">0.437</span>, <span class="fl">0.509</span>,</span>
+<span id="cb64-10"><a href="prec-sesgo-boot.html#cb64-10" tabindex="-1"></a>    <span class="fl">0.611</span>, <span class="fl">0.712</span>, <span class="fl">1.04</span>, <span class="fl">1.09</span>, <span class="fl">1.15</span>, <span class="fl">1.46</span>, <span class="fl">1.88</span>, <span class="fl">2.08</span>)</span>
+<span id="cb64-11"><a href="prec-sesgo-boot.html#cb64-11" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">length</span>(muestra)</span>
+<span id="cb64-12"><a href="prec-sesgo-boot.html#cb64-12" tabindex="-1"></a>varmedia <span class="ot">&lt;-</span> (<span class="dv">1</span><span class="sc">/</span>(n<span class="sc">^</span><span class="dv">2</span>)) <span class="sc">*</span> <span class="fu">sum</span>((muestra <span class="sc">-</span> <span class="fu">mean</span>(muestra))<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb64-13"><a href="prec-sesgo-boot.html#cb64-13" tabindex="-1"></a><span class="co"># Alternativamente: varmedia &lt;- var(muestra)/n</span></span>
+<span id="cb64-14"><a href="prec-sesgo-boot.html#cb64-14" tabindex="-1"></a>desvmedia <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(varmedia)</span>
+<span id="cb64-15"><a href="prec-sesgo-boot.html#cb64-15" tabindex="-1"></a></span>
+<span id="cb64-16"><a href="prec-sesgo-boot.html#cb64-16" tabindex="-1"></a><span class="co"># Remuestreo</span></span>
+<span id="cb64-17"><a href="prec-sesgo-boot.html#cb64-17" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="fl">1e+04</span></span>
+<span id="cb64-18"><a href="prec-sesgo-boot.html#cb64-18" tabindex="-1"></a>media <span class="ot">&lt;-</span> <span class="fu">numeric</span>(B)</span>
+<span id="cb64-19"><a href="prec-sesgo-boot.html#cb64-19" tabindex="-1"></a>mediana <span class="ot">&lt;-</span> <span class="fu">numeric</span>(B)</span>
+<span id="cb64-20"><a href="prec-sesgo-boot.html#cb64-20" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb64-21"><a href="prec-sesgo-boot.html#cb64-21" tabindex="-1"></a><span class="cf">for</span> (k <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>B) {</span>
+<span id="cb64-22"><a href="prec-sesgo-boot.html#cb64-22" tabindex="-1"></a>    remuestra <span class="ot">&lt;-</span> <span class="fu">sample</span>(muestra, n, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb64-23"><a href="prec-sesgo-boot.html#cb64-23" tabindex="-1"></a>    media[k] <span class="ot">&lt;-</span> <span class="fu">mean</span>(remuestra)</span>
+<span id="cb64-24"><a href="prec-sesgo-boot.html#cb64-24" tabindex="-1"></a>    <span class="co"># remordenada &lt;- sort(remuestra)</span></span>
+<span id="cb64-25"><a href="prec-sesgo-boot.html#cb64-25" tabindex="-1"></a>    <span class="co"># mediana[k] &lt;- remordenada[8]</span></span>
+<span id="cb64-26"><a href="prec-sesgo-boot.html#cb64-26" tabindex="-1"></a>    mediana[k] <span class="ot">&lt;-</span> <span class="fu">median</span>(remuestra)</span>
+<span id="cb64-27"><a href="prec-sesgo-boot.html#cb64-27" tabindex="-1"></a>}</span>
+<span id="cb64-28"><a href="prec-sesgo-boot.html#cb64-28" tabindex="-1"></a></span>
+<span id="cb64-29"><a href="prec-sesgo-boot.html#cb64-29" tabindex="-1"></a><span class="co"># Aproximaciones precisión</span></span>
+<span id="cb64-30"><a href="prec-sesgo-boot.html#cb64-30" tabindex="-1"></a>varmediaboot <span class="ot">&lt;-</span> (<span class="dv">1</span><span class="sc">/</span>B) <span class="sc">*</span> <span class="fu">sum</span>((media <span class="sc">-</span> <span class="fu">mean</span>(media))<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb64-31"><a href="prec-sesgo-boot.html#cb64-31" tabindex="-1"></a>desvmediaboot <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(varmediaboot)</span>
+<span id="cb64-32"><a href="prec-sesgo-boot.html#cb64-32" tabindex="-1"></a>varmedianaboot <span class="ot">&lt;-</span> (<span class="dv">1</span><span class="sc">/</span>B) <span class="sc">*</span> <span class="fu">sum</span>((mediana <span class="sc">-</span> <span class="fu">mean</span>(mediana))<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb64-33"><a href="prec-sesgo-boot.html#cb64-33" tabindex="-1"></a>desvmedianaboot <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(varmedianaboot)</span>
+<span id="cb64-34"><a href="prec-sesgo-boot.html#cb64-34" tabindex="-1"></a>desvmedia</span></code></pre></div>
 <pre><code>## [1] 0.1555792</code></pre>
-<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="prec-sesgo-boot.html#cb66-1" aria-hidden="true" tabindex="-1"></a>desvmediaboot</span></code></pre></div>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="prec-sesgo-boot.html#cb66-1" tabindex="-1"></a>desvmediaboot</span></code></pre></div>
 <pre><code>## [1] 0.1548697</code></pre>
-<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="prec-sesgo-boot.html#cb68-1" aria-hidden="true" tabindex="-1"></a>desvmedianaboot</span></code></pre></div>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="prec-sesgo-boot.html#cb68-1" tabindex="-1"></a>desvmedianaboot</span></code></pre></div>
 <pre><code>## [1] 0.2498461</code></pre>
-<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="prec-sesgo-boot.html#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Aproximaciones sesgo</span></span>
-<span id="cb70-2"><a href="prec-sesgo-boot.html#cb70-2" aria-hidden="true" tabindex="-1"></a>sesgomediaboot <span class="ot">&lt;-</span> <span class="fu">mean</span>(media) <span class="sc">-</span> <span class="fu">mean</span>(muestra)</span>
-<span id="cb70-3"><a href="prec-sesgo-boot.html#cb70-3" aria-hidden="true" tabindex="-1"></a>sesgomedianaboot <span class="ot">&lt;-</span> <span class="fu">mean</span>(mediana) <span class="sc">-</span> muestra[<span class="dv">8</span>]</span>
-<span id="cb70-4"><a href="prec-sesgo-boot.html#cb70-4" aria-hidden="true" tabindex="-1"></a>sesgomediaboot</span></code></pre></div>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="prec-sesgo-boot.html#cb70-1" tabindex="-1"></a><span class="co"># Aproximaciones sesgo</span></span>
+<span id="cb70-2"><a href="prec-sesgo-boot.html#cb70-2" tabindex="-1"></a>sesgomediaboot <span class="ot">&lt;-</span> <span class="fu">mean</span>(media) <span class="sc">-</span> <span class="fu">mean</span>(muestra)</span>
+<span id="cb70-3"><a href="prec-sesgo-boot.html#cb70-3" tabindex="-1"></a>sesgomedianaboot <span class="ot">&lt;-</span> <span class="fu">mean</span>(mediana) <span class="sc">-</span> muestra[<span class="dv">8</span>]</span>
+<span id="cb70-4"><a href="prec-sesgo-boot.html#cb70-4" tabindex="-1"></a>sesgomediaboot</span></code></pre></div>
 <pre><code>## [1] 7.115333e-05</code></pre>
-<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="prec-sesgo-boot.html#cb72-1" aria-hidden="true" tabindex="-1"></a>sesgomedianaboot</span></code></pre></div>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="prec-sesgo-boot.html#cb72-1" tabindex="-1"></a>sesgomedianaboot</span></code></pre></div>
 <pre><code>## [1] 0.0439615</code></pre>
 <p>Empleando el paquete <code>boot</code> el código sería más simple:</p>
-<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="prec-sesgo-boot.html#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(boot)</span>
-<span id="cb74-2"><a href="prec-sesgo-boot.html#cb74-2" aria-hidden="true" tabindex="-1"></a>statistic <span class="ot">&lt;-</span> <span class="cf">function</span>(data, i){</span>
-<span id="cb74-3"><a href="prec-sesgo-boot.html#cb74-3" aria-hidden="true" tabindex="-1"></a>  remuestra <span class="ot">&lt;-</span> data[i]</span>
-<span id="cb74-4"><a href="prec-sesgo-boot.html#cb74-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="fu">mean</span>(remuestra), <span class="fu">median</span>(remuestra))</span>
-<span id="cb74-5"><a href="prec-sesgo-boot.html#cb74-5" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb74-6"><a href="prec-sesgo-boot.html#cb74-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-7"><a href="prec-sesgo-boot.html#cb74-7" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb74-8"><a href="prec-sesgo-boot.html#cb74-8" aria-hidden="true" tabindex="-1"></a>res.boot <span class="ot">&lt;-</span> <span class="fu">boot</span>(muestra, statistic, <span class="at">R =</span> B)</span>
-<span id="cb74-9"><a href="prec-sesgo-boot.html#cb74-9" aria-hidden="true" tabindex="-1"></a>res.boot</span></code></pre></div>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="prec-sesgo-boot.html#cb74-1" tabindex="-1"></a><span class="fu">library</span>(boot)</span>
+<span id="cb74-2"><a href="prec-sesgo-boot.html#cb74-2" tabindex="-1"></a>statistic <span class="ot">&lt;-</span> <span class="cf">function</span>(data, i){</span>
+<span id="cb74-3"><a href="prec-sesgo-boot.html#cb74-3" tabindex="-1"></a>  remuestra <span class="ot">&lt;-</span> data[i]</span>
+<span id="cb74-4"><a href="prec-sesgo-boot.html#cb74-4" tabindex="-1"></a>  <span class="fu">c</span>(<span class="fu">mean</span>(remuestra), <span class="fu">median</span>(remuestra))</span>
+<span id="cb74-5"><a href="prec-sesgo-boot.html#cb74-5" tabindex="-1"></a>}</span>
+<span id="cb74-6"><a href="prec-sesgo-boot.html#cb74-6" tabindex="-1"></a></span>
+<span id="cb74-7"><a href="prec-sesgo-boot.html#cb74-7" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb74-8"><a href="prec-sesgo-boot.html#cb74-8" tabindex="-1"></a>res.boot <span class="ot">&lt;-</span> <span class="fu">boot</span>(muestra, statistic, <span class="at">R =</span> B)</span>
+<span id="cb74-9"><a href="prec-sesgo-boot.html#cb74-9" tabindex="-1"></a>res.boot</span></code></pre></div>
 <pre><code>## 
 ## ORDINARY NONPARAMETRIC BOOTSTRAP
 ## 
@@ -636,13 +648,13 @@ llevar a cabo mediante el siguiente código:</p>
 <p>Lamentablemente la función <code>print.boot()</code> calcula las aproximaciones
 bootstrap del sesgo y de la precisión pero no las almacena.
 En el caso más simple podríamos obtenerlas con el siguiente código:</p>
-<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="prec-sesgo-boot.html#cb76-1" aria-hidden="true" tabindex="-1"></a>op <span class="ot">&lt;-</span> <span class="fu">with</span>(res.boot, <span class="fu">cbind</span>(</span>
-<span id="cb76-2"><a href="prec-sesgo-boot.html#cb76-2" aria-hidden="true" tabindex="-1"></a>  t0, <span class="fu">apply</span>(t, <span class="dv">2</span>, mean, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">-</span>  t0,</span>
-<span id="cb76-3"><a href="prec-sesgo-boot.html#cb76-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">apply</span>(t, <span class="dv">2</span>, sd, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb76-4"><a href="prec-sesgo-boot.html#cb76-4" aria-hidden="true" tabindex="-1"></a>  ))</span>
-<span id="cb76-5"><a href="prec-sesgo-boot.html#cb76-5" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(op) <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;t&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(res.boot<span class="sc">$</span>t), <span class="st">&quot;*&quot;</span>)</span>
-<span id="cb76-6"><a href="prec-sesgo-boot.html#cb76-6" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(op) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;original&quot;</span>, <span class="st">&quot;bias  &quot;</span>, <span class="st">&quot; std. error&quot;</span>)</span>
-<span id="cb76-7"><a href="prec-sesgo-boot.html#cb76-7" aria-hidden="true" tabindex="-1"></a>op</span></code></pre></div>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="prec-sesgo-boot.html#cb76-1" tabindex="-1"></a>op <span class="ot">&lt;-</span> <span class="fu">with</span>(res.boot, <span class="fu">cbind</span>(</span>
+<span id="cb76-2"><a href="prec-sesgo-boot.html#cb76-2" tabindex="-1"></a>  t0, <span class="fu">apply</span>(t, <span class="dv">2</span>, mean, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">-</span>  t0,</span>
+<span id="cb76-3"><a href="prec-sesgo-boot.html#cb76-3" tabindex="-1"></a>  <span class="fu">apply</span>(t, <span class="dv">2</span>, sd, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb76-4"><a href="prec-sesgo-boot.html#cb76-4" tabindex="-1"></a>  ))</span>
+<span id="cb76-5"><a href="prec-sesgo-boot.html#cb76-5" tabindex="-1"></a><span class="fu">rownames</span>(op) <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;t&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(res.boot<span class="sc">$</span>t), <span class="st">&quot;*&quot;</span>)</span>
+<span id="cb76-6"><a href="prec-sesgo-boot.html#cb76-6" tabindex="-1"></a><span class="fu">colnames</span>(op) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;original&quot;</span>, <span class="st">&quot;bias  &quot;</span>, <span class="st">&quot; std. error&quot;</span>)</span>
+<span id="cb76-7"><a href="prec-sesgo-boot.html#cb76-7" tabindex="-1"></a>op</span></code></pre></div>
 <pre><code>##      original       bias    std. error
 ## t1* 0.8053333 7.115333e-05   0.1572396
 ## t2* 0.6110000 4.529410e-02   0.2511022</code></pre>

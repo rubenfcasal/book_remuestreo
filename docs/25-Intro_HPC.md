@@ -118,7 +118,7 @@ system.time(res.boot <- parSapply(cl, 1:100, func))
 
 ```
 ##    user  system elapsed 
-##    0.00    0.00    0.03
+##    0.00    0.00    0.01
 ```
 
 ``` r
@@ -195,7 +195,7 @@ system.time(res.boot <- boot(muestra, statistic, R = B, parallel = "snow", cl = 
 
 ```
 ##    user  system elapsed 
-##    0.03    0.00    0.03
+##    0.01    0.00    0.02
 ```
 
 ### Estudio de simulación {#estudio-sim-boot}
@@ -259,7 +259,7 @@ print(t.fin)
 
 ```
 ##    user  system elapsed 
-##    0.02    0.00    2.05
+##    0.00    0.00    1.69
 ```
 
 ``` r
@@ -288,19 +288,13 @@ knitr::kable(res, digits = 3)
 ```
 
 
-\begin{tabular}{l|r|r}
-\hline
-  & Cobertura & Longitud\\
-\hline
-Normal & 0.870 & 57.551\\
-\hline
-Basic & 0.862 & 57.491\\
-\hline
-Studentized & 0.898 & 66.179\\
-\hline
-Percentil & 0.870 & 57.491\\
-\hline
-\end{tabular}
+
+|            | Cobertura| Longitud|
+|:-----------|---------:|--------:|
+|Normal      |     0.870|   57.551|
+|Basic       |     0.862|   57.491|
+|Studentized |     0.898|   66.179|
+|Percentil   |     0.870|   57.491|
 
 
 El último paso es finalizar el cluster:
