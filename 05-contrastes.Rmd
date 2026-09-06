@@ -620,8 +620,8 @@ modelo0 <- lm(prestige ~ income + education, data = Prestige)
 anova(modelo0, modelo)
 ```
 
-Contrastar si el efecto de `income` es lineal mediante bootstrap residual, 
-empleando como estadístico el incremento en la variabilidad residual con el 
+Contrastar si el efecto de `income` es lineal mediante bootstrap residual, empleando
+como estadístico la proporción de incremento en la variabilidad residual con el 
 modelo reducido y remuestreando los residuos del modelo completo (sin reescalar).
 Aproximar el nivel crítico del contraste y el valor que tendría que superar el
 estadístico para rechazar $H_0$ con un nivel de significación $\alpha = 0.05$.
