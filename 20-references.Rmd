@@ -17,13 +17,15 @@
   publisher={Taylor \& Francis}
 }
 
-@article{canty2002resampling,
-  title={Resampling methods in R: the boot package},
-  author={Canty, Angelo J},
-  journal={RNews: The Newsletter of the R Project},
-  volume={2},
-  pages={3},
-  year={2002}
+@article{canty2002,
+  title = {Resampling Methods in {R}: The boot Package},
+  author = {Canty, Angelo J},
+  journal = {R News},
+  year = 2002,
+  volume = 2,
+  number = 3,
+  pages = {2--7},
+  url = {https://www.r-project.org/doc/Rnews/Rnews_2002-3.pdf}
 }
 
 @article{carlstein1998matched,
@@ -148,7 +150,7 @@ Bühlmann, P. (1997). Sieve bootstrap for time series. *Bernoulli* **3**,
 Bühlmann, P. (1998). Sieve bootstrap for smoothing in nonstationary time
 series. *Ann. Statist.* **26**, 48-83.
 
-Canty, A. J. (2002). [Resampling methods in R: the boot package ](http://cran.fhcrc.org/doc/Rnews/Rnews_2002-3.pdf). 
+Canty, A. J. (2002). [Resampling methods in R: the boot package ](https://www.r-project.org/doc/Rnews/Rnews_2002-3.pdf). 
 *The Newsletter of the R Project* **2**, 2-7.
 
 Cao, R. (1990). Órdenes de convergencia para las aproximaciones normal y

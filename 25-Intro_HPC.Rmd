@@ -171,15 +171,16 @@ t.ini <- proc.time()
 nsim <- 500
 
 getSimulation <- function(isim, B = 2000, n = 30, alfa = 0.1, mu = 100) {
+    # isim = 1; B = 2000; n = 30; alfa = 0.1; mu = 100
     rate <- 1/mu # 0.01
     resnames <- c("Cobertura", "Longitud")
-    # intervals <- c("Normal", "Percentil", "Percentil-t", "Percentil-t simetrizado")
     intervals <- c("Normal", "Basic", "Studentized", "Percentil", "BCa")
     names(intervals) <- c("normal","basic", "student", "percent", "bca")
     intervals <- intervals[1:4]
     resultados <- array(dim = c(length(resnames), length(intervals)))
     dimnames(resultados) <- list(resnames, intervals)
     # for (isim in 1:nsim) { # isim <- 1
+    # set.seed(isim)
     muestra <- rexp(n, rate = 0.01)
     media <- mean(muestra)
     desv <- sd(muestra)

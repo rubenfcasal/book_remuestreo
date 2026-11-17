@@ -3,11 +3,11 @@
 ```{r , child = '_global_options.Rmd'}
 ```
 
-Etimología: bootstrap = cinta de la bota (oreja lateral para calzarse
-las botas). Modismo anglosajón: to pull oneself up by one’s bootstraps.
+Etimología: bootstrap = cinta de la bota (oreja lateral para calzarse las botas).
+Modismo anglosajón: *to pull oneself up by one’s bootstraps*.
 
 
-## Introducción
+## Introducción {#intro-boot}
 
 El bootstrap es un procedimiento estadístico que sirve para aproximar la
 distribución en el muestreo (normalmente) de un estadístico. Para ello
@@ -178,7 +178,8 @@ Empleando ese método, el procedimiento para generar la muestra bootstrap sería
 set.seed(1)
 n <- length(muestra)
 u <- runif(n)
-muestra_boot <- muestra[floor(n*u) + 1]
+i_boot <- floor(n*u) + 1 # índices de remuestreo
+muestra_boot <- muestra[i_boot]
 head(muestra_boot)
 ```
 
@@ -193,13 +194,14 @@ muestra_boot <- sample(muestra, replace = TRUE)
 head(muestra_boot)
 ```
 
-En el caso multidimensional, cuando trabajamos con un conjunto de datos
+En el caso multivariante, cuando trabajamos con un conjunto de datos
 con múltiples variables, 
 podríamos emplear un procedimiento análogo, a partir de remuestras del
 vector de índices. Por ejemplo:
 ```{r}
 data(iris)
 str(iris)
+set.seed(1)
 n <- nrow(iris)
 # i_boot <- floor(n*runif(n)) + 1
 # i_boot <- sample.int(n, replace = TRUE)
@@ -227,6 +229,7 @@ suponiendo que la desviación típica es conocida e igual a 0.6
 muestra <- c(0.143, 0.182, 0.256, 0.26, 0.27, 0.437, 0.509, 
     0.611, 0.712, 1.04, 1.09, 1.15, 1.46, 1.88, 2.08)
 sigma <- 0.6
+n <- length(muestra)
 summary(muestra)
 sd(muestra)
 hist(muestra)
@@ -260,7 +263,6 @@ $$\hat{IC}_{1-\alpha}\left(  \mu\right)  =
 alfa <- 0.05
 x_barra <- mean(muestra)
 z <- qnorm(1 - alfa/2)
-n <- length(muestra)
 ic_inf <- x_barra - z*sigma/sqrt(n)
 ic_sup <- x_barra + z*sigma/sqrt(n)
 IC <- c(ic_inf, ic_sup)
@@ -283,7 +285,7 @@ $$R^{\ast (b)}=R\left( \mathbf{X}^{\ast (b)},\hat{F} \right) =\sqrt{n}\frac{
 con $\bar{X}^{\ast (b)} = \frac{1}{n}\sum X_i^{\ast (b)}$.
 
 ```{r}
-set.seed(1)
+set.seed(1) # Fijar siempre la semilla
 B <- 1000
 estadistico_boot <- numeric(B)
 for (k in 1:B) {
@@ -343,7 +345,7 @@ la distribución bootstrap obtenida es muy similar a la aproximación normal
 `r citefig("estad-boot")`.
 
 ```{r estad-boot, fig.cap='Distribución del estadístico boostrap y aproximaciones de los cuantiles. Con línea discontinua se muestra la distribución normal asintótica.'}
-hist(estadistico_boot, freq = FALSE)
+hist(estadistico_boot, breaks = "FD", freq = FALSE, ylim = c(0, 0.5))
 lines(density(estadistico_boot))
 abline(v = pto_crit)
 curve(dnorm, lty = 2, add = TRUE)
@@ -409,6 +411,7 @@ muestreo de $R$
 ### Ejemplos
 
 ::: {.example #media-dt-conocida-perturbando name="Inferencia sobre la media con varianza conocida, continuación"}
+<br>
 
 En el Ejemplo \@ref(exm:media-dt-conocida) anteriormente visto de inferencia para la media con
 varianza conocida, el algoritmo bootstrap (basado en Monte Carlo) para
@@ -534,6 +537,7 @@ El código para realizar remuestreo bootstrap uniforme sobre la empírica de la
 muestra perturbando es análogo:
 ```{r}
 # Remuestreo
+set.seed(1)
 B <- 1000
 estadistico_boot <- numeric(B)
 coeficiente <- sigma/sd(muestra)
@@ -622,9 +626,9 @@ El código implementando este algoritmo sería muy similar al de los casos anter
 x_mediana<- median(muestra)
 
 # Remuestreo
+set.seed(1)
 B <- 1000
 estadistico_boot <- numeric(B)
-coeficiente <- sigma/sd(muestra)
 for (k in 1:B) {
   remuestra <- sample(muestra, n, replace = TRUE)
   x_mediana_boot <- median(remuestra)
@@ -648,7 +652,7 @@ la práctica.
 
 :::
 
-## Cálculo de la distribución Bootstrap: exacta y aproximada 
+## Cálculo de la distribución Bootstrap: exacta y aproximada {distr-boot}
 
 ### Distribución bootstrap exacta
 
@@ -915,18 +919,21 @@ muestra <- c(0.143, 0.182, 0.256, 0.26, 0.27, 0.437, 0.509,
              0.611, 0.712, 1.04, 1.09, 1.15, 1.46, 1.88, 2.08)
 n <- length(muestra)
 alfa <- 0.05
-x_barra <- mean(muestra)
+x_barra <- mean(muestra) # Valor observado del estimador
 cuasi_dt <- sd(muestra)
+# ee_estimador <- sd(muestra)/sqrt(n) # Error estándar del estimador
 
 # Remuestreo
 set.seed(1)
-B <- 1000
+B <- 2000
 estadistico_boot <- numeric(B)
 for (k in 1:B) {
   remuestra <- sample(muestra, n, replace = TRUE)
-  x_barra_boot <- mean(remuestra)
+  x_barra_boot <- mean(remuestra) # Réplica bootstrap del estimador
   cuasi_dt_boot <- sd(remuestra)
   estadistico_boot[k] <- sqrt(n) * (x_barra_boot - x_barra)/cuasi_dt_boot
+  # ee_estimador_boot <- sd(remuestra)/sqrt(n) # Réplica bootstrap del error estándar
+  # estadistico_boot[k] <- (x_barra_boot - x_barra)/ee_estimador_boot
 }
 
 # Aproximación bootstrap de los ptos críticos
@@ -935,6 +942,8 @@ pto_crit <- quantile(estadistico_boot, c(alfa/2, 1 - alfa/2))
 # Construcción del IC
 ic_inf_boot <- x_barra - pto_crit[2] * cuasi_dt/sqrt(n)
 ic_sup_boot <- x_barra - pto_crit[1] * cuasi_dt/sqrt(n)
+# ic_inf_boot <- x_barra - pto_crit[2] * ee_estimador
+# ic_sup_boot <- x_barra - pto_crit[1] * ee_estimador
 IC_boot <- c(ic_inf_boot, ic_sup_boot)
 names(IC_boot) <- paste0(100*c(alfa/2, 1-alfa/2), "%")
 IC_boot
@@ -943,15 +952,17 @@ IC_boot
 Este procedimiento para la construcción de intervalos de confianza
 se denomina *método percentil-t* y se tratará en la Sección \@ref(icboot-perc-t).
 
-Como ejemplo adicional podemos comparar la aproximación de la distribución bootstrap del estadístico con la aproximación $t_{n-1}$ basada en normalidad.
+Como ejemplo adicional podemos comparar la aproximación de la distribución bootstrap del estadístico con la aproximación $t_{n-1}$ basada en normalidad `r citefig("mean-boot-stud")`.
 
-```{r}
-hist(estadistico_boot, freq = FALSE, ylim = c(0, 0.4))
+```{r mean-boot-stud, fig.cap="Aproximación de la distribución de la media muestral studentizada mediante bootstrap uniforme."}
+hist(estadistico_boot, breaks = "FD", freq = FALSE, ylim = c(0, 0.4))
+lines(density(estadistico_boot))
 abline(v = pto_crit)
-curve(dt(x, n-1), add=TRUE, lty = 2)
-pto_crit_t <- qt(1 - alfa/2, n-1)
-abline(v = c(-pto_crit_t, pto_crit_t), lty = 2)
+curve(dt(x, n - 1), add = TRUE, col = "blue")
+pto_crit_t <- qt(1 - alfa/2, n - 1)
+abline(v = c(-pto_crit_t, pto_crit_t), col = "blue")
 ```
+
 
 En este caso la distribución bootstrap del estadístico es más asimétrica, lo que se traducirá en diferencias entre las estimaciones por intervalos de confianza.
 Por ejemplo, podemos obtener la estimación basada en normalidad mediante la función `t.test()`:
@@ -1034,7 +1045,7 @@ como las más empleadas:
 * `boot`: incluye las funciones y conjuntos de datos utilizados en el libro 
   "Bootstrap Methods and Their Applications" de A. C. Davison y D. V. Hinkley, 1997,
   Cambridge University Press. Esta librería fue desarrollada originalmente 
-  en `S` por Angelo J. Canty y posteriormente exportada a `R` (ver [Canty, 2002](http://cran.fhcrc.org/doc/Rnews/Rnews_2002-3.pdf)).
+  en `S` por Angelo J. Canty y posteriormente exportada a `R` (ver [Canty, 2002](https://www.r-project.org/doc/Rnews/Rnews_2002-3.pdf)).
   Este paquete es mucho más completo que el paquete `bootstrap`, forma parte de la distribución estándar de `R` y es el que emplearemos como referencia en este libro (ver Sección \@ref(intro-pkgboot)).
 
 Por otra parte existen numerosas rutinas (scripts) realizadas en `R` por
@@ -1042,8 +1053,8 @@ diversos autores, que están disponibles en Internet
 (por ejemplo, puede ser interesante realizar una búsqueda en 
 <https://rseek.org>). 
 
-El bootstrap uniforme se puede implementar fácilmente. Por ejemplo,
-una rutina general para el caso univariante sería la siguiente:
+El bootstrap uniforme se puede implementar fácilmente. 
+Por ejemplo, una rutina general para el caso univariante sería la siguiente:
 
 ```{r}
 #' @param x vector que contiene la muestra.
@@ -1057,51 +1068,69 @@ boot.strap0 <- function(x, B = 1000, statistic = mean){
 }
 ```
 
-Podríamos aplicar esta función a la muestra de tiempos de vida de
-microorganismos con el siguiente código:
+Podríamos aplicar esta función a la muestra de tiempos de vida de microorganismos con el siguiente código:
 ```{r}
-fstatistic <- function(x){
-  #  mean(x)
-  #  mean(x, trim=0.2)
-  median(x)
-  #  max(x)
+statistic0 <- function(x){
+  mean(x)
 }
 
 B <- 1000
 set.seed(1)
-stat.dat <- fstatistic(muestra)
-stat.boot <- boot.strap0(muestra, B, fstatistic)
+stat.dat <- statistic0(muestra)
+stat.boot <- boot.strap0(muestra, B, statistic0)
 
 res.boot <- c(stat.dat, mean(stat.boot)-stat.dat, sd(stat.boot))
 names(res.boot) <- c("Estadístico", "Sesgo", "Error Std.")
 res.boot
 ```
 
-La función `boot.strap0()` anterior no es adecuada para el caso multivariante
-(por ejemplo cuando estamos interesados en regresión).
-Como se mostró en la Sección \@ref(intro-implementacion)
-sería preferible emplear remuestras del vector de índices. 
-Por ejemplo, la siguiente función permitiría aplicar bootstrap uniforme univariante y multivariante:
+La función `boot.strap0()` anterior no es adecuada para el caso multivariante (por ejemplo cuando estamos interesados en regresión).
+Como se mostró en la Sección \@ref(intro-implementacion) sería preferible emplear remuestras del vector de índices. Por ejemplo:
 
 ```{r}
 #' @param datos vector, matriz o data.frame que contiene los datos.
 #' @param B número de réplicas bootstrap.
-#' @param statistic función con al menos dos parámetros, 
-#' los datos y el vector de índices de remuestreo, 
-#' y que devuelve el vector de estadísticos.
+#' @param statistic función con al menos dos parámetros, los datos y el vector 
+#'        de índices de remuestreo, y que devuelve el vector de estadísticos.
 #' @param ... parámetros adicionales de la función statistic.
 boot.strap <- function(datos, B = 1000, statistic, ...) {
   ndat <- NROW(datos)
-  iboot <- sample(ndat, ndat*B, replace = TRUE)
-  iboot <- matrix(i.boot, ncol = B, nrow = ndat)
-  fstat.iboot <- function(i) statistic(datos, i, ...)
-  stat.boot <- drop(apply(iboot, 2, fstat.iboot))
+  i.boot <- sample(ndat, ndat*B, replace = TRUE)
+  i.boot <- matrix(i.boot, ncol = B, nrow = ndat)
+  stat.boot <- drop(apply(i.boot, 2, function(i) statistic(datos, i, ...)))
 }
 ```
 
-Habría que construir la función `statistics(datos, i)`, de forma que la remuestra fuese `datos[i]` en el caso univariante y `datos[i, ]` en el caso multivariante. 
+Habría que construir la función `statistics(datos, i)`, de forma que la remuestra fuese `datos[i]` en el caso univariante y `datos[i, ]` en el caso multivariante.
 
-El paquete `boot`, descrito a continuación, emplea una implementación similar.
+```{r}
+# Caso univariante
+statistic <- function(data, i){
+  remuestra <- data[i]
+  mean(remuestra)
+}
+
+stat.boot <- boot.strap(muestra, B, statistic)
+
+stat.dat <- statistic(muestra, 1:length(muestra))
+res.boot <- c(stat.dat, mean(stat.boot)-stat.dat, sd(stat.boot))
+names(res.boot) <- c("Estadístico", "Sesgo", "Error Std.")
+res.boot
+
+# Caso multivariante
+data(Prestige, package = "carData")
+
+statisticm <- function(data, i){
+  remuestra <- data[i, ]
+  cor(remuestra$income, remuestra$prestige)
+}
+
+stat.boot <- boot.strap(Prestige, B, statisticm)
+```
+
+Las funciones anteriores son únicamente para ilustrar el funcionamiento del paquete `boot`, descrito a continuación, que emplea una implementación similar.
+Sin embargo, al desarrollar un nuevo método bootstrap, la recomendación es emplear un bucle para generar y procesar cada remuestra iterativamente, en lugar de funciones similares a las anteriores con programación vectorial, al menos en una primera versión. 
+
 
 ### El paquete `boot` {#intro-pkgboot}
 
@@ -1126,6 +1155,7 @@ muestra <- c(0.143, 0.182, 0.256, 0.26, 0.27, 0.437, 0.509,
 statistic <- function(data, i){
   # remuestra <- data[i]; median(remuestra)
   median(data[i])
+  # c(mean(data[i]), median(data[i]))
 }
 
 set.seed(1)
@@ -1139,7 +1169,7 @@ names(res.boot)
 Además de los parámetros de entrada (incluyendo los valores por defecto), contiene tres componentes adicionales:
 
 * `tO`: el valor observado del estadístico 
-  (su evaluación en los datos originales).
+  (su evaluación en la muestra original).
   
 * `t`: la matriz de réplicas bootstrap del estadístico
   (cada fila se corresponde con una remuestra).
@@ -1168,10 +1198,10 @@ Se darán más detalles sobre los posibles problemas del bootstrap uniforme en l
 Además de estos métodos, las principales funciones de interés serían:
 
 * `jack.after.boot()`: genera un gráfico para diagnósticar la inluencia 
-  de las observaciones individuales en los resultados bootstrap 
-  (se representan los cuantiles frente a las diferencias en el estadístico 
-  al eliminar una observación; este gráfico también se puede obtener estableciendo
-  `jack = TRUE` en `plot.boot()`).
+  de las observaciones individuales en la distribución bootstrap 
+  (se representan los cuantiles frente a las diferencias en la media 
+  al ir eliminando cada observación; este gráfico también se puede obtener 
+  estableciendo `jack = TRUE` en `plot.boot()`).
   
 * `boot.array()`: genera la matriz de índices a partir de la que se obtuvieron las remuestras (permite reconstruir las remuestras bootstrap).
   
@@ -1237,6 +1267,11 @@ del Ejemplo \@ref(exm:media-dt-desconocida).
 
 :::
 
+<!-- 
+Pendiente: Ejercicio media, media recortada y mediana, simultáneamente 
+-->
+
+
 ***Modificaciones del bootstrap uniforme*** 
 
 Estableciendo parámetros adicionales de la función `boot` se pueden llevar 
@@ -1275,9 +1310,9 @@ Finalmente destacar que hay numerosas extensiones implementadas en otros paquete
 Por ejemplo en la Sección \@ref(boot-reg) se ilustrará el uso de la función `Boot()` del paquete `car` para hacer inferencia sobre modelos de regresión.
 
 
-### Ejemplo: Bootstrap uniforme multidimensional {#boot-unif-multi}
+### Ejemplo: Bootstrap uniforme multivariante {#boot-unif-multi}
 
-Como ya se mostró en las Secciones \@ref(intro-implementacion) y \@ref(intro-paquetes) podemos implementar el bootstrap uniforme en el caso multidimensional (denominado también *remuestreo de casos* o *bootstrap de las observaciones*) de modo análogo al unidimensional.
+Como ya se mostró en las Secciones \@ref(intro-implementacion) y \@ref(intro-paquetes) podemos implementar el bootstrap uniforme en el caso multivariante (denominado también *remuestreo de casos* o *bootstrap de las observaciones*) de modo análogo al unidimensional.
 
 Consideraremos como ejemplo el conjunto de datos `Prestige` del paquete `carData`, y supongamos que queremos realizar inferencias sobre el coeficiente de correlación entre `prestige` (puntuación de ocupaciones obtenidas a partir de una encuesta) e`income` (media de ingresos en la ocupación).
 
@@ -1288,7 +1323,7 @@ str(Prestige)
 cor(Prestige$income, Prestige$prestige)
 ```
 
-En el siguiente código se emplea el paquete `boot` para realizar bootstrap uniforme multidimensional sobre este estadístico:
+En el siguiente código se emplea el paquete `boot` para realizar bootstrap uniforme multivariante sobre este estadístico:
 
 ```{r}
 library(boot)
@@ -1302,19 +1337,22 @@ set.seed(1)
 B <- 1000
 res.boot <- boot(Prestige, statistic, R = B)
 res.boot
+```
 
+Si representamos la distribución bootstrap del estimador `r citefig("plot-boot-multi")`, observamos cierta asimetría negativa, por lo que asumir que su distribución es normal podría no ser adecuado en este caso (por ejemplo para la construcción de intervalos de confianza, que se tratarán en la Sección \@ref(icboot-trans)).
+
+```{r plot-boot-multi, fig.dim=c(12, 6), out.width="90%", fig.cap='Gráficos de diagnóstico para la distribución bootstrap del coeficiente de correlación.'}
 plot(res.boot)
 ```
 
-En este caso podemos observar que la distribución bootstrap del estimador es asimétrica, por lo que asumir que su distribución es normal podría no ser adecuado (por ejemplo para la construcción de intervalos de confianza, que se tratarán en la Sección \@ref(icboot-trans)).
-
 Como comentario final, nótese que en principio el paquete boot está diseñado para obtener réplicas bootstrap de un estimador, por lo que si lo que nos interesa es emplear otro estadístico habría que construirlo a partir de ellas (como hacen otras funciones secundarias como `boot.ci()`).
 Por ejemplo, si queremos emplear el estadístico $R = \hat \theta - \theta$
-(bootstrap percentil básico o natural), podemos obtener la correspondiente distribución bootstrap (aproximada por Monte Carlo) con el siguiente código:
+(bootstrap percentil básico o natural), podemos obtener la correspondiente distribución bootstrap (aproximada por Monte Carlo) con el siguiente código `r citefig("plot-boot-basico")`:
 
-```{r}
+```{r plot-boot-basico, fig.cap='Distribución bootstrap del estadístico percentil básico para el coeficiente de correlación.'}
 estadistico_boot <- res.boot$t - res.boot$t0 
-hist(estadistico_boot)
+hist(estadistico_boot, breaks = "FD", freq = FALSE)
+lines(density(estadistico_boot))
 ```
 
 A partir de la distribución empírica del estadístico bootstrap $R^{\ast} = \hat \theta^{\ast} - \hat \theta$ aproximaríamos la característica de interés de la distribución en el muestreo de $R = \hat \theta - \theta$.
@@ -1331,6 +1369,7 @@ mean(estadistico_boot <= u)
 
 
 ::: {.exercise #boot-multi}
+<br>
 
 Emplear el paquete `boot` para aproximar mediante bootstrap uniforme
 la distribución de los estimadores de los coeficientes del ajuste

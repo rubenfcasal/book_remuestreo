@@ -115,11 +115,11 @@ Los órdenes de convergencia de la aproximación de la distribución
 (condicional o incondicional) del estadístico a la distribución normal
 límite vienen dados por:
 $$\begin{aligned}
-\sup_{z\in \boldsymbol{R}}\left\vert P^{\left. Y\right\vert _{X}}\left[ 
+\sup_{z\in \mathbb{R}}\left\vert P^{\left. Y\right\vert _{X}}\left[ 
 \sqrt{nh}\left( \hat{m}_{h}\left( x \right) -m\left( x \right) \right) \leq z
 \right] -\Phi \left( \frac{z-B}{V^{1/2}} \right) \right\vert &= O_{P}\left(
 n^{-1/5} \right), \\
-\sup_{z\in \boldsymbol{R}}\left\vert P\left[ \sqrt{nh}\left( \hat{m}
+\sup_{z\in \mathbb{R}}\left\vert P\left[ \sqrt{nh}\left( \hat{m}
 _{h}\left( x \right) -m\left( x \right) \right) \leq z\right] -\Phi \left( 
 \frac{z-B}{V^{1/2}} \right) \right\vert &= O\left( n^{-2/5} \right),
 \end{aligned}$$
@@ -140,11 +140,11 @@ $\hat{V}-V=O_{P}\left( n^{-2/5} \right)$.
 Como consecuencia se tienen los siguientes órdenes de convergencia 
 (condicional e incondicional) para la aproximación plug-in:
 $$\begin{aligned}
-\sup_{z\in \boldsymbol{R}}\left\vert P^{\left. Y\right\vert _{X}}\left[ 
+\sup_{z\in \mathbb{R}}\left\vert P^{\left. Y\right\vert _{X}}\left[ 
 \sqrt{nh}\left( \hat{m}_{h}\left( x \right) -m\left( x \right) \right) \leq z
 \right] -\Phi \left( \frac{z-\hat{B}}{\hat{V}^{1/2}} \right) \right\vert
 &= O_{P}\left( n^{-1/5} \right), \\
-\sup_{z\in \boldsymbol{R}}\left\vert P\left[ \sqrt{nh}\left( \hat{m}
+\sup_{z\in \mathbb{R}}\left\vert P\left[ \sqrt{nh}\left( \hat{m}
 _{h}\left( x \right) -m\left( x \right) \right) \leq z\right] -\Phi \left( 
 \frac{z-\hat{B}}{\hat{V}^{1/2}} \right) \right\vert &= O_{P}\left(
 n^{-2/9} \right).
@@ -234,12 +234,12 @@ piloto de orden óptimo en ese sentido, $g_{0}\simeq d_{0}n^{-1/9}$,
 se obtienen las siguientes tasas de convergencia (condicionales e
 incondicionales) para la aproximación dada por el wild bootstrap:
 $$\begin{gathered}
-\sup_{z\in \boldsymbol{R}} \left\vert P^{\left. Y\right\vert _{X}}\left[ 
+\sup_{z\in \mathbb{R}} \left\vert P^{\left. Y\right\vert _{X}}\left[ 
 \sqrt{nh}\left( \hat{m}_{h}\left( x \right) -m\left( x \right) \right) \leq z
 \right] - P^{\ast}\left[ \sqrt{nh}\left( \hat{m}_{h}^{\ast}\left( x \right) -
 \hat{m}_{g}\left( x \right) \right) \leq z\right] \right\vert = O_{P}\left( n^{-2/9} \right), 
 \\
-\sup_{z\in \boldsymbol{R}} \left\vert P\left[ \sqrt{nh}\left( \hat{m}
+\sup_{z\in \mathbb{R}} \left\vert P\left[ \sqrt{nh}\left( \hat{m}
 _{h}\left( x \right) -m\left( x \right) \right) \leq z\right] 
  - P^{\ast}\left[ \sqrt{nh}\left( \hat{m}_{h}^{\ast}\left( x \right) -\hat{m}_{g}\left(
 x \right) \right) \leq z\right] \right\vert = O_{P}\left( n^{-1/5} \right).
@@ -333,13 +333,13 @@ $$w_i\left( X^{\ast} \right) =\frac{\frac{1}{n}K_{g}\left( X^{\ast}
 Las tasas de convergencia de la aproximación bootstrap proporcionadas
 por este método resultan:
 $$\begin{gathered}
-\sup_{z\in \boldsymbol{R}}\left\vert P^{\left. Y\right\vert _{X}}\left[ 
+\sup_{z\in \mathbb{R}}\left\vert P^{\left. Y\right\vert _{X}}\left[ 
 \sqrt{nh}\left( \hat{m}_{h}\left( x \right) -m\left( x \right) \right) \leq z
 \right]  -P^{\left. Y^{\ast}\right\vert _{X^{\ast}}}\left[ \sqrt{nh}\left( 
 \hat{m}_{h}^{\ast}\left( x \right) -\hat{m}_{g}\left( x \right) \right) \leq z
 \right] \right\vert \\
 =O_{P^{\ast}}\left( n^{-2/9} \right) \text{, en probabilidad }P, \\
-\sup_{z\in \boldsymbol{R}}\left\vert P\left[ \sqrt{nh}\left( \hat{m}
+\sup_{z\in \mathbb{R}}\left\vert P\left[ \sqrt{nh}\left( \hat{m}
 _{h}\left( x \right) -m\left( x \right) \right) \leq z\right] -P^{\ast}\left[ 
 \sqrt{nh}\left( \hat{m}_{h}^{\ast}\left( x \right) -\hat{m}_{g}\left(
 x \right) \right) \leq z\right] \right\vert \\
@@ -647,6 +647,7 @@ lines(fit$x, fit$y - bias)
 
 
 ::: {.exercise #wild-boot}
+<br>
 
 Siguiendo con el conjunto de datos `MASS::mcycle`, emplear wild bootstrap para 
 obtener estimaciones por intervalo de confianza de la función de regresión
@@ -813,6 +814,7 @@ En este ejemplo concreto podría ser recomendable considerar también errores co
 
 
 ::: {.exercise #heter-boot}
+<br>
 
 Siguiendo con el ejemplo anterior, obtener intervalos de predicción mediante bootstrap heterocedástico residual.
 
