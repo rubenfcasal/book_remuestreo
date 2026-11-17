@@ -420,7 +420,59 @@ del tiempo de vida medio de microorganismos.
 En el Ejemplo \@ref(exm:media-dt-desconocida-boot) se mostró como
 calcular este intervalo empleando el paquete `boot` (haciendo que 
 la función `statistic` devuelva también la varianza del estadístico 
-y estableciendo `type="stud"` en la llamada a la función `boot.ci()`).
+y estableciendo `type = "stud"` en la llamada a la función `boot.ci()`).
+
+
+::: {.exercise #boot-coef-stud}
+<br>
+
+Continuando con el Ejercicio \@ref(exr:boot-coef), obtener estimaciones por intervalo de confianza de los coeficientes del modelo lineal que explica `prestige` a partir de `income` y `education`, utilizando el método percentil-*t*, mediante bootstrap uniforme multivariante con el paquete `boot`.
+
+
+``` r
+data(Prestige, package = "carData")
+fit <- lm(prestige ~ income + education, data = Prestige)
+# Bajo las hipótesis estructurales del modelo:
+# summary(fit)
+confint(fit)
+```
+
+```
+##                     2.5 %       97.5 %
+## (Intercept) -1.323493e+01 -0.460629799
+## income       9.162805e-04  0.001806051
+## education    3.445127e+00  4.829761535
+```
+
+``` r
+coef <- summary(fit)$coefficients
+coef[, 1:2]
+```
+
+```
+##                 Estimate   Std. Error
+## (Intercept) -6.847778720 3.2189770963
+## income       0.001361166 0.0002242121
+## education    4.137444384 0.3489120233
+```
+
+``` r
+cbind(Estimate = coef[, 1], Variance = coef[, 2]^2)
+```
+
+```
+##                 Estimate     Variance
+## (Intercept) -6.847778720 1.036181e+01
+## income       0.001361166 5.027105e-08
+## education    4.137444384 1.217396e-01
+```
+
+``` r
+# Equivale a un vector en el que los primeros `nrow(coef)` componentes son
+# las estimaciones y los siguientes sus varianzas.
+```
+
+:::
 
 
 ## Método percentil-*t* simetrizado {#icboot-perc-t-sim}
@@ -674,7 +726,7 @@ t.fin
 
 ```
 ##    user  system elapsed 
-##    6.43    0.06    6.48
+##    6.75    0.09    6.87
 ```
 
 ``` r
@@ -740,7 +792,7 @@ Para realizar inferencias sobre el coeficiente de correlación, como aproximaci�
 <!-- \mathcal{t}_{n-2} error en LaTeX-->
 
 Pero esta aproximación solo sería válida en el caso de muestras grandes (o si la distribución bivariante de $(X, Y)$ es aproximadamente normal) cuando la correlación entre las variables es débil o moderada. 
-En caso contrario la distribución muestral de $r$ puede ser muy asimétrica y los resultados obtenidos con el estadístico anterior no ser muy adecuados (esto concuerda con lo observado en la Sección \@ref(boot-unif-multi), al emplear bootstrap uniforme multidimensional para hacer inferencia sobre $R = r -\rho$).
+En caso contrario la distribución muestral de $r$ puede ser muy asimétrica y los resultados obtenidos con el estadístico anterior no ser muy adecuados (esto concuerda con lo observado en la Sección \@ref(boot-unif-multi), al emplear bootstrap uniforme multivariante para hacer inferencia sobre $R = r -\rho$).
 Para evitar este problema se suelen obtener intervalos de confianza para $\rho$ empleando la transformación $Z$ de Fisher (1915):
 $$Z = \frac{1}{2}\ln \left( \frac{1+r}{1-r} \right) = \operatorname{arctanh}(r),$$
 que es una transformación (aprox.) normalizadora y estabilizadora de la varianza.
@@ -832,7 +884,9 @@ hist(ht, freq = FALSE, breaks = "FD",
 curve(dnorm(x, mean=mean(ht), sd=sd(ht)), lty = 2, add = TRUE)
 ```
 
-<img src="04-ic_boot_files/figure-html/unnamed-chunk-10-1.png" alt="" width="70%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.7\linewidth]{04-ic_boot_files/figure-latex/unnamed-chunk-11-1} \end{center}
 
 
 

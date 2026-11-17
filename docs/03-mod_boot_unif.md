@@ -105,6 +105,7 @@ directamente la mayoría de las distribuciones paramétricas habituales.
 
 
 ::: {.example #media-dt-conocida-par name="Inferencia sobre la media con varianza conocida, continuación"}
+<br>
 
 Continuando con el ejemplo de tiempo de vida de microorganismos,
 podemos modificar fácilmente el código mostrado en el Ejemplo \@ref(exm:media-dt-conocida), de forma que se emplee bootstrap
@@ -166,7 +167,9 @@ pto_crit_teor <- qnorm(1 - alfa/2)
 abline(v = c(-pto_crit_teor, pto_crit_teor), lty = 2)
 ```
 
-<img src="03-mod_boot_unif_files/figure-html/unnamed-chunk-2-1.png" alt="" width="70%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.7\linewidth]{03-mod_boot_unif_files/figure-latex/unnamed-chunk-2-1} \end{center}
 
 ``` r
 ic_inf_boot_teor <- x_barra - pto_crit_teor * sigma/sqrt(n)
@@ -231,7 +234,7 @@ boot.ci(res.boot, type = "stud")
 Aunque los resultados dependerán en gran medida de que el modelo paramétrico
 sea adecuado para describir la variabilidad de los datos 
 (en este caso no es muy razonable que el modelo admita tiempos de vida negativos).
-Si, por ejemplo, consideramos que un modelo exponencial es más adecuado: 
+Si, por ejemplo, consideramos que un modelo exponencial es más adecuado: [Figura \@ref(fig:boot-par-aprox)]
 
 
 ``` r
@@ -244,10 +247,14 @@ curve(pexp(x, 1/mean(muestra)), lty = 3, add = TRUE)
 legend("bottomright", legend = c("Empírica", "Aprox. normal", "Aprox. exponencial"), lty = 1:3)
 ```
 
-<div class="figure" style="text-align: center">
-<img src="03-mod_boot_unif_files/figure-html/boot-par-aprox-1.png" alt="Distribución empírica de la muestra de tiempos de vida de microorganismos y aproximaciones paramétricas." width="70%" />
-<p class="caption">(\#fig:boot-par-aprox)Distribución empírica de la muestra de tiempos de vida de microorganismos y aproximaciones paramétricas.</p>
-</div>
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{03-mod_boot_unif_files/figure-latex/boot-par-aprox-1} 
+
+}
+
+\caption{Distribución empírica de la muestra de tiempos de vida de microorganismos y aproximaciones paramétricas.}(\#fig:boot-par-aprox)
+\end{figure}
 
 Solo tendríamos que cambiar la función que genera los datos:
 
@@ -400,6 +407,7 @@ distribución más alejada de la simetría.
 
 
 ::: {.exercise #media-dt-conocida-sim  name="Inferencia sobre la media con varianza conocida empleando bootstrap simetrizado"}
+<br>
 
 Modificar adecuadamente el código del Ejemplo \@ref(exm:media-dt-conocida), para
 implementar un método bootstrap simetrizado, con el objeto de calcular
@@ -467,7 +475,7 @@ En `R` podemos emplear la función `density()` del paquete base para obtener
 una estimación tipo núcleo de la densidad (con la ventana determinada
 por el parámetro `bw`), aunque podríamos emplear implementaciones de otros
 paquetes (en la Sección \@ref(npden-r) se incluyen más detalles).
-Por ejemplo, considerando el conjunto de datos `precip` (que contiene el promedio de precipitación, en pulgadas de lluvia, de 70 ciudades de Estados Unidos), podríamos utilizar el siguiente código :
+Por ejemplo, considerando el conjunto de datos `precip` (que contiene el promedio de precipitación, en pulgadas de lluvia, de 70 ciudades de Estados Unidos), podríamos utilizar el siguiente código [Figura \@ref(fig:density)]:
 
 
 ``` r
@@ -484,10 +492,14 @@ lines(npden, lwd = 2)
 rug(x, col = "darkgray")
 ```
 
-<div class="figure" style="text-align: center">
-<img src="03-mod_boot_unif_files/figure-html/density-1.png" alt="Estimación tipo núcleo de la densidad de `precip`. " width="70%" />
-<p class="caption">(\#fig:density)Estimación tipo núcleo de la densidad de `precip`. </p>
-</div>
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{03-mod_boot_unif_files/figure-latex/density-1} 
+
+}
+
+\caption{Estimación tipo núcleo de la densidad de `precip`. }(\#fig:density)
+\end{figure}
 
 La sensibilidad del estimador tipo núcleo al parámetro de suavizado puede
 observarse ejecutando el siguiente código (ver Figura \@ref(fig:bandwidth-movie), [bandwidth-movie.gif](./bandwidth-movie.gif)):
@@ -502,10 +514,14 @@ for (bw in bws)
 ```
 
 
-<div class="figure" style="text-align: center">
-<img src="bandwidth-movie.gif" alt="Efecto de cambio en la ventana en la estimación tipo núcleo de la densidad." width="70%" />
-<p class="caption">(\#fig:bandwidth-movie)Efecto de cambio en la ventana en la estimación tipo núcleo de la densidad.</p>
-</div>
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{03-mod_boot_unif_files/figure-latex/bandwidth-movie-1} 
+
+}
+
+\caption{Efecto de cambio en la ventana en la estimación tipo núcleo de la densidad.}(\#fig:bandwidth-movie)
+\end{figure}
 
 
 La función de distribución asociada al estimador tipo núcleo de la
@@ -524,7 +540,7 @@ asociada al núcleo $K$, es decir
 $$\mathbb{K}\left( t \right) =\int_{-\infty }^{t}K\left(
 u \right) du.$$
 
-Por ejemplo, en el caso de del conjunto de datos de precipitaciones, el siguiente código compara la estimación tipo núcleo de la distribución con la empírica :
+Por ejemplo, en el caso de del conjunto de datos de precipitaciones, el siguiente código compara la estimación tipo núcleo de la distribución con la empírica [Figura \@ref(fig:pnp)]:
 
 
 ``` r
@@ -535,10 +551,14 @@ curve(Fnp, lty = 2, add = TRUE)
 legend("bottomright", legend = c("Empírica", "Tipo núcleo"), lty = 1:2)
 ```
 
-<div class="figure" style="text-align: center">
-<img src="03-mod_boot_unif_files/figure-html/pnp-1.png" alt="Estimación empírica y tipo núcleo de la función de distribución de `precip`. " width="70%" />
-<p class="caption">(\#fig:pnp)Estimación empírica y tipo núcleo de la función de distribución de `precip`. </p>
-</div>
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{03-mod_boot_unif_files/figure-latex/pnp-1} 
+
+}
+
+\caption{Estimación empírica y tipo núcleo de la función de distribución de `precip`. }(\#fig:pnp)
+\end{figure}
 
 
 El método bootstrap suavizado procede de la siguiente forma:
@@ -619,10 +639,14 @@ plot(npden, main = "")
 lines(density(x_boot), col = "blue", lwd = 2, lty = 2)
 ```
 
-<div class="figure" style="text-align: center">
-<img src="03-mod_boot_unif_files/figure-html/density-sim-1.png" alt="Estimaciónes tipo núcleo de las densidades de `precip` y de una simulación." width="70%" />
-<p class="caption">(\#fig:density-sim)Estimaciónes tipo núcleo de las densidades de `precip` y de una simulación.</p>
-</div>
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{03-mod_boot_unif_files/figure-latex/density-sim-1} 
+
+}
+
+\caption{Estimaciónes tipo núcleo de las densidades de `precip` y de una simulación.}(\#fig:density-sim)
+\end{figure}
 
 Es fácil percatarse de que los posibles valores que puede tomar una
 observación $X_i^{\ast}$ de cada remuestra bootstrap son infinitos,
@@ -640,6 +664,7 @@ reduce al bootstrap uniforme.
 
 
 ::: {.example #media-dt-conocida-suav name="Inferencia sobre la media con varianza conocida, continuación"}
+<br>
 
 Continuando con el ejemplo de tiempo de vida de microorganismos,
 podemos modificar fácilmente el código mostrado en el Ejemplo \@ref(exm:media-dt-conocida), para implementar bootstrap suavizado 
@@ -773,7 +798,7 @@ con lo cual su función de densidad viene dada por
 $$g\left( x \right) =\frac{n}{\theta }\left( \frac{x}{\theta } \right)^{n-1},
 \text{ si }x\in \left[ 0,\theta \right] .$$
 Tomando, por ejemplo, $\theta =1$ y $n=50$, esta función de densidad resulta
-:
+[Figura \@ref(fig:den-max)]:
 
 ``` r
 theta <- 1
@@ -781,10 +806,14 @@ n <- 50
 curve(n/theta * (x/theta)^(n - 1), 0, theta, ylab = "Density")
 ```
 
-<div class="figure" style="text-align: center">
-<img src="03-mod_boot_unif_files/figure-html/den-max-1.png" alt="Función de densidad del máximo de una muestra procedente de una uniforme." width="70%" />
-<p class="caption">(\#fig:den-max)Función de densidad del máximo de una muestra procedente de una uniforme.</p>
-</div>
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{03-mod_boot_unif_files/figure-latex/den-max-1} 
+
+}
+
+\caption{Función de densidad del máximo de una muestra procedente de una uniforme.}(\#fig:den-max)
+\end{figure}
 
 Como consecuencia podemos hallar fácilmente el sesgo del estimador
 $\hat{\theta}$, ya que
@@ -839,12 +868,13 @@ $$g_R\left( x \right) =\frac{n}{\theta }\left( \frac{x + \theta}{\theta } \right
 De esta forma vemos que el bootstrap uniforme (no paramétrico) es inconsistente.
 
 ::: {.example #boot-maximo-uniforme name="Inferencia sobre el máximo de una distribución uniforme"}
+<br>
 
 El siguiente código implementa el método
 bootstrap uniforme (también llamado naïve) para aproximar la
 distribución del estadístico $R=\hat{\theta}-\theta$, para una muestra
 de tamaño $n=50$, proveniente de una población con distribución
-$\mathcal{U}\left( 0,1\right)$ :
+$\mathcal{U}\left( 0,1\right)$ [Figura \@ref(fig:boot-uniforme-maximo)]:
 
 
 ``` r
@@ -871,10 +901,14 @@ rug(estadistico, col = "darkgray")
 curve(n/theta * ((x + theta)/theta)^(n - 1), col = "blue", lty = 2, lwd = 2, add = TRUE)
 ```
 
-<div class="figure" style="text-align: center">
-<img src="03-mod_boot_unif_files/figure-html/boot-uniforme-maximo-1.png" alt="Distribución de las réplicas bootstrap (uniforme) del estadístico y distribución poblacional." width="70%" />
-<p class="caption">(\#fig:boot-uniforme-maximo)Distribución de las réplicas bootstrap (uniforme) del estadístico y distribución poblacional.</p>
-</div>
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{03-mod_boot_unif_files/figure-latex/boot-uniforme-maximo-1} 
+
+}
+
+\caption{Distribución de las réplicas bootstrap (uniforme) del estadístico y distribución poblacional.}(\#fig:boot-uniforme-maximo)
+\end{figure}
 
 :::
 
@@ -902,10 +936,11 @@ $R=R\left( \mathbf{X},F \right) =\hat{\theta}-\theta$.
 
 
 ::: {.example #boot-maximo-parametrico name="Inferencia sobre el máximo de una distribución uniforme, continuación"}
+<br>
 
 Para emplear el bootstrap paramétrico (que remuestrea de una distribución
 uniforme con parámetro estimado) podríamos emplear un código muy similar al 
-del Ejemplo \@ref(exm:boot-maximo-uniforme) :
+del Ejemplo \@ref(exm:boot-maximo-uniforme) [Figura \@ref(fig:boot-parametrico-maximo)]:
 
 
 ``` r
@@ -927,10 +962,14 @@ rug(estadistico, col = "darkgray")
 curve(n/theta * ((x + theta)/theta)^(n - 1), col = "blue", lty = 2, lwd = 2, add = TRUE)
 ```
 
-<div class="figure" style="text-align: center">
-<img src="03-mod_boot_unif_files/figure-html/boot-parametrico-maximo-1.png" alt="Distribución bootstrap paramétrica y distribución poblacional." width="70%" />
-<p class="caption">(\#fig:boot-parametrico-maximo)Distribución bootstrap paramétrica y distribución poblacional.</p>
-</div>
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{03-mod_boot_unif_files/figure-latex/boot-parametrico-maximo-1} 
+
+}
+
+\caption{Distribución bootstrap paramétrica y distribución poblacional.}(\#fig:boot-parametrico-maximo)
+\end{figure}
 
 :::
 
@@ -1127,11 +1166,11 @@ Se puede generalizar el modelo \@ref(eq:modelogeneral) de diversas formas, por e
 En este caso se suele reescribir como:
 $$Y = m(\mathbf{X}) + \sigma(\mathbf{X}) \varepsilon,$$
 siendo $\sigma^2(\mathbf{x}) = Var\left( \left. Y\right\vert_{\mathbf{X}=\mathbf{x}} \right)$ la varianza condicional y suponiendo adicionalmente que $\varepsilon$ tiene varianza uno.
-Se podría modificar el bootstrap residual para este caso pero habría que modelizar y estimar la varianza condicional.
-Alternativamente se podría emplear el denominado  *Wild Bootstrap* que se describirá en la Sección \@ref(wild-bootstrap) para el caso de modelos de regresión no paramétricos.
+Se podría modificar el bootstrap residual para este caso pero habría que modelizar y estimar la varianza condicional (en la Sección \@ref(npreg-heter) se describe una aproximación no paramétrica).
+Alternativamente se podría emplear el denominado  *Wild Bootstrap* que se describirá en la secciones \@ref(wild-bootstrap) y \@ref(r-wild-bootstrap) para el caso de modelos de regresión no paramétricos (sería directamente aplicable al caso paramétrico).
 
 En esta sección nos centraremos en el caso de regresión lineal:
-$$m_{\boldsymbol{\beta}}(\mathbf{x}) =  \beta_{0} + \beta_{1}X_{1} + \beta_{2}X_{2} + \cdots + \beta_{p}X_{p},$$ 
+$$m_{\boldsymbol{\beta}}(\mathbf{X}) =  \beta_{0} + \beta_{1}X_{1} + \beta_{2}X_{2} + \cdots + \beta_{p}X_{p},$$ 
 siendo $\boldsymbol{\beta} = \left(  \beta_{0}, \beta_{1}, \ldots, \beta_{p} \right)^{T}$ el vector de parámetros (desconocidos).
 Su estimador mínimo cuadrático es:
 $$\boldsymbol{\hat{\beta}} = \left( X^{T}X\right)^{-1}X^{T}\mathbf{Y},$$
@@ -1198,7 +1237,7 @@ res$adj.r.squared
 
 ### Remuestreo de las observaciones {#boot-unif-reg}
 
-Como ya se comentó, en regresión podríamos emplear bootstrap uniforme multidimensional para el caso de diseño aleatorio, aunque hay que tener en cuenta que con este método la distribución en el remuestreo de $\left. Y^{\ast}\right\vert _{X^{\ast}=X_i}$ es degenerada.
+Como ya se comentó, en regresión podríamos emplear bootstrap uniforme multivariante para el caso de diseño aleatorio, aunque hay que tener en cuenta que con este método la distribución en el remuestreo de $\left. Y^{\ast}\right\vert _{\mathbf{X}^{\ast}=\mathbf{X}_i}$ es degenerada.
 
 En este caso, podríamos realizar inferencias sobre el coeficiente de determinación ajustado empleando el siguiente código:
 
@@ -1252,7 +1291,7 @@ boot.ci(boot.case, type = c("basic", "perc", "bca"))
 ### Bootstrap residual {#boot-residual}
 
 Como ya se comentó, en el caso de diseño fijo podemos realizar un remuestreo de los residuos:
-$$\mathbf{r} = \mathbf{Y} - X\hat{\mathbf{\beta}} = \mathbf{Y} - \hat{\mathbf{Y}}$$
+$$\mathbf{r} = \mathbf{Y} - X\hat{\boldsymbol{\beta}} = \mathbf{Y} - \hat{\mathbf{Y}}$$
 obteniéndose las réplicas bootstrap:
 $$\mathbf{Y}^{\ast} = \hat{\mathbf{Y}} + \mathbf{r}^{\ast}.$$
 Por ejemplo, adaptando el código en Canty (2002) para este conjunto de datos, podríamos emplear:
@@ -1324,8 +1363,8 @@ boot.dat$sres <- residuals(modelo)/sqrt(1 - hatvalues(modelo))
 boot.dat$sres <- boot.dat$sres - mean(boot.dat$sres)
 ```
 
-Sin embargo puede ser más cómodo emplear la función `Boot()` del paquete `car` (que internamente llama a la función `boot()`), 
-como se describe en el apéndice "Bootstrapping Regression Models in R" del libro "An R Companion to Applied Regression" de Fox y Weisberg (2018), disponible [aquí](https://socialsciences.mcmaster.ca/jfox/Books/Companion/appendices/Appendix-Bootstrapping.pdf).
+Sin embargo puede ser más cómodo (ver Ejercicio \@ref(exr:boot-coef)) emplear la función `Boot()` del paquete `car` (que internamente llama a la función `boot()`), 
+como se describe en el apéndice "Bootstrapping Regression Models in R" del libro "An R Companion to Applied Regression" de Fox y Weisberg (2018), disponible [aquí](https://www.john-fox.ca/Companion/appendices.html).
 
 Esta función es de la forma:
 
@@ -1342,21 +1381,116 @@ donde:
 - `method`: especifica el tipo de remuestreo: remuestreo de observaciones (`"case"`)
   o de residuos (`"residual"`), empleando la modificación descrita anteriormente.
 
+El resultado de esta función es un objeto de la clase `boot`, con el que se podrían utilizar las herramientas del paquete original.
+Adicionalmente, el paquete `car` implementa también métodos `summary.boot()`, `hist.boot()` y `Confint.boot()`.
+Al contrario que `print.boot()`, `summary.boot()` devuelve una matriz de estadísticos de resumen (con descriptivos adicionales).
+Los otros dos métodos también generan simultáneamente resultados para todos los los componentes del vector de estadísticos, por lo que resultarían más cómodos para estadísticos multidimensionales que las equivalentes funciones `plot.boot()` y `boot.ci()` (que requerirían de múltiples llamadas variando el argumento `index`).
+Como inconveniente, `Confint.boot()` solo calcula un tipo de intervalo bootstrap y no admite el tipo percentil-*t* (`type = "stud"`; ver Ejercicio \@ref(exr:boot-coef-stud)).
+
+::: {.example #boot-car-coef}
+<br>
+
+Como ejemplo utilizamos las opciones por defecto de la función `Boot()` del paquete `car` (empleando bootstrap uniforme multivariante) para realizar inferencias sobre los coeficientes del modelo de regresión lineal que explica `prestige` a partir de `income` y `education`.
+
+
+``` r
+library(car)
+res.boot <- Boot(modelo) # uniforme multivariante coeficientes
+summary(res.boot) # Devuelve una matriz de estadísticos
+```
+
+```
+## 
+## Number of bootstrap replications R = 999 
+##               original    bootBias     bootSE   bootMed
+## (Intercept) -6.8477787 -1.6743e-01 3.19299985 -6.914060
+## income       0.0013612  5.4825e-05 0.00028712  0.001377
+## education    4.1374444 -1.9509e-02 0.38543296  4.124770
+```
+
+``` r
+hist(res.boot)
+```
+
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.9\linewidth]{03-mod_boot_unif_files/figure-latex/boot-car-plot-1} 
+
+}
+
+\caption{Histogramas de las réplicas bootstrap de las estimaciones de los coeficientes (obtenidas mediante bootstrap uniforme multivariante).}(\#fig:boot-car-plot)
+\end{figure}
+
+``` r
+# Por defecto calcula intervalos BCa
+Confint(res.boot) # ?Confint.boot
+```
+
+```
+## Bootstrap bca confidence intervals
+## 
+##                 Estimate        2.5 %       97.5 %
+## (Intercept) -6.847778720 -13.40121280 -0.655432067
+## income       0.001361166   0.00087588  0.001962325
+## education    4.137444384   3.40218577  4.938028833
+```
+
+``` r
+# Se puede seleccionar otro de los métodos de boot.ci(), salvo "stud"
+Confint(res.boot, type = "basic")
+```
+
+```
+## Bootstrap basic confidence intervals
+## 
+##                 Estimate         2.5 %       97.5 %
+## (Intercept) -6.847778720 -1.291709e+01 -0.045406560
+## income       0.001361166  6.344962e-04  0.001791998
+## education    4.137444384  3.356650e+00  4.930320163
+```
+
+``` r
+# # Con el paquete boot:
+# res.boot
+# plot(res.boot)
+# plot(res.boot, index = 2)
+# plot(res.boot, index = 3)
+# # Cuidado con el studentizado en boot.ci(), habría que utilizar index
+# boot.ci(res.boot, type = "basic") # , index = 1) 
+# boot.ci(res.boot, type = "basic", index = 2) 
+# boot.ci(res.boot, type = "basic", index = 3) 
+```
+:::
+
+En el ejemplo anterior, para emplear bootstrap residual con reescalado de los residuos solo habría que establecer el argumento `method = "residual"` en la llamada a `Boot()`.
+Con la función `boot()` tendríamos que utilizar una función de la forma:
+
+
+``` r
+mod.stat2 <- function(data, i) {
+    data$prestige <- data$fit + data$sres[i]
+    fit <- lm(prestige ~ income + education, data = data)
+    coef(fit)
+}
+```
+
+y el problema es que la componente `t0` del resultado de `boot()` no contendría el valor observado del estadístico (ya que se calcularía como `mod.stat2(data, 1:nrow(data))`), por lo que habría que corregirlo antes de llamar a las funciones `print.boot()` o `boot.ci()`.
+
+::: {.exercise #boot-coef}
+<br>
+
+Continuando con el ejemplo anterior, utilizar la función `boot::boot()` para realizar inferencias sobre los coeficientes del modelo de regresión lineal empleando bootstrap residual con reescalado de los residuos.
+
+:::
+
 
 ::: {.exercise #boot-car}
+<br>
 
 Emplear la función `Boot()` del paquete `car` para hacer inferencia sobre 
 el coeficiente de determinación ajustado del modelo de regresión lineal 
 que explica `prestige` a partir de `income` y `education` 
 (obtener una estimación del sesgo y de la precisión,
 y una estimación por intervalo de confianza de este estadístico).
-
-
-``` r
-library(car)
-
-# set.seed(DNI)
-# ...
-```
 
 :::

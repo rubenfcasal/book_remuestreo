@@ -185,7 +185,7 @@ system.time(res.boot <- boot(muestra, statistic, R = B))
 
 ```
 ##    user  system elapsed 
-##    0.03    0.00    0.03
+##    0.02    0.00    0.01
 ```
 
 ``` r
@@ -195,7 +195,7 @@ system.time(res.boot <- boot(muestra, statistic, R = B, parallel = "snow", cl = 
 
 ```
 ##    user  system elapsed 
-##    0.01    0.00    0.02
+##    0.03    0.00    0.03
 ```
 
 ### Estudio de simulación {#estudio-sim-boot}
@@ -216,15 +216,16 @@ t.ini <- proc.time()
 nsim <- 500
 
 getSimulation <- function(isim, B = 2000, n = 30, alfa = 0.1, mu = 100) {
+    # isim = 1; B = 2000; n = 30; alfa = 0.1; mu = 100
     rate <- 1/mu # 0.01
     resnames <- c("Cobertura", "Longitud")
-    # intervals <- c("Normal", "Percentil", "Percentil-t", "Percentil-t simetrizado")
     intervals <- c("Normal", "Basic", "Studentized", "Percentil", "BCa")
     names(intervals) <- c("normal","basic", "student", "percent", "bca")
     intervals <- intervals[1:4]
     resultados <- array(dim = c(length(resnames), length(intervals)))
     dimnames(resultados) <- list(resnames, intervals)
     # for (isim in 1:nsim) { # isim <- 1
+    # set.seed(isim)
     muestra <- rexp(n, rate = 0.01)
     media <- mean(muestra)
     desv <- sd(muestra)
@@ -259,7 +260,7 @@ print(t.fin)
 
 ```
 ##    user  system elapsed 
-##    0.00    0.00    1.69
+##    0.00    0.00    2.03
 ```
 
 ``` r
@@ -288,13 +289,19 @@ knitr::kable(res, digits = 3)
 ```
 
 
-
-|            | Cobertura| Longitud|
-|:-----------|---------:|--------:|
-|Normal      |     0.870|   57.551|
-|Basic       |     0.862|   57.491|
-|Studentized |     0.898|   66.179|
-|Percentil   |     0.870|   57.491|
+\begin{tabular}{l|r|r}
+\hline
+  & Cobertura & Longitud\\
+\hline
+Normal & 0.870 & 57.551\\
+\hline
+Basic & 0.862 & 57.491\\
+\hline
+Studentized & 0.898 & 66.179\\
+\hline
+Percentil & 0.870 & 57.491\\
+\hline
+\end{tabular}
 
 
 El último paso es finalizar el cluster:

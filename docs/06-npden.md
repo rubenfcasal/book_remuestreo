@@ -17,7 +17,7 @@ paramétricos de estimación de curvas.
 
 Como ya se introdujo en la Sección \@ref(modunif-boot-suav), si 
 $\left( X_1, X_2, \ldots, X_n \right)$ es una muestra aleatoria simple
-(m.a.s.),, de una población con función de distribución $F$, absolutamente
+(m.a.s.), de una población con función de distribución $F$, absolutamente
 continua, y función de densidad $f$, el estimador tipo núcleo propuesto por
 Parzen (1962) y Rosenblatt (1956) viene dado por
 $$\hat{f}_{h}\left( x \right) =\frac{1}{nh}\sum_{i=1}^{n}K\left( \frac{x-X_i}{
@@ -41,7 +41,8 @@ de la ventana con `density()`
 * `"ucv"`: validación cruzada insesgada.
 * `"bcv"`: validación cruzada sesgada.
 * `"SJ"`: métodos de Sheather y Jones (1991).
-También se pueden obtener estas ventanas llamando a la función `bw.xxx()` correspondiente, donde `xxx` son los posibles valores del parámetro `bw`.
+También se pueden obtener estas ventanas llamando a la función `bw.xxx()` correspondiente, 
+donde `xxx` son los posibles valores (carácter) del parámetro `bw`.
 -->
  
 ## Sesgo, varianza y error cuadrático medio
@@ -162,7 +163,7 @@ Pasa por estimar $B$ y $V$ mediante$$\begin{aligned}
 una ventana adecuada para estimar la derivada segunda de la función de
 densidad. Utilizando la desigualdad de Berry-Esséen se obtiene el
 siguiente orden de
-convergencia:$$\sup_{z\in \boldsymbol{R}}\left\vert P\left[ \sqrt{nh}\left( \hat{f}
+convergencia:$$\sup_{z\in \mathbb{R}}\left\vert P\left[ \sqrt{nh}\left( \hat{f}
 _{h}\left( x \right) -f\left( x \right) \right) \leq z\right] -\Phi \left( 
 \frac{z-\hat{B}}{\hat{V}^{1/2}} \right) \right\vert =O_{P}\left(
 n^{-1/5} \right),$$
@@ -171,7 +172,7 @@ que empeora la tasa teórica de la aproximación normal basada en la media
 y varianza exactas ($B_n=E\left[ \sqrt{nh}\left( \hat{f}_{h}\left(
 x \right) -f\left( x \right) \right) \right]$ y
 $V_n=Var\left[ \sqrt{nh} \left( \hat{f}_{h}\left( x \right) -f\left( x \right) \right) \right]$):
-$$\sup_{z\in \boldsymbol{R}}\left\vert P\left[ \sqrt{nh}\left( \hat{f}
+$$\sup_{z\in \mathbb{R}}\left\vert P\left[ \sqrt{nh}\left( \hat{f}
 _{h}\left( x \right) -f\left( x \right) \right) \leq z\right] -\Phi \left( 
 \frac{z-B_n}{V_n^{1/2}} \right) \right\vert =O\left( n^{-2/5} \right),$$
 aunque no la de la normal asintótica, $\mathcal{N}\left( B,V \right)$, cuya tasa es
@@ -217,7 +218,7 @@ $$g\simeq \left( \frac{5f\left( x \right) \int K^{\prime \prime }\left( t
 
 El orden de convergencia de para la aproximación bootstrap viene dado por
 $$\begin{aligned}
-&\sup_{z\in \boldsymbol{R}}\left\vert P\left[ \sqrt{nh}\left( \hat{f}
+&\sup_{z\in \mathbb{R}}\left\vert P\left[ \sqrt{nh}\left( \hat{f}
 _{h}\left( x \right) -f\left( x \right) \right) \leq z\right] -P^{\ast}\left[ 
 \sqrt{nh}\left( \hat{f}_{h}^{\ast}\left( x \right) -\hat{f}_{g}\left(
 x \right) \right) \leq z\right] \right\vert \\
@@ -416,7 +417,9 @@ lines(npden, lwd = 2)
 rug(x, col = "darkgray")
 ```
 
-<img src="06-npden_files/figure-html/unnamed-chunk-2-1.png" alt="" width="70%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.7\linewidth]{06-npden_files/figure-latex/unnamed-chunk-2-1} \end{center}
 
 Alternativamente podríamos emplear implementaciones en otros paquetes de `R`.
 Uno de los más empleados es `ks` (Duong, 2019), que admite estimación 
@@ -470,7 +473,9 @@ plot(npden, type="l", ylim = c(0, 0.05), lwd = 2)
 lines(npden$x, npden$y - bias)
 ```
 
-<img src="06-npden_files/figure-html/unnamed-chunk-3-1.png" alt="" width="70%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.7\linewidth]{06-npden_files/figure-latex/unnamed-chunk-3-1} \end{center}
 
 
 ### Estimación por intervalos de confianza {#npden-r-ic}
@@ -493,7 +498,9 @@ lines(npden$x, ic_inf_boot, lty = 2)
 lines(npden$x, ic_sup_boot, lty = 2)
 ```
 
-<img src="06-npden_files/figure-html/unnamed-chunk-4-1.png" alt="" width="70%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.7\linewidth]{06-npden_files/figure-latex/unnamed-chunk-4-1} \end{center}
 
 
 ### Implementación con el paquete `boot` {#npden-r-boot}
@@ -554,7 +561,9 @@ lines(npden$x, ic_inf_boot, lty = 2)
 lines(npden$x, ic_sup_boot, lty = 2)
 ```
 
-<img src="06-npden_files/figure-html/unnamed-chunk-6-1.png" alt="" width="70%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.7\linewidth]{06-npden_files/figure-latex/unnamed-chunk-6-1} \end{center}
 
 En la práctica, en muchas ocasiones se trabaja directamente con
 las réplicas bootstrap del estimador. Por ejemplo, es habitual
@@ -568,7 +577,9 @@ lines(npden, lwd = 2)
 lines(npden$x, npden$y - bias)
 ```
 
-<img src="06-npden_files/figure-html/unnamed-chunk-7-1.png" alt="" width="70%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.7\linewidth]{06-npden_files/figure-latex/unnamed-chunk-7-1} \end{center}
 
 Pero la recomendación es emplear bootstrap básico (o percentil-*t*) en lugar
 de bootstrap percentil (directo) en la presencia de sesgo:
@@ -581,5 +592,7 @@ lines(npden, lwd = 2)
 lines(npden$x, npden$y - bias)
 ```
 
-<img src="06-npden_files/figure-html/unnamed-chunk-8-1.png" alt="" width="70%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.7\linewidth]{06-npden_files/figure-latex/unnamed-chunk-8-1} \end{center}
 

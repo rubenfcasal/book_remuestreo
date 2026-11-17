@@ -367,7 +367,29 @@ del tiempo de vida medio de microorganismos.
 En el Ejemplo \@ref(exm:media-dt-desconocida-boot) se mostró como
 calcular este intervalo empleando el paquete `boot` (haciendo que 
 la función `statistic` devuelva también la varianza del estadístico 
-y estableciendo `type="stud"` en la llamada a la función `boot.ci()`).
+y estableciendo `type = "stud"` en la llamada a la función `boot.ci()`).
+
+
+::: {.exercise #boot-coef-stud}
+<br>
+
+Continuando con el Ejercicio \@ref(exr:boot-coef), obtener estimaciones por intervalo de confianza de los coeficientes del modelo lineal que explica `prestige` a partir de `income` y `education`, utilizando el método percentil-*t*, mediante bootstrap uniforme multivariante con el paquete `boot`.
+
+```{r}
+data(Prestige, package = "carData")
+fit <- lm(prestige ~ income + education, data = Prestige)
+# Bajo las hipótesis estructurales del modelo:
+# summary(fit)
+confint(fit)
+
+coef <- summary(fit)$coefficients
+coef[, 1:2]
+cbind(Estimate = coef[, 1], Variance = coef[, 2]^2)
+# Equivale a un vector en el que los primeros `nrow(coef)` componentes son
+# las estimaciones y los siguientes sus varianzas.
+```
+
+:::
 
 
 ## Método percentil-*t* simetrizado {#icboot-perc-t-sim}
@@ -664,7 +686,7 @@ Para realizar inferencias sobre el coeficiente de correlación, como aproximaci�
 <!-- \mathcal{t}_{n-2} error en LaTeX-->
 
 Pero esta aproximación solo sería válida en el caso de muestras grandes (o si la distribución bivariante de $(X, Y)$ es aproximadamente normal) cuando la correlación entre las variables es débil o moderada. 
-En caso contrario la distribución muestral de $r$ puede ser muy asimétrica y los resultados obtenidos con el estadístico anterior no ser muy adecuados (esto concuerda con lo observado en la Sección \@ref(boot-unif-multi), al emplear bootstrap uniforme multidimensional para hacer inferencia sobre $R = r -\rho$).
+En caso contrario la distribución muestral de $r$ puede ser muy asimétrica y los resultados obtenidos con el estadístico anterior no ser muy adecuados (esto concuerda con lo observado en la Sección \@ref(boot-unif-multi), al emplear bootstrap uniforme multivariante para hacer inferencia sobre $R = r -\rho$).
 Para evitar este problema se suelen obtener intervalos de confianza para $\rho$ empleando la transformación $Z$ de Fisher (1915):
 $$Z = \frac{1}{2}\ln \left( \frac{1+r}{1-r} \right) = \operatorname{arctanh}(r),$$
 que es una transformación (aprox.) normalizadora y estabilizadora de la varianza.

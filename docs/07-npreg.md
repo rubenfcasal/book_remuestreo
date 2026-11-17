@@ -115,11 +115,11 @@ Los órdenes de convergencia de la aproximación de la distribución
 (condicional o incondicional) del estadístico a la distribución normal
 límite vienen dados por:
 $$\begin{aligned}
-\sup_{z\in \boldsymbol{R}}\left\vert P^{\left. Y\right\vert _{X}}\left[ 
+\sup_{z\in \mathbb{R}}\left\vert P^{\left. Y\right\vert _{X}}\left[ 
 \sqrt{nh}\left( \hat{m}_{h}\left( x \right) -m\left( x \right) \right) \leq z
 \right] -\Phi \left( \frac{z-B}{V^{1/2}} \right) \right\vert &= O_{P}\left(
 n^{-1/5} \right), \\
-\sup_{z\in \boldsymbol{R}}\left\vert P\left[ \sqrt{nh}\left( \hat{m}
+\sup_{z\in \mathbb{R}}\left\vert P\left[ \sqrt{nh}\left( \hat{m}
 _{h}\left( x \right) -m\left( x \right) \right) \leq z\right] -\Phi \left( 
 \frac{z-B}{V^{1/2}} \right) \right\vert &= O\left( n^{-2/5} \right),
 \end{aligned}$$
@@ -140,11 +140,11 @@ $\hat{V}-V=O_{P}\left( n^{-2/5} \right)$.
 Como consecuencia se tienen los siguientes órdenes de convergencia 
 (condicional e incondicional) para la aproximación plug-in:
 $$\begin{aligned}
-\sup_{z\in \boldsymbol{R}}\left\vert P^{\left. Y\right\vert _{X}}\left[ 
+\sup_{z\in \mathbb{R}}\left\vert P^{\left. Y\right\vert _{X}}\left[ 
 \sqrt{nh}\left( \hat{m}_{h}\left( x \right) -m\left( x \right) \right) \leq z
 \right] -\Phi \left( \frac{z-\hat{B}}{\hat{V}^{1/2}} \right) \right\vert
 &= O_{P}\left( n^{-1/5} \right), \\
-\sup_{z\in \boldsymbol{R}}\left\vert P\left[ \sqrt{nh}\left( \hat{m}
+\sup_{z\in \mathbb{R}}\left\vert P\left[ \sqrt{nh}\left( \hat{m}
 _{h}\left( x \right) -m\left( x \right) \right) \leq z\right] -\Phi \left( 
 \frac{z-\hat{B}}{\hat{V}^{1/2}} \right) \right\vert &= O_{P}\left(
 n^{-2/9} \right).
@@ -234,12 +234,12 @@ piloto de orden óptimo en ese sentido, $g_{0}\simeq d_{0}n^{-1/9}$,
 se obtienen las siguientes tasas de convergencia (condicionales e
 incondicionales) para la aproximación dada por el wild bootstrap:
 $$\begin{gathered}
-\sup_{z\in \boldsymbol{R}} \left\vert P^{\left. Y\right\vert _{X}}\left[ 
+\sup_{z\in \mathbb{R}} \left\vert P^{\left. Y\right\vert _{X}}\left[ 
 \sqrt{nh}\left( \hat{m}_{h}\left( x \right) -m\left( x \right) \right) \leq z
 \right] - P^{\ast}\left[ \sqrt{nh}\left( \hat{m}_{h}^{\ast}\left( x \right) -
 \hat{m}_{g}\left( x \right) \right) \leq z\right] \right\vert = O_{P}\left( n^{-2/9} \right), 
 \\
-\sup_{z\in \boldsymbol{R}} \left\vert P\left[ \sqrt{nh}\left( \hat{m}
+\sup_{z\in \mathbb{R}} \left\vert P\left[ \sqrt{nh}\left( \hat{m}
 _{h}\left( x \right) -m\left( x \right) \right) \leq z\right] 
  - P^{\ast}\left[ \sqrt{nh}\left( \hat{m}_{h}^{\ast}\left( x \right) -\hat{m}_{g}\left(
 x \right) \right) \leq z\right] \right\vert = O_{P}\left( n^{-1/5} \right).
@@ -333,13 +333,13 @@ $$w_i\left( X^{\ast} \right) =\frac{\frac{1}{n}K_{g}\left( X^{\ast}
 Las tasas de convergencia de la aproximación bootstrap proporcionadas
 por este método resultan:
 $$\begin{gathered}
-\sup_{z\in \boldsymbol{R}}\left\vert P^{\left. Y\right\vert _{X}}\left[ 
+\sup_{z\in \mathbb{R}}\left\vert P^{\left. Y\right\vert _{X}}\left[ 
 \sqrt{nh}\left( \hat{m}_{h}\left( x \right) -m\left( x \right) \right) \leq z
 \right]  -P^{\left. Y^{\ast}\right\vert _{X^{\ast}}}\left[ \sqrt{nh}\left( 
 \hat{m}_{h}^{\ast}\left( x \right) -\hat{m}_{g}\left( x \right) \right) \leq z
 \right] \right\vert \\
 =O_{P^{\ast}}\left( n^{-2/9} \right) \text{, en probabilidad }P, \\
-\sup_{z\in \boldsymbol{R}}\left\vert P\left[ \sqrt{nh}\left( \hat{m}
+\sup_{z\in \mathbb{R}}\left\vert P\left[ \sqrt{nh}\left( \hat{m}
 _{h}\left( x \right) -m\left( x \right) \right) \leq z\right] -P^{\ast}\left[ 
 \sqrt{nh}\left( \hat{m}_{h}^{\ast}\left( x \right) -\hat{m}_{g}\left(
 x \right) \right) \leq z\right] \right\vert \\
@@ -454,7 +454,9 @@ plot(x, y)
 lines(fit)
 ```
 
-<img src="07-npreg_files/figure-html/unnamed-chunk-2-1.png" alt="" width="70%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.7\linewidth]{07-npreg_files/figure-latex/unnamed-chunk-2-1} \end{center}
 
 Hay que tener en cuenta que el paquete `KernSmooth` no implementa los métodos
 `predict()` y `residuals()`:
@@ -504,7 +506,9 @@ hcv <- hcv(x, y) # Método de validación cruzada
 fit.sm <- sm.regression(x, y, h = hcv, display = "se")
 ```
 
-<img src="07-npreg_files/figure-html/unnamed-chunk-5-1.png" alt="" width="70%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.7\linewidth]{07-npreg_files/figure-latex/unnamed-chunk-5-1} \end{center}
 
 ``` r
 fit.sm$sigma
@@ -567,7 +571,9 @@ lines(fit, lwd = 2)
 lines(fit$x, fit$y - bias)
 ```
 
-<img src="07-npreg_files/figure-html/unnamed-chunk-6-1.png" alt="" width="70%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.7\linewidth]{07-npreg_files/figure-latex/unnamed-chunk-6-1} \end{center}
 
 NOTA: De forma análoga al caso lineal (Sección \@ref(boot-residual)), se podrían reescalar los residuos a partir de la matriz de suavizado (empleando los paquetes `sm` o `npsp`).
 
@@ -590,7 +596,9 @@ lines(fit$x, ic_inf_boot, lty = 2)
 lines(fit$x, ic_sup_boot, lty = 2)
 ```
 
-<img src="07-npreg_files/figure-html/unnamed-chunk-7-1.png" alt="" width="70%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.7\linewidth]{07-npreg_files/figure-latex/unnamed-chunk-7-1} \end{center}
 
 
 El modelo ajustado también es empleado para predecir una nueva respuesta individual $Y(x_0)$ para un valor concreto $x_0$ de la variable explicativa.  
@@ -630,7 +638,9 @@ lines(fit$x, ip_inf_boot, lty = 3)
 lines(fit$x, ip_sup_boot, lty = 3)
 ```
 
-<img src="07-npreg_files/figure-html/unnamed-chunk-8-1.png" alt="" width="70%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.7\linewidth]{07-npreg_files/figure-latex/unnamed-chunk-8-1} \end{center}
 
 
 En este caso puede no ser recomendable considerar errores i.i.d., sería de esperar heterocedásticidad (e incluso dependencia temporal).
@@ -674,10 +684,13 @@ lines(fit, lwd = 2)
 lines(fit$x, fit$y - bias)
 ```
 
-<img src="07-npreg_files/figure-html/unnamed-chunk-9-1.png" alt="" width="70%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.7\linewidth]{07-npreg_files/figure-latex/unnamed-chunk-9-1} \end{center}
 
 
 ::: {.exercise #wild-boot}
+<br>
 
 Siguiendo con el conjunto de datos `MASS::mcycle`, emplear wild bootstrap para 
 obtener estimaciones por intervalo de confianza de la función de regresión
@@ -720,7 +733,9 @@ plot(x, y)
 lines(fit)
 ```
 
-<img src="07-npreg_files/figure-html/unnamed-chunk-11-1.png" alt="" width="70%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.7\linewidth]{07-npreg_files/figure-latex/unnamed-chunk-11-1} \end{center}
 
 Obtenemos estimaciones de la tendencia y los residuos (heterocedásticos)
 
@@ -744,7 +759,9 @@ plot(x, r2)
 lines(fit.var)
 ```
 
-<img src="07-npreg_files/figure-html/unnamed-chunk-13-1.png" alt="" width="70%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.7\linewidth]{07-npreg_files/figure-latex/unnamed-chunk-13-1} \end{center}
 
 Otra alternativa sería hacer el suavizado en escala logarítmica (empleando `log(r2)`
 en lugar de `r2` y transformando el resultado a la escala original mediante `exp()`;
@@ -761,7 +778,9 @@ plot(x, r2)
 lines(fit.var)
 ```
 
-<img src="07-npreg_files/figure-html/unnamed-chunk-14-1.png" alt="" width="70%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.7\linewidth]{07-npreg_files/figure-latex/unnamed-chunk-14-1} \end{center}
 
 ``` r
 # g <- dpill(x, sqrt(abs(resid)))
@@ -792,7 +811,9 @@ lines(x, trend.est + sd.est, lty = 2)
 lines(x, trend.est - sd.est, lty = 2)
 ```
 
-<img src="07-npreg_files/figure-html/unnamed-chunk-16-1.png" alt="" width="70%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.7\linewidth]{07-npreg_files/figure-latex/unnamed-chunk-16-1} \end{center}
 
 
 En el bootstrap heterocedástico residual los errores $\hat{\varepsilon}_i^{\ast}$ se generan mediante remuestreo de los residuos studentizados: 
@@ -842,7 +863,9 @@ lines(fit$x, fit$y - bias - 2*std.err, lty = 2)
 lines(fit$x, fit$y - bias + 2*std.err, lty = 2)
 ```
 
-<img src="07-npreg_files/figure-html/unnamed-chunk-17-1.png" alt="" width="70%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.7\linewidth]{07-npreg_files/figure-latex/unnamed-chunk-17-1} \end{center}
 
 De forma análoga al caso homocedástico, podemos calcular estimaciones por 
 intervalo de confianza (puntuales) por el método percentil (básico):
@@ -861,12 +884,15 @@ lines(fit$x, ic_inf_boot, lty = 2)
 lines(fit$x, ic_sup_boot, lty = 2)
 ```
 
-<img src="07-npreg_files/figure-html/unnamed-chunk-18-1.png" alt="" width="70%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.7\linewidth]{07-npreg_files/figure-latex/unnamed-chunk-18-1} \end{center}
 
 En este ejemplo concreto podría ser recomendable considerar también errores con dependencia temporal (ver e.g. material suplementario de Fernández-Casal et al., 2024). 
 
 
 ::: {.exercise #heter-boot}
+<br>
 
 Siguiendo con el ejemplo anterior, obtener intervalos de predicción mediante bootstrap heterocedástico residual.
 
