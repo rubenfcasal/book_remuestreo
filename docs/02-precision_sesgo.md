@@ -369,15 +369,16 @@ op
 
 Al interpretar valores obtenidos hay que tener en cuenta que son estimaciones (realmente aproximaciones por simulación de la estimación bootstrap). 
 Por ejemplo, es de esperar que la aproximación del sesgo de un estimador insesgado sea próxima a cero, pero en condiciones normales no va a ser nunca cero.
-Para ayudar a determinar si el sesgo de un estimador es pequeño y puede ser ignorado en análisis posteriores, se puede utilizar la regla práctica de Efron y Tibshirani (1993), quienes proponen comparar el sesgo de un estimador con su error estándar y si el cociente es inferior a 0.25 errores estándar[^sesgo-boot-1], puede ignorarse en muchas aplicaciones.
+Para ayudar a determinar si el sesgo de un estimador es pequeño y puede ser ignorado en análisis posteriores, se puede utilizar la regla práctica de Efron y Tibshirani (1993), basada en el sesgo relativo, el cociente entre el sesgo de un estimador y su error estándar.
+Como "regla del pulgar" proponen que, si el sesgo es inferior a 0.25 errores estándar[^sesgo-boot-1], podría ignorarse en la mayoría de los procedimientos de inferencia.
 
 [^sesgo-boot-1]: La justificación de este criterio se obtiene de la descomposición
 $$\begin{aligned}
-RMSE(\hat\theta) &= \sqrt{MSE(\hat\theta)} = \sqrt{SE(\hat\theta)^2 + Sesgo(\hat\theta)^2} \\
-&= SE(\hat\theta) \sqrt{1 + \left( \frac{SE(\hat\theta)}{Sesgo(\hat\theta)} \right)^2} \\
-&\approx SE(\hat\theta) \left[ 1 + \frac{1}{2}\left( \frac{SE(\hat\theta)}{Sesgo(\hat\theta)} \right)^2\right]
+RMSE(\hat\theta) &= \sqrt{MSE(\hat\theta)} = \sqrt{\sigma(\hat\theta)^2 + Sesgo(\hat\theta)^2} \\
+&= \sigma(\hat\theta) \sqrt{1 + \left( \frac{Sesgo(\hat\theta)}{\sigma(\hat\theta)} \right)^2} \\
+&\approx \sigma(\hat\theta) \left[ 1 + \frac{1}{2}\left( \frac{Sesgo(\hat\theta)}{\sigma(\hat\theta)} \right)^2\right]
 \end{aligned}$$
-Si $|SE(\hat\theta)/Sesgo(\hat\theta)| \le 0.25$, la raíz cuadrada del error cuadrático medio no supera al error estándar $SE(\hat\theta)$ en más de 3.1\%.
+Si $|Sesgo(\hat\theta)/\sigma(\hat\theta)| \le 0.25$, la raíz cuadrada del error cuadrático medio no supera al error estándar $\sigma(\hat\theta)$ en más de un 3.1\%.
 
 
 Como comentario adicional, si se emplea $\hat F$ como aproximación de la distribución poblacional, lo habitual es que $\hat\theta = T\left( \mathbf{X} \right) = \theta ( \hat{F} )$ sea el estimador de $\theta(F)$ (por ejemplo $\hat\theta = \theta(F_n)$ en el caso del bootstrap uniforme). 

@@ -396,7 +396,7 @@ mediante el argumento <code>mc.cores</code>.</p>
 <span id="cb296-8"><a href="ejemplos-3.html#cb296-8" tabindex="-1"></a></span>
 <span id="cb296-9"><a href="ejemplos-3.html#cb296-9" tabindex="-1"></a><span class="fu">system.time</span>(res.boot <span class="ot">&lt;-</span> <span class="fu">mclapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>, func)) <span class="co"># En Windows llama a lapply() (mc.cores = 1)</span></span></code></pre></div>
 <pre><code>##    user  system elapsed 
-##    0.05    0.00    0.04</code></pre>
+##    0.03    0.00    0.03</code></pre>
 <div class="sourceCode" id="cb298"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb298-1"><a href="ejemplos-3.html#cb298-1" tabindex="-1"></a><span class="co"># res.boot &lt;- mclapply(1:100, func, mc.cores = ncores - 1) # En Windows genera un error si mc.cores &gt; 1</span></span></code></pre></div>
 <p>En Windows habría que crear previamente un cluster, llamar a una de las funciones
 <code>par*apply()</code> y finalizar el cluster:</p>
@@ -450,7 +450,7 @@ salvo que se establezca con el parámetro <code>cl</code>.</p>
 <span id="cb304-15"><a href="ejemplos-3.html#cb304-15" tabindex="-1"></a></span>
 <span id="cb304-16"><a href="ejemplos-3.html#cb304-16" tabindex="-1"></a><span class="fu">system.time</span>(res.boot <span class="ot">&lt;-</span> <span class="fu">boot</span>(muestra, statistic, <span class="at">R =</span> B))</span></code></pre></div>
 <pre><code>##    user  system elapsed 
-##    0.01    0.00    0.02</code></pre>
+##    0.02    0.00    0.03</code></pre>
 <div class="sourceCode" id="cb306"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb306-1"><a href="ejemplos-3.html#cb306-1" tabindex="-1"></a><span class="co"># system.time(res.boot &lt;- boot(muestra, statistic, R = B, parallel = &quot;snow&quot;))</span></span>
 <span id="cb306-2"><a href="ejemplos-3.html#cb306-2" tabindex="-1"></a><span class="fu">system.time</span>(res.boot <span class="ot">&lt;-</span> <span class="fu">boot</span>(muestra, statistic, <span class="at">R =</span> B, <span class="at">parallel =</span> <span class="st">&quot;snow&quot;</span>, <span class="at">cl =</span> cl))</span></code></pre></div>
 <pre><code>##    user  system elapsed 
@@ -511,7 +511,7 @@ intervalos de confianza implementados en la función <code>boot.ci()</code>.</p>
 <span id="cb308-44"><a href="ejemplos-3.html#cb308-44" tabindex="-1"></a>t.fin <span class="ot">&lt;-</span> <span class="fu">proc.time</span>() <span class="sc">-</span> t.ini</span>
 <span id="cb308-45"><a href="ejemplos-3.html#cb308-45" tabindex="-1"></a><span class="fu">print</span>(t.fin)</span></code></pre></div>
 <pre><code>##    user  system elapsed 
-##    0.00    0.02    1.78</code></pre>
+##    0.00    0.00    1.86</code></pre>
 <div class="sourceCode" id="cb310"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb310-1"><a href="ejemplos-3.html#cb310-1" tabindex="-1"></a>resnames <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Cobertura&quot;</span>, <span class="st">&quot;Longitud&quot;</span>)</span>
 <span id="cb310-2"><a href="ejemplos-3.html#cb310-2" tabindex="-1"></a>intervals <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Normal&quot;</span>, <span class="st">&quot;Basic&quot;</span>, <span class="st">&quot;Studentized&quot;</span>, <span class="st">&quot;Percentil&quot;</span>, <span class="st">&quot;BCa&quot;</span>)</span>
 <span id="cb310-3"><a href="ejemplos-3.html#cb310-3" tabindex="-1"></a><span class="fu">names</span>(intervals) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;normal&quot;</span>,<span class="st">&quot;basic&quot;</span>, <span class="st">&quot;student&quot;</span>, <span class="st">&quot;percent&quot;</span>, <span class="st">&quot;bca&quot;</span>)</span>

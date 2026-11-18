@@ -661,7 +661,8 @@ En el caso más simple podríamos obtenerlas con el siguiente código:</p>
 </div>
 <p>Al interpretar valores obtenidos hay que tener en cuenta que son estimaciones (realmente aproximaciones por simulación de la estimación bootstrap).
 Por ejemplo, es de esperar que la aproximación del sesgo de un estimador insesgado sea próxima a cero, pero en condiciones normales no va a ser nunca cero.
-Para ayudar a determinar si el sesgo de un estimador es pequeño y puede ser ignorado en análisis posteriores, se puede utilizar la regla práctica de Efron y Tibshirani (1993), quienes proponen comparar el sesgo de un estimador con su error estándar y si el cociente es inferior a 0.25 errores estándar<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>, puede ignorarse en muchas aplicaciones.</p>
+Para ayudar a determinar si el sesgo de un estimador es pequeño y puede ser ignorado en análisis posteriores, se puede utilizar la regla práctica de Efron y Tibshirani (1993), basada en el sesgo relativo, el cociente entre el sesgo de un estimador y su error estándar.
+Como “regla del pulgar” proponen que, si el sesgo es inferior a 0.25 errores estándar<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>, podría ignorarse en la mayoría de los procedimientos de inferencia.</p>
 <p>Como comentario adicional, si se emplea <span class="math inline">\(\hat F\)</span> como aproximación de la distribución poblacional, lo habitual es que <span class="math inline">\(\hat\theta = T\left( \mathbf{X} \right) = \theta ( \hat{F} )\)</span> sea el estimador de <span class="math inline">\(\theta(F)\)</span> (por ejemplo <span class="math inline">\(\hat\theta = \theta(F_n)\)</span> en el caso del bootstrap uniforme).
 De esta forma, en el universo bootstrap el parámetro teórico se sustituye por el estimador y, por ejemplo, <span class="math inline">\(R = \hat \theta - \theta\)</span> se traduce en <span class="math inline">\(R^{\ast} = \hat{\theta}^{\ast}- \hat \theta\)</span>.
 Este es el principal motivo por el que la mayoría de las herramientas utilizadas en la práctica siempre asumen que ocurre esto, como es el caso de los métodos implementados en el paquete <code>boot</code> (y derivados).</p>
@@ -681,11 +682,11 @@ De hecho, en general se trata de buscar $\hat{F}$ de forma que $\theta ( \hat{F}
 <ol start="3">
 <li id="fn3"><p>La justificación de este criterio se obtiene de la descomposición
 <span class="math display">\[\begin{aligned}
-RMSE(\hat\theta) &amp;= \sqrt{MSE(\hat\theta)} = \sqrt{SE(\hat\theta)^2 + Sesgo(\hat\theta)^2} \\
-&amp;= SE(\hat\theta) \sqrt{1 + \left( \frac{SE(\hat\theta)}{Sesgo(\hat\theta)} \right)^2} \\
-&amp;\approx SE(\hat\theta) \left[ 1 + \frac{1}{2}\left( \frac{SE(\hat\theta)}{Sesgo(\hat\theta)} \right)^2\right]
+RMSE(\hat\theta) &amp;= \sqrt{MSE(\hat\theta)} = \sqrt{\sigma(\hat\theta)^2 + Sesgo(\hat\theta)^2} \\
+&amp;= \sigma(\hat\theta) \sqrt{1 + \left( \frac{Sesgo(\hat\theta)}{\sigma(\hat\theta)} \right)^2} \\
+&amp;\approx \sigma(\hat\theta) \left[ 1 + \frac{1}{2}\left( \frac{Sesgo(\hat\theta)}{\sigma(\hat\theta)} \right)^2\right]
 \end{aligned}\]</span>
-Si <span class="math inline">\(|SE(\hat\theta)/Sesgo(\hat\theta)| \le 0.25\)</span>, la raíz cuadrada del error cuadrático medio no supera al error estándar <span class="math inline">\(SE(\hat\theta)\)</span> en más de 3.1%.<a href="prec-sesgo-boot.html#fnref3" class="footnote-back">↩︎</a></p></li>
+Si <span class="math inline">\(|Sesgo(\hat\theta)/\sigma(\hat\theta)| \le 0.25\)</span>, la raíz cuadrada del error cuadrático medio no supera al error estándar <span class="math inline">\(\sigma(\hat\theta)\)</span> en más de un 3.1%.<a href="prec-sesgo-boot.html#fnref3" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>
