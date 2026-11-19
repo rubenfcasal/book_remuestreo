@@ -211,19 +211,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5" data-path="contrastes.html"><a href="contrastes.html"><i class="fa fa-check"></i><b>5</b> Aplicaciones del Bootstrap en contrastes de hipótesis</a>
 <ul>
 <li class="chapter" data-level="5.1" data-path="aproximación-del-p-valor-mediante-remuestreo.html"><a href="aproximación-del-p-valor-mediante-remuestreo.html"><i class="fa fa-check"></i><b>5.1</b> Aproximación del p-valor mediante remuestreo</a></li>
-<li class="chapter" data-level="5.2" data-path="contrastes-parametricos.html"><a href="contrastes-parametricos.html"><i class="fa fa-check"></i><b>5.2</b> Contrastes bootstrap paramétricos</a>
-<ul>
-<li class="chapter" data-level="5.2.1" data-path="contrastes-parametricos.html"><a href="contrastes-parametricos.html#ejemplo-contraste-de-kolmogorov-smirnov"><i class="fa fa-check"></i><b>5.2.1</b> Ejemplo: contraste de Kolmogorov-Smirnov</a></li>
-</ul></li>
-<li class="chapter" data-level="5.3" data-path="contrastes-de-permutaciones.html"><a href="contrastes-de-permutaciones.html"><i class="fa fa-check"></i><b>5.3</b> Contrastes de permutaciones</a>
-<ul>
-<li class="chapter" data-level="5.3.1" data-path="contrastes-de-permutaciones.html"><a href="contrastes-de-permutaciones.html#ejemplo-inferencia-sobre-el-coeficiente-de-correlaci%C3%B3n-lineal"><i class="fa fa-check"></i><b>5.3.1</b> Ejemplo: Inferencia sobre el coeficiente de correlación lineal</a></li>
-</ul></li>
-<li class="chapter" data-level="5.4" data-path="contrastes-semiparametricos.html"><a href="contrastes-semiparametricos.html"><i class="fa fa-check"></i><b>5.4</b> Contrastes bootstrap semiparamétricos</a>
-<ul>
-<li class="chapter" data-level="5.4.1" data-path="contrastes-semiparametricos.html"><a href="contrastes-semiparametricos.html#ejemplo-inferencia-sobre-modelos-de-regresi%C3%B3n"><i class="fa fa-check"></i><b>5.4.1</b> Ejemplo: Inferencia sobre modelos de regresión</a></li>
-<li class="chapter" data-level="5.4.2" data-path="contrastes-semiparametricos.html"><a href="contrastes-semiparametricos.html#ejercicio"><i class="fa fa-check"></i><b>5.4.2</b> Ejercicio</a></li>
-</ul></li>
+<li class="chapter" data-level="5.2" data-path="contrastes-parametricos.html"><a href="contrastes-parametricos.html"><i class="fa fa-check"></i><b>5.2</b> Contrastes bootstrap paramétricos</a></li>
+<li class="chapter" data-level="5.3" data-path="contrastes-de-permutaciones.html"><a href="contrastes-de-permutaciones.html"><i class="fa fa-check"></i><b>5.3</b> Contrastes de permutaciones</a></li>
+<li class="chapter" data-level="5.4" data-path="contrastes-semiparametricos.html"><a href="contrastes-semiparametricos.html"><i class="fa fa-check"></i><b>5.4</b> Contrastes bootstrap semiparamétricos</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="npden.html"><a href="npden.html"><i class="fa fa-check"></i><b>6</b> Bootstrap y estimación no paramétrica de la densidad</a>
 <ul>
@@ -382,32 +372,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><span id="exr:censboot-strata-ej" class="exercise"><strong>Ejercicio 8.1  (Bootstrap censurado por estratos) </strong></span><br></p>
 <p>Analizar el conjunto de datos <code>channing</code> completo, teniendo en cuenta el sexo como estrato
 (i.e. <code>Surv(age, cens) ~ sex</code> y <code>strata = chan$sex</code>)</p>
-<div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb266-1"><a href="ejercicios.html#cb266-1" tabindex="-1"></a><span class="co"># Datos</span></span>
-<span id="cb266-2"><a href="ejercicios.html#cb266-2" tabindex="-1"></a><span class="fu">data</span>(channing)</span>
-<span id="cb266-3"><a href="ejercicios.html#cb266-3" tabindex="-1"></a><span class="co"># Calcular edad (de partida o muerte) en años</span></span>
-<span id="cb266-4"><a href="ejercicios.html#cb266-4" tabindex="-1"></a>channing<span class="sc">$</span>age <span class="ot">&lt;-</span> (channing<span class="sc">$</span>entry <span class="sc">+</span> channing<span class="sc">$</span>time)<span class="sc">/</span><span class="dv">12</span></span>
-<span id="cb266-5"><a href="ejercicios.html#cb266-5" tabindex="-1"></a><span class="co"># Seleccionar variables</span></span>
-<span id="cb266-6"><a href="ejercicios.html#cb266-6" tabindex="-1"></a>chan <span class="ot">&lt;-</span>channing[<span class="fu">c</span>(<span class="st">&quot;age&quot;</span>, <span class="st">&quot;cens&quot;</span>, <span class="st">&quot;sex&quot;</span>)]</span>
-<span id="cb266-7"><a href="ejercicios.html#cb266-7" tabindex="-1"></a></span>
-<span id="cb266-8"><a href="ejercicios.html#cb266-8" tabindex="-1"></a><span class="co"># Estimación supervivencia</span></span>
-<span id="cb266-9"><a href="ejercicios.html#cb266-9" tabindex="-1"></a><span class="fu">library</span>(survival)</span>
-<span id="cb266-10"><a href="ejercicios.html#cb266-10" tabindex="-1"></a>chan.F <span class="ot">&lt;-</span> <span class="fu">survfit</span>(<span class="fu">Surv</span>(age, cens) <span class="sc">~</span> sex, <span class="at">data =</span> chan)</span>
-<span id="cb266-11"><a href="ejercicios.html#cb266-11" tabindex="-1"></a>chan.F</span></code></pre></div>
+<div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb265-1"><a href="ejercicios.html#cb265-1" tabindex="-1"></a><span class="co"># Datos</span></span>
+<span id="cb265-2"><a href="ejercicios.html#cb265-2" tabindex="-1"></a><span class="fu">data</span>(channing)</span>
+<span id="cb265-3"><a href="ejercicios.html#cb265-3" tabindex="-1"></a><span class="co"># Calcular edad (de partida o muerte) en años</span></span>
+<span id="cb265-4"><a href="ejercicios.html#cb265-4" tabindex="-1"></a>channing<span class="sc">$</span>age <span class="ot">&lt;-</span> (channing<span class="sc">$</span>entry <span class="sc">+</span> channing<span class="sc">$</span>time)<span class="sc">/</span><span class="dv">12</span></span>
+<span id="cb265-5"><a href="ejercicios.html#cb265-5" tabindex="-1"></a><span class="co"># Seleccionar variables</span></span>
+<span id="cb265-6"><a href="ejercicios.html#cb265-6" tabindex="-1"></a>chan <span class="ot">&lt;-</span>channing[<span class="fu">c</span>(<span class="st">&quot;age&quot;</span>, <span class="st">&quot;cens&quot;</span>, <span class="st">&quot;sex&quot;</span>)]</span>
+<span id="cb265-7"><a href="ejercicios.html#cb265-7" tabindex="-1"></a></span>
+<span id="cb265-8"><a href="ejercicios.html#cb265-8" tabindex="-1"></a><span class="co"># Estimación supervivencia</span></span>
+<span id="cb265-9"><a href="ejercicios.html#cb265-9" tabindex="-1"></a><span class="fu">library</span>(survival)</span>
+<span id="cb265-10"><a href="ejercicios.html#cb265-10" tabindex="-1"></a>chan.F <span class="ot">&lt;-</span> <span class="fu">survfit</span>(<span class="fu">Surv</span>(age, cens) <span class="sc">~</span> sex, <span class="at">data =</span> chan)</span>
+<span id="cb265-11"><a href="ejercicios.html#cb265-11" tabindex="-1"></a>chan.F</span></code></pre></div>
 <pre><code>## Call: survfit(formula = Surv(age, cens) ~ sex, data = chan)
 ## 
 ##              n events median 0.95LCL 0.95UCL
 ## sex=Female 365    130     88    86.7    89.5
 ## sex=Male    97     46     87    85.8    90.4</code></pre>
-<div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb268-1"><a href="ejercicios.html#cb268-1" tabindex="-1"></a><span class="fu">plot</span>(chan.F, <span class="at">lty =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">60</span>, <span class="dv">100</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb267"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb267-1"><a href="ejercicios.html#cb267-1" tabindex="-1"></a><span class="fu">plot</span>(chan.F, <span class="at">lty =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">60</span>, <span class="dv">100</span>))</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:surv-strata"></span>
 <img src="08-dat_cen_files/figure-html/surv-strata-1.png" alt="Estimaciones de la supervivencia." width="70%" />
 <p class="caption">
 Figura 8.3: Estimaciones de la supervivencia.
 </p>
 </div>
-<div class="sourceCode" id="cb269"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb269-1"><a href="ejercicios.html#cb269-1" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">summary</span>(chan.F)</span>
-<span id="cb269-2"><a href="ejercicios.html#cb269-2" tabindex="-1"></a><span class="co"># res</span></span>
-<span id="cb269-3"><a href="ejercicios.html#cb269-3" tabindex="-1"></a><span class="fu">str</span>(res)</span></code></pre></div>
+<div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb268-1"><a href="ejercicios.html#cb268-1" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">summary</span>(chan.F)</span>
+<span id="cb268-2"><a href="ejercicios.html#cb268-2" tabindex="-1"></a><span class="co"># res</span></span>
+<span id="cb268-3"><a href="ejercicios.html#cb268-3" tabindex="-1"></a><span class="fu">str</span>(res)</span></code></pre></div>
 <pre><code>## List of 20
 ##  $ n            : int [1:2] 365 97
 ##  $ time         : num [1:146] 67 68.5 69.2 70 70.4 ...
@@ -433,26 +423,26 @@ Figura 8.3: Estimaciones de la supervivencia.
 ##   .. ..$ : chr [1:9] &quot;records&quot; &quot;n.max&quot; &quot;n.start&quot; &quot;events&quot; ...
 ##  $ rmean.endtime: num [1:2] 101 101
 ##  - attr(*, &quot;class&quot;)= chr &quot;summary.survfit&quot;</code></pre>
-<div class="sourceCode" id="cb271"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb271-1"><a href="ejercicios.html#cb271-1" tabindex="-1"></a><span class="co"># Estimaciones de interés</span></span>
-<span id="cb271-2"><a href="ejercicios.html#cb271-2" tabindex="-1"></a>res<span class="sc">$</span>table[, <span class="fu">c</span>(<span class="st">&quot;rmean&quot;</span>, <span class="st">&quot;median&quot;</span>)]</span></code></pre></div>
+<div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb270-1"><a href="ejercicios.html#cb270-1" tabindex="-1"></a><span class="co"># Estimaciones de interés</span></span>
+<span id="cb270-2"><a href="ejercicios.html#cb270-2" tabindex="-1"></a>res<span class="sc">$</span>table[, <span class="fu">c</span>(<span class="st">&quot;rmean&quot;</span>, <span class="st">&quot;median&quot;</span>)]</span></code></pre></div>
 <pre><code>##               rmean median
 ## sex=Female 88.46153     88
 ## sex=Male   86.89935     87</code></pre>
-<div class="sourceCode" id="cb273"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb273-1"><a href="ejercicios.html#cb273-1" tabindex="-1"></a><span class="fu">as.numeric</span>(res<span class="sc">$</span>table[, <span class="fu">c</span>(<span class="st">&quot;rmean&quot;</span>, <span class="st">&quot;median&quot;</span>)])</span></code></pre></div>
+<div class="sourceCode" id="cb272"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb272-1"><a href="ejercicios.html#cb272-1" tabindex="-1"></a><span class="fu">as.numeric</span>(res<span class="sc">$</span>table[, <span class="fu">c</span>(<span class="st">&quot;rmean&quot;</span>, <span class="st">&quot;median&quot;</span>)])</span></code></pre></div>
 <pre><code>## [1] 88.46153 86.89935 88.00000 87.00000</code></pre>
 </div>
 <div class="exercise">
 <p><span id="exr:censboot-cox-ej" class="exercise"><strong>Ejercicio 8.2  (Bootstrap censurado con riesgo proporcional de Cox) </strong></span><br></p>
 <p>Reproducir el ejemplo en Canty (2002, <a href="https://www.r-project.org/doc/Rnews/Rnews_2002-3.pdf">Rnews_2002-3</a>) del modelo de riesgo proporcional de Cox (Cox, 1972):</p>
-<div class="sourceCode" id="cb275"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb275-1"><a href="ejercicios.html#cb275-1" tabindex="-1"></a><span class="co"># Datos</span></span>
-<span id="cb275-2"><a href="ejercicios.html#cb275-2" tabindex="-1"></a><span class="fu">data</span>(melanoma)</span>
-<span id="cb275-3"><a href="ejercicios.html#cb275-3" tabindex="-1"></a>mel <span class="ot">&lt;-</span> melanoma[melanoma<span class="sc">$</span>ulcer <span class="sc">==</span> <span class="dv">1</span>, ]</span>
-<span id="cb275-4"><a href="ejercicios.html#cb275-4" tabindex="-1"></a>mel<span class="sc">$</span>cens <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">*</span> (mel<span class="sc">$</span>status <span class="sc">==</span> <span class="dv">1</span>)</span>
-<span id="cb275-5"><a href="ejercicios.html#cb275-5" tabindex="-1"></a><span class="co"># Estimación supervivencia</span></span>
-<span id="cb275-6"><a href="ejercicios.html#cb275-6" tabindex="-1"></a><span class="fu">library</span>(survival)</span>
-<span id="cb275-7"><a href="ejercicios.html#cb275-7" tabindex="-1"></a><span class="co"># Modelo de riesgo proporcional de Cox</span></span>
-<span id="cb275-8"><a href="ejercicios.html#cb275-8" tabindex="-1"></a>mel.cox <span class="ot">&lt;-</span> <span class="fu">coxph</span>(<span class="fu">Surv</span>(time, cens) <span class="sc">~</span> thickness, <span class="at">data =</span> mel)</span>
-<span id="cb275-9"><a href="ejercicios.html#cb275-9" tabindex="-1"></a>mel.cox</span></code></pre></div>
+<div class="sourceCode" id="cb274"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb274-1"><a href="ejercicios.html#cb274-1" tabindex="-1"></a><span class="co"># Datos</span></span>
+<span id="cb274-2"><a href="ejercicios.html#cb274-2" tabindex="-1"></a><span class="fu">data</span>(melanoma)</span>
+<span id="cb274-3"><a href="ejercicios.html#cb274-3" tabindex="-1"></a>mel <span class="ot">&lt;-</span> melanoma[melanoma<span class="sc">$</span>ulcer <span class="sc">==</span> <span class="dv">1</span>, ]</span>
+<span id="cb274-4"><a href="ejercicios.html#cb274-4" tabindex="-1"></a>mel<span class="sc">$</span>cens <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">*</span> (mel<span class="sc">$</span>status <span class="sc">==</span> <span class="dv">1</span>)</span>
+<span id="cb274-5"><a href="ejercicios.html#cb274-5" tabindex="-1"></a><span class="co"># Estimación supervivencia</span></span>
+<span id="cb274-6"><a href="ejercicios.html#cb274-6" tabindex="-1"></a><span class="fu">library</span>(survival)</span>
+<span id="cb274-7"><a href="ejercicios.html#cb274-7" tabindex="-1"></a><span class="co"># Modelo de riesgo proporcional de Cox</span></span>
+<span id="cb274-8"><a href="ejercicios.html#cb274-8" tabindex="-1"></a>mel.cox <span class="ot">&lt;-</span> <span class="fu">coxph</span>(<span class="fu">Surv</span>(time, cens) <span class="sc">~</span> thickness, <span class="at">data =</span> mel)</span>
+<span id="cb274-9"><a href="ejercicios.html#cb274-9" tabindex="-1"></a>mel.cox</span></code></pre></div>
 <pre><code>## Call:
 ## coxph(formula = Surv(time, cens) ~ thickness, data = mel)
 ## 
@@ -461,9 +451,9 @@ Figura 8.3: Estimaciones de la supervivencia.
 ## 
 ## Likelihood ratio test=5  on 1 df, p=0.02541
 ## n= 90, number of events= 41</code></pre>
-<div class="sourceCode" id="cb277"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb277-1"><a href="ejercicios.html#cb277-1" tabindex="-1"></a><span class="co"># summary(mel.cox)</span></span>
-<span id="cb277-2"><a href="ejercicios.html#cb277-2" tabindex="-1"></a><span class="co"># Estadísticos de interés</span></span>
-<span id="cb277-3"><a href="ejercicios.html#cb277-3" tabindex="-1"></a>mel.cox<span class="sc">$</span>coefficients</span></code></pre></div>
+<div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb276-1"><a href="ejercicios.html#cb276-1" tabindex="-1"></a><span class="co"># summary(mel.cox)</span></span>
+<span id="cb276-2"><a href="ejercicios.html#cb276-2" tabindex="-1"></a><span class="co"># Estadísticos de interés</span></span>
+<span id="cb276-3"><a href="ejercicios.html#cb276-3" tabindex="-1"></a>mel.cox<span class="sc">$</span>coefficients</span></code></pre></div>
 <pre><code>##  thickness 
 ## 0.09967665</code></pre>
 </div>

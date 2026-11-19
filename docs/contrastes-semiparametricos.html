@@ -211,19 +211,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5" data-path="contrastes.html"><a href="contrastes.html"><i class="fa fa-check"></i><b>5</b> Aplicaciones del Bootstrap en contrastes de hipótesis</a>
 <ul>
 <li class="chapter" data-level="5.1" data-path="aproximación-del-p-valor-mediante-remuestreo.html"><a href="aproximación-del-p-valor-mediante-remuestreo.html"><i class="fa fa-check"></i><b>5.1</b> Aproximación del p-valor mediante remuestreo</a></li>
-<li class="chapter" data-level="5.2" data-path="contrastes-parametricos.html"><a href="contrastes-parametricos.html"><i class="fa fa-check"></i><b>5.2</b> Contrastes bootstrap paramétricos</a>
-<ul>
-<li class="chapter" data-level="5.2.1" data-path="contrastes-parametricos.html"><a href="contrastes-parametricos.html#ejemplo-contraste-de-kolmogorov-smirnov"><i class="fa fa-check"></i><b>5.2.1</b> Ejemplo: contraste de Kolmogorov-Smirnov</a></li>
-</ul></li>
-<li class="chapter" data-level="5.3" data-path="contrastes-de-permutaciones.html"><a href="contrastes-de-permutaciones.html"><i class="fa fa-check"></i><b>5.3</b> Contrastes de permutaciones</a>
-<ul>
-<li class="chapter" data-level="5.3.1" data-path="contrastes-de-permutaciones.html"><a href="contrastes-de-permutaciones.html#ejemplo-inferencia-sobre-el-coeficiente-de-correlaci%C3%B3n-lineal"><i class="fa fa-check"></i><b>5.3.1</b> Ejemplo: Inferencia sobre el coeficiente de correlación lineal</a></li>
-</ul></li>
-<li class="chapter" data-level="5.4" data-path="contrastes-semiparametricos.html"><a href="contrastes-semiparametricos.html"><i class="fa fa-check"></i><b>5.4</b> Contrastes bootstrap semiparamétricos</a>
-<ul>
-<li class="chapter" data-level="5.4.1" data-path="contrastes-semiparametricos.html"><a href="contrastes-semiparametricos.html#ejemplo-inferencia-sobre-modelos-de-regresi%C3%B3n"><i class="fa fa-check"></i><b>5.4.1</b> Ejemplo: Inferencia sobre modelos de regresión</a></li>
-<li class="chapter" data-level="5.4.2" data-path="contrastes-semiparametricos.html"><a href="contrastes-semiparametricos.html#ejercicio"><i class="fa fa-check"></i><b>5.4.2</b> Ejercicio</a></li>
-</ul></li>
+<li class="chapter" data-level="5.2" data-path="contrastes-parametricos.html"><a href="contrastes-parametricos.html"><i class="fa fa-check"></i><b>5.2</b> Contrastes bootstrap paramétricos</a></li>
+<li class="chapter" data-level="5.3" data-path="contrastes-de-permutaciones.html"><a href="contrastes-de-permutaciones.html"><i class="fa fa-check"></i><b>5.3</b> Contrastes de permutaciones</a></li>
+<li class="chapter" data-level="5.4" data-path="contrastes-semiparametricos.html"><a href="contrastes-semiparametricos.html"><i class="fa fa-check"></i><b>5.4</b> Contrastes bootstrap semiparamétricos</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="npden.html"><a href="npden.html"><i class="fa fa-check"></i><b>6</b> Bootstrap y estimación no paramétrica de la densidad</a>
 <ul>
@@ -384,15 +374,9 @@ con una componente paramétrica y otra no paramétrica.
 Típicamente se incluye el error en la componente no paramétrica, y podríamos emplear
 el bootstrap residual (también denominado semiparamétrico o basado en modelos)
 descrito en la Sección <a href="boot-reg.html#boot-residual">3.7.2</a>.</p>
-<p>En esta sección consideraremos como ejemplo el conjunto de datos <code>Prestige</code>
-del paquete <code>carData</code>, considerando como variable respuesta <code>prestige</code>
-(puntuación de ocupaciones obtenidas a partir de una encuesta)
-y como variables explicativas: <code>income</code> (media de ingresos en la ocupación)
-y <code>education</code> (media de los años de educación).</p>
+<p>En esta sección nos centraremos en inferencia sobre modelos de regresión lineales (aunque el procedimiento sería análogo en el caso de modelos más generales), empleando como ejemplo el conjunto de datos <code>Prestige</code> del paquete <code>carData</code>, considerando como variable respuesta <code>prestige</code> (puntuación de ocupaciones obtenidas a partir de una encuesta) y como variables explicativas: <code>income</code> (media de ingresos en la ocupación) y <code>education</code> (media de los años de educación).</p>
 <div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb193-1"><a href="contrastes-semiparametricos.html#cb193-1" tabindex="-1"></a><span class="fu">data</span>(Prestige, <span class="at">package =</span> <span class="st">&quot;carData&quot;</span>)</span>
 <span id="cb193-2"><a href="contrastes-semiparametricos.html#cb193-2" tabindex="-1"></a><span class="co"># ?Prestige</span></span></code></pre></div>
-<div id="ejemplo-inferencia-sobre-modelos-de-regresión" class="section level3 hasAnchor" number="5.4.1">
-<h3><span class="header-section-number">5.4.1</span> Ejemplo: Inferencia sobre modelos de regresión<a href="contrastes-semiparametricos.html#ejemplo-inferencia-sobre-modelos-de-regresi%C3%B3n" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>En la mayoría de los casos nos interesa contrastar un <strong>modelo reducido</strong>
 frente a un <strong>modelo completo</strong> (que generaliza el modelo reducido).
 Por ejemplo, en el caso de modelos lineales (estimados por mínimos cuadrados)
@@ -494,9 +478,14 @@ el bootstrap semiparamétrico<a href="#fn8" class="footnote-ref" id="fnref8"><su
 ## Bootstrap Statistics :
 ##     original    bias    std. error
 ## t1* 195.5505 -194.4866    1.096335</code></pre>
-<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb205-1"><a href="contrastes-semiparametricos.html#cb205-1" tabindex="-1"></a><span class="fu">hist</span>(boot.mod<span class="sc">$</span>t, <span class="at">breaks =</span> <span class="st">&quot;FD&quot;</span>, <span class="at">freq =</span> <span class="cn">FALSE</span>)</span>
+<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb205-1"><a href="contrastes-semiparametricos.html#cb205-1" tabindex="-1"></a><span class="fu">hist</span>(boot.mod<span class="sc">$</span>t, <span class="at">freq =</span> <span class="cn">FALSE</span>, <span class="at">breaks =</span> <span class="st">&quot;FD&quot;</span>, <span class="at">main =</span> <span class="st">&quot;&quot;</span>)</span>
 <span id="cb205-2"><a href="contrastes-semiparametricos.html#cb205-2" tabindex="-1"></a><span class="fu">curve</span>(<span class="fu">pf</span>(x, df, dfr, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>), <span class="at">lty =</span> <span class="dv">2</span>, <span class="at">add =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<p><img src="05-contrastes_files/figure-html/unnamed-chunk-21-1.png" alt="" width="70%" style="display: block; margin: auto;" /></p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:semipar-test-plot"></span>
+<img src="05-contrastes_files/figure-html/semipar-test-plot-1.png" alt="Distribución del estadístico del contraste (bajo la hipótesis nula) aproximada mediante bootstrap semiparamétrico." width="70%" />
+<p class="caption">
+Figura 5.4: Distribución del estadístico del contraste (bajo la hipótesis nula) aproximada mediante bootstrap semiparamétrico.
+</p>
+</div>
 <div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="contrastes-semiparametricos.html#cb206-1" tabindex="-1"></a><span class="co"># pval &lt;- mean(boot.mod$t &gt;= boot.mod$t0)</span></span>
 <span id="cb206-2"><a href="contrastes-semiparametricos.html#cb206-2" tabindex="-1"></a>pval <span class="ot">&lt;-</span> <span class="fu">mean</span>(boot.mod<span class="sc">$</span>t <span class="sc">&gt;=</span> stat)</span>
 <span id="cb206-3"><a href="contrastes-semiparametricos.html#cb206-3" tabindex="-1"></a>pval</span></code></pre></div>
@@ -509,11 +498,16 @@ y Cao (1993), se pueden remuestrear los residuos del modelo completo.
 De esta forma reproduciríamos la variabilidad del error de forma consistente
 tanto bajo la hipótesis alternativa como bajo la nula.</p>
 <div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="contrastes-semiparametricos.html#cb208-1" tabindex="-1"></a>old.par <span class="ot">&lt;-</span> <span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
-<span id="cb208-2"><a href="contrastes-semiparametricos.html#cb208-2" tabindex="-1"></a><span class="fu">hist</span>(<span class="fu">residuals</span>(modelo0), <span class="at">xlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">50</span>, <span class="dv">50</span>), </span>
-<span id="cb208-3"><a href="contrastes-semiparametricos.html#cb208-3" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&#39;Variabilidad residual</span><span class="sc">\n</span><span class="st"> con el modelo reducido&#39;</span>)</span>
-<span id="cb208-4"><a href="contrastes-semiparametricos.html#cb208-4" tabindex="-1"></a><span class="fu">hist</span>(<span class="fu">residuals</span>(modelo), <span class="at">xlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">50</span>, <span class="dv">50</span>), </span>
-<span id="cb208-5"><a href="contrastes-semiparametricos.html#cb208-5" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&#39;Variabilidad residual</span><span class="sc">\n</span><span class="st"> con el modelo completo&#39;</span>)</span></code></pre></div>
-<p><img src="05-contrastes_files/figure-html/unnamed-chunk-22-1.png" alt="" width="70%" style="display: block; margin: auto;" /></p>
+<span id="cb208-2"><a href="contrastes-semiparametricos.html#cb208-2" tabindex="-1"></a><span class="co"># Variabilidad residual con el modelo reducido</span></span>
+<span id="cb208-3"><a href="contrastes-semiparametricos.html#cb208-3" tabindex="-1"></a><span class="fu">hist</span>(<span class="fu">residuals</span>(modelo0), <span class="at">xlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">50</span>, <span class="dv">50</span>), <span class="at">main =</span> <span class="st">&quot;&quot;</span>)</span>
+<span id="cb208-4"><a href="contrastes-semiparametricos.html#cb208-4" tabindex="-1"></a><span class="co"># Variabilidad residual con el modelo completo</span></span>
+<span id="cb208-5"><a href="contrastes-semiparametricos.html#cb208-5" tabindex="-1"></a><span class="fu">hist</span>(<span class="fu">residuals</span>(modelo), <span class="at">xlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">50</span>, <span class="dv">50</span>), <span class="at">main =</span> <span class="st">&quot;&quot;</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:semipar-var-plot"></span>
+<img src="05-contrastes_files/figure-html/semipar-var-plot-1.png" alt="Variabilidad residual con el modelo reducido (izquierda) y con el modelo completo (derecha)." width="90%" />
+<p class="caption">
+Figura 5.5: Variabilidad residual con el modelo reducido (izquierda) y con el modelo completo (derecha).
+</p>
+</div>
 <div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="contrastes-semiparametricos.html#cb209-1" tabindex="-1"></a><span class="fu">par</span>(old.par)</span></code></pre></div>
 <p>Adicionalmente, como se mostró en la Sección <a href="boot-reg.html#boot-residual">3.7.2</a>, se puede emplear
 la modificación propuesta en Davison y Hinkley (1997, Alg. 6.3, p. 271)
@@ -550,15 +544,20 @@ y remuestrear los residuos reescalados y centrados.</p>
 <code>boot.mod$t0</code> no va a coincidir con el valor observado del estadístico,
 almacenado en <code>stat</code> (por tanto habría que ignorar <code>original</code> y <code>bias</code>
 en <code>Bootstrap Statistics</code>;
-la función <code>Boot()</code> del paquete <code>car</code> corrige este problema).</p>
-<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb212-1"><a href="contrastes-semiparametricos.html#cb212-1" tabindex="-1"></a><span class="fu">hist</span>(boot.mod<span class="sc">$</span>t, <span class="at">breaks =</span> <span class="st">&quot;FD&quot;</span>, <span class="at">freq =</span> <span class="cn">FALSE</span>)</span>
+la función <code>Boot()</code> del paquete <code>car</code> corregiría este problema).</p>
+<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb212-1"><a href="contrastes-semiparametricos.html#cb212-1" tabindex="-1"></a><span class="fu">hist</span>(boot.mod<span class="sc">$</span>t, <span class="at">freq =</span> <span class="cn">FALSE</span>, <span class="at">breaks =</span> <span class="st">&quot;FD&quot;</span>, <span class="at">main =</span> <span class="st">&quot;&quot;</span>)</span>
 <span id="cb212-2"><a href="contrastes-semiparametricos.html#cb212-2" tabindex="-1"></a><span class="fu">curve</span>(<span class="fu">pf</span>(x, df, dfr, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>), <span class="at">lty =</span> <span class="dv">2</span>, <span class="at">add =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<p><img src="05-contrastes_files/figure-html/unnamed-chunk-24-1.png" alt="" width="70%" style="display: block; margin: auto;" /></p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:boot-semipar-test-plot"></span>
+<img src="05-contrastes_files/figure-html/boot-semipar-test-plot-1.png" alt="Distribución del estadístico del contraste (bajo la hipótesis nula) aproximada mediante bootstrap semiparamétrico." width="70%" />
+<p class="caption">
+Figura 5.6: Distribución del estadístico del contraste (bajo la hipótesis nula) aproximada mediante bootstrap semiparamétrico.
+</p>
+</div>
 <div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb213-1"><a href="contrastes-semiparametricos.html#cb213-1" tabindex="-1"></a>pval <span class="ot">&lt;-</span> <span class="fu">mean</span>(boot.mod<span class="sc">$</span>t <span class="sc">&gt;=</span> stat)</span>
 <span id="cb213-2"><a href="contrastes-semiparametricos.html#cb213-2" tabindex="-1"></a>pval</span></code></pre></div>
 <pre><code>## [1] 0</code></pre>
 <p>En el caso de modelos no lineales (o otros tipos de modelos lineales) puede ser
-complicado aproximar los grados de libertad para el cáculo del estadístico <span class="math inline">\(F\)</span>,
+complicado aproximar los grados de libertad para el cálculo del estadístico <span class="math inline">\(F\)</span>,
 pero si empleamos bootstrap, vamos a obtener los mismos resultados considerando
 como estadístico:
 <span class="math display">\[\tilde F =\frac{RSS_0 - RSS}{RSS},\]</span>
@@ -566,16 +565,19 @@ que se puede interpretar también como una medida del incremento en la variabili
 al considerar el modelo reducido (ya que únicamente difieren en una constante).
 En este caso también se suelen emplear los residuos sin reescalar, ya que también puede ser
 difícil encontrar la transformación adecuada.</p>
-</div>
-<div id="ejercicio" class="section level3 hasAnchor" number="5.4.2">
-<h3><span class="header-section-number">5.4.2</span> Ejercicio<a href="contrastes-semiparametricos.html#ejercicio" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="exercise">
+<p><span id="exr:test-semipar-cuadratico" class="exercise"><strong>Ejercicio 5.1  </strong></span><br></p>
 <p>Al estudiar el efecto de las variables explicativas en el modelo
 anterior, podríamos pensar que no es adecuado asumir un efecto lineal
 de alguna de las variables explicativas. Por ejemplo, si generamos los gráficos
 parciales de residuos obtendríamos:</p>
-<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb215-1"><a href="contrastes-semiparametricos.html#cb215-1" tabindex="-1"></a><span class="co"># library(car)</span></span>
-<span id="cb215-2"><a href="contrastes-semiparametricos.html#cb215-2" tabindex="-1"></a><span class="fu">crPlots</span>(modelo)</span></code></pre></div>
-<p><img src="05-contrastes_files/figure-html/unnamed-chunk-25-1.png" alt="" width="70%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb215-1"><a href="contrastes-semiparametricos.html#cb215-1" tabindex="-1"></a>car<span class="sc">::</span><span class="fu">crPlots</span>(modelo)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:semipar-crplot"></span>
+<img src="05-contrastes_files/figure-html/semipar-crplot-1.png" alt="Efecto de las variables explicativas en el modelo (gráficos de residuos)." width="90%" />
+<p class="caption">
+Figura 5.7: Efecto de las variables explicativas en el modelo (gráficos de residuos).
+</p>
+</div>
 <p>En este caso podría ser razonable considerar un efecto cuadrático
 de la variable <code>income</code><a href="#fn9" class="footnote-ref" id="fnref9"><sup>9</sup></a></p>
 <div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb216-1"><a href="contrastes-semiparametricos.html#cb216-1" tabindex="-1"></a>modelo <span class="ot">&lt;-</span> <span class="fu">lm</span>(prestige <span class="sc">~</span> income <span class="sc">+</span> <span class="fu">I</span>(income<span class="sc">^</span><span class="dv">2</span>) <span class="sc">+</span> education, <span class="at">data =</span> Prestige)</span>
@@ -613,17 +615,13 @@ realizar un contraste empleando la función <code>anova()</code>:</p>
 ## 2     98 5308.0  1     730.8 13.492 0.0003904 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
-<p>Contrastar si el efecto de <code>income</code> es lineal mediante bootstrap residual, empleando
-como estadístico la proporción de incremento en la variabilidad residual con el
+<p>Contrastar si el efecto de <code>income</code> es lineal mediante bootstrap residual,
+empleando como estadístico la proporción de incremento en la variabilidad residual con el
 modelo reducido y remuestreando los residuos del modelo completo (sin reescalar).
 Aproximar el nivel crítico del contraste y el valor que tendría que superar el
 estadístico para rechazar <span class="math inline">\(H_0\)</span> con un nivel de significación <span class="math inline">\(\alpha = 0.05\)</span>.</p>
-<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb220-1"><a href="contrastes-semiparametricos.html#cb220-1" tabindex="-1"></a><span class="fu">library</span>(boot)</span>
-<span id="cb220-2"><a href="contrastes-semiparametricos.html#cb220-2" tabindex="-1"></a></span>
-<span id="cb220-3"><a href="contrastes-semiparametricos.html#cb220-3" tabindex="-1"></a><span class="co"># set.seed(DNI)</span></span>
-<span id="cb220-4"><a href="contrastes-semiparametricos.html#cb220-4" tabindex="-1"></a><span class="co"># ...</span></span></code></pre></div>
-
 </div>
+
 </div>
 <!-- </div> -->
 <div class="footnotes">

@@ -211,19 +211,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5" data-path="contrastes.html"><a href="contrastes.html"><i class="fa fa-check"></i><b>5</b> Aplicaciones del Bootstrap en contrastes de hipótesis</a>
 <ul>
 <li class="chapter" data-level="5.1" data-path="aproximación-del-p-valor-mediante-remuestreo.html"><a href="aproximación-del-p-valor-mediante-remuestreo.html"><i class="fa fa-check"></i><b>5.1</b> Aproximación del p-valor mediante remuestreo</a></li>
-<li class="chapter" data-level="5.2" data-path="contrastes-parametricos.html"><a href="contrastes-parametricos.html"><i class="fa fa-check"></i><b>5.2</b> Contrastes bootstrap paramétricos</a>
-<ul>
-<li class="chapter" data-level="5.2.1" data-path="contrastes-parametricos.html"><a href="contrastes-parametricos.html#ejemplo-contraste-de-kolmogorov-smirnov"><i class="fa fa-check"></i><b>5.2.1</b> Ejemplo: contraste de Kolmogorov-Smirnov</a></li>
-</ul></li>
-<li class="chapter" data-level="5.3" data-path="contrastes-de-permutaciones.html"><a href="contrastes-de-permutaciones.html"><i class="fa fa-check"></i><b>5.3</b> Contrastes de permutaciones</a>
-<ul>
-<li class="chapter" data-level="5.3.1" data-path="contrastes-de-permutaciones.html"><a href="contrastes-de-permutaciones.html#ejemplo-inferencia-sobre-el-coeficiente-de-correlaci%C3%B3n-lineal"><i class="fa fa-check"></i><b>5.3.1</b> Ejemplo: Inferencia sobre el coeficiente de correlación lineal</a></li>
-</ul></li>
-<li class="chapter" data-level="5.4" data-path="contrastes-semiparametricos.html"><a href="contrastes-semiparametricos.html"><i class="fa fa-check"></i><b>5.4</b> Contrastes bootstrap semiparamétricos</a>
-<ul>
-<li class="chapter" data-level="5.4.1" data-path="contrastes-semiparametricos.html"><a href="contrastes-semiparametricos.html#ejemplo-inferencia-sobre-modelos-de-regresi%C3%B3n"><i class="fa fa-check"></i><b>5.4.1</b> Ejemplo: Inferencia sobre modelos de regresión</a></li>
-<li class="chapter" data-level="5.4.2" data-path="contrastes-semiparametricos.html"><a href="contrastes-semiparametricos.html#ejercicio"><i class="fa fa-check"></i><b>5.4.2</b> Ejercicio</a></li>
-</ul></li>
+<li class="chapter" data-level="5.2" data-path="contrastes-parametricos.html"><a href="contrastes-parametricos.html"><i class="fa fa-check"></i><b>5.2</b> Contrastes bootstrap paramétricos</a></li>
+<li class="chapter" data-level="5.3" data-path="contrastes-de-permutaciones.html"><a href="contrastes-de-permutaciones.html"><i class="fa fa-check"></i><b>5.3</b> Contrastes de permutaciones</a></li>
+<li class="chapter" data-level="5.4" data-path="contrastes-semiparametricos.html"><a href="contrastes-semiparametricos.html"><i class="fa fa-check"></i><b>5.4</b> Contrastes bootstrap semiparamétricos</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="npden.html"><a href="npden.html"><i class="fa fa-check"></i><b>6</b> Bootstrap y estimación no paramétrica de la densidad</a>
 <ul>
@@ -408,17 +398,17 @@ de las observaciones).</p></li>
 <p>Utilizaremos como punto de partida el código empleado en la Sección <a href="modunif-boot-suav.html#modunif-boot-suav">3.3</a>.
 Considerando el conjunto de datos <code>precip</code> (que contiene el promedio de precipitación,
 en pulgadas de lluvia, de 70 ciudades de Estados Unidos).</p>
-<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb222-1"><a href="npden-r.html#cb222-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> precip</span>
-<span id="cb222-2"><a href="npden-r.html#cb222-2" tabindex="-1"></a>h <span class="ot">&lt;-</span> <span class="fu">bw.SJ</span>(x)</span>
-<span id="cb222-3"><a href="npden-r.html#cb222-3" tabindex="-1"></a>npden <span class="ot">&lt;-</span> <span class="fu">density</span>(x, <span class="at">bw =</span> h)</span>
-<span id="cb222-4"><a href="npden-r.html#cb222-4" tabindex="-1"></a><span class="co"># npden &lt;- density(x, bw = &quot;SJ&quot;)</span></span>
-<span id="cb222-5"><a href="npden-r.html#cb222-5" tabindex="-1"></a></span>
-<span id="cb222-6"><a href="npden-r.html#cb222-6" tabindex="-1"></a><span class="co"># plot(npden)</span></span>
-<span id="cb222-7"><a href="npden-r.html#cb222-7" tabindex="-1"></a><span class="fu">hist</span>(x, <span class="at">freq =</span> <span class="cn">FALSE</span>, <span class="at">main =</span> <span class="st">&quot;Kernel density estimation&quot;</span>,</span>
-<span id="cb222-8"><a href="npden-r.html#cb222-8" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="fu">paste</span>(<span class="st">&quot;Bandwidth =&quot;</span>, <span class="fu">formatC</span>(h)), <span class="at">lty =</span> <span class="dv">2</span>,</span>
-<span id="cb222-9"><a href="npden-r.html#cb222-9" tabindex="-1"></a>     <span class="at">border =</span> <span class="st">&quot;darkgray&quot;</span>, <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">80</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.04</span>))</span>
-<span id="cb222-10"><a href="npden-r.html#cb222-10" tabindex="-1"></a><span class="fu">lines</span>(npden, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
-<span id="cb222-11"><a href="npden-r.html#cb222-11" tabindex="-1"></a><span class="fu">rug</span>(x, <span class="at">col =</span> <span class="st">&quot;darkgray&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb221-1"><a href="npden-r.html#cb221-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> precip</span>
+<span id="cb221-2"><a href="npden-r.html#cb221-2" tabindex="-1"></a>h <span class="ot">&lt;-</span> <span class="fu">bw.SJ</span>(x)</span>
+<span id="cb221-3"><a href="npden-r.html#cb221-3" tabindex="-1"></a>npden <span class="ot">&lt;-</span> <span class="fu">density</span>(x, <span class="at">bw =</span> h)</span>
+<span id="cb221-4"><a href="npden-r.html#cb221-4" tabindex="-1"></a><span class="co"># npden &lt;- density(x, bw = &quot;SJ&quot;)</span></span>
+<span id="cb221-5"><a href="npden-r.html#cb221-5" tabindex="-1"></a></span>
+<span id="cb221-6"><a href="npden-r.html#cb221-6" tabindex="-1"></a><span class="co"># plot(npden)</span></span>
+<span id="cb221-7"><a href="npden-r.html#cb221-7" tabindex="-1"></a><span class="fu">hist</span>(x, <span class="at">freq =</span> <span class="cn">FALSE</span>, <span class="at">main =</span> <span class="st">&quot;Kernel density estimation&quot;</span>,</span>
+<span id="cb221-8"><a href="npden-r.html#cb221-8" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="fu">paste</span>(<span class="st">&quot;Bandwidth =&quot;</span>, <span class="fu">formatC</span>(h)), <span class="at">lty =</span> <span class="dv">2</span>,</span>
+<span id="cb221-9"><a href="npden-r.html#cb221-9" tabindex="-1"></a>     <span class="at">border =</span> <span class="st">&quot;darkgray&quot;</span>, <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">80</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.04</span>))</span>
+<span id="cb221-10"><a href="npden-r.html#cb221-10" tabindex="-1"></a><span class="fu">lines</span>(npden, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb221-11"><a href="npden-r.html#cb221-11" tabindex="-1"></a><span class="fu">rug</span>(x, <span class="at">col =</span> <span class="st">&quot;darkgray&quot;</span>)</span></code></pre></div>
 <p><img src="06-npden_files/figure-html/unnamed-chunk-2-1.png" alt="" width="70%" style="display: block; margin: auto;" /></p>
 <p>Alternativamente podríamos emplear implementaciones en otros paquetes de <code>R</code>.
 Uno de los más empleados es <code>ks</code> (Duong, 2019), que admite estimación

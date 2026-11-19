@@ -211,19 +211,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5" data-path="contrastes.html"><a href="contrastes.html"><i class="fa fa-check"></i><b>5</b> Aplicaciones del Bootstrap en contrastes de hipótesis</a>
 <ul>
 <li class="chapter" data-level="5.1" data-path="aproximación-del-p-valor-mediante-remuestreo.html"><a href="aproximación-del-p-valor-mediante-remuestreo.html"><i class="fa fa-check"></i><b>5.1</b> Aproximación del p-valor mediante remuestreo</a></li>
-<li class="chapter" data-level="5.2" data-path="contrastes-parametricos.html"><a href="contrastes-parametricos.html"><i class="fa fa-check"></i><b>5.2</b> Contrastes bootstrap paramétricos</a>
-<ul>
-<li class="chapter" data-level="5.2.1" data-path="contrastes-parametricos.html"><a href="contrastes-parametricos.html#ejemplo-contraste-de-kolmogorov-smirnov"><i class="fa fa-check"></i><b>5.2.1</b> Ejemplo: contraste de Kolmogorov-Smirnov</a></li>
-</ul></li>
-<li class="chapter" data-level="5.3" data-path="contrastes-de-permutaciones.html"><a href="contrastes-de-permutaciones.html"><i class="fa fa-check"></i><b>5.3</b> Contrastes de permutaciones</a>
-<ul>
-<li class="chapter" data-level="5.3.1" data-path="contrastes-de-permutaciones.html"><a href="contrastes-de-permutaciones.html#ejemplo-inferencia-sobre-el-coeficiente-de-correlaci%C3%B3n-lineal"><i class="fa fa-check"></i><b>5.3.1</b> Ejemplo: Inferencia sobre el coeficiente de correlación lineal</a></li>
-</ul></li>
-<li class="chapter" data-level="5.4" data-path="contrastes-semiparametricos.html"><a href="contrastes-semiparametricos.html"><i class="fa fa-check"></i><b>5.4</b> Contrastes bootstrap semiparamétricos</a>
-<ul>
-<li class="chapter" data-level="5.4.1" data-path="contrastes-semiparametricos.html"><a href="contrastes-semiparametricos.html#ejemplo-inferencia-sobre-modelos-de-regresi%C3%B3n"><i class="fa fa-check"></i><b>5.4.1</b> Ejemplo: Inferencia sobre modelos de regresión</a></li>
-<li class="chapter" data-level="5.4.2" data-path="contrastes-semiparametricos.html"><a href="contrastes-semiparametricos.html#ejercicio"><i class="fa fa-check"></i><b>5.4.2</b> Ejercicio</a></li>
-</ul></li>
+<li class="chapter" data-level="5.2" data-path="contrastes-parametricos.html"><a href="contrastes-parametricos.html"><i class="fa fa-check"></i><b>5.2</b> Contrastes bootstrap paramétricos</a></li>
+<li class="chapter" data-level="5.3" data-path="contrastes-de-permutaciones.html"><a href="contrastes-de-permutaciones.html"><i class="fa fa-check"></i><b>5.3</b> Contrastes de permutaciones</a></li>
+<li class="chapter" data-level="5.4" data-path="contrastes-semiparametricos.html"><a href="contrastes-semiparametricos.html"><i class="fa fa-check"></i><b>5.4</b> Contrastes bootstrap semiparamétricos</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="npden.html"><a href="npden.html"><i class="fa fa-check"></i><b>6</b> Bootstrap y estimación no paramétrica de la densidad</a>
 <ul>
@@ -386,8 +376,8 @@ bootstrap paramétrico para obtener las remuestras bootstrap de los datos
 Siempre hay que tener en cuenta que las réplicas bootstrap del estadístico se
 deberían obtener empleando el mismo procedimiento utilizado en la muestra
 (p.e. reestimando los parámetros si es el caso).</p>
-<div id="ejemplo-contraste-de-kolmogorov-smirnov" class="section level3 hasAnchor" number="5.2.1">
-<h3><span class="header-section-number">5.2.1</span> Ejemplo: contraste de Kolmogorov-Smirnov<a href="contrastes-parametricos.html#ejemplo-contraste-de-kolmogorov-smirnov" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="example">
+<p><span id="exm:ks-test-sim-exp" class="example"><strong>Ejemplo 5.1  (Contraste de Kolmogorov-Smirnov) </strong></span><br></p>
 <p>Se trata de un contraste de bondad de ajuste (similar a la prueba de
 Cramer-von Mises o a la de Anderson-Darling, implementadas en el paquete
 <code>goftest</code> de R, que son en principio mejores).
@@ -453,23 +443,28 @@ tamaño del contraste. Alternativamente podríamos representar su función de
 distribución empírica, que se correspondería con la proporción de rechazos
 para los distintos niveles de significación.</p>
 <div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="contrastes-parametricos.html#cb173-1" tabindex="-1"></a>old.par <span class="ot">&lt;-</span> <span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
-<span id="cb173-2"><a href="contrastes-parametricos.html#cb173-2" tabindex="-1"></a><span class="co"># Histograma</span></span>
-<span id="cb173-3"><a href="contrastes-parametricos.html#cb173-3" tabindex="-1"></a><span class="fu">hist</span>(pvalor.ks, <span class="at">freq=</span><span class="cn">FALSE</span>, <span class="at">main =</span> <span class="st">&quot;p-valor del test de KS&quot;</span>)</span>
-<span id="cb173-4"><a href="contrastes-parametricos.html#cb173-4" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h=</span><span class="dv">1</span>, <span class="at">lty=</span><span class="dv">2</span>)   <span class="co"># curve(dunif(x,0,1), add=TRUE)</span></span>
-<span id="cb173-5"><a href="contrastes-parametricos.html#cb173-5" tabindex="-1"></a><span class="co"># Distribución empírica</span></span>
-<span id="cb173-6"><a href="contrastes-parametricos.html#cb173-6" tabindex="-1"></a><span class="fu">curve</span>(<span class="fu">ecdf</span>(pvalor.ks)(x), <span class="at">type =</span> <span class="st">&quot;s&quot;</span>, <span class="at">lwd =</span> <span class="dv">2</span>, </span>
-<span id="cb173-7"><a href="contrastes-parametricos.html#cb173-7" tabindex="-1"></a>      <span class="at">main =</span> <span class="st">&#39;Tamaño del contraste KS&#39;</span>, <span class="at">ylab =</span> <span class="st">&#39;Proporción de rechazos&#39;</span>, </span>
-<span id="cb173-8"><a href="contrastes-parametricos.html#cb173-8" tabindex="-1"></a>      <span class="at">xlab =</span> <span class="st">&#39;Nivel de significación&#39;</span>)</span>
+<span id="cb173-2"><a href="contrastes-parametricos.html#cb173-2" tabindex="-1"></a><span class="co"># Test de KS</span></span>
+<span id="cb173-3"><a href="contrastes-parametricos.html#cb173-3" tabindex="-1"></a>  <span class="co"># Histograma</span></span>
+<span id="cb173-4"><a href="contrastes-parametricos.html#cb173-4" tabindex="-1"></a><span class="fu">hist</span>(pvalor.ks, <span class="at">freq=</span><span class="cn">FALSE</span>, <span class="at">main =</span> <span class="st">&quot;&quot;</span>)</span>
+<span id="cb173-5"><a href="contrastes-parametricos.html#cb173-5" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h=</span><span class="dv">1</span>, <span class="at">lty=</span><span class="dv">2</span>)   <span class="co"># curve(dunif(x,0,1), add=TRUE)</span></span>
+<span id="cb173-6"><a href="contrastes-parametricos.html#cb173-6" tabindex="-1"></a>  <span class="co"># Distribución empírica</span></span>
+<span id="cb173-7"><a href="contrastes-parametricos.html#cb173-7" tabindex="-1"></a><span class="fu">curve</span>(<span class="fu">ecdf</span>(pvalor.ks)(x), <span class="at">type =</span> <span class="st">&quot;s&quot;</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">main =</span> <span class="st">&#39;&#39;</span>, </span>
+<span id="cb173-8"><a href="contrastes-parametricos.html#cb173-8" tabindex="-1"></a>      <span class="at">ylab =</span> <span class="st">&#39;Proporción de rechazos&#39;</span>, <span class="at">xlab =</span> <span class="st">&#39;Nivel de significación&#39;</span>)</span>
 <span id="cb173-9"><a href="contrastes-parametricos.html#cb173-9" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">a=</span><span class="dv">0</span>, <span class="at">b=</span><span class="dv">1</span>, <span class="at">lty=</span><span class="dv">2</span>)   <span class="co"># curve(punif(x, 0, 1), add = TRUE)</span></span>
-<span id="cb173-10"><a href="contrastes-parametricos.html#cb173-10" tabindex="-1"></a><span class="co"># Histograma</span></span>
-<span id="cb173-11"><a href="contrastes-parametricos.html#cb173-11" tabindex="-1"></a><span class="fu">hist</span>(pvalor.lil, <span class="at">freq=</span><span class="cn">FALSE</span>, <span class="at">main =</span> <span class="st">&quot;p-valor del test de Lilliefors&quot;</span>)</span>
-<span id="cb173-12"><a href="contrastes-parametricos.html#cb173-12" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h=</span><span class="dv">1</span>, <span class="at">lty=</span><span class="dv">2</span>)   <span class="co"># curve(dunif(x,0,1), add=TRUE)</span></span>
-<span id="cb173-13"><a href="contrastes-parametricos.html#cb173-13" tabindex="-1"></a><span class="co"># Distribución empírica</span></span>
-<span id="cb173-14"><a href="contrastes-parametricos.html#cb173-14" tabindex="-1"></a><span class="fu">curve</span>(<span class="fu">ecdf</span>(pvalor.lil)(x), <span class="at">type =</span> <span class="st">&quot;s&quot;</span>, <span class="at">lwd =</span> <span class="dv">2</span>, </span>
-<span id="cb173-15"><a href="contrastes-parametricos.html#cb173-15" tabindex="-1"></a>      <span class="at">main =</span> <span class="st">&#39;Tamaño del contraste de Lilliefors&#39;</span>, <span class="at">ylab =</span> <span class="st">&#39;Proporción de rechazos&#39;</span>, </span>
-<span id="cb173-16"><a href="contrastes-parametricos.html#cb173-16" tabindex="-1"></a>      <span class="at">xlab =</span> <span class="st">&#39;Nivel de significación&#39;</span>)</span>
+<span id="cb173-10"><a href="contrastes-parametricos.html#cb173-10" tabindex="-1"></a><span class="co"># Test de Lilliefors</span></span>
+<span id="cb173-11"><a href="contrastes-parametricos.html#cb173-11" tabindex="-1"></a>  <span class="co"># Histograma</span></span>
+<span id="cb173-12"><a href="contrastes-parametricos.html#cb173-12" tabindex="-1"></a><span class="fu">hist</span>(pvalor.lil, <span class="at">freq=</span><span class="cn">FALSE</span>, <span class="at">main =</span> <span class="st">&quot;&quot;</span>)</span>
+<span id="cb173-13"><a href="contrastes-parametricos.html#cb173-13" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h=</span><span class="dv">1</span>, <span class="at">lty=</span><span class="dv">2</span>)   <span class="co"># curve(dunif(x,0,1), add=TRUE)</span></span>
+<span id="cb173-14"><a href="contrastes-parametricos.html#cb173-14" tabindex="-1"></a>  <span class="co"># Distribución empírica</span></span>
+<span id="cb173-15"><a href="contrastes-parametricos.html#cb173-15" tabindex="-1"></a><span class="fu">curve</span>(<span class="fu">ecdf</span>(pvalor.lil)(x), <span class="at">type =</span> <span class="st">&quot;s&quot;</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">main =</span> <span class="st">&#39;&#39;</span>, </span>
+<span id="cb173-16"><a href="contrastes-parametricos.html#cb173-16" tabindex="-1"></a>      <span class="at">ylab =</span> <span class="st">&#39;Proporción de rechazos&#39;</span>,  <span class="at">xlab =</span> <span class="st">&#39;Nivel de significación&#39;</span>)</span>
 <span id="cb173-17"><a href="contrastes-parametricos.html#cb173-17" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">a=</span><span class="dv">0</span>, <span class="at">b=</span><span class="dv">1</span>, <span class="at">lty=</span><span class="dv">2</span>)   <span class="co"># curve(punif(x, 0, 1), add = TRUE)</span></span></code></pre></div>
-<p><img src="05-contrastes_files/figure-html/unnamed-chunk-4-1.png" alt="" width="70%" style="display: block; margin: auto;" /></p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:ks-lil-plot"></span>
+<img src="05-contrastes_files/figure-html/ks-lil-plot-1.png" alt="Distribución del p-valor (izquierda) y tamaño (proporción de rechazos bajo la hipótesis nula; derecha), aproximados por Monte Carlo, para el contraste de Kolmogorov-Smirnov (arriba) y el de Lilliefors (abajo)." width="90%" />
+<p class="caption">
+Figura 5.1: Distribución del p-valor (izquierda) y tamaño (proporción de rechazos bajo la hipótesis nula; derecha), aproximados por Monte Carlo, para el contraste de Kolmogorov-Smirnov (arriba) y el de Lilliefors (abajo).
+</p>
+</div>
 <div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb174-1"><a href="contrastes-parametricos.html#cb174-1" tabindex="-1"></a><span class="fu">par</span>(old.par)</span></code></pre></div>
 <p>En el caso del contraste de Kolmogorov-Smirnov (KS) se observa que el <span class="math inline">\(p\)</span>-valor
 tiende a tomar valores grandes y por tanto se rechaza la hipótesis nula
@@ -526,24 +521,38 @@ y 200 réplicas bootstrap (para disminuir el tiempo de computación).</p>
 <span id="cb176-13"><a href="contrastes-parametricos.html#cb176-13" tabindex="-1"></a>}</span>
 <span id="cb176-14"><a href="contrastes-parametricos.html#cb176-14" tabindex="-1"></a><span class="co"># Generar gráficos</span></span>
 <span id="cb176-15"><a href="contrastes-parametricos.html#cb176-15" tabindex="-1"></a>old.par <span class="ot">&lt;-</span> <span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
-<span id="cb176-16"><a href="contrastes-parametricos.html#cb176-16" tabindex="-1"></a><span class="co"># Histograma</span></span>
-<span id="cb176-17"><a href="contrastes-parametricos.html#cb176-17" tabindex="-1"></a><span class="fu">hist</span>(pvalor.ks, <span class="at">freq=</span><span class="cn">FALSE</span>, <span class="at">main =</span> <span class="st">&quot;p-valor del test KS&quot;</span>)</span>
-<span id="cb176-18"><a href="contrastes-parametricos.html#cb176-18" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h=</span><span class="dv">1</span>, <span class="at">lty=</span><span class="dv">2</span>)   <span class="co"># curve(dunif(x,0,1), add=TRUE)</span></span>
-<span id="cb176-19"><a href="contrastes-parametricos.html#cb176-19" tabindex="-1"></a><span class="co"># Distribución empírica</span></span>
-<span id="cb176-20"><a href="contrastes-parametricos.html#cb176-20" tabindex="-1"></a><span class="fu">curve</span>(<span class="fu">ecdf</span>(pvalor.ks)(x), <span class="at">type =</span> <span class="st">&quot;s&quot;</span>, <span class="at">lwd =</span> <span class="dv">2</span>, </span>
-<span id="cb176-21"><a href="contrastes-parametricos.html#cb176-21" tabindex="-1"></a>      <span class="at">main =</span> <span class="st">&#39;Tamaño del contraste KS&#39;</span>, <span class="at">ylab =</span> <span class="st">&#39;Proporción de rechazos&#39;</span>, </span>
-<span id="cb176-22"><a href="contrastes-parametricos.html#cb176-22" tabindex="-1"></a>      <span class="at">xlab =</span> <span class="st">&#39;Nivel de significación&#39;</span>)</span>
+<span id="cb176-16"><a href="contrastes-parametricos.html#cb176-16" tabindex="-1"></a><span class="co"># Test de KS</span></span>
+<span id="cb176-17"><a href="contrastes-parametricos.html#cb176-17" tabindex="-1"></a>  <span class="co"># Histograma</span></span>
+<span id="cb176-18"><a href="contrastes-parametricos.html#cb176-18" tabindex="-1"></a><span class="fu">hist</span>(pvalor.ks, <span class="at">freq=</span><span class="cn">FALSE</span>, <span class="at">main =</span> <span class="st">&quot;&quot;</span>)</span>
+<span id="cb176-19"><a href="contrastes-parametricos.html#cb176-19" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h=</span><span class="dv">1</span>, <span class="at">lty=</span><span class="dv">2</span>)   <span class="co"># curve(dunif(x,0,1), add=TRUE)</span></span>
+<span id="cb176-20"><a href="contrastes-parametricos.html#cb176-20" tabindex="-1"></a>  <span class="co"># Distribución empírica</span></span>
+<span id="cb176-21"><a href="contrastes-parametricos.html#cb176-21" tabindex="-1"></a><span class="fu">curve</span>(<span class="fu">ecdf</span>(pvalor.ks)(x), <span class="at">type =</span> <span class="st">&quot;s&quot;</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">main =</span> <span class="st">&#39;&#39;</span>, </span>
+<span id="cb176-22"><a href="contrastes-parametricos.html#cb176-22" tabindex="-1"></a>      <span class="at">ylab =</span> <span class="st">&#39;Proporción de rechazos&#39;</span>, <span class="at">xlab =</span> <span class="st">&#39;Nivel de significación&#39;</span>)</span>
 <span id="cb176-23"><a href="contrastes-parametricos.html#cb176-23" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">a=</span><span class="dv">0</span>, <span class="at">b=</span><span class="dv">1</span>, <span class="at">lty=</span><span class="dv">2</span>)   <span class="co"># curve(punif(x, 0, 1), add = TRUE)</span></span>
-<span id="cb176-24"><a href="contrastes-parametricos.html#cb176-24" tabindex="-1"></a><span class="co"># Histograma</span></span>
-<span id="cb176-25"><a href="contrastes-parametricos.html#cb176-25" tabindex="-1"></a><span class="fu">hist</span>(pvalor.ks.boot, <span class="at">freq=</span><span class="cn">FALSE</span>, <span class="at">main =</span> <span class="st">&quot;p-valor del test KS-boot&quot;</span>)</span>
-<span id="cb176-26"><a href="contrastes-parametricos.html#cb176-26" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h=</span><span class="dv">1</span>, <span class="at">lty=</span><span class="dv">2</span>)   <span class="co"># curve(dunif(x,0,1), add=TRUE)</span></span>
-<span id="cb176-27"><a href="contrastes-parametricos.html#cb176-27" tabindex="-1"></a><span class="co"># Distribución empírica</span></span>
-<span id="cb176-28"><a href="contrastes-parametricos.html#cb176-28" tabindex="-1"></a><span class="fu">curve</span>(<span class="fu">ecdf</span>(pvalor.ks.boot)(x), <span class="at">type =</span> <span class="st">&quot;s&quot;</span>, <span class="at">lwd =</span> <span class="dv">2</span>, </span>
-<span id="cb176-29"><a href="contrastes-parametricos.html#cb176-29" tabindex="-1"></a>      <span class="at">main =</span> <span class="st">&#39;Tamaño del contraste KS-boot&#39;</span>, <span class="at">ylab =</span> <span class="st">&#39;Proporción de rechazos&#39;</span>, </span>
-<span id="cb176-30"><a href="contrastes-parametricos.html#cb176-30" tabindex="-1"></a>      <span class="at">xlab =</span> <span class="st">&#39;Nivel de significación&#39;</span>)</span>
+<span id="cb176-24"><a href="contrastes-parametricos.html#cb176-24" tabindex="-1"></a><span class="co"># Contraste bootstrap paramétrico</span></span>
+<span id="cb176-25"><a href="contrastes-parametricos.html#cb176-25" tabindex="-1"></a>  <span class="co"># Histograma</span></span>
+<span id="cb176-26"><a href="contrastes-parametricos.html#cb176-26" tabindex="-1"></a><span class="fu">hist</span>(pvalor.ks.boot, <span class="at">freq=</span><span class="cn">FALSE</span>, <span class="at">main =</span> <span class="st">&quot;&quot;</span>)</span>
+<span id="cb176-27"><a href="contrastes-parametricos.html#cb176-27" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h=</span><span class="dv">1</span>, <span class="at">lty=</span><span class="dv">2</span>)   <span class="co"># curve(dunif(x,0,1), add=TRUE)</span></span>
+<span id="cb176-28"><a href="contrastes-parametricos.html#cb176-28" tabindex="-1"></a>  <span class="co"># Distribución empírica</span></span>
+<span id="cb176-29"><a href="contrastes-parametricos.html#cb176-29" tabindex="-1"></a><span class="fu">curve</span>(<span class="fu">ecdf</span>(pvalor.ks.boot)(x), <span class="at">type =</span> <span class="st">&quot;s&quot;</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">main =</span> <span class="st">&#39;&#39;</span>, </span>
+<span id="cb176-30"><a href="contrastes-parametricos.html#cb176-30" tabindex="-1"></a>      <span class="at">ylab =</span> <span class="st">&#39;Proporción de rechazos&#39;</span>,  <span class="at">xlab =</span> <span class="st">&#39;Nivel de significación&#39;</span>)</span>
 <span id="cb176-31"><a href="contrastes-parametricos.html#cb176-31" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">a=</span><span class="dv">0</span>, <span class="at">b=</span><span class="dv">1</span>, <span class="at">lty=</span><span class="dv">2</span>)   <span class="co"># curve(punif(x, 0, 1), add = TRUE)</span></span></code></pre></div>
-<p><img src="05-contrastes_files/figure-html/unnamed-chunk-6-1.png" alt="" width="70%" style="display: block; margin: auto;" /></p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:ks-boot-plot"></span>
+<img src="05-contrastes_files/figure-html/ks-boot-plot-1.png" alt="Distribución del p-valor (izquierda) y tamaño (proporción de rechazos bajo la hipótesis nula; derecha), aproximados por  Monte Carlo, para el contraste de Kolmogorov-Smirnov (arriba) y el correspondiente contraste boostrap paramétrico (abajo)." width="90%" />
+<p class="caption">
+Figura 5.2: Distribución del p-valor (izquierda) y tamaño (proporción de rechazos bajo la hipótesis nula; derecha), aproximados por Monte Carlo, para el contraste de Kolmogorov-Smirnov (arriba) y el correspondiente contraste boostrap paramétrico (abajo).
+</p>
+</div>
 <div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="contrastes-parametricos.html#cb177-1" tabindex="-1"></a><span class="fu">par</span>(old.par)</span></code></pre></div>
+<p>El estadístico de Kolmogorov-Smirnov <code>Dn = max(c(DMinus, DPlus))</code> tiene ventajas desde el
+punto de vista teórico, pero puede no ser muy potente para detectar diferencias entre la
+distribución bajo la hipótesis nula y la distribución de los datos.
+La ventaja de la aproximación por simulación es que no estamos atados a resultados teóricos
+y podemos emplear el estadístico que se considere oportuno
+(la principal desventaja es el tiempo de computación).
+Por ejemplo, podríamos pensar en utilizar como estadístico la suma de los errores en
+valor absoluto del correspondiente gráfico PP, y solo habría que cambiar el estadístico
+<code>Dn</code> en la función <code>ks.exp.sim</code> por <code>Dn = sum(abs( (1:n - 0.5)/n -  pexp(sort(x), rate=rate) ))</code>.</p>
 </div>
 </div>
             </section>

@@ -19,18 +19,18 @@ Para realizar el contraste se emplea un estadístico $D\left( X_1,\ldots ,X_n;H_
 que mide la discrepancia entre la muestra observada y la hipótesis nula, 
 con distribución conocida (o que se puede aproximar) bajo $H_0$.
 Por ejemplo, en el caso de una hipótesis nula paramétrica 
-es habitual emplear un estadístico estudentizado de la forma:
+es habitual emplear un estadístico studentizado de la forma:
 $$D\left( X_1,\ldots ,X_n;H_0\right) =
 \frac{\hat{\theta}-\theta _0}{\hat\sigma_{\hat\theta}}$$
 (o algún tipo de razón de verosimilitudes).
 
-La regla de decisión depende de la hipótesis altervativa y 
+La regla de decisión depende de la hipótesis alternativa y 
 del riesgo asumible al rechazar $H_0$ siendo cierta:
 $$P\left( \text{rechazar }H_0\mid H_0\text{ cierta}\right) =\alpha,$$ 
 denominado nivel de significación. 
 Se determina una región de rechazo (RR) a partir de los valores que tiende 
 a tomar el estadístico cuando $H_1$ es cierta, 
-de forma que^[Aunque cuando la hipotesis nula es compuesta:
+de forma que^[Aunque cuando la hipótesis nula es compuesta:
 $P\left( D\in RR \mid H_0\text{ cierta}\right) \leq \alpha$.]:
 $$P\left( D\in RR \mid H_0\text{ cierta}\right) =\alpha.$$
 Se rechaza la hipótesis nula cuando el valor observado del 
@@ -38,7 +38,7 @@ estadístico $\hat{d}=D\left( x_1,\ldots ,x_n;H_0\right)$ pertenece
 a la región de rechazo.
 
 Para medir el nivel de evidencia en contra de $H_0$ se emplea el
-$p$-valor del contraste (también denominado valor crítico o 
+$p$-valor del contraste (también denominado nivel crítico o 
 tamaño del contraste), el menor valor del nivel 
 de significación para el que se rechaza $H_0$ 
 (que se puede interpretar también como la 
@@ -116,7 +116,9 @@ deberían obtener empleando el mismo procedimiento utilizado en la muestra
 (p.e. reestimando los parámetros si es el caso).
 
 
-### Ejemplo: contraste de Kolmogorov-Smirnov
+
+::: {.example #ks-test-sim-exp name="Contraste de Kolmogorov-Smirnov"}
+<br>
 
 Se trata de un contraste de bondad de ajuste (similar a la prueba de 
 Cramer-von Mises o a la de Anderson-Darling, implementadas en el paquete 
@@ -198,27 +200,32 @@ para los distintos niveles de significación.
 
 ``` r
 old.par <- par(mfrow=c(2, 2))
-# Histograma
-hist(pvalor.ks, freq=FALSE, main = "p-valor del test de KS")
+# Test de KS
+  # Histograma
+hist(pvalor.ks, freq=FALSE, main = "")
 abline(h=1, lty=2)   # curve(dunif(x,0,1), add=TRUE)
-# Distribución empírica
-curve(ecdf(pvalor.ks)(x), type = "s", lwd = 2, 
-      main = 'Tamaño del contraste KS', ylab = 'Proporción de rechazos', 
-      xlab = 'Nivel de significación')
+  # Distribución empírica
+curve(ecdf(pvalor.ks)(x), type = "s", lwd = 2, main = '', 
+      ylab = 'Proporción de rechazos', xlab = 'Nivel de significación')
 abline(a=0, b=1, lty=2)   # curve(punif(x, 0, 1), add = TRUE)
-# Histograma
-hist(pvalor.lil, freq=FALSE, main = "p-valor del test de Lilliefors")
+# Test de Lilliefors
+  # Histograma
+hist(pvalor.lil, freq=FALSE, main = "")
 abline(h=1, lty=2)   # curve(dunif(x,0,1), add=TRUE)
-# Distribución empírica
-curve(ecdf(pvalor.lil)(x), type = "s", lwd = 2, 
-      main = 'Tamaño del contraste de Lilliefors', ylab = 'Proporción de rechazos', 
-      xlab = 'Nivel de significación')
+  # Distribución empírica
+curve(ecdf(pvalor.lil)(x), type = "s", lwd = 2, main = '', 
+      ylab = 'Proporción de rechazos',  xlab = 'Nivel de significación')
 abline(a=0, b=1, lty=2)   # curve(punif(x, 0, 1), add = TRUE)
 ```
 
+\begin{figure}[!htb]
 
+{\centering \includegraphics[width=0.9\linewidth]{05-contrastes_files/figure-latex/ks-lil-plot-1} 
 
-\begin{center}\includegraphics[width=0.7\linewidth]{05-contrastes_files/figure-latex/unnamed-chunk-4-1} \end{center}
+}
+
+\caption{Distribución del p-valor (izquierda) y tamaño (proporción de rechazos bajo la hipótesis nula; derecha), aproximados por Monte Carlo, para el contraste de Kolmogorov-Smirnov (arriba) y el de Lilliefors (abajo).}(\#fig:ks-lil-plot)
+\end{figure}
 
 ``` r
 par(old.par)
@@ -289,31 +296,49 @@ for(isim in 1:nsim) {
 }
 # Generar gráficos
 old.par <- par(mfrow=c(2, 2))
-# Histograma
-hist(pvalor.ks, freq=FALSE, main = "p-valor del test KS")
+# Test de KS
+  # Histograma
+hist(pvalor.ks, freq=FALSE, main = "")
 abline(h=1, lty=2)   # curve(dunif(x,0,1), add=TRUE)
-# Distribución empírica
-curve(ecdf(pvalor.ks)(x), type = "s", lwd = 2, 
-      main = 'Tamaño del contraste KS', ylab = 'Proporción de rechazos', 
-      xlab = 'Nivel de significación')
+  # Distribución empírica
+curve(ecdf(pvalor.ks)(x), type = "s", lwd = 2, main = '', 
+      ylab = 'Proporción de rechazos', xlab = 'Nivel de significación')
 abline(a=0, b=1, lty=2)   # curve(punif(x, 0, 1), add = TRUE)
-# Histograma
-hist(pvalor.ks.boot, freq=FALSE, main = "p-valor del test KS-boot")
+# Contraste bootstrap paramétrico
+  # Histograma
+hist(pvalor.ks.boot, freq=FALSE, main = "")
 abline(h=1, lty=2)   # curve(dunif(x,0,1), add=TRUE)
-# Distribución empírica
-curve(ecdf(pvalor.ks.boot)(x), type = "s", lwd = 2, 
-      main = 'Tamaño del contraste KS-boot', ylab = 'Proporción de rechazos', 
-      xlab = 'Nivel de significación')
+  # Distribución empírica
+curve(ecdf(pvalor.ks.boot)(x), type = "s", lwd = 2, main = '', 
+      ylab = 'Proporción de rechazos',  xlab = 'Nivel de significación')
 abline(a=0, b=1, lty=2)   # curve(punif(x, 0, 1), add = TRUE)
 ```
 
+\begin{figure}[!htb]
 
+{\centering \includegraphics[width=0.9\linewidth]{05-contrastes_files/figure-latex/ks-boot-plot-1} 
 
-\begin{center}\includegraphics[width=0.7\linewidth]{05-contrastes_files/figure-latex/unnamed-chunk-6-1} \end{center}
+}
+
+\caption{Distribución del p-valor (izquierda) y tamaño (proporción de rechazos bajo la hipótesis nula; derecha), aproximados por  Monte Carlo, para el contraste de Kolmogorov-Smirnov (arriba) y el correspondiente contraste boostrap paramétrico (abajo).}(\#fig:ks-boot-plot)
+\end{figure}
 
 ``` r
 par(old.par)
 ```
+
+El estadístico de Kolmogorov-Smirnov `Dn = max(c(DMinus, DPlus))` tiene ventajas desde el
+punto de vista teórico, pero puede no ser muy potente para detectar diferencias entre la
+distribución bajo la hipótesis nula y la distribución de los datos. 
+La ventaja de la aproximación por simulación es que no estamos atados a resultados teóricos
+y podemos emplear el estadístico que se considere oportuno 
+(la principal desventaja es el tiempo de computación). 
+Por ejemplo, podríamos pensar en utilizar como estadístico la suma de los errores en
+valor absoluto del correspondiente gráfico PP, y solo habría que cambiar el estadístico 
+`Dn` en la función `ks.exp.sim` por `Dn = sum(abs( (1:n - 0.5)/n -  pexp(sort(x), rate=rate) ))`.
+
+:::
+
 
 ## Contrastes de permutaciones
 
@@ -342,8 +367,8 @@ el parámetro `sim = "permutation"` al llamar a la función `boot()` (el argumen
 Puede ser también de interés el paquete [`coin`](https://cran.r-project.org/web/packages/coin/index.html), 
 que implementa muchos contrastes de este tipo.
 
-
-### Ejemplo: Inferencia sobre el coeficiente de correlación lineal
+::: {.example #perm-test-cor name="Inferencia sobre el coeficiente de correlación lineal"}
+<br>
 
 En esta sección consideraremos como ejemplo el conjunto de datos `dogs` 
 del paquete `boot`, que contiene observaciones sobre el consumo de 
@@ -407,7 +432,7 @@ Esta función realiza el contraste $H_0: \rho = 0$ empleando el estadístico:
 $$\frac{r\sqrt{n - 2}}{\sqrt{1 - r^2}} \underset{aprox}{\sim } t_{n-2},$$
 <!-- \mathcal{t}_{n-2} error en LaTeX-->
 bajo la hipótesis nula de que la verdadera correlación es cero.
-Alternativemente se pueden realizar contrastes unilaterales estableciendo
+Alternativamente se pueden realizar contrastes unilaterales estableciendo
 el parámetro `alternative` igual a `"less"` o `"greater"`.
 Por ejemplo, para contrastar $H_0: \rho \leq 0$ podríamos emplear:
 
@@ -447,13 +472,18 @@ observado del estadístico del contraste (almacenado en `res.boot$t0`)
 para aproximar el $p$-valor:
 
 ``` r
-hist(res.boot$t, freq = FALSE)
+hist(res.boot$t, freq = FALSE, main ="")
 abline(v = res.boot$t0, lty = 2)
 ```
 
+\begin{figure}[!htb]
 
+{\centering \includegraphics[width=0.7\linewidth]{05-contrastes_files/figure-latex/perm-test-cor-1} 
 
-\begin{center}\includegraphics[width=0.7\linewidth]{05-contrastes_files/figure-latex/unnamed-chunk-12-1} \end{center}
+}
+
+\caption{Distribución del estadístico del contraste bajo la hipótesis nula aproximada mediante permutación de las observaciones.}(\#fig:perm-test-cor)
+\end{figure}
 
 Por ejemplo, para el contraste unilateral $H_0: \rho \leq 0$ 
 (`alternative = "greater"`), obtendríamos:
@@ -481,6 +511,7 @@ pval
 ## [1] 0.018
 ```
 
+:::
 
 ## Contrastes bootstrap semiparamétricos {#contrastes-semiparametricos}
 
@@ -491,19 +522,13 @@ Típicamente se incluye el error en la componente no paramétrica, y podríamos 
 el bootstrap residual (también denominado semiparamétrico o basado en modelos) 
 descrito en la Sección \@ref(boot-residual).
 
-En esta sección consideraremos como ejemplo el conjunto de datos `Prestige` 
-del paquete `carData`, considerando como variable respuesta `prestige` 
-(puntuación de ocupaciones obtenidas a partir de una encuesta) 
-y como variables explicativas: `income` (media de ingresos en la ocupación) 
-y `education` (media de los años de educación).
+En esta sección nos centraremos en inferencia sobre modelos de regresión lineales (aunque el procedimiento sería análogo en el caso de modelos más generales), empleando como ejemplo el conjunto de datos `Prestige` del paquete `carData`, considerando como variable respuesta `prestige` (puntuación de ocupaciones obtenidas a partir de una encuesta) y como variables explicativas: `income` (media de ingresos en la ocupación) y `education` (media de los años de educación).
 
 
 ``` r
 data(Prestige, package = "carData")
 # ?Prestige
 ```
-
-### Ejemplo: Inferencia sobre modelos de regresión
 
 En la mayoría de los casos nos interesa contrastar un **modelo reducido**
 frente a un **modelo completo** (que generaliza el modelo reducido).
@@ -654,13 +679,18 @@ boot.mod
 ```
 
 ``` r
-hist(boot.mod$t, breaks = "FD", freq = FALSE)
+hist(boot.mod$t, freq = FALSE, breaks = "FD", main = "")
 curve(pf(x, df, dfr, lower.tail = FALSE), lty = 2, add = TRUE)
 ```
 
+\begin{figure}[!htb]
 
+{\centering \includegraphics[width=0.7\linewidth]{05-contrastes_files/figure-latex/semipar-test-plot-1} 
 
-\begin{center}\includegraphics[width=0.7\linewidth]{05-contrastes_files/figure-latex/unnamed-chunk-21-1} \end{center}
+}
+
+\caption{Distribución del estadístico del contraste (bajo la hipótesis nula) aproximada mediante bootstrap semiparamétrico.}(\#fig:semipar-test-plot)
+\end{figure}
 
 ``` r
 # pval <- mean(boot.mod$t >= boot.mod$t0)
@@ -683,15 +713,20 @@ tanto bajo la hipótesis alternativa como bajo la nula.
 
 ``` r
 old.par <- par(mfrow=c(1,2))
-hist(residuals(modelo0), xlim = c(-50, 50), 
-     main = 'Variabilidad residual\n con el modelo reducido')
-hist(residuals(modelo), xlim = c(-50, 50), 
-     main = 'Variabilidad residual\n con el modelo completo')
+# Variabilidad residual con el modelo reducido
+hist(residuals(modelo0), xlim = c(-50, 50), main = "")
+# Variabilidad residual con el modelo completo
+hist(residuals(modelo), xlim = c(-50, 50), main = "")
 ```
 
+\begin{figure}[!htb]
 
+{\centering \includegraphics[width=0.9\linewidth]{05-contrastes_files/figure-latex/semipar-var-plot-1} 
 
-\begin{center}\includegraphics[width=0.7\linewidth]{05-contrastes_files/figure-latex/unnamed-chunk-22-1} \end{center}
+}
+
+\caption{Variabilidad residual con el modelo reducido (izquierda) y con el modelo completo (derecha).}(\#fig:semipar-var-plot)
+\end{figure}
 
 ``` r
 par(old.par)
@@ -740,17 +775,22 @@ En la aproximación del $p$-valor hay que tener en cuenta que al modificar los r
 `boot.mod$t0` no va a coincidir con el valor observado del estadístico, 
 almacenado en `stat` (por tanto habría que ignorar `original` y `bias`
 en `Bootstrap Statistics`; 
-la función `Boot()` del paquete `car` corrige este problema).
+la función `Boot()` del paquete `car` corregiría este problema).
 
 
 ``` r
-hist(boot.mod$t, breaks = "FD", freq = FALSE)
+hist(boot.mod$t, freq = FALSE, breaks = "FD", main = "")
 curve(pf(x, df, dfr, lower.tail = FALSE), lty = 2, add = TRUE)
 ```
 
+\begin{figure}[!htb]
 
+{\centering \includegraphics[width=0.7\linewidth]{05-contrastes_files/figure-latex/boot-semipar-test-plot-1} 
 
-\begin{center}\includegraphics[width=0.7\linewidth]{05-contrastes_files/figure-latex/unnamed-chunk-24-1} \end{center}
+}
+
+\caption{Distribución del estadístico del contraste (bajo la hipótesis nula) aproximada mediante bootstrap semiparamétrico.}(\#fig:boot-semipar-test-plot)
+\end{figure}
 
 ``` r
 pval <- mean(boot.mod$t >= stat)
@@ -762,7 +802,7 @@ pval
 ```
 
 En el caso de modelos no lineales (o otros tipos de modelos lineales) puede ser 
-complicado aproximar los grados de libertad para el cáculo del estadístico $F$, 
+complicado aproximar los grados de libertad para el cálculo del estadístico $F$, 
 pero si empleamos bootstrap, vamos a obtener los mismos resultados considerando 
 como estadístico:
 $$\tilde F =\frac{RSS_0 - RSS}{RSS},$$
@@ -772,7 +812,8 @@ En este caso también se suelen emplear los residuos sin reescalar, ya que tambi
 difícil encontrar la transformación adecuada.
 
 
-### Ejercicio
+::: {.exercise #test-semipar-cuadratico}
+<br>
 
 Al estudiar el efecto de las variables explicativas en el modelo 
 anterior, podríamos pensar que no es adecuado asumir un efecto lineal
@@ -781,13 +822,17 @@ parciales de residuos obtendríamos:
 
 
 ``` r
-# library(car)
-crPlots(modelo)
+car::crPlots(modelo)
 ```
 
+\begin{figure}[!htb]
 
+{\centering \includegraphics[width=0.9\linewidth]{05-contrastes_files/figure-latex/semipar-crplot-1} 
 
-\begin{center}\includegraphics[width=0.7\linewidth]{05-contrastes_files/figure-latex/unnamed-chunk-25-1} \end{center}
+}
+
+\caption{Efecto de las variables explicativas en el modelo (gráficos de residuos).}(\#fig:semipar-crplot)
+\end{figure}
 
 En este caso podría ser razonable considerar un efecto cuadrático
 de la variable `income`^[Para ajustar un modelo polinómico
@@ -849,19 +894,13 @@ anova(modelo0, modelo)
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
 
-Contrastar si el efecto de `income` es lineal mediante bootstrap residual, empleando
-como estadístico la proporción de incremento en la variabilidad residual con el 
+Contrastar si el efecto de `income` es lineal mediante bootstrap residual, 
+empleando como estadístico la proporción de incremento en la variabilidad residual con el 
 modelo reducido y remuestreando los residuos del modelo completo (sin reescalar).
 Aproximar el nivel crítico del contraste y el valor que tendría que superar el
 estadístico para rechazar $H_0$ con un nivel de significación $\alpha = 0.05$.
 
-
-``` r
-library(boot)
-
-# set.seed(DNI)
-# ...
-```
+:::
 
 
 

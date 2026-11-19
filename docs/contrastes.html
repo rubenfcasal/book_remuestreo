@@ -211,19 +211,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5" data-path="contrastes.html"><a href="contrastes.html"><i class="fa fa-check"></i><b>5</b> Aplicaciones del Bootstrap en contrastes de hipótesis</a>
 <ul>
 <li class="chapter" data-level="5.1" data-path="aproximación-del-p-valor-mediante-remuestreo.html"><a href="aproximación-del-p-valor-mediante-remuestreo.html"><i class="fa fa-check"></i><b>5.1</b> Aproximación del p-valor mediante remuestreo</a></li>
-<li class="chapter" data-level="5.2" data-path="contrastes-parametricos.html"><a href="contrastes-parametricos.html"><i class="fa fa-check"></i><b>5.2</b> Contrastes bootstrap paramétricos</a>
-<ul>
-<li class="chapter" data-level="5.2.1" data-path="contrastes-parametricos.html"><a href="contrastes-parametricos.html#ejemplo-contraste-de-kolmogorov-smirnov"><i class="fa fa-check"></i><b>5.2.1</b> Ejemplo: contraste de Kolmogorov-Smirnov</a></li>
-</ul></li>
-<li class="chapter" data-level="5.3" data-path="contrastes-de-permutaciones.html"><a href="contrastes-de-permutaciones.html"><i class="fa fa-check"></i><b>5.3</b> Contrastes de permutaciones</a>
-<ul>
-<li class="chapter" data-level="5.3.1" data-path="contrastes-de-permutaciones.html"><a href="contrastes-de-permutaciones.html#ejemplo-inferencia-sobre-el-coeficiente-de-correlaci%C3%B3n-lineal"><i class="fa fa-check"></i><b>5.3.1</b> Ejemplo: Inferencia sobre el coeficiente de correlación lineal</a></li>
-</ul></li>
-<li class="chapter" data-level="5.4" data-path="contrastes-semiparametricos.html"><a href="contrastes-semiparametricos.html"><i class="fa fa-check"></i><b>5.4</b> Contrastes bootstrap semiparamétricos</a>
-<ul>
-<li class="chapter" data-level="5.4.1" data-path="contrastes-semiparametricos.html"><a href="contrastes-semiparametricos.html#ejemplo-inferencia-sobre-modelos-de-regresi%C3%B3n"><i class="fa fa-check"></i><b>5.4.1</b> Ejemplo: Inferencia sobre modelos de regresión</a></li>
-<li class="chapter" data-level="5.4.2" data-path="contrastes-semiparametricos.html"><a href="contrastes-semiparametricos.html#ejercicio"><i class="fa fa-check"></i><b>5.4.2</b> Ejercicio</a></li>
-</ul></li>
+<li class="chapter" data-level="5.2" data-path="contrastes-parametricos.html"><a href="contrastes-parametricos.html"><i class="fa fa-check"></i><b>5.2</b> Contrastes bootstrap paramétricos</a></li>
+<li class="chapter" data-level="5.3" data-path="contrastes-de-permutaciones.html"><a href="contrastes-de-permutaciones.html"><i class="fa fa-check"></i><b>5.3</b> Contrastes de permutaciones</a></li>
+<li class="chapter" data-level="5.4" data-path="contrastes-semiparametricos.html"><a href="contrastes-semiparametricos.html"><i class="fa fa-check"></i><b>5.4</b> Contrastes bootstrap semiparamétricos</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="npden.html"><a href="npden.html"><i class="fa fa-check"></i><b>6</b> Bootstrap y estimación no paramétrica de la densidad</a>
 <ul>
@@ -392,11 +382,11 @@ entre hipótesis nulas simples (especifican un único modelo) y compuestas
 que mide la discrepancia entre la muestra observada y la hipótesis nula,
 con distribución conocida (o que se puede aproximar) bajo <span class="math inline">\(H_0\)</span>.
 Por ejemplo, en el caso de una hipótesis nula paramétrica
-es habitual emplear un estadístico estudentizado de la forma:
+es habitual emplear un estadístico studentizado de la forma:
 <span class="math display">\[D\left( X_1,\ldots ,X_n;H_0\right) =
 \frac{\hat{\theta}-\theta _0}{\hat\sigma_{\hat\theta}}\]</span>
 (o algún tipo de razón de verosimilitudes).</p>
-<p>La regla de decisión depende de la hipótesis altervativa y
+<p>La regla de decisión depende de la hipótesis alternativa y
 del riesgo asumible al rechazar <span class="math inline">\(H_0\)</span> siendo cierta:
 <span class="math display">\[P\left( \text{rechazar }H_0\mid H_0\text{ cierta}\right) =\alpha,\]</span>
 denominado nivel de significación.
@@ -408,7 +398,7 @@ Se rechaza la hipótesis nula cuando el valor observado del
 estadístico <span class="math inline">\(\hat{d}=D\left( x_1,\ldots ,x_n;H_0\right)\)</span> pertenece
 a la región de rechazo.</p>
 <p>Para medir el nivel de evidencia en contra de <span class="math inline">\(H_0\)</span> se emplea el
-<span class="math inline">\(p\)</span>-valor del contraste (también denominado valor crítico o
+<span class="math inline">\(p\)</span>-valor del contraste (también denominado nivel crítico o
 tamaño del contraste), el menor valor del nivel
 de significación para el que se rechaza <span class="math inline">\(H_0\)</span>
 (que se puede interpretar también como la
@@ -438,7 +428,7 @@ Es decir, la distribución del <span class="math inline">\(p\)</span>-valor bajo
 <div class="footnotes">
 <hr />
 <ol start="6">
-<li id="fn6"><p>Aunque cuando la hipotesis nula es compuesta:
+<li id="fn6"><p>Aunque cuando la hipótesis nula es compuesta:
 <span class="math inline">\(P\left( D\in RR \mid H_0\text{ cierta}\right) \leq \alpha\)</span>.<a href="contrastes.html#fnref6" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>

@@ -211,19 +211,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5" data-path="contrastes.html"><a href="contrastes.html"><i class="fa fa-check"></i><b>5</b> Aplicaciones del Bootstrap en contrastes de hipótesis</a>
 <ul>
 <li class="chapter" data-level="5.1" data-path="aproximación-del-p-valor-mediante-remuestreo.html"><a href="aproximación-del-p-valor-mediante-remuestreo.html"><i class="fa fa-check"></i><b>5.1</b> Aproximación del p-valor mediante remuestreo</a></li>
-<li class="chapter" data-level="5.2" data-path="contrastes-parametricos.html"><a href="contrastes-parametricos.html"><i class="fa fa-check"></i><b>5.2</b> Contrastes bootstrap paramétricos</a>
-<ul>
-<li class="chapter" data-level="5.2.1" data-path="contrastes-parametricos.html"><a href="contrastes-parametricos.html#ejemplo-contraste-de-kolmogorov-smirnov"><i class="fa fa-check"></i><b>5.2.1</b> Ejemplo: contraste de Kolmogorov-Smirnov</a></li>
-</ul></li>
-<li class="chapter" data-level="5.3" data-path="contrastes-de-permutaciones.html"><a href="contrastes-de-permutaciones.html"><i class="fa fa-check"></i><b>5.3</b> Contrastes de permutaciones</a>
-<ul>
-<li class="chapter" data-level="5.3.1" data-path="contrastes-de-permutaciones.html"><a href="contrastes-de-permutaciones.html#ejemplo-inferencia-sobre-el-coeficiente-de-correlaci%C3%B3n-lineal"><i class="fa fa-check"></i><b>5.3.1</b> Ejemplo: Inferencia sobre el coeficiente de correlación lineal</a></li>
-</ul></li>
-<li class="chapter" data-level="5.4" data-path="contrastes-semiparametricos.html"><a href="contrastes-semiparametricos.html"><i class="fa fa-check"></i><b>5.4</b> Contrastes bootstrap semiparamétricos</a>
-<ul>
-<li class="chapter" data-level="5.4.1" data-path="contrastes-semiparametricos.html"><a href="contrastes-semiparametricos.html#ejemplo-inferencia-sobre-modelos-de-regresi%C3%B3n"><i class="fa fa-check"></i><b>5.4.1</b> Ejemplo: Inferencia sobre modelos de regresión</a></li>
-<li class="chapter" data-level="5.4.2" data-path="contrastes-semiparametricos.html"><a href="contrastes-semiparametricos.html#ejercicio"><i class="fa fa-check"></i><b>5.4.2</b> Ejercicio</a></li>
-</ul></li>
+<li class="chapter" data-level="5.2" data-path="contrastes-parametricos.html"><a href="contrastes-parametricos.html"><i class="fa fa-check"></i><b>5.2</b> Contrastes bootstrap paramétricos</a></li>
+<li class="chapter" data-level="5.3" data-path="contrastes-de-permutaciones.html"><a href="contrastes-de-permutaciones.html"><i class="fa fa-check"></i><b>5.3</b> Contrastes de permutaciones</a></li>
+<li class="chapter" data-level="5.4" data-path="contrastes-semiparametricos.html"><a href="contrastes-semiparametricos.html"><i class="fa fa-check"></i><b>5.4</b> Contrastes bootstrap semiparamétricos</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="npden.html"><a href="npden.html"><i class="fa fa-check"></i><b>6</b> Bootstrap y estimación no paramétrica de la densidad</a>
 <ul>
@@ -398,8 +388,8 @@ el parámetro <code>sim = "permutation"</code> al llamar a la función <code>boo
 <code>i</code> de la función <code>statistic</code> contendrá permutaciones del vector de índices).
 Puede ser también de interés el paquete <a href="https://cran.r-project.org/web/packages/coin/index.html"><code>coin</code></a>,
 que implementa muchos contrastes de este tipo.</p>
-<div id="ejemplo-inferencia-sobre-el-coeficiente-de-correlación-lineal" class="section level3 hasAnchor" number="5.3.1">
-<h3><span class="header-section-number">5.3.1</span> Ejemplo: Inferencia sobre el coeficiente de correlación lineal<a href="contrastes-de-permutaciones.html#ejemplo-inferencia-sobre-el-coeficiente-de-correlaci%C3%B3n-lineal" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="example">
+<p><span id="exm:perm-test-cor" class="example"><strong>Ejemplo 5.2  (Inferencia sobre el coeficiente de correlación lineal) </strong></span><br></p>
 <p>En esta sección consideraremos como ejemplo el conjunto de datos <code>dogs</code>
 del paquete <code>boot</code>, que contiene observaciones sobre el consumo de
 oxígeno cardíaco (<code>mvo</code>) y la presión ventricular izquierda (<code>lvp</code>)
@@ -439,7 +429,7 @@ que podemos calcular en <code>R</code> empleando la función <code>cor()</code>:
 <span class="math display">\[\frac{r\sqrt{n - 2}}{\sqrt{1 - r^2}} \underset{aprox}{\sim } t_{n-2},\]</span>
 <!-- \mathcal{t}_{n-2} error en LaTeX-->
 bajo la hipótesis nula de que la verdadera correlación es cero.
-Alternativemente se pueden realizar contrastes unilaterales estableciendo
+Alternativamente se pueden realizar contrastes unilaterales estableciendo
 el parámetro <code>alternative</code> igual a <code>"less"</code> o <code>"greater"</code>.
 Por ejemplo, para contrastar <span class="math inline">\(H_0: \rho \leq 0\)</span> podríamos emplear:</p>
 <div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="contrastes-de-permutaciones.html#cb185-1" tabindex="-1"></a><span class="fu">cor.test</span>(dogs<span class="sc">$</span>mvo, dogs<span class="sc">$</span>lvp, <span class="at">alternative =</span> <span class="st">&quot;greater&quot;</span>)</span></code></pre></div>
@@ -466,9 +456,14 @@ emplear el siguiente código:</p>
 <p>Posteriormente emplearíamos las réplicas (almacenadas en <code>res.boot$t</code>) y el valor
 observado del estadístico del contraste (almacenado en <code>res.boot$t0</code>)
 para aproximar el <span class="math inline">\(p\)</span>-valor:</p>
-<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="contrastes-de-permutaciones.html#cb188-1" tabindex="-1"></a><span class="fu">hist</span>(res.boot<span class="sc">$</span>t, <span class="at">freq =</span> <span class="cn">FALSE</span>)</span>
+<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="contrastes-de-permutaciones.html#cb188-1" tabindex="-1"></a><span class="fu">hist</span>(res.boot<span class="sc">$</span>t, <span class="at">freq =</span> <span class="cn">FALSE</span>, <span class="at">main =</span><span class="st">&quot;&quot;</span>)</span>
 <span id="cb188-2"><a href="contrastes-de-permutaciones.html#cb188-2" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> res.boot<span class="sc">$</span>t0, <span class="at">lty =</span> <span class="dv">2</span>)</span></code></pre></div>
-<p><img src="05-contrastes_files/figure-html/unnamed-chunk-12-1.png" alt="" width="70%" style="display: block; margin: auto;" /></p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:perm-test-cor"></span>
+<img src="05-contrastes_files/figure-html/perm-test-cor-1.png" alt="Distribución del estadístico del contraste bajo la hipótesis nula aproximada mediante permutación de las observaciones." width="70%" />
+<p class="caption">
+Figura 5.3: Distribución del estadístico del contraste bajo la hipótesis nula aproximada mediante permutación de las observaciones.
+</p>
+</div>
 <p>Por ejemplo, para el contraste unilateral <span class="math inline">\(H_0: \rho \leq 0\)</span>
 (<code>alternative = "greater"</code>), obtendríamos:</p>
 <div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="contrastes-de-permutaciones.html#cb189-1" tabindex="-1"></a>pval.greater <span class="ot">&lt;-</span> <span class="fu">mean</span>(res.boot<span class="sc">$</span>t <span class="sc">&gt;=</span> res.boot<span class="sc">$</span>t0)</span>

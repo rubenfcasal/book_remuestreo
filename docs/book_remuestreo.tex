@@ -234,7 +234,7 @@
 
 \title{Técnicas de Remuestreo}
 \author{Ricardo Cao Abad (\href{mailto:rcao@udc.es}{\nolinkurl{rcao@udc.es}}) y Rubén Fernández Casal (\href{mailto:rfcasal@udc.es}{\nolinkurl{rfcasal@udc.es}})}
-\date{Edición: Septiembre de 2026. Impresión: 2026-11-18}
+\date{Edición: Septiembre de 2026. Impresión: 2026-11-19}
 
 \begin{document}
 \maketitle
@@ -5228,7 +5228,7 @@ bootstrap para un nivel de confianza nominal del 90\% (\(\alpha =0.10\)).
 
 \begin{verbatim}
 ##    user  system elapsed 
-##    6.36    0.10    6.45
+##    6.42    0.09    6.56
 \end{verbatim}
 
 \begin{Shaded}
@@ -5424,18 +5424,18 @@ Para realizar el contraste se emplea un estadístico \(D\left( X_1,\ldots ,X_n;H
 que mide la discrepancia entre la muestra observada y la hipótesis nula,
 con distribución conocida (o que se puede aproximar) bajo \(H_0\).
 Por ejemplo, en el caso de una hipótesis nula paramétrica
-es habitual emplear un estadístico estudentizado de la forma:
+es habitual emplear un estadístico studentizado de la forma:
 \[D\left( X_1,\ldots ,X_n;H_0\right) =
 \frac{\hat{\theta}-\theta _0}{\hat\sigma_{\hat\theta}}\]
 (o algún tipo de razón de verosimilitudes).
 
-La regla de decisión depende de la hipótesis altervativa y
+La regla de decisión depende de la hipótesis alternativa y
 del riesgo asumible al rechazar \(H_0\) siendo cierta:
 \[P\left( \text{rechazar }H_0\mid H_0\text{ cierta}\right) =\alpha,\]
 denominado nivel de significación.
 Se determina una región de rechazo (RR) a partir de los valores que tiende
 a tomar el estadístico cuando \(H_1\) es cierta,
-de forma que\footnote{Aunque cuando la hipotesis nula es compuesta:
+de forma que\footnote{Aunque cuando la hipótesis nula es compuesta:
   \(P\left( D\in RR \mid H_0\text{ cierta}\right) \leq \alpha\).}:
 \[P\left( D\in RR \mid H_0\text{ cierta}\right) =\alpha.\]
 Se rechaza la hipótesis nula cuando el valor observado del
@@ -5443,7 +5443,7 @@ estadístico \(\hat{d}=D\left( x_1,\ldots ,x_n;H_0\right)\) pertenece
 a la región de rechazo.
 
 Para medir el nivel de evidencia en contra de \(H_0\) se emplea el
-\(p\)-valor del contraste (también denominado valor crítico o
+\(p\)-valor del contraste (también denominado nivel crítico o
 tamaño del contraste), el menor valor del nivel
 de significación para el que se rechaza \(H_0\)
 (que se puede interpretar también como la
@@ -5518,7 +5518,8 @@ Siempre hay que tener en cuenta que las réplicas bootstrap del estadístico se
 deberían obtener empleando el mismo procedimiento utilizado en la muestra
 (p.e. reestimando los parámetros si es el caso).
 
-\subsection{Ejemplo: contraste de Kolmogorov-Smirnov}\label{ejemplo-contraste-de-kolmogorov-smirnov}
+\begin{example}[Contraste de Kolmogorov-Smirnov]
+\protect\hypertarget{exm:ks-test-sim-exp}{}\label{exm:ks-test-sim-exp}
 
 Se trata de un contraste de bondad de ajuste (similar a la prueba de
 Cramer-von Mises o a la de Anderson-Darling, implementadas en el paquete
@@ -5602,26 +5603,33 @@ para los distintos niveles de significación.
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{old.par }\OtherTok{\textless{}{-}} \FunctionTok{par}\NormalTok{(}\AttributeTok{mfrow=}\FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{))}
-\CommentTok{\# Histograma}
-\FunctionTok{hist}\NormalTok{(pvalor.ks, }\AttributeTok{freq=}\ConstantTok{FALSE}\NormalTok{, }\AttributeTok{main =} \StringTok{"p{-}valor del test de KS"}\NormalTok{)}
+\CommentTok{\# Test de KS}
+  \CommentTok{\# Histograma}
+\FunctionTok{hist}\NormalTok{(pvalor.ks, }\AttributeTok{freq=}\ConstantTok{FALSE}\NormalTok{, }\AttributeTok{main =} \StringTok{""}\NormalTok{)}
 \FunctionTok{abline}\NormalTok{(}\AttributeTok{h=}\DecValTok{1}\NormalTok{, }\AttributeTok{lty=}\DecValTok{2}\NormalTok{)   }\CommentTok{\# curve(dunif(x,0,1), add=TRUE)}
-\CommentTok{\# Distribución empírica}
-\FunctionTok{curve}\NormalTok{(}\FunctionTok{ecdf}\NormalTok{(pvalor.ks)(x), }\AttributeTok{type =} \StringTok{"s"}\NormalTok{, }\AttributeTok{lwd =} \DecValTok{2}\NormalTok{, }
-      \AttributeTok{main =} \StringTok{\textquotesingle{}Tamaño del contraste KS\textquotesingle{}}\NormalTok{, }\AttributeTok{ylab =} \StringTok{\textquotesingle{}Proporción de rechazos\textquotesingle{}}\NormalTok{, }
-      \AttributeTok{xlab =} \StringTok{\textquotesingle{}Nivel de significación\textquotesingle{}}\NormalTok{)}
+  \CommentTok{\# Distribución empírica}
+\FunctionTok{curve}\NormalTok{(}\FunctionTok{ecdf}\NormalTok{(pvalor.ks)(x), }\AttributeTok{type =} \StringTok{"s"}\NormalTok{, }\AttributeTok{lwd =} \DecValTok{2}\NormalTok{, }\AttributeTok{main =} \StringTok{\textquotesingle{}\textquotesingle{}}\NormalTok{, }
+      \AttributeTok{ylab =} \StringTok{\textquotesingle{}Proporción de rechazos\textquotesingle{}}\NormalTok{, }\AttributeTok{xlab =} \StringTok{\textquotesingle{}Nivel de significación\textquotesingle{}}\NormalTok{)}
 \FunctionTok{abline}\NormalTok{(}\AttributeTok{a=}\DecValTok{0}\NormalTok{, }\AttributeTok{b=}\DecValTok{1}\NormalTok{, }\AttributeTok{lty=}\DecValTok{2}\NormalTok{)   }\CommentTok{\# curve(punif(x, 0, 1), add = TRUE)}
-\CommentTok{\# Histograma}
-\FunctionTok{hist}\NormalTok{(pvalor.lil, }\AttributeTok{freq=}\ConstantTok{FALSE}\NormalTok{, }\AttributeTok{main =} \StringTok{"p{-}valor del test de Lilliefors"}\NormalTok{)}
+\CommentTok{\# Test de Lilliefors}
+  \CommentTok{\# Histograma}
+\FunctionTok{hist}\NormalTok{(pvalor.lil, }\AttributeTok{freq=}\ConstantTok{FALSE}\NormalTok{, }\AttributeTok{main =} \StringTok{""}\NormalTok{)}
 \FunctionTok{abline}\NormalTok{(}\AttributeTok{h=}\DecValTok{1}\NormalTok{, }\AttributeTok{lty=}\DecValTok{2}\NormalTok{)   }\CommentTok{\# curve(dunif(x,0,1), add=TRUE)}
-\CommentTok{\# Distribución empírica}
-\FunctionTok{curve}\NormalTok{(}\FunctionTok{ecdf}\NormalTok{(pvalor.lil)(x), }\AttributeTok{type =} \StringTok{"s"}\NormalTok{, }\AttributeTok{lwd =} \DecValTok{2}\NormalTok{, }
-      \AttributeTok{main =} \StringTok{\textquotesingle{}Tamaño del contraste de Lilliefors\textquotesingle{}}\NormalTok{, }\AttributeTok{ylab =} \StringTok{\textquotesingle{}Proporción de rechazos\textquotesingle{}}\NormalTok{, }
-      \AttributeTok{xlab =} \StringTok{\textquotesingle{}Nivel de significación\textquotesingle{}}\NormalTok{)}
+  \CommentTok{\# Distribución empírica}
+\FunctionTok{curve}\NormalTok{(}\FunctionTok{ecdf}\NormalTok{(pvalor.lil)(x), }\AttributeTok{type =} \StringTok{"s"}\NormalTok{, }\AttributeTok{lwd =} \DecValTok{2}\NormalTok{, }\AttributeTok{main =} \StringTok{\textquotesingle{}\textquotesingle{}}\NormalTok{, }
+      \AttributeTok{ylab =} \StringTok{\textquotesingle{}Proporción de rechazos\textquotesingle{}}\NormalTok{,  }\AttributeTok{xlab =} \StringTok{\textquotesingle{}Nivel de significación\textquotesingle{}}\NormalTok{)}
 \FunctionTok{abline}\NormalTok{(}\AttributeTok{a=}\DecValTok{0}\NormalTok{, }\AttributeTok{b=}\DecValTok{1}\NormalTok{, }\AttributeTok{lty=}\DecValTok{2}\NormalTok{)   }\CommentTok{\# curve(punif(x, 0, 1), add = TRUE)}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.7\linewidth]{05-contrastes_files/figure-latex/unnamed-chunk-4-1} \end{center}
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.9\linewidth]{05-contrastes_files/figure-latex/ks-lil-plot-1} 
+
+}
+
+\caption{Distribución del p-valor (izquierda) y tamaño (proporción de rechazos bajo la hipótesis nula; derecha), aproximados por Monte Carlo, para el contraste de Kolmogorov-Smirnov (arriba) y el de Lilliefors (abajo).}\label{fig:ks-lil-plot}
+\end{figure}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5695,32 +5703,50 @@ y 200 réplicas bootstrap (para disminuir el tiempo de computación).
 \NormalTok{\}}
 \CommentTok{\# Generar gráficos}
 \NormalTok{old.par }\OtherTok{\textless{}{-}} \FunctionTok{par}\NormalTok{(}\AttributeTok{mfrow=}\FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{))}
-\CommentTok{\# Histograma}
-\FunctionTok{hist}\NormalTok{(pvalor.ks, }\AttributeTok{freq=}\ConstantTok{FALSE}\NormalTok{, }\AttributeTok{main =} \StringTok{"p{-}valor del test KS"}\NormalTok{)}
+\CommentTok{\# Test de KS}
+  \CommentTok{\# Histograma}
+\FunctionTok{hist}\NormalTok{(pvalor.ks, }\AttributeTok{freq=}\ConstantTok{FALSE}\NormalTok{, }\AttributeTok{main =} \StringTok{""}\NormalTok{)}
 \FunctionTok{abline}\NormalTok{(}\AttributeTok{h=}\DecValTok{1}\NormalTok{, }\AttributeTok{lty=}\DecValTok{2}\NormalTok{)   }\CommentTok{\# curve(dunif(x,0,1), add=TRUE)}
-\CommentTok{\# Distribución empírica}
-\FunctionTok{curve}\NormalTok{(}\FunctionTok{ecdf}\NormalTok{(pvalor.ks)(x), }\AttributeTok{type =} \StringTok{"s"}\NormalTok{, }\AttributeTok{lwd =} \DecValTok{2}\NormalTok{, }
-      \AttributeTok{main =} \StringTok{\textquotesingle{}Tamaño del contraste KS\textquotesingle{}}\NormalTok{, }\AttributeTok{ylab =} \StringTok{\textquotesingle{}Proporción de rechazos\textquotesingle{}}\NormalTok{, }
-      \AttributeTok{xlab =} \StringTok{\textquotesingle{}Nivel de significación\textquotesingle{}}\NormalTok{)}
+  \CommentTok{\# Distribución empírica}
+\FunctionTok{curve}\NormalTok{(}\FunctionTok{ecdf}\NormalTok{(pvalor.ks)(x), }\AttributeTok{type =} \StringTok{"s"}\NormalTok{, }\AttributeTok{lwd =} \DecValTok{2}\NormalTok{, }\AttributeTok{main =} \StringTok{\textquotesingle{}\textquotesingle{}}\NormalTok{, }
+      \AttributeTok{ylab =} \StringTok{\textquotesingle{}Proporción de rechazos\textquotesingle{}}\NormalTok{, }\AttributeTok{xlab =} \StringTok{\textquotesingle{}Nivel de significación\textquotesingle{}}\NormalTok{)}
 \FunctionTok{abline}\NormalTok{(}\AttributeTok{a=}\DecValTok{0}\NormalTok{, }\AttributeTok{b=}\DecValTok{1}\NormalTok{, }\AttributeTok{lty=}\DecValTok{2}\NormalTok{)   }\CommentTok{\# curve(punif(x, 0, 1), add = TRUE)}
-\CommentTok{\# Histograma}
-\FunctionTok{hist}\NormalTok{(pvalor.ks.boot, }\AttributeTok{freq=}\ConstantTok{FALSE}\NormalTok{, }\AttributeTok{main =} \StringTok{"p{-}valor del test KS{-}boot"}\NormalTok{)}
+\CommentTok{\# Contraste bootstrap paramétrico}
+  \CommentTok{\# Histograma}
+\FunctionTok{hist}\NormalTok{(pvalor.ks.boot, }\AttributeTok{freq=}\ConstantTok{FALSE}\NormalTok{, }\AttributeTok{main =} \StringTok{""}\NormalTok{)}
 \FunctionTok{abline}\NormalTok{(}\AttributeTok{h=}\DecValTok{1}\NormalTok{, }\AttributeTok{lty=}\DecValTok{2}\NormalTok{)   }\CommentTok{\# curve(dunif(x,0,1), add=TRUE)}
-\CommentTok{\# Distribución empírica}
-\FunctionTok{curve}\NormalTok{(}\FunctionTok{ecdf}\NormalTok{(pvalor.ks.boot)(x), }\AttributeTok{type =} \StringTok{"s"}\NormalTok{, }\AttributeTok{lwd =} \DecValTok{2}\NormalTok{, }
-      \AttributeTok{main =} \StringTok{\textquotesingle{}Tamaño del contraste KS{-}boot\textquotesingle{}}\NormalTok{, }\AttributeTok{ylab =} \StringTok{\textquotesingle{}Proporción de rechazos\textquotesingle{}}\NormalTok{, }
-      \AttributeTok{xlab =} \StringTok{\textquotesingle{}Nivel de significación\textquotesingle{}}\NormalTok{)}
+  \CommentTok{\# Distribución empírica}
+\FunctionTok{curve}\NormalTok{(}\FunctionTok{ecdf}\NormalTok{(pvalor.ks.boot)(x), }\AttributeTok{type =} \StringTok{"s"}\NormalTok{, }\AttributeTok{lwd =} \DecValTok{2}\NormalTok{, }\AttributeTok{main =} \StringTok{\textquotesingle{}\textquotesingle{}}\NormalTok{, }
+      \AttributeTok{ylab =} \StringTok{\textquotesingle{}Proporción de rechazos\textquotesingle{}}\NormalTok{,  }\AttributeTok{xlab =} \StringTok{\textquotesingle{}Nivel de significación\textquotesingle{}}\NormalTok{)}
 \FunctionTok{abline}\NormalTok{(}\AttributeTok{a=}\DecValTok{0}\NormalTok{, }\AttributeTok{b=}\DecValTok{1}\NormalTok{, }\AttributeTok{lty=}\DecValTok{2}\NormalTok{)   }\CommentTok{\# curve(punif(x, 0, 1), add = TRUE)}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.7\linewidth]{05-contrastes_files/figure-latex/unnamed-chunk-6-1} \end{center}
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.9\linewidth]{05-contrastes_files/figure-latex/ks-boot-plot-1} 
+
+}
+
+\caption{Distribución del p-valor (izquierda) y tamaño (proporción de rechazos bajo la hipótesis nula; derecha), aproximados por  Monte Carlo, para el contraste de Kolmogorov-Smirnov (arriba) y el correspondiente contraste boostrap paramétrico (abajo).}\label{fig:ks-boot-plot}
+\end{figure}
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{par}\NormalTok{(old.par)}
 \end{Highlighting}
 \end{Shaded}
+
+El estadístico de Kolmogorov-Smirnov \texttt{Dn\ =\ max(c(DMinus,\ DPlus))} tiene ventajas desde el
+punto de vista teórico, pero puede no ser muy potente para detectar diferencias entre la
+distribución bajo la hipótesis nula y la distribución de los datos.
+La ventaja de la aproximación por simulación es que no estamos atados a resultados teóricos
+y podemos emplear el estadístico que se considere oportuno
+(la principal desventaja es el tiempo de computación).
+Por ejemplo, podríamos pensar en utilizar como estadístico la suma de los errores en
+valor absoluto del correspondiente gráfico PP, y solo habría que cambiar el estadístico
+\texttt{Dn} en la función \texttt{ks.exp.sim} por \texttt{Dn\ =\ sum(abs(\ (1:n\ -\ 0.5)/n\ -\ \ pexp(sort(x),\ rate=rate)\ ))}.
+\end{example}
 
 \section{Contrastes de permutaciones}\label{contrastes-de-permutaciones}
 
@@ -5753,7 +5779,8 @@ el parámetro \texttt{sim\ =\ "permutation"} al llamar a la función \texttt{boo
 Puede ser también de interés el paquete \href{https://cran.r-project.org/web/packages/coin/index.html}{\texttt{coin}},
 que implementa muchos contrastes de este tipo.
 
-\subsection{Ejemplo: Inferencia sobre el coeficiente de correlación lineal}\label{ejemplo-inferencia-sobre-el-coeficiente-de-correlaciuxf3n-lineal}
+\begin{example}[Inferencia sobre el coeficiente de correlación lineal]
+\protect\hypertarget{exm:perm-test-cor}{}\label{exm:perm-test-cor}
 
 En esta sección consideraremos como ejemplo el conjunto de datos \texttt{dogs}
 del paquete \texttt{boot}, que contiene observaciones sobre el consumo de
@@ -5827,7 +5854,7 @@ Para realizar inferencias sobre \(\rho\) podemos emplear la función
 Esta función realiza el contraste \(H_0: \rho = 0\) empleando el estadístico:
 \[\frac{r\sqrt{n - 2}}{\sqrt{1 - r^2}} \underset{aprox}{\sim } t_{n-2},\]
 bajo la hipótesis nula de que la verdadera correlación es cero.
-Alternativemente se pueden realizar contrastes unilaterales estableciendo
+Alternativamente se pueden realizar contrastes unilaterales estableciendo
 el parámetro \texttt{alternative} igual a \texttt{"less"} o \texttt{"greater"}.
 Por ejemplo, para contrastar \(H_0: \rho \leq 0\) podríamos emplear:
 
@@ -5872,12 +5899,19 @@ para aproximar el \(p\)-valor:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{hist}\NormalTok{(res.boot}\SpecialCharTok{$}\NormalTok{t, }\AttributeTok{freq =} \ConstantTok{FALSE}\NormalTok{)}
+\FunctionTok{hist}\NormalTok{(res.boot}\SpecialCharTok{$}\NormalTok{t, }\AttributeTok{freq =} \ConstantTok{FALSE}\NormalTok{, }\AttributeTok{main =}\StringTok{""}\NormalTok{)}
 \FunctionTok{abline}\NormalTok{(}\AttributeTok{v =}\NormalTok{ res.boot}\SpecialCharTok{$}\NormalTok{t0, }\AttributeTok{lty =} \DecValTok{2}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.7\linewidth]{05-contrastes_files/figure-latex/unnamed-chunk-12-1} \end{center}
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{05-contrastes_files/figure-latex/perm-test-cor-1} 
+
+}
+
+\caption{Distribución del estadístico del contraste bajo la hipótesis nula aproximada mediante permutación de las observaciones.}\label{fig:perm-test-cor}
+\end{figure}
 
 Por ejemplo, para el contraste unilateral \(H_0: \rho \leq 0\)
 (\texttt{alternative\ =\ "greater"}), obtendríamos:
@@ -5909,6 +5943,8 @@ la distribución del estadístico de contraste es simétrica:
 ## [1] 0.018
 \end{verbatim}
 
+\end{example}
+
 \section{Contrastes bootstrap semiparamétricos}\label{contrastes-semiparametricos}
 
 Este tipo de aproximación se emplearía en el caso de que la hipótesis nula
@@ -5918,11 +5954,7 @@ Típicamente se incluye el error en la componente no paramétrica, y podríamos 
 el bootstrap residual (también denominado semiparamétrico o basado en modelos)
 descrito en la Sección \ref{boot-residual}.
 
-En esta sección consideraremos como ejemplo el conjunto de datos \texttt{Prestige}
-del paquete \texttt{carData}, considerando como variable respuesta \texttt{prestige}
-(puntuación de ocupaciones obtenidas a partir de una encuesta)
-y como variables explicativas: \texttt{income} (media de ingresos en la ocupación)
-y \texttt{education} (media de los años de educación).
+En esta sección nos centraremos en inferencia sobre modelos de regresión lineales (aunque el procedimiento sería análogo en el caso de modelos más generales), empleando como ejemplo el conjunto de datos \texttt{Prestige} del paquete \texttt{carData}, considerando como variable respuesta \texttt{prestige} (puntuación de ocupaciones obtenidas a partir de una encuesta) y como variables explicativas: \texttt{income} (media de ingresos en la ocupación) y \texttt{education} (media de los años de educación).
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5930,8 +5962,6 @@ y \texttt{education} (media de los años de educación).
 \CommentTok{\# ?Prestige}
 \end{Highlighting}
 \end{Shaded}
-
-\subsection{Ejemplo: Inferencia sobre modelos de regresión}\label{ejemplo-inferencia-sobre-modelos-de-regresiuxf3n}
 
 En la mayoría de los casos nos interesa contrastar un \textbf{modelo reducido}
 frente a un \textbf{modelo completo} (que generaliza el modelo reducido).
@@ -6088,12 +6118,19 @@ el bootstrap semiparamétrico\footnote{En este caso también podríamos emplear 
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{hist}\NormalTok{(boot.mod}\SpecialCharTok{$}\NormalTok{t, }\AttributeTok{breaks =} \StringTok{"FD"}\NormalTok{, }\AttributeTok{freq =} \ConstantTok{FALSE}\NormalTok{)}
+\FunctionTok{hist}\NormalTok{(boot.mod}\SpecialCharTok{$}\NormalTok{t, }\AttributeTok{freq =} \ConstantTok{FALSE}\NormalTok{, }\AttributeTok{breaks =} \StringTok{"FD"}\NormalTok{, }\AttributeTok{main =} \StringTok{""}\NormalTok{)}
 \FunctionTok{curve}\NormalTok{(}\FunctionTok{pf}\NormalTok{(x, df, dfr, }\AttributeTok{lower.tail =} \ConstantTok{FALSE}\NormalTok{), }\AttributeTok{lty =} \DecValTok{2}\NormalTok{, }\AttributeTok{add =} \ConstantTok{TRUE}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.7\linewidth]{05-contrastes_files/figure-latex/unnamed-chunk-21-1} \end{center}
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{05-contrastes_files/figure-latex/semipar-test-plot-1} 
+
+}
+
+\caption{Distribución del estadístico del contraste (bajo la hipótesis nula) aproximada mediante bootstrap semiparamétrico.}\label{fig:semipar-test-plot}
+\end{figure}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -6118,14 +6155,21 @@ tanto bajo la hipótesis alternativa como bajo la nula.
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{old.par }\OtherTok{\textless{}{-}} \FunctionTok{par}\NormalTok{(}\AttributeTok{mfrow=}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{))}
-\FunctionTok{hist}\NormalTok{(}\FunctionTok{residuals}\NormalTok{(modelo0), }\AttributeTok{xlim =} \FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{50}\NormalTok{, }\DecValTok{50}\NormalTok{), }
-     \AttributeTok{main =} \StringTok{\textquotesingle{}Variabilidad residual}\SpecialCharTok{\textbackslash{}n}\StringTok{ con el modelo reducido\textquotesingle{}}\NormalTok{)}
-\FunctionTok{hist}\NormalTok{(}\FunctionTok{residuals}\NormalTok{(modelo), }\AttributeTok{xlim =} \FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{50}\NormalTok{, }\DecValTok{50}\NormalTok{), }
-     \AttributeTok{main =} \StringTok{\textquotesingle{}Variabilidad residual}\SpecialCharTok{\textbackslash{}n}\StringTok{ con el modelo completo\textquotesingle{}}\NormalTok{)}
+\CommentTok{\# Variabilidad residual con el modelo reducido}
+\FunctionTok{hist}\NormalTok{(}\FunctionTok{residuals}\NormalTok{(modelo0), }\AttributeTok{xlim =} \FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{50}\NormalTok{, }\DecValTok{50}\NormalTok{), }\AttributeTok{main =} \StringTok{""}\NormalTok{)}
+\CommentTok{\# Variabilidad residual con el modelo completo}
+\FunctionTok{hist}\NormalTok{(}\FunctionTok{residuals}\NormalTok{(modelo), }\AttributeTok{xlim =} \FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{50}\NormalTok{, }\DecValTok{50}\NormalTok{), }\AttributeTok{main =} \StringTok{""}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.7\linewidth]{05-contrastes_files/figure-latex/unnamed-chunk-22-1} \end{center}
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.9\linewidth]{05-contrastes_files/figure-latex/semipar-var-plot-1} 
+
+}
+
+\caption{Variabilidad residual con el modelo reducido (izquierda) y con el modelo completo (derecha).}\label{fig:semipar-var-plot}
+\end{figure}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -6177,16 +6221,23 @@ En la aproximación del \(p\)-valor hay que tener en cuenta que al modificar los
 \texttt{boot.mod\$t0} no va a coincidir con el valor observado del estadístico,
 almacenado en \texttt{stat} (por tanto habría que ignorar \texttt{original} y \texttt{bias}
 en \texttt{Bootstrap\ Statistics};
-la función \texttt{Boot()} del paquete \texttt{car} corrige este problema).
+la función \texttt{Boot()} del paquete \texttt{car} corregiría este problema).
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{hist}\NormalTok{(boot.mod}\SpecialCharTok{$}\NormalTok{t, }\AttributeTok{breaks =} \StringTok{"FD"}\NormalTok{, }\AttributeTok{freq =} \ConstantTok{FALSE}\NormalTok{)}
+\FunctionTok{hist}\NormalTok{(boot.mod}\SpecialCharTok{$}\NormalTok{t, }\AttributeTok{freq =} \ConstantTok{FALSE}\NormalTok{, }\AttributeTok{breaks =} \StringTok{"FD"}\NormalTok{, }\AttributeTok{main =} \StringTok{""}\NormalTok{)}
 \FunctionTok{curve}\NormalTok{(}\FunctionTok{pf}\NormalTok{(x, df, dfr, }\AttributeTok{lower.tail =} \ConstantTok{FALSE}\NormalTok{), }\AttributeTok{lty =} \DecValTok{2}\NormalTok{, }\AttributeTok{add =} \ConstantTok{TRUE}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.7\linewidth]{05-contrastes_files/figure-latex/unnamed-chunk-24-1} \end{center}
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{05-contrastes_files/figure-latex/boot-semipar-test-plot-1} 
+
+}
+
+\caption{Distribución del estadístico del contraste (bajo la hipótesis nula) aproximada mediante bootstrap semiparamétrico.}\label{fig:boot-semipar-test-plot}
+\end{figure}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -6200,7 +6251,7 @@ la función \texttt{Boot()} del paquete \texttt{car} corrige este problema).
 \end{verbatim}
 
 En el caso de modelos no lineales (o otros tipos de modelos lineales) puede ser
-complicado aproximar los grados de libertad para el cáculo del estadístico \(F\),
+complicado aproximar los grados de libertad para el cálculo del estadístico \(F\),
 pero si empleamos bootstrap, vamos a obtener los mismos resultados considerando
 como estadístico:
 \[\tilde F =\frac{RSS_0 - RSS}{RSS},\]
@@ -6209,7 +6260,8 @@ al considerar el modelo reducido (ya que únicamente difieren en una constante).
 En este caso también se suelen emplear los residuos sin reescalar, ya que también puede ser
 difícil encontrar la transformación adecuada.
 
-\subsection{Ejercicio}\label{ejercicio}
+\begin{exercise}
+\protect\hypertarget{exr:test-semipar-cuadratico}{}\label{exr:test-semipar-cuadratico}
 
 Al estudiar el efecto de las variables explicativas en el modelo
 anterior, podríamos pensar que no es adecuado asumir un efecto lineal
@@ -6218,12 +6270,18 @@ parciales de residuos obtendríamos:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# library(car)}
-\FunctionTok{crPlots}\NormalTok{(modelo)}
+\NormalTok{car}\SpecialCharTok{::}\FunctionTok{crPlots}\NormalTok{(modelo)}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.7\linewidth]{05-contrastes_files/figure-latex/unnamed-chunk-25-1} \end{center}
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.9\linewidth]{05-contrastes_files/figure-latex/semipar-crplot-1} 
+
+}
+
+\caption{Efecto de las variables explicativas en el modelo (gráficos de residuos).}\label{fig:semipar-crplot}
+\end{figure}
 
 En este caso podría ser razonable considerar un efecto cuadrático
 de la variable \texttt{income}\footnote{Para ajustar un modelo polinómico
@@ -6287,20 +6345,12 @@ realizar un contraste empleando la función \texttt{anova()}:
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 \end{verbatim}
 
-Contrastar si el efecto de \texttt{income} es lineal mediante bootstrap residual, empleando
-como estadístico la proporción de incremento en la variabilidad residual con el
+Contrastar si el efecto de \texttt{income} es lineal mediante bootstrap residual,
+empleando como estadístico la proporción de incremento en la variabilidad residual con el
 modelo reducido y remuestreando los residuos del modelo completo (sin reescalar).
 Aproximar el nivel crítico del contraste y el valor que tendría que superar el
 estadístico para rechazar \(H_0\) con un nivel de significación \(\alpha = 0.05\).
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{library}\NormalTok{(boot)}
-
-\CommentTok{\# set.seed(DNI)}
-\CommentTok{\# ...}
-\end{Highlighting}
-\end{Shaded}
+\end{exercise}
 
 \chapter{Bootstrap y estimación no paramétrica de la densidad}\label{npden}
 
@@ -10186,7 +10236,7 @@ mediante el argumento \texttt{mc.cores}.
 
 \begin{verbatim}
 ##    user  system elapsed 
-##    0.04    0.00    0.04
+##    0.03    0.00    0.04
 \end{verbatim}
 
 \begin{Shaded}
@@ -10209,7 +10259,7 @@ En Windows habría que crear previamente un cluster, llamar a una de las funcion
 
 \begin{verbatim}
 ##    user  system elapsed 
-##    0.00    0.00    0.03
+##    0.00    0.00    0.02
 \end{verbatim}
 
 \begin{Shaded}
@@ -10293,7 +10343,7 @@ Veamos un ejemplo empleando una muestra simulada:
 
 \begin{verbatim}
 ##    user  system elapsed 
-##    0.02    0.00    0.02
+##    0.01    0.00    0.02
 \end{verbatim}
 
 \subsection{Estudio de simulación}\label{estudio-sim-boot}
@@ -10359,7 +10409,7 @@ intervalos de confianza implementados en la función \texttt{boot.ci()}.
 
 \begin{verbatim}
 ##    user  system elapsed 
-##    0.02    0.00    1.75
+##    0.00    0.00    1.75
 \end{verbatim}
 
 \begin{Shaded}

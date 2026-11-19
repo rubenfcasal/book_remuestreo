@@ -211,19 +211,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5" data-path="contrastes.html"><a href="contrastes.html"><i class="fa fa-check"></i><b>5</b> Aplicaciones del Bootstrap en contrastes de hipótesis</a>
 <ul>
 <li class="chapter" data-level="5.1" data-path="aproximación-del-p-valor-mediante-remuestreo.html"><a href="aproximación-del-p-valor-mediante-remuestreo.html"><i class="fa fa-check"></i><b>5.1</b> Aproximación del p-valor mediante remuestreo</a></li>
-<li class="chapter" data-level="5.2" data-path="contrastes-parametricos.html"><a href="contrastes-parametricos.html"><i class="fa fa-check"></i><b>5.2</b> Contrastes bootstrap paramétricos</a>
-<ul>
-<li class="chapter" data-level="5.2.1" data-path="contrastes-parametricos.html"><a href="contrastes-parametricos.html#ejemplo-contraste-de-kolmogorov-smirnov"><i class="fa fa-check"></i><b>5.2.1</b> Ejemplo: contraste de Kolmogorov-Smirnov</a></li>
-</ul></li>
-<li class="chapter" data-level="5.3" data-path="contrastes-de-permutaciones.html"><a href="contrastes-de-permutaciones.html"><i class="fa fa-check"></i><b>5.3</b> Contrastes de permutaciones</a>
-<ul>
-<li class="chapter" data-level="5.3.1" data-path="contrastes-de-permutaciones.html"><a href="contrastes-de-permutaciones.html#ejemplo-inferencia-sobre-el-coeficiente-de-correlaci%C3%B3n-lineal"><i class="fa fa-check"></i><b>5.3.1</b> Ejemplo: Inferencia sobre el coeficiente de correlación lineal</a></li>
-</ul></li>
-<li class="chapter" data-level="5.4" data-path="contrastes-semiparametricos.html"><a href="contrastes-semiparametricos.html"><i class="fa fa-check"></i><b>5.4</b> Contrastes bootstrap semiparamétricos</a>
-<ul>
-<li class="chapter" data-level="5.4.1" data-path="contrastes-semiparametricos.html"><a href="contrastes-semiparametricos.html#ejemplo-inferencia-sobre-modelos-de-regresi%C3%B3n"><i class="fa fa-check"></i><b>5.4.1</b> Ejemplo: Inferencia sobre modelos de regresión</a></li>
-<li class="chapter" data-level="5.4.2" data-path="contrastes-semiparametricos.html"><a href="contrastes-semiparametricos.html#ejercicio"><i class="fa fa-check"></i><b>5.4.2</b> Ejercicio</a></li>
-</ul></li>
+<li class="chapter" data-level="5.2" data-path="contrastes-parametricos.html"><a href="contrastes-parametricos.html"><i class="fa fa-check"></i><b>5.2</b> Contrastes bootstrap paramétricos</a></li>
+<li class="chapter" data-level="5.3" data-path="contrastes-de-permutaciones.html"><a href="contrastes-de-permutaciones.html"><i class="fa fa-check"></i><b>5.3</b> Contrastes de permutaciones</a></li>
+<li class="chapter" data-level="5.4" data-path="contrastes-semiparametricos.html"><a href="contrastes-semiparametricos.html"><i class="fa fa-check"></i><b>5.4</b> Contrastes bootstrap semiparamétricos</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="npden.html"><a href="npden.html"><i class="fa fa-check"></i><b>6</b> Bootstrap y estimación no paramétrica de la densidad</a>
 <ul>
@@ -393,40 +383,40 @@ que pasaron por el centro de retiro ‘Channing House’ (Palo Alto, California)
 desde su apertura en 1964 hasta el 1 de julio de 1975
 (ver Sección 3.5 y ‘Practical 3.2’, de Davison y Hinkley, 1997).
 En primer lugar consideraremos únicamente la muestra de hombres:</p>
-<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="implementación-en-r-con-los-paquetes-boot-y-survival.html#cb254-1" tabindex="-1"></a><span class="co"># Datos</span></span>
-<span id="cb254-2"><a href="implementación-en-r-con-los-paquetes-boot-y-survival.html#cb254-2" tabindex="-1"></a><span class="fu">library</span>(boot)</span>
-<span id="cb254-3"><a href="implementación-en-r-con-los-paquetes-boot-y-survival.html#cb254-3" tabindex="-1"></a><span class="fu">data</span>(channing)</span>
-<span id="cb254-4"><a href="implementación-en-r-con-los-paquetes-boot-y-survival.html#cb254-4" tabindex="-1"></a><span class="co"># Calcular edad (de partida o muerte) en años</span></span>
-<span id="cb254-5"><a href="implementación-en-r-con-los-paquetes-boot-y-survival.html#cb254-5" tabindex="-1"></a>channing<span class="sc">$</span>age <span class="ot">&lt;-</span> (channing<span class="sc">$</span>entry <span class="sc">+</span> channing<span class="sc">$</span>time)<span class="sc">/</span><span class="dv">12</span></span>
-<span id="cb254-6"><a href="implementación-en-r-con-los-paquetes-boot-y-survival.html#cb254-6" tabindex="-1"></a><span class="co"># Seleccionar hombres (y de paso hacer que `index = c(1, 2)` para `censboot()`)</span></span>
-<span id="cb254-7"><a href="implementación-en-r-con-los-paquetes-boot-y-survival.html#cb254-7" tabindex="-1"></a>chan <span class="ot">&lt;-</span> <span class="fu">subset</span>(channing, sex<span class="sc">==</span><span class="st">&quot;Male&quot;</span>, <span class="fu">c</span>(age, cens))</span>
-<span id="cb254-8"><a href="implementación-en-r-con-los-paquetes-boot-y-survival.html#cb254-8" tabindex="-1"></a></span>
-<span id="cb254-9"><a href="implementación-en-r-con-los-paquetes-boot-y-survival.html#cb254-9" tabindex="-1"></a><span class="co"># Estimación supervivencia</span></span>
-<span id="cb254-10"><a href="implementación-en-r-con-los-paquetes-boot-y-survival.html#cb254-10" tabindex="-1"></a><span class="fu">library</span>(survival)</span>
-<span id="cb254-11"><a href="implementación-en-r-con-los-paquetes-boot-y-survival.html#cb254-11" tabindex="-1"></a>chan.F <span class="ot">&lt;-</span> <span class="fu">survfit</span>(<span class="fu">Surv</span>(age, cens)<span class="sc">~</span><span class="dv">1</span>, <span class="at">data =</span> chan)</span>
-<span id="cb254-12"><a href="implementación-en-r-con-los-paquetes-boot-y-survival.html#cb254-12" tabindex="-1"></a>chan.F</span></code></pre></div>
+<div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb253-1"><a href="implementación-en-r-con-los-paquetes-boot-y-survival.html#cb253-1" tabindex="-1"></a><span class="co"># Datos</span></span>
+<span id="cb253-2"><a href="implementación-en-r-con-los-paquetes-boot-y-survival.html#cb253-2" tabindex="-1"></a><span class="fu">library</span>(boot)</span>
+<span id="cb253-3"><a href="implementación-en-r-con-los-paquetes-boot-y-survival.html#cb253-3" tabindex="-1"></a><span class="fu">data</span>(channing)</span>
+<span id="cb253-4"><a href="implementación-en-r-con-los-paquetes-boot-y-survival.html#cb253-4" tabindex="-1"></a><span class="co"># Calcular edad (de partida o muerte) en años</span></span>
+<span id="cb253-5"><a href="implementación-en-r-con-los-paquetes-boot-y-survival.html#cb253-5" tabindex="-1"></a>channing<span class="sc">$</span>age <span class="ot">&lt;-</span> (channing<span class="sc">$</span>entry <span class="sc">+</span> channing<span class="sc">$</span>time)<span class="sc">/</span><span class="dv">12</span></span>
+<span id="cb253-6"><a href="implementación-en-r-con-los-paquetes-boot-y-survival.html#cb253-6" tabindex="-1"></a><span class="co"># Seleccionar hombres (y de paso hacer que `index = c(1, 2)` para `censboot()`)</span></span>
+<span id="cb253-7"><a href="implementación-en-r-con-los-paquetes-boot-y-survival.html#cb253-7" tabindex="-1"></a>chan <span class="ot">&lt;-</span> <span class="fu">subset</span>(channing, sex<span class="sc">==</span><span class="st">&quot;Male&quot;</span>, <span class="fu">c</span>(age, cens))</span>
+<span id="cb253-8"><a href="implementación-en-r-con-los-paquetes-boot-y-survival.html#cb253-8" tabindex="-1"></a></span>
+<span id="cb253-9"><a href="implementación-en-r-con-los-paquetes-boot-y-survival.html#cb253-9" tabindex="-1"></a><span class="co"># Estimación supervivencia</span></span>
+<span id="cb253-10"><a href="implementación-en-r-con-los-paquetes-boot-y-survival.html#cb253-10" tabindex="-1"></a><span class="fu">library</span>(survival)</span>
+<span id="cb253-11"><a href="implementación-en-r-con-los-paquetes-boot-y-survival.html#cb253-11" tabindex="-1"></a>chan.F <span class="ot">&lt;-</span> <span class="fu">survfit</span>(<span class="fu">Surv</span>(age, cens)<span class="sc">~</span><span class="dv">1</span>, <span class="at">data =</span> chan)</span>
+<span id="cb253-12"><a href="implementación-en-r-con-los-paquetes-boot-y-survival.html#cb253-12" tabindex="-1"></a>chan.F</span></code></pre></div>
 <pre><code>## Call: survfit(formula = Surv(age, cens) ~ 1, data = chan)
 ## 
 ##       n events median 0.95LCL 0.95UCL
 ## [1,] 97     46     87    85.8    90.4</code></pre>
-<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="implementación-en-r-con-los-paquetes-boot-y-survival.html#cb256-1" tabindex="-1"></a><span class="co"># plot(chan.F)</span></span>
-<span id="cb256-2"><a href="implementación-en-r-con-los-paquetes-boot-y-survival.html#cb256-2" tabindex="-1"></a><span class="co"># Estimaciones de interés</span></span>
-<span id="cb256-3"><a href="implementación-en-r-con-los-paquetes-boot-y-survival.html#cb256-3" tabindex="-1"></a><span class="fu">with</span>(chan.F, </span>
-<span id="cb256-4"><a href="implementación-en-r-con-los-paquetes-boot-y-survival.html#cb256-4" tabindex="-1"></a>    <span class="fu">c</span>(<span class="at">s75 =</span> <span class="fu">max</span>(surv[time <span class="sc">&gt;</span> <span class="dv">75</span>]), <span class="at">s85 =</span> <span class="fu">max</span>(surv[time <span class="sc">&gt;</span> <span class="dv">85</span>]),</span>
-<span id="cb256-5"><a href="implementación-en-r-con-los-paquetes-boot-y-survival.html#cb256-5" tabindex="-1"></a>      <span class="at">p75 =</span> <span class="fu">min</span>(time[surv <span class="sc">&lt;=</span> <span class="fl">0.75</span>]), <span class="at">p50 =</span> <span class="fu">min</span>(time[surv <span class="sc">&lt;=</span> <span class="fl">0.5</span>])) </span>
-<span id="cb256-6"><a href="implementación-en-r-con-los-paquetes-boot-y-survival.html#cb256-6" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb255-1"><a href="implementación-en-r-con-los-paquetes-boot-y-survival.html#cb255-1" tabindex="-1"></a><span class="co"># plot(chan.F)</span></span>
+<span id="cb255-2"><a href="implementación-en-r-con-los-paquetes-boot-y-survival.html#cb255-2" tabindex="-1"></a><span class="co"># Estimaciones de interés</span></span>
+<span id="cb255-3"><a href="implementación-en-r-con-los-paquetes-boot-y-survival.html#cb255-3" tabindex="-1"></a><span class="fu">with</span>(chan.F, </span>
+<span id="cb255-4"><a href="implementación-en-r-con-los-paquetes-boot-y-survival.html#cb255-4" tabindex="-1"></a>    <span class="fu">c</span>(<span class="at">s75 =</span> <span class="fu">max</span>(surv[time <span class="sc">&gt;</span> <span class="dv">75</span>]), <span class="at">s85 =</span> <span class="fu">max</span>(surv[time <span class="sc">&gt;</span> <span class="dv">85</span>]),</span>
+<span id="cb255-5"><a href="implementación-en-r-con-los-paquetes-boot-y-survival.html#cb255-5" tabindex="-1"></a>      <span class="at">p75 =</span> <span class="fu">min</span>(time[surv <span class="sc">&lt;=</span> <span class="fl">0.75</span>]), <span class="at">p50 =</span> <span class="fu">min</span>(time[surv <span class="sc">&lt;=</span> <span class="fl">0.5</span>])) </span>
+<span id="cb255-6"><a href="implementación-en-r-con-los-paquetes-boot-y-survival.html#cb255-6" tabindex="-1"></a>)</span></code></pre></div>
 <pre><code>##        s75        s85        p75        p50 
 ##  0.9160745  0.6347541 82.4166667 87.0000000</code></pre>
-<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb258-1"><a href="implementación-en-r-con-los-paquetes-boot-y-survival.html#cb258-1" tabindex="-1"></a><span class="co"># Bootstrap</span></span>
-<span id="cb258-2"><a href="implementación-en-r-con-los-paquetes-boot-y-survival.html#cb258-2" tabindex="-1"></a><span class="co"># library(boot)</span></span>
-<span id="cb258-3"><a href="implementación-en-r-con-los-paquetes-boot-y-survival.html#cb258-3" tabindex="-1"></a>chan.stat <span class="ot">&lt;-</span> <span class="cf">function</span>(data) {</span>
-<span id="cb258-4"><a href="implementación-en-r-con-los-paquetes-boot-y-survival.html#cb258-4" tabindex="-1"></a>    s <span class="ot">&lt;-</span> <span class="fu">survfit</span>(<span class="fu">Surv</span>(age, cens)<span class="sc">~</span><span class="dv">1</span>, <span class="at">data =</span> data)</span>
-<span id="cb258-5"><a href="implementación-en-r-con-los-paquetes-boot-y-survival.html#cb258-5" tabindex="-1"></a>    <span class="fu">with</span>(s, <span class="fu">c</span>(<span class="at">s75 =</span> <span class="fu">max</span>(surv[time <span class="sc">&gt;</span> <span class="dv">75</span>]), <span class="at">s85 =</span> <span class="fu">max</span>(surv[time <span class="sc">&gt;</span> <span class="dv">85</span>]),</span>
-<span id="cb258-6"><a href="implementación-en-r-con-los-paquetes-boot-y-survival.html#cb258-6" tabindex="-1"></a>            <span class="at">p75 =</span> <span class="fu">min</span>(time[surv <span class="sc">&lt;=</span> <span class="fl">0.75</span>]), <span class="at">p50 =</span> <span class="fu">min</span>(time[surv <span class="sc">&lt;=</span> <span class="fl">0.5</span>])))</span>
-<span id="cb258-7"><a href="implementación-en-r-con-los-paquetes-boot-y-survival.html#cb258-7" tabindex="-1"></a>}</span>
-<span id="cb258-8"><a href="implementación-en-r-con-los-paquetes-boot-y-survival.html#cb258-8" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb258-9"><a href="implementación-en-r-con-los-paquetes-boot-y-survival.html#cb258-9" tabindex="-1"></a>chan.boot <span class="ot">&lt;-</span> <span class="fu">censboot</span>(chan, chan.stat, <span class="at">R =</span> <span class="dv">199</span>) <span class="co"># sim = &quot;ordinary&quot;</span></span>
-<span id="cb258-10"><a href="implementación-en-r-con-los-paquetes-boot-y-survival.html#cb258-10" tabindex="-1"></a>chan.boot</span></code></pre></div>
+<div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb257-1"><a href="implementación-en-r-con-los-paquetes-boot-y-survival.html#cb257-1" tabindex="-1"></a><span class="co"># Bootstrap</span></span>
+<span id="cb257-2"><a href="implementación-en-r-con-los-paquetes-boot-y-survival.html#cb257-2" tabindex="-1"></a><span class="co"># library(boot)</span></span>
+<span id="cb257-3"><a href="implementación-en-r-con-los-paquetes-boot-y-survival.html#cb257-3" tabindex="-1"></a>chan.stat <span class="ot">&lt;-</span> <span class="cf">function</span>(data) {</span>
+<span id="cb257-4"><a href="implementación-en-r-con-los-paquetes-boot-y-survival.html#cb257-4" tabindex="-1"></a>    s <span class="ot">&lt;-</span> <span class="fu">survfit</span>(<span class="fu">Surv</span>(age, cens)<span class="sc">~</span><span class="dv">1</span>, <span class="at">data =</span> data)</span>
+<span id="cb257-5"><a href="implementación-en-r-con-los-paquetes-boot-y-survival.html#cb257-5" tabindex="-1"></a>    <span class="fu">with</span>(s, <span class="fu">c</span>(<span class="at">s75 =</span> <span class="fu">max</span>(surv[time <span class="sc">&gt;</span> <span class="dv">75</span>]), <span class="at">s85 =</span> <span class="fu">max</span>(surv[time <span class="sc">&gt;</span> <span class="dv">85</span>]),</span>
+<span id="cb257-6"><a href="implementación-en-r-con-los-paquetes-boot-y-survival.html#cb257-6" tabindex="-1"></a>            <span class="at">p75 =</span> <span class="fu">min</span>(time[surv <span class="sc">&lt;=</span> <span class="fl">0.75</span>]), <span class="at">p50 =</span> <span class="fu">min</span>(time[surv <span class="sc">&lt;=</span> <span class="fl">0.5</span>])))</span>
+<span id="cb257-7"><a href="implementación-en-r-con-los-paquetes-boot-y-survival.html#cb257-7" tabindex="-1"></a>}</span>
+<span id="cb257-8"><a href="implementación-en-r-con-los-paquetes-boot-y-survival.html#cb257-8" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb257-9"><a href="implementación-en-r-con-los-paquetes-boot-y-survival.html#cb257-9" tabindex="-1"></a>chan.boot <span class="ot">&lt;-</span> <span class="fu">censboot</span>(chan, chan.stat, <span class="at">R =</span> <span class="dv">199</span>) <span class="co"># sim = &quot;ordinary&quot;</span></span>
+<span id="cb257-10"><a href="implementación-en-r-con-los-paquetes-boot-y-survival.html#cb257-10" tabindex="-1"></a>chan.boot</span></code></pre></div>
 <pre><code>## 
 ## CASE RESAMPLING BOOTSTRAP FOR CENSORED DATA
 ## 
@@ -450,21 +440,21 @@ parámetro <code>F.surv</code> la estimación de Kaplan-Meier de la supervivenci
 si <code>sim = "cond"</code>, la correspondiente a la variable censurante en <code>G.surv</code>.
 Se recomienda estimarlas con la función <code>survfit()</code> del paquete <code>survival</code>
 (ver Figura <a href="implementación-en-r-con-los-paquetes-boot-y-survival.html#fig:survfit-f-g">8.2</a>):</p>
-<div class="sourceCode" id="cb260"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb260-1"><a href="implementación-en-r-con-los-paquetes-boot-y-survival.html#cb260-1" tabindex="-1"></a><span class="co"># Estimación supervivencia variable censurante</span></span>
-<span id="cb260-2"><a href="implementación-en-r-con-los-paquetes-boot-y-survival.html#cb260-2" tabindex="-1"></a>chan.G <span class="ot">&lt;-</span> <span class="fu">survfit</span>(<span class="fu">Surv</span>(age, <span class="dv">1</span><span class="sc">-</span>cens)<span class="sc">~</span><span class="dv">1</span>, <span class="at">data =</span> chan)</span>
-<span id="cb260-3"><a href="implementación-en-r-con-los-paquetes-boot-y-survival.html#cb260-3" tabindex="-1"></a><span class="co"># Representación</span></span>
-<span id="cb260-4"><a href="implementación-en-r-con-los-paquetes-boot-y-survival.html#cb260-4" tabindex="-1"></a>old.par <span class="ot">&lt;-</span> <span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
-<span id="cb260-5"><a href="implementación-en-r-con-los-paquetes-boot-y-survival.html#cb260-5" tabindex="-1"></a><span class="fu">plot</span>(chan.F, <span class="at">main =</span> <span class="st">&quot;Supervivencia (edad)&quot;</span>, <span class="at">mark.time =</span> <span class="cn">TRUE</span>, </span>
-<span id="cb260-6"><a href="implementación-en-r-con-los-paquetes-boot-y-survival.html#cb260-6" tabindex="-1"></a>    <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">60</span>, <span class="dv">100</span>))</span>
-<span id="cb260-7"><a href="implementación-en-r-con-los-paquetes-boot-y-survival.html#cb260-7" tabindex="-1"></a><span class="fu">plot</span>(chan.G, <span class="at">main =</span> <span class="st">&quot;Supervivencia variable censurante (partida)&quot;</span>, </span>
-<span id="cb260-8"><a href="implementación-en-r-con-los-paquetes-boot-y-survival.html#cb260-8" tabindex="-1"></a>     <span class="at">mark.time =</span> <span class="cn">TRUE</span>, <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">60</span>, <span class="dv">100</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb259-1"><a href="implementación-en-r-con-los-paquetes-boot-y-survival.html#cb259-1" tabindex="-1"></a><span class="co"># Estimación supervivencia variable censurante</span></span>
+<span id="cb259-2"><a href="implementación-en-r-con-los-paquetes-boot-y-survival.html#cb259-2" tabindex="-1"></a>chan.G <span class="ot">&lt;-</span> <span class="fu">survfit</span>(<span class="fu">Surv</span>(age, <span class="dv">1</span><span class="sc">-</span>cens)<span class="sc">~</span><span class="dv">1</span>, <span class="at">data =</span> chan)</span>
+<span id="cb259-3"><a href="implementación-en-r-con-los-paquetes-boot-y-survival.html#cb259-3" tabindex="-1"></a><span class="co"># Representación</span></span>
+<span id="cb259-4"><a href="implementación-en-r-con-los-paquetes-boot-y-survival.html#cb259-4" tabindex="-1"></a>old.par <span class="ot">&lt;-</span> <span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb259-5"><a href="implementación-en-r-con-los-paquetes-boot-y-survival.html#cb259-5" tabindex="-1"></a><span class="fu">plot</span>(chan.F, <span class="at">main =</span> <span class="st">&quot;Supervivencia (edad)&quot;</span>, <span class="at">mark.time =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb259-6"><a href="implementación-en-r-con-los-paquetes-boot-y-survival.html#cb259-6" tabindex="-1"></a>    <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">60</span>, <span class="dv">100</span>))</span>
+<span id="cb259-7"><a href="implementación-en-r-con-los-paquetes-boot-y-survival.html#cb259-7" tabindex="-1"></a><span class="fu">plot</span>(chan.G, <span class="at">main =</span> <span class="st">&quot;Supervivencia variable censurante (partida)&quot;</span>, </span>
+<span id="cb259-8"><a href="implementación-en-r-con-los-paquetes-boot-y-survival.html#cb259-8" tabindex="-1"></a>     <span class="at">mark.time =</span> <span class="cn">TRUE</span>, <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">60</span>, <span class="dv">100</span>))</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:survfit-f-g"></span>
 <img src="08-dat_cen_files/figure-html/survfit-f-g-1.png" alt="Estimaciones de la supervivencia (izquierda; indicando los tiempos de las observaciones censuradas) y de la variable censurante (derecha; indicando los de las no censuradas)." width="70%" />
 <p class="caption">
 Figura 8.2: Estimaciones de la supervivencia (izquierda; indicando los tiempos de las observaciones censuradas) y de la variable censurante (derecha; indicando los de las no censuradas).
 </p>
 </div>
-<div class="sourceCode" id="cb261"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb261-1"><a href="implementación-en-r-con-los-paquetes-boot-y-survival.html#cb261-1" tabindex="-1"></a><span class="fu">par</span>(old.par)</span></code></pre></div>
+<div class="sourceCode" id="cb260"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb260-1"><a href="implementación-en-r-con-los-paquetes-boot-y-survival.html#cb260-1" tabindex="-1"></a><span class="fu">par</span>(old.par)</span></code></pre></div>
 <p>En el <em>boostrap condicional</em> (<code>sim = "cond"</code>) se condiciona el muestreo al
 patrón de censura observado (en lugar de fijarlo a <span class="math inline">\(\mathbf{1}\)</span> como en el bootstrap de Reid; Sección <a href="relaciones-entre-los-métodos-de-remuestreo-bajo-censura.html#bootcen-reid">8.3.2</a>).
 El mecanismo es similar al del bootstrap obvio (Sección <a href="remuestreos-bootstrap-en-presencia-de-censura.html#bootcen-obvio">8.2.2</a>):</p>
@@ -493,9 +483,9 @@ T_n^{\ast} \right)\)</span> y <span class="math inline">\(\boldsymbol{\delta}^{\
 función de riesgo acumulada para generar los valores
 (e.g. Sección 3.5.2 de Davison y Hinkley, 1997).</p>
 <p>El siguiente código muestra un ejemplo de la aplicación de ambos métodos:</p>
-<div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb262-1"><a href="implementación-en-r-con-los-paquetes-boot-y-survival.html#cb262-1" tabindex="-1"></a>chan.boot2 <span class="ot">&lt;-</span> <span class="fu">censboot</span>(chan, chan.stat, <span class="at">R =</span> <span class="dv">199</span>, <span class="at">F.surv =</span> chan.F, </span>
-<span id="cb262-2"><a href="implementación-en-r-con-los-paquetes-boot-y-survival.html#cb262-2" tabindex="-1"></a>                  <span class="at">G.surv =</span> chan.G, <span class="at">sim =</span> <span class="st">&quot;cond&quot;</span>)</span>
-<span id="cb262-3"><a href="implementación-en-r-con-los-paquetes-boot-y-survival.html#cb262-3" tabindex="-1"></a>chan.boot2</span></code></pre></div>
+<div class="sourceCode" id="cb261"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb261-1"><a href="implementación-en-r-con-los-paquetes-boot-y-survival.html#cb261-1" tabindex="-1"></a>chan.boot2 <span class="ot">&lt;-</span> <span class="fu">censboot</span>(chan, chan.stat, <span class="at">R =</span> <span class="dv">199</span>, <span class="at">F.surv =</span> chan.F, </span>
+<span id="cb261-2"><a href="implementación-en-r-con-los-paquetes-boot-y-survival.html#cb261-2" tabindex="-1"></a>                  <span class="at">G.surv =</span> chan.G, <span class="at">sim =</span> <span class="st">&quot;cond&quot;</span>)</span>
+<span id="cb261-3"><a href="implementación-en-r-con-los-paquetes-boot-y-survival.html#cb261-3" tabindex="-1"></a>chan.boot2</span></code></pre></div>
 <pre><code>## 
 ## CONDITIONAL BOOTSTRAP FOR CENSORED DATA
 ## 
@@ -511,9 +501,9 @@ función de riesgo acumulada para generar los valores
 ## t2*  0.6347541 -0.001057025  0.05382609
 ## t3* 82.4166667  0.019681742  1.21793756
 ## t4* 87.0000000  0.286013400  0.95041994</code></pre>
-<div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb264-1"><a href="implementación-en-r-con-los-paquetes-boot-y-survival.html#cb264-1" tabindex="-1"></a>chan.boot3 <span class="ot">&lt;-</span> <span class="fu">censboot</span>(chan, chan.stat, <span class="at">R =</span> <span class="dv">199</span>, <span class="at">F.surv =</span> chan.F, </span>
-<span id="cb264-2"><a href="implementación-en-r-con-los-paquetes-boot-y-survival.html#cb264-2" tabindex="-1"></a>                  <span class="at">sim =</span> <span class="st">&quot;weird&quot;</span>)</span>
-<span id="cb264-3"><a href="implementación-en-r-con-los-paquetes-boot-y-survival.html#cb264-3" tabindex="-1"></a>chan.boot3</span></code></pre></div>
+<div class="sourceCode" id="cb263"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb263-1"><a href="implementación-en-r-con-los-paquetes-boot-y-survival.html#cb263-1" tabindex="-1"></a>chan.boot3 <span class="ot">&lt;-</span> <span class="fu">censboot</span>(chan, chan.stat, <span class="at">R =</span> <span class="dv">199</span>, <span class="at">F.surv =</span> chan.F, </span>
+<span id="cb263-2"><a href="implementación-en-r-con-los-paquetes-boot-y-survival.html#cb263-2" tabindex="-1"></a>                  <span class="at">sim =</span> <span class="st">&quot;weird&quot;</span>)</span>
+<span id="cb263-3"><a href="implementación-en-r-con-los-paquetes-boot-y-survival.html#cb263-3" tabindex="-1"></a>chan.boot3</span></code></pre></div>
 <pre><code>## 
 ## WEIRD BOOTSTRAP FOR CENSORED DATA
 ## 

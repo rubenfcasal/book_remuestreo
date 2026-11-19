@@ -211,19 +211,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5" data-path="contrastes.html"><a href="contrastes.html"><i class="fa fa-check"></i><b>5</b> Aplicaciones del Bootstrap en contrastes de hipótesis</a>
 <ul>
 <li class="chapter" data-level="5.1" data-path="aproximación-del-p-valor-mediante-remuestreo.html"><a href="aproximación-del-p-valor-mediante-remuestreo.html"><i class="fa fa-check"></i><b>5.1</b> Aproximación del p-valor mediante remuestreo</a></li>
-<li class="chapter" data-level="5.2" data-path="contrastes-parametricos.html"><a href="contrastes-parametricos.html"><i class="fa fa-check"></i><b>5.2</b> Contrastes bootstrap paramétricos</a>
-<ul>
-<li class="chapter" data-level="5.2.1" data-path="contrastes-parametricos.html"><a href="contrastes-parametricos.html#ejemplo-contraste-de-kolmogorov-smirnov"><i class="fa fa-check"></i><b>5.2.1</b> Ejemplo: contraste de Kolmogorov-Smirnov</a></li>
-</ul></li>
-<li class="chapter" data-level="5.3" data-path="contrastes-de-permutaciones.html"><a href="contrastes-de-permutaciones.html"><i class="fa fa-check"></i><b>5.3</b> Contrastes de permutaciones</a>
-<ul>
-<li class="chapter" data-level="5.3.1" data-path="contrastes-de-permutaciones.html"><a href="contrastes-de-permutaciones.html#ejemplo-inferencia-sobre-el-coeficiente-de-correlaci%C3%B3n-lineal"><i class="fa fa-check"></i><b>5.3.1</b> Ejemplo: Inferencia sobre el coeficiente de correlación lineal</a></li>
-</ul></li>
-<li class="chapter" data-level="5.4" data-path="contrastes-semiparametricos.html"><a href="contrastes-semiparametricos.html"><i class="fa fa-check"></i><b>5.4</b> Contrastes bootstrap semiparamétricos</a>
-<ul>
-<li class="chapter" data-level="5.4.1" data-path="contrastes-semiparametricos.html"><a href="contrastes-semiparametricos.html#ejemplo-inferencia-sobre-modelos-de-regresi%C3%B3n"><i class="fa fa-check"></i><b>5.4.1</b> Ejemplo: Inferencia sobre modelos de regresión</a></li>
-<li class="chapter" data-level="5.4.2" data-path="contrastes-semiparametricos.html"><a href="contrastes-semiparametricos.html#ejercicio"><i class="fa fa-check"></i><b>5.4.2</b> Ejercicio</a></li>
-</ul></li>
+<li class="chapter" data-level="5.2" data-path="contrastes-parametricos.html"><a href="contrastes-parametricos.html"><i class="fa fa-check"></i><b>5.2</b> Contrastes bootstrap paramétricos</a></li>
+<li class="chapter" data-level="5.3" data-path="contrastes-de-permutaciones.html"><a href="contrastes-de-permutaciones.html"><i class="fa fa-check"></i><b>5.3</b> Contrastes de permutaciones</a></li>
+<li class="chapter" data-level="5.4" data-path="contrastes-semiparametricos.html"><a href="contrastes-semiparametricos.html"><i class="fa fa-check"></i><b>5.4</b> Contrastes bootstrap semiparamétricos</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="npden.html"><a href="npden.html"><i class="fa fa-check"></i><b>6</b> Bootstrap y estimación no paramétrica de la densidad</a>
 <ul>
@@ -429,23 +419,23 @@ Otros paquetes incluyen más funcionalidades: <code>sm</code> (Bowman y Azzalini
 <p>Como ejemplo emplearemos el conjunto de datos <code>MASS::mcycle</code> que contiene mediciones
 de la aceleración de la cabeza en una simulación de un accidente de motocicleta,
 utilizado para probar cascos protectores.</p>
-<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb229-1"><a href="locpol-r.html#cb229-1" tabindex="-1"></a><span class="fu">data</span>(mcycle, <span class="at">package =</span> <span class="st">&quot;MASS&quot;</span>)</span>
-<span id="cb229-2"><a href="locpol-r.html#cb229-2" tabindex="-1"></a>x <span class="ot">&lt;-</span> mcycle<span class="sc">$</span>times</span>
-<span id="cb229-3"><a href="locpol-r.html#cb229-3" tabindex="-1"></a>y <span class="ot">&lt;-</span> mcycle<span class="sc">$</span>accel  </span>
-<span id="cb229-4"><a href="locpol-r.html#cb229-4" tabindex="-1"></a></span>
-<span id="cb229-5"><a href="locpol-r.html#cb229-5" tabindex="-1"></a><span class="fu">library</span>(KernSmooth)</span>
-<span id="cb229-6"><a href="locpol-r.html#cb229-6" tabindex="-1"></a>h <span class="ot">&lt;-</span> <span class="fu">dpill</span>(x, y) <span class="co"># Método plug-in de Ruppert, Sheather y Wand (1995)</span></span>
-<span id="cb229-7"><a href="locpol-r.html#cb229-7" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">locpoly</span>(x, y, <span class="at">bandwidth =</span> h) <span class="co"># Estimación lineal local</span></span>
-<span id="cb229-8"><a href="locpol-r.html#cb229-8" tabindex="-1"></a><span class="fu">plot</span>(x, y)</span>
-<span id="cb229-9"><a href="locpol-r.html#cb229-9" tabindex="-1"></a><span class="fu">lines</span>(fit)</span></code></pre></div>
+<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="locpol-r.html#cb228-1" tabindex="-1"></a><span class="fu">data</span>(mcycle, <span class="at">package =</span> <span class="st">&quot;MASS&quot;</span>)</span>
+<span id="cb228-2"><a href="locpol-r.html#cb228-2" tabindex="-1"></a>x <span class="ot">&lt;-</span> mcycle<span class="sc">$</span>times</span>
+<span id="cb228-3"><a href="locpol-r.html#cb228-3" tabindex="-1"></a>y <span class="ot">&lt;-</span> mcycle<span class="sc">$</span>accel  </span>
+<span id="cb228-4"><a href="locpol-r.html#cb228-4" tabindex="-1"></a></span>
+<span id="cb228-5"><a href="locpol-r.html#cb228-5" tabindex="-1"></a><span class="fu">library</span>(KernSmooth)</span>
+<span id="cb228-6"><a href="locpol-r.html#cb228-6" tabindex="-1"></a>h <span class="ot">&lt;-</span> <span class="fu">dpill</span>(x, y) <span class="co"># Método plug-in de Ruppert, Sheather y Wand (1995)</span></span>
+<span id="cb228-7"><a href="locpol-r.html#cb228-7" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">locpoly</span>(x, y, <span class="at">bandwidth =</span> h) <span class="co"># Estimación lineal local</span></span>
+<span id="cb228-8"><a href="locpol-r.html#cb228-8" tabindex="-1"></a><span class="fu">plot</span>(x, y)</span>
+<span id="cb228-9"><a href="locpol-r.html#cb228-9" tabindex="-1"></a><span class="fu">lines</span>(fit)</span></code></pre></div>
 <p><img src="07-npreg_files/figure-html/unnamed-chunk-2-1.png" alt="" width="70%" style="display: block; margin: auto;" /></p>
 <p>Hay que tener en cuenta que el paquete <code>KernSmooth</code> no implementa los métodos
 <code>predict()</code> y <code>residuals()</code>:</p>
-<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="locpol-r.html#cb230-1" tabindex="-1"></a>est <span class="ot">&lt;-</span> <span class="fu">approx</span>(fit, <span class="at">xout =</span> x)<span class="sc">$</span>y <span class="co"># est &lt;- predict(fit)</span></span>
-<span id="cb230-2"><a href="locpol-r.html#cb230-2" tabindex="-1"></a>resid <span class="ot">&lt;-</span> y <span class="sc">-</span> est <span class="co"># resid &lt;- residuals(fit)</span></span></code></pre></div>
+<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb229-1"><a href="locpol-r.html#cb229-1" tabindex="-1"></a>est <span class="ot">&lt;-</span> <span class="fu">approx</span>(fit, <span class="at">xout =</span> x)<span class="sc">$</span>y <span class="co"># est &lt;- predict(fit)</span></span>
+<span id="cb229-2"><a href="locpol-r.html#cb229-2" tabindex="-1"></a>resid <span class="ot">&lt;-</span> y <span class="sc">-</span> est <span class="co"># resid &lt;- residuals(fit)</span></span></code></pre></div>
 <p>Tampoco calcula medidas de bondad de ajuste, aunque podríamos obtener fácilmente un (pseudo) R-cuadrado:</p>
-<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb231-1"><a href="locpol-r.html#cb231-1" tabindex="-1"></a>r.squared <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> <span class="fu">sum</span>(resid<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span><span class="fu">sum</span>((y <span class="sc">-</span> <span class="fu">mean</span>(y))<span class="sc">^</span><span class="dv">2</span>)</span>
-<span id="cb231-2"><a href="locpol-r.html#cb231-2" tabindex="-1"></a>r.squared</span></code></pre></div>
+<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="locpol-r.html#cb230-1" tabindex="-1"></a>r.squared <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> <span class="fu">sum</span>(resid<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span><span class="fu">sum</span>((y <span class="sc">-</span> <span class="fu">mean</span>(y))<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb230-2"><a href="locpol-r.html#cb230-2" tabindex="-1"></a>r.squared</span></code></pre></div>
 <pre><code>## [1] 0.8023864</code></pre>
 <div id="estimación-de-la-varianza" class="section level3 hasAnchor" number="7.3.1">
 <h3><span class="header-section-number">7.3.1</span> Estimación de la varianza<a href="locpol-r.html#estimaci%C3%B3n-de-la-varianza" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -461,11 +451,11 @@ y <span class="math inline">\(df_e = tr(I - S)\)</span> (de forma análoga al ca
 <span class="math display">\[\widehat{Var}\left(\hat{m}_{h}(x_i)\right) = \hat\sigma^2\sum_{j=1}^n s^2_{ij}\]</span></p>
 <p>Uno de los pocos paquetes de <code>R</code> que implementan la estimación de la varianza
 y el cálculo de intervalos de confianza es el paquete<a href="#fn11" class="footnote-ref" id="fnref11"><sup>11</sup></a> <code>sm</code> (Bowman y Azzalini, 2019).</p>
-<div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb233-1"><a href="locpol-r.html#cb233-1" tabindex="-1"></a><span class="fu">library</span>(sm)</span>
-<span id="cb233-2"><a href="locpol-r.html#cb233-2" tabindex="-1"></a>hcv <span class="ot">&lt;-</span> <span class="fu">hcv</span>(x, y) <span class="co"># Método de validación cruzada</span></span>
-<span id="cb233-3"><a href="locpol-r.html#cb233-3" tabindex="-1"></a>fit.sm <span class="ot">&lt;-</span> <span class="fu">sm.regression</span>(x, y, <span class="at">h =</span> hcv, <span class="at">display =</span> <span class="st">&quot;se&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb232-1"><a href="locpol-r.html#cb232-1" tabindex="-1"></a><span class="fu">library</span>(sm)</span>
+<span id="cb232-2"><a href="locpol-r.html#cb232-2" tabindex="-1"></a>hcv <span class="ot">&lt;-</span> <span class="fu">hcv</span>(x, y) <span class="co"># Método de validación cruzada</span></span>
+<span id="cb232-3"><a href="locpol-r.html#cb232-3" tabindex="-1"></a>fit.sm <span class="ot">&lt;-</span> <span class="fu">sm.regression</span>(x, y, <span class="at">h =</span> hcv, <span class="at">display =</span> <span class="st">&quot;se&quot;</span>)</span></code></pre></div>
 <p><img src="07-npreg_files/figure-html/unnamed-chunk-5-1.png" alt="" width="70%" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="locpol-r.html#cb234-1" tabindex="-1"></a>fit.sm<span class="sc">$</span>sigma</span></code></pre></div>
+<div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb233-1"><a href="locpol-r.html#cb233-1" tabindex="-1"></a>fit.sm<span class="sc">$</span>sigma</span></code></pre></div>
 <pre><code>## [1] 22.82508</code></pre>
 <p>Alternativamente se podría emplear bootstrap.</p>
 </div>

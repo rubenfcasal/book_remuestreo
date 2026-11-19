@@ -211,19 +211,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5" data-path="contrastes.html"><a href="contrastes.html"><i class="fa fa-check"></i><b>5</b> Aplicaciones del Bootstrap en contrastes de hipótesis</a>
 <ul>
 <li class="chapter" data-level="5.1" data-path="aproximación-del-p-valor-mediante-remuestreo.html"><a href="aproximación-del-p-valor-mediante-remuestreo.html"><i class="fa fa-check"></i><b>5.1</b> Aproximación del p-valor mediante remuestreo</a></li>
-<li class="chapter" data-level="5.2" data-path="contrastes-parametricos.html"><a href="contrastes-parametricos.html"><i class="fa fa-check"></i><b>5.2</b> Contrastes bootstrap paramétricos</a>
-<ul>
-<li class="chapter" data-level="5.2.1" data-path="contrastes-parametricos.html"><a href="contrastes-parametricos.html#ejemplo-contraste-de-kolmogorov-smirnov"><i class="fa fa-check"></i><b>5.2.1</b> Ejemplo: contraste de Kolmogorov-Smirnov</a></li>
-</ul></li>
-<li class="chapter" data-level="5.3" data-path="contrastes-de-permutaciones.html"><a href="contrastes-de-permutaciones.html"><i class="fa fa-check"></i><b>5.3</b> Contrastes de permutaciones</a>
-<ul>
-<li class="chapter" data-level="5.3.1" data-path="contrastes-de-permutaciones.html"><a href="contrastes-de-permutaciones.html#ejemplo-inferencia-sobre-el-coeficiente-de-correlaci%C3%B3n-lineal"><i class="fa fa-check"></i><b>5.3.1</b> Ejemplo: Inferencia sobre el coeficiente de correlación lineal</a></li>
-</ul></li>
-<li class="chapter" data-level="5.4" data-path="contrastes-semiparametricos.html"><a href="contrastes-semiparametricos.html"><i class="fa fa-check"></i><b>5.4</b> Contrastes bootstrap semiparamétricos</a>
-<ul>
-<li class="chapter" data-level="5.4.1" data-path="contrastes-semiparametricos.html"><a href="contrastes-semiparametricos.html#ejemplo-inferencia-sobre-modelos-de-regresi%C3%B3n"><i class="fa fa-check"></i><b>5.4.1</b> Ejemplo: Inferencia sobre modelos de regresión</a></li>
-<li class="chapter" data-level="5.4.2" data-path="contrastes-semiparametricos.html"><a href="contrastes-semiparametricos.html#ejercicio"><i class="fa fa-check"></i><b>5.4.2</b> Ejercicio</a></li>
-</ul></li>
+<li class="chapter" data-level="5.2" data-path="contrastes-parametricos.html"><a href="contrastes-parametricos.html"><i class="fa fa-check"></i><b>5.2</b> Contrastes bootstrap paramétricos</a></li>
+<li class="chapter" data-level="5.3" data-path="contrastes-de-permutaciones.html"><a href="contrastes-de-permutaciones.html"><i class="fa fa-check"></i><b>5.3</b> Contrastes de permutaciones</a></li>
+<li class="chapter" data-level="5.4" data-path="contrastes-semiparametricos.html"><a href="contrastes-semiparametricos.html"><i class="fa fa-check"></i><b>5.4</b> Contrastes bootstrap semiparamétricos</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="npden.html"><a href="npden.html"><i class="fa fa-check"></i><b>6</b> Bootstrap y estimación no paramétrica de la densidad</a>
 <ul>
@@ -383,7 +373,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Para simular una serie de tiempo en <code>R</code> se puede emplear la función
 <code>arima.sim()</code> del paquete base <code>stats</code>.
 Los principales parámetros de esta función son:</p>
-<div class="sourceCode" id="cb279"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb279-1"><a href="implementación-en-r.html#cb279-1" tabindex="-1"></a><span class="fu">arima.sim</span>(model, n, <span class="at">rand.gen =</span> rnorm, <span class="at">n.start =</span> <span class="cn">NA</span>, ...)</span></code></pre></div>
+<div class="sourceCode" id="cb278"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb278-1"><a href="implementación-en-r.html#cb278-1" tabindex="-1"></a><span class="fu">arima.sim</span>(model, n, <span class="at">rand.gen =</span> rnorm, <span class="at">n.start =</span> <span class="cn">NA</span>, ...)</span></code></pre></div>
 <ul>
 <li><p><code>model</code>: lista que define el modelo, con componentes <code>ar</code> y/o <code>ma</code> que
 contienen los coeficientes AR y MA respectivamente, y opcionalmente un
@@ -405,36 +395,36 @@ comparar resultados considerando distintos parámetros de dependencia.</p>
 el periodo de calentamiento.</p></li>
 </ul>
 <p>Por ejemplo, podemos generar una serie autoregresiva AR(1) con:</p>
-<div class="sourceCode" id="cb280"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb280-1"><a href="implementación-en-r.html#cb280-1" tabindex="-1"></a><span class="co"># Parámetros</span></span>
-<span id="cb280-2"><a href="implementación-en-r.html#cb280-2" tabindex="-1"></a>nsim <span class="ot">&lt;-</span> <span class="dv">200</span>   <span class="co"># Numero de simulaciones</span></span>
-<span id="cb280-3"><a href="implementación-en-r.html#cb280-3" tabindex="-1"></a>xvar <span class="ot">&lt;-</span> <span class="dv">1</span>     <span class="co"># Varianza</span></span>
-<span id="cb280-4"><a href="implementación-en-r.html#cb280-4" tabindex="-1"></a>xmed <span class="ot">&lt;-</span> <span class="dv">0</span>     <span class="co"># Media</span></span>
-<span id="cb280-5"><a href="implementación-en-r.html#cb280-5" tabindex="-1"></a>rho <span class="ot">&lt;-</span> <span class="fl">0.5</span>    <span class="co"># Coeficiente AR</span></span>
-<span id="cb280-6"><a href="implementación-en-r.html#cb280-6" tabindex="-1"></a>nburn <span class="ot">&lt;-</span> <span class="dv">10</span>   <span class="co"># Periodo de calentamiento (burn-in)</span></span>
-<span id="cb280-7"><a href="implementación-en-r.html#cb280-7" tabindex="-1"></a>evar <span class="ot">&lt;-</span> xvar<span class="sc">*</span>(<span class="dv">1</span> <span class="sc">-</span> rho<span class="sc">^</span><span class="dv">2</span>) <span class="co"># Varianza del error</span></span>
-<span id="cb280-8"><a href="implementación-en-r.html#cb280-8" tabindex="-1"></a></span>
-<span id="cb280-9"><a href="implementación-en-r.html#cb280-9" tabindex="-1"></a><span class="co"># Simulación</span></span>
-<span id="cb280-10"><a href="implementación-en-r.html#cb280-10" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb280-11"><a href="implementación-en-r.html#cb280-11" tabindex="-1"></a>ry <span class="ot">&lt;-</span> xmed <span class="sc">+</span> <span class="fu">arima.sim</span>(<span class="at">model =</span> <span class="fu">list</span>(<span class="at">order =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>), <span class="at">ar =</span> rho), </span>
-<span id="cb280-12"><a href="implementación-en-r.html#cb280-12" tabindex="-1"></a>            <span class="at">n =</span> nsim, <span class="at">sd =</span> <span class="fu">sqrt</span>(evar)) <span class="co"># n.start = nburn</span></span>
-<span id="cb280-13"><a href="implementación-en-r.html#cb280-13" tabindex="-1"></a><span class="fu">plot</span>(ry)</span></code></pre></div>
+<div class="sourceCode" id="cb279"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb279-1"><a href="implementación-en-r.html#cb279-1" tabindex="-1"></a><span class="co"># Parámetros</span></span>
+<span id="cb279-2"><a href="implementación-en-r.html#cb279-2" tabindex="-1"></a>nsim <span class="ot">&lt;-</span> <span class="dv">200</span>   <span class="co"># Numero de simulaciones</span></span>
+<span id="cb279-3"><a href="implementación-en-r.html#cb279-3" tabindex="-1"></a>xvar <span class="ot">&lt;-</span> <span class="dv">1</span>     <span class="co"># Varianza</span></span>
+<span id="cb279-4"><a href="implementación-en-r.html#cb279-4" tabindex="-1"></a>xmed <span class="ot">&lt;-</span> <span class="dv">0</span>     <span class="co"># Media</span></span>
+<span id="cb279-5"><a href="implementación-en-r.html#cb279-5" tabindex="-1"></a>rho <span class="ot">&lt;-</span> <span class="fl">0.5</span>    <span class="co"># Coeficiente AR</span></span>
+<span id="cb279-6"><a href="implementación-en-r.html#cb279-6" tabindex="-1"></a>nburn <span class="ot">&lt;-</span> <span class="dv">10</span>   <span class="co"># Periodo de calentamiento (burn-in)</span></span>
+<span id="cb279-7"><a href="implementación-en-r.html#cb279-7" tabindex="-1"></a>evar <span class="ot">&lt;-</span> xvar<span class="sc">*</span>(<span class="dv">1</span> <span class="sc">-</span> rho<span class="sc">^</span><span class="dv">2</span>) <span class="co"># Varianza del error</span></span>
+<span id="cb279-8"><a href="implementación-en-r.html#cb279-8" tabindex="-1"></a></span>
+<span id="cb279-9"><a href="implementación-en-r.html#cb279-9" tabindex="-1"></a><span class="co"># Simulación</span></span>
+<span id="cb279-10"><a href="implementación-en-r.html#cb279-10" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb279-11"><a href="implementación-en-r.html#cb279-11" tabindex="-1"></a>ry <span class="ot">&lt;-</span> xmed <span class="sc">+</span> <span class="fu">arima.sim</span>(<span class="at">model =</span> <span class="fu">list</span>(<span class="at">order =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>), <span class="at">ar =</span> rho), </span>
+<span id="cb279-12"><a href="implementación-en-r.html#cb279-12" tabindex="-1"></a>            <span class="at">n =</span> nsim, <span class="at">sd =</span> <span class="fu">sqrt</span>(evar)) <span class="co"># n.start = nburn</span></span>
+<span id="cb279-13"><a href="implementación-en-r.html#cb279-13" tabindex="-1"></a><span class="fu">plot</span>(ry)</span></code></pre></div>
 <p><img src="09-depen_files/figure-html/unnamed-chunk-3-1.png" alt="" width="70%" style="display: block; margin: auto;" /></p>
 <p>Como ejemplo adicional utilizamos una distribución t con 5 grados de libertad
 para generar los errores:</p>
-<div class="sourceCode" id="cb281"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb281-1"><a href="implementación-en-r.html#cb281-1" tabindex="-1"></a>rand.gen.t <span class="ot">&lt;-</span> <span class="cf">function</span>(n, <span class="at">df =</span> <span class="dv">5</span>, <span class="at">sd =</span> <span class="dv">1</span>) {</span>
-<span id="cb281-2"><a href="implementación-en-r.html#cb281-2" tabindex="-1"></a>  <span class="fu">sqrt</span>(<span class="dv">1</span> <span class="sc">-</span> <span class="dv">2</span><span class="sc">/</span>df) <span class="sc">*</span> sd <span class="sc">*</span> <span class="fu">rt</span>(n, <span class="at">df =</span> df)</span>
-<span id="cb281-3"><a href="implementación-en-r.html#cb281-3" tabindex="-1"></a>}</span>
-<span id="cb281-4"><a href="implementación-en-r.html#cb281-4" tabindex="-1"></a></span>
-<span id="cb281-5"><a href="implementación-en-r.html#cb281-5" tabindex="-1"></a>ry2 <span class="ot">&lt;-</span> xmed <span class="sc">+</span> <span class="fu">arima.sim</span>(<span class="at">model =</span> <span class="fu">list</span>(<span class="at">order =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>), <span class="at">ar =</span> rho), </span>
-<span id="cb281-6"><a href="implementación-en-r.html#cb281-6" tabindex="-1"></a>                <span class="at">n =</span> nsim, <span class="at">rand.gen =</span> rand.gen.t,</span>
-<span id="cb281-7"><a href="implementación-en-r.html#cb281-7" tabindex="-1"></a>                <span class="at">sd =</span> <span class="fu">sqrt</span>(evar)) <span class="co"># n.start = nburn</span></span>
-<span id="cb281-8"><a href="implementación-en-r.html#cb281-8" tabindex="-1"></a><span class="fu">plot</span>(ry2)</span></code></pre></div>
+<div class="sourceCode" id="cb280"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb280-1"><a href="implementación-en-r.html#cb280-1" tabindex="-1"></a>rand.gen.t <span class="ot">&lt;-</span> <span class="cf">function</span>(n, <span class="at">df =</span> <span class="dv">5</span>, <span class="at">sd =</span> <span class="dv">1</span>) {</span>
+<span id="cb280-2"><a href="implementación-en-r.html#cb280-2" tabindex="-1"></a>  <span class="fu">sqrt</span>(<span class="dv">1</span> <span class="sc">-</span> <span class="dv">2</span><span class="sc">/</span>df) <span class="sc">*</span> sd <span class="sc">*</span> <span class="fu">rt</span>(n, <span class="at">df =</span> df)</span>
+<span id="cb280-3"><a href="implementación-en-r.html#cb280-3" tabindex="-1"></a>}</span>
+<span id="cb280-4"><a href="implementación-en-r.html#cb280-4" tabindex="-1"></a></span>
+<span id="cb280-5"><a href="implementación-en-r.html#cb280-5" tabindex="-1"></a>ry2 <span class="ot">&lt;-</span> xmed <span class="sc">+</span> <span class="fu">arima.sim</span>(<span class="at">model =</span> <span class="fu">list</span>(<span class="at">order =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>), <span class="at">ar =</span> rho), </span>
+<span id="cb280-6"><a href="implementación-en-r.html#cb280-6" tabindex="-1"></a>                <span class="at">n =</span> nsim, <span class="at">rand.gen =</span> rand.gen.t,</span>
+<span id="cb280-7"><a href="implementación-en-r.html#cb280-7" tabindex="-1"></a>                <span class="at">sd =</span> <span class="fu">sqrt</span>(evar)) <span class="co"># n.start = nburn</span></span>
+<span id="cb280-8"><a href="implementación-en-r.html#cb280-8" tabindex="-1"></a><span class="fu">plot</span>(ry2)</span></code></pre></div>
 <p><img src="09-depen_files/figure-html/unnamed-chunk-4-1.png" alt="" width="70%" style="display: block; margin: auto;" /></p>
 <p>En el bootstrap paramétrico se emplearía el modelo ajustado.
 Como ejemplo consideraremos los datos de linces capturados al año en Canadá entre 1821 y 1934:</p>
-<div class="sourceCode" id="cb282"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb282-1"><a href="implementación-en-r.html#cb282-1" tabindex="-1"></a><span class="co"># ?lynx</span></span>
-<span id="cb282-2"><a href="implementación-en-r.html#cb282-2" tabindex="-1"></a><span class="co">#plot(lynx)</span></span>
-<span id="cb282-3"><a href="implementación-en-r.html#cb282-3" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">log</span>(lynx))</span></code></pre></div>
+<div class="sourceCode" id="cb281"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb281-1"><a href="implementación-en-r.html#cb281-1" tabindex="-1"></a><span class="co"># ?lynx</span></span>
+<span id="cb281-2"><a href="implementación-en-r.html#cb281-2" tabindex="-1"></a><span class="co">#plot(lynx)</span></span>
+<span id="cb281-3"><a href="implementación-en-r.html#cb281-3" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">log</span>(lynx))</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:loglynx"></span>
 <img src="09-depen_files/figure-html/loglynx-1.png" alt="Logaritmo del número de capturas anuales de linces en Canadá entre 1821 y 1934." width="70%" />
 <p class="caption">
@@ -444,53 +434,53 @@ Figura 9.1: Logaritmo del número de capturas anuales de linces en Canadá entre
 <p>En <code>R</code> podemos emplear las funciones <code>ar()</code> o <code>arima()</code> para ajustar un modelo,
 pero puede resultar más cómodo emplear las herramientas del paquete
 <a href="https://pkg.robjhyndman.com/forecast/">forecast</a> (o de la nueva alternativa <a href="http://fable.tidyverts.org/">fable</a>)</p>
-<div class="sourceCode" id="cb283"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb283-1"><a href="implementación-en-r.html#cb283-1" tabindex="-1"></a>fit.arima <span class="ot">&lt;-</span> forecast<span class="sc">::</span><span class="fu">auto.arima</span>(<span class="fu">log</span>(lynx), <span class="at">stepwise=</span><span class="cn">FALSE</span>, <span class="at">approximation=</span><span class="cn">FALSE</span>)</span>
-<span id="cb283-2"><a href="implementación-en-r.html#cb283-2" tabindex="-1"></a><span class="fu">str</span>(fit.arima<span class="sc">$</span>coef)</span></code></pre></div>
+<div class="sourceCode" id="cb282"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb282-1"><a href="implementación-en-r.html#cb282-1" tabindex="-1"></a>fit.arima <span class="ot">&lt;-</span> forecast<span class="sc">::</span><span class="fu">auto.arima</span>(<span class="fu">log</span>(lynx), <span class="at">stepwise=</span><span class="cn">FALSE</span>, <span class="at">approximation=</span><span class="cn">FALSE</span>)</span>
+<span id="cb282-2"><a href="implementación-en-r.html#cb282-2" tabindex="-1"></a><span class="fu">str</span>(fit.arima<span class="sc">$</span>coef)</span></code></pre></div>
 <pre><code>##  Named num [1:6] 1.555 -0.953 -0.453 -0.149 0.563 ...
 ##  - attr(*, &quot;names&quot;)= chr [1:6] &quot;ar1&quot; &quot;ar2&quot; &quot;ma1&quot; &quot;ma2&quot; ...</code></pre>
 <p>Este paquete implementa métodos <code>simulate()</code> para los distintos modelos que permite ajustar.
 Por defecto hace simulación condicional (<code>future = TRUE</code>), simulando nuevos valores condicionados a los ya observados:</p>
-<div class="sourceCode" id="cb285"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb285-1"><a href="implementación-en-r.html#cb285-1" tabindex="-1"></a><span class="co"># methods(simulate)</span></span>
-<span id="cb285-2"><a href="implementación-en-r.html#cb285-2" tabindex="-1"></a><span class="co"># ?simulate.Arima</span></span>
-<span id="cb285-3"><a href="implementación-en-r.html#cb285-3" tabindex="-1"></a><span class="co"># View(forecast:::simulate.Arima)</span></span>
-<span id="cb285-4"><a href="implementación-en-r.html#cb285-4" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb285-5"><a href="implementación-en-r.html#cb285-5" tabindex="-1"></a>ry <span class="ot">&lt;-</span> <span class="fu">simulate</span>(fit.arima, <span class="at">nsim =</span> <span class="dv">12</span>)</span>
-<span id="cb285-6"><a href="implementación-en-r.html#cb285-6" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">log</span>(lynx), <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">1820</span>, <span class="dv">1946</span>))</span>
-<span id="cb285-7"><a href="implementación-en-r.html#cb285-7" tabindex="-1"></a><span class="fu">lines</span>(ry, <span class="at">col =</span> <span class="st">&quot;red&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb284"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb284-1"><a href="implementación-en-r.html#cb284-1" tabindex="-1"></a><span class="co"># methods(simulate)</span></span>
+<span id="cb284-2"><a href="implementación-en-r.html#cb284-2" tabindex="-1"></a><span class="co"># ?simulate.Arima</span></span>
+<span id="cb284-3"><a href="implementación-en-r.html#cb284-3" tabindex="-1"></a><span class="co"># View(forecast:::simulate.Arima)</span></span>
+<span id="cb284-4"><a href="implementación-en-r.html#cb284-4" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb284-5"><a href="implementación-en-r.html#cb284-5" tabindex="-1"></a>ry <span class="ot">&lt;-</span> <span class="fu">simulate</span>(fit.arima, <span class="at">nsim =</span> <span class="dv">12</span>)</span>
+<span id="cb284-6"><a href="implementación-en-r.html#cb284-6" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">log</span>(lynx), <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">1820</span>, <span class="dv">1946</span>))</span>
+<span id="cb284-7"><a href="implementación-en-r.html#cb284-7" tabindex="-1"></a><span class="fu">lines</span>(ry, <span class="at">col =</span> <span class="st">&quot;red&quot;</span>)</span></code></pre></div>
 <p><img src="09-depen_files/figure-html/unnamed-chunk-6-1.png" alt="" width="70%" style="display: block; margin: auto;" /></p>
 <p>Para hacer simulación incondicional hay que establecer <code>future = FALSE</code>:</p>
-<div class="sourceCode" id="cb286"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb286-1"><a href="implementación-en-r.html#cb286-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb286-2"><a href="implementación-en-r.html#cb286-2" tabindex="-1"></a>ry <span class="ot">&lt;-</span> <span class="fu">simulate</span>(fit.arima, <span class="at">future =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb286-3"><a href="implementación-en-r.html#cb286-3" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">log</span>(lynx))</span>
-<span id="cb286-4"><a href="implementación-en-r.html#cb286-4" tabindex="-1"></a><span class="fu">lines</span>(ry, <span class="at">lty =</span> <span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb285"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb285-1"><a href="implementación-en-r.html#cb285-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb285-2"><a href="implementación-en-r.html#cb285-2" tabindex="-1"></a>ry <span class="ot">&lt;-</span> <span class="fu">simulate</span>(fit.arima, <span class="at">future =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb285-3"><a href="implementación-en-r.html#cb285-3" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">log</span>(lynx))</span>
+<span id="cb285-4"><a href="implementación-en-r.html#cb285-4" tabindex="-1"></a><span class="fu">lines</span>(ry, <span class="at">lty =</span> <span class="dv">3</span>)</span></code></pre></div>
 <p><img src="09-depen_files/figure-html/unnamed-chunk-7-1.png" alt="" width="70%" style="display: block; margin: auto;" /></p>
 </div>
 <div id="bootstrap-residual-semiparamétrico" class="section level3 hasAnchor" number="9.4.2">
 <h3><span class="header-section-number">9.4.2</span> Bootstrap residual (semiparamétrico)<a href="implementación-en-r.html#bootstrap-residual-semiparam%C3%A9trico" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>En lugar de generar errores siguiendo una distribución paramétrica, se pueden remuestrear los residuos:</p>
-<div class="sourceCode" id="cb287"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb287-1"><a href="implementación-en-r.html#cb287-1" tabindex="-1"></a>fit.ar <span class="ot">&lt;-</span> <span class="fu">ar</span>(<span class="fu">log</span>(lynx)) <span class="co"># Cuidado con el modelo!</span></span>
-<span id="cb287-2"><a href="implementación-en-r.html#cb287-2" tabindex="-1"></a>n <span class="ot">&lt;-</span> fit.ar<span class="sc">$</span>n.obs</span>
-<span id="cb287-3"><a href="implementación-en-r.html#cb287-3" tabindex="-1"></a>xmed <span class="ot">&lt;-</span> fit.ar<span class="sc">$</span>x.mean <span class="co"># mean(log(lynx))</span></span>
-<span id="cb287-4"><a href="implementación-en-r.html#cb287-4" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">order =</span> <span class="fu">c</span>(fit.ar<span class="sc">$</span>order, <span class="dv">0</span>, <span class="dv">0</span>), <span class="at">ar =</span> fit.ar<span class="sc">$</span>ar)</span>
-<span id="cb287-5"><a href="implementación-en-r.html#cb287-5" tabindex="-1"></a>res <span class="ot">&lt;-</span> fit.ar<span class="sc">$</span>resid[<span class="sc">!</span><span class="fu">is.na</span>(fit.ar<span class="sc">$</span>resid)]</span>
-<span id="cb287-6"><a href="implementación-en-r.html#cb287-6" tabindex="-1"></a>res <span class="ot">&lt;-</span> res <span class="sc">-</span> <span class="fu">mean</span>(res)</span>
-<span id="cb287-7"><a href="implementación-en-r.html#cb287-7" tabindex="-1"></a></span>
-<span id="cb287-8"><a href="implementación-en-r.html#cb287-8" tabindex="-1"></a>rand.gen.res <span class="ot">&lt;-</span> <span class="cf">function</span>(n, res) {</span>
-<span id="cb287-9"><a href="implementación-en-r.html#cb287-9" tabindex="-1"></a>  <span class="fu">sample</span>(res, n, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb287-10"><a href="implementación-en-r.html#cb287-10" tabindex="-1"></a>}</span>
-<span id="cb287-11"><a href="implementación-en-r.html#cb287-11" tabindex="-1"></a></span>
-<span id="cb287-12"><a href="implementación-en-r.html#cb287-12" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb287-13"><a href="implementación-en-r.html#cb287-13" tabindex="-1"></a>ry.boot <span class="ot">&lt;-</span> xmed <span class="sc">+</span> <span class="fu">arima.sim</span>(<span class="at">model =</span> model, <span class="at">n =</span> n, <span class="at">rand.gen =</span> rand.gen.res,</span>
-<span id="cb287-14"><a href="implementación-en-r.html#cb287-14" tabindex="-1"></a>                            <span class="at">res =</span> res) <span class="co"># n.start = nburn</span></span>
-<span id="cb287-15"><a href="implementación-en-r.html#cb287-15" tabindex="-1"></a><span class="fu">plot</span>(ry.boot)</span></code></pre></div>
+<div class="sourceCode" id="cb286"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb286-1"><a href="implementación-en-r.html#cb286-1" tabindex="-1"></a>fit.ar <span class="ot">&lt;-</span> <span class="fu">ar</span>(<span class="fu">log</span>(lynx)) <span class="co"># Cuidado con el modelo!</span></span>
+<span id="cb286-2"><a href="implementación-en-r.html#cb286-2" tabindex="-1"></a>n <span class="ot">&lt;-</span> fit.ar<span class="sc">$</span>n.obs</span>
+<span id="cb286-3"><a href="implementación-en-r.html#cb286-3" tabindex="-1"></a>xmed <span class="ot">&lt;-</span> fit.ar<span class="sc">$</span>x.mean <span class="co"># mean(log(lynx))</span></span>
+<span id="cb286-4"><a href="implementación-en-r.html#cb286-4" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">order =</span> <span class="fu">c</span>(fit.ar<span class="sc">$</span>order, <span class="dv">0</span>, <span class="dv">0</span>), <span class="at">ar =</span> fit.ar<span class="sc">$</span>ar)</span>
+<span id="cb286-5"><a href="implementación-en-r.html#cb286-5" tabindex="-1"></a>res <span class="ot">&lt;-</span> fit.ar<span class="sc">$</span>resid[<span class="sc">!</span><span class="fu">is.na</span>(fit.ar<span class="sc">$</span>resid)]</span>
+<span id="cb286-6"><a href="implementación-en-r.html#cb286-6" tabindex="-1"></a>res <span class="ot">&lt;-</span> res <span class="sc">-</span> <span class="fu">mean</span>(res)</span>
+<span id="cb286-7"><a href="implementación-en-r.html#cb286-7" tabindex="-1"></a></span>
+<span id="cb286-8"><a href="implementación-en-r.html#cb286-8" tabindex="-1"></a>rand.gen.res <span class="ot">&lt;-</span> <span class="cf">function</span>(n, res) {</span>
+<span id="cb286-9"><a href="implementación-en-r.html#cb286-9" tabindex="-1"></a>  <span class="fu">sample</span>(res, n, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb286-10"><a href="implementación-en-r.html#cb286-10" tabindex="-1"></a>}</span>
+<span id="cb286-11"><a href="implementación-en-r.html#cb286-11" tabindex="-1"></a></span>
+<span id="cb286-12"><a href="implementación-en-r.html#cb286-12" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb286-13"><a href="implementación-en-r.html#cb286-13" tabindex="-1"></a>ry.boot <span class="ot">&lt;-</span> xmed <span class="sc">+</span> <span class="fu">arima.sim</span>(<span class="at">model =</span> model, <span class="at">n =</span> n, <span class="at">rand.gen =</span> rand.gen.res,</span>
+<span id="cb286-14"><a href="implementación-en-r.html#cb286-14" tabindex="-1"></a>                            <span class="at">res =</span> res) <span class="co"># n.start = nburn</span></span>
+<span id="cb286-15"><a href="implementación-en-r.html#cb286-15" tabindex="-1"></a><span class="fu">plot</span>(ry.boot)</span></code></pre></div>
 <p><img src="09-depen_files/figure-html/unnamed-chunk-8-1.png" alt="" width="70%" style="display: block; margin: auto;" /></p>
 <p>Con los métodos <code>simulate()</code> del paquete <code>forecast</code> bastaría con establecer <code>bootstrap = TRUE</code>:</p>
-<div class="sourceCode" id="cb288"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb288-1"><a href="implementación-en-r.html#cb288-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb288-2"><a href="implementación-en-r.html#cb288-2" tabindex="-1"></a><span class="co"># ry.boot &lt;- simulate(fit.ar, future = FALSE, bootstrap = TRUE)</span></span>
-<span id="cb288-3"><a href="implementación-en-r.html#cb288-3" tabindex="-1"></a>ry.boot.cond <span class="ot">&lt;-</span> <span class="fu">simulate</span>(fit.ar, <span class="at">bootstrap =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb288-4"><a href="implementación-en-r.html#cb288-4" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">log</span>(lynx), <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">1820</span>, <span class="dv">1946</span>))</span>
-<span id="cb288-5"><a href="implementación-en-r.html#cb288-5" tabindex="-1"></a><span class="co"># lines(ry.boot, lty = 3)</span></span>
-<span id="cb288-6"><a href="implementación-en-r.html#cb288-6" tabindex="-1"></a><span class="fu">lines</span>(ry.boot.cond, <span class="at">col =</span> <span class="st">&quot;red&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb287"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb287-1"><a href="implementación-en-r.html#cb287-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb287-2"><a href="implementación-en-r.html#cb287-2" tabindex="-1"></a><span class="co"># ry.boot &lt;- simulate(fit.ar, future = FALSE, bootstrap = TRUE)</span></span>
+<span id="cb287-3"><a href="implementación-en-r.html#cb287-3" tabindex="-1"></a>ry.boot.cond <span class="ot">&lt;-</span> <span class="fu">simulate</span>(fit.ar, <span class="at">bootstrap =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb287-4"><a href="implementación-en-r.html#cb287-4" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">log</span>(lynx), <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">1820</span>, <span class="dv">1946</span>))</span>
+<span id="cb287-5"><a href="implementación-en-r.html#cb287-5" tabindex="-1"></a><span class="co"># lines(ry.boot, lty = 3)</span></span>
+<span id="cb287-6"><a href="implementación-en-r.html#cb287-6" tabindex="-1"></a><span class="fu">lines</span>(ry.boot.cond, <span class="at">col =</span> <span class="st">&quot;red&quot;</span>)</span></code></pre></div>
 <p><img src="09-depen_files/figure-html/unnamed-chunk-9-1.png" alt="" width="70%" style="display: block; margin: auto;" /></p>
 <p>Ver enlaces en apéndice <a href="forecast-links.html#forecast-links">A.1</a>.</p>
 </div>
@@ -498,8 +488,8 @@ Por defecto hace simulación condicional (<code>future = TRUE</code>), simulando
 <h3><span class="header-section-number">9.4.3</span> Implementación en <code>R</code> con el paquete <code>boot</code><a href="implementación-en-r.html#implementaci%C3%B3n-en-r-con-el-paquete-boot" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>La función <code>tsboot()</code> del paquete <code>boot</code> implementa distintos métodos
 de remuestreo para series de tiempo.</p>
-<div class="sourceCode" id="cb289"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb289-1"><a href="implementación-en-r.html#cb289-1" tabindex="-1"></a><span class="fu">library</span>(boot)</span>
-<span id="cb289-2"><a href="implementación-en-r.html#cb289-2" tabindex="-1"></a><span class="co"># ?tsboot</span></span></code></pre></div>
+<div class="sourceCode" id="cb288"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb288-1"><a href="implementación-en-r.html#cb288-1" tabindex="-1"></a><span class="fu">library</span>(boot)</span>
+<span id="cb288-2"><a href="implementación-en-r.html#cb288-2" tabindex="-1"></a><span class="co"># ?tsboot</span></span></code></pre></div>
 <p>Utilizaremos los ejemplos en Canty, A. J. (2002). <a href="http://cran.fhcrc.org/doc/Rnews/Rnews_2002-3.pdf">Resampling methods in R: the boot package</a>. Rnews: The Newsletter of the R Project, 2 (3), pp. 2-7.</p>
 <div id="rnews-1-boostrap-por-bloques" class="section level4 hasAnchor" number="9.4.3.1">
 <h4><span class="header-section-number">9.4.3.1</span> Rnews 1: boostrap por bloques<a href="implementación-en-r.html#rnews-1-boostrap-por-bloques" class="anchor-section" aria-label="Anchor link to header"></a></h4>
@@ -512,18 +502,18 @@ of this function being the time series itself), the number
 of bootstrap replicates, the simulation type and
 the (mean) block length’’.</p>
 </blockquote>
-<div class="sourceCode" id="cb290"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb290-1"><a href="implementación-en-r.html#cb290-1" tabindex="-1"></a><span class="co"># Datos</span></span>
-<span id="cb290-2"><a href="implementación-en-r.html#cb290-2" tabindex="-1"></a><span class="fu">data</span>(lynx)</span>
-<span id="cb290-3"><a href="implementación-en-r.html#cb290-3" tabindex="-1"></a><span class="co"># ?lynx</span></span>
-<span id="cb290-4"><a href="implementación-en-r.html#cb290-4" tabindex="-1"></a><span class="co"># Boot</span></span>
-<span id="cb290-5"><a href="implementación-en-r.html#cb290-5" tabindex="-1"></a><span class="fu">library</span>(boot)</span>
-<span id="cb290-6"><a href="implementación-en-r.html#cb290-6" tabindex="-1"></a>lynx.fun <span class="ot">&lt;-</span> <span class="cf">function</span>(tsb) {</span>
-<span id="cb290-7"><a href="implementación-en-r.html#cb290-7" tabindex="-1"></a>  fit <span class="ot">&lt;-</span> <span class="fu">ar</span>(tsb, <span class="at">order.max =</span> <span class="dv">25</span>)</span>
-<span id="cb290-8"><a href="implementación-en-r.html#cb290-8" tabindex="-1"></a>  <span class="fu">c</span>(fit<span class="sc">$</span>order, <span class="fu">mean</span>(tsb)) </span>
-<span id="cb290-9"><a href="implementación-en-r.html#cb290-9" tabindex="-1"></a>}</span>
-<span id="cb290-10"><a href="implementación-en-r.html#cb290-10" tabindex="-1"></a><span class="co"># tsboot</span></span>
-<span id="cb290-11"><a href="implementación-en-r.html#cb290-11" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb290-12"><a href="implementación-en-r.html#cb290-12" tabindex="-1"></a><span class="fu">tsboot</span>(<span class="fu">log</span>(lynx), lynx.fun, <span class="at">R =</span> <span class="dv">199</span>, <span class="at">sim =</span> <span class="st">&quot;geom&quot;</span>, <span class="at">l =</span> <span class="dv">20</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb289"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb289-1"><a href="implementación-en-r.html#cb289-1" tabindex="-1"></a><span class="co"># Datos</span></span>
+<span id="cb289-2"><a href="implementación-en-r.html#cb289-2" tabindex="-1"></a><span class="fu">data</span>(lynx)</span>
+<span id="cb289-3"><a href="implementación-en-r.html#cb289-3" tabindex="-1"></a><span class="co"># ?lynx</span></span>
+<span id="cb289-4"><a href="implementación-en-r.html#cb289-4" tabindex="-1"></a><span class="co"># Boot</span></span>
+<span id="cb289-5"><a href="implementación-en-r.html#cb289-5" tabindex="-1"></a><span class="fu">library</span>(boot)</span>
+<span id="cb289-6"><a href="implementación-en-r.html#cb289-6" tabindex="-1"></a>lynx.fun <span class="ot">&lt;-</span> <span class="cf">function</span>(tsb) {</span>
+<span id="cb289-7"><a href="implementación-en-r.html#cb289-7" tabindex="-1"></a>  fit <span class="ot">&lt;-</span> <span class="fu">ar</span>(tsb, <span class="at">order.max =</span> <span class="dv">25</span>)</span>
+<span id="cb289-8"><a href="implementación-en-r.html#cb289-8" tabindex="-1"></a>  <span class="fu">c</span>(fit<span class="sc">$</span>order, <span class="fu">mean</span>(tsb)) </span>
+<span id="cb289-9"><a href="implementación-en-r.html#cb289-9" tabindex="-1"></a>}</span>
+<span id="cb289-10"><a href="implementación-en-r.html#cb289-10" tabindex="-1"></a><span class="co"># tsboot</span></span>
+<span id="cb289-11"><a href="implementación-en-r.html#cb289-11" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb289-12"><a href="implementación-en-r.html#cb289-12" tabindex="-1"></a><span class="fu">tsboot</span>(<span class="fu">log</span>(lynx), lynx.fun, <span class="at">R =</span> <span class="dv">199</span>, <span class="at">sim =</span> <span class="st">&quot;geom&quot;</span>, <span class="at">l =</span> <span class="dv">20</span>)</span></code></pre></div>
 <pre><code>## 
 ## STATIONARY BOOTSTRAP FOR TIME SERIES
 ## 
@@ -575,28 +565,28 @@ the resampled residuals should be put back through
 the fitted model filter. The function <code>ran.gen</code> can be
 used to do this’’.</p>
 </blockquote>
-<div class="sourceCode" id="cb292"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb292-1"><a href="implementación-en-r.html#cb292-1" tabindex="-1"></a><span class="co"># Datos</span></span>
-<span id="cb292-2"><a href="implementación-en-r.html#cb292-2" tabindex="-1"></a>lynx1 <span class="ot">&lt;-</span> <span class="fu">log</span>(lynx)</span>
-<span id="cb292-3"><a href="implementación-en-r.html#cb292-3" tabindex="-1"></a><span class="co"># Modelo</span></span>
-<span id="cb292-4"><a href="implementación-en-r.html#cb292-4" tabindex="-1"></a>lynx.ar <span class="ot">&lt;-</span> <span class="fu">ar</span>(lynx1)</span>
-<span id="cb292-5"><a href="implementación-en-r.html#cb292-5" tabindex="-1"></a><span class="co"># Residuos</span></span>
-<span id="cb292-6"><a href="implementación-en-r.html#cb292-6" tabindex="-1"></a>lynx.res <span class="ot">&lt;-</span> <span class="fu">with</span>(lynx.ar, resid[<span class="sc">!</span><span class="fu">is.na</span>(resid)])</span>
-<span id="cb292-7"><a href="implementación-en-r.html#cb292-7" tabindex="-1"></a>lynx.res <span class="ot">&lt;-</span> lynx.res <span class="sc">-</span> <span class="fu">mean</span>(lynx.res)</span>
-<span id="cb292-8"><a href="implementación-en-r.html#cb292-8" tabindex="-1"></a><span class="co"># Boot</span></span>
-<span id="cb292-9"><a href="implementación-en-r.html#cb292-9" tabindex="-1"></a><span class="fu">library</span>(boot)</span>
-<span id="cb292-10"><a href="implementación-en-r.html#cb292-10" tabindex="-1"></a>lynx.ord <span class="ot">&lt;-</span> <span class="fu">c</span>(lynx.ar<span class="sc">$</span>order, <span class="dv">0</span>, <span class="dv">0</span>)</span>
-<span id="cb292-11"><a href="implementación-en-r.html#cb292-11" tabindex="-1"></a>lynx.mod <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">order =</span> lynx.ord, <span class="at">ar =</span> lynx.ar<span class="sc">$</span>ar)</span>
-<span id="cb292-12"><a href="implementación-en-r.html#cb292-12" tabindex="-1"></a>lynx.args <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">mean =</span> <span class="fu">mean</span>(lynx1), <span class="at">model =</span> lynx.mod)</span>
-<span id="cb292-13"><a href="implementación-en-r.html#cb292-13" tabindex="-1"></a>lynx.black <span class="ot">&lt;-</span> <span class="cf">function</span>(res, n.sim, ran.args) {</span>
-<span id="cb292-14"><a href="implementación-en-r.html#cb292-14" tabindex="-1"></a>    m <span class="ot">&lt;-</span> ran.args<span class="sc">$</span>mean</span>
-<span id="cb292-15"><a href="implementación-en-r.html#cb292-15" tabindex="-1"></a>    ts.mod <span class="ot">&lt;-</span> ran.args<span class="sc">$</span>model</span>
-<span id="cb292-16"><a href="implementación-en-r.html#cb292-16" tabindex="-1"></a>    m <span class="sc">+</span> <span class="fu">filter</span>(res, ts.mod<span class="sc">$</span>ar, <span class="at">method =</span> <span class="st">&quot;recursive&quot;</span>) </span>
-<span id="cb292-17"><a href="implementación-en-r.html#cb292-17" tabindex="-1"></a>}</span>
-<span id="cb292-18"><a href="implementación-en-r.html#cb292-18" tabindex="-1"></a><span class="co"># tsboot</span></span>
-<span id="cb292-19"><a href="implementación-en-r.html#cb292-19" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb292-20"><a href="implementación-en-r.html#cb292-20" tabindex="-1"></a><span class="fu">tsboot</span>(lynx.res, lynx.fun, <span class="at">R =</span> <span class="dv">199</span>, <span class="at">l =</span> <span class="dv">20</span>, </span>
-<span id="cb292-21"><a href="implementación-en-r.html#cb292-21" tabindex="-1"></a>        <span class="at">sim =</span> <span class="st">&quot;fixed&quot;</span>, <span class="at">n.sim =</span> <span class="dv">114</span>,</span>
-<span id="cb292-22"><a href="implementación-en-r.html#cb292-22" tabindex="-1"></a>        <span class="at">ran.gen =</span> lynx.black, <span class="at">ran.args =</span> lynx.args)</span></code></pre></div>
+<div class="sourceCode" id="cb291"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb291-1"><a href="implementación-en-r.html#cb291-1" tabindex="-1"></a><span class="co"># Datos</span></span>
+<span id="cb291-2"><a href="implementación-en-r.html#cb291-2" tabindex="-1"></a>lynx1 <span class="ot">&lt;-</span> <span class="fu">log</span>(lynx)</span>
+<span id="cb291-3"><a href="implementación-en-r.html#cb291-3" tabindex="-1"></a><span class="co"># Modelo</span></span>
+<span id="cb291-4"><a href="implementación-en-r.html#cb291-4" tabindex="-1"></a>lynx.ar <span class="ot">&lt;-</span> <span class="fu">ar</span>(lynx1)</span>
+<span id="cb291-5"><a href="implementación-en-r.html#cb291-5" tabindex="-1"></a><span class="co"># Residuos</span></span>
+<span id="cb291-6"><a href="implementación-en-r.html#cb291-6" tabindex="-1"></a>lynx.res <span class="ot">&lt;-</span> <span class="fu">with</span>(lynx.ar, resid[<span class="sc">!</span><span class="fu">is.na</span>(resid)])</span>
+<span id="cb291-7"><a href="implementación-en-r.html#cb291-7" tabindex="-1"></a>lynx.res <span class="ot">&lt;-</span> lynx.res <span class="sc">-</span> <span class="fu">mean</span>(lynx.res)</span>
+<span id="cb291-8"><a href="implementación-en-r.html#cb291-8" tabindex="-1"></a><span class="co"># Boot</span></span>
+<span id="cb291-9"><a href="implementación-en-r.html#cb291-9" tabindex="-1"></a><span class="fu">library</span>(boot)</span>
+<span id="cb291-10"><a href="implementación-en-r.html#cb291-10" tabindex="-1"></a>lynx.ord <span class="ot">&lt;-</span> <span class="fu">c</span>(lynx.ar<span class="sc">$</span>order, <span class="dv">0</span>, <span class="dv">0</span>)</span>
+<span id="cb291-11"><a href="implementación-en-r.html#cb291-11" tabindex="-1"></a>lynx.mod <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">order =</span> lynx.ord, <span class="at">ar =</span> lynx.ar<span class="sc">$</span>ar)</span>
+<span id="cb291-12"><a href="implementación-en-r.html#cb291-12" tabindex="-1"></a>lynx.args <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">mean =</span> <span class="fu">mean</span>(lynx1), <span class="at">model =</span> lynx.mod)</span>
+<span id="cb291-13"><a href="implementación-en-r.html#cb291-13" tabindex="-1"></a>lynx.black <span class="ot">&lt;-</span> <span class="cf">function</span>(res, n.sim, ran.args) {</span>
+<span id="cb291-14"><a href="implementación-en-r.html#cb291-14" tabindex="-1"></a>    m <span class="ot">&lt;-</span> ran.args<span class="sc">$</span>mean</span>
+<span id="cb291-15"><a href="implementación-en-r.html#cb291-15" tabindex="-1"></a>    ts.mod <span class="ot">&lt;-</span> ran.args<span class="sc">$</span>model</span>
+<span id="cb291-16"><a href="implementación-en-r.html#cb291-16" tabindex="-1"></a>    m <span class="sc">+</span> <span class="fu">filter</span>(res, ts.mod<span class="sc">$</span>ar, <span class="at">method =</span> <span class="st">&quot;recursive&quot;</span>) </span>
+<span id="cb291-17"><a href="implementación-en-r.html#cb291-17" tabindex="-1"></a>}</span>
+<span id="cb291-18"><a href="implementación-en-r.html#cb291-18" tabindex="-1"></a><span class="co"># tsboot</span></span>
+<span id="cb291-19"><a href="implementación-en-r.html#cb291-19" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb291-20"><a href="implementación-en-r.html#cb291-20" tabindex="-1"></a><span class="fu">tsboot</span>(lynx.res, lynx.fun, <span class="at">R =</span> <span class="dv">199</span>, <span class="at">l =</span> <span class="dv">20</span>, </span>
+<span id="cb291-21"><a href="implementación-en-r.html#cb291-21" tabindex="-1"></a>        <span class="at">sim =</span> <span class="st">&quot;fixed&quot;</span>, <span class="at">n.sim =</span> <span class="dv">114</span>,</span>
+<span id="cb291-22"><a href="implementación-en-r.html#cb291-22" tabindex="-1"></a>        <span class="at">ran.gen =</span> lynx.black, <span class="at">ran.args =</span> lynx.args)</span></code></pre></div>
 <pre><code>## 
 ## POST-BLACKENED BLOCK BOOTSTRAP FOR TIME SERIES
 ## 
